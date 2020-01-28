@@ -4,7 +4,7 @@ geopandas
 geopandas-postgis
 networkx
 numpy
-osgeo
+gdal
 pandas
 psycopg2
 pyyaml
