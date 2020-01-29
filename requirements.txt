@@ -1,10 +1,10 @@
 click==7.0
 fiona
+gdal
 geopandas
 geopandas-postgis
 networkx
 numpy
-osgeo
 pandas
 psycopg2
 pyyaml
