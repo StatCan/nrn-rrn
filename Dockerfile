@@ -8,7 +8,7 @@ COPY . /nrn-app
 
 WORKDIR /
 
-# System update and install the required dependencies.
+# Update system and install dependencies.
 RUN apt-get update
 
 RUN apt-get install -y wget \
@@ -48,8 +48,20 @@ RUN pip3 install -r requirements.txt
 # Test modules with import script.
 RUN python3 tests/modules.py
 
-# Pull geospatial data from online repository.
-RUN mkdir -p data/raw/nb && \ 
-    ogr2ogr -f 'ESRI Shapefile' \ 
-    data/raw/nb/geonb_nbrn-rrnb_shp \ 
-    '/vsizip//vsicurl/http://geonb.snb.ca/downloads/nbrn/geonb_nbrn-rrnb_shp.zip'
+# Make shell scripts executable.
+RUN chmod u+x tests/dl-data.sh
+RUN chmod u+x tests/psql-test.sh
+
+# Download geospatial data from internet.
+RUN tests/dl-data.sh
+
+USER postgres
+
+EXPOSE 5432
+
+# Test PostgreSQL/PostGIS capabilities.
+RUN /nrn-app/tests/psql-test.sh
+
+USER root
+
+CMD ["/bin/bash", "-c", "service postgresql start; bash"]
