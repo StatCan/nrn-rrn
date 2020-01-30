@@ -47,3 +47,9 @@ RUN pip3 install -r requirements.txt
 
 # Test modules with import script.
 RUN python3 tests/modules.py
+
+# Pull geospatial data from online repository.
+RUN mkdir -p data/raw/nb && \ 
+    ogr2ogr -f 'ESRI Shapefile' \ 
+    data/raw/nb/geonb_nbrn-rrnb_shp \ 
+    '/vsizip//vsicurl/http://geonb.snb.ca/downloads/nbrn/geonb_nbrn-rrnb_shp.zip'
