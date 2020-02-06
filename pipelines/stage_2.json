@@ -1,0 +1,20 @@
+{
+  "pipeline": {
+    "name": "stage_2"
+  },
+  "description": "A pipeline that executes NRN stage 2.",
+  "transform": {
+    "cmd": ["python3", "stage_2.py"],
+    "image": "artifactory.cloud.statcan.ca/docker-local/daaas/nrn",
+    "env": {
+      "nrn_working_dir": "src/stage_2"
+    }
+  },
+  "input": {
+    "pfs": {
+      "name": "data",
+      "repo": "interim",
+      "glob": "/"
+    }
+  }
+}
