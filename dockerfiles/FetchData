@@ -1,10 +1,10 @@
 FROM osgeo/gdal:ubuntu-small-3.0.3
 
-ARG nrn_source=
+ARG nrn_pr_code=
 
 ARG nrn_url=
 
-ENV nrn_source ${nrn_source}
+ENV nrn_pr_code ${nrn_pr_code}
 
 ENV nrn_url ${nrn_url}
 
@@ -14,6 +14,6 @@ COPY . /nrn-app
 
 WORKDIR /nrn-app
 
-RUN chmod u+x dl-data.sh
+RUN chmod u+x scripts/dl-data.sh
 
-RUN ./dl-data.sh
+RUN ./scripts/dl-data.sh
