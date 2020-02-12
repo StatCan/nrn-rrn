@@ -20,14 +20,14 @@ RUN apt-get install -y wget \
     libncurses5-dev \
     libgdbm-dev \
     libnss3-dev \
-    libpq-dev \ 
+    libpq-dev \
     libssl-dev \
     libreadline-dev \
-    libffi-dev \ 
+    libffi-dev \
     gnupg2 \
-    binutils \ 
-    postgresql \ 
-    postgresql-contrib \ 
+    binutils \
+    postgresql \
+    postgresql-contrib \
     postgis \
     python-psycopg2
 
@@ -47,14 +47,14 @@ RUN pip3 install -r requirements.txt
 
 RUN service postgresql start
 
-RUN update-rc.d postgresql enable
-
 USER postgres
 
-RUN psql -c "ALTER USER postgres PASSWORD 'postgres';"
+RUN service postgresql start && psql --command "ALTER ROLE postgres WITH PASSWORD 'password';"
 
 USER root
 
-RUN export LC_ALL=C.UTF-8
+RUN update-rc.d postgresql enable
 
-RUN export LANG=C.UTF-8
+VOLUME /nrn-app/data/raw
+
+RUN chmod u+x scripts/tests/build-test.sh

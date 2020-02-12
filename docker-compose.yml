@@ -1,0 +1,26 @@
+version: '2'
+services:
+  nrn_fetch:
+    build:
+      context: .
+      dockerfile: dockerfiles/FetchData
+      args:
+        nrn_pr_code: nb/geonb_nbrn-rrnb_shp
+        nrn_url: http://geonb.snb.ca/downloads/nbrn/geonb_nbrn-rrnb_shp.zip
+    container_name: nrn_fetch
+    environment:
+      nrn_pr_code: nb/geonb_nbrn-rrnb_shp
+      nrn_url: http://geonb.snb.ca/downloads/nbrn/geonb_nbrn-rrnb_shp.zip
+    volumes:
+      - /nrn-app/data/raw
+  nrn:
+    build:
+      context: .
+      dockerfile: dockerfiles/ProcessData
+      args:
+        nrn_working_dir: src/stage_1
+    container_name: nrn
+    environment:
+      nrn_working_dir: src/stage_1
+    volumes_from:
+      - nrn_fetch:rw
