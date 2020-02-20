@@ -54,3 +54,7 @@ RUN service postgresql start && psql --command "ALTER ROLE postgres WITH PASSWOR
 USER root
 
 RUN update-rc.d postgresql enable
+
+VOLUME /nrn-app/data/raw
+
+RUN chmod u+x scripts/tests/build-test.sh

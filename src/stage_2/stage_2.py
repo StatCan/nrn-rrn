@@ -1,3 +1,4 @@
+import gdal
 import click
 import fiona
 import geopandas as gpd
@@ -246,11 +247,11 @@ class Stage:
         # Transform administrative boundary file to GeoPackage layer with crs EPSG:4617.
         logger.info("Transforming administrative boundary file.")
         try:
-            subprocess.run("ogr2ogr -f GPKG -where PRUID='{}' ../../data/raw/boundary.gpkg "
-                           "../../data/raw/boundary/lpr_000a16a_e.shp -t_srs EPSG:4617 -nlt MULTIPOLYGON -nln {} "
-                           "-lco overwrite=yes "
+            subprocess.run("""ogr2ogr -f GPKG -sql "SELECT * FROM lpr_000a16a_e WHERE PRUID='{}'" 
+                           /nrn-app/data/raw/boundary.gpkg /nrn-app/data/raw/boundary/lpr_000a16a_e.shp 
+                           -t_srs EPSG:4617 -nlt MULTIPOLYGON -nln nb -lco overwrite=yes """
                            .format({"ab": 48, "bc": 59, "mb": 46, "nb": 13, "nl": 10, "ns": 12, "nt": 61, "nu": 62,
-                                    "on": 35, "pe": 11, "qc": 24, "sk": 47, "yt": 60}[self.source], self.source))
+                                    "on": 35, "pe": 11, "qc": 24, "sk": 47, "yt": 60}[self.source], self.source), shell=True)
         except subprocess.CalledProcessError as e:
             logger.exception("Unable to transform data source to EPSG:4617.")
             logger.exception("ogr2ogr error: {}".format(e))
