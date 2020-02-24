@@ -16,4 +16,4 @@ WORKDIR /nrn-app
 
 RUN chmod u+x scripts/dl-data.sh
 
-RUN ./scripts/dl-data.sh
+CMD ./scripts/dl-data.sh
