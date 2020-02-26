@@ -45,8 +45,6 @@ WORKDIR /nrn-app
 
 RUN pip3 install -r requirements.txt
 
-RUN service postgresql start
-
 USER postgres
 
 RUN service postgresql start && psql --command "ALTER ROLE postgres WITH PASSWORD 'password';"
