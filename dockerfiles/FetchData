@@ -15,7 +15,3 @@ RUN rm -rf /nrn-app
 COPY . /nrn-app
 
 WORKDIR /nrn-app
-
-RUN chmod u+x scripts/dl-data.sh
-
-CMD ./scripts/dl-data.sh
