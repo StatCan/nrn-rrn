@@ -2,18 +2,14 @@
   "pipeline": {
     "name": "stage_1"
   },
+  "standby" : true,
   "description": "A pipeline that executes NRN stage 1.",
   "transform": {
-    "image": "artifactory.cloud.statcan.ca/docker-local/daaas/nrn:v7",
+    "image": "artifactory.cloud.statcan.ca/docker-local/daaas/nrn:v0.5",
     "image_pull_secrets": [ "artifactory-prod" ],
-    "cmd" : [ "sh" ],
-    "stdin" : [ "export LC_ALL=C.UTF-8",
-		"export LANG=C.UTF-8",
-		"mkdir -p /nrn-app/data/raw/nb",
-		"find -L /pfs/data",
-		"cp -r /pfs/data/data/raw/nb /nrn-app/data/raw/nb || exit 1",
-		"cd /nrn-app/src/stage_1",
-		"python3 stage_1.py nb"
+    "cmd" : [ "bash" ],
+    "stdin" : [ "chmod u+x /nrn-app/pipelines/run.sh",
+		"/nrn-app/pipelines/run.sh"
 	      ],
     "env": {
       "nrn_working_dir": "/nrn-app/src/stage_1"
