@@ -1,0 +1,28 @@
+{
+  "pipeline": {
+    "name": "stage_0_nb"
+  },
+  "description": "A pipeline that executes NRN stage 0 for nb (New Brunswick).",
+  "transform": {
+    "image": "artifactory.cloud.statcan.ca/docker-local/daaas/nrn_fetch:v0.1",
+    "image_pull_secrets": [ "artifactory-prod" ],
+    "cmd" : [ "sh" ],
+    "stdin" : [ 
+                "chmod u+x /nrn-app/scripts/dl-data.sh", 
+                "/nrn-app/scripts/dl-data.sh",
+		"chmod u+x /nrn-app/scripts/copy-data.sh",
+                "/nrn-app/scripts/copy-data.sh" 
+              ],
+    "env": {
+      "nrn_pr_code": "nb/geonb_nbrn-rrnb_shp",
+      "nrn_url": "http://geonb.snb.ca/downloads/nbrn/geonb_nbrn-rrnb_shp.zip"
+    }
+  },
+  "input": {
+    "pfs": {
+      "repo": "data",
+      "glob": "/"
+    }
+  }
+}
+

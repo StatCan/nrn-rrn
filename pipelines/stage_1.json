@@ -1,0 +1,25 @@
+{
+  "pipeline": {
+    "name": "stage_1"
+  },
+  "standby" : true,
+  "description": "A pipeline that executes NRN stage 1.",
+  "transform": {
+    "image": "artifactory.cloud.statcan.ca/docker-local/daaas/nrn:v0.5",
+    "image_pull_secrets": [ "artifactory-prod" ],
+    "cmd" : [ "bash" ],
+    "stdin" : [ "chmod u+x /nrn-app/pipelines/run.sh",
+		"/nrn-app/pipelines/run.sh"
+	      ],
+    "env": {
+      "nrn_working_dir": "/nrn-app/src/stage_1"
+    }
+  },
+  "input": {
+    "pfs": {
+      "repo" : "stage_0_nb",
+      "name": "data",
+      "glob": "/"
+    }
+  }
+}
