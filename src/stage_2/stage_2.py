@@ -12,6 +12,7 @@ import sys
 import urllib.request
 import uuid
 import zipfile
+from datetime import datetime
 from geopandas_postgis import PostGIS
 from psycopg2 import connect, extensions, sql
 from shapely.geometry.multipoint import MultiPoint
@@ -45,6 +46,9 @@ class Stage:
             logger.exception("Input data not found: \"{}\".".format(self.data_path))
             sys.exit(1)
 
+        # Compile database configuration variables.
+        self.db_config = helpers.load_yaml(os.path.abspath("db_config.yaml"))
+
     def create_db(self):
         """Creates the PostGIS database needed for Stage 2."""
 
@@ -53,17 +57,20 @@ class Stage:
 
         # default postgres connection needed to create the nrn database
         conn = connect(
-            dbname="postgres",
-            user="postgres",
-            host="localhost",
-            password="password"
+            dbname=self.db_config["dbname"],
+            user=self.db_config["user"],
+            host=self.db_config["host"],
+            password=self.db_config["password"]
         )
 
         # postgres database url for geoprocessing
         nrn_url = URL(
-            drivername='postgresql+psycopg2', host='localhost',
-            database=nrn_db, username='postgres',
-            port='5432', password='password'
+            drivername=self.db_config["drivername"],
+            host=self.db_config["host"],
+            database=nrn_db,
+            username=self.db_config["username"],
+            port=self.db_config["port"],
+            password=self.db_config["password"]
         )
 
         # engine to connect to nrn database
@@ -99,9 +106,9 @@ class Stage:
         # connection parameters for newly created database
         nrn_conn = connect(
             dbname=nrn_db,
-            user="postgres",
-            host="localhost",
-            password="password"
+            user=self.db_config["user"],
+            host=self.db_config["host"],
+            password=self.db_config["password"]
         )
 
         nrn_conn.set_isolation_level(autocommit)
@@ -154,7 +161,7 @@ class Stage:
 
         logger.info("Importing roadseg geodataframe into PostGIS.")
         self.dframes["roadseg"].postgis.to_postgis(con=self.engine, table_name="stage_{}".format(self.stage),
-                                                   geometry="LineString", if_exists="replace")
+                                                   geometry="LineString", if_exists="replace", index=False)
 
         logger.info("Loading SQL yaml.")
         self.sql = helpers.load_yaml("../sql.yaml")
@@ -240,7 +247,15 @@ class Stage:
         logger.info("Downloading administrative boundary file.")
         adm_file = "http://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/2016/" \
                    "lpr_000a16a_e.zip"
-        urllib.request.urlretrieve(adm_file, '../../data/raw/boundary.zip')
+        try:
+            urllib.request.urlretrieve(adm_file, '../../data/raw/boundary.zip')
+        except (TimeoutError, urllib.error.URLError) as e:
+            logger.exception("Unable to download administrative boundary file: \"{}\".".format(adm_file))
+            logger.exception(e)
+            sys.exit(1)
+
+        # Extract zipped file.
+        logger.info("Extracting zipped administrative boundary file.")
         with zipfile.ZipFile("../../data/raw/boundary.zip", "r") as zip_ref:
             zip_ref.extractall("../../data/raw/boundary")
 
@@ -277,15 +292,24 @@ class Stage:
         attr_fix = self.sql["attributes"]["query"].format(self.stage)
 
         logger.info("Testing for junction equality and altering attributes.")
-        self.attr_equality = gpd.GeoDataFrame.from_postgis(attr_fix, self.engine)
+        self.attr_equality = gpd.GeoDataFrame.from_postgis(attr_fix, self.engine, geom_col="geom")
+        self.attr_equality = self.attr_equality.rename(columns={"geom": "geometry"}).set_geometry("geometry")
 
     def gen_junctions(self):
         """Generate final dataset."""
 
+        # Set standard field values.
         self.attr_equality["uuid"] = [uuid.uuid4().hex for _ in range(len(self.attr_equality))]
+        self.attr_equality["credate"] = datetime.today().strftime("%Y%m%d")
         self.attr_equality["datasetnam"] = self.dframes["roadseg"]["datasetnam"][0]
         self.dframes["junction"] = self.attr_equality
+
+        # Apply field domains.
         self.apply_domains()
+
+        # Convert geometry from multipoint to point.
+        if self.dframes["junction"].geom_type[0] == "MultiPoint":
+            self.multipoint_to_point()
 
     def apply_domains(self):
         """Applies the field domains to each column in the target dataframes."""
@@ -312,6 +336,11 @@ class Stage:
         except (AttributeError, KeyError, ValueError):
             logger.exception("Invalid schema definition for table: junction, field: {}.".format(field))
             sys.exit(1)
+
+    def multipoint_to_point(self):
+        """Converts junction geometry from multipoint to point."""
+
+        self.dframes["junction"]["geometry"] = self.dframes["junction"]["geometry"].map(lambda geom: geom[0])
 
     def export_gpkg(self):
         """Exports the junctions dataframe as a GeoPackage layer."""
