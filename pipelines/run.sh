@@ -20,4 +20,29 @@ then
 	service postgresql start
 	python3 stage_2.py $nrn_source
 	cp -r /nrn-app/data/interim/. /pfs/out/data/
+elif [ "$nrn_working_dir" = "/nrn-app/src/stage_3" ]
+then
+	cp /pfs/data/data/*.gpkg /nrn-app/data/interim
+	python3 stage_3.py $nrn_source
+	cp -r /nrn-app/data/interim/. /pfs/out/data/
+elif [ "$nrn_working_dir" = "/nrn-app/src/stage_4" ]
+then
+	cp /pfs/data/data/*.gpkg /nrn-app/data/interim
+	python3 stage_4.py $nrn_source
+	cp -r /nrn-app/data/interim/. /pfs/out/data/
+elif [ "$nrn_working_dir" = "/nrn-app/src/stage_5" ]
+then
+	cp /pfs/data/data/*.gpkg /nrn-app/data/interim
+	python3 stage_5.py $nrn_source
+	cp -r /nrn-app/data/interim/. /pfs/out/data/
+elif [ "$nrn_working_dir" = "/nrn-app/src/stage_6" ]
+then
+	cp /pfs/data/data/*.gpkg /nrn-app/data/interim
+	python3 stage_6.py $nrn_source
+	cp -r /nrn-app/data/interim/. /pfs/out/data/
+elif [ "$nrn_working_dir" = "/nrn-app/src/stage_7" ]
+then
+	cp /pfs/data/data/*.gpkg /nrn-app/data/interim
+	python3 stage_7.py $nrn_source
+	cp -r /nrn-app/data/interim/. /pfs/out/data/
 fi

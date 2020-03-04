@@ -5,7 +5,7 @@
   "standby" : true,
   "description": "A pipeline that executes NRN stage 2.",
   "transform": {
-    "image": "artifactory.cloud.statcan.ca/docker-local/daaas/nrn:v0.5",
+    "image": "artifactory.cloud.statcan.ca/docker-local/daaas/nrn:v0.1",
     "image_pull_secrets": [ "artifactory-prod" ],
     "cmd" : [ "bash" ],
     "stdin" : [ "chmod u+x /nrn-app/pipelines/run.sh",
