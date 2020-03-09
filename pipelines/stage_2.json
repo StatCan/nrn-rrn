@@ -2,14 +2,18 @@
   "pipeline": {
     "name": "stage_2"
   },
-  "standby" : true,
+  "standby" : false,
   "description": "A pipeline that executes NRN stage 2.",
   "transform": {
-    "image": "artifactory.cloud.statcan.ca/docker-local/daaas/nrn:v0.5",
+    "image": "artifactory.cloud.statcan.ca/docker-local/daaas/nrn:v0.8",
     "image_pull_secrets": [ "artifactory-prod" ],
     "cmd" : [ "bash" ],
-    "stdin" : [ "chmod u+x /nrn-app/pipelines/run.sh",
-		"/nrn-app/pipelines/run.sh"
+    "stdin" : [ "cp /pfs/data/*.gpkg /nrn-app/data/interim/",
+		"service postgresql start",
+		"export LC_ALL=C.UTF-8",
+		"export LANG=C.UTF-8",
+		"cd /nrn-app/src/stage_2 && python3 stage_2.py nb",
+		"cp -r /nrn-app/data/interim/. /pfs/out/"
 	      ],
     "env": {
       "nrn_working_dir": "/nrn-app/src/stage_2"
