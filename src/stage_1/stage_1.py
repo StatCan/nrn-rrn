@@ -350,7 +350,7 @@ class Stage:
                 # Transform data source crs.
                 logger.info("Transforming data source to EPSG:4617.")
                 try:
-                    args = """ogr2ogr -f ESRI Shapefile -overwrite \"{}\" \"{}\" {} -lco coordinate_precision=6 -t_srs EPSG:4617""".format(dest, source_yaml["data"]["filename"], " " + source_yaml["data"]["layer"] if source_yaml["data"]["layer"] else "")
+                    args = """ogr2ogr -overwrite \"{}\" \"{}\" {} -lco coordinate_precision=6 -t_srs EPSG:4617""".format(dest, source_yaml["data"]["filename"], " " + source_yaml["data"]["layer"] if source_yaml["data"]["layer"] else "")
                     subprocess.run(args, shell=True, check=True)
                 except subprocess.CalledProcessError as e:
                     logger.exception("Unable to transform data source to EPSG:4617.")

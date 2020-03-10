@@ -2,9 +2,10 @@
   "pipeline": {
     "name": "stage_0_nb"
   },
+  "standby": false,
   "description": "A pipeline that executes NRN stage 0 for nb (New Brunswick).",
   "transform": {
-    "image": "artifactory.cloud.statcan.ca/docker-local/daaas/nrn_fetch:v0.1",
+    "image": "artifactory.cloud.statcan.ca/docker-local/daaas/nrn_fetch:2020.03.10",
     "image_pull_secrets": [ "artifactory-prod" ],
     "cmd" : [ "sh" ],
     "stdin" : [ 
