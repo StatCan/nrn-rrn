@@ -248,7 +248,7 @@ class Stage:
         adm_file = "http://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/2016/" \
                    "lpr_000a16a_e.zip"
         try:
-            urllib.request.urlretrieve(adm_file, '../../data/raw/boundary.zip')
+            urllib.request.urlretrieve(adm_file, '/nrn-app/data/raw/boundary.zip')
         except (TimeoutError, urllib.error.URLError) as e:
             logger.exception("Unable to download administrative boundary file: \"{}\".".format(adm_file))
             logger.exception(e)
@@ -256,15 +256,13 @@ class Stage:
 
         # Extract zipped file.
         logger.info("Extracting zipped administrative boundary file.")
-        with zipfile.ZipFile("../../data/raw/boundary.zip", "r") as zip_ref:
-            zip_ref.extractall("../../data/raw/boundary")
+        with zipfile.ZipFile("/nrn-app/data/raw/boundary.zip", "r") as zip_ref:
+            zip_ref.extractall("/nrn-app/data/raw/boundary")
 
         # Transform administrative boundary file to GeoPackage layer with crs EPSG:4617.
         logger.info("Transforming administrative boundary file.")
         try:
-            subprocess.run("""ogr2ogr -f GPKG -sql "SELECT * FROM lpr_000a16a_e WHERE PRUID='{}'" 
-                           /nrn-app/data/raw/boundary.gpkg /nrn-app/data/raw/boundary/lpr_000a16a_e.shp 
-                           -t_srs EPSG:4617 -nlt MULTIPOLYGON -nln nb -lco overwrite=yes """
+            subprocess.run("""ogr2ogr -f 'GPKG' -sql "SELECT * FROM lpr_000a16a_e WHERE PRUID='{}'" /nrn-app/data/raw/boundary.gpkg /nrn-app/data/raw/boundary/lpr_000a16a_e.shp -t_srs EPSG:4617 -nlt MULTIPOLYGON -nln nb -lco overwrite=yes """
                            .format({"ab": 48, "bc": 59, "mb": 46, "nb": 13, "nl": 10, "ns": 12, "nt": 61, "nu": 62,
                                     "on": 35, "pe": 11, "qc": 24, "sk": 47, "yt": 60}[self.source], self.source), shell=True)
         except subprocess.CalledProcessError as e:
@@ -273,7 +271,7 @@ class Stage:
             sys.exit(1)
 
         logger.info("Remove temporary administrative boundary files and directories.")
-        paths = ["../../data/raw/boundary", "../../data/raw/boundary.zip"]
+        paths = ["/nrn-app/data/raw/boundary", "/nrn-app/data/raw/boundary.zip"]
         for path in paths:
             if os.path.exists(path):
                 try:
@@ -283,7 +281,7 @@ class Stage:
                     logger.warning("OSError: {}.".format(e))
                     continue
 
-        bound_adm = gpd.read_file("../../data/raw/boundary.gpkg", layer=self.source)
+        bound_adm = gpd.read_file("/nrn-app/data/raw/boundary.gpkg", layer=self.source)
         bound_adm.crs = self.dframes["roadseg"].crs
 
         logger.info("Importing administrative boundary into PostGIS.")
