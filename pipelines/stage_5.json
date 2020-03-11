@@ -2,10 +2,10 @@
   "pipeline": {
     "name": "stage_5"
   },
-  "standby" : true,
+  "standby" : false,
   "description": "A pipeline that executes NRN stage 5.",
   "transform": {
-    "image": "artifactory.cloud.statcan.ca/docker-local/daaas/nrn:",
+    "image": "artifactory.cloud.statcan.ca/docker-local/daaas/nrn:2020.03.11-1",
     "image_pull_secrets": [ "artifactory-prod" ],
     "cmd" : [ "bash" ],
     "stdin" : [ "chmod u+x /nrn-app/pipelines/run.sh",
@@ -17,7 +17,7 @@
   },
   "input": {
     "pfs": {
-      "repo" : "stage_5",
+      "repo" : "stage_4",
       "name": "data",
       "glob": "/"
     }

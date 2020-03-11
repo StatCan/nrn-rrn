@@ -76,9 +76,8 @@ class Stage:
         # Transform latest vintage into crs EPSG:4617.
         logger.info("Transforming latest provincial dataset.")
         try:
-            subprocess.run('ogr2ogr -f "ESRI Shapefile" -t_srs EPSG:4617 '
-                           '../../data/raw/vintage/NRN_RRN_NB_9_0_SHP/NRN_NB_9_0_SHP_en/4617 '
-                           '../../data/raw/vintage/NRN_RRN_NB_9_0_SHP/NRN_NB_9_0_SHP_en')
+            subprocess.run('ogr2ogr /nrn-app/data/raw/vintage/NRN_RRN_NB_9_0_SHP/NRN_NB_9_0_SHP_en/4617 ' \
+                           '/nrn-app/data/raw/vintage/NRN_RRN_NB_9_0_SHP/NRN_NB_9_0_SHP_en -t_srs EPSG:4617', shell=True, check=True)
         except subprocess.CalledProcessError as e:
             logger.exception("Unable to transform data source to EPSG:4617.")
             logger.exception("ogr2ogr error: {}".format(e))
@@ -117,7 +116,7 @@ class Stage:
                     self.dframes["roadseg"]["nid"] = ""
 
         logger.info("Writing test road segment GPKG.")
-        helpers.export_gpkg({"roadseg_equal": self.dframes["roadseg"]}, self.data_path)
+        helpers.export_gpkg({"roadseg": self.dframes["roadseg"]}, self.data_path)
 
 
     def ferryseg_equality(self):
@@ -139,7 +138,7 @@ class Stage:
                 self.dframes["ferryseg"]["nid"] = ""
 
         logger.info("Writing test ferry segment GPKG.")
-        helpers.export_gpkg({"ferryseg_equal": self.dframes["ferryseg"]}, self.data_path)
+        helpers.export_gpkg({"ferryseg": self.dframes["ferryseg"]}, self.data_path)
 
     def junction_equality(self):
         """Checks if junction features have equal geometry."""
@@ -159,7 +158,7 @@ class Stage:
                 logger.warning("Unequal junction geometry detected for uuid: {}".format(index))
 
         logger.info("Writing test junction GPKG.")
-        helpers.export_gpkg({"junction_equal": self.dframes["junction"]}, self.data_path)
+        helpers.export_gpkg({"junction": self.dframes["junction"]}, self.data_path)
 
     def execute(self):
         """Executes an NRN stage."""
