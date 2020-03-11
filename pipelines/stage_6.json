@@ -2,10 +2,10 @@
   "pipeline": {
     "name": "stage_6"
   },
-  "standby" : true,
+  "standby" : false,
   "description": "A pipeline that executes NRN stage 6.",
   "transform": {
-    "image": "artifactory.cloud.statcan.ca/docker-local/daaas/nrn:2020.03.10-2",
+    "image": "artifactory.cloud.statcan.ca/docker-local/daaas/nrn:2020.03.11-2",
     "image_pull_secrets": [ "artifactory-prod" ],
     "cmd" : [ "bash" ],
     "stdin" : [ "rm -rf /pfs/data/raw/vintage",
@@ -22,7 +22,7 @@
   },
   "input": {
     "pfs": {
-      "repo" : "stage_6",
+      "repo" : "stage_5",
       "name": "data",
       "glob": "/"
     }
