@@ -70,7 +70,7 @@ then
 	rm -rf /nrn-app/data/raw
 	cp -r /pfs/data/raw /nrn-app/data
 	export nrn_source=`ls /nrn-app/data/raw`
-	python3 stage_7.py $nrn_source
-	cp -r /nrn-app/data/interim/. /pfs/out
+	python3 stage_7.py $nrn_source $major_version $minor_version
+	cp -r /nrn-app/data/. /pfs/out
 
 fi
