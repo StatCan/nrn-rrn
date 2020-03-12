@@ -15,7 +15,7 @@
                 "/nrn-app/scripts/copy-data.sh" 
               ],
     "env": {
-      "nrn_pr_code": "nb/geonb_nbrn-rrnb_shp",
+      "nrn_pr_dir": "nb/geonb_nbrn-rrnb_shp",
       "nrn_url": "http://geonb.snb.ca/downloads/nbrn/geonb_nbrn-rrnb_shp.zip"
     }
   },
