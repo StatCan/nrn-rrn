@@ -1,10 +1,10 @@
 FROM osgeo/gdal:ubuntu-small-3.0.3
 
-ARG nrn_pr_code=
+ARG nrn_pr_dir=
 
 ARG nrn_url=
 
-ENV nrn_pr_code ${nrn_pr_code}
+ENV nrn_pr_dir ${nrn_pr_dir}
 
 ENV nrn_url ${nrn_url}
 

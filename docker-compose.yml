@@ -5,11 +5,11 @@ services:
       context: .
       dockerfile: dockerfiles/FetchData-Testing
       args:
-        nrn_pr_code: nb/geonb_nbrn-rrnb_shp
+        nrn_pr_dir: nb/geonb_nbrn-rrnb_shp
         nrn_url: http://geonb.snb.ca/downloads/nbrn/geonb_nbrn-rrnb_shp.zip
     container_name: nrn_fetch
     environment:
-      nrn_pr_code: nb/geonb_nbrn-rrnb_shp
+      nrn_pr_dir: nb/geonb_nbrn-rrnb_shp
       nrn_url: http://geonb.snb.ca/downloads/nbrn/geonb_nbrn-rrnb_shp.zip
     volumes:
       - /nrn-app/data/raw
