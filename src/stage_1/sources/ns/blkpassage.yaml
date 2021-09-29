@@ -29,5 +29,5 @@ conform:
     revdate: REVDATE
     specvers: 2.0
     blkpassty: BLKPASSTY
-    nid: NID
-    roadnid: ROADNID
+    nid:
+    roadnid:

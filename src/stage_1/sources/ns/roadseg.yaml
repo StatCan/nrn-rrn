@@ -13,7 +13,7 @@ license:
 language: en
 data:
   filename: 2021/NRN_Output.gdb
-  layer: NRN_ROADSEG
+  layer: NRN_ROADSEG_NEW
   driver: OpenFileGDB
   crs: "EPSG:2961"
   spatial: True
@@ -30,20 +30,20 @@ conform:
     specvers: 2.0
     l_adddirfg:
     r_adddirfg:
-    adrangenid: ADRANGENID #TODO: FIX
+    adrangenid: ADRANGENID
     closing: CLOSING
     exitnbr: EXITNBR
-    l_hnumf: #TODO
-    r_hnumf: #TODO
+    l_hnumf: L_HNUMF
+    r_hnumf: R_HNUMF
     roadclass: ROADCLASS
-    l_hnuml: #TODO
-    r_hnuml: #TODO
-    nid: NID
+    l_hnuml: L_HNUML
+    r_hnuml: R_HNUML
+    nid: uuid
     nbrlanes: NBRLANES
-    l_placenam: #TODO
-    r_placenam: #TODO
-    l_stname_c: #TODO
-    r_stname_c: #TODO
+    l_placenam: L_PLACENAM
+    r_placenam: R_PLACENAM
+    l_stname_c: L_STNAME_C
+    r_stname_c: R_STNAME_C
     pavsurf: PAVSURF
     pavstatus: PAVSTATUS
     roadjuris: ROADJURIS
@@ -64,7 +64,7 @@ conform:
     speed: SPEED
     strunameen: STRUNAMEEN
     strunamefr: STRUNAMEFR
-    structid: STRUCTID #TODO: FIX
+    structid:
     structtype: STRUCTTYPE
     trafficdir: TRAFFICDIR
     unpavsurf: UNPAVSURF

@@ -57,6 +57,32 @@ Stage      Time
 **Total**  **03:26.41**
 =========  ====
 
+Nova Scotia (NS)
+==========================
+
+September 29, 2021
+------------------
+
+:Source: data/raw/ns/2021/NRN_Output.gdb
+:Environment:
+    :OS: Windows 10 64-bit
+    :CPU: Intel Core i7 4700HQ @ 2.40GHz
+    :RAM: 16.0GB
+    :Python: 3.9.2
+:Runtimes:
+
+=========  ====
+Stage      Time
+=========  ====
+1          00:00.00
+2          00:00.00
+3          00:00.00
+4          00:00.00
+5          00:00.00
+---------  ----
+**Total**  **00:00.00**
+=========  ====
+
 Nunavut (NU)
 ==========================
 

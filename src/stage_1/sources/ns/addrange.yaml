@@ -28,8 +28,8 @@ conform:
     provider: PROVIDER
     revdate: REVDATE
     specvers: 2.0
-    l_altnanid: "None"
-    r_altnanid: "None"
+    l_altnanid:
+    r_altnanid:
     l_digdirfg: L_DIGDIRFG
     r_digdirfg: R_DIGDIRFG
     l_hnumf: L_HNUMF
@@ -46,7 +46,7 @@ conform:
     r_hnumsufl: R_HNUMSUFL
     l_hnumtypl: L_HNUMTYPL
     r_hnumtypl: R_HNUMTYPL
-    nid: NID #TODO: FIX
+    nid: NID
     l_offnanid: L_OFFNANID
     r_offnanid: R_OFFNANID
     l_rfsysind: L_RFSYSIND

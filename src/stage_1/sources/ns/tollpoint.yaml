@@ -28,6 +28,6 @@ conform:
     provider: PROVIDER
     revdate: REVDATE
     specvers: 2.0
-    nid: NID
-    roadnid: ROADNID
+    nid:
+    roadnid:
     tollpttype: TOLLPTTYPE
