@@ -682,10 +682,7 @@ class Stage:
                 df.set_crs(source_yaml["data"]["crs"], allow_override=True, inplace=True)
                 df = df.to_crs("EPSG:4617")
 
-                # Force coordinates to 2D.
-                df = helpers.flatten_coordinates(df)
-
-                # Round coordinates to decimal precision = 7.
+                # Round coordinates to decimal precision = 7 and flatten to 2-dimensions.
                 df = helpers.round_coordinates(df, 7)
 
             # Add uuid field.
@@ -769,10 +766,7 @@ class Stage:
                         # Reproject to EPSG:4617.
                         df = df.to_crs("EPSG:4617")
 
-                        # Force coordinates to 2D.
-                        df = helpers.flatten_coordinates(df)
-
-                        # Round coordinates to decimal precision = 7.
+                        # Round coordinates to decimal precision = 7 and flatten to 2-dimensions.
                         df = helpers.round_coordinates(df, precision=7)
 
                     # Store result.
