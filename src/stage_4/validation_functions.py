@@ -502,21 +502,18 @@ class Validator:
 
         # Validation 2: ensure line segments do not have repeated adjacent points.
 
-        # Filter geometries to those with duplicated coordinates.
-        s_filtered = series.loc[series.map(lambda g: len(g.coords) != len(set(g.coords)))]
-
-        if len(s_filtered):
-
-            # Identify geometries with repeated adjacent coordinates.
-            mask = s_filtered.map(lambda g: len(g.coords) != len(list(groupby(g.coords))))
-
-            # Compile uuids of flagged records.
-            errors[2] = s_filtered.loc[mask].index.values
-
-        # Validation 3: ensure line segments do not overlap (i.e. contain duplicated adjacent points).
-
         # Extract coordinates from geometries (used multiple times).
         series_coords = series.map(attrgetter("coords")).map(tuple)
+
+        # Filter geometries to those with duplicated coordinates.
+        mask = (series_coords.map(len) != series_coords.map(lambda coords: len([i for i, x in groupby(coords)])))
+
+        if sum(mask):
+
+            # Compile uuids of flagged records.
+            errors[2] = series.loc[mask].index.values
+
+        # Validation 3: ensure line segments do not overlap (i.e. contain duplicated adjacent points).
 
         # Create ordered coordinate pairs, sorted.
         coord_pairs = series_coords.map(ordered_pairs).explode()
@@ -562,22 +559,20 @@ class Validator:
         df = self.dframes[name]
 
         # Extract coordinates of points.
-        pts = df["geometry"].map(lambda g: itemgetter(0)(g.coords))
+        df["pt"] = df["geometry"].map(lambda g: itemgetter(0)(g.coords))
 
         # Identify duplicated geometries.
-        dups = pts.loc[pts.duplicated(keep=False)]
+        dups = df["pt"].duplicated(keep=False)
 
-        if len(dups):
+        if sum(dups):
 
             # Configure duplicated groups and their uuids.
-            uuid_groups = set(dups.map(
-                lambda geom1: tuple(set(dups.loc[dups.map(lambda geom2: geom1.equals(geom2))].index))).tolist())
+            uuid_groups = helpers.groupby_to_list(df.loc[dups], "pt", "uuid").values
 
             # Compile error properties.
-            if len(uuid_groups):
-                for uuid_group in uuid_groups:
-                    vals = ", ".join(map(lambda val: f"'{val}'", uuid_group))
-                    errors[1].append(f"Duplicated geometries identified for uuids: {vals}.")
+            for uuid_group in uuid_groups:
+                vals = ", ".join(map(lambda val: f"'{val}'", uuid_group))
+                errors[1].append(f"Duplicated geometries identified for uuids: {vals}.")
 
         return errors
 
