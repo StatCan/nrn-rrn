@@ -12,10 +12,10 @@ license:
   text: Open Government License - Nova Scotia
 language: en
 data:
-  filename: 2021/NRN_Output.gpkg
+  filename: 2021/NRN_Output.gdb
   layer: NRN_BLKPASSAGE
-  driver: GPKG
-  crs: "EPSG:4617"
+  driver: OpenFileGDB
+  crs: "EPSG:2961"
   spatial: True
   query:
 conform:
