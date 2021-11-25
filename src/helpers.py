@@ -111,7 +111,7 @@ def apply_domain(series: pd.Series, domain: dict, default: Any) -> pd.Series:
     else:
 
         # Convert empty strings and null types to default.
-        series.loc[(series.map(str).isin(["", "nan"])) | (series.isna())] = default
+        series.loc[(series.map(str).isin(["", "nan", "-2147483648"])) | (series.isna())] = default
         return series
 
 
