@@ -303,7 +303,7 @@ class Stage:
 
         logger.info(f"Applying data cleanup functions.")
 
-        def enforce_accuracy_limits(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
+        def _enforce_accuracy_limits(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
                 Union[gpd.GeoDataFrame, pd.DataFrame]:
             """
             Enforces upper and lower limits for NRN attribute 'accuracy'.
@@ -328,7 +328,7 @@ class Stage:
 
             return df.copy(deep=True)
 
-        def lower_case_ids(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
+        def _lower_case_ids(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
                 Union[gpd.GeoDataFrame, pd.DataFrame]:
             """
             Sets all ID fields to lower case.
@@ -358,7 +358,7 @@ class Stage:
 
             return df.copy(deep=True)
 
-        def overwrite_segment_ids(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
+        def _overwrite_segment_ids(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
                 Union[gpd.GeoDataFrame, pd.DataFrame]:
             """
             Populates the NRN attributes 'ferrysegid' or 'roadsegid', whichever appropriate, with incrementing integer
@@ -379,7 +379,37 @@ class Stage:
 
             return df.copy(deep=True)
 
-        def standardize_nones(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
+        def _resolve_pavsurf(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
+                Union[gpd.GeoDataFrame, pd.DataFrame]:
+            """
+            Resolves conflicts between pavstatus and pavsurf / unpavsurf.
+
+            :param str table: name of an NRN dataset.
+            :param Union[gpd.GeoDataFrame, pd.DataFrame] df: (Geo)DataFrame containing the target NRN attribute(s).
+            :return Union[gpd.GeoDataFrame, pd.DataFrame]: (Geo)DataFrame with attribute modifications.
+            """
+
+            if table == "roadseg":
+
+                logger.info(f"Applying data cleanup \"resolve_pavsurf\" to dataset: {table}.")
+
+                # For 'Paved' roads, set 'unpavsurf' to 'None'.
+                flag_paved = (df["pavstatus"] == "Paved") & (df["unpavsurf" != "None"])
+                df.loc[flag_paved, "unpavsurf"] = "None"
+
+                # For 'Unpaved' roads, set 'pavsurf' to 'None'.
+                flag_unpaved = (df["pavstatus"] == "Unpaved") & (df["pavsurf" != "None"])
+                df.loc[flag_unpaved, "pavsurf"] = "None"
+
+                # Log modifications.
+                for col, flag in (("unpavsurf", flag_paved), ("pavsurf", flag_unpaved)):
+                    if sum(flag):
+                        logger.warning(f"Modified {sum(flag)} record(s) in table {table}, column {col}."
+                                       f"\nModification details: Column values set to \"None\".")
+
+                return df.copy(deep=True)
+
+        def _standardize_nones(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
                 Union[gpd.GeoDataFrame, pd.DataFrame]:
             """
             Standardizes string 'None's (distinct from Null).
@@ -409,7 +439,7 @@ class Stage:
 
             return df.copy(deep=True)
 
-        def strip_whitespace(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
+        def _strip_whitespace(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
                 Union[gpd.GeoDataFrame, pd.DataFrame]:
             """
             Strips leading, trailing, and multiple internal whitespace for each (Geo)DataFrame column.
@@ -440,7 +470,7 @@ class Stage:
 
             return df.copy(deep=True)
 
-        def title_case_names(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
+        def _title_case_names(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
                 Union[gpd.GeoDataFrame, pd.DataFrame]:
             """
             Sets to title case all NRN name attributes:
@@ -489,8 +519,8 @@ class Stage:
         for table, df in self.target_gdframes.items():
 
             # Iterate cleanup functions.
-            for func in (lower_case_ids, strip_whitespace, standardize_nones, overwrite_segment_ids, title_case_names,
-                         enforce_accuracy_limits):
+            for func in (_enforce_accuracy_limits, _lower_case_ids, _overwrite_segment_ids, _resolve_pavsurf,
+                         _standardize_nones, _strip_whitespace, _title_case_names):
                 df = func(table, df)
 
             # Store updated dataframe.

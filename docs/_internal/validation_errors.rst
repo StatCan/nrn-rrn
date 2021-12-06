@@ -234,16 +234,6 @@ E01601
 E01602
 ^^^^^^
 
-:Description: Attribute "unpavsurf" must equal "None" when attribute "pavstatus" equals "Paved".
-
-E01603
-^^^^^^
-
-:Description: Attribute "pavsurf" must equal "None" when attribute "pavstatus" equals "Unpaved".
-
-E01604
-^^^^^^
-
 :Description: Attribute "unpavsurf" cannot equal "None" when attribute "pavstatus" equals "Unpaved".
 
 E01701

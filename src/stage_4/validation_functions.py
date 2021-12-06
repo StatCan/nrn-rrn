@@ -269,15 +269,13 @@ class Validator:
         # Apply validations and compile uuids of flagged records.
         if len(df_filtered):
 
-            # Validation: when pavstatus == "Paved", ensure pavsurf != "None" and unpavsurf == "None".
+            # Validation: when pavstatus == "Paved", ensure pavsurf != "None".
             paved = df_filtered.loc[df_filtered["pavstatus"] == "Paved"]
             errors[1] = paved.loc[paved["pavsurf"] == "None"].index.values
-            errors[2] = paved.loc[paved["unpavsurf"] != "None"].index.values
 
-            # Validation: when pavstatus == "Unpaved", ensure pavsurf == "None" and unpavsurf != "None".
+            # Validation: when pavstatus == "Unpaved", ensure unpavsurf != "None".
             unpaved = df_filtered.loc[df_filtered["pavstatus"] == "Unpaved"]
-            errors[3] = unpaved.loc[unpaved["pavsurf"] != "None"].index.values
-            errors[4] = unpaved.loc[unpaved["unpavsurf"] == "None"].index.values
+            errors[2] = unpaved.loc[unpaved["unpavsurf"] == "None"].index.values
 
         # Compile error properties.
         for code, vals in errors.items():
