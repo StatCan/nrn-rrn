@@ -221,106 +221,91 @@ E01501
 :Validation: NID linkages.
 :Description: ID(s) from the specified attribute column are not present in the linked dataset's "NID" attribute column.
 
-E016
-----
-
-:Validation: Conflicting pavement status.
-
 E01601
-^^^^^^
-
-:Description: Attribute "pavsurf" cannot equal "None" when attribute "pavstatus" equals "Paved".
-
-E01602
-^^^^^^
-
-:Description: Attribute "unpavsurf" cannot equal "None" when attribute "pavstatus" equals "Unpaved".
-
-E01701
 ------
 
 :Validation: Point proximity.
 :Description: Points must be >= 5 meters from each other.
 
-E018
+E017
 ----
 
 :Validation: Structure attributes.
 
-E01801
+E01701
 ^^^^^^
 
 :Description: Dead end road segments must have attribute "structtype" equal to "None" or the default value.
 
-E01802
+E01702
 ^^^^^^
 
 :Description: Structures must be contiguous (i.e. all line segments must be touching). The specified structure
     represents all geometries where attribute "structid" equals the specified structure ID.
 
-E01803
+E01703
 ^^^^^^
 
 :Description: Attribute "structid" must be identical and not the default value for all line segments constituting a
     contiguous structure (i.e. all connected line segments where attribute "structtype" is not equal to the default
     value).
 
-E01804
+E01704
 ^^^^^^
 
 :Description: Attribute "structtype" must be identical and not the default value for all line segments constituting a
     contiguous structure (i.e. all connected line segments where attribute "structtype" is not equal to the default
     value).
 
-E01901
+E01801
 ------
 
 :Validation: Road class - route number relationship.
 :Description: Attribute "rtnumber1" cannot equal the default value or "None" when attribute "roadclass" equals one of
     the following: "Expressway / Highway", "Freeway".
 
-E02001
+E01901
 ------
 
 :Validation: Self-intersecting road elements.
 :Description: Road segments which constitute a self-intersecting road element must have attribute "roadclass" equal to
     one of the following: "Expressway / Highway", "Freeway", "Ramp", "Rapid Transit", "Service Lane".
 
-E02101
+E02001
 ------
 
 :Validation: Self-intersecting structures.
 :Description: Line segments which intersect themselves must have a "structtype" attribute not equal to "None".
 
-E02201
+E02101
 ------
 
 :Validation: Route contiguity.
 :Description: Routes must be contiguous (i.e. all line segments must be touching). The specified route represents all
     geometries where one of the specified route name attributes equals the specified route name.
 
-E023
+E022
 ----
 
 :Validation: Speed.
 
-E02301
+E02201
 ^^^^^^
 
 :Description: Attribute "speed" must be between 5 and 120, inclusively.
 
-E02302
+E02202
 ^^^^^^
 
 :Description: Attribute "speed" must be a multiple of 5.
 
-E02401
+E02301
 ------
 
 :Validation: Encoding.
 :Description: Attribute contains one or more question mark ("?"), which may be the result of invalid character encoding.
 
-E02501
+E02401
 ------
 
 :Validation: Out-of-scope.

@@ -167,53 +167,48 @@ class Validator:
                 "datasets": self.dframes.keys(),
                 "iterate": True
             },
-            self.conflicting_pavement_status: {
-                "code": 16,
-                "datasets": ["roadseg"],
-                "iterate": True
-            },
             self.point_proximity: {
-                "code": 17,
+                "code": 16,
                 "datasets": self.df_points,
                 "iterate": True
             },
             self.structure_attributes: {
-                "code": 18,
+                "code": 17,
                 "datasets": ["roadseg", "junction"],
                 "iterate": False
             },
             self.roadclass_rtnumber_relationship: {
-                "code": 19,
+                "code": 18,
                 "datasets": ["ferryseg", "roadseg"],
                 "iterate": True
             },
             self.self_intersecting_elements: {
-                "code": 20,
+                "code": 19,
                 "datasets": ["roadseg"],
                 "iterate": True
             },
             self.self_intersecting_structures: {
-                "code": 21,
+                "code": 20,
                 "datasets": ["roadseg"],
                 "iterate": True
             },
             self.route_contiguity: {
-                "code": 22,
+                "code": 21,
                 "datasets": ["roadseg"],
                 "iterate": False
             },
             self.speed: {
-                "code": 23,
+                "code": 22,
                 "datasets": ["roadseg"],
                 "iterate": True
             },
             self.encoding: {
-                "code": 24,
+                "code": 23,
                 "datasets": self.dframes.keys(),
                 "iterate": True
             },
             self.out_of_scope: {
-                "code": 25,
+                "code": 24,
                 "datasets": {*self.df_lines, *self.df_points} - {"junction"},
                 "iterate": True
             }
@@ -248,39 +243,6 @@ class Validator:
             for nid, exitnbrs in flag_nids.iteritems():
                 exitnbrs = ", ".join(map(lambda val: f"'{val}'", exitnbrs))
                 errors[1].append(f"nid '{nid}' has multiple exitnbrs: {exitnbrs}.")
-
-        return errors
-
-    def conflicting_pavement_status(self, name: str) -> Dict[int, list]:
-        """
-        Applies a set of validations to pavstatus, pavsurf, and unpavsurf fields.
-
-        :param str name: NRN dataset name.
-        :return Dict[int, list]: dictionary of validation codes and associated lists of error messages.
-        """
-
-        errors = defaultdict(list)
-        df = self.dframes[name]
-
-        # Subset dataframe to non-default values, keep only required fields.
-        default = self.defaults_all[name]["pavstatus"]
-        df_filtered = df.loc[df["pavstatus"] != default, ["pavstatus", "pavsurf", "unpavsurf"]]
-
-        # Apply validations and compile uuids of flagged records.
-        if len(df_filtered):
-
-            # Validation: when pavstatus == "Paved", ensure pavsurf != "None".
-            paved = df_filtered.loc[df_filtered["pavstatus"] == "Paved"]
-            errors[1] = paved.loc[paved["pavsurf"] == "None"].index.values
-
-            # Validation: when pavstatus == "Unpaved", ensure unpavsurf != "None".
-            unpaved = df_filtered.loc[df_filtered["pavstatus"] == "Unpaved"]
-            errors[2] = unpaved.loc[unpaved["unpavsurf"] == "None"].index.values
-
-        # Compile error properties.
-        for code, vals in errors.items():
-            if len(vals):
-                errors[code] = list(map(lambda val: f"uuid: '{val}'", vals))
 
         return errors
 

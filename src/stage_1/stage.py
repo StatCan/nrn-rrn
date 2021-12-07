@@ -392,20 +392,30 @@ class Stage:
             if table == "roadseg":
 
                 logger.info(f"Applying data cleanup \"resolve_pavsurf\" to dataset: {table}.")
+                paved_orig = df["pavsurf"].copy(deep=True)
+                unpaved_orig = df["unpavsurf"].copy(deep=True)
 
-                # For 'Paved' roads, set 'unpavsurf' to 'None'.
-                flag_paved = (df["pavstatus"] == "Paved") & (df["unpavsurf"] != "None")
-                df.loc[flag_paved, "unpavsurf"] = "None"
+                # For 'Paved' roads:
+                # 1) Ensure 'unpavsurf' = 'None'
+                # 2) Ensure 'pavsurf' != 'None'.
+                flag_paved = (df["pavstatus"] == "Paved")
+                df.loc[flag_paved & (df["unpavsurf"] != "None"), "unpavsurf"] = "None"
+                df.loc[flag_paved & (df["pavsurf"] == "None"), "pavsurf"] = self.defaults[table]["pavsurf"]
 
-                # For 'Unpaved' roads, set 'pavsurf' to 'None'.
-                flag_unpaved = (df["pavstatus"] == "Unpaved") & (df["pavsurf"] != "None")
-                df.loc[flag_unpaved, "pavsurf"] = "None"
+                # For 'Unpaved' roads:
+                # 1) Ensure 'pavsurf' = 'None'
+                # 2) Ensure 'unpavsurf' != 'None'.
+                flag_unpaved = (df["pavstatus"] == "Unpaved")
+                df.loc[flag_unpaved & (df["pavsurf"] != "None"), "pavsurf"] = "None"
+                df.loc[flag_unpaved & (df["unpavsurf"] == "None"), "unpavsurf"] = self.defaults[table]["unpavsurf"]
 
                 # Log modifications.
-                for col, flag in (("unpavsurf", flag_paved), ("pavsurf", flag_unpaved)):
-                    if sum(flag):
-                        logger.warning(f"Modified {sum(flag)} record(s) in table {table}, column {col}."
-                                       f"\nModification details: Column values set to \"None\".")
+                for col, series_orig in (("pavsurf", paved_orig), ("unpavsurf", unpaved_orig)):
+                    mods = sum(series_orig != df[col])
+                    if mods:
+                        logger.warning(f"Modified {mods} record(s) in table {table}, column {col}."
+                                       f"\nModification details: Column values set to \"None\" / "
+                                       f"\"{self.defaults[table][col]}\".")
 
             return df.copy(deep=True)
 
