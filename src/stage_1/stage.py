@@ -394,11 +394,11 @@ class Stage:
                 logger.info(f"Applying data cleanup \"resolve_pavsurf\" to dataset: {table}.")
 
                 # For 'Paved' roads, set 'unpavsurf' to 'None'.
-                flag_paved = (df["pavstatus"] == "Paved") & (df["unpavsurf" != "None"])
+                flag_paved = (df["pavstatus"] == "Paved") & (df["unpavsurf"] != "None")
                 df.loc[flag_paved, "unpavsurf"] = "None"
 
                 # For 'Unpaved' roads, set 'pavsurf' to 'None'.
-                flag_unpaved = (df["pavstatus"] == "Unpaved") & (df["pavsurf" != "None"])
+                flag_unpaved = (df["pavstatus"] == "Unpaved") & (df["pavsurf"] != "None")
                 df.loc[flag_unpaved, "pavsurf"] = "None"
 
                 # Log modifications.
@@ -407,7 +407,7 @@ class Stage:
                         logger.warning(f"Modified {sum(flag)} record(s) in table {table}, column {col}."
                                        f"\nModification details: Column values set to \"None\".")
 
-                return df.copy(deep=True)
+            return df.copy(deep=True)
 
         def _standardize_nones(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
                 Union[gpd.GeoDataFrame, pd.DataFrame]:
