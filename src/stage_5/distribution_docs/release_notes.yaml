@@ -39,10 +39,10 @@ nu:
   release_date: 2021-04
   validity_date: 2020-10
 'on':
-  edition: 13.0
-  number_of_kilometers: 261,714
-  release_date: 2020-12
-  validity_date: 2020-08
+  edition: 14.0
+  number_of_kilometers: 262,378
+  release_date: 2021-12
+  validity_date: 2021-12
 pe:
   edition: 20.1
   number_of_kilometers: 6,988

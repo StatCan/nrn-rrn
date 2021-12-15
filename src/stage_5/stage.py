@@ -11,6 +11,7 @@ from collections import Counter
 from datetime import datetime
 from operator import attrgetter, itemgetter
 from pathlib import Path
+from shapely.geometry import LineString
 from tqdm import tqdm
 from tqdm.auto import trange
 from typing import Union
@@ -250,6 +251,11 @@ class Stage:
 
                     # Iterate export datasets.
                     for table, df in dframes.items():
+
+                        # Reverse lat/lon ordering.
+                        df = df.copy(deep=True)
+                        df["geometry"] = df["geometry"].map(
+                            lambda g: LineString(pt[::-1] for pt in attrgetter("coords")(g)))
 
                         # Map dataframe queries (more efficient than iteratively querying).
                         self.kml_groups[lang]["df"] = self.kml_groups[lang]["query"].map(
