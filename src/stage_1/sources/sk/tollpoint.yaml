@@ -5,14 +5,14 @@ coverage:
     alpha2: CA-SK
     country: Canada
     subdivision: Saskatchewan
-  website: https://www.isc.ca/MapsandPhotos/GISData/Pages/SaskatchewanUpgradedRoadNetwork(SURN).aspx
+  website: http://efts.gov.sk.ca
   update_frequency: unknown
 license:
   url: https://www.isc.ca/About/Legal/Pages/default.aspx
   text:
 language: en
 data:
-  filename: 2020/TOLLPOINT.shp
+  filename: 2021/TOLLPOINT.shp
   layer:
   driver: ESRI Shapefile
   crs: "EPSG:26913"
@@ -21,33 +21,13 @@ data:
 conform:
   tollpoint:
     nid: uuid
-    datasetnam:
-      fields: DATASETNAM
-      functions:
-        - function: direct
-          cast_type: int
+    datasetnam: Saskatchewan
     specvers: 2.0
     accuracy: ACCURACY
-    acqtech:
-      fields: ACQTECH
-      functions:
-        - function: direct
-          cast_type: int
-    provider:
-      fields: PROVIDER
-      functions:
-        - function: direct
-          cast_type: int
+    acqtech: ACQTECH
+    provider: PROVIDER
     credate: CREDATE
     revdate: REVDATE
-    metacover:
-      fields: METACOVER
-      functions:
-        - function: direct
-          cast_type: int
+    metacover: METACOVER
     roadnid: ROADNID
-    tollpttype:
-      fields: TOLLPTTYPE
-      functions:
-        - function: direct
-          cast_type: int
+    tollpttype: TOLLPTTYPE

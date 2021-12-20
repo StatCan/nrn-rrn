@@ -2,19 +2,15 @@ import click
 import fiona
 import geopandas as gpd
 import logging
-import numpy as np
 import pandas as pd
 import requests
 import sys
 import uuid
-from collections import Counter
 from datetime import datetime
 from itertools import chain
 from operator import attrgetter, itemgetter
 from pathlib import Path
-from scipy.spatial import cKDTree
-from shapely.geometry import box, Point, Polygon, MultiPolygon, GeometryCollection
-from typing import Dict, List, Union
+from shapely.geometry import Point
 
 filepath = Path(__file__).resolve()
 sys.path.insert(1, str(filepath.parents[1]))
@@ -105,144 +101,17 @@ class Stage:
             logger.exception(f"Invalid schema definition for table: {table}, field: {field}.")
             sys.exit(1)
 
-    def divide_polygon(self, poly: Union[MultiPolygon, Polygon], threshold: Union[float, int], pts: pd.Series,
-                       count: int = 0) -> List[Union[None, MultiPolygon, Polygon]]:
-        """
-        Recursively divides a (Multi)Polygon into 2 parts until any of the following limits are reached:
-        a) both dimensions (height and width) are <= threshold.
-        b) a recursion depth of 250 is reached.
-        c) no more point tuples exist within the current bounds.
-
-        :param Union[MultiPolygon, Polygon] poly: (Multi)Polygon.
-        :param Union[float, int] threshold: maximum height and width of the divided Polygons.
-        :param pd.Series pts: Series of coordinate tuples.
-        :param int count: current recursion depth (for internal use), default 0.
-        :return List[Union[None, MultiPolygon, Polygon]]: list of Polygons, extracted from the original (Multi)Polygon.
-        """
-
-        xmin, ymin, xmax, ymax = poly.bounds
-
-        # Configure bounds dimensions.
-        width = xmax - xmin
-        height = ymax - ymin
-
-        # Exit recursion once limits are reached.
-        if max(width, height) <= threshold or count == 250 or not len(pts):
-            if len(pts):
-                return [poly]
-            else:
-                return [None]
-
-        # Conditionally split polygon by height or width.
-        if height >= width:
-            a = box(xmin, ymin, xmax, ymin + (height / 2))
-            b = box(xmin, ymin + (height / 2), xmax, ymax)
-        else:
-            a = box(xmin, ymin, xmin + (width / 2), ymax)
-            b = box(xmin + (width / 2), ymin, xmax, ymax)
-        result = []
-
-        # Compile split results, further recurse.
-        for d in (a, b,):
-            c = poly.intersection(d)
-            if not isinstance(c, GeometryCollection):
-                c = [c]
-            for e in c:
-                if isinstance(e, (Polygon, MultiPolygon)):
-                    pts_subset = pts[pts.map(lambda pt: (xmin <= pt[0] <= xmax) and (ymin <= pt[1] <= ymax))]
-                    result.extend(self.divide_polygon(e, threshold, pts_subset, count=count + 1))
-
-        if count > 0:
-            return result
-
-        # Compile final result as a single-part polygon.
-        final_result = []
-        for g in result:
-            if g:
-                if isinstance(g, MultiPolygon):
-                    final_result.extend(g)
-                else:
-                    final_result.append(g)
-
-        return final_result
-
     def gen_attributes(self) -> None:
         """Generate the remaining attributes for the output junction dataset."""
 
         logger.info("Generating remaining dataset attributes.")
 
-        def compute_connected_attributes(attributes: List[str]) -> Dict[str, pd.Series]:
-            """
-            Computes the given attributes from NRN ferryseg and roadseg features connected to the junction dataset.
-            Currently supported attributes: 'accuracy', 'exitnbr'.
+        # Create attribute lookup dict.
+        uuid_attr_lookup = self.dframes["roadseg"][list(set(self.dframes["roadseg"].columns) - {"geometry"})]\
+            .to_dict(orient="dict")
 
-            :param List[str] attributes: list of attribute names.
-            :return Dict[str, pd.Series]: dictionary of attributes and junction-aligned Series of attribute values.
-            """
-
-            junction = self.dframes["junction"].copy(deep=True)
-
-            # Validate input attributes.
-            if not set(attributes).issubset({"accuracy", "exitnbr"}):
-                logger.exception(f"One or more unsupported attributes provided: {', '.join(attributes)}.")
-                sys.exit(1)
-
-            # Concatenate ferryseg and roadseg, if possible.
-            if "ferryseg" in self.dframes:
-                df = gpd.GeoDataFrame(
-                    pd.concat(itemgetter("ferryseg", "roadseg")(self.dframes), ignore_index=False, sort=False))
-            else:
-                df = self.dframes["roadseg"].copy(deep=True)
-
-            # Generate kdtree.
-            tree = cKDTree(np.concatenate(df["geometry"].map(attrgetter("coords")).to_numpy()))
-
-            # Compile indexes of segments at 0 meters distance from each junction. These represent connected segments.
-            connected_idx = junction["geometry"].map(lambda geom: list(chain(*tree.query_ball_point(geom.coords, r=0))))
-
-            # Construct a uuid series aligned to the series of segment points.
-            pts_uuid = np.concatenate([[id] * count for id, count in
-                                       df["geometry"].map(lambda geom: len(geom.coords)).iteritems()])
-
-            # Retrieve the uuid associated with the connected indexes.
-            connected_uuid = connected_idx.map(lambda index: itemgetter(*index)(pts_uuid))
-
-            # Compile the attributes for all segment uuids.
-            attributes_uuid = df[attributes].to_dict()
-
-            # Convert associated uuids to attributes.
-            # Convert invalid attribute values to the default field value.
-            results = dict.fromkeys(attributes)
-
-            for attribute in attributes:
-                attribute_uuid = attributes_uuid[attribute]
-                default = self.defaults[attribute]
-                connected_attribute = None
-
-                # Attribute: accuracy.
-                if attribute == "accuracy":
-                    connected_attribute = connected_uuid.map(
-                        lambda id: max(itemgetter(*id)(attribute_uuid)) if isinstance(id, tuple) else
-                        itemgetter(id)(attribute_uuid))
-
-                # Attribute: exitnbr.
-                if attribute == "exitnbr":
-                    connected_attribute = connected_uuid.map(
-                        lambda id: tuple(set(itemgetter(*id)(attribute_uuid))) if isinstance(id, tuple) else
-                        (itemgetter(id)(attribute_uuid),))
-
-                    # Concatenate, sort, and remove invalid attribute tuples.
-                    connected_attribute = connected_attribute.map(
-                        lambda vals: ", ".join(sorted([str(v) for v in vals if v not in {default, "None"} and
-                                                       not pd.isna(v)])))
-
-                # Populate empty results with default.
-                connected_attribute = connected_attribute.map(lambda v: v if len(str(v)) else default)
-
-                # Store results.
-                results[attribute] = connected_attribute.copy(deep=True)
-
-            return results
+        # Flag records with multiple linked uuids.
+        flag = self.dframes["junction"]["uuids"].map(len) > 1
 
         # Set remaining attributes, where possible.
         self.dframes["junction"]["acqtech"] = "Computed"
@@ -251,107 +120,71 @@ class Stage:
         self.dframes["junction"]["datasetnam"] = self.dframes["roadseg"]["datasetnam"].iloc[0]
         self.dframes["junction"]["provider"] = "Federal"
         self.dframes["junction"]["revdate"] = self.defaults["revdate"]
-        connected_attributes = compute_connected_attributes(["accuracy", "exitnbr"])
-        self.dframes["junction"]["accuracy"] = connected_attributes["accuracy"]
-        self.dframes["junction"]["exitnbr"] = connected_attributes["exitnbr"]
+
+        # Attribute: accuracy. Take maximum value.
+        self.dframes["junction"].loc[flag, "accuracy"] = self.dframes["junction"].loc[flag, "uuids"].map(
+            lambda uuids: max(set(itemgetter(*uuids)(uuid_attr_lookup["accuracy"]))))
+        self.dframes["junction"].loc[~flag, "accuracy"] = self.dframes["junction"].loc[~flag, "uuids"].map(
+            lambda uuids: itemgetter(*uuids)(uuid_attr_lookup["accuracy"]))
+
+        # Attribute: exitnbr. Take first non-default / non-null value, otherwise take the default value.
+        default_exitnbr = self.defaults["exitnbr"]
+        self.dframes["junction"].loc[flag, "exitnbr"] = self.dframes["junction"].loc[flag, "uuids"].map(
+            lambda uuids: [*set(itemgetter(*uuids)(uuid_attr_lookup["exitnbr"])) - {"None", default_exitnbr},
+                           default_exitnbr][0])
+        self.dframes["junction"].loc[~flag, "exitnbr"] = self.dframes["junction"].loc[~flag, "uuids"].map(
+            lambda uuids: [*{itemgetter(*uuids)(uuid_attr_lookup["exitnbr"])} - {"None", default_exitnbr},
+                           default_exitnbr][0])
+
+        # Delete temporary attribution.
+        self.dframes["junction"].drop(columns=["pt", "uuids"], inplace=True)
 
     def gen_junctions(self) -> None:
         """Generates a junction GeoDataFrame for all junctypes: Dead End, Ferry, Intersection, and NatProvTer."""
 
         logger.info("Generating junctions.")
-        df = self.dframes["roadseg"].copy(deep=True)
+        roadseg = self.dframes["roadseg"].copy(deep=True)
 
-        # Separate unique and non-unique points.
-        logger.info("Separating unique and non-unique points.")
+        # Compile and classify junctions.
+        logger.info("Compiling and classifying junctions.")
 
-        # Construct a uuid series aligned to the series of points.
-        pts_uuid = np.concatenate([[id] * count for id, count in df["geometry"].map(
-            lambda geom: len(geom.coords)).iteritems()])
+        # Compile all nodes and group uuids by geometry.
+        nodes = roadseg["geometry"].map(lambda g: itemgetter(0, -1)(attrgetter("coords")(g))).explode()
+        nodes_df = pd.DataFrame({"uuid": nodes.index, "pt": nodes.values})
+        nodes_grouped = helpers.groupby_to_list(nodes_df, group_field="pt", list_field="uuid")
+        nodes_grouped_df = gpd.GeoDataFrame({"pt": nodes_grouped.index, "uuids": nodes_grouped.values},
+                                            geometry=nodes_grouped.index.map(Point).values, crs="EPSG:4617")
 
-        # Construct x- and y-coordinate series aligned to the series of points.
-        pts_x, pts_y = np.concatenate(df["geometry"].map(attrgetter("coords")).to_numpy()).T
+        # Classify junctions.
+        ferry = set(self.dframes["ferryseg"]["geometry"].map(
+            lambda g: itemgetter(0, -1)(attrgetter("coords")(g))).explode())
+        deadend = set(nodes_grouped_df.loc[(nodes_grouped_df["uuids"].map(len) == 1) &
+                                           (~nodes_grouped_df["pt"].isin(ferry)), "pt"])
+        intersection = set(nodes_grouped_df.loc[(nodes_grouped_df["uuids"].map(len) >= 3) &
+                                                (~nodes_grouped_df["pt"].isin(ferry)), "pt"])
+        natprovter = set(chain.from_iterable([deadend, ferry, intersection])) -\
+                     set(nodes_grouped_df.loc[nodes_grouped_df.sindex.query(self.boundary, predicate="contains"), "pt"])
 
-        # Join the uuids, x- and y-coordinates.
-        pts_df = pd.DataFrame({"x": pts_x, "y": pts_y, "uuid": pts_uuid})
+        # Remove natprovter junctions from other classifications.
+        ferry = ferry - natprovter
+        deadend = deadend - natprovter
+        intersection = intersection - natprovter
 
-        # Query unique points (all) and endpoints.
-        pts_unique = set(map(tuple, pts_df.loc[~pts_df[["x", "y"]].duplicated(keep=False), ["x", "y"]].values))
-        endpoints_unique = set(map(tuple, np.unique(np.concatenate(
-            df["geometry"].map(lambda g: itemgetter(0, -1)(attrgetter("coords")(g))).to_numpy()), axis=0)))
+        # Compile junctions into target dataset.
+        logger.info("Compiling junctions into target dataset.")
 
-        # Query non-unique points (all), keep only the first duplicated point from self-loops.
-        pts_dup = pts_df.loc[(pts_df[["x", "y"]].duplicated(keep=False)) &
-                             (~pts_df.duplicated(keep="first")), ["x", "y"]].values
+        # Compile junctions into GeoDataFrame.
+        junction_pts = set(chain.from_iterable([deadend, ferry, intersection]))
+        junctions = nodes_grouped_df.loc[nodes_grouped_df["pt"].isin(junction_pts)].copy(deep=True)
+        junctions["junctype"] = None
+        junctions["uuid"] = [uuid.uuid4().hex for _ in range(len(junctions))]
+        for junctype, pts in {"Dead End": deadend, "Ferry": ferry, "Intersection": intersection,
+                              "NatProvTer": natprovter}.items():
+            junctions.loc[junctions["pt"].isin(pts), "junctype"] = junctype
 
-        # Query junctypes.
-
-        # junctype: Dead End.
-        # Process: Query unique points which also exist in unique endpoints.
-        logger.info("Configuring junctype: Dead End.")
-        deadend = pts_unique.intersection(endpoints_unique)
-
-        # junctype: Intersection.
-        # Process: Query non-unique points with >= 3 instances.
-        logger.info("Configuring junctype: Intersection.")
-        counts = Counter(map(tuple, pts_dup))
-        intersection = {pt for pt, count in counts.items() if count >= 3}
-
-        # junctype: Ferry.
-        # Process: Compile all unique ferryseg endpoints which intersect a roadseg point. Remove conflicting points
-        # from other junctypes.
-        logger.info("Configuring junctype: Ferry.")
-
-        ferry = set()
-        if "ferryseg" in self.dframes:
-            pts_all = pts_unique.union(set(map(tuple, pts_dup)))
-            ferry = set(chain.from_iterable(self.dframes["ferryseg"]["geometry"].map(
-                lambda g: itemgetter(0, -1)(attrgetter("coords")(g)))))
-
-            ferry = ferry.intersection(pts_all)
-            deadend = deadend.difference(ferry)
-            intersection = intersection.difference(ferry)
-
-        # junctype: NatProvTer.
-        # Process: Query, from compiled junctypes, points not within the administrative boundary. Remove conflicting
-        # points from other junctypes.
-        logger.info("Configuring junctype: NatProvTer.")
-
-        # Compile all junction as coordinate tuples and Point geometries.
-        pts = pd.Series(chain.from_iterable([deadend, ferry, intersection]))
-        pts_geoms = gpd.GeoSeries(pts.map(Point))
-
-        # Split administrative boundary into smaller polygons.
-        boundary_polys = gpd.GeoSeries(self.divide_polygon(self.boundary["geometry"].iloc[0], 0.1, pts))
-
-        # Use the junctions' spatial indexes to query points within the split boundary polygons.
-        pts_sindex = pts_geoms.sindex
-        pts_within = boundary_polys.map(
-            lambda poly: pts_geoms.iloc[list(pts_sindex.intersection(poly.bounds))].within(poly))
-        pts_within = pts_within.map(lambda series: series.index[series].values)
-        pts_within = set(chain.from_iterable(pts_within.to_list()))
-
-        # Invert query and compile resulting points as NatProvTer.
-        natprovter = set(pts_geoms.loc[~pts_geoms.index.isin(pts_within)].map(lambda pt: pt.coords[0]))
-
-        # Remove conflicting points from other junctypes.
-        deadend = deadend.difference(natprovter)
-        ferry = ferry.difference(natprovter)
-        intersection = intersection.difference(natprovter)
-
-        # Load junctions into target dataset.
-        logger.info("Loading junctions into target dataset.")
-
-        # Compile junctypes as GeoDataFrames.
-        junctions = [gpd.GeoDataFrame(
-            {'junctype': junctype, "uuid": [uuid.uuid4().hex for _ in range(len(pts))]},
-            geometry=pd.Series(map(Point, pts))) for junctype, pts in
-            {"Dead End": deadend, "Ferry": ferry, "Intersection": intersection, "NatProvTer": natprovter}.items() if
-            len(pts)]
-
-        # Concatenate junctions with target dataset and set uuid as index.
+        # Concatenate data with target DataFrame.
         self.dframes["junction"] = gpd.GeoDataFrame(
-            pd.concat([self.junction, *junctions], ignore_index=True, sort=False), crs=self.dframes["roadseg"].crs)\
-            .copy(deep=True)
+            pd.concat([self.junction, junctions], ignore_index=True, sort=False), crs="EPSG:4617").copy(deep=True)
         self.dframes["junction"].index = self.dframes["junction"]["uuid"]
 
     def gen_target_dataframe(self) -> None:
@@ -388,6 +221,9 @@ class Stage:
 
             # Reproject boundaries to EPSG:4617.
             self.boundary = self.boundary.to_crs("EPSG:4617")
+
+            # Extract polygon from dataframe.
+            self.boundary = self.boundary["geometry"].iloc[0]
 
         except (fiona.errors, requests.exceptions.RequestException) as e:
             logger.exception(f"Error encountered when compiling administrative boundary file: \"{download_url}\".")

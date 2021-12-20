@@ -5,14 +5,14 @@ coverage:
     alpha2: CA-SK
     country: Canada
     subdivision: Saskatchewan
-  website: https://www.isc.ca/MapsandPhotos/GISData/Pages/SaskatchewanUpgradedRoadNetwork(SURN).aspx
+  website: http://efts.gov.sk.ca
   update_frequency: unknown
 license:
   url: https://www.isc.ca/About/Legal/Pages/default.aspx
   text:
 language: en
 data:
-  filename: 2020/ROADSEG.shp
+  filename: 2021/ROADSEG.shp
   layer:
   driver: ESRI Shapefile
   crs: "EPSG:26913"
@@ -20,24 +20,12 @@ data:
   query:
 conform:
   addrange:
-    acqtech:
-      fields: ACQTECH
-      functions:
-        - function: direct
-          cast_type: int
-    metacover:
-      fields: METACOVER
-      functions:
-        - function: direct
-          cast_type: int
+    acqtech: ACQTECH
+    metacover: METACOVER
     credate: CREDATE
-    datasetnam: "Saskatchewan"
+    datasetnam: Saskatchewan
     accuracy: ACCURACY
-    provider:
-      fields: PROVIDER
-      functions:
-      - function: direct
-        cast_type: int
+    provider: PROVIDER
     revdate: REVDATE
     specvers: 2.0
     l_altnanid:
@@ -64,24 +52,12 @@ conform:
     l_rfsysind:
     r_rfsysind:
   roadseg:
-    acqtech:
-      fields: ACQTECH
-      functions:
-      - function: direct
-        cast_type: int
-    metacover:
-      fields: METACOVER
-      functions:
-      - function: direct
-        cast_type: int
+    acqtech: ACQTECH
+    metacover: METACOVER
     credate: CREDATE
-    datasetnam: "Saskatchewan"
+    datasetnam: Saskatchewan
     accuracy: ACCURACY
-    provider:
-      fields: PROVIDER
-      functions:
-      - function: direct
-        cast_type: int
+    provider: PROVIDER
     revdate: REVDATE
     specvers: 2.0
     l_adddirfg:
@@ -91,11 +67,7 @@ conform:
     exitnbr: EXITNBR
     l_hnumf:
     r_hnumf:
-    roadclass:
-      fields: ROADCLASS
-      functions:
-        - function: direct
-          cast_type: int
+    roadclass: ROADCLASS
     l_hnuml:
     r_hnuml:
     nid: uuid
@@ -104,16 +76,8 @@ conform:
     r_placenam: PLACENAME
     l_stname_c: POSTEDNAME
     r_stname_c: POSTEDNAME
-    pavsurf:
-      fields: PAVSURF
-      functions:
-        - function: direct
-          cast_type: int
-    pavstatus:
-      fields: PAVSTATUS
-      functions:
-        - function: direct
-          cast_type: int
+    pavsurf: PAVSURF
+    pavstatus: PAVSTATUS
     roadjuris:
     roadsegid:
     rtename1en: RTENAME1EN
@@ -132,37 +96,17 @@ conform:
     speed: SPEEDLIMIT
     strunameen: STRUNAMEEN
     strunamefr: STRUNAMEFR
-    structid: STRUCTID
-    structtype:
-      fields: STRUCTTYPE
-      functions:
-      - function: direct
-        cast_type: int
+    structid:
+    structtype: STRUCTTYPE
     trafficdir: TRAVELDIR
-    unpavsurf:
-      fields: UNPAVSURF
-      functions:
-      - function: direct
-        cast_type: int
+    unpavsurf: UNPAVSURF
   strplaname:
-    acqtech:
-      fields: ACQTECH
-      functions:
-        - function: direct
-          cast_type: int
-    metacover:
-      fields: METACOVER
-      functions:
-        - function: direct
-          cast_type: int
+    acqtech: ACQTECH
+    metacover: METACOVER
     credate: CREDATE
-    datasetnam: "Saskatchewan"
+    datasetnam: Saskatchewan
     accuracy: ACCURACY
-    provider:
-      fields: PROVIDER
-      functions:
-        - function: direct
-          cast_type: int
+    provider: PROVIDER
     revdate: REVDATE
     specvers: 2.0
     dirprefix:
@@ -191,7 +135,7 @@ conform:
     nid: uuid
     placename: PLACENAME
     placetype:
-    province: "Saskatchewan"
+    province: Saskatchewan
     starticle:
       fields: POSTEDNAME
       functions:
