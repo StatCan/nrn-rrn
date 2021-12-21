@@ -1,7 +1,6 @@
 import click
 import geopandas as gpd
 import logging
-import math
 import networkx as nx
 import numpy as np
 import pandas as pd
@@ -11,7 +10,6 @@ import uuid
 from itertools import chain, compress
 from operator import attrgetter, itemgetter
 from pathlib import Path
-from scipy.spatial import cKDTree
 from shapely.geometry import LineString, MultiPoint, Point
 from shapely.ops import linemerge, split
 
@@ -534,57 +532,32 @@ class Stage:
 
         if tables:
 
-            # Filter and copy roadseg.
-            roadseg = self.dframes["roadseg"][["nid", "geometry"]].copy(deep=True)
+            # Copy roadseg and reproject to meter-based crs.
+            roadseg = self.dframes["roadseg"].to_crs("EPSG:3348").copy(deep=True)
 
-            # Identify maximum roadseg node distance (length between adjacent nodes on a line).
-            max_len = np.vectorize(lambda geom: max(map(
-                lambda pts: math.hypot(pts[0][0] - pts[1][0], pts[0][1] - pts[1][1]),
-                zip(geom.coords[:-1], geom.coords[1:]))))\
-                (roadseg["geometry"]).max()
+            # Create roadseg idx-nid lookup dict. Add nid default to dict.
+            roadseg_idx_nid_lookup = dict(zip(range(len(roadseg)), roadseg["nid"]))
+            default = self.defaults["nid"]
+            roadseg_idx_nid_lookup[default] = default
 
-            # Generate roadseg kdtree.
-            roadseg_tree = cKDTree(np.concatenate(roadseg["geometry"].map(attrgetter("coords")).to_numpy()))
+            # Iterate dataframes, if available.
+            for table in tables:
 
-            # Compile an index-lookup dict for each coordinate associated with each roadseg record.
-            roadseg_pt_indexes = np.concatenate([[index] * count for index, count in
-                                                 roadseg["geometry"].map(lambda geom: len(geom.coords)).iteritems()])
-            roadseg_lookup = pd.Series(roadseg_pt_indexes, index=range(0, roadseg_tree.n)).to_dict()
+                logger.info(f"Updating nid linkages for table relationship: {table} - roadseg.")
 
-            # Compile an index-lookup dict for each full roadseg geometry and nid record.
-            roadseg_geometry_lookup = roadseg["geometry"].to_dict()
-            roadseg_nid_lookup = roadseg["nid"].to_dict()
+                # Copy table dataframe and reproject to meter-based crs.
+                df = self.dframes[table].to_crs("EPSG:3348").copy(deep=True)
 
-        # Iterate dataframes, if available.
-        for table in tables:
+                # Create idx-idx lookup dict for nearest features between table and roadseg.
+                nearest_idx_lookup = dict(zip(*roadseg.sindex.nearest(
+                    df["geometry"], return_all=False, max_distance=5, return_distance=False)))
 
-            # Copy and filter dataframe.
-            df = self.dframes[table][["roadnid", "geometry"]].copy(deep=True)
+                # Populate table roadnid based on lookup dicts.
+                df["roadnid"] = range(len(df))
+                df["roadnid"] = df["roadnid"].map(nearest_idx_lookup).fillna(default).map(roadseg_idx_nid_lookup)
 
-            # Compile indexes of all roadseg points within max_len distance.
-            roadseg_pt_indexes = df["geometry"].map(lambda geom: roadseg_tree.query_ball_point(geom, r=max_len))
-
-            # Retrieve associated record indexes for each point index.
-            df["roadseg_idxs"] = roadseg_pt_indexes.map(lambda idxs: list(set(itemgetter(*idxs)(roadseg_lookup))))
-
-            # Retrieve associated record geometries for each record index.
-            df["roadsegs"] = df["roadseg_idxs"].map(lambda idxs: itemgetter(*idxs)(roadseg_geometry_lookup))
-            df["roadsegs"] = df["roadsegs"].map(lambda vals: vals if isinstance(vals, tuple) else (vals,))
-
-            # Retrieve the local roadsegs index of the nearest roadsegs geometry.
-            df["nearest_local_idx"] = np.vectorize(
-                lambda pt, roads: min(enumerate(map(lambda road: road.distance(pt), roads)), key=itemgetter(1))[0])\
-                (df["geometry"], df["roadsegs"])
-
-            # Retrieve the associated roadseg record index from the local index.
-            df["nearest_roadseg_idx"] = np.vectorize(
-                lambda local_idx, roadseg_idxs: itemgetter(local_idx)(roadseg_idxs))\
-                (df["nearest_local_idx"], df["roadseg_idxs"])
-
-            # Retrieve the nid associated with the roadseg index.
-            # Store results.
-            self.dframes[table]["roadnid"] = df["nearest_roadseg_idx"].map(
-                lambda roadseg_idx: itemgetter(roadseg_idx)(roadseg_nid_lookup)).copy(deep=True)
+                # Store results.
+                self.dframes[table]["roadnid"] = df["roadnid"].copy(deep=True)
 
     def execute(self) -> None:
         """Executes an NRN stage."""
