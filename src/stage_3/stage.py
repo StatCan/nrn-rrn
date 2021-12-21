@@ -1,7 +1,6 @@
 import click
 import geopandas as gpd
 import logging
-import networkx as nx
 import numpy as np
 import pandas as pd
 import string
@@ -69,18 +68,28 @@ class Stage:
                                  "remove=True (-r) or manually clear the output namespace.")
                 sys.exit(1)
 
-        # Compile match fields (fields which must be equal across records).
-        self.match_fields = ["r_stname_c"]
-
-        # Define change logs dictionary.
-        self.change_logs = dict()
+        # Define match fields (fields used for grouping records in current dataset / linking to old dataset)
+        # Note: roadseg requires a match field, the remaining entries are optional.
+        self.match_fields = {
+            "blkpassage": "blkpassty",
+            "junction": "junctype",
+            "roadseg": "r_stname_c",
+            "tollpoint": "tollpttype"
+        }
 
         # Load default field values.
-        self.defaults = helpers.compile_default_values()["roadseg"]
+        self.defaults = helpers.compile_default_values()
 
         # Load data - current and previous vintage.
-        self.dframes = helpers.load_gpkg(self.data_path)
-        self.dframes_old = helpers.load_gpkg(self.data_path.parent / f"{self.source}_old.gpkg", find=True)
+        self.dframes = helpers.load_gpkg(self.data_path,
+                                         layers=["blkpassage", "ferryseg", "junction", "roadseg", "tollpoint"])
+        self.dframes_old = helpers.load_gpkg(self.data_path.parent / f"{self.source}_old.gpkg", find=True,
+                                             layers=["blkpassage", "ferryseg", "junction", "roadseg", "tollpoint"])
+
+        # Define change logs dictionary.
+        self.change_logs = {
+            table: {change: set() for change in ("added", "retired", "modified", "confirmed")} for table in self.dframes
+        }
 
     def export_change_logs(self) -> None:
         """Exports the dataset differences as logs - based on nids."""
@@ -161,7 +170,86 @@ class Stage:
             self.dframes["roadseg"].loc[structures.index, "structid"] = structures["structid"].copy(deep=True)
             self.roadseg.loc[structures.index, "structid"] = structures["structid"].copy(deep=True)
 
-    def get_valid_ids(self, series: pd.Series) -> pd.Series:
+    def gen_nids(self) -> None:
+        """
+        Generates NID values for each dataset.
+        """
+
+        logger.info("Generating NIDs.")
+
+        # Iterate datasets.
+        for table, df in self.dframes.items():
+
+            logger.info(f"Generating NIDs for dataset: {table}.")
+
+            # Fetch old dataset, match field, and defaults.
+            df_old = self.dframes_old[table].copy(deep=True)
+            match_field = self.match_fields[table] if table in self.match_fields else None
+            default = self.defaults[table]["nid"]
+
+            # Handle complex NID generation.
+            if table == "roadseg":
+
+                # Compile junctions as splitting points.
+                junctions = gpd.GeoSeries(self.dframes["junction"].loc[
+                                              self.dframes["junction"]["junctype"] != "Dead End", "geometry"].unique(),
+                                          crs=self.dframes["junction"].crs)
+
+                # Dissolve geometries, grouped by match field, and explode multi-part results.
+                df_merge = helpers.groupby_to_list(df, list_field=match_field, group_field="geometry")\
+                    .map(linemerge).explode()
+                df_merge = gpd.GeoDataFrame({"match_field": df_merge.index}, geometry=df_merge.values, crs=df.crs)
+
+                # Compile and split on junctions contained within each dissolved geometry; explode multi-part results.
+                junctions_idx_geom_lookup = dict(junctions)
+                df_merge["junctions"] = df_merge["geometry"].map(
+                    lambda g: junctions.sindex.query(g, predicate="contains")).map(tuple)
+                flag_split = df_merge["junctions"].map(len) > 0
+                df_merge.loc[flag_split, "junctions"] = df_merge.loc[flag_split, "junctions"]\
+                    .map(lambda idxs: itemgetter(*idxs)(junctions_idx_geom_lookup))\
+                    .map(lambda pts: MultiPoint(pts) if isinstance(pts, tuple) else pts)
+                df_merge.loc[flag_split, "geometry"] = df_merge.loc[flag_split, ["geometry", "junctions"]]\
+                    .apply(lambda row: split(row[0], row[1]), axis=1)
+                df_merge = df_merge.explode(ignore_index=True)
+
+                # TODO: you now have nid groups, all that remains is to link and classify nids.
+
+            # Handle simple NID generation.
+            else:
+
+                # Compile geometry as wkb.
+                df_wkb = df["geometry"].to_wkb(hex=False)
+                df_old_wkb = df_old["geometry"].to_wkb(hex=False)
+
+                # Generate wkb-nid and nid-match_field lookup dicts from old dataset.
+                wkb_nid_lookup = dict(zip(df_old_wkb, df_old["nid"]))
+                nid_match_lookup = dict(zip(df_old["nid"], df_old[match_field])) if match_field else dict()
+                nid_match_lookup[default] = default
+
+                # Recover nids from wkb-nid lookup.
+                df["nid"] = df_wkb.map(wkb_nid_lookup).fillna(default)
+                self.change_logs[table]["confirmed"] = set(df.loc[~df["nid"].isna(), "nid"])
+
+                # Identify modified records based on match field.
+                if match_field:
+                    flag_modified = (df["nid" != default]) & (df[match_field] != df["nid"].map(nid_match_lookup))
+
+                    self.change_logs[table]["modified"] = set(df.loc[flag_modified, "nid"])
+                    self.change_logs[table]["confirmed"] =\
+                        self.change_logs[table]["confirmed"] - set(df.loc[flag_modified, "nid"])
+
+                # Assign a new nid to all required records.
+                flag_added = (df["nid"] == default)
+                df.loc[flag_added, "nid"] = [uuid.uuid4().hex for _ in range(sum(flag_added))]
+
+                self.change_logs[table]["added"] = set(df.loc[flag_added, "nid"])
+                self.change_logs[table]["retired"] = set(df_old["nid"]) - set(df["nid"])
+
+                # Store results.
+                self.dframes[table]["nid"] = df["nid"].copy(deep=True)
+
+    @staticmethod
+    def get_valid_ids(series: pd.Series) -> pd.Series:
         """
         Validates a Series of IDs based on the following conditions:
         1) ID must be non-null.
@@ -532,6 +620,12 @@ class Stage:
 
     def execute(self) -> None:
         """Executes an NRN stage."""
+
+        # TODO: NEW
+        self.gen_nids()
+        self.gen_structids()
+        self.update_nid_linkages()
+        # TODO: NEW
 
         self.roadseg_gen_full()
         self.roadseg_gen_nids()
