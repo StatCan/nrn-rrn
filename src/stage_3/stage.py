@@ -9,8 +9,9 @@ import uuid
 from itertools import chain, compress
 from operator import attrgetter, itemgetter
 from pathlib import Path
-from shapely.geometry import LineString, MultiPoint, Point
+from shapely.geometry import LineString, MultiLineString, MultiPoint, Point
 from shapely.ops import linemerge, split
+from typing import Tuple
 
 filepath = Path(__file__).resolve()
 sys.path.insert(1, str(filepath.parents[1]))
@@ -190,29 +191,42 @@ class Stage:
             # Handle complex NID generation.
             if table == "roadseg":
 
+                # Copy original (non-dissolved) data.
+                df_orig = df.copy(deep=True)
+                df_old_orig = df_old.copy(deep=True)
+
                 # Compile junctions as splitting points.
                 junctions = gpd.GeoSeries(self.dframes["junction"].loc[
                                               self.dframes["junction"]["junctype"] != "Dead End", "geometry"].unique(),
                                           crs=self.dframes["junction"].crs)
 
                 # Dissolve geometries, grouped by match field, and explode multi-part results.
-                df_merge = helpers.groupby_to_list(df, list_field=match_field, group_field="geometry")\
+                df_merge = helpers.groupby_to_list(df, group_field=match_field, list_field="geometry")\
                     .map(linemerge).explode()
                 df_merge = gpd.GeoDataFrame({"match_field": df_merge.index}, geometry=df_merge.values, crs=df.crs)
 
-                # Compile and split on junctions contained within each dissolved geometry; explode multi-part results.
-                junctions_idx_geom_lookup = dict(junctions)
-                df_merge["junctions"] = df_merge["geometry"].map(
+                # Compile junctions, as coordinates, contained within each dissolved geometry.
+                junctions_idx_geom_lookup = dict(junctions.map(lambda pt: itemgetter(0)(attrgetter("coords")(pt))))
+                df_merge["junctions"] = None
+                df_merge["junction_idxs"] = df_merge["geometry"].map(
                     lambda g: junctions.sindex.query(g, predicate="contains")).map(tuple)
-                flag_split = df_merge["junctions"].map(len) > 0
-                df_merge.loc[flag_split, "junctions"] = df_merge.loc[flag_split, "junctions"]\
+                flag_split = df_merge["junction_idxs"].map(len) > 0
+                df_merge.loc[flag_split, "junctions"] = df_merge.loc[flag_split, "junction_idxs"]\
                     .map(lambda idxs: itemgetter(*idxs)(junctions_idx_geom_lookup))\
-                    .map(lambda pts: MultiPoint(pts) if isinstance(pts, tuple) else pts)
-                df_merge.loc[flag_split, "geometry"] = df_merge.loc[flag_split, ["geometry", "junctions"]]\
-                    .apply(lambda row: split(row[0], row[1]), axis=1)
-                df_merge = df_merge.explode(ignore_index=True)
+                    .map(lambda pts: (pts,) if not isinstance(pts[0], tuple) else pts)
 
-                # TODO: you now have nid groups, all that remains is to link and classify nids.
+                # Split geometries on junctions; explode multi-part results.
+                df_merge["split"] = None
+                df_merge.loc[flag_split, "split"] = pd.Series(zip(df_merge.loc[flag_split, "geometry"],
+                                                                  df_merge.loc[flag_split, "junctions"])).values
+                df_merge.loc[flag_split, "geometry"] = df_merge.loc[flag_split, "split"].map(
+                    lambda geoms: self.split_line(*geoms))
+                df_merge = df_merge.explode(ignore_index=True)[["match_field", "geometry"]]
+
+                # Create dissolved geometries, grouped by nid, for old dataset.
+                df_merge_old = helpers.groupby_to_list(df_old, group_field="nid", list_field="geometry").map(linemerge)
+                df_merge_old = gpd.GeoDataFrame({"nid": df_merge_old.index}, geometry=df_merge_old.values,
+                                                crs=df_old.crs)
 
             # Handle simple NID generation.
             else:
@@ -617,6 +631,26 @@ class Stage:
 
                 # Store results.
                 self.dframes[table]["roadnid"] = df["roadnid"].copy(deep=True)
+
+    @staticmethod
+    def split_line(line: LineString, pts: Tuple[tuple, ...]) -> MultiLineString:
+        """
+        Splits a LineString on a collection of points.
+
+        :param LineString line: LineString to be split.
+        :param Tuple[tuple, ...] pts: Tuple of point coordinates used to split the input LineString.
+        :return MultiLineString: MultiLineString representing the segmented input LineString.
+        """
+
+        # Compile LineString coordinates.
+        line_pts = tuple(attrgetter("coords")(line))
+
+        # Compile indexes of points along LineString, convert to ranges.
+        idxs = sorted({0, *map(lambda pt: line_pts.index(pt), pts), len(line_pts) - 1})
+        ranges = tuple(zip(idxs[:-1], idxs[1:]))
+
+        # Split LineString at point indexes.
+        return MultiLineString(tuple(map(lambda rng: LineString(line_pts[rng[0]: rng[1] + 1]), ranges)))
 
     def execute(self) -> None:
         """Executes an NRN stage."""
