@@ -188,12 +188,12 @@ class Stage:
             match_field = self.match_fields[table] if table in self.match_fields else None
             default = self.defaults[table]["nid"]
 
-            # Handle complex NID generation.
-            if table == "roadseg":
+            # Copy original (non-dissolved) data.
+            df_orig = df.copy(deep=True)
+            df_old_orig = df_old.copy(deep=True)
 
-                # Copy original (non-dissolved) data.
-                df_orig = df.copy(deep=True)
-                df_old_orig = df_old.copy(deep=True)
+            # Modify geometries prior to standard nid generation process.
+            if table == "roadseg":
 
                 # Compile junctions as splitting points.
                 junctions = gpd.GeoSeries(self.dframes["junction"].loc[
@@ -203,7 +203,7 @@ class Stage:
                 # Dissolve geometries, grouped by match field, and explode multi-part results.
                 df_merge = helpers.groupby_to_list(df, group_field=match_field, list_field="geometry")\
                     .map(linemerge).explode()
-                df_merge = gpd.GeoDataFrame({"match_field": df_merge.index}, geometry=df_merge.values, crs=df.crs)
+                df_merge = gpd.GeoDataFrame({match_field: df_merge.index}, geometry=df_merge.values, crs=df.crs)
 
                 # Compile junctions, as coordinates, contained within each dissolved geometry.
                 junctions_idx_geom_lookup = dict(junctions.map(lambda pt: itemgetter(0)(attrgetter("coords")(pt))))
@@ -216,51 +216,73 @@ class Stage:
                     .map(lambda pts: (pts,) if not isinstance(pts[0], tuple) else pts)
 
                 # Split geometries on junctions; explode multi-part results.
+                # Overwrite df variable with results to feed into generic process flow.
                 df_merge["split"] = None
                 df_merge.loc[flag_split, "split"] = pd.Series(zip(df_merge.loc[flag_split, "geometry"],
                                                                   df_merge.loc[flag_split, "junctions"])).values
                 df_merge.loc[flag_split, "geometry"] = df_merge.loc[flag_split, "split"].map(
                     lambda geoms: self.split_line(*geoms))
-                df_merge = df_merge.explode(ignore_index=True)[["match_field", "geometry"]]
+                df = df_merge.explode(ignore_index=True)[[match_field, "geometry"]]
 
                 # Create dissolved geometries, grouped by nid, for old dataset.
+                # Overwrite df variable with results to feed into generic process flow.
+                old_nid_match_field_lookup = dict(zip(df_old["nid"], df_old[match_field]))
                 df_merge_old = helpers.groupby_to_list(df_old, group_field="nid", list_field="geometry").map(linemerge)
-                df_merge_old = gpd.GeoDataFrame({"nid": df_merge_old.index}, geometry=df_merge_old.values,
-                                                crs=df_old.crs)
+                df_old = gpd.GeoDataFrame(
+                    {"nid": df_merge_old.index, match_field: df_merge_old.index.map(old_nid_match_field_lookup)},
+                    geometry=df_merge_old.values, crs=df_old.crs
+                )
 
-            # Handle simple NID generation.
-            else:
+            # Generate and classify nids.
 
-                # Compile geometry as wkb.
-                df_wkb = df["geometry"].to_wkb(hex=False)
-                df_old_wkb = df_old["geometry"].to_wkb(hex=False)
+            # Compile geometry as wkb.
+            df_wkb = df["geometry"].to_wkb(hex=False)
+            df_old_wkb = df_old["geometry"].to_wkb(hex=False)
 
-                # Generate wkb-nid and nid-match_field lookup dicts from old dataset.
-                wkb_nid_lookup = dict(zip(df_old_wkb, df_old["nid"]))
-                nid_match_lookup = dict(zip(df_old["nid"], df_old[match_field])) if match_field else dict()
-                nid_match_lookup[default] = default
+            # Generate wkb-nid and nid-match_field lookup dicts from old dataset.
+            wkb_nid_lookup = dict(zip(df_old_wkb, df_old["nid"]))
+            nid_match_lookup = dict(zip(df_old["nid"], df_old[match_field])) if match_field else dict()
+            nid_match_lookup[default] = default
 
-                # Recover nids from wkb-nid lookup.
-                df["nid"] = df_wkb.map(wkb_nid_lookup).fillna(default)
-                self.change_logs[table]["confirmed"] = set(df.loc[~df["nid"].isna(), "nid"])
+            # Recover nids from wkb-nid lookup.
+            df["nid"] = df_wkb.map(wkb_nid_lookup).fillna(default)
+            self.change_logs[table]["confirmed"] = set(df.loc[~df["nid"].isna(), "nid"])
 
-                # Identify modified records based on match field.
-                if match_field:
-                    flag_modified = (df["nid" != default]) & (df[match_field] != df["nid"].map(nid_match_lookup))
+            # Identify modified records based on match field.
+            if match_field:
+                flag_modified = (df["nid"] != default) & (df[match_field] != df["nid"].map(nid_match_lookup))
 
-                    self.change_logs[table]["modified"] = set(df.loc[flag_modified, "nid"])
-                    self.change_logs[table]["confirmed"] =\
-                        self.change_logs[table]["confirmed"] - set(df.loc[flag_modified, "nid"])
+                self.change_logs[table]["modified"] = set(df.loc[flag_modified, "nid"])
+                self.change_logs[table]["confirmed"] = \
+                    self.change_logs[table]["confirmed"] - set(df.loc[flag_modified, "nid"])
 
-                # Assign a new nid to all required records.
-                flag_added = (df["nid"] == default)
-                df.loc[flag_added, "nid"] = [uuid.uuid4().hex for _ in range(sum(flag_added))]
+            # Assign a new nid to all required records.
+            flag_added = (df["nid"] == default)
+            df.loc[flag_added, "nid"] = [uuid.uuid4().hex for _ in range(sum(flag_added))]
 
-                self.change_logs[table]["added"] = set(df.loc[flag_added, "nid"])
-                self.change_logs[table]["retired"] = set(df_old["nid"]) - set(df["nid"])
+            self.change_logs[table]["added"] = set(df.loc[flag_added, "nid"])
+            self.change_logs[table]["retired"] = set(df_old["nid"]) - set(df["nid"])
 
-                # Store results.
-                self.dframes[table]["nid"] = df["nid"].copy(deep=True)
+            # Link dissolved geometries to original geometries, if required.
+            if table == "roadseg":
+
+                # Compile index of dissolved geometry associated with each original geometry.
+                covered_by = df_orig["geometry"].map(lambda g: df.sindex.query(g, predicate="covered_by"))
+
+                # Log invalid geometry and exit, if required.
+                invalid = set(covered_by.loc[covered_by.map(len) != 1].index)
+                if len(invalid):
+
+                    invalid_values = "\n".join(map(str, invalid))
+                    invalid_query = f"\"uuid\" in {*invalid_values,}"
+                    logger.exception(f"Unable to proceed with NID recovery due to the following {len(invalid)} invalid "
+                                     f"geometries (listed by uuid):\n{invalid_values}\n\nQuery: {invalid_query}")
+                    sys.exit(1)
+
+                # TODO: finish linking geoms.
+
+            # Store results.
+            self.dframes[table]["nid"] = df["nid"].copy(deep=True)
 
     @staticmethod
     def get_valid_ids(series: pd.Series) -> pd.Series:
