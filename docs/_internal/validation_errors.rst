@@ -136,46 +136,49 @@ E502
 
 :Description: Primary - foreign key linkages must be valid.
 
-E601
+E600
 ----
 
-:Validation: Conflicting exit numbers.
+:Validation: Exit Numbers.
+
+E601
+^^^^
+
 :Description: Attribute "exitnbr" must be identical, excluding the default value or "None", for all arcs sharing an nid.
+
+E602
+^^^^
+
+:Description: When attribute "exitnbr" is not equal to the default value or "None", attribute "roadclass" must equal
+    one of the following: "Expressway / Highway", "Freeway", "Ramp", "Rapid Transit", "Service Lane".
 
 E701
 ----
 
-:Validation: Exit number - road class relationship.
-:Description: When attribute "exitnbr" is not equal to the default value or "None", attribute "roadclass" must equal
-    one of the following: "Expressway / Highway", "Freeway", "Ramp", "Rapid Transit", "Service Lane".
+:Validation: Ferry Integration.
+:Description: Ferry arcs must be connected to a road arc at at least one of their nodes.
+
 
 E801
 ----
 
-:Validation: Ferry - road connectivity.
-:Description: Ferry arcs must be connected to a road arc at at least one of their nodes.
-
-
-E901
-----
-
-:Validation: Number of lanes.
+:Validation: Number of Lanes.
 :Description: Attribute "nbrlanes" must be between 1 and 8, inclusively.
 
-E1001
+E901
 -----
 
 :Validation: Speed.
 :Description: Attribute "speed" must be between 5 and 120, inclusively.
 
-E1101
+E1001
 -----
 
 :Validation: Encoding.
 :Description: Attribute contains one or more question mark ("?"), which may be the result of invalid character encoding.
 
-E1201
+E1101
 -----
 
-:Validation: Out-of-scope.
-:Description: Geometry is non-completely within the source region.
+:Validation: Scope.
+:Description: Geometry is not completely within the source region.

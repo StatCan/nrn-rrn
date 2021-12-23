@@ -126,7 +126,8 @@ class Stage:
         logger.info("Generating NIDs.")
 
         # Iterate datasets.
-        for table, df in self.dframes.items():
+        valid_dframes = {table: df.copy(deep=True) for table, df in self.dframes.items() if "geometry" in df.columns}
+        for table, df in valid_dframes.items():
 
             logger.info(f"Generating NIDs for dataset: {table}.")
 
