@@ -120,60 +120,9 @@ class Stage:
                 # Write log.
                 logger_change_logs.info(log)
 
-    def gen_and_recover_structids(self) -> None:
-        """Recovers structids from the previous NRN vintage or generates new ones."""
-
-        logger.info("Generating structids for table: roadseg.")
-
-        # Overwrite any pre-existing structid.
-        self.dframes["roadseg"]["structid"] = "None"
-        self.roadseg["structid"] = "None"
-
-        # Copy and filter dataframes.
-        structures = self.dframes["roadseg"].loc[
-            ~self.dframes["roadseg"]["structtype"].isin({"None", self.defaults["structtype"]})].copy(deep=True)
-        structures_old = self.dframes_old["roadseg"].loc[
-            self.get_valid_ids(self.dframes_old["roadseg"]["structid"])].copy(deep=True)
-
-        if len(structures):
-
-            # Group contiguous structures as a GeoSeries.
-            structures_merge = linemerge(*structures["geometry"])
-            if structures_merge.geom_type == "MultiLineString":
-                structures_merge = gpd.GeoSeries([*structures_merge], crs=structures.crs,
-                                                index=[uuid.uuid4().hex for _ in range(len(structures_merge))])
-            else:
-                structures_merge = gpd.GeoSeries([structures_merge], crs=structures.crs, index=[uuid.uuid4().hex])
-
-            # Create merged structure idx-structid lookup dict and assign to structures.
-            structures_merge_idx_structid_lookup = dict(zip(range(len(structures_merge)), structures_merge.index))
-            structures["structid"] = structures["geometry"].map(
-                lambda g: structures_merge.sindex.query(g, predicate="within"))\
-                .map(itemgetter(0))\
-                .map(structures_merge_idx_structid_lookup)
-
-            # Recovery old structids.
-            logger.info("Recovering old structids for table: roadseg.")
-
-            # Create wkb-structid lookup dict for old structures using dissolved geometries, grouped by structid.
-            structures_old_merge = gpd.GeoSeries(helpers.groupby_to_list(
-                structures_old, group_field="structid", list_field="geometry").map(linemerge), crs=structures_old.crs)
-            structures_old_wkb_structid_lookup = dict(zip(structures_old_merge.map(lambda g: g.wkb),
-                                                          structures_old_merge.index))
-
-            # Recovery structids.
-            structures["structid_old"] = structures["geometry"].map(lambda g: g.wkb)\
-                .map(structures_old_wkb_structid_lookup)
-            structures.loc[~structures["structid_old"].isna(), "structid"] = \
-                structures.loc[~structures["structid_old"].isna(), "structid_old"]
-
-            # Store results.
-            self.dframes["roadseg"].loc[structures.index, "structid"] = structures["structid"].copy(deep=True)
-            self.roadseg.loc[structures.index, "structid"] = structures["structid"].copy(deep=True)
-
     def gen_nids(self) -> None:
         """
-        Generates NID values for each dataset.
+        Generates NID values for each dataset. Additionally recovers NIDs from the previous version, where possible.
         """
 
         logger.info("Generating NIDs.")
@@ -184,21 +133,19 @@ class Stage:
             logger.info(f"Generating NIDs for dataset: {table}.")
 
             # Fetch old dataset, match field, and defaults.
-            df_old = self.dframes_old[table].copy(deep=True)
+            df_old = self.dframes_old[table].loc[self.validate_ids(self.dframes_old[table]["nid"])].copy(deep=True)
             match_field = self.match_fields[table] if table in self.match_fields else None
             default = self.defaults[table]["nid"]
 
             # Copy original (non-dissolved) data.
             df_orig = df.copy(deep=True)
-            df_old_orig = df_old.copy(deep=True)
 
             # Modify geometries prior to standard nid generation process.
             if table == "roadseg":
 
                 # Compile junctions as splitting points.
-                junctions = gpd.GeoSeries(self.dframes["junction"].loc[
-                                              self.dframes["junction"]["junctype"] != "Dead End", "geometry"].unique(),
-                                          crs=self.dframes["junction"].crs)
+                junctions = self.dframes["junction"].loc[self.dframes["junction"]["junctype"] != "Dead End", "geometry"]
+                junctions = gpd.GeoSeries(junctions.unique(), crs=junctions.crs)
 
                 # Dissolve geometries, grouped by match field, and explode multi-part results.
                 df_merge = helpers.groupby_to_list(df, group_field=match_field, list_field="geometry")\
@@ -207,10 +154,11 @@ class Stage:
 
                 # Compile junctions, as coordinates, contained within each dissolved geometry.
                 junctions_idx_geom_lookup = dict(junctions.map(lambda pt: itemgetter(0)(attrgetter("coords")(pt))))
-                df_merge["junctions"] = None
                 df_merge["junction_idxs"] = df_merge["geometry"].map(
                     lambda g: junctions.sindex.query(g, predicate="contains")).map(tuple)
                 flag_split = df_merge["junction_idxs"].map(len) > 0
+
+                df_merge["junctions"] = None
                 df_merge.loc[flag_split, "junctions"] = df_merge.loc[flag_split, "junction_idxs"]\
                     .map(lambda idxs: itemgetter(*idxs)(junctions_idx_geom_lookup))\
                     .map(lambda pts: (pts,) if not isinstance(pts[0], tuple) else pts)
@@ -233,6 +181,9 @@ class Stage:
                     geometry=df_merge_old.values, crs=df_old.crs
                 )
 
+                # Filter out multi-part geometries from old dataset.
+                df_old = df_old.loc[df_old.geom_type == "LineString"].copy(deep=True)
+
             # Generate and classify nids.
 
             # Compile geometry as wkb.
@@ -246,7 +197,7 @@ class Stage:
 
             # Recover nids from wkb-nid lookup.
             df["nid"] = df_wkb.map(wkb_nid_lookup).fillna(default)
-            self.change_logs[table]["confirmed"] = set(df.loc[~df["nid"].isna(), "nid"])
+            self.change_logs[table]["confirmed"] = set(df.loc[df["nid"] != default, "nid"])
 
             # Identify modified records based on match field.
             if match_field:
@@ -269,41 +220,110 @@ class Stage:
                 # Compile index of dissolved geometry associated with each original geometry.
                 covered_by = df_orig["geometry"].map(lambda g: df.sindex.query(g, predicate="covered_by"))
 
-                # Log invalid geometry and exit, if required.
+                # Log records with invalid geometry and exit, if required.
                 invalid = set(covered_by.loc[covered_by.map(len) != 1].index)
                 if len(invalid):
+                    self.log_invalids(process="nid generation and recovery", identifiers=invalid, field="uuid")
 
-                    invalid_values = "\n".join(map(str, invalid))
-                    invalid_query = f"\"uuid\" in {*invalid_values,}"
-                    logger.exception(f"Unable to proceed with NID recovery due to the following {len(invalid)} invalid "
-                                     f"geometries (listed by uuid):\n{invalid_values}\n\nQuery: {invalid_query}")
-                    sys.exit(1)
+                else:
 
-                # TODO: finish linking geoms.
+                    # Generate dissolved dataset idx-nid lookup and recover nids for non-dissolved dataset.
+                    idx_nid_lookup = dict(zip(range(len(df)), df["nid"]))
+                    covered_by = covered_by.map(itemgetter(0)).map(idx_nid_lookup)
+
+                    # Overwrite dissolved dataset with non-dissolved nid series.
+                    df = pd.DataFrame({"nid": covered_by.values}, index=covered_by.index)
 
             # Store results.
             self.dframes[table]["nid"] = df["nid"].copy(deep=True)
 
+    def gen_structids(self) -> None:
+        """
+        Generates structid values for roadseg. Additionally recovers structids from the previous version, where
+        possible.
+        """
+
+        logger.info("Generating structids for dataset: roadseg.")
+
+        # Overwrite any pre-existing structid.
+        self.dframes["roadseg"]["structid"] = "None"
+
+        # Copy and filter dataframes.
+        default = self.defaults["roadseg"]["structtype"]
+        struct = self.dframes["roadseg"].loc[
+            ~self.dframes["roadseg"]["structtype"].isin({"None", default})].copy(deep=True)
+        struct_old = self.dframes_old["roadseg"].loc[
+            (~self.dframes_old["roadseg"]["structtype"].isin({"None", default})) &
+            (self.validate_ids(self.dframes_old["roadseg"]["structid"]))].copy(deep=True)
+
+        if len(struct):
+
+            default = self.defaults["roadseg"]["structid"]
+
+            # Dissolve contiguous structures, explode multi-part results.
+            struct_merge = gpd.GeoDataFrame(geometry=[linemerge(struct["geometry"].values)], crs=struct.crs)\
+                .explode(ignore_index=True)
+
+            # Dissolve contiguous structures, grouped by structid, for old dataset.
+            struct_merge_old = helpers.groupby_to_list(struct_old, group_field="nid", list_field="geometry")\
+                .map(linemerge)
+            struct_merge_old = gpd.GeoDataFrame(
+                {"structid": struct_merge_old.index}, geometry=struct_merge_old.values, crs=struct_old.crs)
+
+            # Filter out multi-part geometries from old dataset.
+            struct_merge_old = struct_merge_old.loc[struct_merge_old.geom_type == "LineString"].copy(deep=True)
+
+            # Compile geometry as wkb.
+            struct_merge_wkb = struct_merge["geometry"].to_wkb(hex=False)
+            struct_merge_old_wkb = struct_merge_old["geometry"].to_wkb(hex=False)
+
+            # Generate wkb-structid lookup from old dataset and recover structids.
+            wkb_structid_lookup = dict(zip(struct_merge_old_wkb, struct_merge_old["structid"]))
+            struct_merge["structid"] = struct_merge_wkb.map(wkb_structid_lookup).fillna(default)
+
+            # Assign a new structid to all required records.
+            flag_added = (struct_merge["structid"] == default)
+            struct_merge.loc[flag_added, "structid"] = [uuid.uuid4().hex for _ in range(sum(flag_added))]
+
+            # Link dissolved geometries to original geometries.
+
+            # Compile index of dissolved geometry associated with each original geometry.
+            covered_by = struct["geometry"].map(lambda g: struct_merge.sindex.query(g, predicate="covered_by"))
+
+            # Log records with invalid geometry and exit, if required.
+            invalid = set(covered_by.loc[covered_by.map(len) != 1].index)
+            if len(invalid):
+                self.log_invalids(process="structid generation and recovery", identifiers=invalid, field="uuid")
+
+            else:
+
+                # Generate dissolved dataset idx-structid lookup and recover structids for non-dissolved dataset.
+                idx_structid_lookup = dict(zip(range(len(struct_merge)), struct_merge["structid"]))
+                covered_by = covered_by.map(itemgetter(0)).map(idx_structid_lookup)
+
+                # Store results.
+                self.dframes["roadseg"].loc[covered_by.index, "structid"] = covered_by.copy(deep=True)
+
     @staticmethod
-    def get_valid_ids(series: pd.Series) -> pd.Series:
+    def log_invalids(process: str, identifiers: set, field: str = "uuid") -> None:
         """
-        Validates a Series of IDs based on the following conditions:
-        1) ID must be non-null.
-        2) ID must be 32 digits.
-        3) ID must be hexadecimal.
+        Logs the identifiers of records containing invalid geometries as both:
+        a) a list of identifiers
+        b) a query constructed from the identifiers and field name.
 
-        :param pd.Series series: Series.
-        :return pd.Series: boolean Series.
+        :param str process: Name of the process in which the invalid geometries were flagged.
+        :param set identifiers: Set of identifiers.
+        :param str field: Field name containing the identifiers, default 'uuid'.
         """
 
-        hexdigits = set(string.hexdigits)
+        # Construct standardized values and query.
+        values = "\n".join(map(str, identifiers))
+        query = f"\"{field}\" in {*values,}"
 
-        # Filter records.
-        flags = ~((series.isna()) |
-                  (series.map(lambda val: len(str(val)) != 32)) |
-                  (series.map(lambda val: not set(str(val)).issubset(hexdigits))))
-
-        return flags
+        # Log results.
+        logger.exception(f"Unable to proceed with {process} due to invalid geometries for the following {len(values)} "
+                         f"records (listed by {field}):\n{values}\n\nQuery: {query}")
+        sys.exit(1)
 
     def recover_and_classify_nids(self) -> None:
         """
@@ -353,7 +373,7 @@ class Stage:
                     recovery.index = recovery["nid"]
 
                     # Filter invalid nids from old data.
-                    recovery = recovery.loc[self.get_valid_ids(recovery["nid_old"])]
+                    recovery = recovery.loc[self.validate_ids(recovery["nid_old"])]
 
                     # Recover old nids.
                     recovery_lookup = recovery["nid_old"].to_dict()
@@ -580,7 +600,7 @@ class Stage:
         recovery.index = recovery["nid"]
 
         # Filter invalid nids from old data.
-        recovery = recovery.loc[self.get_valid_ids(recovery["nid_old"])]
+        recovery = recovery.loc[self.validate_ids(recovery["nid_old"])]
 
         # Recover old nids.
         recovery_lookup = recovery["nid_old"].to_dict()
@@ -673,6 +693,27 @@ class Stage:
 
         # Split LineString at point indexes.
         return MultiLineString(tuple(map(lambda rng: LineString(line_pts[rng[0]: rng[1] + 1]), ranges)))
+
+    @staticmethod
+    def validate_ids(series: pd.Series) -> pd.Series:
+        """
+        Validates a Series of IDs based on the following conditions:
+        1) ID must be non-null.
+        2) ID must be 32 digits.
+        3) ID must be hexadecimal.
+
+        :param pd.Series series: Series.
+        :return pd.Series: boolean Series.
+        """
+
+        hexdigits = set(string.hexdigits)
+
+        # Filter records.
+        flags = ~((series.isna()) |
+                  (series.map(lambda val: len(str(val)) != 32)) |
+                  (series.map(lambda val: not set(str(val)).issubset(hexdigits))))
+
+        return flags
 
     def execute(self) -> None:
         """Executes an NRN stage."""
