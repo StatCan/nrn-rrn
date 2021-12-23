@@ -49,43 +49,52 @@ Errors
 E001
 ----
 
-:Validation: Duplicated lines.
+:Validation: Construction.
 
 E00101
 ^^^^^^
 
-:Description: Line segments within the same dataset must not be duplicated.
+:Description: Arcs must be >= 3 meters in length.
 
 E00102
 ^^^^^^
 
-:Description: Line segments must not contain repeated adjacent coordinates.
+:Description: Arcs must be simple (i.e. must not self-overlap, self-cross, nor touch their interior).
 
 E00103
 ^^^^^^
 
-:Description: Line segments within the same dataset must not overlap (i.e. contain duplicated adjacent points).
+:Description: Arcs must have >= 0.01 meters distance between adjacent vertices (cluster tolerance).
+
+E002
+----
+
+:Validation: Duplication.
 
 E00201
-------
+^^^^^^
 
-:Validation: Duplicated points.
-:Description: Points within the same dataset must not be duplicated.
+:Description: Features within the same dataset must not be duplicated.
+
+E00202
+^^^^^^
+
+:Description: Arcs within the same dataset must not overlap (i.e. contain duplicated adjacent vertices).
 
 E003
 ----
 
-:Validation: Isolated lines.
+:Validation: Connectivity.
 
 E00301
 ^^^^^^
 
-:Description: Line segments must be connected to at least one other line segment.
+:Description: Arcs must only connect at endpoints (nodes).
 
 E00302
 ^^^^^^
 
-:Description: Line segments must only connect at endpoint vertices.
+:Description: Arcs must be >= 5 meters from each other, excluding connected arcs (i.e. no dangles).
 
 E004
 ----
@@ -96,7 +105,7 @@ E00401
 ^^^^^^
 
 :Description: Attributes "credate" and "revdate" must have lengths of 4, 6, or 8. Therefore, using zero-padded digits,
-    dates can represent a year, year + month, or year + month + day.
+    dates can represent in the formats: YYYY, YYYYMM, or YYYYMMDD.
 
 E00402
 ^^^^^^
@@ -125,18 +134,26 @@ E00406
 
 :Description: Attribute "credate" must be <= attribute "revdate".
 
-E00501
-------
+E005
+----
 
-:Validation: Dead End proximity.
-:Description: Junctions with attribute "junctype" equal to "Dead End" must be >= 5 meters from disjointed line segments.
+:Validation: Identifiers.
+
+E00501
+^^^^^^
+
+:Description: IDs must be 32 digit hexadecimal strings.
+
+E00502
+^^^^^^
+
+:Description: Primary - foreign key linkages must be valid.
 
 E00601
 ------
 
 :Validation: Conflicting exit numbers.
-:Description: Attribute "exitnbr" must be identical or the default value or "None" for all road segments constituting a
-    road element.
+:Description: Attribute "exitnbr" must be identical, excluding the default value or "None", for all arcs sharing an nid.
 
 E00701
 ------
@@ -145,168 +162,33 @@ E00701
 :Description: When attribute "exitnbr" is not equal to the default value or "None", attribute "roadclass" must equal
     one of the following: "Expressway / Highway", "Freeway", "Ramp", "Rapid Transit", "Service Lane".
 
-E008
-----
+E00801
+------
 
 :Validation: Ferry - road connectivity.
+:Description: Ferry arcs must be connected to a road arc at at least one of their nodes.
 
-E00801
-^^^^^^
-
-:Description: Ferry segments must be connected to a road segment at at least one endpoint.
-
-E00802
-^^^^^^
-
-:Description: Ferry segments cannot be connected to multiple road segments at the same endpoint.
-
-E009
-----
-
-:Validation: Identifiers.
 
 E00901
-^^^^^^
-
-:Description: IDs must be 32 digits in length.
-
-E00902
-^^^^^^
-
-:Description: IDs must be hexadecimal.
-
-E00903
-^^^^^^
-
-:Description: IDs in UUID attribute columns must be unique.
-
-E00904
-^^^^^^
-
-:Description: IDs in UUID attribute column must not equal "None" nor the default value.
-
-E01001
-------
-
-:Validation: Line internal clustering.
-:Description: Line segments must have >= 1x10:superscript:`-2` (0.01) meters distance between adjacent coordinates.
-
-E01101
-------
-
-:Validation: Line length.
-:Description: Line segments must be >= 5 meters in length.
-
-E01201
-------
-
-:Validation: Line merging angle.
-:Description: Line segments must only merge at angles >= 5 degrees.
-
-E01301
-------
-
-:Validation: Line proximity.
-:Description: Line segments must be >= 5 meters from each other, excluding connected segments.
-
-E01401
 ------
 
 :Validation: Number of lanes.
 :Description: Attribute "nbrlanes" must be between 1 and 8, inclusively.
 
-E01501
+E01001
 ------
-
-:Validation: NID linkages.
-:Description: ID(s) from the specified attribute column are not present in the linked dataset's "NID" attribute column.
-
-E01601
-------
-
-:Validation: Point proximity.
-:Description: Points must be >= 5 meters from each other.
-
-E017
-----
-
-:Validation: Structure attributes.
-
-E01701
-^^^^^^
-
-:Description: Dead end road segments must have attribute "structtype" equal to "None" or the default value.
-
-E01702
-^^^^^^
-
-:Description: Structures must be contiguous (i.e. all line segments must be touching). The specified structure
-    represents all geometries where attribute "structid" equals the specified structure ID.
-
-E01703
-^^^^^^
-
-:Description: Attribute "structid" must be identical and not the default value for all line segments constituting a
-    contiguous structure (i.e. all connected line segments where attribute "structtype" is not equal to the default
-    value).
-
-E01704
-^^^^^^
-
-:Description: Attribute "structtype" must be identical and not the default value for all line segments constituting a
-    contiguous structure (i.e. all connected line segments where attribute "structtype" is not equal to the default
-    value).
-
-E01801
-------
-
-:Validation: Road class - route number relationship.
-:Description: Attribute "rtnumber1" cannot equal the default value or "None" when attribute "roadclass" equals one of
-    the following: "Expressway / Highway", "Freeway".
-
-E01901
-------
-
-:Validation: Self-intersecting road elements.
-:Description: Road segments which constitute a self-intersecting road element must have attribute "roadclass" equal to
-    one of the following: "Expressway / Highway", "Freeway", "Ramp", "Rapid Transit", "Service Lane".
-
-E02001
-------
-
-:Validation: Self-intersecting structures.
-:Description: Line segments which intersect themselves must have a "structtype" attribute not equal to "None".
-
-E02101
-------
-
-:Validation: Route contiguity.
-:Description: Routes must be contiguous (i.e. all line segments must be touching). The specified route represents all
-    geometries where one of the specified route name attributes equals the specified route name.
-
-E022
-----
 
 :Validation: Speed.
-
-E02201
-^^^^^^
-
 :Description: Attribute "speed" must be between 5 and 120, inclusively.
 
-E02202
-^^^^^^
-
-:Description: Attribute "speed" must be a multiple of 5.
-
-E02301
+E01101
 ------
 
 :Validation: Encoding.
 :Description: Attribute contains one or more question mark ("?"), which may be the result of invalid character encoding.
 
-E02401
+E01201
 ------
 
 :Validation: Out-of-scope.
-:Description: Geometry is partially or completely outside of the target area, based on Census provincial / territorial boundaries.
+:Description: Geometry is non-completely within the source region.
