@@ -1,9 +1,7 @@
 import click
-import fiona
 import geopandas as gpd
 import logging
 import pandas as pd
-import requests
 import sys
 import uuid
 from datetime import datetime
@@ -53,6 +51,11 @@ class Stage:
 
         # Load data.
         self.dframes = helpers.load_gpkg(self.data_path, layers=["ferryseg", "roadseg"])
+
+        # Load administrative boundary, reprojected to EPSG:4617.
+        boundaries = gpd.read_file(filepath.parent / "boundaries.gpkg", layer="boundaries")
+        boundaries = boundaries.loc[boundaries["source"] == self.source].to_crs("EPSG:4617")
+        self.boundary = boundaries["geometry"].iloc[0]
 
     def apply_domains(self) -> None:
         """Applies domain restrictions to each column in the target (Geo)DataFrames."""
@@ -195,45 +198,9 @@ class Stage:
         self.junction = gpd.GeoDataFrame().assign(**{field: pd.Series(dtype=dtype) for field, dtype in
                                                      self.target_attributes["junction"]["fields"].items()})
 
-    def load_boundaries(self) -> None:
-        """Downloads and compiles the administrative boundaries for the source province / territory."""
-
-        logger.info("Loading administrative boundaries.")
-
-        # Download administrative boundaries.
-        logger.info("Downloading administrative boundary file.")
-        source = helpers.load_yaml(filepath.parents[1] / "downloads.yaml")["provincial_boundaries"]
-        download_url, source_crs = itemgetter("url", "crs")(source)
-
-        try:
-
-            # Get raw content stream from download url.
-            download = helpers.get_url(download_url, stream=True, timeout=30, verify=True).content
-
-            # Load bytes collection into geodataframe.
-            with fiona.BytesCollection(download) as f:
-                self.boundary = gpd.GeoDataFrame.from_features(f, crs=source_crs)
-
-            # Filter boundaries.
-            pruid = {"ab": 48, "bc": 59, "mb": 46, "nb": 13, "nl": 10, "ns": 12, "nt": 61, "nu": 62, "on": 35, "pe": 11,
-                     "qc": 24, "sk": 47, "yt": 60}[self.source]
-            self.boundary = self.boundary.loc[self.boundary["PRUID"] == str(pruid)]
-
-            # Reproject boundaries to EPSG:4617.
-            self.boundary = self.boundary.to_crs("EPSG:4617")
-
-            # Extract polygon from dataframe.
-            self.boundary = self.boundary["geometry"].iloc[0]
-
-        except (fiona.errors, requests.exceptions.RequestException) as e:
-            logger.exception(f"Error encountered when compiling administrative boundary file: \"{download_url}\".")
-            logger.exception(e)
-            sys.exit(1)
-
     def execute(self) -> None:
         """Executes an NRN stage."""
 
-        self.load_boundaries()
         self.compile_target_attributes()
         self.gen_target_dataframe()
         self.gen_junctions()
