@@ -41,7 +41,7 @@ E100
 E101
 ^^^^
 
-:Description: Arcs must be >= 3 meters in length.
+:Description: Arcs must be >= 3 meters in length, except structures (e.g. Bridges).
 
 E102
 ^^^^
@@ -122,7 +122,7 @@ E501
 E502
 ^^^^
 
-:Description: Primary - foreign key linkages must be valid.
+:Description: NID linkages must be valid.
 
 E600
 ----
