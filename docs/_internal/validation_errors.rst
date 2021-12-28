@@ -97,20 +97,14 @@ E401
 E402
 ^^^^
 
-:Description: Attributes "credate" and "revdate" must have a year (first 4 digits) between 1960 and the current year,
-    inclusively.
+:Description: Attributes "credate" and "revdate" must have a valid yyyymmdd combination.
 
 E403
 ^^^^
 
-:Description: Attributes "credate" and "revdate" must have a valid yyyymmdd combination.
+:Description: Attributes "credate" and "revdate" must be between 19600101 and the current date, inclusively.
 
 E404
-^^^^
-
-:Description: Attributes "credate" and "revdate" must be <= today.
-
-E405
 ^^^^
 
 :Description: Attribute "credate" must be <= attribute "revdate".

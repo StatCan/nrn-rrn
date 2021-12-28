@@ -5,6 +5,7 @@ import pandas as pd
 import sys
 from collections import defaultdict
 from copy import deepcopy
+from datetime import datetime
 from functools import reduce
 from itertools import chain, compress, tee
 from operator import attrgetter, itemgetter
@@ -108,22 +109,17 @@ class Validator:
                 "datasets": ["addrange", "blkpassage", "ferryseg", "roadseg", "strplaname", "tollpoint"]
             },
             402: {
-                "func": self.dates_year,
-                "desc": "Attributes \"credate\" and \"revdate\" must have a year (first 4 digits) between 1960 and the "
-                        "current year, inclusively.",
-                "datasets": ["addrange", "blkpassage", "ferryseg", "roadseg", "strplaname", "tollpoint"]
-            },
-            403: {
                 "func": self.dates_combination,
                 "desc": "Attributes \"credate\" and \"revdate\" must have a valid yyyymmdd combination.",
                 "datasets": ["addrange", "blkpassage", "ferryseg", "roadseg", "strplaname", "tollpoint"]
             },
-            404: {
-                "func": self.dates_future,
-                "desc": "Attributes \"credate\" and \"revdate\" must be <= today.",
+            403: {
+                "func": self.dates_range,
+                "desc": "Attributes \"credate\" and \"revdate\" must be between 19600101 and the current date, "
+                        "inclusively.",
                 "datasets": ["addrange", "blkpassage", "ferryseg", "roadseg", "strplaname", "tollpoint"]
             },
-            405: {
+            404: {
                 "func": self.dates_order,
                 "desc": "Attribute \"credate\" must be <= attribute \"revdate\".",
                 "datasets": ["addrange", "blkpassage", "ferryseg", "roadseg", "strplaname", "tollpoint"]
@@ -192,7 +188,7 @@ class Validator:
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
-        errors = {"values": list(), "query": None}
+        errors = {"values": set(), "query": None}
 
         # TODO
 
@@ -206,7 +202,7 @@ class Validator:
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
-        errors = {"values": list(), "query": None}
+        errors = {"values": set(), "query": None}
 
         # TODO
 
@@ -220,7 +216,7 @@ class Validator:
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
-        errors = {"values": list(), "query": None}
+        errors = {"values": set(), "query": None}
 
         # TODO
 
@@ -234,7 +230,7 @@ class Validator:
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
-        errors = {"values": list(), "query": None}
+        errors = {"values": set(), "query": None}
 
         # TODO
 
@@ -248,7 +244,7 @@ class Validator:
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
-        errors = {"values": list(), "query": None}
+        errors = {"values": set(), "query": None}
 
         # TODO
 
@@ -275,38 +271,23 @@ class Validator:
 
             # Filter to non-default dates.
             default = self.defaults_all[dataset][col]
-            df_valid = df.loc[df[col] != default, col].copy(deep=True)
+            series = df.loc[df[col] != default, col].copy(deep=True)
 
             # Iterate valid lengths.
             for length in (4, 6, 8):
-                series = df_valid.loc[df_valid.map(lambda val: int(math.log10(val)) + 1) == length].copy(deep=True)
+                series_ = series.loc[series.map(lambda val: int(math.log10(val)) + 1) == length].copy(deep=True)
 
                 # Flag records with invalid yyyymmdd combination.
-                flag = pd.to_datetime(series, format=strftime[length], errors="coerce").isna()
+                flag = pd.to_datetime(series_, format=strftime[length], errors="coerce").isna()
                 if sum(flag):
 
                     # Compile error logs.
-                    vals = set(series.loc[flag].index)
+                    vals = set(series_.loc[flag].index)
                     errors["values"].update(vals)
 
         # Compile error log query.
         if len(errors["values"]):
-            errors["values"] = list(errors["values"])
             errors["query"] = f"\"{self.id}\" in {*errors['values'],}"
-
-        return errors
-
-    def dates_future(self, dataset: str) -> dict:
-        """
-        Validates: Attributes \"credate\" and \"revdate\" must be <= today.
-
-        :param str dataset: name of the dataset to be validated.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
-        """
-
-        errors = {"values": list(), "query": None}
-
-        # TODO
 
         return errors
 
@@ -319,9 +300,29 @@ class Validator:
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
-        errors = {"values": list(), "query": None}
+        errors = {"values": set(), "query": None}
 
-        # TODO
+        # Fetch dataframe.
+        df = self.dfs[dataset].copy(deep=True)
+
+        # Iterate date attributes: "credate", "revdate".
+        for col in ("credate", "revdate"):
+
+            # Fetch default value.
+            default = self.defaults_all[dataset][col]
+
+            # Flag non-default values which are also not a valid length.
+            flag = (df[col] != default) & (~df[col].map(lambda val: int(math.log10(val)) + 1).isin({4, 6, 8}))
+            if sum(flag):
+
+                # Compile error logs.
+                vals = set(df.loc[flag].index)
+                errors["values"].update(vals)
+                errors["query"] = f"\"{self.id}\" in {*vals,}"
+
+        # Compile error log query.
+        if len(errors["values"]):
+            errors["query"] = f"\"{self.id}\" in {*errors['values'],}"
 
         return errors
 
@@ -333,24 +334,62 @@ class Validator:
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
-        errors = {"values": list(), "query": None}
+        errors = {"values": set(), "query": None}
 
-        # TODO
+        # Fetch dataframe.
+        df = self.dfs[dataset].copy(deep=True)
+
+        # Filter to non-default dates.
+        defaults = {"credate": self.defaults_all[dataset]["credate"],
+                    "revdate": self.defaults_all[dataset]["revdate"]}
+        df_ = df.loc[(df["credate"] != defaults["credate"]) &
+                     (df["revdate"] != defaults["revdate"]), ["credate", "revdate"]].copy(deep=True)
+
+        # Flag records with invalid date order.
+        flag = df_["credate"] > df_["revdate"]
+        if sum(flag):
+
+            # Compile error logs.
+            vals = set(df_.loc[flag].index)
+            errors["values"] = vals
+            errors["query"] = f"\"{self.id}\" in {*vals,}"
 
         return errors
 
-    def dates_year(self, dataset: str) -> dict:
+    def dates_range(self, dataset: str) -> dict:
         """
-        Validates: Attributes \"credate\" and \"revdate\" must have a year (first 4 digits) between 1960 and the
-            current year, inclusively.
+        Validates: Attributes \"credate\" and \"revdate\" must be between 19600101 and the current date, inclusively.
 
         :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
-        errors = {"values": list(), "query": None}
+        errors = {"values": set(), "query": None}
 
-        # TODO
+        # Fetch dataframe.
+        df = self.dfs[dataset].copy(deep=True)
+
+        # Fetch current date.
+        today = int(datetime.today().strftime("%Y%m%d"))
+
+        # Iterate date attributes: "credate", "revdate".
+        for col in ("credate", "revdate"):
+
+            # Filter to non-default dates.
+            default = self.defaults_all[dataset][col]
+            series = df.loc[df[col] != default, col].copy(deep=True)
+
+            # Flag records with invalid date range.
+            flag = ~series.between(left=19600101, right=today, inclusive="both")
+            if sum(flag):
+
+                # Compile error logs.
+                vals = set(series.loc[flag].index)
+                errors["values"].update(vals)
+
+        # Compile error log query.
+        if len(errors["values"]):
+            errors["query"] = f"\"{self.id}\" in {*errors['values'],}"
 
         return errors
 
@@ -362,7 +401,7 @@ class Validator:
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
-        errors = {"values": list(), "query": None}
+        errors = {"values": set(), "query": None}
 
         # TODO
 
@@ -376,7 +415,7 @@ class Validator:
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
-        errors = {"values": list(), "query": None}
+        errors = {"values": set(), "query": None}
 
         # TODO
 
@@ -391,7 +430,7 @@ class Validator:
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
-        errors = {"values": list(), "query": None}
+        errors = {"values": set(), "query": None}
 
         # TODO
 
@@ -406,7 +445,7 @@ class Validator:
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
-        errors = {"values": list(), "query": None}
+        errors = {"values": set(), "query": None}
 
         # TODO
 
@@ -422,7 +461,7 @@ class Validator:
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
-        errors = {"values": list(), "query": None}
+        errors = {"values": set(), "query": None}
 
         # TODO
 
@@ -436,7 +475,7 @@ class Validator:
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
-        errors = {"values": list(), "query": None}
+        errors = {"values": set(), "query": None}
 
         # TODO
 
@@ -450,7 +489,7 @@ class Validator:
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
-        errors = {"values": list(), "query": None}
+        errors = {"values": set(), "query": None}
 
         # TODO
 
@@ -464,7 +503,7 @@ class Validator:
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
-        errors = {"values": list(), "query": None}
+        errors = {"values": set(), "query": None}
 
         # TODO
 
@@ -478,7 +517,7 @@ class Validator:
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
-        errors = {"values": list(), "query": None}
+        errors = {"values": set(), "query": None}
 
         # TODO
 
@@ -492,7 +531,7 @@ class Validator:
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
-        errors = {"values": list(), "query": None}
+        errors = {"values": set(), "query": None}
 
         # TODO
 
@@ -506,7 +545,7 @@ class Validator:
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
-        errors = {"values": list(), "query": None}
+        errors = {"values": set(), "query": None}
 
         # TODO
 
