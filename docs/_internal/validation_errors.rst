@@ -103,20 +103,14 @@ E402
 E403
 ^^^^
 
-:Description: Attributes "credate" and "revdate" must have a month (digits 5 and 6) between 01 and 12, inclusively.
+:Description: Attributes "credate" and "revdate" must have a valid yyyymmdd combination.
 
 E404
 ^^^^
 
-:Description: Attributes "credate" and "revdate" must have a day (digits 7 and 8) between 01 and the monthly maximum,
-    inclusively.
-
-E405
-^^^^
-
 :Description: Attributes "credate" and "revdate" must be <= today.
 
-E406
+E405
 ^^^^
 
 :Description: Attribute "credate" must be <= attribute "revdate".

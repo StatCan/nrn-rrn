@@ -1,5 +1,6 @@
 import geopandas as gpd
 import logging
+import math
 import pandas as pd
 import sys
 from collections import defaultdict
@@ -50,6 +51,7 @@ class Validator:
         """
 
         self.errors = defaultdict(list)
+        self.id = "uuid"
 
         # Compile datasets reprojected to a meter-based crs (EPSG:3348).
         self.dfs = {name: df.to_crs("EPSG:3348").copy(deep=True) if "geometry" in df.columns else df.copy(deep=True)
@@ -67,17 +69,17 @@ class Validator:
             101: {
                 "func": self.construction_min_length,
                 "desc": "Arcs must be >= 3 meters in length.",
-                "datasets": []
+                "datasets": ["ferryseg", "roadseg"]
             },
             102: {
                 "func": self.construction_simple,
                 "desc": "Arcs must be simple (i.e. must not self-overlap, self-cross, nor touch their interior).",
-                "datasets": []
+                "datasets": ["ferryseg", "roadseg"]
             },
             103: {
                 "func": self.construction_cluster_tolerance,
                 "desc": "Arcs must have >= 0.01 meters distance between adjacent vertices (cluster tolerance).",
-                "datasets": []
+                "datasets": ["ferryseg", "roadseg"]
             },
             201: {
                 "func": self.duplication_duplicated,
@@ -112,23 +114,16 @@ class Validator:
                 "datasets": ["addrange", "blkpassage", "ferryseg", "roadseg", "strplaname", "tollpoint"]
             },
             403: {
-                "func": self.dates_month,
-                "desc": "Attributes \"credate\" and \"revdate\" must have a month (digits 5 and 6) between 01 and 12, "
-                        "inclusively.",
+                "func": self.dates_combination,
+                "desc": "Attributes \"credate\" and \"revdate\" must have a valid yyyymmdd combination.",
                 "datasets": ["addrange", "blkpassage", "ferryseg", "roadseg", "strplaname", "tollpoint"]
             },
             404: {
-                "func": self.dates_day,
-                "desc": "Attributes \"credate\" and \"revdate\" must have a day (digits 7 and 8) between 01 and the "
-                        "monthly maximum, inclusively.",
-                "datasets": ["addrange", "blkpassage", "ferryseg", "roadseg", "strplaname", "tollpoint"]
-            },
-            405: {
                 "func": self.dates_future,
                 "desc": "Attributes \"credate\" and \"revdate\" must be <= today.",
                 "datasets": ["addrange", "blkpassage", "ferryseg", "roadseg", "strplaname", "tollpoint"]
             },
-            406: {
+            405: {
                 "func": self.dates_order,
                 "desc": "Attribute \"credate\" must be <= attribute \"revdate\".",
                 "datasets": ["addrange", "blkpassage", "ferryseg", "roadseg", "strplaname", "tollpoint"]
@@ -189,10 +184,11 @@ class Validator:
         self._min_dist = 5
         self._min_cluster_dist = 0.01
 
-    def connectivity_min_distance(self) -> dict:
+    def connectivity_min_distance(self, dataset: str) -> dict:
         """
         Validates: Arcs must be >= 5 meters from each other, excluding connected arcs (i.e. no dangles).
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -202,10 +198,11 @@ class Validator:
 
         return errors
 
-    def connectivity_node_intersection(self) -> dict:
+    def connectivity_node_intersection(self, dataset: str) -> dict:
         """
         Validates: Arcs must only connect at endpoints (nodes).
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -215,10 +212,11 @@ class Validator:
 
         return errors
 
-    def construction_cluster_tolerance(self) -> dict:
+    def construction_cluster_tolerance(self, dataset: str) -> dict:
         """
         Validates: Arcs must have >= 0.01 meters distance between adjacent vertices (cluster tolerance).
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -228,10 +226,11 @@ class Validator:
 
         return errors
 
-    def construction_min_length(self) -> dict:
+    def construction_min_length(self, dataset: str) -> dict:
         """
         Validates: Arcs must be >= 3 meters in length.
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -241,10 +240,11 @@ class Validator:
 
         return errors
 
-    def construction_simple(self) -> dict:
+    def construction_simple(self, dataset: str) -> dict:
         """
         Validates: Arcs must be simple (i.e. must not self-overlap, self-cross, nor touch their interior).
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -254,24 +254,53 @@ class Validator:
 
         return errors
 
-    def dates_day(self) -> dict:
+    def dates_combination(self, dataset: str) -> dict:
         """
-        Validates: Attributes \"credate\" and \"revdate\" must have a day (digits 7 and 8) between 01 and the monthly
-            maximum, inclusively.
+        Validates: Attributes \"credate\" and \"revdate\" must have a valid yyyymmdd combination.
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
-        errors = {"values": list(), "query": None}
+        errors = {"values": set(), "query": None}
 
-        # TODO
+        # Fetch dataframe.
+        df = self.dfs[dataset].copy(deep=True)
+
+        # Define length-dependant datetime strftime formats.
+        strftime = {4: "%Y", 6: "%Y%m", 8: "%Y%m%d"}
+
+        # Iterate date attributes: "credate", "revdate".
+        for col in ("credate", "revdate"):
+
+            # Filter to non-default dates.
+            default = self.defaults_all[dataset][col]
+            df_valid = df.loc[df[col] != default, col].copy(deep=True)
+
+            # Iterate valid lengths.
+            for length in (4, 6, 8):
+                series = df_valid.loc[df_valid.map(lambda val: int(math.log10(val)) + 1) == length].copy(deep=True)
+
+                # Flag records with invalid yyyymmdd combination.
+                flag = pd.to_datetime(series, format=strftime[length], errors="coerce").isna()
+                if sum(flag):
+
+                    # Compile error logs.
+                    vals = set(series.loc[flag].index)
+                    errors["values"].update(vals)
+
+        # Compile error log query.
+        if len(errors["values"]):
+            errors["values"] = list(errors["values"])
+            errors["query"] = f"\"{self.id}\" in {*errors['values'],}"
 
         return errors
 
-    def dates_future(self) -> dict:
+    def dates_future(self, dataset: str) -> dict:
         """
         Validates: Attributes \"credate\" and \"revdate\" must be <= today.
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -281,11 +310,12 @@ class Validator:
 
         return errors
 
-    def dates_length(self) -> dict:
+    def dates_length(self, dataset: str) -> dict:
         """
         Validates: Attributes \"credate\" and \"revdate\" must have lengths of 4, 6, or 8. Therefore, using
             zero-padded digits, dates can represent in the formats: YYYY, YYYYMM, or YYYYMMDD.
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -295,24 +325,11 @@ class Validator:
 
         return errors
 
-    def dates_month(self) -> dict:
-        """
-        Validates: Attributes \"credate\" and \"revdate\" must have a month (digits 5 and 6) between 01 and 12,
-            inclusively.
-
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
-        """
-
-        errors = {"values": list(), "query": None}
-
-        # TODO
-
-        return errors
-
-    def dates_order(self) -> dict:
+    def dates_order(self, dataset: str) -> dict:
         """
         Validates: Attribute \"credate\" must be <= attribute \"revdate\".
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -322,11 +339,12 @@ class Validator:
 
         return errors
 
-    def dates_year(self) -> dict:
+    def dates_year(self, dataset: str) -> dict:
         """
         Validates: Attributes \"credate\" and \"revdate\" must have a year (first 4 digits) between 1960 and the
             current year, inclusively.
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -336,10 +354,11 @@ class Validator:
 
         return errors
 
-    def duplication_duplicated(self) -> dict:
+    def duplication_duplicated(self, dataset: str) -> dict:
         """
         Validates: Features within the same dataset must not be duplicated.
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -349,10 +368,11 @@ class Validator:
 
         return errors
 
-    def duplication_overlap(self) -> dict:
+    def duplication_overlap(self, dataset: str) -> dict:
         """
         Validates: Arcs within the same dataset must not overlap (i.e. contain duplicated adjacent vertices).
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -362,11 +382,12 @@ class Validator:
 
         return errors
 
-    def encoding_(self) -> dict:
+    def encoding_(self, dataset: str) -> dict:
         """
         Validates: Attribute contains one or more question mark (\"?\"), which may be the result of invalid character
             encoding.
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -376,11 +397,12 @@ class Validator:
 
         return errors
 
-    def exit_numbers_nid(self) -> dict:
+    def exit_numbers_nid(self, dataset: str) -> dict:
         """
         Validates: Attribute \"exitnbr\" must be identical, excluding the default value or \"None\", for all arcs
             sharing an nid.
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -390,12 +412,13 @@ class Validator:
 
         return errors
 
-    def exit_numbers_roadclass(self) -> dict:
+    def exit_numbers_roadclass(self, dataset: str) -> dict:
         """
         Validates: When attribute \"exitnbr\" is not equal to the default value or \"None\", attribute \"roadclass\"
             must equal one of the following: \"Expressway / Highway\", \"Freeway\", \"Ramp\", \"Rapid Transit\",
             \"Service Lane\".
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -405,10 +428,11 @@ class Validator:
 
         return errors
 
-    def ferry_integration_(self) -> dict:
+    def ferry_integration_(self, dataset: str) -> dict:
         """
         Validates: Ferry arcs must be connected to a road arc at at least one of their nodes.
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -418,10 +442,11 @@ class Validator:
 
         return errors
 
-    def identifiers_32hex(self) -> dict:
+    def identifiers_32hex(self, dataset: str) -> dict:
         """
         Validates: IDs must be 32 digit hexadecimal strings.
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -431,10 +456,11 @@ class Validator:
 
         return errors
 
-    def identifiers_linkages(self) -> dict:
+    def identifiers_linkages(self, dataset: str) -> dict:
         """
         Validates: Primary - foreign key linkages must be valid.
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -444,10 +470,11 @@ class Validator:
 
         return errors
 
-    def number_of_lanes_(self) -> dict:
+    def number_of_lanes_(self, dataset: str) -> dict:
         """
         Validates: Attribute \"nbrlanes\" must be between 1 and 8, inclusively.
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -457,10 +484,11 @@ class Validator:
 
         return errors
 
-    def scope_(self) -> dict:
+    def scope_(self, dataset: str) -> dict:
         """
         Validates: Geometry is not completely within the source region.
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -470,10 +498,11 @@ class Validator:
 
         return errors
 
-    def speed_(self) -> dict:
+    def speed_(self, dataset: str) -> dict:
         """
         Validates: Attribute \"speed\" must be between 5 and 120, inclusively.
 
+        :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -490,14 +519,17 @@ class Validator:
 
             # Iterate validations.
             for code, params in self.validations.items():
-                func, description = itemgetter("func", "desc")(params)
+                func, description, datasets = itemgetter("func", "desc", "datasets")(params)
 
-                logger.info(f"Applying validation E{code}: \"{func.__name__}\".")
+                # Iterate datasets.
+                for dataset in datasets:
 
-                # Execute validation and store non-empty results.
-                results = func()
-                if len(results["values"]):
-                    self.errors[f"E{code} - {description}"] = deepcopy(results)
+                    logger.info(f"Applying validation E{code}: \"{func.__name__}\"; dataset={dataset}.")
+
+                    # Execute validation and store non-empty results.
+                    results = func(dataset)
+                    if len(results["values"]):
+                        self.errors[f"E{code} - {dataset} - {description}"] = deepcopy(results)
 
         except (KeyError, SyntaxError, ValueError) as e:
             logger.exception("Unable to apply validation.")
