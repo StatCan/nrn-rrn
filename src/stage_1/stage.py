@@ -5,7 +5,6 @@ import logging
 import numpy as np
 import pandas as pd
 import re
-import requests
 import shutil
 import sys
 import uuid
@@ -597,7 +596,7 @@ class Stage:
                 with open(self.nrn_old_path["zip"], "wb") as f:
                     shutil.copyfileobj(download.raw, f)
 
-            except (requests.exceptions.RequestException, shutil.Error) as e:
+            except (shutil.Error) as e:
                 logger.exception(f"Unable to download previous NRN vintage: \"{download_url}\".")
                 logger.exception(e)
                 sys.exit(1)

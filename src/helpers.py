@@ -3,7 +3,6 @@ import fiona
 import geopandas as gpd
 import jinja2
 import logging
-import networkx as nx
 import numpy as np
 import pandas as pd
 import random
@@ -21,7 +20,7 @@ from sqlalchemy import create_engine, exc as sqlalchemy_exc
 from sqlalchemy.engine.base import Engine
 from tqdm import tqdm
 from tqdm.auto import trange
-from typing import Any, Dict, List, Tuple, Type, Union
+from typing import Any, Dict, List, Type, Union
 
 
 # Set logger.
@@ -731,47 +730,6 @@ def extract_nrn(url: str, source_code: int) -> Dict[str, Union[gpd.GeoDataFrame,
     return nrn
 
 
-def gdf_to_nx(gdf: gpd.GeoDataFrame, keep_attributes: bool = True, endpoints_only: bool = False) -> nx.Graph:
-    """
-    Converts a GeoDataFrame to a networkx Graph.
-
-    :param gpd.GeoDataFrame gdf: GeoDataFrame.
-    :param bool keep_attributes: keep the GeoDataFrame attributes on the networkx Graph, default True.
-    :param bool endpoints_only: keep only the endpoints of the GeoDataFrame LineStrings, default False.
-    :return nx.Graph: networkx Graph.
-    """
-
-    logger.info("Loading GeoPandas GeoDataFrame into NetworkX graph.")
-
-    # Generate graph from GeoDataFrame of LineStrings, keeping crs property and (optionally) fields.
-    g = nx.Graph()
-    g.graph['crs'] = gdf.crs
-    fields = list(gdf.columns) if keep_attributes else None
-
-    # Iterate rows.
-    for index, row in gdf.iterrows():
-
-        # Compile geometry as edges.
-        coords = [*row.geometry.coords]
-        if endpoints_only:
-            edges = [[coords[0], coords[-1]]]
-        else:
-            edges = [[coords[i], coords[i + 1]] for i in range(len(coords) - 1)]
-
-        # Compile attributes.
-        attributes = dict()
-        if keep_attributes:
-            data = [row[field] for field in fields]
-            attributes = dict(zip(fields, data))
-
-        # Add edges.
-        g.add_edges_from(edges, **attributes)
-
-    logger.info("Successfully loaded GeoPandas GeoDataFrame into NetworkX graph.")
-
-    return g
-
-
 def get_url(url: str, attempt: int = 1, max_attempts = 10, **kwargs: dict) -> requests.Response:
     """
     Fetches a response from a url, using exponential backoff for failed attempts.
@@ -960,46 +918,6 @@ def load_yaml(path: Union[Path, str]) -> Any:
 
         except (ValueError, yaml.YAMLError):
             logger.exception(f"Unable to load yaml: {path}.")
-
-
-def nx_to_gdf(g: nx.Graph, nodes: bool = True, edges: bool = True) -> \
-        Union[gpd.GeoDataFrame, Tuple[gpd.GeoDataFrame, gpd.GeoDataFrame]]:
-    """
-    Converts a networkx Graph to a GeoDataFrame.
-
-    :param nx.Graph g: networkx Graph.
-    :param bool nodes: return a Point GeoDataFrame, derived from the network Graph nodes, default True.
-    :param bool edges: return a LineString GeoDataFrame, derived from the network Graph edges, default True.
-    :return Union[gpd.GeoDataFrame, Tuple[gpd.GeoDataFrame, gpd.GeoDataFrame]]: a Point GeoDataFrame and / or LineString
-        GeoDataFrame, derived from the networkx Graph nodes and / or edges, respectively.
-    """
-
-    logger.info("Loading NetworkX graph into GeoPandas GeoDataFrame.")
-
-    # Generate GeoDataFrames for both networkx nodes and edges.
-    gdf_nodes, gdf_edges = None, None
-
-    # Compile node geometry and attributes.
-    if nodes:
-        node_xy, node_data = zip(*g.nodes(data=True))
-        gdf_nodes = gpd.GeoDataFrame(list(node_data), geometry=[Point(i, j) for i, j in node_xy])
-        gdf_nodes.crs = g.graph['crs']
-
-    # Compile edge geometry and attributes.
-    if edges:
-        starts, ends, edge_data = zip(*g.edges(data=True))
-        gdf_edges = gpd.GeoDataFrame(list(edge_data))
-        gdf_edges.crs = g.graph['crs']
-
-    logger.info("Successfully loaded GeoPandas GeoDataFrame into NetworkX graph.")
-
-    # Conditionally return nodes and / or edges.
-    if all([nodes, edges]):
-        return gdf_nodes, gdf_edges
-    elif nodes is True:
-        return gdf_nodes
-    else:
-        return gdf_edges
 
 
 def rm_tree(path: Path) -> None:

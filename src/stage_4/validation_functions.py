@@ -7,13 +7,10 @@ import sys
 from collections import defaultdict
 from copy import deepcopy
 from datetime import datetime
-from functools import reduce
 from itertools import chain, compress, tee
 from operator import attrgetter, itemgetter
 from pathlib import Path
-from scipy.spatial.distance import euclidean
-from shapely.geometry import LineString, MultiLineString, MultiPoint, Point
-from shapely.ops import split
+from shapely.geometry import MultiPoint, Point
 from typing import Dict, List, Tuple, Union
 
 filepath = Path(__file__).resolve()
@@ -64,9 +61,8 @@ class Validator:
         self.dfs = {name: df.to_crs(self.to_crs).copy(deep=True) if "geometry" in df.columns else df.copy(deep=True)
                     for name, df in dfs.items()}
 
-        # Compile default field values and dtypes.
+        # Compile default field values.
         self.defaults_all = helpers.compile_default_values()
-        self.dtypes_all = helpers.compile_dtypes()
 
         logger.info("Configuring validations.")
 
@@ -145,13 +141,27 @@ class Validator:
                 "func": self.identifiers_32hex,
                 "desc": "IDs must be 32 digit hexadecimal strings.",
                 "datasets": ["addrange", "altnamlink", "blkpassage", "ferryseg", "roadseg", "strplaname", "tollpoint"],
-                "iter_cols": None
+                "iter_cols": {
+                    "addrange": ["l_altnanid", "l_offnanid", "nid", "r_altnanid", "r_offnanid"],
+                    "altnamlink": ["nid", "strnamenid"],
+                    "blkpassage": ["nid", "roadnid"],
+                    "ferryseg": ["nid"],
+                    "roadseg": ["adrangenid", "nid"],
+                    "strplaname": ["nid"],
+                    "tollpoint": ["nid", "roadnid"]
+                }
             },
             502: {
                 "func": self.identifiers_nid_linkages,
                 "desc": "NID linkages must be valid.",
-                "datasets": ["addrange", "altnamlink", "blkpassage", "roadseg", "strplaname", "tollpoint"],
-                "iter_cols": None
+                "datasets": ["addrange", "altnamlink", "blkpassage", "roadseg", "tollpoint"],
+                "iter_cols": {
+                    "addrange": ["l_altnanid", "l_offnanid", "r_altnanid", "r_offnanid"],
+                    "altnamlink": ["strnamenid"],
+                    "blkpassage": ["roadnid"],
+                    "roadseg": ["adrangenid"],
+                    "tollpoint": ["roadnid"]
+                }
             },
             601: {
                 "func": self.exit_numbers_nid,
@@ -247,7 +257,61 @@ class Validator:
 
         errors = {"values": set(), "query": None}
 
-        # TODO
+        # Fetch dataframe.
+        df = self.dfs[dataset].copy(deep=True)
+
+        # Compile all non-duplicated nodes (dead ends) as a DataFrame.
+        pts = df["pt_start"].append(df["pt_end"])
+        deadends = pts.loc[~pts.duplicated(keep=False)]
+        deadends = pd.DataFrame({"pt": deadends.values, self.id: deadends.index})
+
+        # Generate simplified node buffers with distance tolerance.
+        deadends["buffer"] = deadends["pt"].map(lambda pt: Point(pt).buffer(self._min_dist, resolution=5))
+
+        # Query arcs which intersect each dead end buffer.
+        deadends["intersects"] = deadends["buffer"].map(
+            lambda buffer: set(df.sindex.query(buffer, predicate="intersects")))
+
+        # Flag dead ends which have buffers with one or more intersecting arcs.
+        deadends = deadends.loc[deadends["intersects"].map(len) > 1]
+        if len(deadends):
+
+            # Aggregate deadends to their source features.
+            # Note: source features will exist twice if both nodes are deadends; these results will be aggregated.
+            deadends_agg = helpers.groupby_to_list(deadends, self.id, "intersects") \
+                .map(chain.from_iterable).map(set).to_dict()
+            deadends["intersects"] = deadends[self.id].map(deadends_agg)
+            deadends.drop_duplicates(subset=self.id, inplace=True)
+
+            # Compile identifiers corresponding to each 'intersects' index.
+            deadends["intersects"] = deadends["intersects"].map(
+                lambda idxs: set(itemgetter(*idxs)(self.idx_id_lookup[dataset])))
+
+            # Compile identifiers containing either of the source geometry nodes.
+            deadends["connected"] = deadends[self.id].map(
+                lambda identifier: set(chain.from_iterable(
+                    itemgetter(node)(self.pts_id_lookup[dataset]) for node in itemgetter(0, -1)(
+                        itemgetter(identifier)(df["pts_tuple"]))
+                )))
+
+            # Subtract identifiers of connected features from buffer-intersecting features.
+            deadends["disconnected"] = deadends["intersects"] - deadends["connected"]
+
+            # Filter to those results with disconnected segments.
+            flag = deadends["disconnected"].map(len) > 0
+            if sum(flag):
+
+                # Remove duplicated results.
+                deadends = deadends.loc[flag]
+                deadends["ids"] = deadends[[self.id, "disconnected"]].apply(
+                    lambda row: tuple({row[0], *row[1]}), axis=1)
+                deadends.drop_duplicates(subset="ids", keep="first", inplace=True)
+
+                # Compile error logs.
+                errors["values"] = deadends["ids"].map(
+                    lambda ids: f"Disconnected features are too close: {*ids,}").to_list()
+                vals = set(chain.from_iterable(deadends["ids"]))
+                errors["query"] = f"\"{self.id}\" in {*vals,}"
 
         return errors
 
@@ -261,7 +325,38 @@ class Validator:
 
         errors = {"values": set(), "query": None}
 
-        # TODO
+        # Fetch dataframe.
+        df = self.dfs[dataset].copy(deep=True)
+
+        # Compile nodes.
+        nodes = set(df["pt_start"].append(df["pt_end"]))
+
+        # Compile interior vertices (non-nodes).
+        # Note: only arcs with > 2 vertices are used.
+        non_nodes = set(df.loc[df["pts_tuple"].map(len) > 2, "pts_tuple"]
+                        .map(lambda pts: set(pts[1:-1])).map(tuple).explode())
+
+        # Compile invalid vertices.
+        invalid_pts = nodes.intersection(non_nodes)
+
+        # Filter invalid vertices to those with multiple connected features.
+        invalid_pts = set(compress(invalid_pts,
+                                   map(lambda pt: len(itemgetter(pt)(self.pts_id_lookup[dataset])) > 1, invalid_pts)))
+        if len(invalid_pts):
+
+            # Filter arcs to those with an invalid vertex.
+            invalid_ids = set(chain.from_iterable(map(lambda pt: itemgetter(pt)(self.pts_id_lookup[dataset]),
+                                                      invalid_pts)))
+            df = df.loc[df.index.isin(invalid_ids)]
+
+            # Flag invalid segments where the invalid vertex is a non-node.
+            flag = df["pts_tuple"].map(lambda pts: len(set(pts[1:-1]).intersection(invalid_pts))) > 0
+            if sum(flag):
+
+                # Compile error logs.
+                vals = set(df.loc[flag].index)
+                errors["values"] = vals
+                errors["query"] = f"\"{self.id}\" in {*vals,}"
 
         return errors
 
@@ -284,7 +379,7 @@ class Validator:
 
             # Explode coordinate pairs and calculate distances.
             coord_pairs = df["pts_ordered_pairs"].explode()
-            coord_dist = coord_pairs.map(lambda pair: euclidean(*pair))
+            coord_dist = coord_pairs.map(lambda pair: math.dist(*pair))
 
             # Flag pairs with distances that are too small.
             flag = coord_dist < self._min_cluster_dist
@@ -434,7 +529,7 @@ class Validator:
 
             # Compile error logs.
             vals = set(series.loc[flag].index)
-            errors["values"].update(vals)
+            errors["values"] = vals
             errors["query"] = f"\"{self.id}\" in {*vals,}"
 
         return errors
@@ -455,15 +550,15 @@ class Validator:
         # Filter to non-default dates.
         defaults = {"credate": self.defaults_all[dataset]["credate"],
                     "revdate": self.defaults_all[dataset]["revdate"]}
-        df_ = df.loc[(df["credate"] != defaults["credate"]) &
-                     (df["revdate"] != defaults["revdate"]), ["credate", "revdate"]].copy(deep=True)
+        df = df.loc[(df["credate"] != defaults["credate"]) &
+                    (df["revdate"] != defaults["revdate"]), ["credate", "revdate"]].copy(deep=True)
 
         # Flag records with invalid date order.
-        flag = df_["credate"] > df_["revdate"]
+        flag = df["credate"] > df["revdate"]
         if sum(flag):
 
             # Compile error logs.
-            vals = set(df_.loc[flag].index)
+            vals = set(df.loc[flag].index)
             errors["values"] = vals
             errors["query"] = f"\"{self.id}\" in {*vals,}"
 
@@ -496,7 +591,7 @@ class Validator:
 
             # Compile error logs.
             vals = set(series.loc[flag].index)
-            errors["values"].update(vals)
+            errors["values"] = vals
             errors["query"] = f"\"{self.id}\" in {*vals,}"
 
         return errors
@@ -584,7 +679,7 @@ class Validator:
 
             # Compile error logs.
             vals = set(series.loc[flag].index)
-            errors["values"].update(vals)
+            errors["values"] = vals
             errors["query"] = f"\"{self.id}\" in {*vals,}"
 
         return errors
@@ -600,7 +695,25 @@ class Validator:
 
         errors = {"values": set(), "query": None}
 
-        # TODO
+        # Fetch dataframe.
+        df = self.dfs[dataset].copy(deep=True)
+
+        # Filter to records with duplicated nids and non-default and non-none exitnbr.
+        default = self.defaults_all[dataset]["exitnbr"]
+        df = df.loc[(df["nid"].duplicated(keep=False)) & ~(df["exitnbr"].isin({default, "None"}))].copy(deep=True)
+        if len(df):
+
+            # Group exitnbrs by nid, removing duplicates.
+            nid_exitnbrs = helpers.groupby_to_list(df, group_field="nid", list_field="exitnbr").map(set)
+
+            # Compile nids with multiple exitnbrs.
+            invalid_nids = set(nid_exitnbrs.loc[nid_exitnbrs.map(len) > 1].index)
+            if len(invalid_nids):
+
+                # Compile error logs.
+                vals = set(df.loc[df["nid"].isin(invalid_nids)].index)
+                errors["values"] = vals
+                errors["query"] = f"\"{self.id}\" in {*vals,}"
 
         return errors
 
@@ -616,7 +729,21 @@ class Validator:
 
         errors = {"values": set(), "query": None}
 
-        # TODO
+        # Fetch dataframe.
+        df = self.dfs[dataset].copy(deep=True)
+
+        # Compile exitnbr default and valid roadclass values.
+        default_exitnbr = self.defaults_all[dataset]["exitnbr"]
+        valid_roadclass = {"Expressway / Highway", "Freeway", "Ramp", "Rapid Transit", "Service lane"}
+
+        # Flag records with non-default and non-none exitnbr and roadclass not in the valid list.
+        flag = ~(df["exitnbr"].isin({default_exitnbr, "None"})) & ~(df["roadclass"].isin(valid_roadclass))
+        if sum(flag):
+
+            # Compile error logs.
+            vals = set(df.loc[flag].index)
+            errors["values"] = vals
+            errors["query"] = f"\"{self.id}\" in {*vals,}"
 
         return errors
 
@@ -630,66 +757,71 @@ class Validator:
 
         errors = {"values": set(), "query": None}
 
-        # TODO
+        # Fetch dataframes.
+        ferryseg = self.dfs[dataset].copy(deep=True)
+        roadseg = self.dfs["roadseg"].copy(deep=True)
+
+        # Compile nodes.
+        nodes_ferryseg = set(ferryseg["pt_start"].append(ferryseg["pt_end"]))
+        nodes_roadseg = set(roadseg["pt_start"].append(roadseg["pt_end"]))
+
+        # Compile invalid ferry nodes.
+        invalid_nodes = nodes_ferryseg.difference(nodes_roadseg)
+        if len(invalid_nodes):
+
+            # Filter and compile identifiers of ferries with an invalid node.
+            invalid_ids = set(chain.from_iterable(map(lambda node: itemgetter(node)(self.pts_id_lookup[dataset]),
+                                                      invalid_nodes)))
+            if len(invalid_ids):
+
+                # Compile error logs.
+                errors["values"] = invalid_ids
+                errors["query"] = f"\"{self.id}\" in {*invalid_ids,}"
 
         return errors
 
-    def identifiers_32hex(self, dataset: str) -> dict:
+    def identifiers_32hex(self, dataset: str, col: str) -> dict:
         """
         Validates: IDs must be 32 digit hexadecimal strings.
 
         :param str dataset: name of the dataset to be validated.
+        :param str col: column name.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
         errors = {"values": set(), "query": None}
 
-        # Compile hexadecimal characters.
-        hexdigits = set(string.hexdigits)
-
-        # Configure identifier columns.
-        identifiers = {
-            "addrange": ["l_altnanid", "l_offnanid", "nid", "r_altnanid", "r_offnanid"],
-            "altnamlink": ["nid", "strnamenid"],
-            "blkpassage": ["nid", "roadnid"],
-            "ferryseg": ["nid"],
-            "roadseg": ["adrangenid", "nid"],
-            "strplaname": ["nid"],
-            "tollpoint": ["nid", "roadnid"]
-        }
-
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
 
-        # Iterate identifiers.
-        for col in identifiers[dataset]:
+        # Filter to non-default and non-none values, excluding nids.
+        if col == "nid":
+            series = df[col].copy(deep=True)
+        else:
+            default = self.defaults_all[dataset][col]
+            series = df.loc[~df[col].isin({default, "None"}), col].copy(deep=True)
 
-            # Filter to non-default and non-None values, except for nids.
-            if col == "nid":
-                series = df[col].copy(deep=True)
-            else:
-                default = self.defaults_all[dataset][col]
-                series = df.loc[(df[col] != default) & (df[col] != "None")].copy(deep=True)
+        # Compile hexadecimal characters.
+        hexdigits = set(string.hexdigits)
 
-            # Flag records with non-hexadecimal or non-32 digit identifiers.
-            flag = (series.astype(str).map(len) != 32) | (series.map(lambda val: not set(val).issubset(hexdigits)))
-            if sum(flag):
+        # Flag records with non-hexadecimal or non-32 digit identifiers.
+        series = series.astype(str)
+        flag = (series.map(len) != 32) | (series.map(lambda val: not set(val).issubset(hexdigits)))
+        if sum(flag):
 
-                # Compile error logs.
-                vals = set(series.loc[flag].index)
-                errors["values"].update(vals)
-
-        # Compile error log query.
-        if len(errors["values"]):
-            errors["query"] = f"\"{self.id}\" in {*errors['values'],}"
+            # Compile error logs.
+            vals = set(series.loc[flag].index)
+            errors["values"] = vals
+            errors["query"] = f"\"{self.id}\" in {*vals,}"
 
         return errors
 
-    def identifiers_nid_linkages(self, dataset: str) -> dict:
+    def identifiers_nid_linkages(self, dataset: str, col: str) -> dict:
         """
         Validates: NID linkages must be valid.
 
         :param str dataset: name of the dataset to be validated.
+        :param str col: column name.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
         """
 
@@ -699,48 +831,47 @@ class Validator:
         linkages = {
             "addrange":
                 {
-                    "roadseg": ["adrangenid"]
+                    "roadseg": {"adrangenid"}
                 },
             "altnamlink":
                 {
-                    "addrange": ["l_altnanid", "r_altnanid"]
+                    "addrange": {"l_altnanid", "r_altnanid"}
                 },
             "roadseg":
                 {
-                    "blkpassage": ["roadnid"],
-                    "tollpoint": ["roadnid"]
+                    "blkpassage": {"roadnid"},
+                    "tollpoint": {"roadnid"}
                 },
             "strplaname":
                 {
-                    "addrange": ["l_offnanid", "r_offnanid"],
-                    "altnamlink": ["strnamenid"]
+                    "addrange": {"l_offnanid", "r_offnanid"},
+                    "altnamlink": {"strnamenid"}
                 }
         }
 
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
 
+        # Filter to non-none values.
+        series = df.loc[df[col] != "None", col].copy(deep=True)
+
         # Iterate datasets whose nids the current dataset links to.
-        for nid_dataset in filter(lambda name: dataset in linkages[name],
-                                  set(linkages[dataset]).intersection(self.dfs)):
+        for nid_dataset in filter(lambda name: dataset in linkages[name], set(linkages).intersection(self.dfs)):
 
-            # Compile linked nids.
-            nids = set(self.dfs[nid_dataset]["nid"])
+            # Check if the current column links to the nids of the linked dataset.
+            if col in linkages[nid_dataset][dataset]:
 
-            # Iterate columns which link to the nid dataset.
-            for col in linkages[nid_dataset][dataset]:
+                # Compile linked nids.
+                nids = set(self.dfs[nid_dataset]["nid"])
 
-                # Flag missing, non-None identifiers.
-                invalid_ids = set(df[col]) - nids - {"None"}
-                if len(invalid_ids):
+                # Flag missing identifiers.
+                flag = ~series.isin(nids)
+                if sum(flag):
 
                     # Compile error logs.
-                    vals = set(df.loc[df[col].isin(invalid_ids)].index)
+                    vals = set(series.loc[flag].index)
                     errors["values"] = vals
-
-        # Compile error log query.
-        if len(errors["values"]):
-            errors["query"] = f"\"{self.id}\" in {*errors['values'],}"
+                    errors["query"] = f"\"{self.id}\" in {*vals,}"
 
         return errors
 
@@ -847,7 +978,7 @@ class Validator:
 
                     # Iterate columns, if required.
                     if iter_cols:
-                        for col in iter_cols:
+                        for col in iter_cols[dataset]:
 
                             logger.info(f"Applying validation E{code}: \"{func.__name__}\"; dataset={dataset}.{col}.")
 
