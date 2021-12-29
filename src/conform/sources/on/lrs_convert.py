@@ -9,7 +9,6 @@ from itertools import accumulate, chain
 from operator import attrgetter, itemgetter
 from pathlib import Path
 from shapely.geometry import LineString, MultiLineString, Point
-from shapely.ops import linemerge
 from typing import List, Union
 
 filepath = Path(__file__).resolve()
@@ -27,7 +26,7 @@ logger.addHandler(handler)
 
 
 class LRS:
-    """Class to convert Yukon data from Linear Reference System (LRS) to GeoPackage."""
+    """Class to convert ORN data from Linear Reference System (LRS) to GeoPackage."""
 
     def __init__(self, src: Union[Path, str], dst: Union[Path, str]) -> None:
         """
@@ -39,114 +38,273 @@ class LRS:
 
         self.nrn_datasets = dict()
         self.src_datasets = dict()
-        self.base_dataset = "tdylrs_centerline_sequence"
-        self.geometry_dataset = "tdylrs_centerline"
-        self.event_measurement_fields = {"from": "fromkm", "to": "tokm"}
-        self.calibrations = {
-            "dataset": "tdylrs_calibration_point",
-            "id_field": "routeid",
-            "measurement_field": "measure",
-            "ids": ["004097", "004307", "004349"]
-        }
-        self.point_datasets = {}
-        self.point_event_measurement_field = None
+        self.base_dataset = "orn_road_net_element"
+        self.geometry_dataset = "orn_road_net_element"
+        self.event_measurement_fields = {"from": "from_measure", "to": "to_measure"}
+        self.point_datasets = {"orn_blocked_passage": "blkpassage", "orn_toll_point": "tollpoint"}
+        self.point_event_measurement_field = "at_measure"
 
         # Dataset import specifications.
+        # Note: output fields must use the renamed field names.
         self.schema = {
-            "br_bridge_ln": {
-                "fields": ["routeid", "fromdate", "todate", "fromkm", "tokm", "bridge_name"],
-                "query": "todate.isna() & ~fromdate.astype('str').str.startswith('9999')",
-                "output_fields": ["fromdate", "bridge_name"]
-            },
-            "sm_structure": {
-                "fields": ["routeid", "fromdate", "todate", "fromkm", "tokm", "surface_code"],
-                "query": "todate.isna() & ~fromdate.astype('str').str.startswith('9999')",
-                "output_fields": ["fromdate", "surface_code"]
-            },
-            "tdylrs_calibration_point": {
-                "fields": ["routeid", "fromdate", "todate", "networkid", "measure", "geometry"],
-                "query": "todate.isna() & ~fromdate.astype('str').str.startswith('9999') & networkid==1",
-                "output_fields": None
-            },
-            "tdylrs_centerline": {
-                "fields": ["centerlineid", "geometry"],
+            "orn_address_info": {
+                "fields": ["orn_road_net_element_id", "from_measure", "to_measure", "first_house_number",
+                           "last_house_number", "house_number_structure", "street_side", "effective_datetime"],
                 "query": None,
-                "output_fields": None
+                "output_fields": ["hnumf", "hnuml", "hnumstr", "revdate"]
             },
-            "tdylrs_centerline_sequence": {
-                "fields": ["routeid", "fromdate", "todate", "networkid", "centerlineid"],
-                "query": "todate.isna() & ~fromdate.astype('str').str.startswith('9999') & networkid==1",
-                "output_fields": ["fromdate"]
+            "orn_blocked_passage": {
+                "fields": ["orn_road_net_element_id", "at_measure", "blocked_passage_type", "agency_name",
+                           "effective_datetime"],
+                "query": None,
+                "output_fields": ["blkpassty", "provider", "revdate", "geometry"],
+                "base_output_fields": ["accuracy", "acqtech"]
             },
-            "tdylrs_primary_rte": {
-                "fields": ["fromdate", "todate", "routeid", "planimetric_accuracy", "acquisition_technique_dv",
-                           "acquired_by_dv", "acquisition_date"],
-                "query": "todate.isna() & ~fromdate.astype('str').str.startswith('9999')",
-                "output_fields": ["fromdate", "planimetric_accuracy", "acquisition_technique_dv", "acquired_by_dv",
-                                  "acquisition_date"]
+            "orn_jurisdiction": {
+                "fields": ["orn_road_net_element_id", "from_measure", "to_measure", "street_side", "jurisdiction",
+                           "effective_datetime"],
+                "query": "street_side != 'Left'",
+                "output_fields": ["roadjuris", "revdate"]
             },
-            "td_lane_configuration": {
-                "fields": ["routeid", "fromdate", "todate", "fromkm", "tokm", "lane_configuration"],
-                "query": "todate.isna() & ~fromdate.astype('str').str.startswith('9999')",
-                "output_fields": ["fromdate", "lane_configuration"]
+            "orn_number_of_lanes": {
+                "fields": ["orn_road_net_element_id", "from_measure", "to_measure", "number_of_lanes",
+                           "effective_datetime"],
+                "query": None,
+                "output_fields": ["nbrlanes", "revdate"]
             },
-            "td_number_of_lanes": {
-                "fields": ["routeid", "fromdate", "todate", "fromkm", "tokm", "number_of_lanes"],
-                "query": "todate.isna() & ~fromdate.astype('str').str.startswith('9999')",
-                "output_fields": ["fromdate", "number_of_lanes"]
+            "orn_official_street_name": {
+                "fields": ["orn_road_net_element_id", "from_measure", "to_measure", "full_street_name",
+                           "effective_datetime"],
+                "query": None,
+                "output_fields": ["r_stname_c", "revdate"]
             },
-            "td_road_administration": {
-                "fields": ["routeid", "fromdate", "todate", "fromkm", "tokm", "administration"],
-                "query": "todate.isna() & ~fromdate.astype('str').str.startswith('9999')",
-                "output_fields": ["fromdate", "administration"]
+            "orn_road_class": {
+                "fields": ["orn_road_net_element_id", "from_measure", "to_measure", "road_class", "effective_datetime"],
+                "query": None,
+                "output_fields": ["roadclass", "revdate"]
             },
-            "td_road_type": {
-                "fields": ["routeid", "fromdate", "todate", "fromkm", "tokm", "road_type"],
-                "query": "todate.isna() & ~fromdate.astype('str').str.startswith('9999')",
-                "output_fields": ["fromdate", "road_type"]
+            "orn_road_net_element": {
+                "fields": ["ogf_id", "road_absolute_accuracy", "direction_of_traffic_flow", "exit_number",
+                           "road_element_type", "acquisition_technique", "creation_date", "revision_date", "geometry"],
+                "query": "road_element_type != 'VIRTUAL ROAD'",
+                "output_fields": ["accuracy", "trafficdir", "exitnbr", "road_element_type", "acqtech", "credate",
+                                  "revdate", "geometry"]
             },
-            "td_street_name": {
-                "fields": ["routeid", "fromdate", "todate", "fromkm", "tokm", "street_direction_prefix",
-                           "street_type_prefix", "street_name", "street_type_suffix", "street_direction_suffix"],
-                "query": "todate.isna() & ~fromdate.astype('str').str.startswith('9999')",
-                "output_fields": ["fromdate", "street_direction_prefix", "street_type_prefix", "street_name",
-                                  "street_type_suffix", "street_direction_suffix"]
+            "orn_road_net_element_source": {
+                "fields": ["orn_road_net_element_id", "from_measure", "to_measure", "agency_name",
+                           "effective_datetime"],
+                "query": None,
+                "output_fields": ["provider", "revdate"]
+            },
+            "orn_road_surface": {
+                "fields": ["orn_road_net_element_id", "from_measure", "to_measure", "pavement_status", "surface_type",
+                           "effective_datetime"],
+                "query": None,
+                "output_fields": ["pavstatus", "pavsurf", "revdate"]
+            },
+            "orn_route_name": {
+                "fields": ["orn_road_net_element_id", "from_measure", "to_measure", "route_name_english",
+                           "route_name_french", "effective_datetime"],
+                "query": None,
+                "output_fields": ["rtenameen", "rtenamefr", "revdate"]
+            },
+            "orn_route_number": {
+                "fields": ["orn_road_net_element_id", "from_measure", "to_measure", "route_number",
+                           "effective_datetime"],
+                "query": None,
+                "output_fields": ["rtnumber", "revdate"]
+            },
+            "orn_speed_limit": {
+                "fields": ["orn_road_net_element_id", "from_measure", "to_measure", "speed_limit",
+                           "effective_datetime"],
+                "query": None,
+                "output_fields": ["speed", "revdate"]
+            },
+            "orn_street_name_parsed": {
+                "fields": ["full_street_name", "directional_prefix", "street_type_prefix", "street_name_body",
+                           "street_type_suffix", "directional_suffix", "effective_datetime"],
+                "query": None,
+                "output_fields": ["dirprefix", "strtypre", "namebody", "strtysuf", "dirsuffix", "revdate"]
+            },
+            "orn_structure": {
+                "fields": ["orn_road_net_element_id", "from_measure", "to_measure", "structure_type",
+                           "structure_name_english", "structure_name_french", "effective_datetime"],
+                "query": None,
+                "output_fields": ["structtype", "strunameen", "strunamefr", "revdate"]
+            },
+            "orn_toll_point": {
+                "fields": ["orn_road_net_element_id", "at_measure", "toll_point_type", "agency_name",
+                           "effective_datetime"],
+                "query": None,
+                "output_fields": ["tollpttype", "provider", "revdate", "geometry"],
+                "base_output_fields": ["accuracy", "acqtech"]
             }
         }
 
         # Connections between datasets to the main (base) dataset.
+        # Note: connection fields must use the renamed field names.
         self.structure = {
             "base": self.base_dataset,
             "connections": {
-                "centerlineid": ["tdylrs_centerline"],
-                "routeid": ["br_bridge_ln", "sm_structure", "tdylrs_calibration_point", "tdylrs_primary_rte",
-                            "td_lane_configuration", "td_number_of_lanes", "td_road_administration", "td_road_type",
-                            "td_street_name"]
+                "orn_road_net_element_id": ["orn_address_info", "orn_blocked_passage", "orn_jurisdiction",
+                                            "orn_number_of_lanes", "orn_official_street_name", "orn_road_class",
+                                            "orn_road_net_element_source", "orn_road_surface", "orn_route_name",
+                                            "orn_route_number", "orn_speed_limit", "orn_structure", "orn_toll_point"]
+            }
+        }
+
+        # Connections between non-main (base) datasets.
+        # Note: connection fields must use the renamed field names.
+        self.structure_non_base = {
+            "orn_official_street_name": {
+                "r_stname_c": ["orn_street_name_parsed"]
             }
         }
 
         # Input dataset columns to be renamed upon import.
         self.rename = {
-            "acquired_by_dv": "provider",
-            "acquisition_date": "credate",
-            "acquisition_technique_dv": "acqtech",
-            "administration": "roadjuris",
-            "bridge_name": "strunameen",
-            "fromdate": "revdate",
-            "lane_configuration": "trafficdir",
+            "acquisition_technique": "acqtech",
+            "agency_name": "provider",
+            "blocked_passage_type": "blkpassty",
+            "creation_date": "credate",
+            "direction_of_traffic_flow": "trafficdir",
+            "directional_prefix": "dirprefix",
+            "directional_suffix": "dirsuffix",
+            "effective_datetime": "revdate",
+            "exit_number": "exitnbr",
+            "first_house_number": "hnumf",
+            "full_street_name": "r_stname_c",
+            "house_number_structure": "hnumstr",
+            "jurisdiction": "roadjuris",
+            "last_house_number": "hnuml",
             "number_of_lanes": "nbrlanes",
-            "planimetric_accuracy": "accuracy",
-            "road_type": "roadclass",
-            "street_direction_prefix": "dirprefix",
-            "street_direction_suffix": "dirsuffix",
-            "street_name": "namebody",
+            "ogf_id": "orn_road_net_element_id",
+            "pavement_status": "pavstatus",
+            "revision_date": "revdate",
+            "road_absolute_accuracy": "accuracy",
+            "road_class": "roadclass",
+            "route_name_english": "rtenameen",
+            "route_name_french": "rtenamefr",
+            "route_number": "rtnumber",
+            "speed_limit": "speed",
+            "street_name_body": "namebody",
             "street_type_prefix": "strtypre",
             "street_type_suffix": "strtysuf",
-            "surface_code": "pavstatus"
+            "structure_name_english": "strunameen",
+            "structure_name_french": "strunamefr",
+            "structure_type": "structtype",
+            "surface_type": "pavsurf",
+            "toll_point_type": "tollpttype"
+        }
+
+        # Define composite datasets (datasets to be split into multiple datasets).
+        # Note: output fields must use the renamed field names.
+        self.composite_datasets = {
+            "orn_address_info": {
+                "successive_queries": False,
+                "new_datasets": [
+                    {
+                        "query": "street_side != 'Right'",
+                        "dataset_name": "orn_address_info_left",
+                        "rename_fields": {"hnumf": "l_hnumf", "hnuml": "l_hnuml", "hnumstr": "l_hnumstr"},
+                        "output_fields": ["l_hnumf", "l_hnuml", "l_hnumstr", "revdate"]
+                    },
+                    {
+                        "query": "street_side != 'Left'",
+                        "dataset_name": "orn_address_info_right",
+                        "rename_fields": {"hnumf": "r_hnumf", "hnuml": "r_hnuml", "hnumstr": "r_hnumstr"},
+                        "output_fields": ["r_hnumf", "r_hnuml", "r_hnumstr", "revdate"]
+                    }
+                ]
+            },
+            "orn_route_name": {
+                "successive_queries": True,
+                "new_datasets": [
+                    {
+                        "query": "(~orn_road_net_element_id.duplicated(keep=False)) or "
+                                 "(~orn_road_net_element_id.duplicated(keep='first'))",
+                        "dataset_name": "orn_route_name_1",
+                        "rename_fields": {"rtenameen": "rtename1en", "rtenamefr": "rtename1fr"},
+                        "output_fields": ["rtename1en", "rtename1fr", "revdate"]
+                    },
+                    {
+                        "query": "(~orn_road_net_element_id.duplicated(keep=False)) or "
+                                 "(~orn_road_net_element_id.duplicated(keep='first'))",
+                        "dataset_name": "orn_route_name_2",
+                        "rename_fields": {"rtenameen": "rtename2en", "rtenamefr": "rtename2fr"},
+                        "output_fields": ["rtename2en", "rtename2fr", "revdate"]
+                    },
+                    {
+                        "query": "(~orn_road_net_element_id.duplicated(keep=False)) or "
+                                 "(~orn_road_net_element_id.duplicated(keep='first'))",
+                        "dataset_name": "orn_route_name_3",
+                        "rename_fields": {"rtenameen": "rtename3en", "rtenamefr": "rtename3fr"},
+                        "output_fields": ["rtename3en", "rtename3fr", "revdate"]
+                    },
+                    {
+                        "query": "(~orn_road_net_element_id.duplicated(keep=False)) or "
+                                 "(~orn_road_net_element_id.duplicated(keep='first'))",
+                        "dataset_name": "orn_route_name_4",
+                        "rename_fields": {"rtenameen": "rtename4en", "rtenamefr": "rtename4fr"},
+                        "output_fields": ["rtename4en", "rtename4fr", "revdate"]
+                    }
+                ]
+            },
+            "orn_route_number": {
+                "successive_queries": True,
+                "new_datasets": [
+                    {
+                        "query": "(~orn_road_net_element_id.duplicated(keep=False)) or "
+                                 "(~orn_road_net_element_id.duplicated(keep='first'))",
+                        "dataset_name": "orn_route_number_1",
+                        "rename_fields": {"rtnumber": "rtnumber1"},
+                        "output_fields": ["rtnumber1", "revdate"]
+                    },
+                    {
+                        "query": "(~orn_road_net_element_id.duplicated(keep=False)) or "
+                                 "(~orn_road_net_element_id.duplicated(keep='first'))",
+                        "dataset_name": "orn_route_number_2",
+                        "rename_fields": {"rtnumber": "rtnumber2"},
+                        "output_fields": ["rtnumber2", "revdate"]
+                    },
+                    {
+                        "query": "(~orn_road_net_element_id.duplicated(keep=False)) or "
+                                 "(~orn_road_net_element_id.duplicated(keep='first'))",
+                        "dataset_name": "orn_route_number_3",
+                        "rename_fields": {"rtnumber": "rtnumber3"},
+                        "output_fields": ["rtnumber3", "revdate"]
+                    },
+                    {
+                        "query": "(~orn_road_net_element_id.duplicated(keep=False)) or "
+                                 "(~orn_road_net_element_id.duplicated(keep='first'))",
+                        "dataset_name": "orn_route_number_4",
+                        "rename_fields": {"rtnumber": "rtnumber4"},
+                        "output_fields": ["rtnumber4", "revdate"]
+                    },
+                    {
+                        "query": "(~orn_road_net_element_id.duplicated(keep=False)) or "
+                                 "(~orn_road_net_element_id.duplicated(keep='first'))",
+                        "dataset_name": "orn_route_number_5",
+                        "rename_fields": {"rtnumber": "rtnumber5"},
+                        "output_fields": ["rtnumber5", "revdate"]
+                    }
+                ]
+            }
         }
 
         # Define queries to separate final (NRN) datasets.
-        self.final_dataset_separations = {}
+        self.final_dataset_separations = {
+            "roadseg": [
+                {
+                    "dataset_name": "ferryseg",
+                    "query": "road_element_type == 'FERRY CONNECTION'"
+                },
+                {
+                    "dataset_name": "roadseg",
+                    "query": "road_element_type == 'ROAD ELEMENT'"
+                }
+            ]
+        }
 
         # Validate src.
         self.src = Path(src).resolve()
@@ -161,6 +319,21 @@ class LRS:
             sys.exit(1)
         if self.dst.exists():
             logger.exception(f"Invalid dst input: {dst}. File already exists.")
+
+    def __call__(self) -> None:
+        """Executes class functionality."""
+
+        self.compile_source_datasets()
+        self.assemble_non_base_linkages()
+        self.separate_composite_datasets()
+        self.configure_valid_records()
+        self.clean_event_measurements()
+        self.assemble_segmented_network()
+        self.assemble_network_attribution()
+        self.create_point_datasets()
+        self.standardize_projections()
+        self.separate_final_datasets()
+        self.export_gpkg()
 
     def assemble_network_attribution(self) -> None:
         """Assembles all required attributes from the source datasets to the segmented road network."""
@@ -189,9 +362,10 @@ class LRS:
         # Convert breakpoints to pandas intervals.
         base["interval"] = base["breakpts"].map(lambda vals: pd.Interval(*vals))
 
-        # Iterate source datasets that are connected to the base dataset and have columns to be keep on output.
+        # Iterate source datasets that are connected to the base dataset and have columns to be keep on output,
+        # excluding point datasets.
         for con_id_field, names in self.structure["connections"].items():
-            for name in [n for n in names if self.schema[n]["output_fields"]]:
+            for name in [n for n in names if self.schema[n]["output_fields"] and n not in self.point_datasets]:
 
                 logger.info(f"Assembling attributes from dataset: {name}.")
 
@@ -202,10 +376,12 @@ class LRS:
                 # it may be useful to keep multiple instances.
                 cols_keep = list()
                 for col in self.schema[name]["output_fields"]:
-                    col = self.rename[col]
+                    col_orig = col
                     while col in base.columns:
                         col += "_"
-                        df.rename(columns={col[:-1]: col}, inplace=True)
+                        while col in df.columns:
+                            col += "_"
+                    df.rename(columns={col_orig: col}, inplace=True)
                     cols_keep.append(col)
 
                     # Add new column to base dataset.
@@ -276,20 +452,93 @@ class LRS:
                 logger.info(f"Resolving conflicting attributes for: {field}.")
 
                 # Resolve conflicts into a single attribute.
-                base[field] = base[cols].apply(lambda row: params["func"]([v for v in row if not pd.isna(v)]), axis=1)
+                base[field] = base[cols].apply(lambda row: tuple(filter(lambda v: not pd.isna(v), row)), axis=1)
+                base[field] = base[field].map(lambda vals: params["func"](vals) if len(vals) else None)
 
-        # Remove excess fields (keep all defined output fields plus geometry, drop everything else).
-        cols_keep = set(map(lambda col: self.rename[col], chain.from_iterable(
-            props["output_fields"] for props in self.schema.values() if props["output_fields"]))).union({"geometry"})
+        # Remove excess fields, excluding geometry, epsg, and connection ID fields.
+        cols_keep = set(chain.from_iterable(props["output_fields"] for props in self.schema.values() if
+                                            props["output_fields"]))\
+            .union({"epsg", "geometry", *set(self.structure["connections"])})
         base.drop(columns=set(base.columns)-cols_keep, inplace=True)
 
         # Store result.
         self.nrn_datasets["roadseg"] = base.copy(deep=True)
 
+    def assemble_non_base_linkages(self) -> None:
+        """Assembles dataset linkages which are not against the base dataset."""
+
+        logger.info(f"Assembling non-base dataset linkages.")
+
+        # Iterate non-base linkages.
+        for base_name in self.structure_non_base:
+            base = self.src_datasets[base_name]
+
+            # Iterate linked datasets.
+            for con_id_field, linked_names in self.structure_non_base[base_name].items():
+                for linked_index, linked_name in enumerate(linked_names):
+
+                    logger.info(f"Assembling dataset linkage: {base_name} - {linked_name}")
+
+                    # Merge datasets.
+                    suff = "_" * (linked_index + 1)
+                    base = base.merge(self.src_datasets[linked_name], how="left", on=con_id_field, suffixes=("", suff))
+
+                    # Iterate modified output fields.
+                    for field_index, field in enumerate(self.schema[linked_name]["output_fields"]):
+                        field = f"{field}{suff}"
+                        if field in base.columns:
+
+                            # Replace output field with suffixed name.
+                            self.schema[linked_name]["output_fields"][field_index] = field
+
+                    # Merge output fields.
+                    self.schema[base_name]["output_fields"].extend(self.schema[linked_name]["output_fields"])
+
+                    # Remove linked dataset.
+                    del self.src_datasets[linked_name]
+                    if linked_name in self.point_datasets:
+                        del self.point_datasets[linked_name]
+                    del self.schema[linked_name]
+
+            # Store merged results.
+            self.src_datasets[base_name] = base.copy(deep=True)
+
     def assemble_segmented_network(self) -> None:
         """Assembles a segmented road network from the breakpoints (event measurements) of the source datasets."""
 
-        calibrations_df = self.src_datasets[self.calibrations["dataset"]]
+        def convert_to_individual_utm_zones(df: gpd.GeoDataFrame) -> pd.DataFrame:
+            """
+            Returns a DataFrame with each geometry reprojected to the corresponding UTM zone of its centroid. To allow
+            multiple CRS, a DataFrame must be used instead of a GeoDataFrame.
+
+            :param gpd.GeoDataFrame df: GeoDataFrame.
+            :return pd.DataFrame: DataFrame with individually reprojected geometries.
+            """
+
+            def latlon_to_utm_epsg(lat: float, lon: float) -> int:
+                """
+                Returns the EPSG code for the UTM zone associated with the given latitude and longitude.
+                :param float lat: latitude.
+                :param float lon: longitude.
+                :return int: EPSG code.
+                """
+
+                return int(32700 - round((45 + lat) / 90, 0) * 100 + round((183 + lon) / 6, 0))
+
+            # Explicitly assign CRS to original GeoDataFrame.
+            df.set_crs(f"EPSG:{df.crs.to_epsg()}", allow_override=True, inplace=True)
+
+            # Configure UTM EPSG codes.
+            df["epsg"] = df["geometry"].map(
+                lambda g: latlon_to_utm_epsg(*list(map(itemgetter(0), g.centroid.xy))[::-1]))
+
+            # Separate and reproject GeoDataFrames according to EPSG, store results as DataFrames.
+            reprojected_dfs = list()
+            for epsg in set(df["epsg"]):
+                reprojected_dfs.append(pd.DataFrame(df.loc[df["epsg"] == epsg].to_crs(f"EPSG:{epsg}").copy(deep=True)))
+
+            # Concatenate reprojected DataFrames.
+            return pd.concat(reprojected_dfs).copy(deep=True)
 
         def merge_breakpoints_endpoints(breakpts: List[Union[float, int]], geom: Union[LineString, MultiLineString]) \
                 -> List[Union[float, int]]:
@@ -308,30 +557,28 @@ class LRS:
 
             # Remove breakpoints which are <= 1 unit from an endpoint or outside of the geometry length range (zero to
             # max length). Endpoints include the start and end of every individual LineString in the geometry.
-            # Note: some breakpoints could be outside of the geometry length range due to incorrect calibration points.
             breakpts = [breakpt for breakpt in breakpts if any(
                 [(endpts[i] + 1) < breakpt < (endpts[i + 1] - 1) for i in range(len(endpts) - 1)])]
 
             # Return appended and sorted list of breakpoint and endpoints.
             return sorted(chain(breakpts, endpts))
 
-        def segment_geometry(breakpts: List[Union[float, int]], geom: Union[LineString, MultiLineString]) -> \
-                Union[LineString, MultiLineString]:
+        def segment_geometry(breakpts: List[Union[float, int]], geom: LineString) -> LineString:
             """
-            Segments a (Multi)LineString at a set of breakpoints. To increase splitting accuracy, breakpoints are
-            snapped to pre-existing nodes in the geometry, where possible.
+            Segments a LineString at a set of breakpoints. To increase splitting accuracy, breakpoints are snapped to
+            pre-existing nodes in the geometry, where possible.
 
             :param List[Union[float, int]] breakpts: sequence of breakpts (event measurements).
-            :param Union[LineString, MultiLineString] geom: geometry object which represents the breakpts.
-            :return Union[LineString, MultiLineString]: (Multi)LineString, segmented from the original geometry.
+            :param LineString geom: geometry object which represents the breakpts.
+            :return LineString: LineString, segmented from the original geometry.
             """
 
             # Return entire geometry if breakpoints cover entire length.
             if breakpts[0] == 0 and round(breakpts[-1]) == round(geom.length):
                 return geom
 
-            # Linestring.
-            elif isinstance(geom, LineString):
+            # Segment geometry on breakpoints.
+            else:
 
                 # Extract coordinates (nodes) from geometry.
                 nodes = list(attrgetter("coords")(geom))
@@ -376,64 +623,11 @@ class LRS:
                         if abs(breakpts[-1] - geom.project(nodes_keep[-1])) > 1:
                             nodes_keep = [*nodes_keep, geom.interpolate(breakpts[-1])]
 
+                    # If only 1 point remains, prepend and append breakpoints to list with remaining node.
+                    if len(nodes_keep) == 1:
+                        nodes_keep = [geom.interpolate(breakpts[0]), *nodes_keep, geom.interpolate(breakpts[-1])]
+
                 return LineString(nodes_keep)
-
-            # MultiLineString.
-            else:
-
-                geoms = list()
-
-                # Compile cumulative LineString lengths as endpoint ranges.
-                endpts = list(accumulate([0, *[g.length for g in geom]]))
-                endpts_rng = [pd.Interval(endpts[i], endpts[i+1]) for i in range(len(endpts)-1)]
-
-                # Iterate breakpoint pairs and extract the corresponding LineString from the MultiLineString.
-                for index in range(len(breakpts)-1):
-                    breakpts_ = breakpts[index: index+2]
-                    geom_idx = 0
-                    for idx, endpt_rng in enumerate(endpts_rng):
-                        if pd.Interval(*breakpts_).overlaps(endpt_rng):
-                            geom_idx = idx
-                            break
-                    geom_ = geom[geom_idx]
-
-                    # Subtract from the breakpoints the distance of the LineString start relative to the full
-                    # MultiLineString.
-                    if geom_idx > 0:
-                        sub = sum(g.length for g in geom[:geom_idx])
-                        breakpts_ = [breakpt - sub for breakpt in breakpts]
-
-                    # Call this function with the new parameters, append results to geometry list.
-                    geoms.append(segment_geometry(breakpts_, geom_))
-
-                return MultiLineString(geoms)
-
-        def sort_multilinestring(con_id: Union[int, str], geom: MultiLineString) -> MultiLineString:
-            """
-            Sorts a MultiLineString into the correct LineString ordering based on calibration points.
-
-            :param Union[int, str] con_id: connection ID between the calibrations dataset and the base dataset.
-            :param MultiLineString geom: MultiLineString.
-            :return MultiLineString: sorted MultiLineString.
-            """
-
-            # Compile sorted calibration points for connection ID.
-            calibration_pts = calibrations_df.loc[calibrations_df[self.calibrations["id_field"]] == con_id] \
-                .sort_values(self.calibrations["measurement_field"])
-
-            # Get LineString index order by intersecting calibration points with LineStrings.
-            index_order = list(dict.fromkeys(chain.from_iterable(calibration_pts["geometry"].map(
-                lambda pt: [index for index, line in enumerate(geom) if pt.intersects(line)]).to_list())))
-
-            # Add missing indexes.
-            # Note: indexes will not be missing with topologically correct geometries, however, these errors have been
-            # identified in the data and it is preferred to accommodate them here and flag them collectively in the
-            # actual NRN pipeline.
-            missing = set(range(len(geom))) - set(index_order)
-            index_order.extend(missing)
-
-            # Create MultiLineString from LineString index ordering.
-            return MultiLineString(itemgetter(*index_order)(geom))
 
         logger.info("Assembling segmented network.")
 
@@ -448,21 +642,6 @@ class LRS:
 
         # Explode geometries to singlepart.
         base = helpers.explode_geometry(base)
-
-        # Merge geometries for many-to-one links; keep only the first record but keep the entire merged geometry.
-        con_id_field = self.calibrations["id_field"]
-        flag = base[con_id_field].duplicated(keep=False)
-        geom_links = dict(helpers.groupby_to_list(base.loc[flag], con_id_field, "geometry").map(linemerge))
-        base = base.loc[~base[con_id_field].duplicated(keep="first")]
-        base.loc[flag, "geometry"] = base.loc[flag, con_id_field].map(geom_links)
-
-        # Sort MultiLineStrings into proper LineString ordering.
-        logger.info(f"Sorting MultiLineStrings into proper LineString ordering.")
-
-        con_id_field = self.calibrations["id_field"]
-        flag = base.geom_type == "MultiLineString"
-        base.loc[flag, "geometry"] = base.loc[flag, [con_id_field, "geometry"]].apply(
-            lambda row: sort_multilinestring(*row), axis=1)
 
         # Iterate datasets and assemble all event measurements for each base geometry.
         logger.info(f"Compiling all event measurements as breakpoints.")
@@ -492,6 +671,11 @@ class LRS:
         # Remove extraneous columns.
         base.drop(columns=breakpt_cols, inplace=True)
 
+        # Convert base dataset to DataFrame with individual geometries reprojected to the corresponding UTM zone.
+        logger.info("Reprojecting individual geometries to UTM zones.")
+
+        base = convert_to_individual_utm_zones(base)
+
         # Filter breakpoints which are too close together.
         logger.info(f"Filtering breakpoints which are too close together.")
 
@@ -516,11 +700,10 @@ class LRS:
 
         # Explode dataframe on breakpoints.
         # Note: must use pandas dataframe since geodataframe.explode is geometry based.
-        base = gpd.GeoDataFrame(pd.DataFrame(base).explode("breakpts", ignore_index=True))
+        base = pd.DataFrame(base).explode("breakpts", ignore_index=True)
 
         # Extract geometry segment corresponding to breakpoints.
         # Nest geometry and breakpoints to use map.
-        # Note: for unique connection IDs, keep the entire geometry.
         args = base[["breakpts", "geometry"]].apply(list, axis=1)
         base["geometry"] = args.map(lambda vals: segment_geometry(*vals))
 
@@ -531,52 +714,12 @@ class LRS:
         """
         Performs several cleanup operations on records based on event measurement:
         1. Simplifies event measurement field names to 'from' and 'to'.
-        2. Converts measurements to crs unit (current conversion = km to m).
-        3. Drops records with invalid measurements (from >= to).
-        4. Matches event measurements to any corresponding calibration point measurements (for improved accuracy).
-        5. Removes event measurement offsets for out-of-scope records: some records do not start at zero because they
-        begin outside of the territory. The event measurements on these records must be reduced according to the
-        starting offset.
-        6. Repairs gaps in event measurements along the same connected feature.
-        7. Flags overlapping event measurements along the same connected feature.
+        2. Swaps measurement order for records with invalid measurements (from >= to).
+        3. Repairs gaps in event measurements along the same connected feature.
+        4. Flags overlapping event measurements along the same connected feature.
         """
 
-        calibrations_df = self.src_datasets[self.calibrations["dataset"]]
-
-        def match_calibration_pts(con_id: Union[int, str], event: Union[float, int]) -> Union[float, int]:
-            """
-            Swaps an event measurement for a corresponding calibration point measurements, if possible.
-
-            :param Union[int, str] con_id: connection ID between the source dataset and the calibrations dataset.
-            :param Union[float, int] event: measurement breakpoint.
-            :return Union[float, int]: measurement breakpoint, possibly adjusted to the nearest calibration value.
-            """
-
-            # Filter calibration point to connection ID.
-            measurements = calibrations_df.loc[calibrations_df[self.calibrations["id_field"]] == con_id,
-                                               self.calibrations["measurement_field"]]
-
-            # Identify matching calibration points for event (tolerance = 1 unit).
-            matching_measurements = measurements.loc[measurements.subtract(event).abs() <= 1]
-            if len(matching_measurements):
-                return matching_measurements.iloc[0]
-            else:
-                return event
-
         logger.info("Cleaning event measurement fields.")
-
-        # Compile offsets for event measurements.
-        offsets = dict()
-        id_field, offset_field = itemgetter("id_field", "measurement_field")(self.calibrations)
-
-        # Convert calibration point measurement units identically to event measurements.
-        self.src_datasets[self.calibrations["dataset"]][offset_field] = self.src_datasets[
-            self.calibrations["dataset"]][offset_field].multiply(1000)
-
-        # Compile offsets for out-of-scope events.
-        offsets_df = calibrations_df.loc[calibrations_df[id_field].isin(self.calibrations["ids"])]
-        for offset_id in set(offsets_df[id_field]):
-            offsets[offset_id] = offsets_df.loc[offsets_df[id_field] == offset_id, offset_field].min()
 
         # Iterate dataframes with event measurement fields.
         fields = self.event_measurement_fields
@@ -592,39 +735,14 @@ class LRS:
                 # Convert measurements.
                 logger.info("Converting event measurements.")
 
-                df[list(fields.values())] = df[fields.values()].multiply(1000)
                 df.rename(columns={fields["from"]: "from", fields["to"]: "to"}, inplace=True)
 
-                # Remove records with invalid event measurements.
-                logger.info("Removing records with invalid event measurements.")
+                # Swap measurement order for records with invalid event measurements.
+                logger.info("Swapping measurement order for records with invalid event measurements.")
 
-                count = len(df)
-                df = df.loc[df["from"] < df["to"]].copy(deep=True)
-                logger.info(f"Dropped {count - len(df)} of {count} records.")
-
-                # Match event measurements to calibration points, if possible.
-                logger.info(f"Matching event measurements against calibration points.")
-
-                count = 0
-                for fld in {"from", "to"}:
-                    orig = df[fld].copy(deep=True)
-
-                    flag = df[fld] != 0
-                    df.loc[flag, fld] = df.loc[flag, [con_id_field, fld]].apply(
-                        lambda row: match_calibration_pts(*row), axis=1)
-
-                    count += sum(orig != df[fld])
-
-                logger.info(f"Matched {count} event measurements to calibration points.")
-
-                # Update out-of-scope offsets.
-                logger.info("Updating out-of-scope offsets for events measurements.")
-
-                for offset_id, offset in offsets.items():
-                    flag = df[con_id_field] == offset_id
-                    df.loc[flag, ["from", "to"]] = df.loc[flag, ["from", "to"]].subtract(offset)
-
-                    logger.info(f"Updated {sum(flag)} offset event measurements for {con_id_field}={offset_id}.")
+                flag = df["from"] > df["to"]
+                df.loc[flag, ["from", "to"]] = df.loc[flag, ["to", "from"]].values
+                logger.info(f"Swapped {sum(flag)} of {len(df)} records.")
 
                 # Repair gaps in measurement ranges.
                 logger.info("Repairing event measurement gaps.")
@@ -749,6 +867,37 @@ class LRS:
                 self.src_datasets[name] = df_valid.copy(deep=True)
             else:
                 del self.src_datasets[name]
+                if name in self.point_datasets:
+                    del self.point_datasets[name]
+                self.structure["connections"][con_id_field].remove(name)
+
+    def create_point_datasets(self) -> None:
+        """Create point datasets from the base geometry dataset and point measurement values."""
+
+        logger.info("Creating point datasets.")
+
+        # Compile roadseg dataset.
+        base = self.nrn_datasets["roadseg"]
+
+        # Iterate source datasets to be converted into points.
+        for point_dataset, nrn_dataset in self.point_datasets.items():
+            point_df = self.src_datasets[point_dataset]
+
+            # Identify connection field.
+            con_id_field = self.get_con_id_field(point_dataset)
+
+            # Configure required fields from base.
+            base_fields = [con_id_field, "epsg", "geometry"]
+            if "base_output_fields" in self.schema[point_dataset]:
+                base_fields.extend(self.schema[point_dataset]["base_output_fields"])
+
+            # Merge point and base dataframes and interpolate Point object.
+            point_df = point_df.merge(base[base_fields], how="left", on=con_id_field)
+            point_df["geometry"] = point_df[[self.point_event_measurement_field, "geometry"]].apply(
+                lambda row: row[1].interpolate(row[0]), axis=1)
+
+            # Store point dataset as a DataFrame.
+            self.nrn_datasets[nrn_dataset] = point_df.copy(deep=True)
 
     def export_gpkg(self) -> None:
         """Exports the NRN datasets to a GeoPackage."""
@@ -782,6 +931,52 @@ class LRS:
             if name in df_names:
                 return con_field
 
+    def separate_composite_datasets(self) -> None:
+        """Separates specified datasets into multiple datasets."""
+
+        logger.info("Separating composite datasets.")
+
+        # Iterate composite datasets.
+        for composite_name in self.composite_datasets:
+            composite_df = self.src_datasets[composite_name]
+            con_id_field = self.get_con_id_field(composite_name)
+            count = len(composite_df)
+
+            # Iterate composite new datasets.
+            for new_dataset in self.composite_datasets[composite_name]["new_datasets"]:
+
+                # Compile new dataset properties.
+                dataset_name, query, rename_fields, output_fields = itemgetter(
+                    "dataset_name", "query", "rename_fields", "output_fields")(new_dataset)
+
+                logger.info(f"Separating records from composite dataset: \"{composite_name}\" into new dataset: "
+                            f"\"{dataset_name}\".")
+
+                # Create new dataset via dataframe query.
+                new_df = composite_df.query(query)
+
+                # Log new record count.
+                logger.info(f"New dataset: \"{dataset_name}\" contains {len(new_df)} / {count} composite dataset "
+                            f"records.")
+
+                # Store new dataset with renamed fields and add to class variables: schema and structure.
+                # Note: updating these class variables avoids having to implement specific logic purely to handle
+                # composite new datasets.
+                self.src_datasets[dataset_name] = new_df.rename(columns=rename_fields).copy(deep=True)
+                self.schema[dataset_name] = {"output_fields": output_fields}
+                self.structure["connections"][con_id_field].append(dataset_name)
+
+                # Filter composite dataframe to all remaining records, if queries are to be applied successively.
+                if self.composite_datasets[composite_name]["successive_queries"]:
+                    composite_df = composite_df.query(f"~({query})").copy(deep=True)
+
+            # Remove original composite dataset and remove from class variables: schema, point datasets, and structure.
+            del self.src_datasets[composite_name]
+            if composite_name in self.point_datasets:
+                del self.point_datasets[composite_name]
+            del self.schema[composite_name]
+            self.structure["connections"][con_id_field].remove(composite_name)
+
     def separate_final_datasets(self):
         """Separates the final NRN datasets into multiple NRN datasets based on queries."""
 
@@ -800,100 +995,46 @@ class LRS:
                 logger.info(f"Separated {len(self.nrn_datasets[name])} records from \"{nrn_dataset}\" to create NRN "
                             f"dataset \"{name}\".")
 
-    def split_at_intersections(self) -> None:
-        """
-        Splits geometries at nodes, excluding start and endpoints, which are shared by one or more other geometries.
-        Intersections without a common node will not be split since it is impossible to determine whether the geometries
-        actually intersect or just cross at different elevations.
-        """
+    def standardize_projections(self):
+        """Standardizes multi-CRS DataFrames to a GeoDataFrame with NRN standard projection EPSG:4617."""
 
-        def split_geometry_indexes(geom: LineString, indexes: List[int]) -> List[LineString]:
-            """
-            Splits a LineString at the given node indexes.
+        logger.info("Standardizing dataset projections.")
 
-            :param LineString geom: LineString.
-            :param List[int] indexes: list of node indexes at which the LineString will be split.
-            :return List[LineString]: list of LineStrings, segemented from the original geometry.
-            """
+        # Iterate NRN datasets.
+        for table, df in self.nrn_datasets.items():
+            if {"epsg", "geometry"}.issubset(set(df.columns)):
 
-            # Compile LineString coordinates as splitting Points.
-            nodes = list(map(Point, attrgetter("coords")(geom)))
+                logger.info(f"Standardizing dataset projection for: \"{table}\".")
 
-            # Add start and end to indexes and create ordered pairs.
-            indexes = [0, *indexes, len(nodes)-1]
-            indexes = [[indexes[idx], indexes[idx+1]] for idx in range(len(indexes)-1)]
+                # Separate records by CRS and reproject to EPSG:4617.
+                dfs = list()
+                for epsg in set(df["epsg"]):
+                    df_epsg = gpd.GeoDataFrame(df.loc[df["epsg"] == epsg]).set_crs(f"EPSG:{epsg}", allow_override=True)
+                    dfs.append(df_epsg.to_crs("EPSG:4617").copy(deep=True))
 
-            # Generate LineStrings from node index ranges.
-            return [LineString(nodes[idx_rng[0]: idx_rng[-1]+1]) for idx_rng in indexes]
-
-        logger.info(f"Splitting geometries at intersections.")
-
-        roads = self.nrn_datasets["roadseg"].copy(deep=True)
-
-        # Explode MultiLineStrings.
-        roads = helpers.explode_geometry(roads).copy(deep=True)
-
-        # Extract and explode LineStrings to points, filter to only duplicates.
-        pts = roads["geometry"].map(attrgetter("coords")).map(tuple).explode()
-        pts_dups = set(pts.loc[pts.duplicated(keep=False)])
-
-        # For each LineString, excluding endpoints, compile the point indexes which are duplicated.
-        # Note: it does not matter whether the point is duplicated by another LineString or by the same LineString, the
-        # geometry should be split regardless.
-        roads["node_idxs"] = roads["geometry"].map(
-            lambda g: [index + 1 for index, pt in enumerate(tuple(attrgetter("coords")(g))[1:-1]) if pt in pts_dups])
-
-        # Split segments at node indexes.
-        split_flag = roads["node_idxs"].map(len) > 0
-        args = roads.loc[split_flag, ["geometry", "node_idxs"]].apply(lambda row: [*row], axis=1)
-
-        roads_crs = roads.crs
-        roads = pd.DataFrame(roads)
-        roads["geometry"] = roads["geometry"].map(lambda g: [g])
-
-        roads.loc[split_flag, "geometry"] = args.map(lambda vals: split_geometry_indexes(*vals))
-        logger.info(f"Split {len(args)} records into {sum(roads.loc[split_flag, 'node_idxs'].map(len)+1)} records.")
-
-        # Explode segmented records.
-        roads = gpd.GeoDataFrame(roads.explode("geometry", ignore_index=True), crs=roads_crs)
-
-        # Drop excess fields.
-        roads.drop(columns=["node_idxs"], inplace=True)
-
-        # Store result.
-        self.nrn_datasets["roadseg"] = roads.copy(deep=True)
-
-    def execute(self) -> None:
-        """Executes class functionality."""
-
-        self.compile_source_datasets()
-        self.configure_valid_records()
-        self.clean_event_measurements()
-        self.assemble_segmented_network()
-        self.assemble_network_attribution()
-        self.split_at_intersections()
-        self.separate_final_datasets()
-        self.export_gpkg()
+                # Store concatenated results as a GeoDataFrame.
+                self.nrn_datasets[table] = gpd.GeoDataFrame(
+                    pd.concat(dfs), crs="EPSG:4617").drop(columns=["epsg"]).copy(deep=True)
 
 
 @click.command()
 @click.argument("src", type=click.Path(exists=True))
-@click.option("--dst", type=click.Path(exists=False), default=filepath.parents[4] / "data/raw/yt/yt.gpkg",
+@click.option("--dst", type=click.Path(exists=False), default=filepath.parents[4] / "data/raw/on/on.gpkg",
               show_default=True)
-def main(src: Union[Path, str], dst: Union[Path, str] = filepath.parents[4] / "data/raw/yt/yt.gpkg") -> None:
+def main(src: Union[Path, str], dst: Union[Path, str] = filepath.parents[4] / "data/raw/on/on.gpkg") -> None:
     """
     Executes the LRS class.
 
     :param Union[Path, str] src: source path.
     :param Union[Path, str] dst: destination path,
-        default = Path(__file__).resolve().parents[4] / 'data/raw/yt/yt.gpkg'.
+        default = Path(__file__).resolve().parents[4] / 'data/raw/on/on.gpkg'.
     """
 
     try:
 
         with helpers.Timer():
             lrs = LRS(src, dst)
-            lrs.execute()
+            lrs()
 
     except KeyboardInterrupt:
         logger.exception("KeyboardInterrupt: Exiting program.")

@@ -29,12 +29,12 @@ logger_change_logs = logging.getLogger("change_logs")
 logger_change_logs.setLevel(logging.INFO)
 
 
-class Stage:
-    """Defines an NRN stage."""
+class Confirm:
+    """Defines an NRN process."""
 
     def __init__(self, source: str, remove: bool = False) -> None:
         """
-        Initializes an NRN stage.
+        Initializes an NRN process.
 
         :param str source: abbreviation for the source province / territory.
         :param bool remove: removes pre-existing change logs within the data/processed directory for the specified
@@ -88,6 +88,15 @@ class Stage:
         self.change_logs = {
             table: {change: set() for change in ("added", "retired", "modified", "confirmed")} for table in self.dframes
         }
+
+    def __call__(self) -> None:
+        """Executes an NRN process."""
+
+        self.gen_nids()
+        self.gen_structids()
+        self.update_nid_linkages()
+        self.export_nid_change_logs()
+        helpers.export(self.dframes, self.src)
 
     def export_nid_change_logs(self) -> None:
         """Exports nid change classifications as log files."""
@@ -405,15 +414,6 @@ class Stage:
 
         return flags
 
-    def execute(self) -> None:
-        """Executes an NRN stage."""
-
-        self.gen_nids()
-        self.gen_structids()
-        self.update_nid_linkages()
-        self.export_nid_change_logs()
-        helpers.export(self.dframes, self.src)
-
 
 @click.command()
 @click.argument("source", type=click.Choice("ab bc mb nb nl ns nt nu on pe qc sk yt".split(), False))
@@ -421,7 +421,7 @@ class Stage:
               help="Remove pre-existing change logs within the data/processed directory for the specified source.")
 def main(source: str, remove: bool = False) -> None:
     """
-    Executes an NRN stage.
+    Executes an NRN process.
 
     :param str source: abbreviation for the source province / territory.
     :param bool remove: removes pre-existing change logs within the data/processed directory for the specified source,
@@ -431,8 +431,8 @@ def main(source: str, remove: bool = False) -> None:
     try:
 
         with helpers.Timer():
-            stage = Stage(source, remove)
-            stage.execute()
+            process = Confirm(source, remove)
+            process()
 
     except KeyboardInterrupt:
         logger.exception("KeyboardInterrupt: Exiting program.")

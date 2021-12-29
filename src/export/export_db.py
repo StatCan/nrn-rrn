@@ -30,34 +30,30 @@ handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s: %(message)s
 logger.addHandler(handler)
 
 
-class Stage:
-    """Defines an NRN stage."""
+class Export:
+    """Defines an NRN process."""
 
-    def __init__(self, source: str, remove: bool = False) -> None:
+    def __init__(self, source: str, url: str, remove: bool) -> None:
         """
-        Initializes an NRN stage.
+        Initializes an NRN process.
 
         :param str source: abbreviation for the source province / territory.
+        :param str url: PostgreSQL database connection URL.
         :param bool remove: removes pre-existing files within the data/processed directory for the specified source,
             excluding change logs, default False.
         """
 
         self.source = source.lower()
+        self.url = url
         self.remove = remove
         self.major_version = None
         self.minor_version = None
 
-        # Configure data paths.
-        self.src = filepath.parents[2] / f"data/interim/{self.source}.gpkg"
-        self.dst = filepath.parents[2] / f"data/processed/{self.source}"
+        # Configure output path.
+        self.output_path = filepath.parents[2] / f"data/processed/{self.source}"
 
-        # Validate source path.
-        if not self.src.exists():
-            logger.exception(f"Input data not found: {self.src}.")
-            sys.exit(1)
-
-        # Validate and conditionally clear output namespace.
-        namespace = list(filter(lambda f: f.stem != f"{self.source}_change_logs", self.dst.glob("*")))
+        # Clear output namespace.
+        namespace = list(self.output_path.glob("*"))
 
         if len(namespace):
             logger.warning("Output namespace already occupied.")
@@ -80,7 +76,7 @@ class Stage:
 
         # Configure field defaults and domains.
         self.defaults = {lang: helpers.compile_default_values(lang=lang) for lang in ("en", "fr")}
-        self.domains = helpers.compile_domains(mapped_lang="fr")
+        self.domains = {lang: helpers.compile_domains(mapped_lang=lang) for lang in ("en", "fr")}
 
         # Configure export formats.
         distribution_formats_path = filepath.parent / "distribution_formats"
@@ -94,8 +90,26 @@ class Stage:
         # Note: the only change from default is moving the percentage to the right end of the progress bar.
         self.bar_format = "{desc}: |{bar}| {percentage:3.0f}% {r_bar}"
 
+        # Configure source name and code.
+        self.source_name = {"ab": "Alberta", "bc": "British Columbia", "mb": "Manitoba", "nb": "New Brunswick",
+                            "nl": "Newfoundland and Labrador", "ns": "Nova Scotia", "nt": "Northwest Territories",
+                            "nu": "Nunavut", "on": "Ontario", "pe": "Prince Edward Island", "qc": "Quebec",
+                            "sk": "Saskatchewan", "yt": "Yukon Territory"}[source]
+        self.source_code = {v: k for k, v in self.domains["en"]["metadata"]["datasetnam"]["lookup"].items() if
+                            isinstance(k, int)}[self.source_name]
+
         # Load data.
-        self.dframes = helpers.load_gpkg(self.src)
+        self.dframes = helpers.extract_nrn(url=self.url, source_code=self.source_code)
+
+    def __call__(self) -> None:
+        """Executes an NRN process."""
+
+        self.configure_release_version()
+        self.gen_french_dataframes()
+        self.define_kml_groups()
+        self.export_data()
+        self.zip_data()
+        self.update_distribution_docs()
 
     def configure_release_version(self) -> None:
         """Configures the major and minor release versions for the current NRN vintage."""
@@ -223,7 +237,7 @@ class Stage:
 
                 # Configure export directory.
                 export_dir, export_file = itemgetter("dir", "file")(export_specs["data"])
-                export_dir = self.dst / self.format_path(export_dir) / self.format_path(export_file)
+                export_dir = self.output_path / self.format_path(export_dir) / self.format_path(export_file)
 
                 # Configure mapped layer names.
                 nln_map = {table: self.format_path(export_specs["conform"][table]["name"]) for table in dframes}
@@ -323,8 +337,8 @@ class Stage:
                     series = df[field].copy(deep=True)
 
                     # Translate domain values.
-                    if field in self.domains[table]:
-                        series = helpers.apply_domain(series, self.domains[table][field]["lookup"],
+                    if field in self.domains["fr"][table]:
+                        series = helpers.apply_domain(series, self.domains["fr"][table][field]["lookup"],
                                                       self.defaults["fr"][table][field])
 
                     # Translate default values and Nones.
@@ -357,7 +371,7 @@ class Stage:
 
             # Configure source and destination paths.
             src = filepath.parent / f"distribution_docs/{filename}.rst"
-            dst = self.dst / filename
+            dst = self.output_path / filename
 
             try:
 
@@ -481,36 +495,29 @@ class Stage:
         # Close progress bar.
         zip_progress.close()
 
-    def execute(self) -> None:
-        """Executes an NRN stage."""
-
-        self.configure_release_version()
-        self.gen_french_dataframes()
-        self.define_kml_groups()
-        self.export_data()
-        self.zip_data()
-        self.update_distribution_docs()
-
 
 @click.command()
 @click.argument("source", type=click.Choice("ab bc mb nb nl ns nt nu on pe qc sk yt".split(), False))
+@click.option("--url", "-u", default="postgresql://postgres:postgres@localhost:5433/nrn", show_default=True,
+              help="PostgreSQL database connection URL.")
 @click.option("--remove / --no-remove", "-r", default=False, show_default=True,
               help="Remove pre-existing files within the data/processed directory for the specified source, excluding "
                    "change logs.")
-def main(source: str, remove: bool = False) -> None:
+def main(source: str, url: str = "postgresql://postgres:postgres@localhost:5433/nrn", remove: bool = False) -> None:
     """
-    Executes an NRN stage.
+    Executes an NRN process.
 
     :param str source: abbreviation for the source province / territory.
+    :param str url: PostgreSQL database connection url.
     :param bool remove: removes pre-existing files within the data/processed directory for the specified source,
-        excluding change logs, default False.
+        default False.
     """
 
     try:
 
         with helpers.Timer():
-            stage = Stage(source, remove)
-            stage.execute()
+            process = Export(source, url, remove)
+            process()
 
     except KeyboardInterrupt:
         logger.exception("KeyboardInterrupt: Exiting program.")

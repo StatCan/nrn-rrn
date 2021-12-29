@@ -247,6 +247,47 @@ class Validator:
             # Store updated dataframe.
             self.dfs[dataset] = df.copy(deep=True)
 
+    def __call__(self) -> None:
+        """Orchestrates the execution of validation functions and compiles the resulting errors."""
+
+        try:
+
+            # Iterate validations.
+            for code, params in self.validations.items():
+                func, desc, datasets, iter_cols = itemgetter("func", "desc", "datasets", "iter_cols")(params)
+
+                # Reconfigure iter_cols as dict.
+                if isinstance(iter_cols, list):
+                    iter_cols = {dataset: iter_cols for dataset in datasets}
+
+                # Iterate datasets.
+                for dataset in datasets:
+
+                    # Iterate columns, if required.
+                    if iter_cols:
+                        for col in iter_cols[dataset]:
+
+                            logger.info(f"Applying validation E{code}: \"{func.__name__}\"; dataset={dataset}.{col}.")
+
+                            # Execute validation and store non-empty results.
+                            results = func(dataset, col=col)
+                            if len(results["values"]):
+                                self.errors[f"E{code} - {dataset}.{col} - {desc}"] = deepcopy(results)
+
+                    else:
+
+                        logger.info(f"Applying validation E{code}: \"{func.__name__}\"; dataset={dataset}.")
+
+                        # Execute validation and store non-empty results.
+                        results = func(dataset)
+                        if len(results["values"]):
+                            self.errors[f"E{code} - {dataset} - {desc}"] = deepcopy(results)
+
+        except (KeyError, SyntaxError, ValueError) as e:
+            logger.exception("Unable to apply validation.")
+            logger.exception(e)
+            sys.exit(1)
+
     def connectivity_min_distance(self, dataset: str) -> dict:
         """
         Validates: Arcs must be >= 5 meters from each other, excluding connected arcs (i.e. no dangles).
@@ -959,44 +1000,3 @@ class Validator:
             errors["query"] = f"\"{self.id}\" in {*vals,}"
 
         return errors
-
-    def execute(self) -> None:
-        """Orchestrates the execution of validation functions and compiles the resulting errors."""
-
-        try:
-
-            # Iterate validations.
-            for code, params in self.validations.items():
-                func, desc, datasets, iter_cols = itemgetter("func", "desc", "datasets", "iter_cols")(params)
-
-                # Reconfigure iter_cols as dict.
-                if isinstance(iter_cols, list):
-                    iter_cols = {dataset: iter_cols for dataset in datasets}
-
-                # Iterate datasets.
-                for dataset in datasets:
-
-                    # Iterate columns, if required.
-                    if iter_cols:
-                        for col in iter_cols[dataset]:
-
-                            logger.info(f"Applying validation E{code}: \"{func.__name__}\"; dataset={dataset}.{col}.")
-
-                            # Execute validation and store non-empty results.
-                            results = func(dataset, col=col)
-                            if len(results["values"]):
-                                self.errors[f"E{code} - {dataset}.{col} - {desc}"] = deepcopy(results)
-
-                    else:
-
-                        logger.info(f"Applying validation E{code}: \"{func.__name__}\"; dataset={dataset}.")
-
-                        # Execute validation and store non-empty results.
-                        results = func(dataset)
-                        if len(results["values"]):
-                            self.errors[f"E{code} - {dataset} - {desc}"] = deepcopy(results)
-
-        except (KeyError, SyntaxError, ValueError) as e:
-            logger.exception("Unable to apply validation.")
-            logger.exception(e)
-            sys.exit(1)

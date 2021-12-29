@@ -33,12 +33,12 @@ handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s: %(message)s
 logger.addHandler(handler)
 
 
-class Stage:
-    """Defines an NRN stage."""
+class Conform:
+    """Defines an NRN process."""
 
     def __init__(self, source: str, remove: bool = False, exclude_old: bool = False) -> None:
         """
-        Initializes an NRN stage.
+        Initializes an NRN process.
 
         :param str source: abbreviation for the source province / territory.
         :param bool remove: removes pre-existing files within the data/interim directory for the specified source,
@@ -94,6 +94,24 @@ class Stage:
         self.defaults = helpers.compile_default_values()
         self.dtypes = helpers.compile_dtypes()
         self.domains = helpers.compile_domains()
+
+    def __call__(self) -> None:
+        """Executes an NRN process."""
+
+        self.download_previous_vintage()
+        self.compile_source_attributes()
+        self.compile_target_attributes()
+        self.gen_source_dataframes()
+        self.segment_addresses()
+        self.gen_target_dataframes()
+        self.apply_field_mapping()
+        self.split_strplaname()
+        self.recover_missing_datasets()
+        self.apply_domains()
+        self.clean_datasets()
+        self.filter_and_relink_strplaname()
+        self.gen_junctions()
+        helpers.export(self.target_gdframes, self.dst)
 
     def apply_domains(self) -> None:
         """Applies domain restrictions to each column in the target (Geo)DataFrames."""
@@ -952,24 +970,6 @@ class Stage:
                 self.target_gdframes["altnamlink"] = pd.concat([df_first, df_second],
                                                                ignore_index=False).copy(deep=True)
 
-    def execute(self) -> None:
-        """Executes an NRN stage."""
-
-        self.download_previous_vintage()
-        self.compile_source_attributes()
-        self.compile_target_attributes()
-        self.gen_source_dataframes()
-        self.segment_addresses()
-        self.gen_target_dataframes()
-        self.apply_field_mapping()
-        self.split_strplaname()
-        self.recover_missing_datasets()
-        self.apply_domains()
-        self.clean_datasets()
-        self.filter_and_relink_strplaname()
-        self.gen_junctions()
-        helpers.export(self.target_gdframes, self.dst)
-
 
 @click.command()
 @click.argument("source", type=click.Choice("ab bc mb nb nl ns nt nu on pe qc sk yt".split(), False))
@@ -980,7 +980,7 @@ class Stage:
                    "Option has no effect if remove=False.")
 def main(source: str, remove: bool = False, exclude_old: bool = False) -> None:
     """
-    Executes an NRN stage.
+    Executes an NRN process.
 
     :param str source: abbreviation for the source province / territory.
     :param bool remove: removes pre-existing files within the data/interim directory for the specified source, default
@@ -992,8 +992,8 @@ def main(source: str, remove: bool = False, exclude_old: bool = False) -> None:
     try:
 
         with helpers.Timer():
-            stage = Stage(source, remove, exclude_old)
-            stage.execute()
+            process = Conform(source, remove, exclude_old)
+            process()
 
     except KeyboardInterrupt:
         logger.exception("KeyboardInterrupt: Exiting program.")

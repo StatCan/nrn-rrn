@@ -23,12 +23,12 @@ logger_validations = logging.getLogger("validations")
 logger_validations.setLevel(logging.WARNING)
 
 
-class Stage:
-    """Defines an NRN stage."""
+class Validate:
+    """Defines an NRN process."""
 
     def __init__(self, source: str, remove: bool = False) -> None:
         """
-        Initializes an NRN stage.
+        Initializes an NRN process.
 
         :param str source: abbreviation for the source province / territory.
         :param bool remove: remove pre-existing output file (validations.log), default False.
@@ -59,6 +59,12 @@ class Stage:
 
         # Load source data.
         self.dframes = helpers.load_gpkg(self.src)
+
+    def __call__(self) -> None:
+        """Executes an NRN process."""
+
+        self.validations()
+        self.log_errors()
 
     def log_errors(self) -> None:
         """Outputs error logs returned by validation functions."""
@@ -94,14 +100,8 @@ class Stage:
         logger.info("Initiating validator.")
 
         # Instantiate and execute validator class.
-        self.Validator = Validator(self.dframes)
-        self.Validator.execute()
-
-    def execute(self) -> None:
-        """Executes an NRN stage."""
-
-        self.validations()
-        self.log_errors()
+        self.Validator = Validator(self.dframes, source=self.source)
+        self.Validator()
 
 
 @click.command()
@@ -110,7 +110,7 @@ class Stage:
               help="Remove pre-existing output file (validations.log).")
 def main(source: str, remove: bool = False) -> None:
     """
-    Executes an NRN stage.
+    Executes an NRN process.
 
     :param str source: abbreviation for the source province / territory.
     :param bool remove: remove pre-existing output file (validations.log), default False.
@@ -119,8 +119,8 @@ def main(source: str, remove: bool = False) -> None:
     try:
 
         with helpers.Timer():
-            stage = Stage(source, remove)
-            stage.execute()
+            process = Validate(source, remove)
+            process()
 
     except KeyboardInterrupt:
         logger.exception("KeyboardInterrupt: Exiting program.")

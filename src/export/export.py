@@ -11,6 +11,7 @@ from collections import Counter
 from datetime import datetime
 from operator import attrgetter, itemgetter
 from pathlib import Path
+from shapely.geometry import LineString
 from tqdm import tqdm
 from tqdm.auto import trange
 from typing import Union
@@ -29,32 +30,34 @@ handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s: %(message)s
 logger.addHandler(handler)
 
 
-class Stage:
-    """Defines an NRN stage."""
+class Export:
+    """Defines an NRN process."""
 
-    def __init__(self, source: str, url: str, remove: bool) -> None:
+    def __init__(self, source: str, remove: bool = False) -> None:
         """
-        Initializes an NRN stage.
+        Initializes an NRN process.
 
         :param str source: abbreviation for the source province / territory.
-        :param str url: PostgreSQL database connection URL.
         :param bool remove: removes pre-existing files within the data/processed directory for the specified source,
             excluding change logs, default False.
         """
 
-        self.stage = filepath.stem
         self.source = source.lower()
-        self.url = url
         self.remove = remove
         self.major_version = None
         self.minor_version = None
-        self.dframes = dict()
 
-        # Configure output path.
-        self.output_path = filepath.parents[2] / f"data/processed/{self.source}"
+        # Configure data paths.
+        self.src = filepath.parents[2] / f"data/interim/{self.source}.gpkg"
+        self.dst = filepath.parents[2] / f"data/processed/{self.source}"
 
-        # Clear output namespace.
-        namespace = list(self.output_path.glob("*"))
+        # Validate source path.
+        if not self.src.exists():
+            logger.exception(f"Input data not found: {self.src}.")
+            sys.exit(1)
+
+        # Validate and conditionally clear output namespace.
+        namespace = list(filter(lambda f: f.stem != f"{self.source}_change_logs", self.dst.glob("*")))
 
         if len(namespace):
             logger.warning("Output namespace already occupied.")
@@ -77,7 +80,7 @@ class Stage:
 
         # Configure field defaults and domains.
         self.defaults = {lang: helpers.compile_default_values(lang=lang) for lang in ("en", "fr")}
-        self.domains = {lang: helpers.compile_domains(mapped_lang=lang) for lang in ("en", "fr")}
+        self.domains = helpers.compile_domains(mapped_lang="fr")
 
         # Configure export formats.
         distribution_formats_path = filepath.parent / "distribution_formats"
@@ -91,13 +94,18 @@ class Stage:
         # Note: the only change from default is moving the percentage to the right end of the progress bar.
         self.bar_format = "{desc}: |{bar}| {percentage:3.0f}% {r_bar}"
 
-        # Configure source name and code.
-        self.source_name = {"ab": "Alberta", "bc": "British Columbia", "mb": "Manitoba", "nb": "New Brunswick",
-                            "nl": "Newfoundland and Labrador", "ns": "Nova Scotia", "nt": "Northwest Territories",
-                            "nu": "Nunavut", "on": "Ontario", "pe": "Prince Edward Island", "qc": "Quebec",
-                            "sk": "Saskatchewan", "yt": "Yukon Territory"}[source]
-        self.source_code = {v: k for k, v in self.domains["en"]["metadata"]["datasetnam"]["lookup"].items() if
-                            isinstance(k, int)}[self.source_name]
+        # Load data.
+        self.dframes = helpers.load_gpkg(self.src)
+
+    def __call__(self) -> None:
+        """Executes an NRN process."""
+
+        self.configure_release_version()
+        self.gen_french_dataframes()
+        self.define_kml_groups()
+        self.export_data()
+        self.zip_data()
+        self.update_distribution_docs()
 
     def configure_release_version(self) -> None:
         """Configures the major and minor release versions for the current NRN vintage."""
@@ -186,6 +194,7 @@ class Stage:
                     # Compile indexes of placename records.
                     indexes = df.query(f"l_placenam==\"{placename}\" or r_placenam==\"{placename}\"").index
                     for index, indexes_range in enumerate(np.array_split(indexes, (len(indexes) // kml_limit) + 1)):
+
                         # Configure export parameters.
                         names.append(re.sub(r"[\W_]+", "_", f"{placename}_{index}"))
                         queries.append(f"index.isin({list(indexes_range)})")
@@ -224,7 +233,7 @@ class Stage:
 
                 # Configure export directory.
                 export_dir, export_file = itemgetter("dir", "file")(export_specs["data"])
-                export_dir = self.output_path / self.format_path(export_dir) / self.format_path(export_file)
+                export_dir = self.dst / self.format_path(export_dir) / self.format_path(export_file)
 
                 # Configure mapped layer names.
                 nln_map = {table: self.format_path(export_specs["conform"][table]["name"]) for table in dframes}
@@ -252,12 +261,18 @@ class Stage:
                     # Iterate export datasets.
                     for table, df in dframes.items():
 
+                        # Reverse lat/lon ordering.
+                        df = df.copy(deep=True)
+                        df["geometry"] = df["geometry"].map(
+                            lambda g: LineString(pt[::-1] for pt in attrgetter("coords")(g)))
+
                         # Map dataframe queries (more efficient than iteratively querying).
                         self.kml_groups[lang]["df"] = self.kml_groups[lang]["query"].map(
                             lambda query: df.query(query).copy(deep=True))
 
                         # Iterate KML groups.
                         for kml_group in self.kml_groups[lang].itertuples(index=False):
+
                             # Export data.
                             kml_name, kml_df = attrgetter("name", "df")(kml_group)
                             helpers.export({table: kml_df}, kml_name, **kwargs)
@@ -318,8 +333,8 @@ class Stage:
                     series = df[field].copy(deep=True)
 
                     # Translate domain values.
-                    if field in self.domains["fr"][table]:
-                        series = helpers.apply_domain(series, self.domains["fr"][table][field]["lookup"],
+                    if field in self.domains[table]:
+                        series = helpers.apply_domain(series, self.domains[table][field]["lookup"],
                                                       self.defaults["fr"][table][field])
 
                     # Translate default values and Nones.
@@ -352,7 +367,7 @@ class Stage:
 
             # Configure source and destination paths.
             src = filepath.parent / f"distribution_docs/{filename}.rst"
-            dst = self.output_path / filename
+            dst = self.dst / filename
 
             try:
 
@@ -455,6 +470,7 @@ class Stage:
                 # Recursively iterate directory files, compress, and zip contents.
                 with zipfile.ZipFile(f"{data_dir}.zip", "w") as zip_f:
                     for file in filter(Path.is_file, data_dir.rglob("*")):
+
                         zip_progress.set_description_str(f"Compressing file={file.name}")
 
                         # Configure new relative path inside .zip file.
@@ -475,40 +491,26 @@ class Stage:
         # Close progress bar.
         zip_progress.close()
 
-    def execute(self) -> None:
-        """Executes an NRN stage."""
-
-        self.dframes = helpers.extract_nrn(url=self.url, source_code=self.source_code)
-        self.configure_release_version()
-        self.gen_french_dataframes()
-        self.define_kml_groups()
-        self.export_data()
-        self.zip_data()
-        self.update_distribution_docs()
-
 
 @click.command()
 @click.argument("source", type=click.Choice("ab bc mb nb nl ns nt nu on pe qc sk yt".split(), False))
-@click.option("--url", "-u", default="postgresql://postgres:postgres@localhost:5433/nrn", show_default=True,
-              help="PostgreSQL database connection URL.")
 @click.option("--remove / --no-remove", "-r", default=False, show_default=True,
               help="Remove pre-existing files within the data/processed directory for the specified source, excluding "
                    "change logs.")
-def main(source: str, url: str = "postgresql://postgres:postgres@localhost:5433/nrn", remove: bool = False) -> None:
+def main(source: str, remove: bool = False) -> None:
     """
-    Executes an NRN stage.
+    Executes an NRN process.
 
     :param str source: abbreviation for the source province / territory.
-    :param str url: PostgreSQL database connection url.
     :param bool remove: removes pre-existing files within the data/processed directory for the specified source,
-        default False.
+        excluding change logs, default False.
     """
 
     try:
 
         with helpers.Timer():
-            stage = Stage(source, url, remove)
-            stage.execute()
+            process = Export(source, remove)
+            process()
 
     except KeyboardInterrupt:
         logger.exception("KeyboardInterrupt: Exiting program.")
