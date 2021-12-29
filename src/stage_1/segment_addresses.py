@@ -43,7 +43,7 @@ class Segmentor:
         """
 
         self.source = source.lower()
-        self.export_gpkg = filepath.parents[2] / f"data/interim/{self.source}_addresses_review.gpkg"
+        self.dst = filepath.parents[2] / f"data/interim/{self.source}_addresses_review.gpkg"
 
         logger.info("Configuring address attributes.")
 
@@ -384,7 +384,7 @@ class Segmentor:
 
         # Export address-roadseg connections for review.
         layer = "address_roadseg_connections"
-        logger.info(f"Exporting address-roadseg connections for review: {self.export_gpkg}, layer={layer}.")
+        logger.info(f"Exporting address-roadseg connections for review: {self.dst}, layer={layer}.")
 
         # Generate connection LineStrings as new GeoDataFrame.
         connections = gpd.GeoDataFrame(
@@ -394,7 +394,7 @@ class Segmentor:
             crs=self.addresses.crs)
 
         # Export connections to Geopackage.
-        connections.to_file(self.export_gpkg, driver="GPKG", layer=layer)
+        connections.to_file(str(self.dst), driver="GPKG", layer=layer)
 
     def configure_roadseg_linkages(self) -> None:
         """Associates each address point with an NRN roadseg record."""
@@ -442,12 +442,11 @@ class Segmentor:
         if sum(non_linked_flag):
 
             layer = "non_linked_addresses"
-            logger.info(f"Exporting {sum(non_linked_flag)} non-linked addresses for review: {self.export_gpkg}, "
-                        f"layer={layer}.")
+            logger.info(f"Exporting {sum(non_linked_flag)} non-linked addresses for review: {self.dst}|layer={layer}.")
 
             # Export addresses to GeoPackage.
             self.addresses.loc[non_linked_flag, ["street", "number", "suffix", "geometry"]].to_file(
-                self.export_gpkg, driver="GPKG", layer=layer)
+                str(self.dst), driver="GPKG", layer=layer)
 
             # Discard non-linked addresses.
             self.addresses.drop(self.addresses.loc[non_linked_flag].index, axis=0, inplace=True)

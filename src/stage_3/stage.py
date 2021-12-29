@@ -44,22 +44,22 @@ class Stage:
         self.source = source.lower()
         self.remove = remove
 
-        # Configure and validate input data path.
-        self.data_path = filepath.parents[2] / f"data/interim/{self.source}.gpkg"
-        if not self.data_path.exists():
-            logger.exception(f"Input data not found: \"{self.data_path}\".")
+        # Configure data paths.
+        self.src = filepath.parents[2] / f"data/interim/{self.source}.gpkg"
+        self.dst = filepath.parents[2] / f"data/processed/{self.source}/{self.source}_change_logs"
+
+        # Validate source path.
+        if not self.src.exists():
+            logger.exception(f"Source not found: \"{self.src}\".")
             sys.exit(1)
 
-        # Configure output path.
-        self.output_path = filepath.parents[2] / f"data/processed/{self.source}/{self.source}_change_logs"
-
-        # Conditionally clear output namespace.
-        if self.output_path.exists():
+        # Validate and conditionally clear output namespace.
+        if self.dst.exists():
             logger.warning("Output namespace already occupied.")
 
             if self.remove:
                 logger.warning("Parameter remove=True: Removing directory.")
-                helpers.rm_tree(self.output_path)
+                helpers.rm_tree(self.dst)
 
             else:
                 logger.exception("Parameter remove=False: Unable to proceed while output namespace is occupied. Set "
@@ -79,9 +79,9 @@ class Stage:
         self.defaults = helpers.compile_default_values()
 
         # Load data - current and previous vintage.
-        self.dframes = helpers.load_gpkg(self.data_path,
+        self.dframes = helpers.load_gpkg(self.src,
                                          layers=["blkpassage", "ferryseg", "junction", "roadseg", "tollpoint"])
-        self.dframes_old = helpers.load_gpkg(self.data_path.parent / f"{self.source}_old.gpkg", find=True,
+        self.dframes_old = helpers.load_gpkg(self.src.parent / f"{self.source}_old.gpkg", find=True,
                                              layers=["blkpassage", "ferryseg", "junction", "roadseg", "tollpoint"])
 
         # Define change logs dictionary.
@@ -92,17 +92,17 @@ class Stage:
     def export_nid_change_logs(self) -> None:
         """Exports nid change classifications as log files."""
 
-        logger.info(f"Writing nid change logs to: \"{self.output_path}\".")
+        logger.info(f"Writing nid change logs to: \"{self.dst}\".")
 
         # Create change logs directory.
-        Path(self.output_path).mkdir(parents=True, exist_ok=True)
+        Path(self.dst).mkdir(parents=True, exist_ok=True)
 
         # Iterate tables and nid classification types.
         for table in self.change_logs:
             for classification, log in self.change_logs[table].items():
 
                 # Configure log path.
-                log_path = self.output_path / f"{self.source}_{table}_{classification}.log"
+                log_path = self.dst / f"{self.source}_{table}_{classification}.log"
 
                 # Drop pre-existing File Handler.
                 for f_handler in logger_change_logs.handlers:
@@ -412,7 +412,7 @@ class Stage:
         self.gen_structids()
         self.update_nid_linkages()
         self.export_nid_change_logs()
-        helpers.export(self.dframes, self.data_path)
+        helpers.export(self.dframes, self.src)
 
 
 @click.command()

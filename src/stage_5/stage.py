@@ -47,17 +47,17 @@ class Stage:
         self.major_version = None
         self.minor_version = None
 
-        # Configure and validate input data path.
-        self.data_path = filepath.parents[2] / f"data/interim/{self.source}.gpkg"
-        if not self.data_path.exists():
-            logger.exception(f"Input data not found: {self.data_path}.")
+        # Configure data paths.
+        self.src = filepath.parents[2] / f"data/interim/{self.source}.gpkg"
+        self.dst = filepath.parents[2] / f"data/processed/{self.source}"
+
+        # Validate source path.
+        if not self.src.exists():
+            logger.exception(f"Input data not found: {self.src}.")
             sys.exit(1)
 
-        # Configure output path.
-        self.output_path = filepath.parents[2] / f"data/processed/{self.source}"
-
-        # Conditionally clear output namespace.
-        namespace = list(filter(lambda f: f.stem != f"{self.source}_change_logs", self.output_path.glob("*")))
+        # Validate and conditionally clear output namespace.
+        namespace = list(filter(lambda f: f.stem != f"{self.source}_change_logs", self.dst.glob("*")))
 
         if len(namespace):
             logger.warning("Output namespace already occupied.")
@@ -95,7 +95,7 @@ class Stage:
         self.bar_format = "{desc}: |{bar}| {percentage:3.0f}% {r_bar}"
 
         # Load data.
-        self.dframes = helpers.load_gpkg(self.data_path)
+        self.dframes = helpers.load_gpkg(self.src)
 
     def configure_release_version(self) -> None:
         """Configures the major and minor release versions for the current NRN vintage."""
@@ -223,7 +223,7 @@ class Stage:
 
                 # Configure export directory.
                 export_dir, export_file = itemgetter("dir", "file")(export_specs["data"])
-                export_dir = self.output_path / self.format_path(export_dir) / self.format_path(export_file)
+                export_dir = self.dst / self.format_path(export_dir) / self.format_path(export_file)
 
                 # Configure mapped layer names.
                 nln_map = {table: self.format_path(export_specs["conform"][table]["name"]) for table in dframes}
@@ -357,7 +357,7 @@ class Stage:
 
             # Configure source and destination paths.
             src = filepath.parent / f"distribution_docs/{filename}.rst"
-            dst = self.output_path / filename
+            dst = self.dst / filename
 
             try:
 

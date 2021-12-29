@@ -51,8 +51,10 @@ class Stage:
         self.remove = remove
         self.exclude_old = exclude_old
 
-        # Configure raw data path.
-        self.data_path = filepath.parents[2] / f"data/raw/{self.source}"
+        # Configure data paths.
+        self.src = filepath.parents[2] / f"data/raw/{self.source}"
+        self.dst = filepath.parents[2] / f"data/interim/{self.source}.gpkg"
+        self.src_old = {ext: filepath.parents[2] / f"data/interim/{self.source}_old.{ext}" for ext in ("gpkg", "zip")}
 
         # Configure attribute paths.
         self.source_attribute_path = filepath.parent / f"sources/{self.source}"
@@ -63,15 +65,8 @@ class Stage:
         self.source_gdframes = dict()
         self.target_gdframes = dict()
 
-        # Configure previous NRN vintage path and clear namespace.
-        self.nrn_old_path = {ext: filepath.parents[2] / f"data/interim/{self.source}_old.{ext}"
-                             for ext in ("gpkg", "zip")}
-
-        # Configure output path.
-        self.output_path = filepath.parents[2] / f"data/interim/{self.source}.gpkg"
-
-        # Conditionally clear output namespace.
-        namespace = list(filter(Path.is_file, self.output_path.parent.glob(f"{self.source}[_.]*")))
+        # Validate and conditionally clear output namespace.
+        namespace = list(filter(Path.is_file, self.dst.parent.glob(f"{self.source}[_.]*")))
 
         if len(namespace):
             logger.warning("Output namespace already occupied.")
@@ -82,7 +77,7 @@ class Stage:
                 for f in namespace:
 
                     # Conditionally exclude previous NRN vintage.
-                    if self.exclude_old and f.name == self.nrn_old_path["gpkg"].name:
+                    if self.exclude_old and f.name == self.src_old["gpkg"].name:
                         logger.info(f"Parameter exclude-old=True: Excluding conflicting file from removal: \"{f}\".")
                         continue
 
@@ -574,8 +569,8 @@ class Stage:
         logger.info("Retrieving previous NRN vintage.")
 
         # Determine download requirement.
-        if self.nrn_old_path["gpkg"].exists():
-            logger.warning(f"Previous NRN vintage already exists: \"{self.nrn_old_path['gpkg']}\". Skipping step.")
+        if self.src_old["gpkg"].exists():
+            logger.warning(f"Previous NRN vintage already exists: \"{self.src_old['gpkg']}\". Skipping step.")
 
         else:
 
@@ -593,7 +588,7 @@ class Stage:
                 download = helpers.get_url(download_url, stream=True, timeout=30, verify=True)
 
                 # Copy download content to file.
-                with open(self.nrn_old_path["zip"], "wb") as f:
+                with open(self.src_old["zip"], "wb") as f:
                     shutil.copyfileobj(download.raw, f)
 
             except (shutil.Error) as e:
@@ -604,18 +599,18 @@ class Stage:
             # Extract zipped data.
             logger.info("Extracting zipped data for previous NRN vintage.")
 
-            gpkg_download = [f for f in zipfile.ZipFile(self.nrn_old_path["zip"], "r").namelist() if
+            gpkg_download = [f for f in zipfile.ZipFile(self.src_old["zip"], "r").namelist() if
                              f.lower().startswith("nrn") and Path(f).suffix == ".gpkg"][0]
 
-            with zipfile.ZipFile(self.nrn_old_path["zip"], "r") as zip_f:
-                with zip_f.open(gpkg_download) as zsrc, open(self.nrn_old_path["gpkg"], "wb") as zdest:
-                    shutil.copyfileobj(zsrc, zdest)
+            with zipfile.ZipFile(self.src_old["zip"], "r") as zip_f:
+                with zip_f.open(gpkg_download) as zsrc, open(self.src_old["gpkg"], "wb") as zdst:
+                    shutil.copyfileobj(zsrc, zdst)
 
             # Remove temporary files.
             logger.info("Removing temporary files for previous NRN vintage.")
 
-            if self.nrn_old_path["zip"].exists():
-                self.nrn_old_path["zip"].unlink()
+            if self.src_old["zip"].exists():
+                self.src_old["zip"].unlink()
 
     def filter_and_relink_strplaname(self) -> None:
         """Reduces duplicated records, where possible, in NRN strplaname and repairs the remaining NID linkages."""
@@ -674,9 +669,12 @@ class Stage:
         logger.info(f"Generating dataset: junction.")
 
         # Instantiate Junction class.
-        ferryseg = self.target_gdframes["ferryseg"] if "ferryseg" in self.target_gdframes else None
-        junction = Junction(source=self.source, target_attributes=self.target_attributes["junction"],
-                            roadseg=self.target_gdframes["roadseg"], ferryseg=ferryseg)
+        junction = Junction(
+            source=self.source,
+            target_attributes=self.target_attributes["junction"],
+            roadseg=self.target_gdframes["roadseg"],
+            ferryseg=self.target_gdframes["ferryseg"] if "ferryseg" in self.target_gdframes else None
+        )
 
         # Execute Junction class and store results.
         self.target_gdframes["junction"] = junction()
@@ -700,7 +698,7 @@ class Stage:
             # Load source data into a geodataframe.
             try:
 
-                df = gpd.read_file(self.data_path / source_yaml["data"]["filename"],
+                df = gpd.read_file(self.src / source_yaml["data"]["filename"],
                                    driver=source_yaml["data"]["driver"],
                                    layer=source_yaml["data"]["layer"])
 
@@ -797,7 +795,7 @@ class Stage:
             logger.info("Recovering missing datasets from the previous NRN vintage.")
 
             # Iterate datasets from previous NRN vintage.
-            for table, df in helpers.load_gpkg(self.nrn_old_path["gpkg"], find=True, layers=recovery_tables).items():
+            for table, df in helpers.load_gpkg(self.src_old["gpkg"], find=True, layers=recovery_tables).items():
 
                 # Recover non-empty datasets.
                 if len(df):
@@ -970,7 +968,7 @@ class Stage:
         self.clean_datasets()
         self.filter_and_relink_strplaname()
         self.gen_junctions()
-        helpers.export(self.target_gdframes, self.output_path)
+        helpers.export(self.target_gdframes, self.dst)
 
 
 @click.command()

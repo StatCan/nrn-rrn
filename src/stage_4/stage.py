@@ -37,15 +37,17 @@ class Stage:
         self.source = source.lower()
         self.remove = remove
         self.Validator = None
+
+        # Configure data paths.
         self.src = Path(filepath.parents[2] / f"data/interim/{self.source}.gpkg")
         self.validations_log = Path(self.src.parent / "validations.log")
 
-        # Configure source path.
+        # Validate source path.
         if not self.src.exists():
             logger.exception(f"Source not found: \"{self.src}\".")
             sys.exit(1)
 
-        # Configure destination path.
+        # Validate destination path.
         if self.validations_log.exists():
             if remove:
                 logger.info(f"Removing conflicting file: \"{self.validations_log}\".")

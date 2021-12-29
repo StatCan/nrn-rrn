@@ -3,11 +3,10 @@ import numpy as np
 import pandas as pd
 import re
 import sys
-import uuid
 from copy import deepcopy
-from operator import attrgetter, itemgetter
+from operator import itemgetter
 from pathlib import Path
-from typing import Any, List, Type, Union
+from typing import List, Union
 
 sys.path.insert(1, str(Path(__file__).resolve().parents[1]))
 import helpers
@@ -122,34 +121,6 @@ def direct(series: pd.Series, cast_type: str = None) -> pd.Series:
         sys.exit(1)
 
 
-def gen_uuid(series: pd.Series) -> pd.Series:
-    """
-    Generates a uuid4 hexadecimal string for each record in the Series.
-
-    :param pd.Series series: Series.
-    :return pd.Series: Series of uuid4 hexadecimal strings aligned to the original Series.
-    """
-
-    return pd.Series([uuid.uuid4().hex for _ in range(len(series))], index=series.index)
-
-
-def incrementor(series: pd.Series, start: int = 1, step: int = 1) -> pd.Series:
-    """
-    Generates an integer sequence aligned to the Series, using the given start and step increment.
-
-    :param pd.Series series: Series.
-    :param int start: sequence start.
-    :param int step: sequence increment.
-    :return pd.Series: Series with an integer sequence aligned to the original Series.
-    """
-
-    if not all(isinstance(param, int) for param in (start, step)):
-        logger.exception(f"Unable to generate sequence. One or more input variables is not an integer.")
-
-    stop = (len(series) * step) + start
-    return pd.Series(range(start, stop, step), index=series.index)
-
-
 def map_values(series: pd.Series, lookup: dict, case_sensitive: bool = False) -> pd.Series:
     """
     Maps Series values based on a lookup dictionary. Non-matches retain their original value.
@@ -159,9 +130,6 @@ def map_values(series: pd.Series, lookup: dict, case_sensitive: bool = False) ->
     :param bool case_sensitive: lookup keys are case sensitive, default False.
     :return pd.Series: Series with mapped values.
     """
-
-    # Validate inputs.
-    validate_dtypes("lookup", lookup, dict)
 
     if case_sensitive:
         return series.map(lookup).fillna(series)
@@ -202,13 +170,15 @@ def query_assign(df: Union[pd.DataFrame, pd.Series], columns: List[str], lookup:
             columns = [columns]
         columns = list(map(str.lower, columns))
 
-        validate_dtypes("lookup", lookup, dict)
+        # Validate and configure assignment type (string vs. column).
         for query, output in lookup.items():
-            validate_dtypes(f"lookup['{query}']", output, dict)
+
             if "type" not in output.keys():
                 lookup[output]["type"] = "string"
+
             if output["type"] == "column":
                 lookup[query]["value"] = lookup[query]["value"].lower()
+
                 if lookup[query]["value"] not in columns:
                     logger.exception(f"Invalid column for lookup['{query}']: {lookup[query]['value']}.")
 
@@ -324,14 +294,7 @@ def regex_find(series: pd.Series, pattern: str, match_index: int, group_index: U
 
     # Validate inputs.
     pattern = validate_regex(pattern)
-    validate_dtypes("match_index", match_index, [int, np.int_])
-    validate_dtypes("group_index", group_index, [int, np.int_, list])
-    if isinstance(group_index, list):
-        for index, i in enumerate(group_index):
-            validate_dtypes(f"group_index[{index}]", i, [int, np.int_])
-    validate_dtypes('strip_result', strip_result, [bool, np.bool_])
     if sub_inplace:
-        validate_dtypes("sub_inplace", sub_inplace, dict)
         if {"pattern", "repl"}.issubset(set(sub_inplace.keys())):
             sub_inplace["pattern"] = validate_regex(sub_inplace["pattern"])
             sub_inplace["repl"] = validate_regex(sub_inplace["repl"])
@@ -373,7 +336,6 @@ def regex_sub(series: pd.Series, **kwargs: dict) -> pd.Series:
     """
 
     # Validate inputs.
-    validate_dtypes("kwargs", kwargs, dict)
     kwargs["pattern"] = validate_regex(kwargs["pattern"])
     if isinstance(kwargs["repl"], str):
         kwargs["repl"] = validate_regex(kwargs["repl"])
@@ -398,29 +360,6 @@ def regex_sub(series: pd.Series, **kwargs: dict) -> pd.Series:
     return series
 
 
-def validate_dtypes(name: str, val: Any, dtypes: Union[Type, List[Type]]) -> bool:
-    """
-    Validates the data type of the given value against a list of acceptable data type objects.
-
-    :param str name: name of the variable holding the provided value.
-    :param Any val: value.
-    :param Union[Type, List[Type]] dtypes: list of acceptable type objects against which the provided value will be
-        validated.
-    :return bool: whether the provided value is an instance of one of the acceptable type objects.
-    """
-
-    if not isinstance(dtypes, list):
-        dtypes = [dtypes]
-
-    if any([isinstance(val, dtype) for dtype in dtypes]):
-        return True
-
-    else:
-        logger.exception(f"Invalid data type for {name}: {val}. Expected one of "
-                         f"{list(map(attrgetter('__name__'), dtypes))} but received {type(val).__name__}.")
-        sys.exit(1)
-
-
 def validate_regex(pattern: str) -> str:
     """
     Validates a regular expression.
@@ -440,7 +379,8 @@ def validate_regex(pattern: str) -> str:
         # Process: iterate keyword matches, parse the resulting keywords and use as domain lookup keys, replace the
         # original values with '|' joined domain values.
         for kw in set([itemgetter(0)(match.groups()) for match in
-                       re.finditer(r"\(domain_(.*?)\)", pattern, flags=re.I)]):
+                       re.finditer(r"\(domain_(.*?)\)", pattern, flags=re.I)
+                       ]):
 
             table, field = kw.split("_")
             domain = domains[table][field]["values"]
