@@ -53,7 +53,7 @@ class Stage:
         self.dframes = helpers.load_gpkg(self.data_path, layers=["ferryseg", "roadseg"])
 
         # Load administrative boundary, reprojected to EPSG:4617.
-        boundaries = gpd.read_file(filepath.parent / "boundaries.gpkg", layer="boundaries")
+        boundaries = gpd.read_file(filepath.parent / "boundaries.zip", layer="boundaries")
         boundaries = boundaries.loc[boundaries["source"] == self.source].to_crs("EPSG:4617")
         self.boundary = boundaries["geometry"].iloc[0]
 

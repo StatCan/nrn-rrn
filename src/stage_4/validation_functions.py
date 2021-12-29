@@ -777,7 +777,7 @@ class Validator:
         df = self.dfs[dataset].copy(deep=True)
 
         # Load administrative boundary, reprojected to meter-based crs.
-        boundaries = gpd.read_file(filepath.parent / "boundaries.gpkg", layer="boundaries")
+        boundaries = gpd.read_file(filepath.parent / "boundaries.zip", layer="boundaries")
         boundaries = boundaries.loc[boundaries["source"] == self.source].to_crs(self.to_crs)
         boundary = boundaries["geometry"].iloc[0]
 
