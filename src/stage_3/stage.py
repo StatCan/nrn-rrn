@@ -41,7 +41,6 @@ class Stage:
             source, default False.
         """
 
-        self.stage = 3
         self.source = source.lower()
         self.remove = remove
 

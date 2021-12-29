@@ -34,7 +34,6 @@ class Stage:
         :param bool remove: remove pre-existing output file (validations.log), default False.
         """
 
-        self.stage = 4
         self.source = source.lower()
         self.remove = remove
         self.Validator = None

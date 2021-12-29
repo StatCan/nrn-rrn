@@ -42,7 +42,6 @@ class Stage:
             excluding change logs, default False.
         """
 
-        self.stage = 5
         self.source = source.lower()
         self.remove = remove
         self.major_version = None

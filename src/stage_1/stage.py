@@ -20,6 +20,7 @@ filepath = Path(__file__).resolve()
 sys.path.insert(1, str(filepath.parents[1]))
 import field_map_functions
 import helpers
+from gen_junctions import Junction
 from segment_addresses import Segmentor
 
 
@@ -46,7 +47,6 @@ class Stage:
             remove=True, default False. Option has no effect if remove=False.
         """
 
-        self.stage = 1
         self.source = source.lower()
         self.remove = remove
         self.exclude_old = exclude_old
@@ -112,7 +112,7 @@ class Stage:
             for table in self.target_gdframes:
                 for field, domain in self.domains[table].items():
 
-                    logger.info(f"Applying domain to table: {table}, field: {field}.")
+                    logger.info(f"Applying domain to {table}.{field}.")
 
                     # Copy series as object dtype.
                     series_orig = self.target_gdframes[table][field].copy(deep=True).astype(object)
@@ -147,7 +147,7 @@ class Stage:
                                            f"instance(s) of {vals[0]} ({dtype_orig}) to {vals[1]} ({dtype_new}).")
 
         except (AttributeError, KeyError, ValueError):
-            logger.exception(f"Invalid schema definition for table: {table}, field: {field}.")
+            logger.exception(f"Invalid schema definition for {table}.{field}.")
             sys.exit(1)
 
     def apply_field_mapping(self) -> None:
@@ -565,7 +565,7 @@ class Stage:
                     self.target_attributes[table]["fields"][field] = vals[0]
 
         except (AttributeError, KeyError, ValueError):
-            logger.exception(f"Invalid schema definition for table: {table}, field: {field}.")
+            logger.exception(f"Invalid schema definition for {table}.{field}.")
             sys.exit(1)
 
     def download_previous_vintage(self) -> None:
@@ -667,6 +667,19 @@ class Stage:
                     mods_count = (series != self.target_gdframes[table][field]).sum()
                     if mods_count:
                         logger.warning(f"Repaired {mods_count} linkage(s) between strplaname.nid - {table}.{field}.")
+
+    def gen_junctions(self) -> None:
+        """Generate the dataset: junction."""
+
+        logger.info(f"Generating dataset: junction.")
+
+        # Instantiate Junction class.
+        ferryseg = self.target_gdframes["ferryseg"] if "ferryseg" in self.target_gdframes else None
+        junction = Junction(source=self.source, target_attributes=self.target_attributes["junction"],
+                            roadseg=self.target_gdframes["roadseg"], ferryseg=ferryseg)
+
+        # Execute Junction class and store results.
+        self.target_gdframes["junction"] = junction()
 
     def gen_source_dataframes(self) -> None:
         """
@@ -956,6 +969,7 @@ class Stage:
         self.apply_domains()
         self.clean_datasets()
         self.filter_and_relink_strplaname()
+        self.gen_junctions()
         helpers.export(self.target_gdframes, self.output_path)
 
 
