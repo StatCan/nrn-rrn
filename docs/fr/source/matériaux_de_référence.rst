@@ -115,11 +115,11 @@ Données vectorielles nationales
 
 Élément routier
     Une route est une section linéaire à la surface de la Terre qui a été conçue pour la circulation de véhicules ou
-    qui en est le résultat. Un Élément routier est la représentation d’une route entre deux Jonctions. Un Élément
-    routier est toujours limité par deux Jonctions. Un Élément routier est composé d’un ou plusieurs Segments routiers.
+    qui en est le résultat. Un Élément routier est la représentation d'une route entre deux Jonctions. Un Élément
+    routier est toujours limité par deux Jonctions. Un Élément routier est composé d'un ou plusieurs Segments routiers.
 
 Entité
-    Représentation numérique d’un phénomène réel. Par exemple, la représentation numérique de la rue King est une
+    Représentation numérique d'un phénomène réel. Par exemple, la représentation numérique de la rue King est une
     entité.
 
 Identifiant unique universel
@@ -134,7 +134,7 @@ Liaison par transbordeur
     le réseau routier. Deux jonctions limitent toujours une liaison par transbordeur.
 
 Objet
-    Un objet est une instance d’une classe.
+    Un objet est une instance d'une classe.
 
 Segment
-    Portion d’un Élément linéaire du réseau présentant un ensemble commun de caractéristiques (attributs) définies.
+    Portion d'un Élément linéaire du réseau présentant un ensemble commun de caractéristiques (attributs) définies.

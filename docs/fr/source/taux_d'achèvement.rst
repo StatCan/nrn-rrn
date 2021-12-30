@@ -168,7 +168,7 @@ Date révision                                   100   100   100   100   100   1
 Version normes                                  100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Indicateur sens numérisation adresse à gauche   100   100   100    99   100     0     6   100     0    54   100     0    28     61
 Indicateur sens numérisation adresse à droite   100   100   100    99   100     0     6   100     0    55   100     0    27     61
-IDN intervalle d’adresse                        100   100   100   100   100    73   100   100   100   100   100   100   100     98
+IDN intervalle d'adresse                        100   100   100   100   100    73   100   100   100   100   100   100   100     98
 Période de fermeture                              0     1     0     1     0    28     2     0     0    82     1     0     1      9
 Numéro de sortie                                100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Numéro première maison à gauche                  90   100    65   100    99    73     6   100    84    54    98   100    28     77
