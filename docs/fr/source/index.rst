@@ -6,7 +6,7 @@ Documentation du Réseau routier national
 .. toctree::
    :numbered:
    :maxdepth: 2
-   :caption: Matières:
+   :caption: Matières :
 
    notes_de_publication
    formats_de_distribution_du_produit
