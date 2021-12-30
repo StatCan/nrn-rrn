@@ -355,53 +355,9 @@ class Export:
     def update_distribution_docs(self) -> None:
         """
         Writes updated documentation to data/processed for:
-            - completion rates
-            - release notes
+            - completion rates / taux d'achèvement
+            - release notes / notes de publication
         """
-
-        def write_documents(data: dict, filename: str) -> None:
-            """
-            Updates a document template with a dictionary and exports:
-                1) an rst file representing the updated template.
-                2) a yaml file containing the updated dictionary.
-
-            :param dict data: dictionary of values used to populate the document template.
-            :param str filename: basename of a document in ../distribution_docs to be updated.
-            """
-
-            # Configure source and destination paths.
-            src = filepath.parent / f"distribution_docs/{filename}.rst"
-            dst = self.output_path / filename
-
-            try:
-
-                # Load document as jinja template.
-                with open(src, "r") as doc:
-                    template = jinja2.Template(doc.read())
-
-                # Update template.
-                updated_doc = template.render(data)
-
-            except (jinja2.TemplateError, jinja2.TemplateAssertionError, jinja2.UndefinedError) as e:
-                logger.exception(f"Unable to render updated Jinja2.Template for: {src}.")
-                logger.exception(e)
-                sys.exit(1)
-
-            # Export updated document.
-            try:
-
-                # Write rst.
-                with open(dst.with_suffix(".rst"), "w") as doc:
-                    doc.write(updated_doc)
-
-                # Write yaml.
-                with open(dst.with_suffix(".yaml"), "w") as doc:
-                    yaml.dump(data, doc)
-
-            except (ValueError, yaml.YAMLError) as e:
-                logger.exception(f"Unable to write document: {dst}.")
-                logger.exception(e)
-                sys.exit(1)
 
         # Update release notes.
         logger.info(f"Updating documentation: release notes.")
@@ -419,8 +375,9 @@ class Export:
         kms = int(round(self.dframes["en"]["roadseg"].to_crs("EPSG:3348").length.sum() / 1000, 0))
         data[self.source]["number_of_kilometers"] = f"{kms:,d}"
 
-        # Write updated documents.
-        write_documents(data, "release_notes")
+        # Write updated documents - English and French.
+        self.write_documents(data, "en/release_notes")
+        self.write_documents(data, "fr/notes_de_publication")
 
         # Update completion rates.
         logger.info(f"Updating documentation: completion rates.")
@@ -449,8 +406,53 @@ class Export:
                 vals = itemgetter(*set(data[table][col]) - {"avg"})(data[table][col])
                 data[table][col]["avg"] = int(round(sum(map(int, vals)) / len(vals), 0))
 
-        # Write updated documents.
-        write_documents(data, "completion_rates")
+        # Write updated documents - English and French.
+        self.write_documents(data, "en/completion_rates")
+        self.write_documents(data, "fr/taux_d'achèvement")
+
+    def write_documents(self, data: dict, filename: str) -> None:
+        """
+        Updates a document template with a dictionary and exports:
+            1) an rst file representing the updated template.
+            2) a yaml file containing the updated dictionary.
+
+        :param dict data: dictionary of values used to populate the document template.
+        :param str filename: basename of a document in ../distribution_docs to be updated.
+        """
+
+        # Configure source and destination paths.
+        src = filepath.parent / f"distribution_docs/{filename}.rst"
+        dst = self.output_path / filename
+
+        try:
+
+            # Load document as jinja template.
+            with open(src, "r") as doc:
+                template = jinja2.Template(doc.read())
+
+            # Update template.
+            updated_doc = template.render(data)
+
+        except (jinja2.TemplateError, jinja2.TemplateAssertionError, jinja2.UndefinedError) as e:
+            logger.exception(f"Unable to render updated Jinja2.Template for: {src}.")
+            logger.exception(e)
+            sys.exit(1)
+
+        # Export updated document.
+        try:
+
+            # Write rst.
+            with open(dst.with_suffix(".rst"), "w") as doc:
+                doc.write(updated_doc)
+
+            # Write yaml.
+            with open(dst.with_suffix(".yaml"), "w") as doc:
+                yaml.dump(data, doc)
+
+        except (ValueError, yaml.YAMLError) as e:
+            logger.exception(f"Unable to write document: {dst}.")
+            logger.exception(e)
+            sys.exit(1)
 
     def zip_data(self) -> None:
         """Compresses and zips all export data directories."""
