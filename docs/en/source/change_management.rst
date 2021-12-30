@@ -7,39 +7,6 @@ Change Management
 .. contents::
    :depth: 3
 
-Abbreviations
-=============
-
-.. glossary::
-    ID
-        Identifier
-
-    NID
-        National Identifier
-
-    NHN
-        National Hydrographic Network
-
-    NRCan
-        Natural Resources Canada
-
-    NRN
-        National Road Network
-
-    NVD
-        National Vector Data
-
-    UUID
-        Universal Unique Identifiers
-
-Terms and Definitions
-=====================
-
-National Vector Data
-    Several layers of vector data, referred to as National Vector Data (NVD), will share the
-    same specification. The National Road Network (NRN) and National Hydrographic Network (NHN)
-    are examples of NVD.
-
 Overview
 ========
 

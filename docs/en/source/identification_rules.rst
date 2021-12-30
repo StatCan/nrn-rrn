@@ -5,48 +5,6 @@ Identification Rules
 .. contents::
    :depth: 3
 
-Abbreviations
-=============
-
-.. glossary::
-    GUID
-        Globally Unique Identifiers
-
-    ID
-        Identifier
-
-    IEEE
-        Institute of Electrical and Electronics Engineers
-
-    NHN
-        National Hydrographic Network
-
-    NID
-        National Identifier
-
-    NRCan
-        Natural Resources Canada
-
-    NRN
-        National Road Network
-
-    NSDI
-        National Spatial Data Infrastructure – USA
-
-    NVD
-        National Vector Data
-
-    UUID
-        Universal Unique Identifiers
-
-Terms and Definitions
-=====================
-
-Network Linear Element
-    Several layers of vector data, referred to as National Vector Data (NVD), will share
-    the same specification. The National Road Network (NRN) and National Hydrographic
-    Network (NHN) are examples of NVD.
-
 Overview
 ========
 
