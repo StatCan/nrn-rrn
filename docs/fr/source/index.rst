@@ -8,6 +8,7 @@ Documentation du Réseau routier national
    :maxdepth: 2
    :caption: Matières :
 
+   matériaux_de_référence
    notes_de_publication
    formats_de_distribution_du_produit
    spécifications_de_produit
@@ -15,7 +16,6 @@ Documentation du Réseau routier national
    gestion_des_modifications
    règles_d'identification
    taux_d'achèvement
-
 
 Coordonnées
 ===========
@@ -36,3 +36,10 @@ Copyright
 =========
 
 |copy| Sa Majesté la Reine du chef du Canada, ministère des Ressources naturelles. Tous droits réservés. GéoBase |reg|
+
+Indices et tableaux
+-------------------
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

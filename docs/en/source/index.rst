@@ -1,6 +1,6 @@
 .. include:: <isonum.txt>
 
-National Road Network's documentation
+National Road Network's Documentation
 =====================================
 
 .. toctree::
@@ -8,6 +8,7 @@ National Road Network's documentation
    :maxdepth: 2
    :caption: Contents:
 
+   reference_materials
    release_notes
    product_distribution_formats
    data_product_specifications
@@ -15,7 +16,6 @@ National Road Network's documentation
    change_management
    identification_rules
    completion_rates
-
 
 Contact Information
 ===================
@@ -36,3 +36,10 @@ Copyright
 =========
 
 |copy| Her Majesty the Queen in Rights of Canada, Department of Natural Resources. All rights reserved. GeoBase |reg|
+
+Indices and Tables
+------------------
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
