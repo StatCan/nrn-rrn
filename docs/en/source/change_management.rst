@@ -2,6 +2,7 @@
 Change Management
 *****************
 
+.. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
 .. contents::

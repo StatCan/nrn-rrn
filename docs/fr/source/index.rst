@@ -1,7 +1,8 @@
-.. include:: <isonum.txt>
-
 Documentation du Réseau routier national
 ========================================
+
+.. include:: <isonum.txt>
+.. include:: <isopub.txt>
 
 .. toctree::
    :numbered:

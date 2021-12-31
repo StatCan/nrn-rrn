@@ -2,6 +2,7 @@
 Completion Rates
 ****************
 
+.. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
 .. contents::

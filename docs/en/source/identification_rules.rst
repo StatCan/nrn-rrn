@@ -2,6 +2,9 @@
 Identification Rules
 ********************
 
+.. include:: <isonum.txt>
+.. include:: <isopub.txt>
+
 .. contents::
    :depth: 3
 

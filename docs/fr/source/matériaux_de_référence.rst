@@ -2,7 +2,8 @@
 Matériaux de référence
 **********************
 
-.. include :: <isonum.txt>
+.. include:: <isonum.txt>
+.. include:: <isopub.txt>
 
 .. contents::
    :depth: 3

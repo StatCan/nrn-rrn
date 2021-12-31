@@ -2,7 +2,8 @@
 Data Product Specifications
 ***************************
 
-.. include :: <isonum.txt>
+.. include:: <isonum.txt>
+.. include:: <isopub.txt>
 
 .. note::
     These specifications are produced in accordance with International Standard ISO/TC 211, 19131: 2007 Geographic

@@ -2,6 +2,7 @@
 Gestion des modifications
 *************************
 
+.. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
 .. contents::

@@ -2,6 +2,7 @@
 Taux d'achèvement
 *****************
 
+.. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
 .. contents::

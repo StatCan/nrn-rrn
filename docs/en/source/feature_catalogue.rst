@@ -2,7 +2,8 @@
 Feature Catalogue
 *****************
 
-.. include :: <isonum.txt>
+.. include:: <isonum.txt>
+.. include:: <isopub.txt>
 
 .. note::
     The description of features and attributes provided in this catalogue is largely based on the standard *ISO
