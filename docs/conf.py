@@ -17,9 +17,9 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Réseau routier national'
-copyright = '2021, Statistique Canada'
-author = 'Statistique Canada'
+project = 'National Road Network'
+copyright = '2021, Statistics Canada'
+author = 'Statistics Canada'
 
 
 # -- General configuration ---------------------------------------------------
@@ -30,6 +30,9 @@ author = 'Statistique Canada'
 extensions = [
     'sphinx.ext.autosectionlabel',
 ]
+
+# The master toctree document.
+root_doc = "index"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -42,7 +45,15 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'pydata_sphinx_theme'
+
+# Theme options are theme-specific and customize the look and feel of a theme
+# further.  For a list of options available for each theme, see the
+# documentation.
+html_theme_options = {
+    "search_bar_position": "sidebar",
+    "github-url": "https://github.com/jessestewart1/nrn-rrn"
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

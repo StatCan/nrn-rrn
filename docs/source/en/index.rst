@@ -5,18 +5,10 @@ National Road Network's Documentation
 .. include:: <isopub.txt>
 
 .. toctree::
-   :numbered:
-   :maxdepth: 2
-   :caption: Contents:
 
-   reference_materials
-   release_notes
-   product_distribution_formats
-   data_product_specifications
-   feature_catalogue
-   change_management
-   identification_rules
-   completion_rates
+   about
+   user_guide
+   product_documentation
 
 Contact Information
 ===================
@@ -42,5 +34,4 @@ Indices and Tables
 ------------------
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`

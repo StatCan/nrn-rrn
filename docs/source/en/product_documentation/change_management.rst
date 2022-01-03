@@ -31,7 +31,7 @@ current national views (see Figure 1: Evolution of the database in time).
 
 The update management process must also make it possible to reconstitute the data as it was on a previous date.
 
-.. figure:: /_static/figures/evolution_of_db_in_time.png
+.. figure:: /_static/figures/evolution_of_the_database_in_time.png
     :alt: Evolution of the database in time
 
     Figure 1: Evolution of the database in time.

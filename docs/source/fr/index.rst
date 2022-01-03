@@ -5,18 +5,10 @@ Documentation du Réseau routier national
 .. include:: <isopub.txt>
 
 .. toctree::
-   :numbered:
-   :maxdepth: 2
-   :caption: Matières :
 
-   matériaux_de_référence
-   notes_de_publication
-   formats_de_distribution_du_produit
-   spécifications_de_produit
-   catalogue_d'entités
-   gestion_des_modifications
-   règles_d'identification
-   taux_d'achèvement
+   about
+   user_guide
+   product_documentation
 
 Coordonnées
 ===========
@@ -42,5 +34,4 @@ Indices et tableaux
 -------------------
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
