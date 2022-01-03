@@ -165,19 +165,19 @@ GPKG File Names
 The entities of the product distributed in GPKG format are distributed as a single file, with the entities divided into
 layers according to their geometrical representation. The name of the GPKG file is structured accordingly::
 
-    NRN_<IDENTIFIER>_<edition>_<version>_<code language>.gpkg
+    NRN_<IDENTIFIER>_<edition>_<version>_en.gpkg
 
 * NRN =                 Abbreviated title of the product.
 * <IDENTIFIER> =        Code of a province or a territory corresponding to the dataset location. Possible codes are:
                         AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT.
 * <edition> =           Dataset edition number.
 * <version> =           Dataset version number.
-* <code language> =     Metadata ISO code language written in lowercase: fr (French), en (English).
+* en =                  ISO code of the dataset distribution language.
 * .gpkg =               File name extension.
 
 Examples:
 
-* NRN_AB_4_0_en.gpkg              (English file for all entities for dataset of Alberta, edition 4, version 0).
+* NRN_AB_4_0_en.gpkg              (All entities for dataset of Alberta, edition 4, version 0).
 
 Metadata File
 -------------
@@ -186,7 +186,7 @@ There are four metadata files that are distributed with each dataset of an NRN p
 FGDC/XML format (in French and in English) and two others according to FGDC/HTML format. The name of the metadata file
 is structured accordingly::
 
-    nrn_rrn_<identifier>_<edition>_<version>_fgdc_<code language>.<format>
+    nrn_rrn_<identifier>_<edition>_<version>_fgdc_en.<format>
 
 * nrn_rrn =             Abbreviated English and French product title.
 * <identifier> =        Code of a province or a territory corresponding to the dataset location. Possible codes are:
@@ -195,15 +195,13 @@ is structured accordingly::
 * <version> =           Dataset version number.
 * fgdc =                Metadata file format according to CSDGM standard of the Federal Geographic Data Committee
                         (FGDC).
-* <code language> =     Metadata ISO code language written in lowercase: fr (French), en (English).
+* en =                  ISO code of the dataset distribution language.
 * <format> =            File name extension (xml or html).
 
 Examples:
 
-* nrn_rrn_ab_4_0_fgdc_en.xml      (English metadata file for dataset of Alberta, edition 4, version 0 in FGDC/XML
-                                  format);
-* nrn_rrn_ab_4_0_fgdc_fr.html     (French metadata file for dataset of Alberta, edition 4, version 0 in FGDC/HTML
-                                  format).
+* nrn_rrn_ab_4_0_fgdc_en.xml      (Metadata file for dataset of Alberta, edition 4, version 0 in FGDC/XML format);
+* nrn_rrn_ab_4_0_fgdc_en.html     (Metadata file for dataset of Alberta, edition 4, version 0 in FGDC/HTML format).
 
 List of distribution file names
 -------------------------------
@@ -274,14 +272,14 @@ Attributes Common to All Entities (Except Alternate Name Link)
    :widths: auto
    :align: left
 
-   "Acquisition Technique", "acquisitionTechnique", "ACQTECH", "C(23)"
+   "Acquisition Technique", "acquisitionTechnique", "ACQTECH", "C(28)"
    "Coverage", "metadataCoverage", "METACOVER", "C(8)"
    "Creation Date", "creationDate", "CREDATE", "N(8,0)"
    "Dataset Name", "datasetName", "DATASETNAME", "C(25)"
    "Planimetric Accuracy", "planimetricAccuracy", "ACCURACY", "N(4,0)"
    "Provider", "provider", "PROVIDER", "C(24)"
    "Revision Date", "revisionDate", "REVDATE", "N(8,0)"
-   "Standard Version", "standardVersion", "SPECVERS", "C(10)"
+   "Standard Version", "standardVersion", "SPECVERS", "N(4,0)"
 
 Attributes Specific to Entities
 -------------------------------
@@ -302,16 +300,16 @@ Address Range
    "First House Number Right", "right_FirstHouseNumber", "R_HNUMF", "N(9,0)"
    "First House Number Suffix Left", "left_FirstHouseNumberSuffix", "L_HNUMSUFF", "C(10)"
    "First House Number Suffix Right", "right_FirstHouseNumberSuffix", "R_HNUMSUFF", "C(10)"
-   "First House Number Type Left", "left_FirstHouseNumberType", "L_HNUMTYPE", "C(16)"
-   "First House Number Type Right", "right_FirstHouseNumberType", "R_HNUMTYPE", "C(16)"
-   "House Number Structure Left", "left_HouseNumberStructure", "L_HNUMSTR", "C(9)"
-   "House Number Structure Right", "right_HouseNumberStructure", "R_HNUMSTR", "C(9)"
+   "First House Number Type Left", "left_FirstHouseNumberType", "L_HNUMTYPE", "C(21)"
+   "First House Number Type Right", "right_FirstHouseNumberType", "R_HNUMTYPE", "C(21)"
+   "House Number Structure Left", "left_HouseNumberStructure", "L_HNUMSTR", "C(19)"
+   "House Number Structure Right", "right_HouseNumberStructure", "R_HNUMSTR", "C(19)"
    "Last House Number Left", "left_LastHouseNumber", "L_HNUML", "N(9,0)"
    "Last House Number Right", "right_LastHouseNumber", "R_HNUML", "N(9,0)"
    "Last House Number Suffix Left", "left_LastHouseNumberSuffix", "L_HNUMSUFL", "C(10)"
    "Last House Number Suffix Right", "right_LastHouseNumberSuffix", "R_HNUMSUFL", "C(10)"
-   "Last House Number Type Left", "left_LastHouseNumberType", "L_HNUMTYPL", "C(16)"
-   "Last House Number Type Right", "right_LastHouseNumberType", "R_HNUMTYPL", "C(16)"
+   "Last House Number Type Left", "left_LastHouseNumberType", "L_HNUMTYPL", "C(21)"
+   "Last House Number Type Right", "right_LastHouseNumberType", "R_HNUMTYPL", "C(21)"
    "NID", "nid", "NID", "C(32)"
    "Official Street Name NID Left", "left_OfficialStreetNameNid", "L_HNUMTYPL", "C(32)"
    "Official Street Name NID Right", "right_OfficialStreetNameNid", "R_HNUMTYPL", "C(32)"
@@ -327,10 +325,10 @@ Alternate Name Link
    :align: left
 
    "Creation Date", "creationDate", "CREDATE", "N(8,0)"
-   "Dataset Name", "datasetName", "DATASETNAM", "C(100)"
+   "Dataset Name", "datasetName", "DATASETNAM", "C(25)"
    "NID", "nid", "NID", "C(32)"
    "Revision Date", "revisionDate", "REVDATE", "N(8,0)"
-   "Standard Version", "standardVersion", "SPECVERS", "C(10)"
+   "Standard Version", "standardVersion", "SPECVERS", "N(4,0)"
    "Street Name NID", "streetNameNid", "STRNAMENID", "C(32)"
 
 Blocked Passage
@@ -355,7 +353,7 @@ Ferry Connection Segment
 
    "Closing Period", "closingPeriod", "CLOSING", "C(7)"
    "Ferry Segment ID", "ferrySegmentId", "FERRYSEGID", "N(9,0)"
-   "Functional Road Class", "functionalRoadClass", "ROADCLASS", "C(21)"
+   "Functional Road Class", "functionalRoadClass", "ROADCLASS", "C(41)"
    "NID", "nid", "NID", "C(32)"
    "Route Name English 1", "routeNameEnglish1", "RTENAME1EN", "C(100)"
    "Route Name English 2", "routeNameEnglish2", "RTENAME2EN", "C(100)"
@@ -380,7 +378,7 @@ Junction
    :align: left
 
    "Exit Number", "exitNumber", "EXITNBR", "C(10)"
-   "Junction Type", "junctionType", "JUNCTYPE", "C(12)"
+   "Junction Type", "junctionType", "JUNCTYPE", "C(14)"
    "NID", "nid", "NID", "C(32)"
 
 Road Segment
@@ -397,11 +395,11 @@ Road Segment
    "Address Range NID", "addressRangeNid", "ADRANGENID", "C(32)"
    "Closing Period", "closingPeriod", "CLOSING", "C(7)"
    "Exit Number", "exitNumber", "EXITNBR", "C(10)"
-   "First House Number Left", "left_FirstHouseNumber", "L_HNUMF", "C(30)"
-   "First House Number Right", "right_FirstHouseNumber", "R_HNUMF", "C(30)"
-   "Functional Road Class", "functionalRoadClass", "ROADCLASS", "C(21)"
-   "Last House Number Left", "left_LastHouseNumber", "L_HNUML", "C(30)"
-   "Last House Number Right", "right_LastHouseNumber", "R_HNUML", "C(30)"
+   "First House Number Left", "left_FirstHouseNumber", "L_HNUMF", "N(9,0)"
+   "First House Number Right", "right_FirstHouseNumber", "R_HNUMF", "N(9,0)"
+   "Functional Road Class", "functionalRoadClass", "ROADCLASS", "C(41)"
+   "Last House Number Left", "left_LastHouseNumber", "L_HNUML", "N(9,0)"
+   "Last House Number Right", "right_LastHouseNumber", "R_HNUML", "N(9,0)"
    "NID", "nid\ :sup:`**`\ ", "NID", "C(32)"
    "Number of Lanes", "numberLanes", "NBRLANES", "N(4,0)"
    "Official Place Name Left", "left_OfficialPlaceName\ :sup:`**`\ ", "L_PLACENAM", "C(100)"
@@ -409,7 +407,7 @@ Road Segment
    "Official Street Name Concatenated Left", "left_OfficialStreetNameConcat\ :sup:`**`\ ", "L_STNAME_C", "C(100)"
    "Official Street Name Concatenated Right", "right_OfficialStreetNameConcat\ :sup:`**`\ ", "R_STNAME_C", "C(100)"
    "Paved Road Surface Type", "pavedRoadSurfaceType", "PAVSURF", "C(8)"
-   "Pavement Status", "pavementStatus", "PAVSTATUS", "C(7)"
+   "Pavement Status", "pavementStatus", "PAVSTATUS", "C(11)"
    "Road Jurisdiction", "roadJurisdiction", "ROADJURIS", "C(100)"
    "Road Segment ID", "roadSegmentId", "ROADSEGID", "N(9,0)"
    "Route Name English 1", "routeNameEnglish1", "RTENAME1EN", "C(100)"
@@ -430,7 +428,7 @@ Road Segment
    "Structure Name French", "structureNameFrench", "STRUNAMEFR", "C(100)"
    "Structure ID", "structureId", "STRUCTID", "C(32)"
    "Structure Type", "structureType", "STRUCTTYPE", "C(15)"
-   "Traffic Direction", "trafficDirection", "TRAFFICDIR", "C(18)"
+   "Traffic Direction", "trafficDirection", "TRAFFICDIR", "C(19)"
    "Unpaved Road Surface Type", "unpavedRoadSurfaceType", "UNPAVSURF", "C(7)"
 
 :sup:`*` KML content (simplified version of the dataset).
@@ -448,12 +446,12 @@ Street and Place Names
    "Muni Quadrant", "muniQuadrant", "MUNIQUAD", "C(10)"
    "NID", "nid", "NID", "C(32)"
    "Place Name", "placeName", "PLACENAME", "C(100)"
-   "Place Type", "placeType", "PLACETYPE", "C(100)"
+   "Place Type", "placeType", "PLACETYPE", "C(68)"
    "Province", "province", "PROVINCE", "C(25)"
-   "Street Name Article", "streetNameArticle", "STARTICLE", "C(20)"
+   "Street Name Article", "streetNameArticle", "STARTICLE", "C(7)"
    "Street Name Body", "streetNameBody", "NAMEBODY", "C(50)"
-   "Street Type Prefix", "streetTypePrefix", "STRTYPRE", "C(30)"
-   "Street Type Suffix", "streetTypeSuffix", "STRTYSUF", "C(30)"
+   "Street Type Prefix", "streetTypePrefix", "STRTYPRE", "C(18)"
+   "Street Type Suffix", "streetTypeSuffix", "STRTYSUF", "C(18)"
 
 Toll Point
 ^^^^^^^^^^
