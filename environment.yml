@@ -14,7 +14,7 @@ dependencies:
   - pandas=1.1.5
   - pip=21.0.1
   - psycopg2=2.9.1
-  - pydata_sphinx_theme=0.7.2
+  - pydata-sphinx-theme=0.7.2
   - pygeos=0.10
   - python=3.9.2
   - pyyaml=5.4.1
