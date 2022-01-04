@@ -317,28 +317,37 @@ class Conform:
 
         logger.info(f"Applying data cleanup functions.")
 
-        def _enforce_accuracy_limits(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
+        def _enforce_min_value(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
                 Union[gpd.GeoDataFrame, pd.DataFrame]:
             """
-            Enforces upper and lower limits for NRN attribute 'accuracy'.
+            Enforces minimum value for NRN attributes: 'accuracy', 'nbrlanes', 'speed'.
 
             :param str table: name of an NRN dataset.
             :param Union[gpd.GeoDataFrame, pd.DataFrame] df: (Geo)DataFrame containing the target NRN attribute(s).
             :return Union[gpd.GeoDataFrame, pd.DataFrame]: (Geo)DataFrame with attribute modifications.
             """
 
-            logger.info(f"Applying data cleanup \"enforce accuracy limits\" to dataset: {table}.")
+            # Define minimum values.
+            min_values = {
+                "accuracy": 1,
+                "nbrlanes": 1,
+                "speed": 1
+            }
 
-            # Enforce accuracy limits.
-            series_orig = df["accuracy"].copy(deep=True)
-            df.loc[df["accuracy"].between(-1, 1, inclusive=False), "accuracy"] = self.defaults[table]["accuracy"]
+            # Iterate columns.
+            for col in {"accuracy", "nbrlanes", "speed"}.intersection(df.columns):
 
-            # Quantify and log modifications.
-            mods = (series_orig != df["accuracy"]).sum()
-            if mods:
-                logger.warning(f"Modified {mods} record(s) in table {table}, column: accuracy."
-                               f"\nModification details: Accuracy set to default value for values between -1 and 1, "
-                               f"exclusively.")
+                logger.info(f"Applying data cleanup \"enforce min value\" to: {table}.{col}.")
+
+                # Enforce minimum value.
+                series_orig = df[col].copy(deep=True)
+                df.loc[df[col] < min_values[col], col] = self.defaults[table][col]
+
+                # Quantify and log modifications.
+                mods = (series_orig != df[col]).sum()
+                if mods:
+                    logger.warning(f"Modified {mods} record(s) in {table}.{col}."
+                                   f"\nModification details: Values < minimum set to default value.")
 
             return df.copy(deep=True)
 
@@ -352,11 +361,11 @@ class Conform:
             :return Union[gpd.GeoDataFrame, pd.DataFrame]: (Geo)DataFrame with attribute modifications.
             """
 
-            logger.info(f"Applying data cleanup \"lower case IDs\" to dataset: {table}.")
-
             # Iterate columns which a) end with "id", b) are str type, and c) are not uuid.
             dtypes = self.dtypes[table]
             for col in [fld for fld in df.columns.difference(["uuid"]) if fld.endswith("id") and dtypes[fld] == "str"]:
+
+                logger.info(f"Applying data cleanup \"lower case IDs\" to: {table}.{col}.")
 
                 # Filter records to non-default values which are not already lower case.
                 default = self.defaults[table][col]
@@ -367,8 +376,8 @@ class Conform:
                     df.loc[s_filtered.index, col] = s_filtered.map(str.lower)
 
                     # Quantify and log modifications.
-                    logger.warning(f"Modified {len(s_filtered)} record(s) in table {table}, column {col}."
-                                   "\nModification details: Column values set to lower case.")
+                    logger.warning(f"Modified {len(s_filtered)} record(s) in {table}.{col}."
+                                   "\nModification details: Values set to lower case.")
 
             return df.copy(deep=True)
 
@@ -385,7 +394,7 @@ class Conform:
 
             if table in {"ferryseg", "roadseg"}:
 
-                logger.info(f"Applying data cleanup \"overwrite segment IDs\" to dataset: {table}.")
+                logger.info(f"Applying data cleanup \"overwrite segment IDs\" to: {table}.")
 
                 # Overwrite column.
                 col = {"ferryseg": "ferrysegid", "roadseg": "roadsegid"}[table]
@@ -405,7 +414,8 @@ class Conform:
 
             if table == "roadseg":
 
-                logger.info(f"Applying data cleanup \"resolve_pavsurf\" to dataset: {table}.")
+                logger.info(f"Applying data cleanup \"resolve_pavsurf\" to: {table}.")
+
                 paved_orig = df["pavsurf"].copy(deep=True)
                 unpaved_orig = df["unpavsurf"].copy(deep=True)
 
@@ -427,9 +437,8 @@ class Conform:
                 for col, series_orig in (("pavsurf", paved_orig), ("unpavsurf", unpaved_orig)):
                     mods = sum(series_orig != df[col])
                     if mods:
-                        logger.warning(f"Modified {mods} record(s) in table {table}, column {col}."
-                                       f"\nModification details: Column values set to \"None\" / "
-                                       f"\"{self.defaults[table][col]}\".")
+                        logger.warning(f"Modified {mods} record(s) in {table}.{col}."
+                                       f"\nModification details: Values set to \"None\" / default value.")
 
             return df.copy(deep=True)
 
@@ -443,13 +452,13 @@ class Conform:
             :return Union[gpd.GeoDataFrame, pd.DataFrame]: (Geo)DataFrame with attribute modifications.
             """
 
-            logger.info(f"Applying data cleanup \"standardize_nones\" to dataset: {table}.")
-
             # Compile valid columns.
             cols = df.select_dtypes(include="object", exclude="geometry").columns.values
 
             # Iterate columns.
             for col in cols:
+
+                logger.info(f"Applying data cleanup \"standardize_nones\" to: {table}.{col}.")
 
                 # Apply modifications.
                 series_orig = df[col].copy(deep=True)
@@ -458,28 +467,28 @@ class Conform:
                 # Quantify and log modifications.
                 mods = (series_orig != df[col]).sum()
                 if mods:
-                    logger.warning(f"Modified {mods} record(s) in table {table}, column {col}."
-                                   f"\nModification details: Column values standardized to \"None\".")
+                    logger.warning(f"Modified {mods} record(s) in {table}.{col}."
+                                   f"\nModification details: Various None-types standardized to \"None\".")
 
             return df.copy(deep=True)
 
         def _strip_whitespace(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
                 Union[gpd.GeoDataFrame, pd.DataFrame]:
             """
-            Strips leading, trailing, and multiple internal whitespace for each (Geo)DataFrame column.
+            Strips leading, trailing, and successive internal whitespace for each (Geo)DataFrame column.
 
             :param str table: name of an NRN dataset.
             :param Union[gpd.GeoDataFrame, pd.DataFrame] df: (Geo)DataFrame containing the target NRN attribute(s).
             :return Union[gpd.GeoDataFrame, pd.DataFrame]: (Geo)DataFrame with attribute modifications.
             """
 
-            logger.info(f"Applying data cleanup \"strip whitespace\" to dataset: {table}.")
-
             # Compile valid columns.
             cols = df.select_dtypes(include="object", exclude="geometry").columns.values
 
             # Iterate columns.
             for col in cols:
+
+                logger.info(f"Applying data cleanup \"strip whitespace\" to dataset: {table}.{col}.")
 
                 # Apply modifications.
                 series_orig = df[col].copy(deep=True)
@@ -488,8 +497,8 @@ class Conform:
                 # Quantify and log modifications.
                 mods = (series_orig != df[col]).sum()
                 if mods:
-                    logger.warning(f"Modified {mods} record(s) in table {table}, column {col}."
-                                   "\nModification details: Column values stripped of leading, trailing, and multiple "
+                    logger.warning(f"Modified {mods} record(s) in {table}.{col}."
+                                   "\nModification details: Values stripped of leading, trailing, and successive "
                                    "internal whitespace.")
 
             return df.copy(deep=True)
@@ -510,8 +519,6 @@ class Conform:
 
             if table in {"ferryseg", "roadseg", "strplaname"}:
 
-                logger.info(f"Applying data cleanup \"title case names\" to dataset: {table}.")
-
                 # Define name fields.
                 name_fields = {
                     "ferryseg": ["rtename1en", "rtename1fr", "rtename2en", "rtename2fr", "rtename3en", "rtename3fr",
@@ -525,6 +532,8 @@ class Conform:
                 # Iterate columns.
                 for col in name_fields[table]:
 
+                    logger.info(f"Applying data cleanup \"title case names\" to: {table}.{col}.")
+
                     # Filter records to non-default values which are not already title case.
                     default = self.defaults[table][col]
                     s_filtered = df.loc[df[col].map(lambda route: route != default and not route.istitle()), col]
@@ -534,8 +543,8 @@ class Conform:
                         df.loc[s_filtered.index, col] = s_filtered.map(str.title)
 
                         # Quantify and log modifications.
-                        logger.warning(f"Modified {len(s_filtered)} record(s) in table {table}, column {col}."
-                                       "\nModification details: Column values set to title case.")
+                        logger.warning(f"Modified {len(s_filtered)} record(s) in {table}.{col}."
+                                       "\nModification details: Values set to title case.")
 
             return df.copy(deep=True)
 
@@ -543,7 +552,7 @@ class Conform:
         for table, df in self.target_gdframes.items():
 
             # Iterate cleanup functions.
-            for func in (_enforce_accuracy_limits, _lower_case_ids, _overwrite_segment_ids, _resolve_pavsurf,
+            for func in (_enforce_min_value, _lower_case_ids, _overwrite_segment_ids, _resolve_pavsurf,
                          _standardize_nones, _strip_whitespace, _title_case_names):
                 df = func(table, df)
 

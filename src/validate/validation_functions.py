@@ -64,6 +64,11 @@ class Validator:
         # Compile default field values.
         self.defaults_all = helpers.compile_default_values()
 
+        # Load administrative boundary, reprojected to meter-based crs.
+        boundaries = gpd.read_file(filepath.parents[1] / "boundaries.zip", layer="boundaries")
+        boundaries = boundaries.loc[boundaries["source"] == self.source].to_crs(self.to_crs)
+        self.boundary = boundaries["geometry"].iloc[0]
+
         logger.info("Configuring validations.")
 
         # Define validation.
@@ -260,8 +265,8 @@ class Validator:
                 if isinstance(iter_cols, list):
                     iter_cols = {dataset: iter_cols for dataset in datasets}
 
-                # Iterate datasets.
-                for dataset in datasets:
+                # Iterate datasets, if they exist.
+                for dataset in set(datasets).intersection(self.dfs):
 
                     # Iterate columns, if required.
                     if iter_cols:
@@ -460,7 +465,8 @@ class Validator:
             # Flag isolated structures (structures not connected to another structure).
 
             # Compile structures.
-            structures = df.loc[~df["structure_type"].isin({"Unknown", "None"})]
+            default = self.defaults_all[dataset]["structtype"]
+            structures = df.loc[~df["structtype"].isin({default, "None"})]
 
             # Compile duplicated structure nodes.
             structure_nodes = pd.Series(structures["pt_start"].append(structures["pt_end"]))
@@ -594,6 +600,15 @@ class Validator:
         df = df.loc[(df["credate"] != defaults["credate"]) &
                     (df["revdate"] != defaults["revdate"]), ["credate", "revdate"]].copy(deep=True)
 
+        # Temporary populate incomplete dates with "01" suffix.
+        for col in ("credate", "revdate"):
+            for length in (4, 6):
+                flag = df[col].map(lambda val: int(math.log10(val)) + 1) == length
+                if length == 4:
+                    df.loc[flag, col] = df.loc[flag, col].map(lambda val: (val * 10000) + 101)
+                else:
+                    df.loc[flag, col] = df.loc[flag, col].map(lambda val: (val * 100) + 1)
+
         # Flag records with invalid date order.
         flag = df["credate"] > df["revdate"]
         if sum(flag):
@@ -626,6 +641,14 @@ class Validator:
         # Fetch current date.
         today = int(datetime.today().strftime("%Y%m%d"))
 
+        # Temporary populate incomplete dates with "01" suffix.
+        for length in (4, 6):
+            flag = series.map(lambda val: int(math.log10(val)) + 1) == length
+            if length == 4:
+                series.loc[flag] = series.loc[flag].map(lambda val: (val * 10000) + 101)
+            else:
+                series.loc[flag] = series.loc[flag].map(lambda val: (val * 100) + 1)
+
         # Flag records with invalid range.
         flag = ~series.between(left=19600101, right=today, inclusive="both")
         if sum(flag):
@@ -646,25 +669,39 @@ class Validator:
         """
 
         errors = {"values": set(), "query": None}
+        dups = pd.Series()
 
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
 
-        # Filter arcs to those with duplicated lengths.
-        df = df.loc[df.length.duplicated(keep=False)]
-        if len(df):
+        # LineStrings.
+        if df.geom_type.iloc[0] == "LineString":
 
-            # Filter arcs to those with duplicated nodes.
-            df = df.loc[df[["pt_start", "pt_end"]].agg(set, axis=1).map(tuple).duplicated(keep=False)]
+            # Filter arcs to those with duplicated lengths.
+            df = df.loc[df.length.duplicated(keep=False)]
+            if len(df):
+
+                # Filter arcs to those with duplicated nodes.
+                df = df.loc[df[["pt_start", "pt_end"]].agg(set, axis=1).map(tuple).duplicated(keep=False)]
+
+                # Flag duplicated geometries.
+                dups = df.loc[df["geometry"].map(lambda g1: df["geometry"].map(lambda g2: g1.equals(g2)).sum() > 1)]
+
+        # Points.
+        else:
+
+            # Extract points.
+            pts = df["geometry"].map(lambda g: itemgetter(0)(attrgetter("coords")(g)))
 
             # Flag duplicated geometries.
-            dups = df.loc[df["geometry"].map(lambda g1: df["geometry"].map(lambda g2: g1.equals(g2)).sum() > 1)]
-            if len(dups):
+            dups = pts.loc[pts.duplicated(keep=False)]
 
-                # Compile error logs.
-                vals = set(dups.index)
-                errors["values"] = vals
-                errors["query"] = f"\"{self.id}\" in {*vals,}"
+        # Compile error logs.
+        if len(dups):
+
+            vals = set(dups.index)
+            errors["values"] = vals
+            errors["query"] = f"\"{self.id}\" in {*vals,}"
 
         return errors
 
@@ -893,8 +930,9 @@ class Validator:
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
 
-        # Filter to non-none values.
-        series = df.loc[df[col] != "None", col].copy(deep=True)
+        # Filter to non-default and non-none values.
+        default = self.defaults_all[dataset][col]
+        series = df.loc[~df[col].isin({default, "None"}), col].copy(deep=True)
 
         # Iterate datasets whose nids the current dataset links to.
         for nid_dataset in filter(lambda name: dataset in linkages[name], set(linkages).intersection(self.dfs)):
@@ -957,13 +995,8 @@ class Validator:
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
 
-        # Load administrative boundary, reprojected to meter-based crs.
-        boundaries = gpd.read_file(filepath.parent / "boundaries.zip", layer="boundaries")
-        boundaries = boundaries.loc[boundaries["source"] == self.source].to_crs(self.to_crs)
-        boundary = boundaries["geometry"].iloc[0]
-
         # Compile indexes of geometries not completely within the source region.
-        invalid_idxs = list(set(range(len(df))) - set(df.sindex.query(boundary, predicate="contains")))
+        invalid_idxs = list(set(range(len(df))) - set(df.sindex.query(self.boundary, predicate="contains")))
         if len(invalid_idxs):
 
             # Compile error logs.

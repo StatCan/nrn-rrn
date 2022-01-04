@@ -29,5 +29,5 @@ conform:
     credate: CREDATE
     revdate: REVDATE
     metacover: METACOVER
-    roadnid: ROADNID
+    roadnid:
     tollpttype: TOLLPTTYPE

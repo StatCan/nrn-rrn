@@ -42,7 +42,7 @@ class Junction:
         self.target_attributes = target_attributes
         self.roadseg = roadseg.copy(deep=True)
         self.ferryseg = None
-        if ferryseg:
+        if isinstance(ferryseg, gpd.GeoDataFrame):
             self.ferryseg = ferryseg.copy(deep=True)
         self.junction = None
 
@@ -52,7 +52,7 @@ class Junction:
         self.domains = helpers.compile_domains(mapped_lang="en")["junction"]
 
         # Load administrative boundary, reprojected to EPSG:4617.
-        boundaries = gpd.read_file(filepath.parent / "boundaries.zip", layer="boundaries")
+        boundaries = gpd.read_file(filepath.parents[1] / "boundaries.zip", layer="boundaries")
         boundaries = boundaries.loc[boundaries["source"] == self.source].to_crs("EPSG:4617")
         self.boundary = boundaries["geometry"].iloc[0]
 
@@ -152,7 +152,7 @@ class Junction:
 
         # Classify junctions.
         ferry = set()
-        if self.ferryseg:
+        if isinstance(self.ferryseg, gpd.GeoDataFrame):
             ferry = set(self.ferryseg["geometry"].map(lambda g: itemgetter(0, -1)(attrgetter("coords")(g))).explode())
         deadend = set(nodes_grouped_df.loc[(nodes_grouped_df["uuids"].map(len) == 1) &
                                            (~nodes_grouped_df["pt"].isin(ferry)), "pt"])
