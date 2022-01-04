@@ -2,6 +2,7 @@ import click
 import fiona
 import geopandas as gpd
 import logging
+import math
 import numpy as np
 import pandas as pd
 import re
@@ -402,6 +403,47 @@ class Conform:
 
             return df.copy(deep=True)
 
+        def _resolve_date_order(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
+                Union[gpd.GeoDataFrame, pd.DataFrame]:
+            """
+            Resolves conflicts between credate and revdate by swapping values where credate > revdate.
+
+            :param str table: name of an NRN dataset.
+            :param Union[gpd.GeoDataFrame, pd.DataFrame] df: (Geo)DataFrame containing the target NRN attribute(s).
+            :return Union[gpd.GeoDataFrame, pd.DataFrame]: (Geo)DataFrame with attribute modifications.
+            """
+
+            logger.info(f"Applying data cleanup \"resolve date order\" to: {table}.")
+
+            # Filter to non-default dates.
+            defaults = {"credate": self.defaults[table]["credate"],
+                        "revdate": self.defaults[table]["revdate"]}
+            df = df.loc[(df["credate"] != defaults["credate"]) &
+                        (df["revdate"] != defaults["revdate"]), ["credate", "revdate"]].copy(deep=True)
+
+            # Temporary populate incomplete dates with "01" suffix.
+            for col in ("credate", "revdate"):
+                for length in (4, 6):
+                    flag = df[col].map(lambda val: int(math.log10(val)) + 1) == length
+                    if length == 4:
+                        df.loc[flag, col] = df.loc[flag, col].map(lambda val: (val * 10000) + 101)
+                    else:
+                        df.loc[flag, col] = df.loc[flag, col].map(lambda val: (val * 100) + 1)
+
+            # Flag records with invalid date order.
+            flag = df["credate"] > df["revdate"]
+            if sum(flag):
+
+                # Swap dates.
+                df.loc[flag, ["credate", "revdate"]] = df.loc[flag, ["revdate", "credate"]].copy(deep=True)
+
+                # Log modifications.
+                mods = sum(flag)
+                logger.warning(f"Modified {mods} record(s) in {table}.credate/revdate."
+                               f"\nModification details: Swapped values.")
+
+            return df.copy(deep=True)
+
         def _resolve_pavsurf(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
                 Union[gpd.GeoDataFrame, pd.DataFrame]:
             """
@@ -414,7 +456,7 @@ class Conform:
 
             if table == "roadseg":
 
-                logger.info(f"Applying data cleanup \"resolve_pavsurf\" to: {table}.")
+                logger.info(f"Applying data cleanup \"resolve pavsurf\" to: {table}.")
 
                 paved_orig = df["pavsurf"].copy(deep=True)
                 unpaved_orig = df["unpavsurf"].copy(deep=True)
@@ -458,7 +500,7 @@ class Conform:
             # Iterate columns.
             for col in cols:
 
-                logger.info(f"Applying data cleanup \"standardize_nones\" to: {table}.{col}.")
+                logger.info(f"Applying data cleanup \"standardize nones\" to: {table}.{col}.")
 
                 # Apply modifications.
                 series_orig = df[col].copy(deep=True)
@@ -552,8 +594,8 @@ class Conform:
         for table, df in self.target_gdframes.items():
 
             # Iterate cleanup functions.
-            for func in (_enforce_min_value, _lower_case_ids, _overwrite_segment_ids, _resolve_pavsurf,
-                         _standardize_nones, _strip_whitespace, _title_case_names):
+            for func in (_enforce_min_value, _lower_case_ids, _overwrite_segment_ids, _resolve_date_order,
+                         _resolve_pavsurf, _standardize_nones, _strip_whitespace, _title_case_names):
                 df = func(table, df)
 
             # Store updated dataframe.

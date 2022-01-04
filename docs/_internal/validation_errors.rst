@@ -104,11 +104,6 @@ E403
 
 :Description: Attributes "credate" and "revdate" must be between 19600101 and the current date, inclusively.
 
-E404
-^^^^
-
-:Description: Attribute "credate" must be <= attribute "revdate".
-
 E500
 ----
 

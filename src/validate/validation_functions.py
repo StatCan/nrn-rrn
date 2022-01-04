@@ -136,12 +136,6 @@ class Validator:
                 "datasets": ["addrange", "blkpassage", "ferryseg", "roadseg", "strplaname", "tollpoint"],
                 "iter_cols": ["credate", "revdate"]
             },
-            404: {
-                "func": self.dates_order,
-                "desc": "Attribute \"credate\" must be <= attribute \"revdate\".",
-                "datasets": ["addrange", "blkpassage", "ferryseg", "roadseg", "strplaname", "tollpoint"],
-                "iter_cols": None
-            },
             501: {
                 "func": self.identifiers_32hex,
                 "desc": "IDs must be 32 digit hexadecimal strings.",
@@ -272,7 +266,7 @@ class Validator:
                     if iter_cols:
                         for col in iter_cols[dataset]:
 
-                            logger.info(f"Applying validation E{code}: \"{func.__name__}\"; dataset={dataset}.{col}.")
+                            logger.info(f"Applying validation E{code}: \"{func.__name__}\"; target={dataset}.{col}.")
 
                             # Execute validation and store non-empty results.
                             results = func(dataset, col=col)
@@ -281,7 +275,7 @@ class Validator:
 
                     else:
 
-                        logger.info(f"Applying validation E{code}: \"{func.__name__}\"; dataset={dataset}.")
+                        logger.info(f"Applying validation E{code}: \"{func.__name__}\"; target={dataset}.")
 
                         # Execute validation and store non-empty results.
                         results = func(dataset)
@@ -576,45 +570,6 @@ class Validator:
 
             # Compile error logs.
             vals = set(series.loc[flag].index)
-            errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}"
-
-        return errors
-
-    def dates_order(self, dataset: str) -> dict:
-        """
-        Validates: Attribute \"credate\" must be <= attribute \"revdate\".
-
-        :param str dataset: name of the dataset to be validated.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
-        """
-
-        errors = {"values": set(), "query": None}
-
-        # Fetch dataframe.
-        df = self.dfs[dataset].copy(deep=True)
-
-        # Filter to non-default dates.
-        defaults = {"credate": self.defaults_all[dataset]["credate"],
-                    "revdate": self.defaults_all[dataset]["revdate"]}
-        df = df.loc[(df["credate"] != defaults["credate"]) &
-                    (df["revdate"] != defaults["revdate"]), ["credate", "revdate"]].copy(deep=True)
-
-        # Temporary populate incomplete dates with "01" suffix.
-        for col in ("credate", "revdate"):
-            for length in (4, 6):
-                flag = df[col].map(lambda val: int(math.log10(val)) + 1) == length
-                if length == 4:
-                    df.loc[flag, col] = df.loc[flag, col].map(lambda val: (val * 10000) + 101)
-                else:
-                    df.loc[flag, col] = df.loc[flag, col].map(lambda val: (val * 100) + 1)
-
-        # Flag records with invalid date order.
-        flag = df["credate"] > df["revdate"]
-        if sum(flag):
-
-            # Compile error logs.
-            vals = set(df.loc[flag].index)
             errors["values"] = vals
             errors["query"] = f"\"{self.id}\" in {*vals,}"
 
