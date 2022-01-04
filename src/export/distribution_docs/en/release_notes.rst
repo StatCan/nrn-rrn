@@ -2,6 +2,7 @@
 Release Notes
 *************
 
+.. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
 Current release notes

@@ -2,6 +2,7 @@
 Notes de publication
 ********************
 
+.. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
 Notes de publication actuelles
