@@ -43,13 +43,15 @@ class Conform:
         :param str source: abbreviation for the source province / territory.
         :param bool remove: removes pre-existing files within the data/interim directory for the specified source,
             default False.
-        :param bool exclude_old: excludes the previous NRN vintage for the specified source from being removed if
-            remove=True, default False. Option has no effect if remove=False.
+        :param bool exclude_old: sets parameter remove=True, excluding the previous NRN vintage
+            (data/interim/source_old.gpkg) for the specified source.
         """
 
         self.source = source.lower()
         self.remove = remove
         self.exclude_old = exclude_old
+        if self.exclude_old:
+            self.remove = exclude_old
 
         # Configure data paths.
         self.src = filepath.parents[2] / f"data/raw/{self.source}"
@@ -976,8 +978,8 @@ class Conform:
 @click.option("--remove / --no-remove", "-r", default=False, show_default=True,
               help="Remove pre-existing files within the data/interim directory for the specified source.")
 @click.option("--exclude-old / --no-exclude-old", "-e", default=False, show_default=True,
-              help="Excludes the previous NRN vintage for the specified source from being removed if remove=True. "
-                   "Option has no effect if remove=False.")
+              help="Sets parameter remove=True, excluding the previous NRN vintage (data/interim/source_old.gpkg) for "
+                   "the specified source.")
 def main(source: str, remove: bool = False, exclude_old: bool = False) -> None:
     """
     Executes an NRN process.
@@ -985,8 +987,8 @@ def main(source: str, remove: bool = False, exclude_old: bool = False) -> None:
     :param str source: abbreviation for the source province / territory.
     :param bool remove: removes pre-existing files within the data/interim directory for the specified source, default
         False.
-    :param bool exclude_old: excludes the previous NRN vintage for the specified source from being removed if
-        remove=True, default False. Option has no effect if remove=False.
+    :param bool exclude_old: sets parameter remove=True, excluding the previous NRN vintage
+        (data/interim/source_old.gpkg) for the specified source.
     """
 
     try:
