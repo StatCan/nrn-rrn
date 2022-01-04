@@ -415,6 +415,8 @@ class Conform:
 
             logger.info(f"Applying data cleanup \"resolve date order\" to: {table}.")
 
+            df_orig = df.copy(deep=True)
+
             # Filter to non-default dates.
             defaults = {"credate": self.defaults[table]["credate"],
                         "revdate": self.defaults[table]["revdate"]}
@@ -435,14 +437,15 @@ class Conform:
             if sum(flag):
 
                 # Swap dates.
-                df.loc[flag, ["credate", "revdate"]] = df.loc[flag, ["revdate", "credate"]].copy(deep=True)
+                df_orig.loc[flag.index, ["credate", "revdate"]] = \
+                    df_orig.loc[flag.index, ["revdate", "credate"]].copy(deep=True)
 
                 # Log modifications.
                 mods = sum(flag)
                 logger.warning(f"Modified {mods} record(s) in {table}.credate/revdate."
                                f"\nModification details: Swapped values.")
 
-            return df.copy(deep=True)
+            return df_orig.copy(deep=True)
 
         def _resolve_pavsurf(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
                 Union[gpd.GeoDataFrame, pd.DataFrame]:
