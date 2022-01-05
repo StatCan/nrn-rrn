@@ -6,9 +6,9 @@ Data Product Specifications
 .. include:: <isopub.txt>
 
 .. note::
-    These specifications are produced in accordance with International Standard ISO/TC 211, 19131: 2007 Geographic
-    Information / Geomatics – Data Product Specification, which refers in particular to standard ISO 19115: 2003
-    Geographic information – Metadata.
+    These specifications are produced in accordance with *International Standard ISO/TC 211, 19131: 2007 Geographic
+    Information / Geomatics – Data Product Specification*, which refers in particular to standard *ISO 19115: 2003
+    Geographic information – Metadata*.
 
 .. contents::
    :depth: 3
@@ -24,9 +24,7 @@ National Road Network
 Reference date
 --------------
 
-Creation date of the data product specifications:
-
-2007-05-31
+Creation date of the data product specifications: 2007-05-31.
 
 Responsible party
 -----------------
@@ -34,21 +32,23 @@ Responsible party
 | GeoBase
 | Statistics Canada
 | Statistical Geomatics Centre
-| 170, Tunney’s Pasture Driveway,
-| Ottawa (Ontario), Canada
+| 170 Tunney's Pasture Driveway,
+| Ottawa, Ontario, Canada
 | K1A 0T6
 
 | Telephone: 1-800-263-1136
 | Fax: 1-514-283-9350
-| E-mail: STATCAN.infostats-infostats.STATCAN@canada.ca
-| Website: http://www.geobase.ca
+| Email: statcan.infostats-infostats.statcan@canada.ca
+| Website: https://statcan.gc.ca
+| Website: https://www.geobase.ca
 
 Language
 --------
 
 Languages in which the data product specifications are available in accordance with the ISO 639-2 standard:
-eng – english
-fra – french
+
+en – english
+fr – french
 
 Informal description of the data product
 ----------------------------------------
@@ -173,10 +173,10 @@ Ending date
 Today
 
 .. note::
-    "Today" means the current date of publication of an instance of the NRN. That is, an instance of the NRN may include
-    the road network that is current at the time of publication.
+    "Today" means the current date of publication of an instance of the NRN. That is, an instance of the NRN may
+    include the road network that is current at the time of publication.
 
-Data Product identification
+Data Product Identification
 ===========================
 
 Title
@@ -207,9 +207,13 @@ the Canadian Council on Geomatics (CCOG). The NRN content largely conforms to th
 Purpose
 -------
 
-The National Road Network (NRN) provides quality geospatial and attributive data (current, accurate, consistent), homogeneous and normalized of the entire Canadian road network.
+The National Road Network (NRN) provides quality geospatial and attributive data (current, accurate, consistent),
+homogeneous and normalized of the entire Canadian road network.
 
-The NRN data serve as a foundation for several applications. This common geometric base is maintained on a regular basis by closest to the source organizations selected for their specific interests or for their ease in offering adequate, up-to-date representations of road phenomena, in accordance with the GeoBase initiative (www.geobase.ca). This common infrastructure facilitates data integration of NRN data with supplementary data.
+The NRN data serve as a foundation for several applications. This common geometric base is maintained on a regular
+basis by closest to the source organizations selected for their specific interests or for their ease in offering
+adequate, up-to-date representations of road phenomena, in accordance with the GeoBase initiative (www.geobase.ca).
+This common infrastructure facilitates data integration of NRN data with supplementary data.
 
 Topic category
 --------------
@@ -229,11 +233,12 @@ Type of spatial representation for the product, as defined by the ISO 19115 stan
 
 Spatial resolution
 ------------------
-Spatial resolution denominator of the data: 10 000
+
+Spatial resolution denominator of the data: 10,000.
 
 .. note::
     The nominal spatial resolution is only a general estimate since the data originate from multiple sources (GPS,
-    existing federal, provincial or municipal data) but is approximately 1:10 000.
+    existing federal, provincial or municipal data) but is approximately 1:10,000.
 
 Geographic description
 ----------------------
@@ -253,14 +258,14 @@ ISO 3166-1:1997 Codes for the representation of names of countries and their sub
 Date
 """"
 
-Reference date of the ISO 3166-1 standard:
-
-1997-10-01
+Reference date of the ISO 3166-1 standard: 1997-10-01.
 
 Date type code
 """"""""""""""
 
-Type of date according to ISO 19115 standard: 002 - publication
+Type of date according to ISO 19115 standard:
+
+002 - publication
 
 Code
 ^^^^
@@ -275,11 +280,6 @@ Extent type code
 Extent type code of the delimitation polygon according to the ISO 19115 standard:
 
 1 - inclusive (the delimitation polygon is inclusive)
-
-Reference to specification scope
---------------------------------
-
-Global
 
 Data Content and Structure
 ==========================
@@ -302,8 +302,7 @@ Data modelling schema used
 Application schema
 ^^^^^^^^^^^^^^^^^^
 
-The conceptual model of the NRN data is presented in the document *National Road Network, edition 2.0.1, Conceptual
-Data Model, Segmented View* accessible on the GeoBase portal (www.geobase.ca).
+The conceptual model of the NRN data is presented in :doc:`conceptual_data_model`.
 
 The physical implementation of the NRN product differs from the conceptual model in what concerned the management of
 object metadata and the addition of certain attributes to the entity Road Segment.
@@ -316,20 +315,13 @@ Otherwise, Object Metadata attributes describe the sources used for creation.
 
 The street name, place name and address range were also added as attributes on the geometry of the entity Road Segment.
 
-The document *National Road Network, edition 2.0.1, Product Distribution Formats* also demonstrates the implementation
-of the conceptual model into the physical model of the NRN data product according to the distribution formats GML,
-KML and Shape (www.geobase.ca).
+:doc:`product_distribution_formats` also demonstrates the implementation of the conceptual model into the physical
+model of the NRN data product according to the distribution formats GML, GPKG, KML and SHP.
 
 Feature catalogue
 ^^^^^^^^^^^^^^^^^
 
-The feature catalogue entitled *National Road Network, edition 2.0.1, Feature Catalogue* can be found on the GeoBase
-portal (www.geobase.ca).
-
-Reference to specification scope
---------------------------------
-
-Global (see 2.1)
+:doc:`feature_catalogue`
 
 Reference System
 ================
@@ -347,15 +339,16 @@ Authority
 Title
 """""
 
-Coordinate reference system registry: EPSG Geodetic Parameter Dataset
+Coordinate reference system registry: EPSG Geodetic Parameter Dataset.
 
 Date
 """"
 
-Reference date: 2007-02-08
+Reference date: 2007-02-08.
 
 Date type code
 """"""""""""""
+
 Date type according to ISO 19115 standard:
 
 002 - publication
@@ -363,12 +356,13 @@ Date type according to ISO 19115 standard:
 Responsible party
 """""""""""""""""
 
-OGP – International Organisation of Oil and Gas Producers URL: http://www.epsg.org
+OGP – International Organisation of Oil and Gas Producers
+URL: http://www.epsg.org
 
 Code
 ^^^^
 
-Coordinate reference system identifier (CRSID): 4617
+Coordinate reference system identifier (CRSID): 4617.
 
 Code space
 ^^^^^^^^^^
@@ -379,11 +373,6 @@ Version
 ^^^^^^^
 
 6.12
-
-Reference to specification scope
---------------------------------
-
-Global (see 2.1)
 
 Data quality
 ============
@@ -417,8 +406,7 @@ Logical consistency
 Conceptual consistency
 ^^^^^^^^^^^^^^^^^^^^^^
 
-The conceptual model of the NRN data can be found in the document *National Road Network, edition 2.0.1, Conceptual
-Data Model, Segmented View* accessible on the GeoBase portal (www.geobase.ca).
+The conceptual model of the NRN data can be found in :doc:`conceptual_data_model`.
 
 The physical implementation of the NRN product differs from the conceptual model in what concerned the management of
 object metadata and the addition of certain attributes to the entity Road Segment.
@@ -442,8 +430,7 @@ Authorized combinations of attribute values are validated by means of in-house s
 Format consistency
 ^^^^^^^^^^^^^^^^^^
 
-The NRN data formats conform to the distribution formats described in the document *National Road Network, edition 2.0.1,
-Product Distribution Formats* accessible on the GeoBase portal (www.geobase.ca).
+The NRN data formats conform to the distribution formats described in :doc:`product_distribution_formats`.
 
 Topological consistency
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -461,25 +448,25 @@ Absolute external positional accuracy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The geometric accuracy of objects is given as the difference between objects position in the dataset and their real
-ground positions measured in reference to the geodetic network. The accuracy may vary from one object to another. It
-is thus provided in attribute with each feature occurrence and is expressed according to the Circular Map Accuracy
+ground positions measured in reference to the geodetic network. The accuracy may vary from one object to another. It is
+thus provided in attribute with each feature occurrence and is expressed according to the Circular Map Accuracy
 Standard (CMAS).
 
 Standard Circular Error:
 
 .. math::
-    \sigma_c = 0.7071 (\sigma_x^2 + \sigma_y^2)
+    \sigma_c = 0.7071 (\sigma_x^{2} + \sigma_y^{2})^{\frac12}
 
-    \sigma_x : standard deviation in the X-axis
+    \sigma_x: \text{standard deviation in the X-axis}
 
-    \sigma_y : standard deviation in the Y-axis
+    \sigma_y: \text{standard deviation in the Y-axis}
 
 Circular Map Accuracy Standard:
 
-.. math:: CMAS=2.1460 \sigma_c
+.. math:: \text{CMAS} = 2.1460 \sigma_c
 
-The planimetric accuracy aimed for the product is 10 meters or better. Under the data maintenance phase, no systematic
-validation of geometric and attributive accuracies is performed on all NRN datasets.
+The planimetric accuracy aimed for the product is 10 meters or better at a 90% confidence level. Under the data
+maintenance phase, no systematic validation of geometric and attributive accuracies is performed on all NRN datasets.
 
 Data accuracy is evaluated according to the methods used to control acquisition sources (GPS, imagery, photogrammetry,
 etc.) and the positioning errors inherent to data extraction. The method for evaluating data accuracy is determined by
@@ -525,13 +512,8 @@ determined by each data provider.
 Quantitative attribute accuracy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The method used for evaluating the accuracy of the quantitative attribute values with respect to reality is
-determined by each data provider.
-
-Reference to specification scope
---------------------------------
-
-Global (see 2.1)
+The method used for evaluating the accuracy of the quantitative attribute values with respect to reality is determined
+by each data provider.
 
 Data Capture
 ============
@@ -545,11 +527,6 @@ are used: GPS, orthoimages, orthophotos, photogrammetry.
 
 Acquisition technique used by the provider is indicated in the object metadata associated with each entity occurrences.
 
-Reference to specification scope
---------------------------------
-
-Global (see 2.1)
-
 Data Maintenance
 ================
 
@@ -557,178 +534,30 @@ Description
 -----------
 
 Maintenance of the NRN data is done within the framework of intergovernmental partnership agreements (federal,
-provincial, territorial and municipal) by interested closest to source governmental bodies capable of offering
-adequate and current representations of the road phenomena. The minimal frequency of maintenance updates is of at
-least once a year.
+provincial, territorial and municipal) by interested closest to source governmental bodies capable of offering adequate
+and current representations of the road phenomena. The minimal frequency of maintenance updates is of at least once a
+year.
 
 In order to help NRN data users in their management of the various update releases, updates are packaged and
 distributed by change effects (addition, retirement, modification, confirmation). By proceeding in this fashion,
 identification rules as well as methods for classifying the modifications are established.
 
-Identification rules on how to unequivocally identify entity occurrences are defined in the document entitled *National
-Vector Data – Identification Rules* available on the GeoBase portal (www.geobase.ca).
+Identification rules on how to unequivocally identify entity occurrences are defined in :doc:`identification_rules`.
 
-The methods for classifying updates by change effects (addition, retirement, modification and confirmation) are
-defined in the document *National Vector data – Change Management* available on the GeoBase portal (www.geobase.ca).
-
-Reference to specification scope
---------------------------------
-
-Global
+The methods for classifying updates by change effects (addition, retirement, modification and confirmation) are defined
+in :doc:`change_management`.
 
 Data Product Delivery
 =====================
 
-Output file formats available for the product are: GML (*Geography Markup Language*), KML (*Keyhole Markup Language*)
-and SHAPE (ESRI |trade|).
+Output file formats available for the product are: GML (*Geography Markup Language*), GPKG (*OGR Geopackage*), KML
+(*Keyhole Markup Language*) and SHP (*ESRI* |trade| *Shapefile*).
 
-.. note::
-    Data files distributed in KML format only contain the entity Road Segment and a subset of attributes.
+The name of the files, entities and attributes are described in :doc:`product_distribution_formats`.
 
-Delivery format information on GML
-----------------------------------
-
-Format name
-^^^^^^^^^^^
-
-GML – Geography Markup Language
-
-Version
-^^^^^^^
-
-2.1.2
-
-Specification
-^^^^^^^^^^^^^
-
-Geography Markup Language – GML – 2.1.2, OpenGIS® Implementation Specifications, 17 September 2002, OGC Document
-Number 02-069 (http://portal.opengeospatial.org/files/?artifact_id=11339)
-
-Language
-^^^^^^^^
-
-Languages used in the dataset according to ISO 639-2 standard:
-
-eng - English
-
-fra - French
-
-Delivery format information on KML
-----------------------------------
-
-Format name
-^^^^^^^^^^^
-
-KML – Keyhole Markup Language
-
-Version
-^^^^^^^
-
-2.1
-
-Specification
-^^^^^^^^^^^^^
-
-Open Geospatial Consortium Inc., KML 2.1 Reference – An OGC Best Practice, Version 0.0.9, 2007-05- 02, Reference number
-of this OGC® project document: OGC 07-039r1 (http://www.opengeospatial.org/standards/bp)
-
-KML specifications available on GoogleTM Earth web site (http://www.keyhole.com/kml/kml_doc.html).
-
-Language
-^^^^^^^^
-
-Languages used in the dataset according to ISO 639-2 standard:
-
-eng - English
-
-fra - French
-
-Delivery format information on SHAPE
-------------------------------------
-
-Format name
-^^^^^^^^^^^
-
-Shape – ESRI |trade|
-
-Version
-^^^^^^^
-
-01
-
-Specification
-^^^^^^^^^^^^^
-
-ESRI Shapefile Technical Description, an ESRI White Paper, July 1998
-(http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf)
-
-Language
-^^^^^^^^
-
-Languages used in the dataset according to ISO 639-2 standard:
-
-eng - English
-
-fra - French
-
-Delivery format information on GPKG
------------------------------------
-
-Format name
-^^^^^^^^^^^
-
-GPKG – OGC Geopackage
-
-Version
-^^^^^^^
-1.0.1
-
-Specification
-^^^^^^^^^^^^^
-
-OGC GeoPackage (https://www.geopackage.org/spec101/index.html)
-
-Language
-^^^^^^^^
-
-Languages used in the dataset according to ISO 639-2 standard:
-
-eng - English
-
-fra - French
-
-Delivery medium information
----------------------------
-
-Units of delivery
-^^^^^^^^^^^^^^^^^
-
-Canadian Province/Territory
-
-Medium name
-^^^^^^^^^^^
-
-Data are available on the GeoBase portal (www.geobase.ca).
-
-Other delivery information
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The name of the files, entities and attributes are described in the document *National Road Network, edition 2.0.1,
-Product Distribution Formats* (www.geobase.ca).
-
-Data are subject to the GeoBase Unrestricted Use Licence Agreement (www.geobase.ca).
-
-Reference to specification scope
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Global
+Data are subject to the *GeoBase Unrestricted Use Licence Agreement* (www.geobase.ca).
 
 Metadata
 ========
 
 Not applicable
-
-Reference to specification scope
---------------------------------
-
-Global
