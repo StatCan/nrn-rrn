@@ -19,14 +19,14 @@ Feature Catalogue
 Data Types
 ==========
 
-Data types for all attributes for all feature classes are specified in :doc:`product_distribution_formats`.
+Data types for all attributes for all feature classes are described in :doc:`product_distribution_formats`.
 
 Missing Data
 ============
 
 This section applies to all attributes for all feature classes.
 
-"-1" (integer) / "Unknown" (character) is used when a value is unknown, missing, or invalid (not within the domain of
+"-1" (numeric) / "Unknown" (character) is used when a value is unknown, missing, or invalid (not within the domain of
 the attribute).
 
 .. _Object Metadata:
@@ -200,6 +200,8 @@ address value. A specific value is defined for the left and right sides of the R
 
 :Domain: A non-integer value or "None" when no value applies.
 
+.. _House Number Type Domain:
+
 First House Number Type (left, right)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -267,20 +269,7 @@ Last House Number Type (left, right)
 
 Method used to populate the address range. A specific value is defined for the left and right sides of the Road Element.
 
-.. csv-table:: Domain:
-   :header: "Code", "Label", "Definition"
-   :widths: auto
-   :align: left
-
-   0, "None", "Absence of a house along the Road Element."
-   1, "Actual Located", "Qualifier indicating that the house number is located at its \"real world\" position along a
-   Road Element."
-   2, "Actual Unlocated", "Qualifier indicating that the house number is located at one end of the Road Element. This
-   may be or may not be its \"real world\" position."
-   3, "Projected", "Qualifier indicating that the house number is planned, figured or estimated for the future and is
-   located (at one end) at the beginning or the end of the Road Element."
-   4, "Interpolated", "Qualifier indicating that the house number is calculated from two known house numbers which are
-   located on either side. By convention, the house is positioned at one end of the Road Element."
+:Domain: Identical to :ref:`House Number Type Domain`.
 
 NID
 ^^^
