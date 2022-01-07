@@ -14,6 +14,8 @@ National Road Network's Documentation
    product_documentation/product_distribution_formats
    product_documentation/data_product_specifications
    product_documentation/feature_catalogue
+   product_documentation/conceptual_data_model
+   product_documentation/data_exchange_model
    product_documentation/change_management
    product_documentation/identification_rules
    product_documentation/completion_rates
