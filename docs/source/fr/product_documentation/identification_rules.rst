@@ -5,8 +5,8 @@ Règles d'identification
 .. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
-.. contents::
-   :depth: 3
+.. contents:: Matières :
+   :depth: 1
 
 Aperçu
 ======

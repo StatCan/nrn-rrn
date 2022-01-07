@@ -5,8 +5,8 @@ Taux d'achèvement
 .. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
-.. contents::
-   :depth: 4
+.. contents:: Matières :
+   :depth: 2
 
 Taux d'achèvement actuels
 =========================

@@ -5,7 +5,7 @@ Formats de distribution du produit
 .. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
-.. contents::
+.. contents:: Matières :
    :depth: 3
 
 Aperçu

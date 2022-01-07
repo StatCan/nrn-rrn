@@ -5,8 +5,8 @@ Change Management
 .. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
-.. contents::
-   :depth: 3
+.. contents:: Contents:
+   :depth: 4
 
 Overview
 ========

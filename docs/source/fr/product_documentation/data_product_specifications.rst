@@ -10,8 +10,8 @@ Spécifications de produit
     géographique – Spécifications de contenu informationnel*, laquelle réfère notamment à la norme *ISO 19115 : 2003
     Information géographique – Métadonnées*.
 
-.. contents::
-   :depth: 3
+.. contents:: Matières :
+   :depth: 4
 
 Aperçu
 ======
@@ -311,8 +311,6 @@ Modèle de données d’entités
 Schéma d’application
 ^^^^^^^^^^^^^^^^^^^^
 
-Le modèle conceptuel des données du RRN est décrit dans le :doc:`conceptual_data_model`.
-
 L’implantation physique du produit RRN diffère du modèle conceptuel en ce qui a trait à la gestion des métadonnées
 d’objet et à l’ajout de certains attributs à l’entité segment routier.
 
@@ -326,8 +324,8 @@ utilisées pour la création des données.
 Le nom de rue, nom de lieu et l’intervalle d’adresse ont été aussi ajoutés en attribut sur la géométrie de l’entité
 segment routier.
 
-:doc:`product_distribution_formats` illustre également la matérialisation du modèle conceptuel du Catalogue d’entités
-dans le modèle physique des données du produit RRN selon les formats de distribution GML, GPKG, KML et SHP.
+:doc:`product_distribution_formats` illustre la matérialisation du modèle conceptuel du Catalogue d’entités dans le
+modèle physique des données du produit RRN selon les formats de distribution GML, GPKG, KML et SHP.
 
 Catalogue d’entités
 ^^^^^^^^^^^^^^^^^^^
@@ -419,8 +417,6 @@ Cohérence logique
 
 Cohérence conceptuelle
 ^^^^^^^^^^^^^^^^^^^^^^
-
-Le modèle conceptuel des données du RRN est disponible dans le :doc:`conceptual_data_model`.
 
 L’implantation physique du produit RRN a été effectuée, le plus possible, en conformité au modèle conceptuel du RRN.
 L’implantation physique diffère du modèle conceptuel en ce qui a trait à la gestion des métadonnées d’objet et à

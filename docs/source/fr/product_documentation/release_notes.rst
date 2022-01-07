@@ -5,6 +5,9 @@ Notes de publication
 .. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
+.. contents:: Matières :
+   :depth: 1
+
 Notes de publication actuelles
 ==============================
 

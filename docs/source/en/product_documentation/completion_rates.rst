@@ -5,8 +5,8 @@ Completion Rates
 .. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
-.. contents::
-   :depth: 4
+.. contents:: Contents:
+   :depth: 2
 
 Current completion rates
 ========================

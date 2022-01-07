@@ -13,8 +13,8 @@ Catalogue d'entités
     Ce catalogue a été adapté à partir de la norme internationale *ISO 19110 — Information géographique — Méthodologie
     de catalogage des entités* préparée par le comité technique ISO/TC 211.
 
-.. contents::
-   :depth: 4
+.. contents:: Matières :
+   :depth: 3
 
 Types de données
 ================

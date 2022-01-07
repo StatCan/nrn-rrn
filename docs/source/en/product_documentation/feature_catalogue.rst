@@ -13,8 +13,8 @@ Feature Catalogue
     This catalogue was adapted from the international standard *ISO 19110 — Geographic information — Methodology for
     feature cataloguing* prepared by technical committee ISO/TC 211.
 
-.. contents::
-   :depth: 4
+.. contents:: Contents:
+   :depth: 3
 
 Data Types
 ==========

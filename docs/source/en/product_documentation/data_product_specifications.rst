@@ -10,8 +10,8 @@ Data Product Specifications
     Information / Geomatics – Data Product Specification*, which refers in particular to standard *ISO 19115: 2003
     Geographic information – Metadata*.
 
-.. contents::
-   :depth: 3
+.. contents:: Contents:
+   :depth: 4
 
 Overview
 ========
@@ -302,8 +302,6 @@ Data modelling schema used
 Application schema
 ^^^^^^^^^^^^^^^^^^
 
-The conceptual model of the NRN data is presented in :doc:`conceptual_data_model`.
-
 The physical implementation of the NRN product differs from the conceptual model in what concerned the management of
 object metadata and the addition of certain attributes to the entity Road Segment.
 
@@ -315,8 +313,8 @@ Otherwise, Object Metadata attributes describe the sources used for creation.
 
 The street name, place name and address range were also added as attributes on the geometry of the entity Road Segment.
 
-:doc:`product_distribution_formats` also demonstrates the implementation of the conceptual model into the physical
-model of the NRN data product according to the distribution formats GML, GPKG, KML and SHP.
+:doc:`product_distribution_formats` demonstrates the implementation of the conceptual model into the physical model of
+the NRN data product according to the distribution formats GML, GPKG, KML and SHP.
 
 Feature catalogue
 ^^^^^^^^^^^^^^^^^
@@ -405,8 +403,6 @@ Logical consistency
 
 Conceptual consistency
 ^^^^^^^^^^^^^^^^^^^^^^
-
-The conceptual model of the NRN data can be found in :doc:`conceptual_data_model`.
 
 The physical implementation of the NRN product differs from the conceptual model in what concerned the management of
 object metadata and the addition of certain attributes to the entity Road Segment.

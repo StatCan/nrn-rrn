@@ -5,6 +5,9 @@ Release Notes
 .. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
+.. contents:: Contents:
+   :depth: 1
+
 Current release notes
 =====================
 
