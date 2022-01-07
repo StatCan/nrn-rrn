@@ -200,12 +200,12 @@ address value. A specific value is defined for the left and right sides of the R
 
 :Domain: A non-integer value or "None" when no value applies.
 
-.. _House Number Type Domain:
-
 First House Number Type (left, right)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Method used to populate the address range. A specific value is defined for the left and right sides of the Road Element.
+
+.. _House Number Type Domain:
 
 .. csv-table:: Domain:
    :header: "Code", "Label", "Definition"
