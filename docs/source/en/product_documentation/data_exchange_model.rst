@@ -6,7 +6,7 @@ Data Exchange Model
 .. include:: <isopub.txt>
 
 .. contents:: Contents:
-   :depth: 3
+   :depth: 2
 
 Overview
 ========
