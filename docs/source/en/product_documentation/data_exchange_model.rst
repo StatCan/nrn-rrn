@@ -14,12 +14,9 @@ Overview
 This document describes recommendations and format used for data exchange between NRN data providers. It is important
 to note that this physical data model does not constitute the final distribution model for the NRN data.
 
-The document results from eight consultation meetings performed with Closest to Source data providers. The broad range
-of the producer and user committee participants has allowed this process to identify and review many aspects of the
-physical data exchange model.
-
-We wish to thank the producer and user community both at the federal and provincial levels who have contributed to this
-exercise an in doing so have ensured that the best possible exchange format for the NRN datasets will be implemented.
+The document results from eight consultation meetings performed with *Closest to Source* data providers. The broad
+range of the producer and user committee participants has allowed this process to identify and review many aspects of
+the physical data exchange model.
 
 Data Exchange Model
 ===================
@@ -91,7 +88,7 @@ Province or Territory.
 Road Elements Located in Non-Organized Territories
 --------------------------------------------------
 
-When the Closest to Source provider is unable to define or associate a geopolitical administrative name for remote
+When the *Closest to Source* provider is unable to define or associate a geopolitical administrative name for remote
 regions within its dataset than other sources should be considered and used up to populate the Place Name field until
 such time that it can be replaced by a more authoritative source.
 
@@ -145,7 +142,8 @@ Functional Road Class Integrity
 A Functional Road Class should not change on the length of a structure and the structure should have the same
 Functional Road Class as one of the road segments to which it is connected.
 
-Roads with Functional Road Class Freeway, Highway, Arterial, Ramp and Rapid Transit should not form a closed loop.
+Roads with Functional Road Class Arterial, Expressway / Highway, Freeway, Ramp and Rapid Transit should not form a
+closed loop.
 
 Ferry Connection Segments are assigned with the same Functional Road Class value of the two Road Segments that it joins
 when they are the same. If the Functional Road Classes differ, the lowest value (i.e. most prominent class) prevails.
@@ -153,7 +151,7 @@ when they are the same. If the Functional Road Classes differ, the lowest value 
 Route Names and Route Numbers Network Continuity
 ------------------------------------------------
 
-Route Numbers, Route Names should not have gaps across their span, and the names should extend to associated service
+Route Numbers and Route Names should not have gaps across their span, and the names should extend to associated service
 lanes and ramps.
 
 Ferry Connection Segment Valency
@@ -169,5 +167,6 @@ Ferry Connection Segments can end as deadend.
 
 Exit Number on Junctions
 ------------------------
+
 When a Road Segment portrays a one-way ramp with an exit number, only the Junction marking its point of entrance (in
 the real world) is assigned with the same Exit Number value.
