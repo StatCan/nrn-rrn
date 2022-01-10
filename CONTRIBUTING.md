@@ -5,7 +5,7 @@ This document explains the process of contributing to the National Road Network 
 The preferred mode of contribution is via GitHub issues. Code additions, modifications, and removals should be left to 
 the NRN project members.
 
-## Table of Contents
+## Contents:
 
 - [Statement of Public Availability](#statement-of-public-availability)
 - [Opening Issues](#opening-issues)
@@ -29,8 +29,8 @@ Feedback is greatly appreciated whether it be an issue, idea, or general questio
 GitHub issue:
 1. **Check pre-existing issues:** Browse opened and closed issues to check if your concern has already been addressed. 
    If this is the case, comment on the existing issue rather than opening a new issue.
-2. **Opening an issue:** When opening a new issue, make use of the pre-existing labels and the associated template. Not 
-   all sections of the template are required; to avoid redundancy, complete only those sections which you feel are 
+2. **Opening an issue:** When opening a new issue, make use of the pre-existing GitHub labels and templates. Not all 
+   sections of the template are required. To avoid redundancy, complete only those sections which you feel are 
    essential to your issue.
 3. **Closing an issue:** Do not close an issue, even if you feel it is resolved or no longer relevant. This 
    responsibility should be left for NRN project members.
@@ -38,13 +38,15 @@ GitHub issue:
 ## Modifying Code
 
 Code additions, modifications, and removals are allowed by non-NRN project members. However, given the nature of the 
-NRN as an official government project, thorough code review should be expected prior to acceptance of any pull requests.
-In addition, any contributed code will become property of the NRN and Statistics Canada.
+NRN as an official government project, thorough code review should be expected prior to acceptance and integration. In 
+addition, any contributed code will become property of the NRN and Statistics Canada.
 
 ### Formatting
+
 The NRN project does not enforce any formatting standard, however, you should try to follow PEP 8 standards as much as 
 possible.
 
 ### Versioning
+
 The NRN project periodically updates the project dependencies, including the base Python version. Compatibility is seen 
 as a non-issue since the NRN is intended to be run within its own conda environment.
