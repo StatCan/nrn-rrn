@@ -11,15 +11,15 @@ Formats de distribution du produit
 Aperçu
 ======
 
-Les entités du Réseau routier national (RRN) vue segmentée sont les suivantes : *Intervalle d’adresse*, *Jonction*,
+Les entités du Réseau routier national (RRN) vue segmentée sont les suivantes : *Intervalle d'adresse*, *Jonction*,
 *Lien nom non officiel*, *Noms de rue et de lieu*, *Passage obstrué*, *Poste de péage*, *Segment de liaison par
 transbordeur* et *Segment routier*.
 
-Les formats de fichiers de sortie disponibles pour le produit sont : GML (Geography Markup Language), KML (Keyhole
-Markup Language), SHP (ESRI |trade| Shapefile) et GPKG (OGC Geopackage).
+Les formats de fichiers de sortie disponibles pour le produit sont : GML (*Geography Markup Language*), KML (*Keyhole
+Markup Language*), SHP (*ESRI*\ |trade| *Shapefile*) et GPKG (*OGC Geopackage*).
 
 .. note::
-    Les fichiers de données dans le format KML contiennent uniquement l’entité Segment routier et un sous-ensemble de
+    Les fichiers de données dans le format KML contiennent uniquement l'entité Segment routier et un sous-ensemble de
     ses attributs.
 
 Identification du produit
@@ -29,7 +29,7 @@ Identification du produit
 :Version: 2.1
 :Date: 2012-03-31
 :Normes: Réseau routier national : Spécifications de produit, édition 2.1, 2012-03-31
-:Catalogue d’entités: Réseau routier national : Catalogue d’entités, édition 2.1, 2012-03-31
+:Catalogue d'entités: Réseau routier national : Catalogue d'entités, édition 2.1, 2012-03-31
 
 Identification des formats de distribution
 ==========================================
@@ -52,7 +52,7 @@ KML – Keyhole Markup Language
 :Spécifications: Open Geospatial Consortium Inc., OGC® KML, Version 2.2.0, 2008-04-14, Reference number of this OGC®
     project document: OGC 07-147r2 (http://portal.opengeospatial.org/files/?artifact_id=27810)
 
-SHP – ESRI |trade| Shapefile
+SHP – ESRI\ |trade| Shapefile
 ----------------------------
 
 :Nom: Shapefile
@@ -75,9 +75,9 @@ Identification des fichiers de distribution
 Nomenclature des fichiers GML
 -----------------------------
 
-Les entités du produit distribuées dans le format GML sont regroupées par jeu de données à l’intérieur de différents
+Les entités du produit distribuées dans le format GML sont regroupées par jeu de données à l'intérieur de différents
 fichiers. Un fichier contenant les entités géométriques et leurs attributs de base (GEOM), un fichier regroupant les
-tables d’attributs d’adressage (ADDR), et jusqu’à quatre fichiers de gestion des modifications pour chaque type de
+tables d'attributs d'adressage (ADDR), et jusqu'à quatre fichiers de gestion des modifications pour chaque type de
 contenu du jeu de données (GEOM et ADDR). Le nom des fichiers GML prend la forme suivante ::
 
     RRN_<IDENTIFIANT>_<édition>_<version>_<CONTENU>[_<MODIFICATION>].gml
@@ -88,20 +88,20 @@ contenu du jeu de données (GEOM et ADDR). Le nom des fichiers GML prend la form
 * <édition> =           Édition du jeu de données.
 * <version> =           Version du jeu de données.
 * <CONTENU> =           Indicateur du contenu du jeu de données. Les valeurs possibles sont : GEOM (entités
-                        géométriques et attributs de base), ADDR (tables d’attributs d’adressage).
+                        géométriques et attributs de base), ADDR (tables d'attributs d'adressage).
 * [<MODIFICATION>] =    [] = Optionnel. Type de modification apportée aux entités et attributs du jeu de données par
-                        rapport à l’édition précédente. Les valeurs possibles sont identifiées à
-                        :ref:`Fichiers de gestion des modifications`.
+                        rapport à l'édition précédente. Les valeurs possibles sont identifiées à
+                        :ref:`Change Management Files`.
 * .gml =                Extension du nom de fichier.
 
 Exemples :
 
-* RRN_AB_4_0_GEOM.gml             (Entités géométriques et attributs de base du jeu de données de l’Alberta, édition 4,
+* RRN_AB_4_0_GEOM.gml             (Entités géométriques et attributs de base du jeu de données de l'Alberta, édition 4,
                                   version 0);
-* RRN_AB_4_0_ADDR.gml             (Tables d’attributs d’adressage du jeu de données de l’Alberta, édition 4, version 0);
-* RRN_AB_4_0_GEOM_AJOUT.gml       (Entités géométriques et/ou attributs de base ajoutés au jeu de données de l’Alberta,
+* RRN_AB_4_0_ADDR.gml             (Tables d'attributs d'adressage du jeu de données de l'Alberta, édition 4, version 0);
+* RRN_AB_4_0_GEOM_AJOUT.gml       (Entités géométriques et/ou attributs de base ajoutés au jeu de données de l'Alberta,
                                   édition 4, version 0);
-* RRN_AB_4_0_ADDR_AJOUT.gml       (Tables des attributs d’adressage ajoutés au jeu de données de l’Alberta, édition 4,
+* RRN_AB_4_0_ADDR_AJOUT.gml       (Tables des attributs d'adressage ajoutés au jeu de données de l'Alberta, édition 4,
                                   version 0).
 
 Un schéma XML (fichier XSD) est également livré pour chaque fichier GML. Ce fichier définit de façon structurée le type
@@ -111,7 +111,7 @@ RRN_<IDENTIFIANT>_<édition>_<version>_<CONTENU>[_<MODIFICATION>].xsd et est cit
 Nomenclature du fichier KML
 ---------------------------
 
-Uniquement l’entité *Segment routier* (et un sous-ensemble d’attributs) du produit est distribuée dans le format KML.
+Uniquement l'entité *Segment routier* (et un sous-ensemble d'attributs) du produit est distribuée dans le format KML.
 Le nom du fichier KML prend la forme suivante ::
 
     nrn_rrn_<identifiant>_kml_fr.kmz
@@ -125,7 +125,7 @@ Le nom du fichier KML prend la forme suivante ::
 
 Exemple :
 
-* nrn_rrn_ab_kml_fr.kmz           (*Segment routier* du jeu de données de l’Alberta, édition 4, version 0).
+* nrn_rrn_ab_kml_fr.kmz           (*Segment routier* du jeu de données de l'Alberta, édition 4, version 0).
 
 Nomenclature des fichiers SHP
 -----------------------------
@@ -140,25 +140,25 @@ suit la structure suivante ::
                         Les codes possibles sont : AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT.
 * <édition> =           Édition du jeu de données.
 * <version> =           Version du jeu de données.
-* <ENTITÉ> =            Nom abrégé de l’entité tel que défini à :ref:`Jeu de données`.
+* <ENTITÉ> =            Nom abrégé de l'entité tel que défini à :ref:`Datasets`.
 * [<MODIFICATION>] =    [] = Optionnel. Type de modification apportée aux entités et attributs du jeu de données par
-                        rapport à l’édition précédente. Les valeurs possibles sont identifiées à
-                        :ref:`Fichiers de gestion des modifications`.
+                        rapport à l'édition précédente. Les valeurs possibles sont identifiées à
+                        :ref:`Change Management Files`.
 * .shp =                Extension du nom de fichier principal de géométrie.
 
-Dans le format SHP, il y a également cinq autres types de fichiers associés au fichier de géométrie de l’entité :
+Dans le format SHP, il y a également cinq autres types de fichiers associés au fichier de géométrie de l'entité :
 
-* un fichier d’attributs (.dbf pour dBASE® file);
-* un fichier projection (.prj) contenant l’information sur le système de référence utilisé et les paramètres de la
+* un fichier d'attributs (.dbf pour dBASE® file);
+* un fichier projection (.prj) contenant l'information sur le système de référence utilisé et les paramètres de la
 projection cartographique;
-* un fichier d’index (.shx) contenant la position relative (offset) de chacun des enregistrements (records) du fichier
+* un fichier d'index (.shx) contenant la position relative (offset) de chacun des enregistrements (records) du fichier
 principal de géométrie;
-* deux fichiers d’index spatial pour les données géométriques (.sbn, .sbx).
+* deux fichiers d'index spatial pour les données géométriques (.sbn, .sbx).
 
 Exemples :
 
-* RRN_AB_4_0_SEGMROUT.shp         (Entité *Segment routier* du jeu de données de l’Alberta, édition 4, version 0);
-* RRN_AB_4_0_SEGMROUT_AJOUT.shp   (Entités géométriques et/ou attributs de base du *Segment routier* ajoutés au jeu de données de l’Alberta, édition 4, version 0).
+* RRN_AB_4_0_SEGMROUT.shp         (Entité *Segment routier* du jeu de données de l'Alberta, édition 4, version 0);
+* RRN_AB_4_0_SEGMROUT_AJOUT.shp   (Entités géométriques et/ou attributs de base du *Segment routier* ajoutés au jeu de données de l'Alberta, édition 4, version 0).
 
 Nomenclature des fichiers GPKG
 ------------------------------
@@ -178,7 +178,7 @@ GPKG suit la structure suivante ::
 
 Examples:
 
-* RRN_AB_4_0_fr.gpkg              (Toutes les entités du jeu de données de l’Alberta, édition 4, version 0).
+* RRN_AB_4_0_fr.gpkg              (Toutes les entités du jeu de données de l'Alberta, édition 4, version 0).
 
 Fichier de métadonnées
 ----------------------
@@ -200,31 +200,31 @@ fichier de métadonnées est ::
 
 Exemples :
 
-* nrn_rrn_ab_4_0_fgdc_en.xml      (Fichier de métadonnées du jeu de données de l’Alberta, édition 4, version 0 selon le
+* nrn_rrn_ab_4_0_fgdc_en.xml      (Fichier de métadonnées du jeu de données de l'Alberta, édition 4, version 0 selon le
                                   format FGDC/XML);
-* nrn_rrn_ab_4_0_fgdc_en.html     (Fichier de métadonnées du jeu de données de l’Alberta, édition 4, version 0 selon le
+* nrn_rrn_ab_4_0_fgdc_en.html     (Fichier de métadonnées du jeu de données de l'Alberta, édition 4, version 0 selon le
                                   format FGDC/HTML).
 
 Liste des noms de fichiers de distribution
 ------------------------------------------
 
 Le produit RRN comporte deux types de jeux de données : des fichiers contenant les données actualisées (i.e. qui ont
-été mises à jour) et des fichiers contenant les modifications (différences) appliquées à l’édition précédente du jeu de
+été mises à jour) et des fichiers contenant les modifications (différences) appliquées à l'édition précédente du jeu de
 données.
 
-.. _Jeu de données:
+.. _Datasets:
 
-Jeu de données
-^^^^^^^^^^^^^^
+Jeux de données
+^^^^^^^^^^^^^^^
 
-L’extension du nom de fichier dépend directement du format de distribution.
+L'extension du nom de fichier dépend directement du format de distribution.
 
 .. csv-table::
    :header: "Catalogue d'entités Nom d'entité", "GML/KML\ :sup:`*`\  Nom d'entité", "GPKG/SHP Nom du fichier", "Type"
    :widths: auto
    :align: left
 
-   "Intervalle d’adresse", "IntervalleAdresse", "INTERVADR", "Table\ :sup:`**`\ "
+   "Intervalle d'adresse", "IntervalleAdresse", "INTERVADR", "Table\ :sup:`**`\ "
    "Jonction", "Jonction", "JONCTION", "Point"
    "Lien nom non officiel", "LienNomNonOfficiel", "LIENNOFF", "Table\ :sup:`**`\ "
    "Noms de rue et de lieu", "NomRueLieu", "NOMRUELIEU", "Table\ :sup:`**`\ "
@@ -234,16 +234,16 @@ L’extension du nom de fichier dépend directement du format de distribution.
    "Segment routier", "SegmentRoutier\ :sup:`*`\ ", "SEGMROUT", "Ligne"
 
 :sup:`*` Contenu KML (version simplifiée du jeu de données).
-:sup:`*` Fichier d’attributs (.dbf) dans le format SHP et entités sans géométrie dans le format GML.
+:sup:`*` Fichier d'attributs (.dbf) dans le format SHP et entités sans géométrie dans le format GML.
 
-.. _Fichiers de gestion des modifications:
+.. _Change Management Files:
 
 Fichiers de gestion des modifications
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-La gestion des modifications consiste principalement à identifier l’ajout, la confirmation, l’élimination ou la
-modification des objets (géométrie et/ou attribut) entre deux éditions successives d’un jeu de données. Un fichier de
-données est généré pour chaque type d’effet. L’extension du nom de fichier dépend directement du format de distribution.
+La gestion des modifications consiste principalement à identifier l'ajout, la confirmation, l'élimination ou la
+modification des objets (géométrie et/ou attribut) entre deux éditions successives d'un jeu de données. Un fichier de
+données est généré pour chaque type d'effet. L'extension du nom de fichier dépend directement du format de distribution.
 
 .. csv-table::
    :header: "Gestion des modifications Nom de l'effet", "GML/SHP Nom du fichier"
@@ -261,7 +261,7 @@ LISEZMOI_<IDENTIFIANT>.txt qui est joint au jeu de données.
 Identification des attributs
 ============================
 
-Les attributs communs à l’ensemble des entités du produit RRN sont identifiés dans le premier tableau. Les attributs
+Les attributs communs à l'ensemble des entités du produit RRN sont identifiés dans le premier tableau. Les attributs
 spécifiques à chaque entité sont présentés dans la sous-section suivante.
 
 Le type de données de tous les formats de distribution est soit : C(c) pour caractères ou N(n,d) pour nombre (c =
@@ -287,7 +287,7 @@ Attributs communs pour toutes les entités (sauf Lien nom non officiel)
 Attributs spécifiques aux entités
 ---------------------------------
 
-Intervalle d’adresse
+Intervalle d'adresse
 ^^^^^^^^^^^^^^^^^^^^
 
 .. csv-table::
@@ -430,7 +430,7 @@ Segment routier
    "État revêtement", "etatRevetement", "ETATREV", "C(11)"
    "ID segment routier", "idSegmentRoutier", "IDSEGMRTE", "N(9,0)"
    "IDN", "idn\ :sup:`**`\ ", "IDN", "C(32)"
-   "IDN intervalle d’adresse", "idnIntervalleAdresse", "IDINTERVAD", "C(32)"
+   "IDN intervalle d'adresse", "idnIntervalleAdresse", "IDINTERVAD", "C(32)"
    "ID structure", "idStructure", "IDSTRUCT", "C(32)"
    "Indicateur sens numérisation adresse à gauche", "sensNumerisationAdresse_Gauche\ :sup:`**`\ ", "ADRSENS_G", "C(18)"
    "Indicateur sens numérisation adresse à droite", "sensNumerisationAdresse_Droite\ :sup:`**`\ ", "ADRSENS_D", "C(18)"

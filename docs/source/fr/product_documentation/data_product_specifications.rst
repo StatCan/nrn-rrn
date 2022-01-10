@@ -57,26 +57,26 @@ Le produit Réseau routier national (RRN) contient des données géospatiales de
 et tenues à jour) des phénomènes routiers canadiens. Le produit est distribué sous forme de treize jeux de données
 provinciaux ou territoriaux et est composé de deux entités linéaires (Segment routier et Segment de liaison par
 transbordeur) et de trois entités ponctuelles (Jonction, Passage obstrué et Poste de péage) auxquelles est associée une
-série d’attributs descriptifs dont, entre autres : Numéro première maison, Numéro dernière maison, Corps nom rue, Nom
+série d'attributs descriptifs dont, entre autres : Numéro première maison, Numéro dernière maison, Corps nom rue, Nom
 de lieu, Classification routière fonctionnelle, État revêtement, Nombre de voies, Type de structure, Numéro de route,
 Nom de route, Numéro de sortie.
 
-La maintenance des données RRN est réalisée par l’entremise d’ententes de partenariat intergouvernemental (fédéral,
+La maintenance des données RRN est réalisée par l'entremise d'ententes de partenariat intergouvernemental (fédéral,
 provincial, territorial et municipal) par les organismes gouvernementaux intéressés, identifiés être les plus près de
-la source et capables d’offrir des représentations adéquates et actualisées des phénomènes routiers. La fréquence de
-maintenance visée est d’au moins une mise à jour par an. Les données produites forment une vue homogène et standardisée
-pour l’ensemble du territoire canadien.
+la source et capables d'offrir des représentations adéquates et actualisées des phénomènes routiers. La fréquence de
+maintenance visée est d'au moins une mise à jour par an. Les données produites forment une vue homogène et standardisée
+pour l'ensemble du territoire canadien.
 
 Le modèle conceptuel RRN a été élaboré en collaboration avec les fournisseurs de données intéressés et a été adopté par
 le Conseil canadien de géomatique (COCG). La norme ISO 14825 — *Systèmes de transport intelligents — Fichiers de
-données géographiques — Spécification des données globales* a servi de guide pour l’élaboration du modèle conceptuel et
-du catalogue RRN. Le vocabulaire RRN (nom de classes, nom d’attributs et définitions) est en grande partie extrait de
-l’ISO 14825.
+données géographiques — Spécification des données globales* a servi de guide pour l'élaboration du modèle conceptuel et
+du catalogue RRN. Le vocabulaire RRN (nom de classes, nom d'attributs et définitions) est en grande partie extrait de
+l'ISO 14825.
 
 Portée des spécifications
 =========================
 
-Cette section décrit la portée à laquelle fait référence l’information des sections subséquentes qui décrivent le
+Cette section décrit la portée à laquelle fait référence l'information des sections subséquentes qui décrivent le
 produit.
 
 Identification de la portée
@@ -102,45 +102,45 @@ RRN
 Étendue
 -------
 
-Cette section décrit l’étendue spatiale et temporelle de la portée.
+Cette section décrit l'étendue spatiale et temporelle de la portée.
 
 Description
 ^^^^^^^^^^^
 
 Masse continentale canadienne
 
-Les données du RRN sont continues entre les jeux de données et constituent un réseau ininterrompu couvrant l’ensemble
+Les données du RRN sont continues entre les jeux de données et constituent un réseau ininterrompu couvrant l'ensemble
 de la masse continentale canadienne.
 
 Étendue verticale
 ^^^^^^^^^^^^^^^^^
 
-Les données RRN sont bidimensionnelles. Il n’y a pas d’élévation (z) associée aux données.
+Les données RRN sont bidimensionnelles. Il n'y a pas d'élévation (z) associée aux données.
 
 Valeur minimale
 """""""""""""""
 
-Ne s’applique pas
+Ne s'applique pas
 
 Valeur maximale
 """""""""""""""
 
-Ne s’applique pas
+Ne s'applique pas
 
 Unité de mesure
 """""""""""""""
 
-Ne s’applique pas
+Ne s'applique pas
 
 Datum vertical
 """"""""""""""
 
-Ne s’applique pas
+Ne s'applique pas
 
 Étendue horizontale
 ^^^^^^^^^^^^^^^^^^^
 
-L’étendue géographique est décrite par les coordonnées de boîte englobante suivante :
+L'étendue géographique est décrite par les coordonnées de boîte englobante suivante :
 
 Longitude limitrophe ouest
 """"""""""""""""""""""""""
@@ -175,10 +175,10 @@ Date de début
 Date de fin
 """""""""""
 
-Aujourd’hui
+Aujourd'hui
 
 .. note::
-    "Aujourd’hui" signifie la date de publication courante d’une instance du RRN. C’est-à-dire, une instance du RRN
+    "Aujourd'hui" signifie la date de publication courante d'une instance du RRN. C'est-à-dire, une instance du RRN
     peut inclure un réseau routier qui est actuel à la date de publication.
 
 Identification du produit
@@ -199,11 +199,11 @@ Résumé
 
 Le produit RRN est distribué sous forme de treize jeux de données provinciaux ou territoriaux et est composé de deux
 entités linéaires (Segment routier et Segment de liaison par transbordeur) et de trois entités ponctuelles (Jonction,
-Passage obstrué et Poste de péage) auxquelles est associée une série d’attributs descriptifs dont, entre autres :
+Passage obstrué et Poste de péage) auxquelles est associée une série d'attributs descriptifs dont, entre autres :
 Numéro première maison, Numéro dernière maison, Corps nom rue, Nom de lieu, Classification routière fonctionnelle, État
 revêtement, Nombre de voies, Type de structure, Numéro de route, Nom de route, Numéro de sortie.
 
-Le développement de l’édition 2.0 du RRN a été réalisé à l’aide de rencontres individuelles et des ateliers nationaux
+Le développement de l'édition 2.0 du RRN a été réalisé à l'aide de rencontres individuelles et des ateliers nationaux
 avec les producteurs de données intéressés des gouvernements fédéraux, provinciaux, territoriaux et municipaux.
 
 En 2005, le RRN édition 2.0 a été adopté à tour de rôle par les membres du Comité mixte des organismes intéressés à la
@@ -214,12 +214,12 @@ But
 ---
 
 Le RRN vise à fournir une description géométrique et attributive de qualité (actuelle, précise, cohérente), homogène et
-normalisée de l’ensemble du réseau routier canadien.
+normalisée de l'ensemble du réseau routier canadien.
 
 Les données RRN servent de fondation pour plusieurs applications. Cette base géométrique commune est acquise et
 maintenue à jour sur une base régulière par les organisations les plus près de la source sélectionnées pour leurs
 intérêts spécifiques ou leur facilité à offrir des représentations adéquates et actualisées des phénomènes routiers,
-conformément à l’initiative GéoBase (www.geobase.ca). Cette infrastructure commune facilite le processus d’intégration
+conformément à l'initiative GéoBase (www.geobase.ca). Cette infrastructure commune facilite le processus d'intégration
 entre les données RRN et d'autres données complémentaires.
 
 Catégories
@@ -245,7 +245,7 @@ Dénominateur de la résolution spatiale des données : 10 000.
 
 .. note::
     La résolution spatiale nominale est un estimé général du fait que les données sont issues de plusieurs sources
-    (GPS, données existantes fédérales, provinciales ou municipales) mais est estimée être de l’ordre de 1/10 000.
+    (GPS, données existantes fédérales, provinciales ou municipales) mais est estimée être de l'ordre de 1/10 000.
 
 Description géographique
 ------------------------
@@ -284,7 +284,7 @@ CA – Canada
 Type de code
 ^^^^^^^^^^^^
 
-Type de code du polygone de délimitation de l’étendue selon la norme ISO 19115 :
+Type de code du polygone de délimitation de l'étendue selon la norme ISO 19115 :
 
 1 - inclusion (le polygone de délimitation est inclusif)
 
@@ -296,38 +296,38 @@ Description
 
 Le RRN est un produit numérique distribué sous forme de treize jeux de données provinciaux ou territoriaux. Chaque jeu
 de données est composé de deux entités linéaires (Segment routier et Segment de liaison par transbordeur) et de trois
-entités ponctuelles (Jonction, Passage obstrué et Poste de péage) auxquelles est associée une série d’attributs
+entités ponctuelles (Jonction, Passage obstrué et Poste de péage) auxquelles est associée une série d'attributs
 descriptifs dont, entre autres : Numéro première maison, Numéro dernière maison, Corps nom rue, Nom de lieu,
 Classification routière fonctionnelle, État revêtement, Nombre de voies, Type de structure, Numéro de route, Nom de
 route, Numéro de sortie.
 
-Les informations d’adressage (intervalle d’adresse, nom de rue et nom de lieu) liées aux entités segment routier sont
-également distribuées dans trois tables distinctes (intervalle d’adresse, noms de rue et de lieu et lien nom de rue non
+Les informations d'adressage (intervalle d'adresse, nom de rue et nom de lieu) liées aux entités segment routier sont
+également distribuées dans trois tables distinctes (intervalle d'adresse, noms de rue et de lieu et lien nom de rue non
 officiel).
 
-Modèle de données d’entités
+Modèle de données d'entités
 ---------------------------
 
-Schéma d’application
+Schéma d'application
 ^^^^^^^^^^^^^^^^^^^^
 
-L’implantation physique du produit RRN diffère du modèle conceptuel en ce qui a trait à la gestion des métadonnées
-d’objet et à l’ajout de certains attributs à l’entité segment routier.
+L'implantation physique du produit RRN diffère du modèle conceptuel en ce qui a trait à la gestion des métadonnées
+d'objet et à l'ajout de certains attributs à l'entité segment routier.
 
-Pour les métadonnées d’objet, le modèle conceptuel prévoit deux séries distinctes d’attributs de métadonnées décrivant
+Pour les métadonnées d'objet, le modèle conceptuel prévoit deux séries distinctes d'attributs de métadonnées décrivant
 les sources respectives utilisées pour créer et réviser les données. Seules les dates distinctes de création et de
-révision ont été implantées. Lorsqu’une date de révision est indiquée et qu’une modification attributive ou géométrique
-a été appliquée à l’objet (par rapport à l’édition précédente du jeu de données), la série d’attributs de métadonnées
-d’objet décrit alors les sources utilisées pour la révision. Autrement, les métadonnées d’objet décrivent les sources
+révision ont été implantées. Lorsqu'une date de révision est indiquée et qu'une modification attributive ou géométrique
+a été appliquée à l'objet (par rapport à l'édition précédente du jeu de données), la série d'attributs de métadonnées
+d'objet décrit alors les sources utilisées pour la révision. Autrement, les métadonnées d'objet décrivent les sources
 utilisées pour la création des données.
 
-Le nom de rue, nom de lieu et l’intervalle d’adresse ont été aussi ajoutés en attribut sur la géométrie de l’entité
+Le nom de rue, nom de lieu et l'intervalle d'adresse ont été aussi ajoutés en attribut sur la géométrie de l'entité
 segment routier.
 
-:doc:`product_distribution_formats` illustre la matérialisation du modèle conceptuel du Catalogue d’entités dans le
+:doc:`product_distribution_formats` illustre la matérialisation du modèle conceptuel du Catalogue d'entités dans le
 modèle physique des données du produit RRN selon les formats de distribution GML, GPKG, KML et SHP.
 
-Catalogue d’entités
+Catalogue d'entités
 ^^^^^^^^^^^^^^^^^^^
 
 :doc:`feature_catalogue`
@@ -339,8 +339,8 @@ Système de référence spatial
 ----------------------------
 
 Les données spatiales sont exprimées en coordonnées géographiques de latitude (φ) et de longitude (λ) en référence au
-Système de référence nord-américain de 1983 Système canadien de référence spatiale (NAD83SCRS). La longitude s’exprime
-à l'aide d'un nombre négatif pour représenter une position à l'ouest du méridien central (0°). L’unité de mesure des
+Système de référence nord-américain de 1983 Système canadien de référence spatiale (NAD83SCRS). La longitude s'exprime
+à l'aide d'un nombre négatif pour représenter une position à l'ouest du méridien central (0°). L'unité de mesure des
 coordonnées est le degré exprimé sous forme de valeur réelle à sept décimales.
 
 Autorité
@@ -391,26 +391,26 @@ Complétude
 ----------
 
 Le produit RRN contient une description géométrique et attributive de qualité (actuelle, précise, cohérente), homogène
-et normalisée de l’ensemble du réseau routier canadien.
+et normalisée de l'ensemble du réseau routier canadien.
 
 La représentation des routes contenues dans le RRN correspond à la ligne médiane de toutes les routes à usage non
-restreint (largeur de 5 mètres ou plus, carrossables et sans obstacle limitant l’accès). Les réseaux de routes qui ne
-sont pas reliées au réseau routier principal, les ruelles, les routes d’accès ressources et loisirs ainsi que les
-informations d’adressage peuvent ne pas faire partie des données de certains jeux de données RRN. Ces données devraient
+restreint (largeur de 5 mètres ou plus, carrossables et sans obstacle limitant l'accès). Les réseaux de routes qui ne
+sont pas reliées au réseau routier principal, les ruelles, les routes d'accès ressources et loisirs ainsi que les
+informations d'adressage peuvent ne pas faire partie des données de certains jeux de données RRN. Ces données devraient
 être ajoutées au fil des mises à jour.
 
 .. note::
-    Les segments de liaison par transbordeur sont inclus au RRN afin d’assurer un réseau routier complet.
+    Les segments de liaison par transbordeur sont inclus au RRN afin d'assurer un réseau routier complet.
 
 Commission
 ^^^^^^^^^^
 
-Chaque fournisseur possède sa méthode d’évaluation pour la détection des données en trop.
+Chaque fournisseur possède sa méthode d'évaluation pour la détection des données en trop.
 
 Omission
 ^^^^^^^^
 
-Chaque fournisseur possède sa méthode d’évaluation pour la détection des données manquantes.
+Chaque fournisseur possède sa méthode d'évaluation pour la détection des données manquantes.
 
 Cohérence logique
 -----------------
@@ -418,27 +418,27 @@ Cohérence logique
 Cohérence conceptuelle
 ^^^^^^^^^^^^^^^^^^^^^^
 
-L’implantation physique du produit RRN a été effectuée, le plus possible, en conformité au modèle conceptuel du RRN.
-L’implantation physique diffère du modèle conceptuel en ce qui a trait à la gestion des métadonnées d’objet et à
-l’ajout de certains attributs à l’entité segment routier.
+L'implantation physique du produit RRN a été effectuée, le plus possible, en conformité au modèle conceptuel du RRN.
+L'implantation physique diffère du modèle conceptuel en ce qui a trait à la gestion des métadonnées d'objet et à
+l'ajout de certains attributs à l'entité segment routier.
 
-Pour les métadonnées d’objet, le modèle conceptuel prévoit deux séries distinctes d’attributs de métadonnées décrivant
+Pour les métadonnées d'objet, le modèle conceptuel prévoit deux séries distinctes d'attributs de métadonnées décrivant
 les sources respectives utilisées pour créer et réviser les données. Seules les dates distinctes de création et de
-révision ont été implantées. Lorsqu’une date de révision est indiquée et qu’une modification géométrique a été
-appliquée à l’objet (par rapport à l’édition précédente du jeu de données), la série d’attributs de métadonnées d’objet
-décrit alors les sources utilisées pour la révision. Autrement, les métadonnées d’objet décrivent les sources utilisées
+révision ont été implantées. Lorsqu'une date de révision est indiquée et qu'une modification géométrique a été
+appliquée à l'objet (par rapport à l'édition précédente du jeu de données), la série d'attributs de métadonnées d'objet
+décrit alors les sources utilisées pour la révision. Autrement, les métadonnées d'objet décrivent les sources utilisées
 pour la création des données.
 
-Le nom de rue, nom de lieu et l’intervalle d’adresse ont été aussi ajoutés en attribut sur la géométrie de l’entité
+Le nom de rue, nom de lieu et l'intervalle d'adresse ont été aussi ajoutés en attribut sur la géométrie de l'entité
 segment routier.
 
 Cohérence de domaine
 ^^^^^^^^^^^^^^^^^^^^
 
-Les valeurs attributives sont validées à l’aide d’un schéma XML contenant la définition des domaines de valeurs
-autorisées définis dans le catalogue d’entités.
+Les valeurs attributives sont validées à l'aide d'un schéma XML contenant la définition des domaines de valeurs
+autorisées définis dans le catalogue d'entités.
 
-Les combinaisons de valeurs d’attribut autorisées sont validées à l’aide d’un logiciel développé à l’interne.
+Les combinaisons de valeurs d'attribut autorisées sont validées à l'aide d'un logiciel développé à l'interne.
 
 Cohérence de format
 ^^^^^^^^^^^^^^^^^^^
@@ -449,13 +449,13 @@ Les formats des données RRN se conforment aux formats de distribution décrits 
 Cohérence topologique
 ^^^^^^^^^^^^^^^^^^^^^
 
-Les relations spatiales des entités des jeux de données RRN sont validées systématiquement à l’aide de logiciels
-développés à l’interne.
+Les relations spatiales des entités des jeux de données RRN sont validées systématiquement à l'aide de logiciels
+développés à l'interne.
 
-La validation réalisée consiste à détecter et à corriger dans la mesure du possible : la duplication d’entités, la
+La validation réalisée consiste à détecter et à corriger dans la mesure du possible : la duplication d'entités, la
 connexion entre les entités linéaires et ponctuelles du réseau routier, la cardinalité entre les segments et les
-jonctions, l’assignation des identifiants (IDN), les incohérences géométriques (« spikes ») ainsi que la continuité des
-réseaux de numéro de route, nom de route, nom de rue et des intervalles d’adresse.
+jonctions, l'assignation des identifiants (IDN), les incohérences géométriques (« spikes ») ainsi que la continuité des
+réseaux de numéro de route, nom de route, nom de rue et des intervalles d'adresse.
 
 Précision spatiale
 ------------------
@@ -464,8 +464,8 @@ Précision spatiale absolue
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 La précision géométrique des objets est représentée par la différence entre la position de ces objets dans le jeu de
-données et leurs positions réelles mesurées relativement au réseau géodésique. La précision peut varier d’un objet à un
-autre. Celle-ci est donc est fournie en attribut à chaque occurrence d’entité et est exprimée selon la Précision
+données et leurs positions réelles mesurées relativement au réseau géodésique. La précision peut varier d'un objet à un
+autre. Celle-ci est donc est fournie en attribut à chaque occurrence d'entité et est exprimée selon la Précision
 cartographique circulaire normalisée (PCCN).
 
 Erreur circulaire standard :
@@ -482,12 +482,12 @@ Précision circulaire cartographique normalisée :
 .. math:: \text{PCCN} = 2.1460 \sigma_c
 
 La précision planimétrique visée est de 10 mètres ou mieux à un niveau de confiance de 90%. Dans le cadre de la
-maintenance des données, aucune validation systématique de la précision géométrique et attributive n’est effectuée sur
-l’ensemble des jeux de données RRN.
+maintenance des données, aucune validation systématique de la précision géométrique et attributive n'est effectuée sur
+l'ensemble des jeux de données RRN.
 
-La précision des données est évaluée en fonction des méthodes utilisées pour contrôler les sources d’acquisition
-utilisées (GPS, imagerie, photogrammétrie, etc.) et des erreurs de positionnement liées à l’extraction des données. La
-méthode d’évaluation de la précision est déterminée par le fournisseur des données.
+La précision des données est évaluée en fonction des méthodes utilisées pour contrôler les sources d'acquisition
+utilisées (GPS, imagerie, photogrammétrie, etc.) et des erreurs de positionnement liées à l'extraction des données. La
+méthode d'évaluation de la précision est déterminée par le fournisseur des données.
 
 Précision spatiale relative
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -497,20 +497,20 @@ Inconnu
 Précision temporelle
 --------------------
 
-Précision d’une mesure de temps
+Précision d'une mesure de temps
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Ne s’applique pas
+Ne s'applique pas
 
 Cohérence temporelle
 ^^^^^^^^^^^^^^^^^^^^
 
-Ne s’applique pas
+Ne s'applique pas
 
 Validité temporelle
 ^^^^^^^^^^^^^^^^^^^
 
-Ne s’applique pas
+Ne s'applique pas
 
 Exactitude thématique
 ---------------------
@@ -523,7 +523,7 @@ Inconnu
 Exactitude des attributs non quantitatifs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-La méthode utilisée pour évaluer l’exactitude des attributs non quantitatifs par rapport à la réalité est déterminée
+La méthode utilisée pour évaluer l'exactitude des attributs non quantitatifs par rapport à la réalité est déterminée
 par le fournisseur des données.
 
 Précision des attributs quantitatifs
@@ -538,12 +538,12 @@ Acquisition des données
 Description
 -----------
 
-Chaque fournisseur est libre d’utiliser la méthode d’acquisition de son choix. La méthode sélectionnée doit permettre
-d’obtenir des données géospatiales de qualité (précises, actuelles, cohérentes) pour l’ensemble du jeu de données.
-Plusieurs sources d’acquisition sont utilisées : GPS, ortho-images, ortho-photos, photogrammétrie.
+Chaque fournisseur est libre d'utiliser la méthode d'acquisition de son choix. La méthode sélectionnée doit permettre
+d'obtenir des données géospatiales de qualité (précises, actuelles, cohérentes) pour l'ensemble du jeu de données.
+Plusieurs sources d'acquisition sont utilisées : GPS, ortho-images, ortho-photos, photogrammétrie.
 
-La technique d’acquisition utilisée par le fournisseur est décrite dans les métadonnées d’objet attribuées à chaque
-occurrence d’entité.
+La technique d'acquisition utilisée par le fournisseur est décrite dans les métadonnées d'objet attribuées à chaque
+occurrence d'entité.
 
 Maintenance des données
 =======================
@@ -551,16 +551,16 @@ Maintenance des données
 Description
 -----------
 
-La maintenance des données RRN est effectuée par l’entremise d’ententes de partenariat intergouvernemental (fédéral,
+La maintenance des données RRN est effectuée par l'entremise d'ententes de partenariat intergouvernemental (fédéral,
 provincial, territorial et municipal) par les organismes gouvernementaux intéressés, identifiés être les plus près de
-la source et capables d’offrir des représentations adéquates et actualisées des phénomènes routiers. La fréquence de
-maintenance visée est d’au moins une mise à jour par an.
+la source et capables d'offrir des représentations adéquates et actualisées des phénomènes routiers. La fréquence de
+maintenance visée est d'au moins une mise à jour par an.
 
-Afin d’aider les utilisateurs des données RRN dans leur gestion des mises à jour, ces dernières sont également
+Afin d'aider les utilisateurs des données RRN dans leur gestion des mises à jour, ces dernières sont également
 distribuées selon les effets de mise à jour (ajout, destruction, modification, confirmation). Pour ce faire, des règles
-d’identification et des méthodes de classification des modifications ont été établies.
+d'identification et des méthodes de classification des modifications ont été établies.
 
-Les règles d’identification ont pour but d’identifier de façon univoque chaque occurrence des entités et sont
+Les règles d'identification ont pour but d'identifier de façon univoque chaque occurrence des entités et sont
 expliquées dans le :doc:`identification_rules`.
 
 Les méthodes utilisées pour déterminer les effets de mise à jour (ajout, destruction, modification et confirmation)
@@ -570,7 +570,7 @@ Livraison du produit
 ====================
 
 Les formats de fichiers de sortie disponibles pour le produit sont : GML (*Geography Markup Language*), GPKG (*OGR
-Geopackage*), KML (*Keyhole Markup Language*) and SHP (*ESRI* |trade| *Shapefile*).
+Geopackage*), KML (*Keyhole Markup Language*) and SHP (*ESRI*\ |trade| *Shapefile*).
 
 :doc:`product_distribution_formats` décrit le nom des fichiers, entités et attributs.
 
@@ -580,4 +580,4 @@ de GéoBase* (www.geobase.ca).
 Métadonnées
 ===========
 
-Ne s’applique pas
+Ne s'applique pas

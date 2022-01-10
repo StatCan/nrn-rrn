@@ -28,7 +28,7 @@ Coordonnées
 Copyright
 =========
 
-|copy| Sa Majesté la Reine du chef du Canada, ministère des Ressources naturelles. Tous droits réservés. GéoBase |reg|
+|copy| Sa Majesté la Reine du chef du Canada, ministère des Ressources naturelles. Tous droits réservés. GéoBase\ |reg|
 
 Indices et tableaux
 -------------------

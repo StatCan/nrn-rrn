@@ -13,12 +13,13 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
+from datetime import datetime
 
 
 # -- Project information -----------------------------------------------------
 
 project = 'National Road Network'
-copyright = '2021, Statistics Canada'
+copyright = f"{datetime.now().year}, Statistics Canada"
 author = 'Statistics Canada'
 
 

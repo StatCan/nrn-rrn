@@ -28,7 +28,7 @@ Contact Information
 Copyright
 =========
 
-|copy| Her Majesty the Queen in Rights of Canada, Department of Natural Resources. All rights reserved. GeoBase |reg|
+|copy| Her Majesty the Queen in Rights of Canada, Department of Natural Resources. All rights reserved. GeoBase\ |reg|
 
 Indices and Tables
 ------------------

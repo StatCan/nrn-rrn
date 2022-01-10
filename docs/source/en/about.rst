@@ -2,4 +2,4 @@
 
 .. include:: ../../../CONTRIBUTING.md
 
-.. include:: ../../../LICENSE.md
+.. include:: ../../../LICENSE.rst

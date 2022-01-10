@@ -547,7 +547,7 @@ Data Product Delivery
 =====================
 
 Output file formats available for the product are: GML (*Geography Markup Language*), GPKG (*OGR Geopackage*), KML
-(*Keyhole Markup Language*) and SHP (*ESRI* |trade| *Shapefile*).
+(*Keyhole Markup Language*) and SHP (*ESRI*\ |trade| *Shapefile*).
 
 The name of the files, entities and attributes are described in :doc:`product_distribution_formats`.
 

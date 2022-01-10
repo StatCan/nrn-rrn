@@ -15,8 +15,8 @@ L'objectif est d'actualiser les produits DVN sur une base régulière dès que d
 les partenaires des DVN. Un de ces mécanismes est la mise en œuvre de principes de gestion des modifications. Deux
 concepts de base sont nécessaires : règles d'identification et définition des classifications des modifications.
 
-:doc:`règles_d'identification` définit aussi précisément que possible le mécanisme d'identification utilisé. Du côté de
-la gestion des modifications, les DVN ne tente pas de suivre l'évolution des phénomènes du monde réel (entités), mais
+:doc:`identification_rules` définit aussi précisément que possible le mécanisme d'identification utilisé. Du côté de la
+gestion des modifications, les DVN ne tente pas de suivre l'évolution des phénomènes du monde réel (entités), mais
 essaient plutôt de maintenir une certaine évolution des objets qui les représentent. En d'autres mots, les DVN ne fera
 pas le suivi des changements réels dans le territoire, ils identifient seulement les *effets* que ceux-ci ont sur les
 données.
@@ -54,7 +54,7 @@ de l'état précédent, peut se produire, tout en conservant le même IDN. Les d
 « modification géométrique ou descriptive » et « confirmation » sont des entités dites *actives* (ou actuelles). Les
 entités ayant l'effet « élimination » sont des données dites *non actives* (historiques).
 
-.. _Types d'effets:
+.. _Effect Types:
 
 Types d'effets
 ==============
@@ -134,7 +134,7 @@ Effets utilisés
 Données segmentées
 ------------------
 
-La gestion des modifications sur les données segmentées est faite à l'aide des *effets* définis à :ref:`Types d'effets`.
+La gestion des modifications sur les données segmentées est faite à l'aide des *effets* définis à :ref:`Effect Types`.
 
 Dans le modèle segmenté, l'effet doit être associé à l'Élément Linéaire au complet même si celui-ci est décomposé en
 plusieurs segments à cause d'un changement d'attribut. C'est-à-dire qu'un même effet doit être utilisé pour l'ensemble

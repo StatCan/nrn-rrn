@@ -1,6 +1,8 @@
+.. |year| date:: %Y
+
 BSD 3-Clause License
 
-Copyright (c) 2021, Government of Canada
+Copyright |copy| |year|, Government of Canada
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

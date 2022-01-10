@@ -15,8 +15,8 @@ The following entities are part of the National Road Network (NRN) Segmented vie
 *Alternate Name Link*, *Blocked Passage*, *Ferry Connection Segment*, *Junction*, *Road Segment*,
 *Street and Place Names* and *Toll Point*.
 
-The product is available in the following output file formats: GML (Geography Markup Language), KML (Keyhole Markup
-Language), SHP (ESRI |trade| Shapefile), and GPKG (OGC Geopackage).
+The product is available in the following output file formats: GML (*Geography Markup Language*), KML (*Keyhole Markup
+Language*), SHP (*ESRI*\ |trade| *Shapefile*), and GPKG (*OGC Geopackage*).
 
 .. note::
     Data files distributed in KML format only contain the entity *Road Segment* and a subset of attributes.
@@ -51,7 +51,7 @@ KML – Keyhole Markup Language
 :Specifications: Open Geospatial Consortium Inc., OGC® KML, Version 2.2.0, 2008-04-14, Reference number of this OGC®
     project document: OGC 07-147r2 (http://portal.opengeospatial.org/files/?artifact_id=27810)
 
-SHP – ESRI |trade| Shapefile
+SHP – ESRI\ |trade| Shapefile
 ----------------------------
 
 :Name: Shapefile
@@ -139,7 +139,7 @@ name of the SHP files is structured accordingly::
                         AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT.
 * <edition> =           Dataset edition number.
 * <version> =           Dataset version number.
-* <ENTITY> =            Abbreviated entity name as defined in :ref:`Dataset`.
+* <ENTITY> =            Abbreviated entity name as defined in :ref:`Datasets`.
 * [<MODIFICATION>] =    [] = Optional. Type of modification applied to the dataset entities and attributes in
                         comparison to previous edition. Possible values are identified in
                         :ref:`Change Management Files`.
@@ -209,10 +209,10 @@ List of distribution file names
 The NRN product is comprised of two types of datasets: a file that contains up to date (actualized) data (e.g. that has
 been updated) and a file containing the modifications (differences) applied to the previous edition of the dataset.
 
-.. _Dataset:
+.. _Datasets:
 
-Dataset
-^^^^^^^
+Datasets
+^^^^^^^^
 
 The extension of the file name corresponds to the distribution format.
 

@@ -125,7 +125,7 @@ Entité
 
 Identifiant unique universel
     La définition et la méthode utilisée pour la génération d'un Identifiant universel unique (IDUU) est décrite dans
-    le document :doc:`règles_d'identification.rst`.
+    le document :doc:`identification_rules.rst`.
 
 Jeu de données
     Collection de données identifiable pour une province ou un territoire canadien.

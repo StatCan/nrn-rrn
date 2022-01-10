@@ -91,7 +91,7 @@ network of partners. The algorithm can be used by all closest to source data pro
 NID when needed. **NIDs should only be generated and assigned by authorized organizations**. Specific care must be
 given to the management of NIDs. These NIDs will eventually allow for data synchronization between organizations. Data
 users must ensure that they make **no alterations whatsoever to these** NIDs value in order to ensure synchronization.
-Modifications to NID’s would render them useless for data synchronization.
+Modifications to NIDs would render them useless for data synchronization.
 
 References
 ==========

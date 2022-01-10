@@ -171,20 +171,20 @@ Un identifiant national unique.
 IDN nom de rue non officiel (gauche, droite)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-L’identifiant utilisé pour lier l'intervalle d'adresse à son ou ses noms de rue non reconnu(s) officiellement. Une
+L'identifiant utilisé pour lier l'intervalle d'adresse à son ou ses noms de rue non reconnu(s) officiellement. Une
 valeur spécifique est définie pour les côtés gauche et droit de l'Élément routier.
 
-:Domaine: Un IDUU ou « Aucun » quand aucune valeur ne s’applique.
+:Domaine: Un IDUU ou « Aucun » quand aucune valeur ne s'applique.
 
     Exemple : 69822b23d217494896014e57a2edb8ac
 
 IDN nom de rue officiel (gauche, droite)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-L’identifiant utilisé pour lier l'intervalle d'adresse à son nom de rue reconnu officiellement. Une valeur spécifique
+L'identifiant utilisé pour lier l'intervalle d'adresse à son nom de rue reconnu officiellement. Une valeur spécifique
 est définie pour les côtés gauche et droit de l'Élément routier.
 
-:Domaine: Un IDUU ou « Aucun » quand aucune valeur ne s’applique.
+:Domaine: Un IDUU ou « Aucun » quand aucune valeur ne s'applique.
 
     Exemple : 69822b23d217494896014e57a2edb8ac
 
@@ -209,7 +209,7 @@ Indicateur système référence (gauche, droite)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Indicateur qui précise si l'adresse physique de tout Élément routier ou d'une partie de celui-ci est basé sur un
-système particulier d’adressage. Une valeur spécifique est définie pour les côtés gauche et droit de l'Élément routier.
+système particulier d'adressage. Une valeur spécifique est définie pour les côtés gauche et droit de l'Élément routier.
 
 .. csv-table:: Domaine :
    :header: "Code", "Étiquette", "Définition"
@@ -323,7 +323,7 @@ Référer aux attributs décrits dans la :ref:`Object Metadata`.
 Jonction
 ========
 
-Une entité positionnée à chaque extrémité d’un Élément routier ou d’une Liaison par transbordeur (fournir la définition
+Une entité positionnée à chaque extrémité d'un Élément routier ou d'une Liaison par transbordeur (fournir la définition
 ou indiquer Segment de liaison par transbordeur). Un Élément routier ou une Liaison par transbordeur forme toujours une
 liaison entre deux Jonctions et, un Élément routier ou une Liaison par transbordeur est toujours délimitée par
 exactement deux Jonctions. Une entité Jonction représente la connexion physique existant entre les Éléments routiers et
@@ -489,7 +489,7 @@ contient plusieurs attributs directionnels.
 Nom de lieu
 ^^^^^^^^^^^
 
-Nom d'une municipalité, d’un district ou d’un autre territoire administratif nommé requis pour assurer l'unicité du nom
+Nom d'une municipalité, d'un district ou d'un autre territoire administratif nommé requis pour assurer l'unicité du nom
 de rue.
 
 :Domaine: Le nom complet d'un lieu.
@@ -857,7 +857,7 @@ Référer aux attributs décrits dans la :ref:`Object Metadata`.
 Passage obstrué
 ===============
 
-Indication de la présence d’un obstacle sur un Élément routier pour empêcher ou contrôler l'accès.
+Indication de la présence d'un obstacle sur un Élément routier pour empêcher ou contrôler l'accès.
 
 Section attribut
 ----------------
@@ -890,11 +890,11 @@ Le type de passage obstrué qui indique si celui-ci est amovible.
    :widths: auto
    :align: left
 
-   1, "Permanente", "La barrière ou l’obstacle doit être détruit ou enlevé au moyen de machinerie lourde pour permettre
+   1, "Permanente", "La barrière ou l'obstacle doit être détruit ou enlevé au moyen de machinerie lourde pour permettre
    l'accès. Les blocs de béton et les remblais de terre constituent des exemples d'obstructions considérées
    permanentes."
-   2, "Amovible", "La barrière est conçue pour permettre l’accès à (l’autre côté de) l’Élément routier qu'elle bloque.
-   Lorsque voulu, l’accès peut facilement être permis."
+   2, "Amovible", "La barrière est conçue pour permettre l'accès à (l'autre côté de) l'Élément routier qu'elle bloque.
+   Lorsque voulu, l'accès peut facilement être permis."
 
 Métadonnées d'objet
 ^^^^^^^^^^^^^^^^^^^
@@ -1123,7 +1123,7 @@ IDN intervalle d'adresse
 
 Un IDUU associé à chaque intervalle d'adresse.
 
-:Domaine: Un IDUU ou « Aucun » quand aucune valeur ne s’applique.
+:Domaine: Un IDUU ou « Aucun » quand aucune valeur ne s'applique.
 
     Exemple : 69822b23d217494896014e57a2edb8ac
 
@@ -1133,7 +1133,7 @@ ID structure
 Un identifiant unique attribué au segment routier ou à l'ensemble de segments routiers formant une structure. Cet
 identifiant permet la reconstitution d'une structure fragmentée par des jonctions.
 
-:Domaine: Un IDUU ou « Aucun » quand aucune valeur ne s’applique.
+:Domaine: Un IDUU ou « Aucun » quand aucune valeur ne s'applique.
 
     Exemple : 69822b23d217494896014e57a2edb8ac
 
@@ -1169,7 +1169,7 @@ Nombre de voies existant sur un Élément routier.
 Nom de lieu officiel (gauche, droite)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Nom d'une municipalité, d’un district ou d’un autre territoire administratif nommé requis pour assurer l'unicité du nom
+Nom d'une municipalité, d'un district ou d'un autre territoire administratif nommé requis pour assurer l'unicité du nom
 de rue.
 
 :Domaine: Dérivé de la table Noms de rue et de lieu. Une valeur spécifique est définie pour les côtés gauche et droit
@@ -1209,14 +1209,14 @@ Nom de structure anglais
 
 La version anglaise du nom d'un ouvrage routier tel qu'attribué par un organisme national ou infranational.
 
-:Domaine: Un nom de structure complet ou « Aucun » quand aucune valeur ne s’applique.
+:Domaine: Un nom de structure complet ou « Aucun » quand aucune valeur ne s'applique.
 
 Nom de structure français
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 La version française du nom d'un ouvrage routier tel qu'attribué par un organisme national ou infranational.
 
-:Domaine: Un nom de structure complet ou « Aucun » quand aucune valeur ne s’applique.
+:Domaine: Un nom de structure complet ou « Aucun » quand aucune valeur ne s'applique.
 
 Numéro dernière maison (gauche, droite)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1292,7 +1292,7 @@ Le type de chaussée d'un Élément routier non revêtue.
 
    0, "Aucun", "Aucune valeur ne s'applique."
    1, "Gravier", "Chemin de terre dont la surface a été améliorée par nivellement avec du gravier."
-   2, "Terre", "Des routes dont la surface est formée par l’enlèvement de la végétation et/ou par le va-et-vient des
+   2, "Terre", "Des routes dont la surface est formée par l'enlèvement de la végétation et/ou par le va-et-vient des
    véhicules sur cette route, ce qui nuit à la croissance de toute végétation."
 
 Type de chaussée revêtue
