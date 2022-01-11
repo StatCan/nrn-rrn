@@ -18,7 +18,8 @@ transbordeur* et *Segment routier*.
 Les formats de fichiers de sortie disponibles pour le produit sont : GML (*Geography Markup Language*), KML (*Keyhole
 Markup Language*), SHP (*ESRI*\ |trade| *Shapefile*) et GPKG (*OGC Geopackage*).
 
-.. note::
+.. admonition:: Notez
+
     Les fichiers de données dans le format KML contiennent uniquement l'entité Segment routier et un sous-ensemble de
     ses attributs.
 
@@ -78,7 +79,7 @@ Nomenclature des fichiers GML
 Les entités du produit distribuées dans le format GML sont regroupées par jeu de données à l'intérieur de différents
 fichiers. Un fichier contenant les entités géométriques et leurs attributs de base (GEOM), un fichier regroupant les
 tables d'attributs d'adressage (ADDR), et jusqu'à quatre fichiers de gestion des modifications pour chaque type de
-contenu du jeu de données (GEOM et ADDR). Le nom des fichiers GML prend la forme suivante ::
+contenu du jeu de données (GEOM et ADDR). Le nom des fichiers GML prend la forme suivante : ::
 
     RRN_<IDENTIFIANT>_<édition>_<version>_<CONTENU>[_<MODIFICATION>].gml
 
@@ -112,7 +113,7 @@ Nomenclature du fichier KML
 ---------------------------
 
 Uniquement l'entité *Segment routier* (et un sous-ensemble d'attributs) du produit est distribuée dans le format KML.
-Le nom du fichier KML prend la forme suivante ::
+Le nom du fichier KML prend la forme suivante : ::
 
     nrn_rrn_<identifiant>_kml_fr.kmz
 
@@ -131,7 +132,7 @@ Nomenclature des fichiers SHP
 -----------------------------
 
 Les entités du produit dans le format SHP sont divisées selon leur représentation géométrique. Le nom des fichiers SHP
-suit la structure suivante ::
+suit la structure suivante : ::
 
     RRN_<IDENTIFIANT>_<édition>_<version>_<ENTITÉ>[_<MODIFICATION>].shp
 
@@ -164,7 +165,7 @@ Nomenclature des fichiers GPKG
 ------------------------------
 
 Les entités du produit dans le format GPKG sont divisées selon leur représentation géométrique. Le nom des fichiers
-GPKG suit la structure suivante ::
+GPKG suit la structure suivante : ::
 
     RRN_<IDENTIFIANT>_<édition>_<version>_fr.gpkg
 
@@ -185,7 +186,7 @@ Fichier de métadonnées
 
 Quatre fichiers de métadonnées sont distribués avec chaque jeu de données du produit RRN. Deux fichiers sont livrés
 dans le format FGDC/XML (en français et en anglais) et deux autres selon le format FGDC/HTML. La nomenclature du
-fichier de métadonnées est ::
+fichier de métadonnées est : ::
 
     nrn_rrn_<identifiant>_<édition>_<version>_fgdc_fr.<format>
 

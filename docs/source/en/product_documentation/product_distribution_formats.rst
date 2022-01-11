@@ -18,7 +18,8 @@ The following entities are part of the National Road Network (NRN) Segmented vie
 The product is available in the following output file formats: GML (*Geography Markup Language*), KML (*Keyhole Markup
 Language*), SHP (*ESRI*\ |trade| *Shapefile*), and GPKG (*OGC Geopackage*).
 
-.. note::
+.. admonition:: Note
+
     Data files distributed in KML format only contain the entity *Road Segment* and a subset of attributes.
 
 Product Identification

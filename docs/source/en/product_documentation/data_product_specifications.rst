@@ -5,7 +5,8 @@ Data Product Specifications
 .. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
-.. note::
+.. admonition:: Note
+
     These specifications are produced in accordance with *International Standard ISO/TC 211, 19131: 2007 Geographic
     Information / Geomatics – Data Product Specification*, which refers in particular to standard *ISO 19115: 2003
     Geographic information – Metadata*.
@@ -80,7 +81,8 @@ Scope identification
 
 Global
 
-.. note::
+.. admonition:: Note
+
     "Global" means that this scope refers to all parts of this data product specifications.
 
 Level
@@ -172,7 +174,8 @@ Ending date
 
 Today
 
-.. note::
+.. admonition:: Note
+
     "Today" means the current date of publication of an instance of the NRN. That is, an instance of the NRN may
     include the road network that is current at the time of publication.
 
@@ -236,7 +239,8 @@ Spatial resolution
 
 Spatial resolution denominator of the data: 10,000.
 
-.. note::
+.. admonition:: Note
+
     The nominal spatial resolution is only a general estimate since the data originate from multiple sources (GPS,
     existing federal, provincial or municipal data) but is approximately 1:10,000.
 
@@ -385,7 +389,8 @@ NRN road representation corresponds to centerline of all non restricted usage ro
 and not blocked by an obstacle). Roads isolated from the main road network, alleyways, resource and recreational roads
 and addressing information may not be included in some NRN datasets.
 
-.. note::
+.. admonition:: Note
+
     Ferry connection segments are included in the NRN for the purpose of road network completeness.
 
 Commission

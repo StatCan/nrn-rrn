@@ -5,7 +5,8 @@ Spécifications de produit
 .. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
-.. note::
+.. admonition:: Notez
+
     Ces spécifications ont été produites conformément à la *Norme internationale ISO/TC 211 19131 : 2007 Information
     géographique – Spécifications de contenu informationnel*, laquelle réfère notamment à la norme *ISO 19115 : 2003
     Information géographique – Métadonnées*.
@@ -84,7 +85,8 @@ Identification de la portée
 
 Globale
 
-.. note::
+.. admonition:: Notez
+
     "Globale" signifie que la portée réfère à toutes les parties des spécifications de produit.
 
 Niveau
@@ -177,7 +179,8 @@ Date de fin
 
 Aujourd'hui
 
-.. note::
+.. admonition:: Notez
+
     "Aujourd'hui" signifie la date de publication courante d'une instance du RRN. C'est-à-dire, une instance du RRN
     peut inclure un réseau routier qui est actuel à la date de publication.
 
@@ -243,7 +246,8 @@ Résolution spatiale
 
 Dénominateur de la résolution spatiale des données : 10 000.
 
-.. note::
+.. admonition:: Notez
+
     La résolution spatiale nominale est un estimé général du fait que les données sont issues de plusieurs sources
     (GPS, données existantes fédérales, provinciales ou municipales) mais est estimée être de l'ordre de 1/10 000.
 
@@ -399,7 +403,8 @@ sont pas reliées au réseau routier principal, les ruelles, les routes d'accès
 informations d'adressage peuvent ne pas faire partie des données de certains jeux de données RRN. Ces données devraient
 être ajoutées au fil des mises à jour.
 
-.. note::
+.. admonition:: Notez
+
     Les segments de liaison par transbordeur sont inclus au RRN afin d'assurer un réseau routier complet.
 
 Commission

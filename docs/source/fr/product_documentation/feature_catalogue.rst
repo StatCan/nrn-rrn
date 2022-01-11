@@ -5,7 +5,8 @@ Catalogue d'entités
 .. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
-.. note::
+.. admonition:: Notez
+
     La description des entités et attributs de ce catalogue est en grande partie extraite de la norme internationale
     *ISO 14825 — Systèmes de transport intelligents — Fichiers de données géographiques — Spécification des données
     globales* du comité technique ISO/TC 204.

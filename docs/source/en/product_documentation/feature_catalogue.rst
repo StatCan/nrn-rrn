@@ -5,7 +5,8 @@ Feature Catalogue
 .. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
-.. note::
+.. admonition:: Note
+
     The description of features and attributes provided in this catalogue is largely based on the standard *ISO 14825 —
     Intelligent transport systems — Geographic Data Files (GDF) — Overall data specification* resulting from technical
     committee ISO/TC 204.
