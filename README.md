@@ -1,12 +1,13 @@
 # National Road Network (NRN)
-[![GitHub license](https://img.shields.io/github/license/jessestewart1/nrn-rrn)](https://github.com/jessestewart1/nrn-rrn/blob/master/LICENSE.rst)
-[![Documentation Status](https://readthedocs.org/projects/nrn-rrn-docs/badge/?version=latest;style=flat)](https://nrn-rrn-docs.readthedocs.io/en/latest/?badge=latest)
+[![Repository](https://img.shields.io/badge/Repository-nrn--rrn-brightgreen.svg?style=flat-square&logo=github)](https://github.com/jessestewart1/nrn-rrn)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg?style=flat-square)](https://opensource.org/licenses/BSD-3-Clause)
+[![Documentation Status](https://readthedocs.org/projects/nrn-rrn-docs/badge/?style=flat-square)](https://nrn-rrn-docs.readthedocs.io/en/latest/)
 
 ## Contents:
 
 - [Description](#description)
 - [Setup](#setup)
-  * [Prerequisites](#prerequisites)
+  * [Software Dependencies](#software-dependencies)
   * [Installation](#installation)
 
 ## Description
@@ -14,7 +15,7 @@
 The NRN was adopted by members from the Inter-Agency Committee on Geomatics (IACG) and the Canadian Council on 
 Geomatics (CCOG) to provide quality geospatial and attributive data (current, accurate, consistent), homogeneous and 
 normalized of the entire Canadian road network. The NRN is part of the GeoBase initiative which aims to provide a 
-common geospatial infrastructure that is maintained on a regular basis by closest to source organizations.
+common geospatial infrastructure that is maintained on a regular basis by *closest to source* organizations.
 
 The NRN is distributed in the form of thirteen provincial / territorial datasets consisting of two linear entities 
 (road segments and ferry segments), three punctual entities (junctions, blocked passages, and toll points), and three
@@ -25,29 +26,48 @@ The NRN content largely conforms to ISO 14825 (https://www.iso.org/standard/5461
 
 ## Setup
 
-The NRN is written in pure Python, but has several dependencies written in C. These dependencies can often be difficult 
-to install and, therefore, it is recommended to create and use the `conda` environment defined in the NRN repository.
+The repository of the NRN project is referred to by its actual repository name: `nrn-rrn`.
 
-### Prerequisites
+### Software Dependencies
 
-The only prerequisite is Anaconda with `conda` >= 4.9 (the latest version of Anaconda will satisfy this requirement).
-Anaconda can be downloaded from: https://docs.anaconda.com/anaconda/install/.
+The `nrn-rrn` has no mandatory software dependencies but highly recommends the software specified in this section. 
+Furthermore, documentation for `nrn-rrn` installation and usage will make use of this software since it represents the 
+easiest and recommended approach.
 
-Once installed, the `conda` version can be validated in the command line with:
-```
-conda -V
-```
+#### Anaconda / conda
+
+The `nrn-rrn` is written in pure Python, but has several dependencies written with C libraries. These C libraries can 
+be difficult to install (particularly on Windows) and, therefore, it is recommended to create and use the conda virtual 
+environment defined in the `nrn-rrn`. conda is an environment and package manager and is the preferable choice for 
+dependency management since it provides pre-built binaries for all dependencies of the `nrn-rrn` for all platforms 
+(Windows, Mac, Linux).
+
+Anaconda with conda >= 4.9 (the latest version of Anaconda will satisfy this requirement).  
+Download: https://docs.anaconda.com/anaconda/install/
+
+Miniconda will also suffice (minimal distribution only containing Python and conda).  
+Download: https://docs.conda.io/en/latest/miniconda.html
+
+#### Git
+
+Git is recommended for simpler repository installation and integration of updates.  
+Download: https://git-scm.com/downloads
 
 ### Installation
 
-FIX THIS SECTION
+Use the following steps to install the `nrn-rrn` repository and conda environment:
 
-1. Download and unzip the repository: https://github.com/jessestewart1/nrn-rrn
+1. Install the repository.
 
-2. Create a virtual conda environment from the file `environment.yml`:
+   a) Using Git:  
+   ```
+   git clone https://github.com/jessestewart1/nrn-rrn.git
+   ```
 
-   `conda env create -f <path to environment.yml>`
+   b) Manual install: Download and unzip the repository: https://github.com/jessestewart1/nrn-rrn.
 
-3. Validate the successful creation of the virtual environment by listing all available environments:
 
-   `conda env list`
+2. Create the conda environment from the `environment.yml` file:
+```
+conda env create -f <path to environment.yml>
+```
