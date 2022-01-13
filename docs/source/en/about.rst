@@ -1,5 +1,3 @@
 .. include:: ../../../README.md
 
-.. include:: ../../../CONTRIBUTING.md
-
 .. include:: ../../../LICENSE.rst

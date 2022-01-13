@@ -1,5 +1,6 @@
+*************************************
 National Road Network's Documentation
-=====================================
+*************************************
 
 .. include:: <isonum.txt>
 .. include:: <isopub.txt>
@@ -9,6 +10,7 @@ National Road Network's Documentation
    about
    user_guide
    product_documentation
+   community
 
 Contact Information
 ===================

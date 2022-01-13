@@ -1,4 +1,4 @@
-name: nrnv3
+name: nrn-rrn
 channels:
   - conda-forge
   - defaults
@@ -12,7 +12,6 @@ dependencies:
   - matplotlib=3.4.2
   - numpy=1.19.5
   - pandas=1.1.5
-  - pip=21.0.1
   - psycopg2=2.9.1
   - pydata-sphinx-theme=0.7.2
   - pygeos=0.10

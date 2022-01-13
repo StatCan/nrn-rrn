@@ -1,5 +1,6 @@
+****************************************
 Documentation du Réseau routier national
-========================================
+****************************************
 
 .. include:: <isonum.txt>
 .. include:: <isopub.txt>
@@ -9,6 +10,7 @@ Documentation du Réseau routier national
    about
    user_guide
    product_documentation
+   community
 
 Coordonnées
 ===========
