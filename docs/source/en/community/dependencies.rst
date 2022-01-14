@@ -87,8 +87,7 @@ operating on arrays of geometries.
 `Python (python) <https://www.python.org/>`_
 ============================================
 
-The actual Python installation which, conveniently, can be defined like any other dependency in the conda environment
-file.
+The actual Python installation.
 
 `PyYAML (pyyaml) <https://github.com/yaml/pyyaml>`_
 ===================================================

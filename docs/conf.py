@@ -29,7 +29,10 @@ author = 'Statistics Canada'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autosectionlabel',
+    "IPython.sphinxext.ipython_console_highlighting",
+    "IPython.sphinxext.ipython_directive",
+    "nbsphinx",
+    "sphinx.ext.autosectionlabel",
 ]
 
 # The master toctree document.
