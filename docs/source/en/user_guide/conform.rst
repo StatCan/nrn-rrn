@@ -661,7 +661,7 @@ This data structure contains 3 mandatory keys:
                          | ``separator``: A delimiter used to concatenate the attributes.
 
 Output
-^^^^^^
+------
 
 The output dataset will contain all addressing attributes of the NRN dataset ``addrange`` and will use the provided
 attributes (``address_join_field`` and ``roadseg_join_field``) to be joined to whichever source dataset is mapped to
@@ -669,7 +669,7 @@ NRN dataset ``roadseg``. Therefore, all addressing attributes of ``addrange`` ca
 NRN dataset ``roadseg`` since they will exist on the source dataset prior to the execution of the field mapping process.
 
 Examples
-^^^^^^^^
+--------
 
 **Simple Example (source: Prince Edward Island):**
 
@@ -704,3 +704,11 @@ Examples
       roadseg_join_field:
         fields: [dirprefix, strtypre, namebody, strtysuf, dirsuffix]
         separator: " "
+
+Segmentation Process
+--------------------
+
+The following documents describe the address segmentation process:
+
+:doc:`../../../_static/reports/address_segmentation_british_columbia.html <Address Segmentation - British Columbia>`
+:doc:`../../../_static/reports/address_segmentation_yellowknife.html <Address Segmentation - Yellowknife>`

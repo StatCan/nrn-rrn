@@ -6,5 +6,5 @@ National Road Network's Documentation / Documentation du Réseau routier nationa
 
 .. toctree::
 
-   en/index
-   fr/index
+   en/index <English>
+   fr/index <Français>

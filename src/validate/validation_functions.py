@@ -125,7 +125,7 @@ class Validator:
             },
             402: {
                 "func": self.dates_combination,
-                "desc": "Attributes \"credate\" and \"revdate\" must have a valid yyyymmdd combination.",
+                "desc": "Attributes \"credate\" and \"revdate\" must have a valid YYYYMMDD combination.",
                 "datasets": ["addrange", "blkpassage", "ferryseg", "roadseg", "strplaname", "tollpoint"],
                 "iter_cols": ["credate", "revdate"]
             },
@@ -165,7 +165,7 @@ class Validator:
             601: {
                 "func": self.exit_numbers_nid,
                 "desc": "Attribute \"exitnbr\" must be identical, excluding the default value or \"None\", for all "
-                        "arcs sharing an nid.",
+                        "arcs sharing an NID.",
                 "datasets": ["roadseg"],
                 "iter_cols": None
             },
@@ -508,7 +508,7 @@ class Validator:
 
     def dates_combination(self, dataset: str, col: str) -> dict:
         """
-        Validates: Attributes \"credate\" and \"revdate\" must have a valid yyyymmdd combination.
+        Validates: Attributes \"credate\" and \"revdate\" must have a valid YYYYMMDD combination.
 
         :param str dataset: name of the dataset to be validated.
         :param str col: column name.
@@ -531,7 +531,7 @@ class Validator:
         for length in (4, 6, 8):
             series_ = series.loc[series.map(lambda val: int(math.log10(val)) + 1) == length].copy(deep=True)
 
-            # Flag records with invalid yyyymmdd combination.
+            # Flag records with invalid YYYYMMDD combination.
             flag = pd.to_datetime(series_, format=strftime[length], errors="coerce").isna()
             if sum(flag):
 
@@ -720,7 +720,7 @@ class Validator:
     def exit_numbers_nid(self, dataset: str) -> dict:
         """
         Validates: Attribute \"exitnbr\" must be identical, excluding the default value or \"None\", for all arcs
-            sharing an nid.
+            sharing an NID.
 
         :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.

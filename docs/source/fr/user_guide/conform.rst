@@ -675,7 +675,7 @@ Cette structure de données contient 3 clés obligatoires :
                          | ``separator``: Un délimiteur utilisé pour concaténer les attributs.
 
 Sortir
-^^^^^^
+------
 
 L'ensemble de données de sortie contiendra tous les attributs d'adressage de l'ensemble de données RRN ``addrange`` et
 utilisera les attributs fournis (``address_join_field`` et ``roadseg_join_field``) à joindre à l'ensemble de données
@@ -684,7 +684,7 @@ source correspondant à l'ensemble de données RRN ``roadseg``. Par conséquent,
 puisqu'ils existeront sur l'ensemble de données source avant l'exécution du processus de correspondance des attributs.
 
 Exemples
-^^^^^^^^
+--------
 
 **Exemple simple (source : Île-du-Prince-Édouard) :**
 
@@ -719,3 +719,11 @@ Exemples
       roadseg_join_field:
         fields: [dirprefix, strtypre, namebody, strtysuf, dirsuffix]
         separator: " "
+
+Processus de segmentation
+-------------------------
+
+Les documents suivants décrivent le processus de segmentation d'adresse :
+
+:doc:`../../../_static/reports/address_segmentation_british_columbia.html <Processus de segmentation - Colombie britannique>`
+:doc:`../../../_static/reports/address_segmentation_yellowknife.html <Processus de segmentation - Yellowknife>`
