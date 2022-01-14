@@ -8,7 +8,7 @@ Dependencies
 .. contents:: Contents:
    :depth: 2
 
-The NRN project builds upon the capabilities of several open-source python tools and libraries. Specific dependency
+The NRN project builds upon the capabilities of several open-source Python tools and libraries. Specific dependency
 details are outlined in the conda environment file :doc:`environment <../../../../../environment.yml>`. This document
 briefly explains each of the dependencies within the NRN dependency ecosystem.
 
@@ -23,7 +23,7 @@ necessary.
 
 ``Fiona`` is ``OGR``'s neat and nimble API for Python programmers. ``Fiona`` reads and writes geographic data files in
 standard Python IO style and relies upon familiar Python types and protocols such as files, dictionaries, mappings, and
-iterators instead of classes specific to ``OGR``'s implementation
+iterators instead of classes specific to ``OGR``'s implementation.
 
 `GDAL (gdal) <https://gdal.org/>`_
 ==================================

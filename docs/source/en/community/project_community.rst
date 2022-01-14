@@ -9,7 +9,7 @@ Project Community
    :depth: 1
 
 Team
-=====
+====
 
 | **Jesse Stewart** | Lead Developer and Project Manager | `@jessestewart1 <https://github.com/jessestewart1>`_
 | **David Craig** | Data Integration and Processing | `@davidacraig <https://github.com/DavidACraig>`_
@@ -27,7 +27,7 @@ contribution insights.
 Project Affiliations
 ====================
 
-.. |logo_statscan| image:: https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Statistics_Canada_logo.svg/800px-Statistics_Canada_logo.svg.png
+.. |logo_statscan| image:: ../../../_static/affiliations/statistics_canada_en.png
    :alt: Statistics Canada logo.
    :target: https://www.statcan.gc.ca/
    :height: 25px
@@ -39,7 +39,7 @@ Project Affiliations
    :height: 35px
    :align: middle
 
-.. |logo_ccog| image:: https://www.ccog-cocg.ca/wp-content/themes/wet-boew-child/images/ccog-ccdg.png
+.. |logo_ccog| image:: ../../../_static/affiliations/ccog.png
    :alt: CCOG logo.
    :target: https://www.ccog-cocg.ca/
    :height: 30px
