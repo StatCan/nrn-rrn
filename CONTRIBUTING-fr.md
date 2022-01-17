@@ -1,17 +1,10 @@
-# Contribuant
+Contribuant
+===========
 
 Ce document explique le processus de contribution au projet de Réseau routier national (RRN).
 
 Le mode de contribution préféré est via les *issues* (problèmes) GitHub. Les ajouts, modifications et suppressions de 
 code doivent être laissés aux membres du projet RRN.
-
-## Matières :
-
-- [Déclaration de disponibilité publique](#déclaration-de-disponibilité-publique)
-- [Problèmes d'ouverture](#problèmes-d'ouverture)
-- [Modification du code](#modification-du-code)
-  * [Mise en page](#mise-en-page)
-  * [Gestion des versions](#gestion-des-versions)
 
 ## Déclaration de disponibilité publique
 
@@ -28,12 +21,12 @@ code soit accessible au public, tous les composants et détails ne peuvent pas �
 Les commentaires sont grandement appréciés, qu'il s'agisse d'un problème, d'une idée ou d'une question générale. Suivez 
 ces étapes lors de l'ouverture d'un problème GitHub :
 1. **Vérifier les problèmes préexistants :** Parcourez les problèmes ouverts et fermés pour vérifier si votre problème 
-   a déjà été traité. Si tel est le cas, commentez le problème existant plutôt que d'ouvrir un nouveau problème.
+a déjà été traité. Si tel est le cas, commentez le problème existant plutôt que d'ouvrir un nouveau problème.
 2. **Ouvrir un problème :** Lorsque vous ouvrez un nouveau problème, utilisez les étiquettes et modèles GitHub 
-   préexistants. Toutes les sections du modèle ne sont pas obligatoires. Pour éviter les redondances, ne remplissez que 
-   les sections que vous jugez essentielles à votre problème.
+préexistants. Toutes les sections du modèle ne sont pas obligatoires. Pour éviter les redondances, ne remplissez que 
+les sections que vous jugez essentielles à votre problème.
 3. **Fermer un problème :** Ne fermez pas un problème, même si vous pensez qu'il est résolu ou qu'il n'est plus 
-   pertinent. Cette responsabilité devrait être laissée aux membres du projet RRN.
+pertinent. Cette responsabilité devrait être laissée aux membres du projet RRN.
 
 ## Modification du code
 

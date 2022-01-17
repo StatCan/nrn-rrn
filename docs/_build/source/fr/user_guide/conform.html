@@ -1,0 +1,1381 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conform &#8212; NRN / RRN  documentation</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/css/blank.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Validate" href="validate.html" />
+    <link rel="prev" title="Utilisation générale" href="general_usage.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../../../index.html">
+<p class="title">NRN / RRN</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../en/index.html">
+  English
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="../index.html">
+  Français
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/jessestewart1/nrn-rrn" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://open.canada.ca/data/en/dataset/3d282116-e556-400c-9306-ca1a3cada77f" rel="noopener" target="_blank" title="Open Government">
+            <span><i class="fas fa-database"></i></span>
+            <label class="sr-only">Open Government</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about.html">
+   Réseau routier national (RRN)
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../user_guide.html">
+   Mode d’emploi
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="general_usage.html">
+     Utilisation générale
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Conform
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="validate.html">
+     Validate
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../product_documentation.html">
+   Documentation du produit
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../product_documentation/reference_materials.html">
+     1. Matériaux de référence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../product_documentation/release_notes.html">
+     2. Notes de publication
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../product_documentation/product_distribution_formats.html">
+     3. Formats de distribution du produit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../product_documentation/data_product_specifications.html">
+     4. Spécifications de produit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../product_documentation/feature_catalogue.html">
+     5. Catalogue d’entités
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../product_documentation/data_exchange_model.html">
+     6. Modèle d’échange de données
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../product_documentation/change_management.html">
+     7. Gestion des modifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../product_documentation/identification_rules.html">
+     8. Règles d’identification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../product_documentation/completion_rates.html">
+     9. Taux d’achèvement
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../community.html">
+   Communauté
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../community/project_community.html">
+     Communauté du projet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../community/contributing.html">
+     Contribuant
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../community/dependencies.html">
+     Dépendances
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#apercu">
+   Aperçu
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#apercu-des-configurations">
+   Aperçu des configurations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#repertoires">
+     Répertoires
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#repertoire-racine">
+       Répertoire racine
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#sous-repertoires">
+       Sous-répertoires
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fichiers">
+     Fichiers
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#noms-de-fichiers">
+       Noms de fichiers
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#integrite-du-nom-de-fichier">
+       Intégrité du nom de fichier
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#structure">
+     Structure
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#contenu-de-la-configuration">
+   Contenu de la configuration
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#metadonnees">
+     Métadonnées
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Structure
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data">
+     Data
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id2">
+       Structure
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     Conform
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id4">
+       Structure
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#aucune-correspondance-d-attribut">
+       Aucune correspondance d’attribut
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#correspondance-d-attribut-directe">
+       Correspondance d’attribut directe
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#fonctions-de-correspondance-des-attributs">
+       Fonctions de correspondance des attributs
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#id5">
+         Structure
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#fonction-apply-domain">
+         Fonction:
+         <code class="docutils literal notranslate">
+          <span class="pre">
+           apply_domain
+          </span>
+         </code>
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#fonction-concatenate">
+         Fonction:
+         <code class="docutils literal notranslate">
+          <span class="pre">
+           concatenate
+          </span>
+         </code>
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#fonction-direct">
+         Fonction:
+         <code class="docutils literal notranslate">
+          <span class="pre">
+           direct
+          </span>
+         </code>
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#fonction-map-values">
+         Fonction:
+         <code class="docutils literal notranslate">
+          <span class="pre">
+           map_values
+          </span>
+         </code>
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#fonction-query-assign">
+         Fonction:
+         <code class="docutils literal notranslate">
+          <span class="pre">
+           query_assign
+          </span>
+         </code>
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#fonction-regex-find">
+         Fonction:
+         <code class="docutils literal notranslate">
+          <span class="pre">
+           regex_find
+          </span>
+         </code>
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#fonction-regex-sub">
+         Fonction:
+         <code class="docutils literal notranslate">
+          <span class="pre">
+           regex_sub
+          </span>
+         </code>
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#fonctions-de-correspondance-des-attributs-touches-speciales">
+       Fonctions de correspondance des attributs - Touches spéciales
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#processus-separement">
+         Processus séparément
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#iterer-les-colonnes">
+         Itérer les colonnes
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#domaines-d-attributs">
+         Domaines d’attributs
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#sortie-imbriquee">
+       Sortie imbriquée
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#segmentation-des-adresses">
+   Segmentation des adresses
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sortir">
+     Sortir
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exemples">
+     Exemples
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#processus-de-segmentation">
+     Processus de segmentation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="conform">
+<h1><a class="toc-backref" href="#id6">Conform</a><a class="headerlink" href="#conform" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="matieres">
+<p class="topic-title">Matières :</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#conform" id="id6">Conform</a></p>
+<ul>
+<li><p><a class="reference internal" href="#apercu" id="id7">Aperçu</a></p></li>
+<li><p><a class="reference internal" href="#apercu-des-configurations" id="id8">Aperçu des configurations</a></p>
+<ul>
+<li><p><a class="reference internal" href="#repertoires" id="id9">Répertoires</a></p>
+<ul>
+<li><p><a class="reference internal" href="#repertoire-racine" id="id10">Répertoire racine</a></p></li>
+<li><p><a class="reference internal" href="#sous-repertoires" id="id11">Sous-répertoires</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#fichiers" id="id12">Fichiers</a></p>
+<ul>
+<li><p><a class="reference internal" href="#noms-de-fichiers" id="id13">Noms de fichiers</a></p></li>
+<li><p><a class="reference internal" href="#integrite-du-nom-de-fichier" id="id14">Intégrité du nom de fichier</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#structure" id="id15">Structure</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#contenu-de-la-configuration" id="id16">Contenu de la configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#metadonnees" id="id17">Métadonnées</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id1" id="id18">Structure</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data" id="id19">Data</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id2" id="id20">Structure</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#id3" id="id21">Conform</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id4" id="id22">Structure</a></p></li>
+<li><p><a class="reference internal" href="#aucune-correspondance-d-attribut" id="id23">Aucune correspondance d’attribut</a></p></li>
+<li><p><a class="reference internal" href="#correspondance-d-attribut-directe" id="id24">Correspondance d’attribut directe</a></p></li>
+<li><p><a class="reference internal" href="#fonctions-de-correspondance-des-attributs" id="id25">Fonctions de correspondance des attributs</a></p></li>
+<li><p><a class="reference internal" href="#fonctions-de-correspondance-des-attributs-touches-speciales" id="id26">Fonctions de correspondance des attributs - Touches spéciales</a></p></li>
+<li><p><a class="reference internal" href="#sortie-imbriquee" id="id27">Sortie imbriquée</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#segmentation-des-adresses" id="id28">Segmentation des adresses</a></p>
+<ul>
+<li><p><a class="reference internal" href="#sortir" id="id29">Sortir</a></p></li>
+<li><p><a class="reference internal" href="#exemples" id="id30">Exemples</a></p></li>
+<li><p><a class="reference internal" href="#processus-de-segmentation" id="id31">Processus de segmentation</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="apercu">
+<h2><a class="toc-backref" href="#id7">Aperçu</a><a class="headerlink" href="#apercu" title="Permalink to this headline">¶</a></h2>
+<p>Le processus <cite>conform</cite> utilise un ou plusieurs fichiers de configuration <code class="docutils literal notranslate"><span class="pre">YAML</span></code> (.yaml) pour définir le mappage des
+données source vers le schéma RRN.</p>
+<p>Le schéma RRN est défini dans <a class="reference internal" href="../product_documentation/feature_catalogue.html"><span class="doc">Catalogue d’entités</span></a>.</p>
+<p>Idéalement, les données sources adhéreraient au schéma RRN et auraient un mappage de champ direct (1 : 1).
+Malheureusement, cela ne reflète pas la réalité. Par conséquent, pour permettre l’intégration d’autant de sources de
+données que possible, un certain nombre de fonctions ont été développées pour manipuler les données sources en vue de
+leur intégration dans le modèle de données RRN.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Correspondance des attributs</dt>
+<dd class="field-odd"><p>Le processus d’intégration des données sources dans le modèle de données RRN.</p>
+</dd>
+<dt class="field-even">Clé</dt>
+<dd class="field-even"><p>Attribut individuel d’un fichier <code class="docutils literal notranslate"><span class="pre">YAML</span></code>.</p>
+</dd>
+<dt class="field-odd">YAML</dt>
+<dd class="field-odd"><p>Langage de sérialisation des données couramment utilisé pour les fichiers de configuration.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="apercu-des-configurations">
+<h2><a class="toc-backref" href="#id8">Aperçu des configurations</a><a class="headerlink" href="#apercu-des-configurations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="repertoires">
+<h3><a class="toc-backref" href="#id9">Répertoires</a><a class="headerlink" href="#repertoires" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="repertoire-racine">
+<h4><a class="toc-backref" href="#id10">Répertoire racine</a><a class="headerlink" href="#repertoire-racine" title="Permalink to this headline">¶</a></h4>
+<p>Le répertoire <code class="docutils literal notranslate"><span class="pre">root</span></code> pour tous les fichiers de configuration est : <code class="docutils literal notranslate"><span class="pre">nrn-rrn/src/conform/sources</span></code>.</p>
+</div>
+<div class="section" id="sous-repertoires">
+<h4><a class="toc-backref" href="#id11">Sous-répertoires</a><a class="headerlink" href="#sous-repertoires" title="Permalink to this headline">¶</a></h4>
+<p>Chaque fichier de configuration doit résider dans un sous-répertoire de <code class="docutils literal notranslate"><span class="pre">root</span></code>, où le nom du sous-répertoire est
+l’abréviation provinciale/territoriale de la source de données. Les abréviations de source acceptées sont les
+suivantes :</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Abréviation</p></th>
+<th class="head"><p>Source (Province / Territoire)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ab</p></td>
+<td><p>Alberta</p></td>
+</tr>
+<tr class="row-odd"><td><p>bc</p></td>
+<td><p>Colombie-Britannique</p></td>
+</tr>
+<tr class="row-even"><td><p>mb</p></td>
+<td><p>Manitoba</p></td>
+</tr>
+<tr class="row-odd"><td><p>nb</p></td>
+<td><p>Nouveau-Brunswick</p></td>
+</tr>
+<tr class="row-even"><td><p>nl</p></td>
+<td><p>Terre-Neuve et Labrador</p></td>
+</tr>
+<tr class="row-odd"><td><p>ns</p></td>
+<td><p>Nouvelle-Écosse</p></td>
+</tr>
+<tr class="row-even"><td><p>nt</p></td>
+<td><p>Territoires du Nord-Ouest</p></td>
+</tr>
+<tr class="row-odd"><td><p>nu</p></td>
+<td><p>Nunavut</p></td>
+</tr>
+<tr class="row-even"><td><p>on</p></td>
+<td><p>Ontario</p></td>
+</tr>
+<tr class="row-odd"><td><p>pe</p></td>
+<td><p>Île-du-Prince-Édouard</p></td>
+</tr>
+<tr class="row-even"><td><p>qc</p></td>
+<td><p>Québec</p></td>
+</tr>
+<tr class="row-odd"><td><p>sk</p></td>
+<td><p>Saskatchewan</p></td>
+</tr>
+<tr class="row-even"><td><p>yt</p></td>
+<td><p>Territoire du Yukon</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="fichiers">
+<h3><a class="toc-backref" href="#id12">Fichiers</a><a class="headerlink" href="#fichiers" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="noms-de-fichiers">
+<h4><a class="toc-backref" href="#id13">Noms de fichiers</a><a class="headerlink" href="#noms-de-fichiers" title="Permalink to this headline">¶</a></h4>
+<p>Les noms de fichiers de configuration individuels n’ont pas d’importance, tant qu’ils ont l’extension <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> requise.</p>
+</div>
+<div class="section" id="integrite-du-nom-de-fichier">
+<h4><a class="toc-backref" href="#id14">Intégrité du nom de fichier</a><a class="headerlink" href="#integrite-du-nom-de-fichier" title="Permalink to this headline">¶</a></h4>
+<p>Chaque jeu de données source (fichier ou couche) doit être défini dans son propre fichier de configuration. De même,
+chaque jeu de données RRN ne doit être défini que dans un seul fichier de configuration par sous-répertoire source,
+sinon les résultats seront écrasés par les fichiers de configuration suivants qui correspondent au même jeu de données
+RRN.</p>
+</div>
+</div>
+<div class="section" id="structure">
+<h3><a class="toc-backref" href="#id15">Structure</a><a class="headerlink" href="#structure" title="Permalink to this headline">¶</a></h3>
+<p>Structure générique :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>src
+├── conform
+│   ├── sources
+│   │   ├── &lt;source abbreviation&gt;
+│   │   │   ├── &lt;configuration file name&gt;.yaml
+│   │   │   ├── &lt;configuration file name&gt;.yaml
+│   │   │   ...
+</pre></div>
+</div>
+<p>Structure spécifique (source : Nouveau-Brunswick) :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>src
+├── conform
+│   ├── sources
+│   │   ├── nb
+│   │   │   ├── geonb_nbrn-rrnb_ferry-traversier.yaml
+│   │   │   └── geonb_nbrn-rrnb_road-route.yaml
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="contenu-de-la-configuration">
+<h2><a class="toc-backref" href="#id16">Contenu de la configuration</a><a class="headerlink" href="#contenu-de-la-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Les fichiers de configuration se composent de 3 composants principaux (sections) :</p>
+<dl class="field-list simple">
+<dt class="field-odd">Métadonnées</dt>
+<dd class="field-odd"><p>Métadonnées de la source.</p>
+</dd>
+<dt class="field-even">Data</dt>
+<dd class="field-even"><p>Fichier source et propriétés de la couche.</p>
+</dd>
+<dt class="field-odd">Conform</dt>
+<dd class="field-odd"><p>Définit la correspondance des attributs.</p>
+</dd>
+</dl>
+<div class="section" id="metadonnees">
+<h3><a class="toc-backref" href="#id17">Métadonnées</a><a class="headerlink" href="#metadonnees" title="Permalink to this headline">¶</a></h3>
+<p>Les composants de métadonnées définissent tous les détails pertinents sur les données source. Aucune clé de métadonnées
+n’est obligatoire, mais il est fortement encouragé de remplir autant de clés de métadonnées que possible car il s’agit
+de la principale référence utilisée pour contextualiser et se référer à la source de données, si jamais nécessaire.</p>
+<div class="section" id="id1">
+<h4><a class="toc-backref" href="#id18">Structure</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p><strong>Structure générique :</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">coverage</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">country</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">province</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">ISO3166</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">alpha2</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">country</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">subdivision</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">website</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">update_frequency</span><span class="p">:</span><span class="w"></span>
+<span class="nt">license</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">url</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">text</span><span class="p">:</span><span class="w"></span>
+<span class="nt">language</span><span class="p">:</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Structure spécifique (source : Nouveau-Brunswick) :</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">coverage</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">country</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ca</span><span class="w"></span>
+<span class="w">  </span><span class="nt">province</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nb</span><span class="w"></span>
+<span class="w">  </span><span class="nt">ISO3166</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">alpha2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CA-NB</span><span class="w"></span>
+<span class="w">    </span><span class="nt">country</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Canada</span><span class="w"></span>
+<span class="w">    </span><span class="nt">subdivision</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">New Brunswick</span><span class="w"></span>
+<span class="w">  </span><span class="nt">website</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://geonb-t.snb.ca/downloads/nbrn/geonb_nbrn-rrnb_orig.zip</span><span class="w"></span>
+<span class="w">  </span><span class="nt">update_frequency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">weekly</span><span class="w"></span>
+<span class="nt">license</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://geonb.snb.ca/documents/license/geonb-odl_en.pdf</span><span class="w"></span>
+<span class="w">  </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GeoNB Open Data License</span><span class="w"></span>
+<span class="nt">language</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">en</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="data">
+<h3><a class="toc-backref" href="#id19">Data</a><a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
+<p>Les composants de données (« data » en anglais) définissent les propriétés du fichier source et de la couche
+pertinentes pour la construction d’un ensemble de données RRN.</p>
+<p>Clés obligatoires :</p>
+<dl class="field-list simple">
+<dt class="field-odd">filename</dt>
+<dd class="field-odd"><p>Nom du fichier source, y compris l’extension.</p>
+</dd>
+<dt class="field-even">driver</dt>
+<dd class="field-even"><p>Nom du pilote vectoriel <code class="docutils literal notranslate"><span class="pre">OGR</span></code> (voir : <a class="reference external" href="https://gdal.org/drivers/vector/index.html">https://gdal.org/drivers/vector/index.html</a>).</p>
+</dd>
+<dt class="field-odd">crs</dt>
+<dd class="field-odd"><p>Chaîne d’autorité du système de référence de coordonnées.</p>
+</dd>
+<dt class="field-even">spatial</dt>
+<dd class="field-even"><p>Drapeau pour indiquer si la source est spatiale.</p>
+</dd>
+</dl>
+<p>Clés facultatives :</p>
+<dl class="field-list simple">
+<dt class="field-odd">layer</dt>
+<dd class="field-odd"><p>Nom de couche pour les fichiers contenant des couches de données.</p>
+</dd>
+<dt class="field-even">query</dt>
+<dd class="field-even"><p>Requête utilisée pour filtrer les enregistrements de source de données.</p>
+</dd>
+</dl>
+<div class="section" id="id2">
+<h4><a class="toc-backref" href="#id20">Structure</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<p><strong>Structure générique :</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">data</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">filename</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">layer</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">driver</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">crs</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">spatial</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">query</span><span class="p">:</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Structure spécifique (source : Nouveau-Brunswick) :</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">data</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">filename</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">geonb_nbrn-rrnb.gdb</span><span class="w"></span>
+<span class="w">  </span><span class="nt">layer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Road_Segment_Entity</span><span class="w"></span>
+<span class="w">  </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OpenFileGDB</span><span class="w"></span>
+<span class="w">  </span><span class="nt">crs</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;EPSG:2953&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">spatial</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
+<span class="w">  </span><span class="nt">query</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Functional_Road_Class</span><span class="nv"> </span><span class="s">!=</span><span class="nv"> </span><span class="s">425&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id21">Conform</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Les composants conformes (« conform » en anglais) définissent la correspondance d’attribut entre les données source et
+le schéma RRN. La correspondance d’attribut peut être soit directe (l’attribut source correspond directement à un
+attribut de données RRN) soit utiliser une série de fonctions.</p>
+<div class="section" id="id4">
+<h4><a class="toc-backref" href="#id22">Structure</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<p><strong>Structure générique :</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">conform</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&lt;jeu de données RRN&gt;</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&lt;attribut de jeu de données RRN&gt;</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;correspondance d&#39;attribut&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="aucune-correspondance-d-attribut">
+<h4><a class="toc-backref" href="#id23">Aucune correspondance d’attribut</a><a class="headerlink" href="#aucune-correspondance-d-attribut" title="Permalink to this headline">¶</a></h4>
+<p>Les clés des ensembles de données ou des attributs RRN sans aucune correspondance d’attribut source peuvent être
+exclues du fichier de configuration ou simplement laissées vides.</p>
+</div>
+<div class="section" id="correspondance-d-attribut-directe">
+<h4><a class="toc-backref" href="#id24">Correspondance d’attribut directe</a><a class="headerlink" href="#correspondance-d-attribut-directe" title="Permalink to this headline">¶</a></h4>
+<p>Les attributs RRN avec une correspondance d’attribut directe de la source peuvent être renseignés avec une valeur
+littérale ou un nom d’attribut. La valeur spécifiée est déterminée comme étant un nom d’attribut s’il existe dans
+l’ensemble d’attributs du fichier/couche source.</p>
+<p><strong>Exemple :</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">accuracy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Element_Planimetric_Accuracy</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fonctions-de-correspondance-des-attributs">
+<h4><a class="toc-backref" href="#id25">Fonctions de correspondance des attributs</a><a class="headerlink" href="#fonctions-de-correspondance-des-attributs" title="Permalink to this headline">¶</a></h4>
+<p>Pour définir une fonction de correspondance d’attributs, les clés suivantes doivent être utilisées :</p>
+<dl class="field-list simple">
+<dt class="field-odd"><code class="docutils literal notranslate"><span class="pre">fields</span></code></dt>
+<dd class="field-odd"><p>Un nom d’attribut ou une liste de noms d’attributs du fichier/couche source.</p>
+</dd>
+<dt class="field-even"><code class="docutils literal notranslate"><span class="pre">functions</span></code></dt>
+<dd class="field-even"><p>Une liste de noms de fonction et de paramètres spécifiques à la fonction. La première clé de chaque
+fonction répertoriée doit être <code class="docutils literal notranslate"><span class="pre">function</span></code> suivie du nom de la fonction.</p>
+</dd>
+</dl>
+<p>Les fonctions de correspondance d’attributs multiples sont appelées <code class="docutils literal notranslate"><span class="pre">chains</span></code> et le processus en tant que
+<code class="docutils literal notranslate"><span class="pre">chaining</span></code>. Pour les <code class="docutils literal notranslate"><span class="pre">chains</span></code>, la sortie de chaque fonction est l’entrée de la fonction suivante.</p>
+<div class="section" id="id5">
+<h5>Structure<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h5>
+<p><strong>Structure générique :</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;attribut de jeu de données RRN&gt;</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">fields</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;attribut source&gt; or [&lt;attribut source&gt;, ...]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">functions</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">function</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;nom de la fonction&gt;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&lt;nom du paramètre de fonction&gt;</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;valeur du paramètre de fonction&gt;</span><span class="w"></span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fonction-apply-domain">
+<h5>Fonction: <code class="docutils literal notranslate"><span class="pre">apply_domain</span></code><a class="headerlink" href="#fonction-apply-domain" title="Permalink to this headline">¶</a></h5>
+<p><strong>Description :</strong> Applique les restrictions de domaine à partir d’un attribut de jeu de données RRN spécifié.</p>
+<p><strong>Attend des attributs de source unique ou multiple :</strong> Unique.</p>
+<p><strong>Paramètres :</strong></p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Paramètre</p></th>
+<th class="head"><p>Valeur</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>table</p></td>
+<td><p>Nom du jeu de données RRN.</p></td>
+</tr>
+<tr class="row-odd"><td><p>field</p></td>
+<td><p>Nom d’attribut RRN.</p></td>
+</tr>
+<tr class="row-even"><td><p>default</p></td>
+<td><p>Valeur par défaut à utiliser en cas d’erreur.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exemple :</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dirprefix</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">fields</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SPN_R_Directional_Prefix</span><span class="w"></span>
+<span class="w">  </span><span class="nt">functions</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">function</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apply_domain</span><span class="w"></span>
+<span class="w">      </span><span class="nt">table</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">strplaname</span><span class="w"></span>
+<span class="w">      </span><span class="nt">field</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dirprefix</span><span class="w"></span>
+<span class="w">      </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fonction-concatenate">
+<h5>Fonction: <code class="docutils literal notranslate"><span class="pre">concatenate</span></code><a class="headerlink" href="#fonction-concatenate" title="Permalink to this headline">¶</a></h5>
+<p><strong>Description :</strong> Concatène les valeurs en une seule chaîne.</p>
+<p><strong>Attend des attributs de source unique ou multiple :</strong> Multiple.</p>
+<p><strong>Paramètres :</strong></p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Paramètre</p></th>
+<th class="head"><p>Valeur</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>columns</p></td>
+<td><p>Liste des noms attribués aux colonnes de données lorsqu’elles sont décompressées dans la fonction.</p></td>
+</tr>
+<tr class="row-odd"><td><p>separator</p></td>
+<td><p>Chaîne de délimiteur utilisée pour joindre les valeurs, par défaut = <cite>” “</cite>.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exemple :</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">l_stname_c</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">fields</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">SPN_L_Street_Type_Prefix</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">SPN_L_Street_Name_Body</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">SPN_L_Street_Type_Suffix</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">functions</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">function</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">concatenate</span><span class="w"></span>
+<span class="w">      </span><span class="nt">columns</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">strtypre</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">namebody</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">strtysuf</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="nt">separator</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="nv"> </span><span class="s">&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fonction-direct">
+<h5>Fonction: <code class="docutils literal notranslate"><span class="pre">direct</span></code><a class="headerlink" href="#fonction-direct" title="Permalink to this headline">¶</a></h5>
+<p><strong>Description :</strong> Correspond directement à la valeur donnée avec le moulage de type facultatif. Cette fonction est
+purement destinée à fournir un appel de fonction pour la correspondance directe des attributs.</p>
+<p><strong>Attend des attributs de source unique ou multiple :</strong> Unique.</p>
+<p><strong>Paramètres :</strong></p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Paramètre</p></th>
+<th class="head"><p>Valeur</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>cast_type</p></td>
+<td><p>Nom de chaîne d’une classe de type Python à convertir, par défaut = <cite>None</cite>. Valeurs acceptées :
+<code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">str</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exemple :</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">l_hnumf</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">fields</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">First_House_Number_L</span><span class="w"></span>
+<span class="w">  </span><span class="nt">functions</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">function</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">direct</span><span class="w"></span>
+<span class="w">      </span><span class="nt">cast_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">int</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fonction-map-values">
+<h5>Fonction: <code class="docutils literal notranslate"><span class="pre">map_values</span></code><a class="headerlink" href="#fonction-map-values" title="Permalink to this headline">¶</a></h5>
+<p><strong>Description :</strong> Correspond aux valeurs basées sur un dictionnaire de recherche.</p>
+<p><strong>Attend des attributs de source unique ou multiple :</strong> Unique.</p>
+<p><strong>Paramètres :</strong></p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Paramètre</p></th>
+<th class="head"><p>Valeur</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>lookup</p></td>
+<td><p>Dictionnaire des correspondances de valeurs.</p></td>
+</tr>
+<tr class="row-odd"><td><p>case_sensitive</p></td>
+<td><p>Indicateur indiquant si le dictionnaire de recherche est sensible à la casse, valeur par défaut =
+<cite>False</cite>.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exemple :</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">fields</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Element_Provider</span><span class="w"></span>
+<span class="w">  </span><span class="nt">functions</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">function</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">map_values</span><span class="w"></span>
+<span class="w">      </span><span class="nt">lookup</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Other</span><span class="w"></span>
+<span class="w">        </span><span class="nt">2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Federal</span><span class="w"></span>
+<span class="w">        </span><span class="nt">3</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Provincial / Territorial</span><span class="w"></span>
+<span class="w">        </span><span class="nt">4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Municipal</span><span class="w"></span>
+<span class="w">        </span><span class="nt">405</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Provincial / Territorial</span><span class="w"></span>
+<span class="w">        </span><span class="nt">406</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Provincial / Territorial</span><span class="w"></span>
+<span class="w">        </span><span class="nt">409</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Municipal</span><span class="w"></span>
+<span class="w">        </span><span class="nt">412</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Other</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fonction-query-assign">
+<h5>Fonction: <code class="docutils literal notranslate"><span class="pre">query_assign</span></code><a class="headerlink" href="#fonction-query-assign" title="Permalink to this headline">¶</a></h5>
+<p><strong>Description :</strong> Correspond à un seul ou à un ensemble de valeurs basées sur un dictionnaire de recherche de requêtes.
+Les non-matchs seront nuls.</p>
+<p><strong>Attend des attributs de source unique ou multiple :</strong> Unique / Multiple.</p>
+<p><strong>Paramètres :</strong></p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Paramètre</p></th>
+<th class="head"><p>Valeur</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>columns</p></td>
+<td><p>Liste des noms attribués aux colonnes de données lorsqu’elles sont décompressées dans la fonction.</p></td>
+</tr>
+<tr class="row-odd"><td><p>lookup</p></td>
+<td><p>Dictionnaire des correspondances requête-valeur où la valeur est un dictionnaire imbriqué composé de
+clés :
+| <code class="docutils literal notranslate"><span class="pre">value</span></code>: la valeur de sortie souhaitée pour la requête,
+| <code class="docutils literal notranslate"><span class="pre">type</span></code>: indicateur du type de la valeur de sortie donnée. Les valeurs acceptées sont <cite>string</cite> (pour une valeur
+littérale) ou <cite>column</cite> (pour un nom d’attribut source, dont la valeur sera utilisée comme sortie). Voir
+<code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.DataFrame.query()</span></code> argument <code class="docutils literal notranslate"><span class="pre">expr</span></code> pour les détails de la chaîne de requête.</p></td>
+</tr>
+<tr class="row-even"><td><p>engine</p></td>
+<td><p>Le moteur utilisé pour traiter l’expression, par défaut = <cite>python</cite>. Voir <code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code> pour une
+liste complète des valeurs.</p></td>
+</tr>
+<tr class="row-odd"><td><p>**kwargs</p></td>
+<td><p>Arguments de mots clés facultatifs transmis à <code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.DataFrame.query()</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exemple :</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">fields</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AGENCY_NAME</span><span class="w"></span>
+<span class="w">  </span><span class="nt">functions</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">function</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">query_assign</span><span class="w"></span>
+<span class="w">      </span><span class="nt">columns</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">provider</span><span class="w"></span>
+<span class="w">      </span><span class="nt">lookup</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">provider.str.lower().str.contains(&#39;city of |county of |municipality of &#39;, na=False, regex=True)</span><span class="p p-Indicator">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Municipal</span><span class="w"></span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">provider.str.lower().isin([&#39;ministry of natural resources and forestry&#39;, &#39;ministry of health&#39;])</span><span class="p p-Indicator">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Provincial</span><span class="w"></span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">provider.str.lower().isin([&#39;elections and statistics canada&#39;, &#39;nrcan&#39;])</span><span class="p p-Indicator">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Federal</span><span class="w"></span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">provider.str.lower() == &#39;waabnoong bemjiwang association of first nations&#39;</span><span class="p p-Indicator">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Other</span><span class="w"></span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
+<span class="w">      </span><span class="nt">engine</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fonction-regex-find">
+<h5>Fonction: <code class="docutils literal notranslate"><span class="pre">regex_find</span></code><a class="headerlink" href="#fonction-regex-find" title="Permalink to this headline">¶</a></h5>
+<p><strong>Description :</strong> Utilise une expression régulière (regex) pour extraire de la valeur d’entrée.</p>
+<p><strong>Attend des attributs de source unique ou multiple :</strong> Unique.</p>
+<p><strong>Paramètres :</strong></p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Paramètre</p></th>
+<th class="head"><p>Valeur</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>pattern</p></td>
+<td><p>Une expression régulière compilable.</p></td>
+</tr>
+<tr class="row-odd"><td><p>match_index</p></td>
+<td><p>Index de position de la correspondance souhaitée renvoyée par l’expression régulière.</p></td>
+</tr>
+<tr class="row-even"><td><p>group_index</p></td>
+<td><p>Index de position du groupe de capture souhaité dans la correspondance souhaitée (voir
+<code class="docutils literal notranslate"><span class="pre">match_index</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p>strip_result</p></td>
+<td><p>La valeur extraite sera supprimée de la valeur d’origine, plutôt que renvoyée, valeur par défaut =
+<cite>False</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p>sub_inplace</p></td>
+<td><p>Arguments de mots clés facultatifs passés à <code class="xref py py-func docutils literal notranslate"><span class="pre">re.sub()</span></code>, par défaut = <cite>None</cite>. Permet à une valeur
+d’entrée d’être modifiée avant d’être appliquée à une expression régulière, tout en renvoyant la sortie comme si la
+chaîne d’origine avait été utilisée. Par exemple, pour faire correspondre <cite>de la</cite> de <cite>Chemin-de-la-Grande-Rivière</cite>,
+<code class="docutils literal notranslate"><span class="pre">sub_inplace</span></code> peut être utilisé pour remplacer les tirets par des espaces. Si <code class="docutils literal notranslate"><span class="pre">strip_result=False</span></code> alors <cite>de la</cite>
+sera retourné, sinon <cite>Chemin-Grande-Rivière</cite> sera retourné.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exemple :</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">rtnumber1</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">fields</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PHA_ROADNA</span><span class="w"></span>
+<span class="w">  </span><span class="nt">functions</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">function</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">regex_find</span><span class="w"></span>
+<span class="w">      </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;\\b([1-9][0-9]*)\\b&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">match_index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="w">      </span><span class="nt">group_index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fonction-regex-sub">
+<h5>Fonction: <code class="docutils literal notranslate"><span class="pre">regex_sub</span></code><a class="headerlink" href="#fonction-regex-sub" title="Permalink to this headline">¶</a></h5>
+<p><strong>Description :</strong> Utilise une expression régulière (regex) pour extraire et substituer à partir de la valeur d’entrée.</p>
+<p><strong>Attend des attributs de source unique ou multiple :</strong> Unique.</p>
+<p><strong>Paramètres :</strong></p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Paramètre</p></th>
+<th class="head"><p>Valeur</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>**kwargs</p></td>
+<td><p>Mots-clés passés à <code class="xref py py-func docutils literal notranslate"><span class="pre">re.sub()</span></code>. Cette fonction étend l’argument <code class="docutils literal notranslate"><span class="pre">repl</span></code> de telle sorte qu’il
+puisse être une expression régulière compilable ou un dictionnaire de mappages de valeurs.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exemple :</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">rtename1en</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">fields</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PHA_ROADNA</span><span class="w"></span>
+<span class="w">  </span><span class="nt">functions</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">function</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">regex_sub</span><span class="w"></span>
+<span class="w">      </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;\\b(No.</span><span class="nv"> </span><span class="s">[1-9][0-9]*)\\b&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">repl</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="fonctions-de-correspondance-des-attributs-touches-speciales">
+<h4><a class="toc-backref" href="#id26">Fonctions de correspondance des attributs - Touches spéciales</a><a class="headerlink" href="#fonctions-de-correspondance-des-attributs-touches-speciales" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="processus-separement">
+<h5>Processus séparément<a class="headerlink" href="#processus-separement" title="Permalink to this headline">¶</a></h5>
+<p><code class="docutils literal notranslate"><span class="pre">process_separately</span></code> est une clé spéciale qui peut être incluse avec les clés de correspondance d’attributs
+obligatoires (<code class="docutils literal notranslate"><span class="pre">fields</span></code> et <code class="docutils literal notranslate"><span class="pre">functions</span></code>). Lorsque <code class="docutils literal notranslate"><span class="pre">process_separately:</span> <span class="pre">True</span></code>, plusieurs attributs source peuvent
+être mis en correspondance avec des fonctions de correspondance d’attributs qui n’acceptent normalement qu’un seul
+attribut source.</p>
+<p>Le but de cette clé spéciale est de permettre à plusieurs attributs de source d’être mis en correspondance avec le même
+attribut RRN lorsque la correspondance d’attribut n’est pas directe.</p>
+<p>Les valeurs de sortie de <code class="docutils literal notranslate"><span class="pre">process_separately</span></code> seront imbriquées.</p>
+<p><strong>Exemple :</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">placename</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">fields</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">SPN_L_Place_Name</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">SPN_R_Place_Name</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">process_separately</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
+<span class="w">  </span><span class="nt">functions</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">function</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">map_values</span><span class="w"></span>
+<span class="w">      </span><span class="nt">lookup</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Aboujagane</span><span class="w"></span>
+<span class="w">        </span><span class="nt">2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Acadie Siding</span><span class="w"></span>
+<span class="w">        </span><span class="nt">3</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Acadieville</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="iterer-les-colonnes">
+<h5>Itérer les colonnes<a class="headerlink" href="#iterer-les-colonnes" title="Permalink to this headline">¶</a></h5>
+<p><code class="docutils literal notranslate"><span class="pre">iterate_cols</span></code> est une clé spéciale qui peut être incluse avec les clés spécifiques à chaque fonction.
+<code class="docutils literal notranslate"><span class="pre">iterate_cols</span></code> accepte une liste d’entiers représentant l’index de position des attributs source listés par
+<code class="docutils literal notranslate"><span class="pre">fields</span></code>. Lorsqu’ils sont renseignés, seuls les attributs source indiqués par <code class="docutils literal notranslate"><span class="pre">iterate_cols</span></code> sont traités par la
+fonction de correspondance d’attributs définie. Les attributs source non spécifiés par <code class="docutils literal notranslate"><span class="pre">iterate_cols</span></code> conserveront
+leurs valeurs.</p>
+<p>Le but de cette clé spéciale est de permettre une <code class="docutils literal notranslate"><span class="pre">chain</span></code> où seuls certains attributs source nécessitent un
+traitement supplémentaire par certaines fonctions de correspondance d’attributs.</p>
+<p><strong>Exemple :</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">l_stname_c</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">fields</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">L_Direction_Prefix</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">L_Type_Prefix</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">L_Article</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">L_Name_Body</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">L_Type_Suffix</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">L_Direction_Suffix</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">functions</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">function</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">map_values</span><span class="w"></span>
+<span class="w">      </span><span class="nt">iterate_cols</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="nt">lookup</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">North</span><span class="w"></span>
+<span class="w">        </span><span class="nt">2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">South</span><span class="w"></span>
+<span class="w">        </span><span class="nt">3</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">East</span><span class="w"></span>
+<span class="w">        </span><span class="nt">4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">West</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">function</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">concatenate</span><span class="w"></span>
+<span class="w">      </span><span class="nt">columns</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">dirprefix</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">strtypre</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">starticle</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">namebody</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">strtysuf</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">dirsuffix</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">      </span><span class="nt">separator</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="nv"> </span><span class="s">&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="domaines-d-attributs">
+<h5>Domaines d’attributs<a class="headerlink" href="#domaines-d-attributs" title="Permalink to this headline">¶</a></h5>
+<p>Lors de l’utilisation d’une fonction de correspondance d’attribut qui accepte une expression régulière, le mot-clé
+<code class="docutils literal notranslate"><span class="pre">domain_&lt;nom</span> <span class="pre">du</span> <span class="pre">jeu</span> <span class="pre">de</span> <span class="pre">données&gt;_&lt;nom</span> <span class="pre">d'attribut&gt;</span></code> peut être utilisé pour insérer les valeurs de domaine restreint de
+tout attribut RRN dans l’expression, séparées par le <code class="docutils literal notranslate"><span class="pre">ou</span></code> opérateur <code class="docutils literal notranslate"><span class="pre">&quot;|&quot;</span></code>.</p>
+<p><strong>Exemple (brutes) :</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dirprefix</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">fields</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">L_Directional_Prefix</span><span class="w"></span>
+<span class="w">  </span><span class="nt">functions</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">function</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">regex_find</span><span class="w"></span>
+<span class="w">      </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;\\b(domain_strplaname_dirprefix)\\b(?!$)&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">match_index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="w">      </span><span class="nt">group_index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+</pre></div>
+</div>
+<p>La définition de correspondance d’attribut ci-dessus sera convertie en :</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dirprefix</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">fields</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">L_Directional_Prefix</span><span class="w"></span>
+<span class="w">  </span><span class="nt">functions</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">function</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">regex_find</span><span class="w"></span>
+<span class="w">      </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;\\b(None|North|South|East|West|Northwest|Northeast|Southwest|Southeast|Central|Centre)\\b(?!$)&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">match_index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+<span class="w">      </span><span class="nt">group_index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="admonition-notez admonition">
+<p class="admonition-title">Notez</p>
+<p>Seule une liste condensée de valeurs de domaine est affichée afin d’économiser de l’espace.</p>
+</div>
+</div>
+</div>
+<div class="section" id="sortie-imbriquee">
+<h4><a class="toc-backref" href="#id27">Sortie imbriquée</a><a class="headerlink" href="#sortie-imbriquee" title="Permalink to this headline">¶</a></h4>
+<p>Exclusif à l’ensemble de données RRN <code class="docutils literal notranslate"><span class="pre">strplaname</span></code>, après le processus complet de correspondance des attributs, si des
+attributs de sortie sont renseignés par des valeurs imbriquées, telles qu’une <code class="docutils literal notranslate"><span class="pre">list</span></code>, tous les enregistrements de cet
+ensemble de données seront dupliqués de sorte que le premier emboîté la valeur de chaque attribut imbriqué devient la
+valeur d’attribut réelle pour la première instance dupliquée et la deuxième valeur imbriquée de chaque attribut
+imbriqué devient la valeur d’attribut réelle pour la deuxième instance dupliquée.</p>
+<p>Cette logique exclusive pour l’ensemble de données RRN <code class="docutils literal notranslate"><span class="pre">strplaname</span></code> permet d’attribuer des attributs avec une
+représentation à gauche et à droite à un seul attribut RRN.</p>
+<p><strong>Exemple :</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">placename</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">SPN_L_Place_Name</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">SPN_R_Place_Name</span><span class="p p-Indicator">]</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="segmentation-des-adresses">
+<h2><a class="toc-backref" href="#id28">Segmentation des adresses</a><a class="headerlink" href="#segmentation-des-adresses" title="Permalink to this headline">¶</a></h2>
+<p>Le processus de <cite>conform</cite> du RRN comprend un processus spécial pour segmenter les adresses contenues dans un ensemble
+de données de Points en plages. Pour la segmentation des adresses, aucune clé <code class="docutils literal notranslate"><span class="pre">conform</span></code> n’existe et, à la place, une
+clé supplémentaire <code class="docutils literal notranslate"><span class="pre">segment</span></code> est incluse dans la clé <code class="docutils literal notranslate"><span class="pre">data</span></code> comme la structure brute suivante :</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">segment</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">address_fields</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">street</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">field</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">regex_sub</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">pattern</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">repl</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">number</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">field</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">regex_sub</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">pattern</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">repl</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">suffix</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">field</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">regex_sub</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">pattern</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">repl</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">address_join_field</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">fields</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">separator</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">roadseg_join_field</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">fields</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">separator</span><span class="p">:</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Cette structure de données contient 3 clés obligatoires :</p>
+<dl class="field-list simple">
+<dt class="field-odd"><code class="docutils literal notranslate"><span class="pre">address_fields</span></code></dt>
+<dd class="field-odd"><p>Définit comment extraire les composants d’adresse des données source. Seuls les composants
+d’attribut de base <code class="docutils literal notranslate"><span class="pre">street</span></code> (nom de la rue), <code class="docutils literal notranslate"><span class="pre">number</span></code> (numéro d’adresse) et <code class="docutils literal notranslate"><span class="pre">suffix</span></code>
+(suffixe du numéro d’adresse) sont acceptés. Les valeurs acceptables sont :
+| a) Un nom d’attribut ou,
+| b) Un dictionnaire <code class="docutils literal notranslate"><span class="pre">regex_sub</span></code> composé des clés <code class="docutils literal notranslate"><span class="pre">pattern</span></code> et <code class="docutils literal notranslate"><span class="pre">repl</span></code> qui sera passé à
+<code class="xref py py-func docutils literal notranslate"><span class="pre">re.sub()</span></code>.</p>
+</dd>
+<dt class="field-even"><code class="docutils literal notranslate"><span class="pre">address_join_field</span></code></dt>
+<dd class="field-even"><p>Attribut de la source d’adresse utilisée pour joindre l’ensemble de données RRN <code class="docutils literal notranslate"><span class="pre">roadseg</span></code>.
+Les valeurs acceptables sont :
+| a) Un nom d’attribut ou,
+| b) Un dictionnaire composé de clés définissant la concaténation des attributs source
+d’adresse :
+| <code class="docutils literal notranslate"><span class="pre">fields</span></code>: Une liste d’attributs de source d’adresse.
+| <code class="docutils literal notranslate"><span class="pre">separator</span></code>: Un délimiteur utilisé pour concaténer les attributs.</p>
+</dd>
+<dt class="field-odd"><code class="docutils literal notranslate"><span class="pre">roadseg_join_field</span></code></dt>
+<dd class="field-odd"><p>Attribut de l’ensemble de données RRN <code class="docutils literal notranslate"><span class="pre">roadseg</span></code> utilisé pour se joindre à la source
+d’adresse. Les valeurs acceptables sont :
+| a) Un nom d’attribut ou,
+| b) Un dictionnaire composé de clés définissant la concaténation des attributs du jeu de
+données RRN <code class="docutils literal notranslate"><span class="pre">roadseg</span></code> :
+| <code class="docutils literal notranslate"><span class="pre">fields</span></code>: Une liste des attributs <code class="docutils literal notranslate"><span class="pre">roadseg</span></code> de l’ensemble de données RRN.
+| <code class="docutils literal notranslate"><span class="pre">separator</span></code>: Un délimiteur utilisé pour concaténer les attributs.</p>
+</dd>
+</dl>
+<div class="section" id="sortir">
+<h3><a class="toc-backref" href="#id29">Sortir</a><a class="headerlink" href="#sortir" title="Permalink to this headline">¶</a></h3>
+<p>L’ensemble de données de sortie contiendra tous les attributs d’adressage de l’ensemble de données RRN <code class="docutils literal notranslate"><span class="pre">addrange</span></code> et
+utilisera les attributs fournis (<code class="docutils literal notranslate"><span class="pre">address_join_field</span></code> et <code class="docutils literal notranslate"><span class="pre">roadseg_join_field</span></code>) à joindre à l’ensemble de données
+source correspondant à l’ensemble de données RRN <code class="docutils literal notranslate"><span class="pre">roadseg</span></code>. Par conséquent, tous les attributs d’adressage de
+<code class="docutils literal notranslate"><span class="pre">addrange</span></code> peuvent être utilisés dans le fichier de configuration pour l’ensemble de données RRN <code class="docutils literal notranslate"><span class="pre">roadseg</span></code>
+puisqu’ils existeront sur l’ensemble de données source avant l’exécution du processus de correspondance des attributs.</p>
+</div>
+<div class="section" id="exemples">
+<h3><a class="toc-backref" href="#id30">Exemples</a><a class="headerlink" href="#exemples" title="Permalink to this headline">¶</a></h3>
+<p><strong>Exemple simple (source : Île-du-Prince-Édouard) :</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">segment</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">address_fields</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">street</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">street_nm</span><span class="w"></span>
+<span class="w">    </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">street_no</span><span class="w"></span>
+<span class="w">    </span><span class="nt">suffix</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">address_join_field</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">street_nm</span><span class="w"></span>
+<span class="w">  </span><span class="nt">roadseg_join_field</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">street_nm</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Exemple avancé (source : Territoire du Yukon) :</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">segment</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">address_fields</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">street</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">street</span><span class="w"></span>
+<span class="w">    </span><span class="nt">number</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">field</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">number</span><span class="w"></span>
+<span class="w">      </span><span class="nt">regex_sub</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;[^\\d]&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">repl</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">suffix</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">field</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">number</span><span class="w"></span>
+<span class="w">      </span><span class="nt">regex_sub</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;\\d+&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">repl</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">address_join_field</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">street</span><span class="w"></span>
+<span class="w">  </span><span class="nt">roadseg_join_field</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">fields</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">dirprefix</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">strtypre</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">namebody</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">strtysuf</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">dirsuffix</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">separator</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="nv"> </span><span class="s">&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="processus-de-segmentation">
+<h3><a class="toc-backref" href="#id31">Processus de segmentation</a><a class="headerlink" href="#processus-de-segmentation" title="Permalink to this headline">¶</a></h3>
+<p>Les documents suivants décrivent le processus de segmentation d’adresse :</p>
+<p><a class="reference external" href="/source/_static/reports/address_segmentation_british_columbia.html">Processus de segmentation - Colombie britannique</a></p>
+<p><a class="reference external" href="/source/_static/reports/address_segmentation_yellowknife.html">Processus de segmentation - Yellowknife</a></p>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="general_usage.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Utilisation générale</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="validate.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Validate</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2022, Statistics Canada / Statistique Canada.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

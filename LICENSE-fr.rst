@@ -1,4 +1,16 @@
+*******
+License
+*******
+
+.. include:: <isonum.txt>
+.. include:: <isopub.txt>
+
 .. |year| date:: %Y
+
+.. admonition:: Avertissement
+
+   Le texte de la licence est conservé dans sa langue d'origine pour éviter de déformer les mots et expressions
+   spécifiques utilisés, car toute erreur de caractérisation peut avoir des répercussions juridiques.
 
 License BSD 3-Clause
 

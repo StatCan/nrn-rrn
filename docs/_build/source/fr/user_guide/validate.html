@@ -1,0 +1,620 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Validate &#8212; NRN / RRN  documentation</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/css/blank.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Documentation du produit" href="../product_documentation.html" />
+    <link rel="prev" title="Conform" href="conform.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../../../index.html">
+<p class="title">NRN / RRN</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../en/index.html">
+  English
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="../index.html">
+  Français
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/jessestewart1/nrn-rrn" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://open.canada.ca/data/en/dataset/3d282116-e556-400c-9306-ca1a3cada77f" rel="noopener" target="_blank" title="Open Government">
+            <span><i class="fas fa-database"></i></span>
+            <label class="sr-only">Open Government</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about.html">
+   Réseau routier national (RRN)
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../user_guide.html">
+   Mode d’emploi
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="general_usage.html">
+     Utilisation générale
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="conform.html">
+     Conform
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Validate
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../product_documentation.html">
+   Documentation du produit
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../product_documentation/reference_materials.html">
+     1. Matériaux de référence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../product_documentation/release_notes.html">
+     2. Notes de publication
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../product_documentation/product_distribution_formats.html">
+     3. Formats de distribution du produit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../product_documentation/data_product_specifications.html">
+     4. Spécifications de produit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../product_documentation/feature_catalogue.html">
+     5. Catalogue d’entités
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../product_documentation/data_exchange_model.html">
+     6. Modèle d’échange de données
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../product_documentation/change_management.html">
+     7. Gestion des modifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../product_documentation/identification_rules.html">
+     8. Règles d’identification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../product_documentation/completion_rates.html">
+     9. Taux d’achèvement
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../community.html">
+   Communauté
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../community/project_community.html">
+     Communauté du projet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../community/contributing.html">
+     Contribuant
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../community/dependencies.html">
+     Dépendances
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#apercu">
+   Aperçu
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#structure-du-journal">
+   Structure du journal
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#erreurs-de-validation">
+   Erreurs de validation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#structure-d-erreur">
+     Structure d’erreur
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#codes-d-erreur">
+     Codes d’erreur
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#e100-construction">
+       E100 - Construction
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#e200-dedoublement">
+       E200 - Dédoublement
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#e300-connectivite">
+       E300 - Connectivité
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#e400-dates">
+       E400 - Dates
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#e500-identifiants">
+       E500 - Identifiants
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#e600-numeros-de-sortie">
+       E600 - Numéros de sortie
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#e700-integration-de-traversier">
+       E700 - Intégration de traversier
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#e800-nombre-de-voies">
+       E800 - Nombre de voies
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#e900-vitesse">
+       E900 - Vitesse
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#e1000-codage">
+       E1000 - Codage
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#e1100-etendue">
+       E1100 - Étendue
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="validate">
+<h1><a class="toc-backref" href="#id1">Validate</a><a class="headerlink" href="#validate" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="matieres">
+<p class="topic-title">Matières :</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#validate" id="id1">Validate</a></p>
+<ul>
+<li><p><a class="reference internal" href="#apercu" id="id2">Aperçu</a></p></li>
+<li><p><a class="reference internal" href="#structure-du-journal" id="id3">Structure du journal</a></p></li>
+<li><p><a class="reference internal" href="#erreurs-de-validation" id="id4">Erreurs de validation</a></p>
+<ul>
+<li><p><a class="reference internal" href="#structure-d-erreur" id="id5">Structure d’erreur</a></p></li>
+<li><p><a class="reference internal" href="#codes-d-erreur" id="id6">Codes d’erreur</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="apercu">
+<h2><a class="toc-backref" href="#id2">Aperçu</a><a class="headerlink" href="#apercu" title="Permalink to this headline">¶</a></h2>
+<p>Le processus <cite>validate</cite> applique un ensemble de validations et de restrictions sur la géométrie et l’attribution des
+ensembles de données RRN. L’intention du processus <cite>validate</cite> est de signaler les erreurs de données réelles et
+potentielles avant de continuer avec le reste du pipeline RRN.</p>
+<p>La seule sortie de <cite>validate</cite> est un fichier journal (.log) qui sera exporté vers :
+<code class="docutils literal notranslate"><span class="pre">nrn-rrn/data/interim/validations.log</span></code>. Le processus prévu consiste pour l’utilisateur à réparer les données source
+d’origine en fonction des erreurs spécifiées dans le journal de sortie. Une fois terminé, l’ensemble du pipeline doit
+être réexécuté à partir du processus initial.</p>
+</div>
+<div class="section" id="structure-du-journal">
+<h2><a class="toc-backref" href="#id3">Structure du journal</a><a class="headerlink" href="#structure-du-journal" title="Permalink to this headline">¶</a></h2>
+<p>Le journal de sortie contiendra une série de journaux standardisés pour chaque validation exécutée par le processus
+<cite>validate</cite>. Chaque validation enregistrée aura la même structure de contenu.</p>
+<p>Structure générique :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">horodatage</span><span class="o">&gt;</span> <span class="o">-</span> <span class="n">WARNING</span><span class="p">:</span> <span class="n">E</span><span class="o">&lt;</span><span class="n">code</span> <span class="n">d</span><span class="s1">&#39;erreur&gt; - &lt;jeu de données RRN&gt; - &lt;Description de l&#39;</span><span class="n">erreur</span><span class="o">&gt;.</span>
+
+<span class="n">Values</span><span class="p">:</span>
+<span class="o">&lt;</span><span class="n">uuid</span><span class="o">&gt;</span>
+<span class="o">...</span>
+
+<span class="n">Query</span><span class="p">:</span> <span class="s2">&quot;uuid&quot;</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;&lt;uuid&gt;&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Structure spécifique :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2022</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">04</span> <span class="mi">16</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">51</span> <span class="o">-</span> <span class="n">WARNING</span><span class="p">:</span> <span class="n">E201</span> <span class="o">-</span> <span class="n">roadseg</span> <span class="o">-</span> <span class="n">Features</span> <span class="n">within</span> <span class="n">the</span> <span class="n">same</span> <span class="n">dataset</span> <span class="n">must</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">duplicated</span><span class="o">.</span>
+
+<span class="n">Values</span><span class="p">:</span>
+<span class="mi">76</span><span class="n">d283b46076400c900ed84c02ab605f</span>
+<span class="n">c9ac2f60a0814eec9ff56bf95ad79804</span>
+
+<span class="n">Query</span><span class="p">:</span> <span class="s2">&quot;uuid&quot;</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;76d283b46076400c900ed84c02ab605f&#39;</span><span class="p">,</span> <span class="s1">&#39;c9ac2f60a0814eec9ff56bf95ad79804&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Composants :</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Values</dt>
+<dd class="field-odd"><p>« Valeurs » en français. Une liste contenant la valeur <code class="docutils literal notranslate"><span class="pre">uuid</span></code> de chaque enregistrement marqué par la
+validation pour l’ensemble de données RRN. <code class="docutils literal notranslate"><span class="pre">uuid</span></code> est un identifiant unique attribué à chaque enregistrement
+de chaque ensemble de données RRN dans le but de suivre et d’identifier les enregistrements tout au long du
+pipeline RRN.</p>
+</dd>
+<dt class="field-even">Query</dt>
+<dd class="field-even"><p>« Requête » en français. Une expression QGIS pour interroger tous les enregistrements marqués par la validation
+du jeu de données RRN. Celui-ci contiendra les mêmes valeurs que <code class="docutils literal notranslate"><span class="pre">Values</span></code>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="erreurs-de-validation">
+<h2><a class="toc-backref" href="#id4">Erreurs de validation</a><a class="headerlink" href="#erreurs-de-validation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="structure-d-erreur">
+<h3><a class="toc-backref" href="#id5">Structure d’erreur</a><a class="headerlink" href="#structure-d-erreur" title="Permalink to this headline">¶</a></h3>
+<p>Toutes les validations se sont vu attribuer un code d’erreur unique avec la structure suivante:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">E</span><span class="o">&lt;</span><span class="n">code</span> <span class="n">majeur</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mi">2</span> <span class="n">chiffres</span><span class="p">)</span><span class="o">&gt;&lt;</span><span class="n">code</span> <span class="n">mineur</span> <span class="p">(</span><span class="mi">2</span> <span class="n">chiffres</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Les codes d’erreur majeure et mineure sont utilisés pour fournir une classification plus simplifiée et plus efficace
+des validations en fonction du type général de problème que la validation tente de résoudre.</p>
+</div>
+<div class="section" id="codes-d-erreur">
+<h3><a class="toc-backref" href="#id6">Codes d’erreur</a><a class="headerlink" href="#codes-d-erreur" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="e100-construction">
+<h4>E100 - Construction<a class="headerlink" href="#e100-construction" title="Permalink to this headline">¶</a></h4>
+<dl class="field-list simple">
+<dt class="field-odd">E101</dt>
+<dd class="field-odd"><p>Les arcs doivent avoir une longueur &gt;= 3 mètres, à l’exception des structures (par exemple, les ponts).</p>
+</dd>
+<dt class="field-even">E102</dt>
+<dd class="field-even"><p>Les arcs doivent être simples (c’est-à-dire qu’ils ne doivent pas se chevaucher, se croiser ou toucher leur
+intérieur).</p>
+</dd>
+<dt class="field-odd">E103</dt>
+<dd class="field-odd"><p>Les arcs doivent avoir une distance &gt;= 0,01 mètre entre les sommets adjacents (tolérance de cluster).</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="e200-dedoublement">
+<h4>E200 - Dédoublement<a class="headerlink" href="#e200-dedoublement" title="Permalink to this headline">¶</a></h4>
+<dl class="field-list simple">
+<dt class="field-odd">E201</dt>
+<dd class="field-odd"><p>Les entités d’un même jeu de données ne doivent pas être dupliquées.</p>
+</dd>
+<dt class="field-even">E202</dt>
+<dd class="field-even"><p>Les arcs du même jeu de données ne doivent pas se chevaucher (c’est-à-dire contenir des sommets adjacents
+dupliqués).</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="e300-connectivite">
+<h4>E300 - Connectivité<a class="headerlink" href="#e300-connectivite" title="Permalink to this headline">¶</a></h4>
+<dl class="field-list simple">
+<dt class="field-odd">E301</dt>
+<dd class="field-odd"><p>Les arcs ne doivent se connecter qu’aux extrémités (nœuds).</p>
+</dd>
+<dt class="field-even">E302</dt>
+<dd class="field-even"><p>Les arcs doivent être &gt;= 5 mètres les uns des autres, à l’exclusion des arcs connectés (c’est-à-dire sans
+pendants).</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="e400-dates">
+<h4>E400 - Dates<a class="headerlink" href="#e400-dates" title="Permalink to this headline">¶</a></h4>
+<dl class="field-list simple">
+<dt class="field-odd">E401</dt>
+<dd class="field-odd"><p>Les attributs « datecre » et « daterev » doivent avoir des longueurs de 4, 6 ou 8. Par conséquent, en utilisant
+des chiffres complétés par des zéros, les dates peuvent représenter les formats : AAAA, AAAAMM ou AAAAMMJJ.</p>
+</dd>
+<dt class="field-even">E402</dt>
+<dd class="field-even"><p>Les attributs « datecre » et « daterev » doivent avoir une combinaison AAAAMMJJ valide.</p>
+</dd>
+<dt class="field-odd">E403</dt>
+<dd class="field-odd"><p>Les attributs « datecre » et « daterev » doivent être compris entre 19600101 et la date actuelle, inclusivement.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="e500-identifiants">
+<h4>E500 - Identifiants<a class="headerlink" href="#e500-identifiants" title="Permalink to this headline">¶</a></h4>
+<dl class="field-list simple">
+<dt class="field-odd">E501</dt>
+<dd class="field-odd"><p>Les ID doivent être des chaînes hexadécimales à 32 chiffres.</p>
+</dd>
+<dt class="field-even">E502</dt>
+<dd class="field-even"><p>Les liaisons IDN doivent être valides.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="e600-numeros-de-sortie">
+<h4>E600 - Numéros de sortie<a class="headerlink" href="#e600-numeros-de-sortie" title="Permalink to this headline">¶</a></h4>
+<dl class="field-list simple">
+<dt class="field-odd">E601</dt>
+<dd class="field-odd"><p>L’attribut « numsortie » doit être identique, à l’exception de la valeur par défaut ou « Aucun », pour tous les
+arcs partageant un IDN.</p>
+</dd>
+<dt class="field-even">E602</dt>
+<dd class="field-even"><p>Lorsque l’attribut « numsortie » n’est pas égal à la valeur par défaut ou « Aucun », l’attribut « classroute »
+doit être égal à l’un des éléments suivants : « Autoroute », « Bretelle », « Réservée transport commun »,
+« Route express », « Service ».</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="e700-integration-de-traversier">
+<h4>E700 - Intégration de traversier<a class="headerlink" href="#e700-integration-de-traversier" title="Permalink to this headline">¶</a></h4>
+<dl class="field-list simple">
+<dt class="field-odd">E701</dt>
+<dd class="field-odd"><p>Les arcs de ferry doivent être connectés à un arc routier à au moins un de leurs nœuds.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="e800-nombre-de-voies">
+<h4>E800 - Nombre de voies<a class="headerlink" href="#e800-nombre-de-voies" title="Permalink to this headline">¶</a></h4>
+<dl class="field-list simple">
+<dt class="field-odd">E801</dt>
+<dd class="field-odd"><p>L’attribut « nbrvoies » doit être compris entre 1 et 8 inclus.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="e900-vitesse">
+<h4>E900 - Vitesse<a class="headerlink" href="#e900-vitesse" title="Permalink to this headline">¶</a></h4>
+<dl class="field-list simple">
+<dt class="field-odd">E901</dt>
+<dd class="field-odd"><p>L’attribut « vitesse » doit être compris entre 5 et 120, inclusivement.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="e1000-codage">
+<h4>E1000 - Codage<a class="headerlink" href="#e1000-codage" title="Permalink to this headline">¶</a></h4>
+<dl class="field-list simple">
+<dt class="field-odd">E1001</dt>
+<dd class="field-odd"><p>L’attribut contient un ou plusieurs points d’interrogation (« ? »), qui peuvent être le résultat d’un codage de
+caractères non valide.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="e1100-etendue">
+<h4>E1100 - Étendue<a class="headerlink" href="#e1100-etendue" title="Permalink to this headline">¶</a></h4>
+<dl class="field-list simple">
+<dt class="field-odd">E1101</dt>
+<dd class="field-odd"><p>La géométrie n’est pas complètement dans la région source.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="conform.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Conform</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../product_documentation.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Documentation du produit</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2022, Statistics Canada / Statistique Canada.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

@@ -5,6 +5,11 @@ National Road Network's Documentation / Documentation du Réseau routier nationa
 .. include:: <isopub.txt>
 
 .. toctree::
+   :hidden:
 
-   en/index <English>
-   fr/index <Français>
+   English <source/en/index>
+   Français <source/fr/index>
+
+.. container:: button
+
+    :doc:`English <source/en/index>` :doc:`Français <source/fr/index>`

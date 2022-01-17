@@ -1,3 +1,10 @@
+*******
+License
+*******
+
+.. include:: <isonum.txt>
+.. include:: <isopub.txt>
+
 .. |year| date:: %Y
 
 BSD 3-Clause License

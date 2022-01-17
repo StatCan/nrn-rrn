@@ -1,0 +1,654 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7. Change Management &#8212; NRN / RRN  documentation</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/css/blank.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="8. Identification Rules" href="identification_rules.html" />
+    <link rel="prev" title="6. Data Exchange Model" href="data_exchange_model.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../../../index.html">
+<p class="title">NRN / RRN</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="../index.html">
+  English
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../fr/index.html">
+  Français
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/jessestewart1/nrn-rrn" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://open.canada.ca/data/en/dataset/3d282116-e556-400c-9306-ca1a3cada77f" rel="noopener" target="_blank" title="Open Government">
+            <span><i class="fas fa-database"></i></span>
+            <label class="sr-only">Open Government</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about.html">
+   National Road Network (NRN)
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../user_guide.html">
+   User Guide
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../user_guide/general_usage.html">
+     General Usage
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../user_guide/conform.html">
+     Conform
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../user_guide/validate.html">
+     Validate
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../product_documentation.html">
+   Product Documentation
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="reference_materials.html">
+     1. Reference Materials
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="release_notes.html">
+     2. Release Notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="product_distribution_formats.html">
+     3. Product Distribution Formats
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data_product_specifications.html">
+     4. Data Product Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="feature_catalogue.html">
+     5. Feature Catalogue
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data_exchange_model.html">
+     6. Data Exchange Model
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     7. Change Management
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="identification_rules.html">
+     8. Identification Rules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="completion_rates.html">
+     9. Completion Rates
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../community.html">
+   Community
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../community/project_community.html">
+     Project Community
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../community/contributing.html">
+     Contributing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../community/dependencies.html">
+     Dependencies
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   7.1. Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#object-life-cycle">
+   7.2. Object Life Cycle
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#effect-types">
+   7.3. Effect Types
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#addition-existence">
+     7.3.1. Addition (Existence)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#retirement-existence">
+     7.3.2. Retirement (Existence)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#modification-evolution">
+     7.3.3. Modification (Evolution)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#descriptive-modification">
+       7.3.3.1. Descriptive Modification
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#geometric-modification">
+       7.3.3.2. Geometric Modification
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#first-method">
+         7.3.3.2.1. First Method
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#second-method">
+         7.3.3.2.2. Second method
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#third-method">
+         7.3.3.2.3. Third method
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#confirmation-evolution">
+     7.3.4. Confirmation (Evolution)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#used-effects">
+   7.4. Used Effects
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#segmented-data">
+     7.4.1. Segmented Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example">
+   7.5. Example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   7.6. References
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="change-management">
+<h1><a class="toc-backref" href="#id10"><span class="section-number">7. </span>Change Management</a><a class="headerlink" href="#change-management" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#change-management" id="id10">Change Management</a></p>
+<ul>
+<li><p><a class="reference internal" href="#overview" id="id11">Overview</a></p></li>
+<li><p><a class="reference internal" href="#object-life-cycle" id="id12">Object Life Cycle</a></p></li>
+<li><p><a class="reference internal" href="#effect-types" id="id13">Effect Types</a></p>
+<ul>
+<li><p><a class="reference internal" href="#addition-existence" id="id14">Addition (Existence)</a></p></li>
+<li><p><a class="reference internal" href="#retirement-existence" id="id15">Retirement (Existence)</a></p></li>
+<li><p><a class="reference internal" href="#modification-evolution" id="id16">Modification (Evolution)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#descriptive-modification" id="id17">Descriptive Modification</a></p></li>
+<li><p><a class="reference internal" href="#geometric-modification" id="id18">Geometric Modification</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#confirmation-evolution" id="id19">Confirmation (Evolution)</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#used-effects" id="id20">Used Effects</a></p>
+<ul>
+<li><p><a class="reference internal" href="#segmented-data" id="id21">Segmented Data</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#example" id="id22">Example</a></p></li>
+<li><p><a class="reference internal" href="#references" id="id23">References</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#id11"><span class="section-number">7.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The objective is to update the NVD data on a regular basis as soon as mechanisms have been established between NVD’s
+partners. One of the mechanisms is establishing change management principles. Two basic concepts are needed:
+identification rules and definition / classification of change.</p>
+<p><a class="reference internal" href="identification_rules.html"><span class="doc">Identification Rules</span></a> defines the identification mechanism used as precisely as possible. In terms of change
+management, the NVD doesn’t attempt to track the evolution of phenomena in the real world (features), but rather of the
+objects that represent them. In other words, the NVD does not monitor real changes in the territory; they identify only
+the <em>effects</em> they have on the data.</p>
+<p>Many projects (or the literature) deal with update management and time modelling <a class="footnote-reference brackets" href="#f1" id="id1">1</a>, <a class="footnote-reference brackets" href="#f2" id="id2">2</a>, <a class="footnote-reference brackets" href="#f3" id="id3">3</a>. The model
+herein was developed in cooperation with the Centre for Research in Geomatics (CRG) at Laval University <a class="footnote-reference brackets" href="#f4" id="id4">4</a>.</p>
+<p>It is aimed to monitor the evolution of objects in order to identify any changes that may have occurred between two
+observations, whether successive or not. The discrepancies observed between two observations are referred to as the
+differential <a class="footnote-reference brackets" href="#f5" id="id5">5</a>. Change management also makes it possible to track updates as well as data corrections. The purpose
+of update management is to facilitate synchronization of databases from producing partners and customers based on
+current national views (see Figure 1: Evolution of the database in time).</p>
+<p>The update management process must also make it possible to reconstitute the data as it was on a previous date.</p>
+<div class="figure align-default" id="id8">
+<img alt="Evolution of the database in time" src="../../../_images/evolution_of_the_database_in_time.png" />
+<p class="caption"><span class="caption-text">Figure 1: Evolution of the database in time.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="object-life-cycle">
+<h2><a class="toc-backref" href="#id12"><span class="section-number">7.2. </span>Object Life Cycle</a><a class="headerlink" href="#object-life-cycle" title="Permalink to this headline">¶</a></h2>
+<p>NVD data constitutes the best representation of the real-world phenomena of interest, unless proven otherwise. The
+geometric data in the NVD must undergo a minimum of change. Changes occur when a new information source offers a better
+representation than the preceding one.</p>
+<p>The effects on NVD data will therefore be established based on the preceding representation. Data life cycle is
+therefore limited by two events. The cycle always begins with an “addition” (assignment of a new NID) and ends with
+“retirement.” Between these two events, geometric or descriptive modification or confirmation of the preceding state
+can occur, while maintaining the same NID. Data with the effects “addition”, “geometric or descriptive modification”,
+and “confirmation” are <em>active</em> (or current) features. Features with the effect “retirement” are <em>non-active</em>
+(historical) data.</p>
+</div>
+<div class="section" id="effect-types">
+<span id="id6"></span><h2><a class="toc-backref" href="#id13"><span class="section-number">7.3. </span>Effect Types</a><a class="headerlink" href="#effect-types" title="Permalink to this headline">¶</a></h2>
+<p>Updating makes it possible to establish a parallel between existing data and the new data from an update. The latter
+has certain <em>effects</em> on the data. The following effects can be classified as:</p>
+<div class="section" id="addition-existence">
+<h3><a class="toc-backref" href="#id14"><span class="section-number">7.3.1. </span>Addition (Existence)</a><a class="headerlink" href="#addition-existence" title="Permalink to this headline">¶</a></h3>
+<p>When a new object has no geometric counterpart in the NVD, a new object is <em>added</em>, along with a new NID.</p>
+</div>
+<div class="section" id="retirement-existence">
+<h3><a class="toc-backref" href="#id15"><span class="section-number">7.3.2. </span>Retirement (Existence)</a><a class="headerlink" href="#retirement-existence" title="Permalink to this headline">¶</a></h3>
+<p>When an object no longer represents a feature, the object is <em>retired</em>. This type of object is removed from the current
+data while maintaining its NID.</p>
+</div>
+<div class="section" id="modification-evolution">
+<h3><a class="toc-backref" href="#id16"><span class="section-number">7.3.3. </span>Modification (Evolution)</a><a class="headerlink" href="#modification-evolution" title="Permalink to this headline">¶</a></h3>
+<p>An object is said to be <em>modified</em> if one of its descriptive attributes or its geometric representation is different.
+In this case, the initial NID is preserved for the new version of the object. Two types of modification are possible.</p>
+<div class="section" id="descriptive-modification">
+<h4><a class="toc-backref" href="#id17"><span class="section-number">7.3.3.1. </span>Descriptive Modification</a><a class="headerlink" href="#descriptive-modification" title="Permalink to this headline">¶</a></h4>
+<p>A descriptive modification occurs when a pair of objects from the same class is geometrically identical but has
+different attribute values. For example, the type of surface of a specific road may have changed from “unpaved” to
+“paved”.</p>
+</div>
+<div class="section" id="geometric-modification">
+<h4><a class="toc-backref" href="#id18"><span class="section-number">7.3.3.2. </span>Geometric Modification</a><a class="headerlink" href="#geometric-modification" title="Permalink to this headline">¶</a></h4>
+<p>A geometric modification occurs when a pair of objects from the same class has different geometries that describe the
+same phenomena.</p>
+<p>There are three types of geometric modification currently defined within the NVD. Each has a certain level of
+complexity. In comparing two representations (old and new), it is possible to define geometric modifications as being:</p>
+<div class="section" id="first-method">
+<h5><span class="section-number">7.3.3.2.1. </span>First Method<a class="headerlink" href="#first-method" title="Permalink to this headline">¶</a></h5>
+<p>While comparing two objects, if one vertex is different from its previous representation, the old representation is
+retired and a new representation added. This method of managing representation modifications means that <em>geometric
+modifications are not followed</em>.</p>
+</div>
+<div class="section" id="second-method">
+<h5><span class="section-number">7.3.3.2.2. </span>Second method<a class="headerlink" href="#second-method" title="Permalink to this headline">¶</a></h5>
+<p>The second method of managing representation change is based on comparing the old and the new Junction locations. Two
+Junctions always bound a Network Linear Element. Any modification along an element (geometric representation) may occur
+between its Junctions. These are treated as a geometric modification while conserving its NID. If, for whatever reason,
+one of the old Junctions located at one end of the Network Linear Element has changed, then this Network Linear Element
+is retired and a new one added.</p>
+</div>
+<div class="section" id="third-method">
+<h5><span class="section-number">7.3.3.2.3. </span>Third method<a class="headerlink" href="#third-method" title="Permalink to this headline">¶</a></h5>
+<p>The third method is based on topological links. If the representation of the Linear Element Junctions have maintained
+the same topological links (even if the Junctions have moved and the Network Linear Element geometry has been
+modified), then these changes are treated as a geometric modifications and the Network Linear Element and Junctions
+maintain their NIDs.</p>
+</div>
+</div>
+</div>
+<div class="section" id="confirmation-evolution">
+<h3><a class="toc-backref" href="#id19"><span class="section-number">7.3.4. </span>Confirmation (Evolution)</a><a class="headerlink" href="#confirmation-evolution" title="Permalink to this headline">¶</a></h3>
+<p>Alongside change, there is <em>confirmation</em> of objects when the geometric or descriptive attributes have not been
+modified.</p>
+</div>
+</div>
+<div class="section" id="used-effects">
+<h2><a class="toc-backref" href="#id20"><span class="section-number">7.4. </span>Used Effects</a><a class="headerlink" href="#used-effects" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="segmented-data">
+<h3><a class="toc-backref" href="#id21"><span class="section-number">7.4.1. </span>Segmented Data</a><a class="headerlink" href="#segmented-data" title="Permalink to this headline">¶</a></h3>
+<p>Feature classes with geometry track change using all <em>effects</em> defined in <a class="reference internal" href="../../fr/product_documentation/change_management.html#effect-types"><span class="std std-ref">Types d’effets</span></a>.</p>
+<p>In the segmented model, the effect must be associated to the complete Network Linear Element even if this one is broken
+up into several segments because of a change of attribute. I.e. the same effect must be applied to all the segments
+that have the same value of attribute NID. The segments that describe the same Network Linear Element can have only one
+effect and the set of priorities is as follows: Addition, Descriptive Modification and Confirmation.</p>
+<p>The follow-up method for geometric modifications is indicated by the change management provider.</p>
+</div>
+</div>
+<div class="section" id="example">
+<h2><a class="toc-backref" href="#id22"><span class="section-number">7.5. </span>Example</a><a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>The following example is designed to illustrate update management for better comprehension. Figure 2: Example of an
+update demonstrates the comparison between the original data and new data. In terms of geometry, a single Road Element
+(object 6) was added with respect to the original data. In terms of description, the type of surface of the Road
+Element (object 2) has changed from unpaved to paved.</p>
+<div class="figure align-default" id="id9">
+<img alt="Example of an update" src="../../../_images/example_of_an_update.png" />
+<p class="caption"><span class="caption-text">Figure 2: Example of an update.</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Objects</p></th>
+<th class="head"><p>Explanation</p></th>
+<th class="head"><p>Effects</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>No correspondence with a new object.</p></td>
+<td><p>Retirement</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>No correspondence with an object in the original data; the arrival of object 6 changed the topological structure
+of the objects (and therefore the geometry).</p></td>
+<td><p>Addition</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>No correspondence with an object in the original data; the arrival of object 6 changed the topological structure
+of the objects (and therefore the geometry).</p></td>
+<td><p>Addition</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>No correspondence with an object in the original data; the feature was not represented.</p></td>
+<td><p>Addition</p></td>
+</tr>
+<tr class="row-even"><td><p>e</p></td>
+<td><p>No correspondence with an object in the original data.</p></td>
+<td><p>Addition</p></td>
+</tr>
+<tr class="row-odd"><td><p>f</p></td>
+<td><p>No correspondence with an object in the original data.</p></td>
+<td><p>Addition</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Attribute value changed.</p></td>
+<td><p>Description modification</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Geometry and attributes did not change.</p></td>
+<td><p>Confirmation</p></td>
+</tr>
+<tr class="row-even"><td><p>a</p></td>
+<td><p>Geometry and attributes did not change.</p></td>
+<td><p>Confirmation</p></td>
+</tr>
+<tr class="row-odd"><td><p>b</p></td>
+<td><p>Geometry and attributes did not change.</p></td>
+<td><p>Confirmation</p></td>
+</tr>
+<tr class="row-even"><td><p>c</p></td>
+<td><p>Geometry and attributes did not change.</p></td>
+<td><p>Confirmation</p></td>
+</tr>
+<tr class="row-odd"><td><p>d</p></td>
+<td><p>Geometry and attributes did not change.</p></td>
+<td><p>Confirmation</p></td>
+</tr>
+</tbody>
+</table>
+<p>Table 1: Updating effects.</p>
+</div>
+<div class="section" id="references">
+<h2><a class="toc-backref" href="#id23"><span class="section-number">7.6. </span>References</a><a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<dl class="footnote brackets">
+<dt class="label" id="f1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Langran, Gail. <em>Time in Geographic Information Systems</em>, Éd. Taylor &amp; Francis, 1993, 187 p.</p>
+</dd>
+<dt class="label" id="f2"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Peuquet, Donna J. <em>It’s About Time: A Conceptual Framework for the Representation of Temporal Dynamics in
+Geographic Information Systems</em>, Annals of the Association of American Geographers, vol. 84, No. 3, 1994,
+p. 441-461.</p>
+</dd>
+<dt class="label" id="f3"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dd><p>Worboys, Michael F. <em>A Unified Model for Spatial and Temporal Information</em>, The Computer Journal, vol 37,
+No. 1, p. 26-34.</p>
+</dd>
+<dt class="label" id="f4"><span class="brackets">4</span><span class="fn-backref">(<a href="#id4">1</a>,<a href="#id7">2</a>)</span></dt>
+<dd><p>Pouliot, J., Larrivé, S., and Bédard, Y. <em>Typologie des mises à jour</em>, 2000, 11 p.</p>
+</dd>
+<dt class="label" id="f5"><span class="brackets"><a class="fn-backref" href="#id5">5</a></span></dt>
+<dd><p>The differential corresponds to the set of differences observed between two landmarks of the territory <a class="footnote-reference brackets" href="#f4" id="id7">4</a>.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="data_exchange_model.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">6. </span>Data Exchange Model</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="identification_rules.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Identification Rules</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2022, Statistics Canada / Statistique Canada.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

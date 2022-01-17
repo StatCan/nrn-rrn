@@ -54,7 +54,7 @@ KML – Keyhole Markup Language
     project document: OGC 07-147r2 (http://portal.opengeospatial.org/files/?artifact_id=27810)
 
 SHP – ESRI\ |trade| Shapefile
-----------------------------
+-----------------------------
 
 :Nom: Shapefile
 :Version: 01
@@ -151,9 +151,9 @@ Dans le format SHP, il y a également cinq autres types de fichiers associés au
 
 * un fichier d'attributs (.dbf pour dBASE® file);
 * un fichier projection (.prj) contenant l'information sur le système de référence utilisé et les paramètres de la
-projection cartographique;
+  projection cartographique;
 * un fichier d'index (.shx) contenant la position relative (offset) de chacun des enregistrements (records) du fichier
-principal de géométrie;
+  principal de géométrie;
 * deux fichiers d'index spatial pour les données géométriques (.sbn, .sbx).
 
 Exemples :

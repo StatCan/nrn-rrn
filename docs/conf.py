@@ -18,9 +18,9 @@ from datetime import datetime
 
 # -- Project information -----------------------------------------------------
 
-project = 'National Road Network'
-copyright = f"{datetime.now().year}, Statistics Canada"
-author = 'Statistics Canada'
+project = 'NRN / RRN'
+copyright = f"{datetime.now().year}, Statistics Canada / Statistique Canada"
+author = 'Statistics Canada / Statistique Canada'
 
 
 # -- General configuration ---------------------------------------------------
@@ -43,12 +43,14 @@ root_doc = "index"
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
+# The name of the Pygments (syntax highlighting) style to use.
+pygments_style = "sphinx"
+
 
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-#
 html_theme = 'pydata_sphinx_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
@@ -56,10 +58,27 @@ html_theme = 'pydata_sphinx_theme'
 # documentation.
 html_theme_options = {
     "search_bar_position": "sidebar",
-    "github-url": "https://github.com/jessestewart1/nrn-rrn"
+    "icon_links": [
+        {
+            "name": "GitHub",
+            "url": "https://github.com/jessestewart1/nrn-rrn",
+            "icon": "fab fa-github",
+            "type": "fontawesome"
+        },
+        {
+            "name": "Open Government",
+            "url": "https://open.canada.ca/data/en/dataset/3d282116-e556-400c-9306-ca1a3cada77f",
+            "icon": "fas fa-database",
+            "type": "fontawesome"
+        }
+    ]
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['source/_static']
+
+html_css_files = [
+    "css/custom.css"
+]

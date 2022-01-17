@@ -1,0 +1,3572 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5. Feature Catalogue &#8212; NRN / RRN  documentation</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/css/blank.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="6. Data Exchange Model" href="data_exchange_model.html" />
+    <link rel="prev" title="4. Data Product Specifications" href="data_product_specifications.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../../../index.html">
+<p class="title">NRN / RRN</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="../index.html">
+  English
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../fr/index.html">
+  Français
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/jessestewart1/nrn-rrn" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://open.canada.ca/data/en/dataset/3d282116-e556-400c-9306-ca1a3cada77f" rel="noopener" target="_blank" title="Open Government">
+            <span><i class="fas fa-database"></i></span>
+            <label class="sr-only">Open Government</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about.html">
+   National Road Network (NRN)
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../user_guide.html">
+   User Guide
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../user_guide/general_usage.html">
+     General Usage
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../user_guide/conform.html">
+     Conform
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../user_guide/validate.html">
+     Validate
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../product_documentation.html">
+   Product Documentation
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="reference_materials.html">
+     1. Reference Materials
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="release_notes.html">
+     2. Release Notes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="product_distribution_formats.html">
+     3. Product Distribution Formats
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data_product_specifications.html">
+     4. Data Product Specifications
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     5. Feature Catalogue
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data_exchange_model.html">
+     6. Data Exchange Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="change_management.html">
+     7. Change Management
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="identification_rules.html">
+     8. Identification Rules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="completion_rates.html">
+     9. Completion Rates
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../community.html">
+   Community
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../community/project_community.html">
+     Project Community
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../community/contributing.html">
+     Contributing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../community/dependencies.html">
+     Dependencies
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-types">
+   5.1. Data Types
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#missing-data">
+   5.2. Missing Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#object-metadata">
+   5.3. Object Metadata
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#acquisition-technique">
+     5.3.1. Acquisition Technique
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#coverage">
+     5.3.2. Coverage
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creation-date">
+     5.3.3. Creation Date
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dataset-name">
+     5.3.4. Dataset Name
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#planimetric-accuracy">
+     5.3.5. Planimetric Accuracy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#provider">
+     5.3.6. Provider
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#revision-date">
+     5.3.7. Revision Date
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#standard-version">
+     5.3.8. Standard Version
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#address-range">
+   5.4. Address Range
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#attribute-section">
+     5.4.1. Attribute Section
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#alternate-street-name-nid-left-right">
+       5.4.1.1. Alternate Street Name NID (left, right)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#digitizing-direction-flag-left-right">
+       5.4.1.2. Digitizing Direction Flag (left, right)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#first-house-number-left-right">
+       5.4.1.3. First House Number (left, right)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#first-house-number-suffix-left-right">
+       5.4.1.4. First House Number Suffix (left, right)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#first-house-number-type-left-right">
+       5.4.1.5. First House Number Type (left, right)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#house-number-structure-left-right">
+       5.4.1.6. House Number Structure (left, right)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#last-house-number-left-right">
+       5.4.1.7. Last House Number (left, right)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#last-house-number-suffix-left-right">
+       5.4.1.8. Last House Number Suffix (left, right)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#last-house-number-type-left-right">
+       5.4.1.9. Last House Number Type (left, right)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#nid">
+       5.4.1.10. NID
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#official-street-name-nid-left-right">
+       5.4.1.11. Official Street Name NID (left, right)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#reference-system-indicator-left-right">
+       5.4.1.12. Reference System Indicator (left, right)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id2">
+       5.4.1.13. Object Metadata
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#alternate-name-link">
+   5.5. Alternate Name Link
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     5.5.1. Attribute Section
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id4">
+       5.5.1.1. NID
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#street-name-nid">
+       5.5.1.2. Street Name NID
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id5">
+       5.5.1.3. Object Metadata
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#blocked-passage">
+   5.6. Blocked Passage
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     5.6.1. Attribute Section
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#blocked-passage-type">
+       5.6.1.1. Blocked Passage Type
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id7">
+       5.6.1.2. NID
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#road-element-nid">
+       5.6.1.3. Road Element NID
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id8">
+       5.6.1.4. Object Metadata
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ferry-connection-segment">
+   5.7. Ferry Connection Segment
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     5.7.1. Attribute Section
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#closing-period">
+       5.7.1.1. Closing Period
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#ferry-segment-id">
+       5.7.1.2. Ferry Segment ID
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#functional-road-class">
+       5.7.1.3. Functional Road Class
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id10">
+       5.7.1.4. NID
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#route-name-english-1-2-3-4">
+       5.7.1.5. Route Name English (1, 2, 3, 4)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#route-name-french-1-2-3-4">
+       5.7.1.6. Route Name French (1, 2, 3, 4)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#route-number-1-2-3-4-5">
+       5.7.1.7. Route Number (1, 2, 3, 4, 5)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id11">
+       5.7.1.8. Object Metadata
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#junction">
+   5.8. Junction
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     5.8.1. Attribute Section
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#exit-number">
+       5.8.1.1. Exit Number
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#junction-type">
+       5.8.1.2. Junction Type
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id13">
+       5.8.1.3. NID
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id14">
+       5.8.1.4. Object Metadata
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#road-segment">
+   5.9. Road Segment
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id15">
+     5.9.1. Attribute Section
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#address-range-digitizing-direction-flag-left-right">
+       5.9.1.1. Address Range Digitizing Direction Flag (left, right)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#address-range-nid">
+       5.9.1.2. Address Range NID
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id16">
+       5.9.1.3. Closing Period
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id17">
+       5.9.1.4. Exit Number
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id18">
+       5.9.1.5. First House Number (left, right)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id19">
+       5.9.1.6. Functional Road Class
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id20">
+       5.9.1.7. Last House Number (left, right)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id21">
+       5.9.1.8. NID
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#number-of-lanes">
+       5.9.1.9. Number of Lanes
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#official-place-name-left-right">
+       5.9.1.10. Official Place Name (left, right)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#official-street-name-concatenated-left-right">
+       5.9.1.11. Official Street Name Concatenated (left, right)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#paved-road-surface-type">
+       5.9.1.12. Paved Road Surface Type
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#pavement-status">
+       5.9.1.13. Pavement Status
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#road-jurisdiction">
+       5.9.1.14. Road Jurisdiction
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#road-segment-id">
+       5.9.1.15. Road Segment ID
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id22">
+       5.9.1.16. Route Name English (1, 2, 3, 4)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id23">
+       5.9.1.17. Route Name French (1, 2, 3, 4)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id24">
+       5.9.1.18. Route Number (1, 2, 3, 4, 5)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#speed-restriction">
+       5.9.1.19. Speed Restriction
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#structure-id">
+       5.9.1.20. Structure ID
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#structure-name-english">
+       5.9.1.21. Structure Name English
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#structure-name-french">
+       5.9.1.22. Structure Name French
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#structure-type">
+       5.9.1.23. Structure Type
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#traffic-direction">
+       5.9.1.24. Traffic Direction
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#unpaved-road-surface-type">
+       5.9.1.25. Unpaved Road Surface Type
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id25">
+       5.9.1.26. Object Metadata
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#street-and-place-names">
+   5.10. Street and Place Names
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id26">
+     5.10.1. Attribute Section
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#directional-prefix">
+       5.10.1.1. Directional Prefix
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#directional-suffix">
+       5.10.1.2. Directional Suffix
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#muni-quadrant">
+       5.10.1.3. Muni Quadrant
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id27">
+       5.10.1.4. NID
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#place-name">
+       5.10.1.5. Place Name
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#place-type">
+       5.10.1.6. Place Type
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#province">
+       5.10.1.7. Province
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#street-name-article">
+       5.10.1.8. Street Name Article
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#street-name-body">
+       5.10.1.9. Street Name Body
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#street-type-prefix">
+       5.10.1.10. Street Type Prefix
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#street-type-suffix">
+       5.10.1.11. Street Type Suffix
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id28">
+       5.10.1.12. Object Metadata
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#toll-point">
+   5.11. Toll Point
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id29">
+     5.11.1. Attribute Section
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id30">
+       5.11.1.1. NID
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id31">
+       5.11.1.2. Road Element NID
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#toll-point-type">
+       5.11.1.3. Toll Point Type
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id32">
+       5.11.1.4. Object Metadata
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="feature-catalogue">
+<h1><a class="toc-backref" href="#id55"><span class="section-number">5. </span>Feature Catalogue</a><a class="headerlink" href="#feature-catalogue" title="Permalink to this headline">¶</a></h1>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note</p>
+<p>The description of features and attributes provided in this catalogue is largely based on the standard <em>ISO 14825 —
+Intelligent transport systems — Geographic Data Files (GDF) — Overall data specification</em> resulting from technical
+committee ISO/TC 204.</p>
+<p>This catalogue was adapted from the international standard <em>ISO 19110 — Geographic information — Methodology for
+feature cataloguing</em> prepared by technical committee ISO/TC 211.</p>
+</div>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#feature-catalogue" id="id55">Feature Catalogue</a></p>
+<ul>
+<li><p><a class="reference internal" href="#data-types" id="id56">Data Types</a></p></li>
+<li><p><a class="reference internal" href="#missing-data" id="id57">Missing Data</a></p></li>
+<li><p><a class="reference internal" href="#object-metadata" id="id58">Object Metadata</a></p>
+<ul>
+<li><p><a class="reference internal" href="#acquisition-technique" id="id59">Acquisition Technique</a></p></li>
+<li><p><a class="reference internal" href="#coverage" id="id60">Coverage</a></p></li>
+<li><p><a class="reference internal" href="#creation-date" id="id61">Creation Date</a></p></li>
+<li><p><a class="reference internal" href="#dataset-name" id="id62">Dataset Name</a></p></li>
+<li><p><a class="reference internal" href="#planimetric-accuracy" id="id63">Planimetric Accuracy</a></p></li>
+<li><p><a class="reference internal" href="#provider" id="id64">Provider</a></p></li>
+<li><p><a class="reference internal" href="#revision-date" id="id65">Revision Date</a></p></li>
+<li><p><a class="reference internal" href="#standard-version" id="id66">Standard Version</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#address-range" id="id67">Address Range</a></p>
+<ul>
+<li><p><a class="reference internal" href="#attribute-section" id="id68">Attribute Section</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#alternate-name-link" id="id69">Alternate Name Link</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id3" id="id70">Attribute Section</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#blocked-passage" id="id71">Blocked Passage</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id6" id="id72">Attribute Section</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#ferry-connection-segment" id="id73">Ferry Connection Segment</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id9" id="id74">Attribute Section</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#junction" id="id75">Junction</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id12" id="id76">Attribute Section</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#road-segment" id="id77">Road Segment</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id15" id="id78">Attribute Section</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#street-and-place-names" id="id79">Street and Place Names</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id26" id="id80">Attribute Section</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#toll-point" id="id81">Toll Point</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id29" id="id82">Attribute Section</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="data-types">
+<h2><a class="toc-backref" href="#id56"><span class="section-number">5.1. </span>Data Types</a><a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
+<p>Data types for all attributes for all feature classes are described in <a class="reference internal" href="product_distribution_formats.html"><span class="doc">Product Distribution Formats</span></a>.</p>
+</div>
+<div class="section" id="missing-data">
+<h2><a class="toc-backref" href="#id57"><span class="section-number">5.2. </span>Missing Data</a><a class="headerlink" href="#missing-data" title="Permalink to this headline">¶</a></h2>
+<p>This section applies to all attributes for all feature classes.</p>
+<p>“-1” (numeric) / “Unknown” (character) is used when a value is unknown, missing, or invalid (not within the domain of
+the attribute).</p>
+</div>
+<div class="section" id="object-metadata">
+<span id="id1"></span><h2><a class="toc-backref" href="#id58"><span class="section-number">5.3. </span>Object Metadata</a><a class="headerlink" href="#object-metadata" title="Permalink to this headline">¶</a></h2>
+<p>The attributes described in this section apply to all feature classes (except for Alternate Name Link where only
+Creation Date, Dataset Name, and Standard Version apply).</p>
+<div class="section" id="acquisition-technique">
+<h3><a class="toc-backref" href="#id59"><span class="section-number">5.3.1. </span>Acquisition Technique</a><a class="headerlink" href="#acquisition-technique" title="Permalink to this headline">¶</a></h3>
+<p>The type of data source or technique used to populate (create or revise) the dataset.</p>
+<table class="colwidths-auto table" id="id33">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id33" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>None</p></td>
+<td><p>No value applies.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Other</p></td>
+<td><p>Other value.</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>GPS</p></td>
+<td><p>Data collected using a GPS device.</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>Orthoimage</p></td>
+<td><p>Satellite imagery orthorectified.</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Orthophoto</p></td>
+<td><p>Aerial photo orthorectified.</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>Vector Data</p></td>
+<td><p>Vector digital data.</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>Paper Map</p></td>
+<td><p>Conventional sources of information like maps or plans.</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>Field Completion</p></td>
+<td><p>Information gathered from people directly on the field.</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>Raster Data</p></td>
+<td><p>Data resulting from a scanning process.</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>Digital Elevation Model</p></td>
+<td><p>Data coming from a Digital Elevation Model (DEM).</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>Aerial Photo</p></td>
+<td><p>Aerial photography not orthorectified.</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>Raw Imagery Data</p></td>
+<td><p>Satellite imagery not orthorectified.</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>Computed</p></td>
+<td><p>Geometric information that has been computed (not captured).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="coverage">
+<h3><a class="toc-backref" href="#id60"><span class="section-number">5.3.2. </span>Coverage</a><a class="headerlink" href="#coverage" title="Permalink to this headline">¶</a></h3>
+<p>This value indicates if this set of metadata covers the full length of the Network Linear Element or only a portion of
+it.</p>
+<table class="colwidths-auto table" id="id34">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id34" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Complete</p></td>
+<td><p>Metadata applies on the entire geometry or attribute event.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Partial</p></td>
+<td><p>Metadata applies on a portion of the geometry or attribute event.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="creation-date">
+<h3><a class="toc-backref" href="#id61"><span class="section-number">5.3.3. </span>Creation Date</a><a class="headerlink" href="#creation-date" title="Permalink to this headline">¶</a></h3>
+<p>The date of data creation.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A date in the format YYYYMMDD. If the month or the day is unknown, corresponding characters are left blank.</p>
+<p>Examples: 20060630, 200606, 2006.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="dataset-name">
+<h3><a class="toc-backref" href="#id62"><span class="section-number">5.3.4. </span>Dataset Name</a><a class="headerlink" href="#dataset-name" title="Permalink to this headline">¶</a></h3>
+<p>Province or Territory covered by the dataset.</p>
+<span id="dataset-name-domain"></span><table class="colwidths-auto table" id="id35">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id35" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Newfoundland and Labrador</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Nova Scotia</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Prince Edward Island</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>New Brunswick</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Quebec</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Ontario</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>Manitoba</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>Saskatchewan</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>Alberta</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>British Columbia</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>Yukon Territory</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>Northwest Territories</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>Nunavut</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="planimetric-accuracy">
+<h3><a class="toc-backref" href="#id63"><span class="section-number">5.3.5. </span>Planimetric Accuracy</a><a class="headerlink" href="#planimetric-accuracy" title="Permalink to this headline">¶</a></h3>
+<p>The planimetric accuracy expressed in meters as the circular map accuracy standard (CMAS).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>[-1,1..n]</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="provider">
+<h3><a class="toc-backref" href="#id64"><span class="section-number">5.3.6. </span>Provider</a><a class="headerlink" href="#provider" title="Permalink to this headline">¶</a></h3>
+<p>The affiliation of the organization that generated (created or revised) the object.</p>
+<table class="colwidths-auto table" id="id36">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id36" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Other</p></td>
+<td><p>Other value.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Federal</p></td>
+<td><p>Federal departments or agencies.</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Provincial / Territorial</p></td>
+<td><p>Provincial / territorial departments or agencies.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Municipal</p></td>
+<td><p>Municipal departments or agencies.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="revision-date">
+<h3><a class="toc-backref" href="#id65"><span class="section-number">5.3.7. </span>Revision Date</a><a class="headerlink" href="#revision-date" title="Permalink to this headline">¶</a></h3>
+<p>The date of data revision.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A date in the format YYYYMMDD. If the month or the day is unknown, corresponding characters are left blank.</p>
+<p>Examples: 20060630, 200606, 2006.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="standard-version">
+<h3><a class="toc-backref" href="#id66"><span class="section-number">5.3.8. </span>Standard Version</a><a class="headerlink" href="#standard-version" title="Permalink to this headline">¶</a></h3>
+<p>The version number of the GeoBase Product specifications.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>[2.0]</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="address-range">
+<h2><a class="toc-backref" href="#id67"><span class="section-number">5.4. </span>Address Range</a><a class="headerlink" href="#address-range" title="Permalink to this headline">¶</a></h2>
+<p>A set of attributes representing the address of the first and last building located along a side of the entire Road
+Element or a portion of it.</p>
+<div class="section" id="attribute-section">
+<h3><a class="toc-backref" href="#id68"><span class="section-number">5.4.1. </span>Attribute Section</a><a class="headerlink" href="#attribute-section" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="alternate-street-name-nid-left-right">
+<h4><span class="section-number">5.4.1.1. </span>Alternate Street Name NID (left, right)<a class="headerlink" href="#alternate-street-name-nid-left-right" title="Permalink to this headline">¶</a></h4>
+<p>The identifier used to link an address range to its alternate street name. A specific value is defined for the left and
+right sides of the Road Element.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A UUID or “None” when no value applies.</p>
+<p>Example: 69822b23d217494896014e57a2edb8ac</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="digitizing-direction-flag-left-right">
+<h4><span class="section-number">5.4.1.2. </span>Digitizing Direction Flag (left, right)<a class="headerlink" href="#digitizing-direction-flag-left-right" title="Permalink to this headline">¶</a></h4>
+<p>Indicates if the attribute event follows the same direction as the digitizing of the Road Element. A specific value is
+defined for the left and right sides of the Road Element.</p>
+<span id="digitizing-direction-flag-domain"></span><table class="colwidths-auto table" id="id37">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id37" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Same Direction</p></td>
+<td><p>Attribute event and Road Element geometry are in the same direction.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Opposite Direction</p></td>
+<td><p>Attribute event and Road Element geometry are in opposite directions.</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Not Applicable</p></td>
+<td><p>Indication of the digitizing direction of the Road Element not needed for the attribute event.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="first-house-number-left-right">
+<h4><span class="section-number">5.4.1.3. </span>First House Number (left, right)<a class="headerlink" href="#first-house-number-left-right" title="Permalink to this headline">¶</a></h4>
+<p>The first house number address value along a particular side (left or right) of a Road Element. A specific value is
+defined for the left and right sides of the Road Element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>[-1..n] The value “0” is used when no value applies.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="first-house-number-suffix-left-right">
+<h4><span class="section-number">5.4.1.4. </span>First House Number Suffix (left, right)<a class="headerlink" href="#first-house-number-suffix-left-right" title="Permalink to this headline">¶</a></h4>
+<p>A non-integer value, such as a fraction (e.g. 1⁄4) or a character (e.g. A) that sometimes follows the house number
+address value. A specific value is defined for the left and right sides of the Road Element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A non-integer value or “None” when no value applies.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="first-house-number-type-left-right">
+<h4><span class="section-number">5.4.1.5. </span>First House Number Type (left, right)<a class="headerlink" href="#first-house-number-type-left-right" title="Permalink to this headline">¶</a></h4>
+<p>Method used to populate the address range. A specific value is defined for the left and right sides of the Road Element.</p>
+<span id="house-number-type-domain"></span><table class="colwidths-auto table" id="id38">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id38" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>None</p></td>
+<td><p>Absence of a house along the Road Element.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Actual Located</p></td>
+<td><p>Qualifier indicating that the house number is located at its “real world” position along a
+Road Element.</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Actual Unlocated</p></td>
+<td><p>Qualifier indicating that the house number is located at one end of the Road Element. This
+may be or may not be its “real world” position.</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>Projected</p></td>
+<td><p>Qualifier indicating that the house number is planned, figured or estimated for the future and is
+located (at one end) at the beginning or the end of the Road Element.</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Interpolated</p></td>
+<td><p>Qualifier indicating that the house number is calculated from two known house numbers which are
+located on either side. By convention, the house is positioned at one end of the Road Element.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="house-number-structure-left-right">
+<h4><span class="section-number">5.4.1.6. </span>House Number Structure (left, right)<a class="headerlink" href="#house-number-structure-left-right" title="Permalink to this headline">¶</a></h4>
+<p>The type of house numbering (or address numbering) method applied to one side of a particular Road Element. A specific
+value is defined for the left and right sides of the Road Element.</p>
+<table class="colwidths-auto table" id="id39">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id39" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>None</p></td>
+<td><p>Absence of a house along the Road Element.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Even</p></td>
+<td><p>The house numbers appear as even numbers in a sequentially sorted order (ascending or descending) when
+moving from one end of the Road Element to the other. Numeric completeness of the series is not a requirement. An
+even house number series that has missing numbers but is sequentially sorted is considered Even. An example is the
+series (2, 4, 8, 18, 22).</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Odd</p></td>
+<td><p>The house numbers appear as odd numbers in a sequentially sorted order (ascending or descending) when
+moving from one end of the Road Element to the other. Numeric completeness of the series is not a requirement. An
+odd house number series that has missing numbers but is sequentially sorted is considered Odd. An example is the
+series (35, 39, 43, 69, 71, 73, 85).</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>Mixed</p></td>
+<td><p>The house numbers are odd and even on the same side of a Road Element in a sequentially sorted order
+(ascending or descending) when moving from one end of the Road Element to the other. Numeric completeness of the
+series is not a requirement. An odd and even house number series that has missing numbers but is sequentially sorted
+is considered Mixed. Examples are the series (5, 6, 7, 9, 10, 13) and (24, 27, 30, 33, 34, 36).</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Irregular</p></td>
+<td><p>The house numbers do not occur in any sorted order.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="last-house-number-left-right">
+<h4><span class="section-number">5.4.1.7. </span>Last House Number (left, right)<a class="headerlink" href="#last-house-number-left-right" title="Permalink to this headline">¶</a></h4>
+<p>The last house number address value along a particular side (left or right) of a Road Element. A specific value is
+defined for the left and right sides of the Road Element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>[-1..n] The value “0” is used when no value applies.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="last-house-number-suffix-left-right">
+<h4><span class="section-number">5.4.1.8. </span>Last House Number Suffix (left, right)<a class="headerlink" href="#last-house-number-suffix-left-right" title="Permalink to this headline">¶</a></h4>
+<p>A non-integer value, such as a fraction (e.g. 1⁄4) or a character (e.g. A) that sometimes follows the house number
+address value. A specific value is defined for the left and right sides of the Road Element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A non-integer value or “None” when no value applies.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="last-house-number-type-left-right">
+<h4><span class="section-number">5.4.1.9. </span>Last House Number Type (left, right)<a class="headerlink" href="#last-house-number-type-left-right" title="Permalink to this headline">¶</a></h4>
+<p>Method used to populate the address range. A specific value is defined for the left and right sides of the Road Element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>Identical to <a class="reference internal" href="../../fr/product_documentation/feature_catalogue.html#house-number-type-domain"><span class="std std-ref">Domaine :</span></a>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="nid">
+<h4><span class="section-number">5.4.1.10. </span>NID<a class="headerlink" href="#nid" title="Permalink to this headline">¶</a></h4>
+<p>A national unique identifier.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A UUID.</p>
+<p>Example: 69822b23d217494896014e57a2edb8ac</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="official-street-name-nid-left-right">
+<h4><span class="section-number">5.4.1.11. </span>Official Street Name NID (left, right)<a class="headerlink" href="#official-street-name-nid-left-right" title="Permalink to this headline">¶</a></h4>
+<p>The identifier used to link an address range to its recognized official street name. A specific value is defined for
+the left and right sides of the Road Element.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A UUID or “None” when no value applies.</p>
+<p>Example: 69822b23d217494896014e57a2edb8ac</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="reference-system-indicator-left-right">
+<h4><span class="section-number">5.4.1.12. </span>Reference System Indicator (left, right)<a class="headerlink" href="#reference-system-indicator-left-right" title="Permalink to this headline">¶</a></h4>
+<p>An indication of whether the physical address of all or a portion of a Road Element is based on a particular addressing
+system. A specific value is defined for the left and right sides of the Road Element.</p>
+<table class="colwidths-auto table" id="id40">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id40" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>None</p></td>
+<td><p>No reference system indicator.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Civic</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Lot and Concession</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>911 Measured</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>911 Civic</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>DLS Townships</p></td>
+<td><p>Dominion Land Survey, survey method dominant in the Prairie provinces.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id2">
+<h4><span class="section-number">5.4.1.13. </span>Object Metadata<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<p>Refer to the attributes described in <a class="reference internal" href="../../fr/product_documentation/feature_catalogue.html#object-metadata"><span class="std std-ref">Métadonnées d’objet</span></a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="alternate-name-link">
+<h2><a class="toc-backref" href="#id69"><span class="section-number">5.5. </span>Alternate Name Link</a><a class="headerlink" href="#alternate-name-link" title="Permalink to this headline">¶</a></h2>
+<p>A linkup table establishing one or many relations between address ranges and their non-official street and place names
+used or known by the general public.</p>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id70"><span class="section-number">5.5.1. </span>Attribute Section</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h4><span class="section-number">5.5.1.1. </span>NID<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<p>A national unique identifier.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A UUID.</p>
+<p>Example: 69822b23d217494896014e57a2edb8ac</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="street-name-nid">
+<h4><span class="section-number">5.5.1.2. </span>Street Name NID<a class="headerlink" href="#street-name-nid" title="Permalink to this headline">¶</a></h4>
+<p>The NID of the non official street and place name.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A UUID.</p>
+<p>Example: 69822b23d217494896014e57a2edb8ac</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id5">
+<h4><span class="section-number">5.5.1.3. </span>Object Metadata<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<p>Refer to the attributes described in <a class="reference internal" href="../../fr/product_documentation/feature_catalogue.html#object-metadata"><span class="std std-ref">Métadonnées d’objet</span></a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="blocked-passage">
+<h2><a class="toc-backref" href="#id71"><span class="section-number">5.6. </span>Blocked Passage</a><a class="headerlink" href="#blocked-passage" title="Permalink to this headline">¶</a></h2>
+<p>Indication of a physical barrier on a Road Element built to prevent or control further access.</p>
+<div class="section" id="id6">
+<h3><a class="toc-backref" href="#id72"><span class="section-number">5.6.1. </span>Attribute Section</a><a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="blocked-passage-type">
+<h4><span class="section-number">5.6.1.1. </span>Blocked Passage Type<a class="headerlink" href="#blocked-passage-type" title="Permalink to this headline">¶</a></h4>
+<p>The type of blocked passage as an indication of the fact whether it is removable.</p>
+<table class="colwidths-auto table" id="id41">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id41" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Permanently Fixed</p></td>
+<td><p>The barrier cannot be removed without destroying it. Heavy equipment needed in order to
+allow further access. Examples of permanently fixed blocked passage are concrete blocks or a mound of earth.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Removable</p></td>
+<td><p>The barrier is designed to free the entrance to the (other side of the) Road Element that it is
+blocking. Further access easily allowed when so desired.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id7">
+<h4><span class="section-number">5.6.1.2. </span>NID<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
+<p>A national unique identifier.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A UUID.</p>
+<p>Example: 69822b23d217494896014e57a2edb8ac</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="road-element-nid">
+<h4><span class="section-number">5.6.1.3. </span>Road Element NID<a class="headerlink" href="#road-element-nid" title="Permalink to this headline">¶</a></h4>
+<p>The NID of the Road Element on which the point geometry is located.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A UUID.</p>
+<p>Example: 69822b23d217494896014e57a2edb8ac</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id8">
+<h4><span class="section-number">5.6.1.4. </span>Object Metadata<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+<p>Refer to the attributes described in <a class="reference internal" href="../../fr/product_documentation/feature_catalogue.html#object-metadata"><span class="std std-ref">Métadonnées d’objet</span></a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="ferry-connection-segment">
+<h2><a class="toc-backref" href="#id73"><span class="section-number">5.7. </span>Ferry Connection Segment</a><a class="headerlink" href="#ferry-connection-segment" title="Permalink to this headline">¶</a></h2>
+<p>The average route a ferryboat takes when transporting vehicles between two fixed locations on the road network.</p>
+<div class="section" id="id9">
+<h3><a class="toc-backref" href="#id74"><span class="section-number">5.7.1. </span>Attribute Section</a><a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="closing-period">
+<h4><span class="section-number">5.7.1.1. </span>Closing Period<a class="headerlink" href="#closing-period" title="Permalink to this headline">¶</a></h4>
+<p>The period in which the road or ferry connection is not available to the public.</p>
+<span id="closing-period-domain"></span><table class="colwidths-auto table" id="id42">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id42" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>None</p></td>
+<td><p>There is no closing period. The road or ferry connection is open year round.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Summer</p></td>
+<td><p>Period of the year for which the absence of ice and snow prevent the access to the road or ferry
+connection.</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Winter</p></td>
+<td><p>Period of the year for which ice and snow prevent the access to the road or ferry connection.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="ferry-segment-id">
+<h4><span class="section-number">5.7.1.2. </span>Ferry Segment ID<a class="headerlink" href="#ferry-segment-id" title="Permalink to this headline">¶</a></h4>
+<p>A unique identifier within a dataset assigned to each Ferry Connection Segment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>[1..n]</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="functional-road-class">
+<h4><span class="section-number">5.7.1.3. </span>Functional Road Class<a class="headerlink" href="#functional-road-class" title="Permalink to this headline">¶</a></h4>
+<p>A classification based on the importance of the role that the Road Element or Ferry Connection performs in the
+connectivity of the total road network.</p>
+<span id="functional-road-class-domain"></span><table class="colwidths-auto table" id="id43">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id43" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Freeway</p></td>
+<td><p>An unimpeded, high-speed controlled access thoroughfare for through traffic with typically no at-
+grade intersections, usually with no property access or direct access, and which is accessed by a ramp. Pedestrians
+are prohibited.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Expressway / Highway</p></td>
+<td><p>A high-speed thoroughfare with a combination of controlled access intersections at any
+grade.</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Arterial</p></td>
+<td><p>A major thoroughfare with medium to large traffic capacity.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Collector</p></td>
+<td><p>A minor thoroughfare mainly used to access properties and to feed traffic with right of way.</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Local / Street</p></td>
+<td><p>A low-speed thoroughfare dedicated to provide full access to the front of properties.</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Local / Strata</p></td>
+<td><p>A low-speed thoroughfare dedicated to provide access to properties with potential public
+restriction such as: trailer parks, First Nations, strata, private estates, seasonal residences.</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>Local / Unknown</p></td>
+<td><p>A low-speed thoroughfare dedicated to provide access to the front of properties but for which
+the access regulations are unknown.</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>Alleyway / Lane</p></td>
+<td><p>A low-speed thoroughfare dedicated to provide access to the rear of properties.</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>Ramp</p></td>
+<td><p>A system of interconnecting roadways providing for the controlled movement between two or more roadways.</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>Resource / Recreation</p></td>
+<td><p>A narrow passage whose primary function is to provide access for resource extraction
+and may also have serve in providing public access to the backcountry.</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>Rapid Transit</p></td>
+<td><p>A thoroughfare restricted to public transit buses.</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>Service Lane</p></td>
+<td><p>A stretch of road permitting vehicles to come to a stop along a freeway or highway. Scale,
+service lane, emergency lane, lookout, and rest area.</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>Winter</p></td>
+<td><p>A road that is only useable during the winter when conditions allow for passage over lakes, rivers,
+and wetlands.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id10">
+<h4><span class="section-number">5.7.1.4. </span>NID<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
+<p>A national unique identifier.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A UUID.</p>
+<p>Example: 69822b23d217494896014e57a2edb8ac</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="route-name-english-1-2-3-4">
+<h4><span class="section-number">5.7.1.5. </span>Route Name English (1, 2, 3, 4)<a class="headerlink" href="#route-name-english-1-2-3-4" title="Permalink to this headline">¶</a></h4>
+<p>The English version of a name of a particular route in a given road network as attributed by a national or subnational
+agency. A particular Road Segment or Ferry Connection Segment can belong to more than one named route. In such cases,
+it has multiple route name attributes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A complete English route name value such as “Trans-Canada Highway” or “None” when no value applies.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="route-name-french-1-2-3-4">
+<h4><span class="section-number">5.7.1.6. </span>Route Name French (1, 2, 3, 4)<a class="headerlink" href="#route-name-french-1-2-3-4" title="Permalink to this headline">¶</a></h4>
+<p>The French version of a name of a particular route in a given road network as attributed by a national or subnational
+agency. A particular Road Segment or Ferry Connection Segment can belong to more than one named route. In such cases,
+it has multiple route name attributes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A complete French route name value such as “Autoroute transcanadienne” or “None” when no value applies.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="route-number-1-2-3-4-5">
+<h4><span class="section-number">5.7.1.7. </span>Route Number (1, 2, 3, 4, 5)<a class="headerlink" href="#route-number-1-2-3-4-5" title="Permalink to this headline">¶</a></h4>
+<p>The ID number of a particular route in a given road network as attributed by a national or subnational agency. A
+particular Road Segment or Ferry Connection Segment can belong to more than one numbered route. In such cases, it has
+multiple route number attributes.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A route number including possible associated non-integer characters such as “A” or “None” when no value
+applies.</p>
+<p>Examples: 1, 1A, 230-A, 430-28.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id11">
+<h4><span class="section-number">5.7.1.8. </span>Object Metadata<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h4>
+<p>Refer to the attributes described in <a class="reference internal" href="../../fr/product_documentation/feature_catalogue.html#object-metadata"><span class="std std-ref">Métadonnées d’objet</span></a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="junction">
+<h2><a class="toc-backref" href="#id75"><span class="section-number">5.8. </span>Junction</a><a class="headerlink" href="#junction" title="Permalink to this headline">¶</a></h2>
+<p>A feature that bounds a Road Element or a Ferry Connection. A Road Element or Ferry Connection always forms a
+connection between two Junctions and, a Road Element or Ferry Connection is always bounded by exactly two Junctions. A
+Junction Feature represents the physical connection between its adjoining Road Elements or Ferry Connections. A
+Junction is defined at the intersection of three or more roads, at the junction of a road and a ferry, at the end of a
+dead end road and at the junction of a road or ferry with a National, Provincial or Territorial Boundary.</p>
+<div class="section" id="id12">
+<h3><a class="toc-backref" href="#id76"><span class="section-number">5.8.1. </span>Attribute Section</a><a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="exit-number">
+<h4><span class="section-number">5.8.1.1. </span>Exit Number<a class="headerlink" href="#exit-number" title="Permalink to this headline">¶</a></h4>
+<p>The ID number of an exit on a controlled access thoroughfare that has been assigned by an administrating body.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>An ID number including possible associated non-integer characters such as “A” or “None” when no value applies.</p>
+<p>Examples: 11, 11A, 11-A, 80-EST, 80-E, 80E.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="junction-type">
+<h4><span class="section-number">5.8.1.2. </span>Junction Type<a class="headerlink" href="#junction-type" title="Permalink to this headline">¶</a></h4>
+<p>The classification of a junction.</p>
+<table class="colwidths-auto table" id="id44">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id44" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Intersection</p></td>
+<td><p>An intersection between three or more Road Elements intersecting at same grade level.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Dead End</p></td>
+<td><p>A specific Junction that indicates that a Road Element ends and is not connected to any other Road
+Element or Ferry Connection.</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Ferry</p></td>
+<td><p>A specific Junction that indicates that a Road Element connects to a Ferry Connection.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>NatProvTer</p></td>
+<td><p>A specific Junction at the limit of a dataset indicating that a Road element or Ferry connection
+continues into the adjacent province, territory or country.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id13">
+<h4><span class="section-number">5.8.1.3. </span>NID<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h4>
+<p>A national unique identifier.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A UUID.</p>
+<p>Example: 69822b23d217494896014e57a2edb8ac</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id14">
+<h4><span class="section-number">5.8.1.4. </span>Object Metadata<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h4>
+<p>Refer to the attributes described in <a class="reference internal" href="../../fr/product_documentation/feature_catalogue.html#object-metadata"><span class="std std-ref">Métadonnées d’objet</span></a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="road-segment">
+<h2><a class="toc-backref" href="#id77"><span class="section-number">5.9. </span>Road Segment</a><a class="headerlink" href="#road-segment" title="Permalink to this headline">¶</a></h2>
+<p>A road is a linear section of the earth designed for or the result of vehicular movement. A Road Segment is the
+specific representation of a portion of a road with uniform characteristics.</p>
+<div class="section" id="id15">
+<h3><a class="toc-backref" href="#id78"><span class="section-number">5.9.1. </span>Attribute Section</a><a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="address-range-digitizing-direction-flag-left-right">
+<h4><span class="section-number">5.9.1.1. </span>Address Range Digitizing Direction Flag (left, right)<a class="headerlink" href="#address-range-digitizing-direction-flag-left-right" title="Permalink to this headline">¶</a></h4>
+<p>Indicates if the attribute event follows the same direction as the digitizing of the Road Element. A specific value is
+defined for the left and right sides of the Road Element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>Identical to <a class="reference internal" href="../../fr/product_documentation/feature_catalogue.html#digitizing-direction-flag-domain"><span class="std std-ref">Domaine :</span></a>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="address-range-nid">
+<h4><span class="section-number">5.9.1.2. </span>Address Range NID<a class="headerlink" href="#address-range-nid" title="Permalink to this headline">¶</a></h4>
+<p>A UUID assigned to each particular block face address ranges.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A UUID or “None” when no value applies.</p>
+<p>Example: 69822b23d217494896014e57a2edb8ac</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id16">
+<h4><span class="section-number">5.9.1.3. </span>Closing Period<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h4>
+<p>The period in which the road or ferry connection is not available to the public.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>Identical to <a class="reference internal" href="../../fr/product_documentation/feature_catalogue.html#closing-period-domain"><span class="std std-ref">Domaine :</span></a>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id17">
+<h4><span class="section-number">5.9.1.4. </span>Exit Number<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h4>
+<p>The ID number of an exit on a controlled access thoroughfare that has been assigned by an administrating body.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>An ID number including possible associated non-integer characters such as “A” or “None” when no value applies.</p>
+<p>Examples: 11, 11A, 11-A, 80-EST, 80-E, 80E.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id18">
+<h4><span class="section-number">5.9.1.5. </span>First House Number (left, right)<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h4>
+<p>The first house number address value along a particular side (left or right) of a Road Element. A specific value is
+defined for the left and right sides of the Road Element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>[-1..n] The value “0” is used when no value applies.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id19">
+<h4><span class="section-number">5.9.1.6. </span>Functional Road Class<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h4>
+<p>A classification based on the importance of the role that the Road Element or Ferry Connection performs in the
+connectivity of the total road network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>Identical to <a class="reference internal" href="../../fr/product_documentation/feature_catalogue.html#functional-road-class-domain"><span class="std std-ref">Domaine :</span></a>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id20">
+<h4><span class="section-number">5.9.1.7. </span>Last House Number (left, right)<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h4>
+<p>The last house number address value along a particular side (left or right) of a Road Element. A specific value is
+defined for the left and right sides of the Road Element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>[-1..n] The value “0” is used when no value applies.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id21">
+<h4><span class="section-number">5.9.1.8. </span>NID<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h4>
+<p>A national unique identifier.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A UUID.</p>
+<p>Example: 69822b23d217494896014e57a2edb8ac</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="number-of-lanes">
+<h4><span class="section-number">5.9.1.9. </span>Number of Lanes<a class="headerlink" href="#number-of-lanes" title="Permalink to this headline">¶</a></h4>
+<p>The number of lanes existing on a Road Element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>[1..8]</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="official-place-name-left-right">
+<h4><span class="section-number">5.9.1.10. </span>Official Place Name (left, right)<a class="headerlink" href="#official-place-name-left-right" title="Permalink to this headline">¶</a></h4>
+<p>Official name of an administrative area, district or other named area which is required for uniqueness of the street
+name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>Derived from the Street and place names table. A specific value is defined for the left and right sides of the
+Road Element. “None” when no value applies.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="official-street-name-concatenated-left-right">
+<h4><span class="section-number">5.9.1.11. </span>Official Street Name Concatenated (left, right)<a class="headerlink" href="#official-street-name-concatenated-left-right" title="Permalink to this headline">¶</a></h4>
+<p>A concatenation of the officially recognized Directional prefix, Street type prefix, Street name article, Street name
+body, Street type suffix, Directional suffix and Muni quadrant values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>Derived from the Street and place names table. A specific value is defined for the left and right sides of the
+Road Element. “None” when no value applies.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="paved-road-surface-type">
+<h4><span class="section-number">5.9.1.12. </span>Paved Road Surface Type<a class="headerlink" href="#paved-road-surface-type" title="Permalink to this headline">¶</a></h4>
+<p>The type of surface a paved Road Element has.</p>
+<table class="colwidths-auto table" id="id45">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id45" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>None</p></td>
+<td><p>No value applies.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Rigid</p></td>
+<td><p>A paved road with a rigid surface such as concrete or steel decks.</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Flexible</p></td>
+<td><p>A paved road with a flexible surface such as asphalt or tar gravel.</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>Blocks</p></td>
+<td><p>A paved road with a surface made of blocks such as cobblestones.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pavement-status">
+<h4><span class="section-number">5.9.1.13. </span>Pavement Status<a class="headerlink" href="#pavement-status" title="Permalink to this headline">¶</a></h4>
+<p>An indication of improvement applied to a Road surface.</p>
+<table class="colwidths-auto table" id="id46">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id46" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Paved</p></td>
+<td><p>A road with a surface made of hardened material such as concrete, asphalt, tar gravel, or steel decks.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Unpaved</p></td>
+<td><p>A road with a surface made of loose material such as gravel or dirt.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="road-jurisdiction">
+<h4><span class="section-number">5.9.1.14. </span>Road Jurisdiction<a class="headerlink" href="#road-jurisdiction" title="Permalink to this headline">¶</a></h4>
+<p>The agency with the responsibility/authority to ensure maintenance occurs but is not necessarily the one who undertakes
+the maintenance directly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>The Agency name or “None” when no value applies.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="road-segment-id">
+<h4><span class="section-number">5.9.1.15. </span>Road Segment ID<a class="headerlink" href="#road-segment-id" title="Permalink to this headline">¶</a></h4>
+<p>A unique identifier within a dataset assigned to each Road Segment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>[1..n]</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id22">
+<h4><span class="section-number">5.9.1.16. </span>Route Name English (1, 2, 3, 4)<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h4>
+<p>The English version of a name of a particular route in a given road network as attributed by a national or subnational
+agency. A particular Road Segment or Ferry Connection Segment can belong to more than one named route. In such cases,
+it has multiple route name attributes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A complete English route name value such as “Trans-Canada Highway” or “None” when no value applies.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id23">
+<h4><span class="section-number">5.9.1.17. </span>Route Name French (1, 2, 3, 4)<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h4>
+<p>The French version of a name of a particular route in a given road network as attributed by a national or subnational
+agency. A particular Road Segment or Ferry Connection Segment can belong to more than one named route. In such cases,
+it has multiple route name attributes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A complete French route name value such as “Autoroute transcanadienne” or “None” when no value applies.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id24">
+<h4><span class="section-number">5.9.1.18. </span>Route Number (1, 2, 3, 4, 5)<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h4>
+<p>The ID number of a particular route in a given road network as attributed by a national or subnational agency. A
+particular Road Segment or Ferry Connection Segment can belong to more than one numbered route. In such cases, it has
+multiple route number attributes.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A route number including possible associated non-integer characters such as “A” or “None” when no value
+applies.</p>
+<p>Examples: 1, 1A, 230-A, 430-28.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="speed-restriction">
+<h4><span class="section-number">5.9.1.19. </span>Speed Restriction<a class="headerlink" href="#speed-restriction" title="Permalink to this headline">¶</a></h4>
+<p>The maximum speed allowed on the road. The value is expressed in kilometers per hour.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A multiple of 5, less than or equal to 120.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="structure-id">
+<h4><span class="section-number">5.9.1.20. </span>Structure ID<a class="headerlink" href="#structure-id" title="Permalink to this headline">¶</a></h4>
+<p>A national unique identifier assigned to the Road Segment or the set of adjoining Road Segments forming a structure.
+This identifier allows for the reconstitution of a structure that is fragmented by Junctions.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A UUID or “None” when no value applies.</p>
+<p>Example: 69822b23d217494896014e57a2edb8ac</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="structure-name-english">
+<h4><span class="section-number">5.9.1.21. </span>Structure Name English<a class="headerlink" href="#structure-name-english" title="Permalink to this headline">¶</a></h4>
+<p>The English version of the name of a road structure as assigned by a national or subnational agency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A complete structure name or “None” when no value applies.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="structure-name-french">
+<h4><span class="section-number">5.9.1.22. </span>Structure Name French<a class="headerlink" href="#structure-name-french" title="Permalink to this headline">¶</a></h4>
+<p>The French version of the name of a road structure as assigned by a national or subnational agency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A complete structure name or “None” when no value applies.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="structure-type">
+<h4><span class="section-number">5.9.1.23. </span>Structure Type<a class="headerlink" href="#structure-type" title="Permalink to this headline">¶</a></h4>
+<p>The classification of a structure.</p>
+<table class="colwidths-auto table" id="id47">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id47" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>None</p></td>
+<td><p>No value applies.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Bridge</p></td>
+<td><p>A manmade construction that supports a road on a raised structure and spans an obstacle, river,
+another road, or railway.</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Bridge covered</p></td>
+<td><p>A manmade construction that supports a road on a covered raised structure and spans an
+obstacle, river, another road, or railway.</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>Bridge moveable</p></td>
+<td><p>A manmade construction that supports a road on a moveable raised structure and spans an
+obstacle, river, another road, or railway.</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Bridge unknown</p></td>
+<td><p>A bridge for which it is currently impossible to determine whether its structure is covered,
+moveable or other.</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>Tunnel</p></td>
+<td><p>An enclosed manmade construction built to carry a road through or below a natural feature or other
+obstructions.</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>Snowshed</p></td>
+<td><p>A manmade roofed structure built over a road in mountainous areas to prevent snow slides from
+blocking the road.</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>Dam</p></td>
+<td><p>A manmade linear structure built across a waterway or floodway to control the flow of water and
+supporting a road for motor vehicles.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="traffic-direction">
+<h4><span class="section-number">5.9.1.24. </span>Traffic Direction<a class="headerlink" href="#traffic-direction" title="Permalink to this headline">¶</a></h4>
+<p>The direction(s) of traffic flow allowed on the road.</p>
+<table class="colwidths-auto table" id="id48">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id48" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Both directions</p></td>
+<td><p>Traffic flow is allowed in both directions.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Same direction</p></td>
+<td><p>The direction of one way traffic flow is the same as the digitizing direction of the Road
+Segment.</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Opposite direction</p></td>
+<td><p>The direction of one way traffic flow is opposite to the digitizing direction of the Road
+Segment.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="unpaved-road-surface-type">
+<h4><span class="section-number">5.9.1.25. </span>Unpaved Road Surface Type<a class="headerlink" href="#unpaved-road-surface-type" title="Permalink to this headline">¶</a></h4>
+<p>The type of surface an unpaved Road Element has.</p>
+<table class="colwidths-auto table" id="id49">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id49" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>None</p></td>
+<td><p>No value applies.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Gravel</p></td>
+<td><p>A dirt road whose surface has been improved by grading with gravel.</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Dirt</p></td>
+<td><p>Roads whose surface is formed by the removal of vegetation and/or by the transportation movements over
+that road which inhibit further growth of any vegetation.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id25">
+<h4><span class="section-number">5.9.1.26. </span>Object Metadata<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h4>
+<p>Refer to the attributes described in <a class="reference internal" href="../../fr/product_documentation/feature_catalogue.html#object-metadata"><span class="std std-ref">Métadonnées d’objet</span></a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="street-and-place-names">
+<h2><a class="toc-backref" href="#id79"><span class="section-number">5.10. </span>Street and Place Names</a><a class="headerlink" href="#street-and-place-names" title="Permalink to this headline">¶</a></h2>
+<p>A street name recognized by the municipality or naming authority and a name of an administrative area, district or
+other named area which is required for uniqueness of the street name.</p>
+<div class="section" id="id26">
+<h3><a class="toc-backref" href="#id80"><span class="section-number">5.10.1. </span>Attribute Section</a><a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="directional-prefix">
+<h4><span class="section-number">5.10.1.1. </span>Directional Prefix<a class="headerlink" href="#directional-prefix" title="Permalink to this headline">¶</a></h4>
+<p>A geographic direction that is part of the street name and precedes the street name body or, if appropriate, the street
+type prefix.</p>
+<span id="street-direction-domain"></span><table class="colwidths-auto table" id="id50">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id50" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>None</p></td>
+<td><p>No value applies.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>North</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Nord</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>South</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Sud</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>East</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>Est</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>West</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>Ouest</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>Northwest</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>Nord-ouest</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>Northeast</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>Nord-est</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>Southwest</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>Sud-ouest</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>Southeast</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>Sud-est</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>Central</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>Centre</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="directional-suffix">
+<h4><span class="section-number">5.10.1.2. </span>Directional Suffix<a class="headerlink" href="#directional-suffix" title="Permalink to this headline">¶</a></h4>
+<p>A geographic direction that is part of the street name and succeeds the street name body or, if appropriate, the street
+type suffix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>Identical to <a class="reference internal" href="../../fr/product_documentation/feature_catalogue.html#street-direction-domain"><span class="std std-ref">Domaine :</span></a>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="muni-quadrant">
+<h4><span class="section-number">5.10.1.3. </span>Muni Quadrant<a class="headerlink" href="#muni-quadrant" title="Permalink to this headline">¶</a></h4>
+<p>The attribute Muni quadrant is used in some addresses much like the directional attributes where the town is divided
+into sections based on major east-west and north-south divisions. The effect is as if multiple directional were used.</p>
+<table class="colwidths-auto table" id="id51">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id51" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>None</p></td>
+<td><p>No value applies.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>South-West</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>South-East</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>North-East</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>North-West</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id27">
+<h4><span class="section-number">5.10.1.4. </span>NID<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h4>
+<p>A national unique identifier.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A UUID.</p>
+<p>Example: 69822b23d217494896014e57a2edb8ac</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="place-name">
+<h4><span class="section-number">5.10.1.5. </span>Place Name<a class="headerlink" href="#place-name" title="Permalink to this headline">¶</a></h4>
+<p>Name of an administrative area, district or other named area which is required for uniqueness of the street name.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>The complete name of the place.</p>
+<p>Examples: Arnold’s Cove, Saint-Jean-Baptiste-de-l’Îsle-Verte, Sault Ste. Marie, Grand-Sault, Grand Falls.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="place-type">
+<h4><span class="section-number">5.10.1.6. </span>Place Type<a class="headerlink" href="#place-type" title="Permalink to this headline">¶</a></h4>
+<p>Expression specifying the type of place.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>Conforms to Census Subdivision (CSD) types and is periodically updated to reflect changes in those values.</p>
+<p>Examples: C (City / Cité), IRI (Indian reserve / Réserve indienne), M (Municipality / Municipalité).</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="province">
+<h4><span class="section-number">5.10.1.7. </span>Province<a class="headerlink" href="#province" title="Permalink to this headline">¶</a></h4>
+<p>Province or Territory where the place is located.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>Identical to <a class="reference internal" href="../../fr/product_documentation/feature_catalogue.html#dataset-name-domain"><span class="std std-ref">Domaine :</span></a>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="street-name-article">
+<h4><span class="section-number">5.10.1.8. </span>Street Name Article<a class="headerlink" href="#street-name-article" title="Permalink to this headline">¶</a></h4>
+<p>Article(s) that is/are part of the street name and located at the beginning.</p>
+<table class="colwidths-auto table" id="id52">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id52" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>None</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>à</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>à l’</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>à la</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>au</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>aux</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>by the</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>chez</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>d’</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>de</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>de l’</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>de la</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>des</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>du</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>l’</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>la</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>le</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>les</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>of the</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>the</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="street-name-body">
+<h4><span class="section-number">5.10.1.9. </span>Street Name Body<a class="headerlink" href="#street-name-body" title="Permalink to this headline">¶</a></h4>
+<p>The portion of the street name (either official or alternate) that has the most identifying power excluding street type
+and directional prefixes or suffixes and street name articles.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>The complete street name body or “None” when no value applies.</p>
+<p>Examples: Capitale, Trésor, Golf, Abbott, Abbott’s, Main, Church, Park, Bread and Cheese.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="street-type-prefix">
+<h4><span class="section-number">5.10.1.10. </span>Street Type Prefix<a class="headerlink" href="#street-type-prefix" title="Permalink to this headline">¶</a></h4>
+<p>A part of the street name of a Road Element identifying the street type. A prefix precedes the street name body of a
+Road Element.</p>
+<span id="street-type-domain"></span><table class="colwidths-auto longtable table" id="id53">
+<caption><span class="caption-text">Domain (new values are periodically added):</span><a class="headerlink" href="#id53" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>None</p></td>
+<td><p>No value applies.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Abbey</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Access</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>Acres</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Aire</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>Allée</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>Alley</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>Autoroute</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>Avenue</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>Barrage</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>Bay</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>Beach</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>Bend</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>Bloc</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>Block</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>Boulevard</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>Bourg</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>Brook</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>By-pass</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>Byway</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>Campus</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>21</p></td>
+<td><p>Cape</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>22</p></td>
+<td><p>Carre</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>Carrefour</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>24</p></td>
+<td><p>Centre</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>25</p></td>
+<td><p>Cercle</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>26</p></td>
+<td><p>Chase</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>27</p></td>
+<td><p>Chemin</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>28</p></td>
+<td><p>Circle</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>29</p></td>
+<td><p>Circuit</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>30</p></td>
+<td><p>Close</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>Common</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>32</p></td>
+<td><p>Concession</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>33</p></td>
+<td><p>Corners</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>34</p></td>
+<td><p>Côte</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>35</p></td>
+<td><p>Cour</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>36</p></td>
+<td><p>Court</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>37</p></td>
+<td><p>Cove</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>38</p></td>
+<td><p>Crescent</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>39</p></td>
+<td><p>Croft</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>40</p></td>
+<td><p>Croissant</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>41</p></td>
+<td><p>Crossing</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>42</p></td>
+<td><p>Crossroads</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>43</p></td>
+<td><p>Cul-de-sac</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>44</p></td>
+<td><p>Dale</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>45</p></td>
+<td><p>Dell</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>46</p></td>
+<td><p>Desserte</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>47</p></td>
+<td><p>Diversion</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>48</p></td>
+<td><p>Downs</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>49</p></td>
+<td><p>Drive</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>50</p></td>
+<td><p>Droit de passage</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>51</p></td>
+<td><p>Échangeur</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>52</p></td>
+<td><p>End</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>53</p></td>
+<td><p>Esplanade</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>54</p></td>
+<td><p>Estates</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>55</p></td>
+<td><p>Expressway</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>56</p></td>
+<td><p>Extension</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>57</p></td>
+<td><p>Farm</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>58</p></td>
+<td><p>Field</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>59</p></td>
+<td><p>Forest</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>60</p></td>
+<td><p>Freeway</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>61</p></td>
+<td><p>Front</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>62</p></td>
+<td><p>Gardens</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>63</p></td>
+<td><p>Gate</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>64</p></td>
+<td><p>Glade</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>65</p></td>
+<td><p>Glen</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>66</p></td>
+<td><p>Green</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>67</p></td>
+<td><p>Grounds</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>68</p></td>
+<td><p>Grove</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>69</p></td>
+<td><p>Harbour</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>70</p></td>
+<td><p>Haven</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>71</p></td>
+<td><p>Heath</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>72</p></td>
+<td><p>Heights</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>73</p></td>
+<td><p>Highlands</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>74</p></td>
+<td><p>Highway</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>75</p></td>
+<td><p>Hill</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>76</p></td>
+<td><p>Hollow</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>77</p></td>
+<td><p>Île</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>78</p></td>
+<td><p>Impasse</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>79</p></td>
+<td><p>Island</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>80</p></td>
+<td><p>Key</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>81</p></td>
+<td><p>Knoll</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>82</p></td>
+<td><p>Landing</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>83</p></td>
+<td><p>Lane</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>84</p></td>
+<td><p>Laneway</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>85</p></td>
+<td><p>Limits</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>86</p></td>
+<td><p>Line</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>87</p></td>
+<td><p>Link</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>88</p></td>
+<td><p>Lookout</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>89</p></td>
+<td><p>Loop</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>90</p></td>
+<td><p>Mall</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>91</p></td>
+<td><p>Manor</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>92</p></td>
+<td><p>Maze</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>93</p></td>
+<td><p>Meadow</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>94</p></td>
+<td><p>Mews</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>95</p></td>
+<td><p>Montée</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>96</p></td>
+<td><p>Moor</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>97</p></td>
+<td><p>Mount</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>98</p></td>
+<td><p>Mountain</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>99</p></td>
+<td><p>Orchard</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>100</p></td>
+<td><p>Parade</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>101</p></td>
+<td><p>Parc</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>102</p></td>
+<td><p>Park</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>103</p></td>
+<td><p>Parkway</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>104</p></td>
+<td><p>Passage</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>105</p></td>
+<td><p>Path</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>106</p></td>
+<td><p>Pathway</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>107</p></td>
+<td><p>Peak</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>108</p></td>
+<td><p>Pines</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>109</p></td>
+<td><p>Place</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>110</p></td>
+<td><p>Place</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>111</p></td>
+<td><p>Plateau</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>112</p></td>
+<td><p>Plaza</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>113</p></td>
+<td><p>Point</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>114</p></td>
+<td><p>Port</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>115</p></td>
+<td><p>Private</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>116</p></td>
+<td><p>Promenade</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>117</p></td>
+<td><p>Quay</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>118</p></td>
+<td><p>Rang</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>119</p></td>
+<td><p>Range</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>120</p></td>
+<td><p>Reach</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>121</p></td>
+<td><p>Ridge</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>122</p></td>
+<td><p>Right of Way</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>123</p></td>
+<td><p>Rise</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>124</p></td>
+<td><p>Road</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>125</p></td>
+<td><p>Rond Point</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>126</p></td>
+<td><p>Route</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>127</p></td>
+<td><p>Row</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>128</p></td>
+<td><p>Rue</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>129</p></td>
+<td><p>Ruelle</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>130</p></td>
+<td><p>Ruisseau</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>131</p></td>
+<td><p>Run</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>132</p></td>
+<td><p>Section</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>133</p></td>
+<td><p>Sentier</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>134</p></td>
+<td><p>Sideroad</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>135</p></td>
+<td><p>Square</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>136</p></td>
+<td><p>Street</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>137</p></td>
+<td><p>Stroll</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>138</p></td>
+<td><p>Subdivision</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>139</p></td>
+<td><p>Terrace</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>140</p></td>
+<td><p>Terrasse</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>141</p></td>
+<td><p>Thicket</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>142</p></td>
+<td><p>Towers</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>143</p></td>
+<td><p>Townline</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>144</p></td>
+<td><p>Trace</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>145</p></td>
+<td><p>Trail</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>146</p></td>
+<td><p>Trunk</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>147</p></td>
+<td><p>Turnabout</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>148</p></td>
+<td><p>Vale</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>149</p></td>
+<td><p>Via</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>150</p></td>
+<td><p>View</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>151</p></td>
+<td><p>Village</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>152</p></td>
+<td><p>Vista</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>153</p></td>
+<td><p>Voie</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>154</p></td>
+<td><p>Walk</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>155</p></td>
+<td><p>Way</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>156</p></td>
+<td><p>Wharf</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>157</p></td>
+<td><p>Wood</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>158</p></td>
+<td><p>Woods</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>159</p></td>
+<td><p>Wynd</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>160</p></td>
+<td><p>Driveway</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>161</p></td>
+<td><p>Height</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>162</p></td>
+<td><p>Roadway</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>163</p></td>
+<td><p>Strip</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>164</p></td>
+<td><p>Concession Road</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>165</p></td>
+<td><p>Corner</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>166</p></td>
+<td><p>County Road</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>167</p></td>
+<td><p>Crossroad</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>168</p></td>
+<td><p>Fire Route</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>169</p></td>
+<td><p>Garden</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>170</p></td>
+<td><p>Hills</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>171</p></td>
+<td><p>Isle</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>172</p></td>
+<td><p>Lanes</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>173</p></td>
+<td><p>Pointe</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>174</p></td>
+<td><p>Regional Road</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>175</p></td>
+<td><p>Autoroute à péage</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>176</p></td>
+<td><p>Baie</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>177</p></td>
+<td><p>Bluff</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>178</p></td>
+<td><p>Bocage</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>179</p></td>
+<td><p>Bois</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>180</p></td>
+<td><p>Boucle</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>181</p></td>
+<td><p>Bretelle</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>182</p></td>
+<td><p>Cap</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>183</p></td>
+<td><p>Causeway</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>184</p></td>
+<td><p>Chaussée</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>185</p></td>
+<td><p>Contournement</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>186</p></td>
+<td><p>Couloir</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>187</p></td>
+<td><p>Crête</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>188</p></td>
+<td><p>Croix</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>189</p></td>
+<td><p>Cross</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>190</p></td>
+<td><p>Dead End</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>191</p></td>
+<td><p>Débarquement</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>192</p></td>
+<td><p>Entrance</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>193</p></td>
+<td><p>Entrée</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>194</p></td>
+<td><p>Evergreen</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>195</p></td>
+<td><p>Exit</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>196</p></td>
+<td><p>Étang</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>197</p></td>
+<td><p>Falaise</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>198</p></td>
+<td><p>Jardin</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>199</p></td>
+<td><p>Lawn</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>200</p></td>
+<td><p>Lien</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>201</p></td>
+<td><p>Ligne</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>202</p></td>
+<td><p>Manoir</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>203</p></td>
+<td><p>Pass</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>204</p></td>
+<td><p>Pente</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>205</p></td>
+<td><p>Pond</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>206</p></td>
+<td><p>Quai</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>207</p></td>
+<td><p>Ramp</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>208</p></td>
+<td><p>Rampe</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>209</p></td>
+<td><p>Rangée</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>210</p></td>
+<td><p>Roundabout</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>211</p></td>
+<td><p>Route de plaisance</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>212</p></td>
+<td><p>Route sur élevée</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>213</p></td>
+<td><p>Side</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>214</p></td>
+<td><p>Sortie</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>215</p></td>
+<td><p>Throughway</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>216</p></td>
+<td><p>Took</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>217</p></td>
+<td><p>Turn</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>218</p></td>
+<td><p>Turnpike</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>219</p></td>
+<td><p>Vallée</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>220</p></td>
+<td><p>Villas</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>221</p></td>
+<td><p>Virage</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>222</p></td>
+<td><p>Voie oust</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>223</p></td>
+<td><p>Voie rapide</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>224</p></td>
+<td><p>Vue</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>225</p></td>
+<td><p>Westway</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>226</p></td>
+<td><p>Arm</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>227</p></td>
+<td><p>Baseline</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>228</p></td>
+<td><p>Bourne</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>229</p></td>
+<td><p>Branch</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>230</p></td>
+<td><p>Bridge</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>231</p></td>
+<td><p>Burn</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>232</p></td>
+<td><p>Bypass</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>233</p></td>
+<td><p>Camp</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>234</p></td>
+<td><p>Chart</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>235</p></td>
+<td><p>Club</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>236</p></td>
+<td><p>Copse</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>237</p></td>
+<td><p>Creek</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>238</p></td>
+<td><p>Crest</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>239</p></td>
+<td><p>Cul De Sac</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>240</p></td>
+<td><p>Curve</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>241</p></td>
+<td><p>Cut</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>242</p></td>
+<td><p>Fairway</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>243</p></td>
+<td><p>Gateway</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>244</p></td>
+<td><p>Greenway</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>245</p></td>
+<td><p>Inamo</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>246</p></td>
+<td><p>Inlet</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>247</p></td>
+<td><p>Junction</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>248</p></td>
+<td><p>Keep</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>249</p></td>
+<td><p>Lake</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>250</p></td>
+<td><p>Lakes</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>251</p></td>
+<td><p>Lakeway</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>252</p></td>
+<td><p>Market</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>253</p></td>
+<td><p>Millway</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>254</p></td>
+<td><p>Outlook</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>255</p></td>
+<td><p>Oval</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>256</p></td>
+<td><p>Overpass</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>257</p></td>
+<td><p>Pier</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>258</p></td>
+<td><p>River</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>259</p></td>
+<td><p>Service</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>260</p></td>
+<td><p>Shore</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>261</p></td>
+<td><p>Shores</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>262</p></td>
+<td><p>Sideline</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>263</p></td>
+<td><p>Spur</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>264</p></td>
+<td><p>Surf</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>265</p></td>
+<td><p>Track</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>266</p></td>
+<td><p>Valley</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>267</p></td>
+<td><p>Walkway</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>268</p></td>
+<td><p>Wold</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>269</p></td>
+<td><p>Tili</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>270</p></td>
+<td><p>Nook</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>271</p></td>
+<td><p>Drung</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="street-type-suffix">
+<h4><span class="section-number">5.10.1.11. </span>Street Type Suffix<a class="headerlink" href="#street-type-suffix" title="Permalink to this headline">¶</a></h4>
+<p>A part of the street name of a Road Element identifying the street type. A suffix follows the street name body of a
+Road Element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>Identical to <a class="reference internal" href="../../fr/product_documentation/feature_catalogue.html#street-type-domain"><span class="std std-ref">Domaine (de nouvelles valeurs sont ajoutées périodiquement) :</span></a>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id28">
+<h4><span class="section-number">5.10.1.12. </span>Object Metadata<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h4>
+<p>Refer to the attributes described in <a class="reference internal" href="../../fr/product_documentation/feature_catalogue.html#object-metadata"><span class="std std-ref">Métadonnées d’objet</span></a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="toll-point">
+<h2><a class="toc-backref" href="#id81"><span class="section-number">5.11. </span>Toll Point</a><a class="headerlink" href="#toll-point" title="Permalink to this headline">¶</a></h2>
+<p>Place where a right-of-way is charged to gain access to a motorway, a bridge, etc.</p>
+<div class="section" id="id29">
+<h3><a class="toc-backref" href="#id82"><span class="section-number">5.11.1. </span>Attribute Section</a><a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id30">
+<h4><span class="section-number">5.11.1.1. </span>NID<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h4>
+<p>A national unique identifier.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A UUID.</p>
+<p>Example: 69822b23d217494896014e57a2edb8ac</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id31">
+<h4><span class="section-number">5.11.1.2. </span>Road Element NID<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h4>
+<p>The NID of the Road Element on which the point geometry is located.</p>
+<dl class="field-list">
+<dt class="field-odd">Domain</dt>
+<dd class="field-odd"><p>A UUID.</p>
+<p>Example: 69822b23d217494896014e57a2edb8ac</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="toll-point-type">
+<h4><span class="section-number">5.11.1.3. </span>Toll Point Type<a class="headerlink" href="#toll-point-type" title="Permalink to this headline">¶</a></h4>
+<p>The type of toll point.</p>
+<table class="colwidths-auto table" id="id54">
+<caption><span class="caption-text">Domain:</span><a class="headerlink" href="#id54" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Physical Toll Booth</p></td>
+<td><p>A toll booth is a construction along or across the road where toll can be paid to
+employees of the organization in charge of collecting the toll, to machines capable of automatically recognizing
+coins or bills or to machines involving electronic methods of payment like credit cards or bank cards.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Virtual Toll Booth</p></td>
+<td><p>At a virtual point of toll payment, toll will be charged via automatic registration of the
+passing vehicle by subscription or invoice.</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Hybrid</p></td>
+<td><p>Hybrid signifies a toll booth which is both physical and virtual.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id32">
+<h4><span class="section-number">5.11.1.4. </span>Object Metadata<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h4>
+<p>Refer to the attributes described in <a class="reference internal" href="../../fr/product_documentation/feature_catalogue.html#object-metadata"><span class="std std-ref">Métadonnées d’objet</span></a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="data_product_specifications.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">4. </span>Data Product Specifications</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="data_exchange_model.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Data Exchange Model</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2022, Statistics Canada / Statistique Canada.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

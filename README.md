@@ -1,14 +1,9 @@
-# National Road Network (NRN)
+National Road Network (NRN)
+===========================
+
 [![Repository](https://img.shields.io/badge/Repository-nrn--rrn-brightgreen.svg?style=flat-square&logo=github)](https://github.com/jessestewart1/nrn-rrn)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg?style=flat-square)](https://opensource.org/licenses/BSD-3-Clause)
 [![Documentation Status](https://readthedocs.org/projects/nrn-rrn-docs/badge/?style=flat-square)](https://nrn-rrn-docs.readthedocs.io/en/latest/)
-
-## Contents:
-
-- [Description](#description)
-- [Setup](#setup)
-  * [Software Dependencies](#software-dependencies)
-  * [Installation](#installation)
 
 ## Description
 
