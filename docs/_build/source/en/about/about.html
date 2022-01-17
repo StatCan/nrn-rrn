@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>National Road Network (NRN) &#8212; NRN / RRN  documentation</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/css/blank.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../../../index.html">
+<p class="title">NRN / RRN</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../index.html">
+  English
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../fr/index.html">
+  Français
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/jessestewart1/nrn-rrn" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://open.canada.ca/data/en/dataset/3d282116-e556-400c-9306-ca1a3cada77f" rel="noopener" target="_blank" title="Open Government">
+            <span><i class="fas fa-database"></i></span>
+            <label class="sr-only">Open Government</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+
+<nav id="bd-toc-nav">
+    
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="national-road-network-nrn">
+<h1>National Road Network (NRN)<a class="headerlink" href="#national-road-network-nrn" title="Permalink to this headline">¶</a></h1>
+<p>[![Repository](<a class="reference external" href="https://img.shields.io/badge/Repository-nrn--rrn-brightgreen.svg?style=flat-square&amp;logo=github)](https://github.com/jessestewart1/nrn-rrn">https://img.shields.io/badge/Repository-nrn–rrn-brightgreen.svg?style=flat-square&amp;logo=github)](https://github.com/jessestewart1/nrn-rrn</a>)
+[![License](<a class="reference external" href="https://img.shields.io/badge/License-BSD%203--Clause-blue.svg?style=flat-square)](https://opensource.org/licenses/BSD-3-Clause">https://img.shields.io/badge/License-BSD%203–Clause-blue.svg?style=flat-square)](https://opensource.org/licenses/BSD-3-Clause</a>)
+[![Documentation Status](<a class="reference external" href="https://readthedocs.org/projects/nrn-rrn-docs/badge/?style=flat-square)](https://nrn-rrn-docs.readthedocs.io/en/latest/">https://readthedocs.org/projects/nrn-rrn-docs/badge/?style=flat-square)](https://nrn-rrn-docs.readthedocs.io/en/latest/</a>)</p>
+<p>## Description</p>
+<p>The NRN was adopted by members from the Inter-Agency Committee on Geomatics (IACG) and the Canadian Council on
+Geomatics (CCOG) to provide quality geospatial and attributive data (current, accurate, consistent), homogeneous and
+normalized of the entire Canadian road network. The NRN is part of the GeoBase initiative which aims to provide a
+common geospatial infrastructure that is maintained on a regular basis by <em>closest to source</em> organizations.</p>
+<p>The NRN is distributed in the form of thirteen provincial / territorial datasets consisting of two linear entities
+(road segments and ferry segments), three punctual entities (junctions, blocked passages, and toll points), and three
+tabular entities (address ranges, street and place names, and alternative name linkages). Currently, the NRN is
+publicly available on the open government data portal (<a class="reference external" href="https://open.canada.ca/en">https://open.canada.ca/en</a>).</p>
+<p>The NRN content largely conforms to ISO 14825 (<a class="reference external" href="https://www.iso.org/standard/54610.html">https://www.iso.org/standard/54610.html</a>).</p>
+<p>## Setup</p>
+<p>The repository of the NRN project is referred to by its actual repository name: <cite>nrn-rrn</cite>.</p>
+<p>### Software Dependencies</p>
+<p>The <cite>nrn-rrn</cite> has no mandatory software dependencies but highly recommends the software specified in this section.
+Furthermore, documentation for <cite>nrn-rrn</cite> installation and usage will make use of this software since it represents the
+easiest and recommended approach.</p>
+<p>#### Anaconda / conda</p>
+<p>The <cite>nrn-rrn</cite> is written in pure Python, but has several dependencies written with C libraries. These C libraries can
+be difficult to install (particularly on Windows) and, therefore, it is recommended to create and use the conda virtual
+environment defined in the <cite>nrn-rrn</cite>. conda is an environment and package manager and is the preferable choice for
+dependency management since it provides pre-built binaries for all dependencies of the <cite>nrn-rrn</cite> for all platforms
+(Windows, Mac, Linux).</p>
+<p>Anaconda with conda &gt;= 4.9 (the latest version of Anaconda will satisfy this requirement).
+Download: <a class="reference external" href="https://docs.anaconda.com/anaconda/install/">https://docs.anaconda.com/anaconda/install/</a></p>
+<p>Miniconda will also suffice (minimal distribution only containing Python and conda).
+Download: <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">https://docs.conda.io/en/latest/miniconda.html</a></p>
+<p>#### Git</p>
+<p>Git is recommended for simpler repository installation and integration of updates.
+Download: <a class="reference external" href="https://git-scm.com/downloads">https://git-scm.com/downloads</a></p>
+<p>### Installation</p>
+<p>Use the following steps to install the <cite>nrn-rrn</cite> repository and conda environment:</p>
+<ol class="arabic">
+<li><p>Install the repository.</p>
+<p>a) Using Git:
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/jessestewart1/nrn-rrn.git</span>
+<span class="pre">`</span></code></p>
+<ol class="loweralpha simple" start="2">
+<li><p>Manual install: Download and unzip the repository: <a class="reference external" href="https://github.com/jessestewart1/nrn-rrn">https://github.com/jessestewart1/nrn-rrn</a>.</p></li>
+</ol>
+</li>
+</ol>
+<p>2. Create the conda environment from the <cite>environment.yml</cite> file:
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">-f</span> <span class="pre">&lt;path</span> <span class="pre">to</span> <span class="pre">environment.yml&gt;</span>
+<span class="pre">`</span></code></p>
+</div>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2022, Statistics Canada / Statistique Canada.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>
