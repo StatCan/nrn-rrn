@@ -57,10 +57,10 @@ document final.
 
 ``Matplotlib`` est une bibliothèque complète pour créer des visualisations statiques, animées et interactives en Python.
 
-`nbsphinx <https://nbsphinx.readthedocs.io/>`_
-==============================================
+`MyST-NB (myst-nb) <https://myst-nb.readthedocs.io/>`_
+======================================================
 
-``nbsphinx`` est une extension ``Sphinx`` qui fournit un analyseur source pour les fichiers Jupyter Notebook (.ipynb).
+``MyST-NB`` est une extension ``Sphinx`` pour travailler avec les fichiers Jupyter Notebook (.ipynb).
 
 `NumPy (numpy) <https://numpy.org/>`_
 =====================================

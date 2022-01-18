@@ -5,9 +5,6 @@ Communauté du projet
 .. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
-.. contents:: Matières :
-   :depth: 1
-
 Équipe
 ======
 
@@ -45,7 +42,7 @@ Affiliations de projet
    :height: 30px
    :align: middle
 
-|logo_statscan| |logo_geobase| |logo_ccog|
+|logo_statscan| | |logo_geobase| | |logo_ccog|
 
 Fournisseurs de données
 =======================
@@ -55,18 +52,6 @@ des fichiers de configuration source individuels (voir :doc:`/source/fr/user_gui
 suivante montre les juridictions fournissant actuellement des données (ou hébergeant une plateforme de données ouvertes
 à partir de laquelle les données sont récupérées) pour le projet RRN :
 
-.. ipython:: python
-   :suppress:
-   :okwarning:
+.. raw:: html
 
-   import geopandas as gpd
-   from pathlib import Path
-
-   sources = gpd.read_file("../../../../src/boundaries.zip", layer="boundaries")
-   config_dir = Path("../../../../src/conform/sources")
-   config_sources = set(map(lambda p: p.stem, filter(Path.is_dir, config_dir.glob("*"))))
-   sources = sources.loc[sources.source.isin(config_sources)]
-
-.. ipython:: python
-
-   sources.explore(color="green", tooltip="name")
+    <iframe src="/nrn-rrn/docs/source/_static/reports/sources.html" width="100%" height="500" style="border:none;"></iframe>

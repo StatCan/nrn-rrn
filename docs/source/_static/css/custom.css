@@ -9,7 +9,7 @@
 .button>p>a {
     box-shadow: 0px 4px 14px -7px #999999;
     background-color: white;
-    border: 1px solid #bbbbbb;
+    border: 1px solid #150458;
     display: inline-block;
     cursor: pointer;
     color: #150458;
@@ -22,11 +22,20 @@
 }
 
 .button>p>a:hover {
-    border-color: #150458;
-    color: #e32e00;
+    background-color: #150458;
+    color: white;
 }
 
 .button>p>a:active {
     position: relative;
     top: 1px;
+}
+
+/* icons */
+i.fa-github:before {
+    color: black;
+}
+
+i.fa-database {
+    color: #d40000;
 }

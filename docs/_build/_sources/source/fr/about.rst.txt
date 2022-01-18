@@ -1,3 +1,4 @@
+***************
 À propos du RRN
 ***************
 
@@ -5,8 +6,8 @@
    :maxdepth: 1
    :hidden:
 
-   about
-   license
+   about/about
+   about/license
 
 .. container:: button
 

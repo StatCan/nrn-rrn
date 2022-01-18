@@ -18,7 +18,7 @@ from datetime import datetime
 
 # -- Project information -----------------------------------------------------
 
-project = 'NRN / RRN'
+project = 'NRN Home / Accueil RRN'
 copyright = f"{datetime.now().year}, Statistics Canada / Statistique Canada"
 author = 'Statistics Canada / Statistique Canada'
 
@@ -31,7 +31,7 @@ author = 'Statistics Canada / Statistique Canada'
 extensions = [
     "IPython.sphinxext.ipython_console_highlighting",
     "IPython.sphinxext.ipython_directive",
-    "nbsphinx",
+    "myst_nb",
     "sphinx.ext.autosectionlabel",
 ]
 

@@ -54,10 +54,10 @@ similar to Python syntax. Then the template is passed data to render the final d
 
 ``Matplotlib`` is a comprehensive library for creating static, animated, and interactive visualizations in Python.
 
-`nbsphinx <https://nbsphinx.readthedocs.io/>`_
-==============================================
+`MyST-NB (myst-nb) <https://myst-nb.readthedocs.io/>`_
+======================================================
 
-``nbsphinx`` is a ``Sphinx`` extension that provides a source parser for Jupyter Notebook (.ipynb) files.
+``MyST-NB`` is a ``Sphinx`` extension for working with Jupyter Notebook (.ipynb) files.
 
 `NumPy (numpy) <https://numpy.org/>`_
 =====================================

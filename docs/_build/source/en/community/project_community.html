@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Community &#8212; NRN / RRN  documentation</title>
+    <title>Project Community &#8212; NRN Home / Accueil RRN  documentation</title>
     
   <link href="../../../_static/css/theme.css" rel="stylesheet">
   <link href="../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -24,6 +24,8 @@
     
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/css/blank.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css" />
     
   <link rel="preload" as="script" href="../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
@@ -32,7 +34,8 @@
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
     <script src="../../../_static/doctools.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Contributing" href="contributing.html" />
@@ -55,7 +58,7 @@
     
     
 <a class="navbar-brand" href="../../../index.html">
-<p class="title">NRN / RRN</p>
+<p class="title">NRN Home / Accueil RRN</p>
 </a>
 
     
@@ -125,17 +128,34 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
   <div class="bd-toc-item active">
     <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../about.html">
-   National Road Network (NRN)
+   About the NRN
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../about/about.html">
+     National Road Network (NRN)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../about/license.html">
+     License
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../user_guide.html">
    User Guide
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -161,8 +181,8 @@
   <a class="reference internal" href="../product_documentation.html">
    Product Documentation
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -218,8 +238,8 @@
   <a class="reference internal" href="../community.html">
    Community
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -303,13 +323,7 @@
               <div>
                 
   <div class="section" id="project-community">
-<h1><a class="toc-backref" href="#id1">Project Community</a><a class="headerlink" href="#project-community" title="Permalink to this headline">¶</a></h1>
-<div class="contents topic" id="contents">
-<p class="topic-title">Contents:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#project-community" id="id1">Project Community</a></p></li>
-</ul>
-</div>
+<h1>Project Community<a class="headerlink" href="#project-community" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="team">
 <h2>Team<a class="headerlink" href="#team" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
@@ -325,18 +339,14 @@ contribution insights.</p>
 </div>
 <div class="section" id="project-affiliations">
 <h2>Project Affiliations<a class="headerlink" href="#project-affiliations" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://www.statcan.gc.ca/"><img alt="Statistics Canada logo." class="align-middle" src="../../../_images/statistics_canada_en.png" style="height: 25px;" /></a> <a class="reference external" href="http://geobase.ca/"><img alt="GeoBase logo." class="align-middle" src="../../../_images/geobase_en.png" style="height: 35px;" /></a> <a class="reference external" href="https://www.ccog-cocg.ca/"><img alt="CCOG logo." class="align-middle" src="../../../_images/ccog.png" style="height: 30px;" /></a></p>
+<p><a class="reference external" href="https://www.statcan.gc.ca/"><img alt="Statistics Canada logo." class="align-middle" src="../../../_images/statistics_canada_en.png" style="height: 25px;" /></a> | <a class="reference external" href="http://geobase.ca/"><img alt="GeoBase logo." class="align-middle" src="../../../_images/geobase_en.png" style="height: 35px;" /></a> | <a class="reference external" href="https://www.ccog-cocg.ca/"><img alt="CCOG logo." class="align-middle" src="../../../_images/ccog.png" style="height: 30px;" /></a></p>
 </div>
 <div class="section" id="data-providers">
 <h2>Data Providers<a class="headerlink" href="#data-providers" title="Permalink to this headline">¶</a></h2>
 <p>Data providers are continuously being added to the NRN project and their metadata can be found in individual source
 configuration files (see <a class="reference internal" href="../user_guide/conform.html"><span class="doc">Conform</span></a>). The following coverage map shows the jurisdictions
 currently providing data (or hosting an open data platform from which data is being retrieved) for the NRN project:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">sources</span><span class="o">.</span><span class="n">explore</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">tooltip</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
-<span class="gh">Out[1]: </span><span class="go">&lt;folium.folium.Map at 0x244220d9ee0&gt;</span>
-</pre></div>
-</div>
-</div>
+<iframe src="/nrn-rrn/docs/source/_static/reports/sources.html" width="100%" height="500" style="border:none;"></iframe></div>
 </div>
 
 

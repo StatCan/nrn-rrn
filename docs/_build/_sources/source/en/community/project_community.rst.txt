@@ -5,9 +5,6 @@ Project Community
 .. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
-.. contents:: Contents:
-   :depth: 1
-
 Team
 ====
 
@@ -45,7 +42,7 @@ Project Affiliations
    :height: 30px
    :align: middle
 
-|logo_statscan| |logo_geobase| |logo_ccog|
+|logo_statscan| | |logo_geobase| | |logo_ccog|
 
 Data Providers
 ==============
@@ -54,18 +51,6 @@ Data providers are continuously being added to the NRN project and their metadat
 configuration files (see :doc:`/source/en/user_guide/conform`). The following coverage map shows the jurisdictions
 currently providing data (or hosting an open data platform from which data is being retrieved) for the NRN project:
 
-.. ipython:: python
-   :suppress:
-   :okwarning:
+.. raw:: html
 
-   import geopandas as gpd
-   from pathlib import Path
-
-   sources = gpd.read_file("../../../../src/boundaries.zip", layer="boundaries")
-   config_dir = Path("../../../../src/conform/sources")
-   config_sources = set(map(lambda p: p.stem, filter(Path.is_dir, config_dir.glob("*"))))
-   sources = sources.loc[sources.source.isin(config_sources)]
-
-.. ipython:: python
-
-   sources.explore(color="green", tooltip="name")
+    <iframe src="/nrn-rrn/docs/source/_static/reports/sources.html" width="100%" height="500" style="border:none;"></iframe>

@@ -1,3 +1,4 @@
+*************
 About the NRN
 *************
 
@@ -5,8 +6,8 @@ About the NRN
    :maxdepth: 1
    :hidden:
 
-   about
-   license
+   about/about
+   about/license
 
 .. container:: button
 
