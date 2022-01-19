@@ -82,7 +82,7 @@ RRN.
 Structure
 ---------
 
-**Structure générique :**::
+**Structure générique :** ::
 
     src
     ├── conform
@@ -92,7 +92,7 @@ Structure
     │   │   │   ├── <configuration file name>.yaml
     │   │   │   ...
 
-**Structure spécifique (source : Nouveau-Brunswick) :**::
+**Structure spécifique (source : Nouveau-Brunswick) :** ::
 
     src
     ├── conform

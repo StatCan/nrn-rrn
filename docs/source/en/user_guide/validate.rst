@@ -11,21 +11,21 @@ Validate
 Overview
 ========
 
-The `validate` process enforces a set of validations and restrictions on NRN dataset geometry and attribution. The
-intention of the `validate` process is to flag actual and potential data error before continuing with the remainder
+The ``validate`` process enforces a set of validations and restrictions on NRN dataset geometry and attribution. The
+intention of the ``validate`` process is to flag actual and potential data error before continuing with the remainder
 of the NRN pipeline.
 
-The only output of `validate` is a log (.log) file which will be exported to: ``nrn-rrn/data/interim/validations.log``.
-The intended process is for the user to repair the original source data based on the specified errors in the output
-log. Once completed, the entire pipeline should be rerun from the initial process.
+The only output of ``validate`` is a log (.log) file which will be exported to:
+``nrn-rrn/data/interim/validations.log``. The intended process is for the user to repair the original source data based
+on the specified errors in the output log. Once completed, the entire pipeline should be rerun from the initial process.
 
 Log Structure
 =============
 
-The output log will contain a series of standardized logs for each validation executed by the `validate` process. Each
-logged validation will have the same content structure.
+The output log will contain a series of standardized logs for each validation executed by the ``validate`` process.
+Each logged validation will have the same content structure.
 
-Generic structure::
+**Generic structure:** ::
 
     <timestamp> - WARNING: E<error code> - <NRN dataset> - <Error description>.
 
@@ -35,7 +35,7 @@ Generic structure::
 
     Query: "uuid" in ('<uuid>', ...)
 
-Specific structure::
+**Specific structure:** ::
 
     2022-01-04 16:00:51 - WARNING: E201 - roadseg - Features within the same dataset must not be duplicated.
 

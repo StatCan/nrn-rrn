@@ -11,11 +11,11 @@ Validate
 Aperçu
 ======
 
-Le processus `validate` applique un ensemble de validations et de restrictions sur la géométrie et l'attribution des
-ensembles de données RRN. L'intention du processus `validate` est de signaler les erreurs de données réelles et
+Le processus ``validate`` applique un ensemble de validations et de restrictions sur la géométrie et l'attribution des
+ensembles de données RRN. L'intention du processus ``validate`` est de signaler les erreurs de données réelles et
 potentielles avant de continuer avec le reste du pipeline RRN.
 
-La seule sortie de `validate` est un fichier journal (.log) qui sera exporté vers :
+La seule sortie de ``validate`` est un fichier journal (.log) qui sera exporté vers :
 ``nrn-rrn/data/interim/validations.log``. Le processus prévu consiste pour l'utilisateur à réparer les données source
 d'origine en fonction des erreurs spécifiées dans le journal de sortie. Une fois terminé, l'ensemble du pipeline doit
 être réexécuté à partir du processus initial.
@@ -24,9 +24,9 @@ Structure du journal
 ====================
 
 Le journal de sortie contiendra une série de journaux standardisés pour chaque validation exécutée par le processus
-`validate`. Chaque validation enregistrée aura la même structure de contenu.
+``validate``. Chaque validation enregistrée aura la même structure de contenu.
 
-Structure générique : ::
+**Structure générique :** ::
 
     <horodatage> - WARNING: E<code d'erreur> - <jeu de données RRN> - <Description de l'erreur>.
 
@@ -36,7 +36,7 @@ Structure générique : ::
 
     Query: "uuid" in ('<uuid>', ...)
 
-Structure spécifique : ::
+**Structure spécifique :** ::
 
     2022-01-04 16:00:51 - WARNING: E201 - roadseg - Features within the same dataset must not be duplicated.
 
