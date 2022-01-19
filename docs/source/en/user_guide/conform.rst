@@ -11,7 +11,7 @@ Conform
 Overview
 ========
 
-The `conform` process uses one or more ``YAML`` (.yaml) configuration file(s) to define the mapping of source data to
+The ``conform`` process uses one or more ``YAML`` (.yaml) configuration file(s) to define the mapping of source data to
 the NRN schema.
 
 The NRN schema is defined in :doc:`/source/en/product_documentation/feature_catalogue`.
@@ -21,7 +21,7 @@ reflect reality. Therefore, to accommodate the integration of as many data sourc
 have been developed to manipulate source data for integration into the NRN data model.
 
 :Field Mapping: The process of source data integration into the NRN data model.
-:Key: Individual attribute of a ``YAML`` file.
+:Key: Individual attribute of a ``YAML`` file. ``YAML`` files consist of key-value pairs similar to Python dictionaries.
 :YAML: Data serialization language commonly used for configuration files.
 
 Configuration Overview
@@ -66,7 +66,7 @@ Files
 File Names
 ^^^^^^^^^^
 
-Individual configuration file names do not matter, so long as they have the required ``.yaml`` extension.
+Individual configuration file names do not matter, so long as they have the required .yaml extension.
 
 File Name Integrity
 ^^^^^^^^^^^^^^^^^^^
@@ -78,7 +78,7 @@ subsequent configuration files which map to the same NRN dataset.
 Structure
 ---------
 
-Generic structure::
+**Generic structure:** ::
 
     src
     ├── conform
@@ -88,7 +88,7 @@ Generic structure::
     │   │   │   ├── <configuration file name>.yaml
     │   │   │   ...
 
-Specific structure (source: New Brunswick)::
+**Specific structure (source: New Brunswick):** ::
 
     src
     ├── conform
@@ -157,14 +157,14 @@ Data
 
 The data components define the properties of the source file and layer relevant to constructing an NRN dataset.
 
-Mandatory keys:
+**Mandatory keys:**
 
 :filename: Name of the source file, including the extension.
-:driver: ``OGR`` vector driver name (see: https://gdal.org/drivers/vector/index.html).
+:driver: ``OGR`` vector driver name (`see complete driver details <https://gdal.org/drivers/vector/index.html>`_).
 :crs: Coordinate Reference System authority string.
 :spatial: Flag to indicate if the source is spatial.
 
-Optional keys:
+**Optional keys:**
 
 :layer: Layer name for files containing data layers.
 :query: Query used to filter data source records.
@@ -263,11 +263,9 @@ Structure
 Function: ``apply_domain``
 """"""""""""""""""""""""""
 
-**Description:** Enforces the domain restrictions from a specified NRN dataset attribute.
-
-**Expects Single or Multiple Source Attributes:** Single.
-
-**Parameters:**
+| **Description:** Enforces the domain restrictions from a specified NRN dataset attribute.
+| **Expects Single or Multiple Source Attributes:** Single.
+| **Parameters:**
 
 .. csv-table::
    :header: "Parameter", "Value"
@@ -293,11 +291,9 @@ Function: ``apply_domain``
 Function: ``concatenate``
 """""""""""""""""""""""""
 
-**Description:** Concatenates values into a single string.
-
-**Expects Single or Multiple Source Attributes:** Multiple.
-
-**Parameters:**
+| **Description:** Concatenates values into a single string.
+| **Expects Single or Multiple Source Attributes:** Multiple.
+| **Parameters:**
 
 .. csv-table::
    :header: "Parameter", "Value"
@@ -305,7 +301,7 @@ Function: ``concatenate``
    :align: left
 
    "columns", "List of names assigned to the data columns when unpacked within the function."
-   "separator", "Delimiter string used to join the values, default = `"" ""`."
+   "separator", "Delimiter string used to join the values, default = ``"" ""``."
 
 **Example:**
 
@@ -321,19 +317,17 @@ Function: ``concatenate``
 Function: ``direct``
 """"""""""""""""""""
 
-**Description:** Directly maps the given value with optional type casting. This function is purely intended to provide
-a function call for direct field mapping.
-
-**Expects Single or Multiple Source Attributes:** Single.
-
-**Parameters:**
+| **Description:** Directly maps the given value with optional type casting. This function is purely intended to
+  provide a function call for direct field mapping.
+| **Expects Single or Multiple Source Attributes:** Single.
+| **Parameters:**
 
 .. csv-table::
    :header: "Parameter", "Value"
    :widths: auto
    :align: left
 
-   "cast_type", "String name of a Python type class to be casted to, default = `None`. Accepted values: ``float``,
+   "cast_type", "String name of a Python type class to be casted to, default = ``None``. Accepted values: ``float``,
    ``int``, ``str``."
 
 **Example:**
@@ -349,11 +343,9 @@ a function call for direct field mapping.
 Function: ``map_values``
 """"""""""""""""""""""""
 
-**Description:** Maps values based on a lookup dictionary.
-
-**Expects Single or Multiple Source Attributes:** Single.
-
-**Parameters:**
+| **Description:** Maps values based on a lookup dictionary.
+| **Expects Single or Multiple Source Attributes:** Single.
+| **Parameters:**
 
 .. csv-table::
    :header: "Parameter", "Value"
@@ -361,7 +353,7 @@ Function: ``map_values``
    :align: left
 
    "lookup", "Dictionary of value mappings."
-   "case_sensitive", "Flag indicating if the lookup dictionary is case sensitive, default = `False`."
+   "case_sensitive", "Flag indicating if the lookup dictionary is case sensitive, default = ``False``."
 
 **Example:**
 
@@ -384,11 +376,9 @@ Function: ``map_values``
 Function: ``query_assign``
 """"""""""""""""""""""""""
 
-**Description:** Maps a single or set of values based on a lookup dictionary of queries. Non-matches will be Null.
-
-**Expects Single or Multiple Source Attributes:** Single / Multiple.
-
-**Parameters:**
+| **Description:** Maps a single or set of values based on a lookup dictionary of queries. Non-matches will be Null.
+| **Expects Single or Multiple Source Attributes:** Single / Multiple.
+| **Parameters:**
 
 .. csv-table::
    :header: "Parameter", "Value"
@@ -401,7 +391,7 @@ Function: ``query_assign``
    | ``type``: indicator of the type of the given output value. Accepted values are ``string`` (for a literal value) or
    ``column`` (for a source attribute name, the value of which will be used as the output). See
    :func:`pandas.DataFrame.query` argument ``expr`` for query string details."
-   "engine", "The engine used to process the expression, default = `python`. See :func:`pandas.eval` for a complete
+   "engine", "The engine used to process the expression, default = ``python``. See :func:`pandas.eval` for a complete
    list of values."
    "\**kwargs", "Optional keyword arguments passed to :func:`pandas.DataFrame.query`."
 
@@ -432,11 +422,9 @@ Function: ``query_assign``
 Function: ``regex_find``
 """"""""""""""""""""""""
 
-**Description:** Uses a regular expression (regex) to extract from the input value.
-
-**Expects Single or Multiple Source Attributes:** Single.
-
-**Parameters:**
+| **Description:** Uses a regular expression (regex) to extract from the input value.
+| **Expects Single or Multiple Source Attributes:** Single.
+| **Parameters:**
 
 .. csv-table::
    :header: "Parameter", "Value"
@@ -447,8 +435,8 @@ Function: ``regex_find``
    "match_index", "Positional index of the desired match returned by the regular expression."
    "group_index", "Positional index of the desired capturing group within the desired match (see ``match_index``)."
    "strip_result", "The extracted value will be stripped from the original value, rather than returned, default =
-   `False`."
-   "sub_inplace", "Optional keyword arguments passed to :func:`re.sub`, default = `None`. Allows an input value to be
+   ``False``."
+   "sub_inplace", "Optional keyword arguments passed to :func:`re.sub`, default = ``None``. Allows an input value to be
    modified prior to applying to regular expression, yet return the output as if the original string were used. For
    instance, to match `de la` from `Chemin-de-la-Grande-Rivière`, ``sub_inplace`` can be used to replace the hyphens
    with spaces. If ``strip_result=False`` then `de la` will be returned, otherwise `Chemin-Grande-Rivière` will be
@@ -469,11 +457,9 @@ Function: ``regex_find``
 Function: ``regex_sub``
 """""""""""""""""""""""
 
-**Description:** Uses a regular expression (regex) to extract and substitute from the input value.
-
-**Expects Single or Multiple Source Attributes:** Single.
-
-**Parameters:**
+| **Description:** Uses a regular expression (regex) to extract and substitute from the input value.
+| **Expects Single or Multiple Source Attributes:** Single.
+| **Parameters:**
 
 .. csv-table::
    :header: "Parameter", "Value"
@@ -608,9 +594,9 @@ be assigned to a single NRN attribute.
 Address Segmentation
 ====================
 
-The NRN `conform` process includes a special process to segment addresses contained within a Point dataset into ranges.
-For address segmentation, no ``conform`` key exists and, instead, an additional key ``segment`` is included within the
-``data`` key as has the following raw structure:
+The NRN ``conform`` process includes a special process to segment addresses contained within a Point dataset into
+ranges. For address segmentation, no ``conform`` key exists and, instead, an additional key ``segment`` is included
+within the ``data`` key as has the following raw structure:
 
 .. code-block:: yaml
 

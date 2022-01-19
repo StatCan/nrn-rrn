@@ -13,11 +13,11 @@ Aperçu
 
 Le pipeline NRN est séparé en 4 processus distincts destinés à être exécutés en séquence :
 
-:1. ``conform``: Standardisation et harmonisation des sources de données au format RRN.
-:2. ``validate``: Application d'un ensemble de validations et de restrictions sur la géométrie et l'attribution des
-                  ensembles de données RRN.
-:3. ``confirm``: Génération et récupération d'identifiants nationaux uniques (IDN).
-:4. ``export``: Configuration et exportation des formats de distribution de produits requis.
+1. ``conform``: Standardisation et harmonisation des sources de données au format RRN.
+2. ``validate``: Application d'un ensemble de validations et de restrictions sur la géométrie et l'attribution des
+   ensembles de données RRN.
+3. ``confirm``: Génération et récupération d'identifiants nationaux uniques (IDN).
+4. ``export``: Configuration et exportation des formats de distribution de produits requis.
 
 Mise en œuvre
 =============
@@ -30,9 +30,9 @@ affichées en passant :code:`--help` à l'outil ILC.
 
 .. admonition:: Notez
 
-    Il est fortement recommandé d'utiliser le pipeline RRN dans l'environnement conda `nrn-rrn`. Sinon, le résultat et
-    le comportement attendus, tels que documentés, ne peuvent être garantis. Les environnements conda peuvent être
-    activés via : :code:`conda activate <env name>`.
+    Il est fortement recommandé d'utiliser le pipeline RRN dans l'environnement conda ``nrn-rrn``. Sinon, le résultat
+    et le comportement attendus, tels que documentés, ne peuvent être garantis. Les environnements conda peuvent être
+    activés via : :code:`conda activate nrn-rrn`.
 
 Exemples
 ========

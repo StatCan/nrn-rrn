@@ -13,10 +13,10 @@ Overview
 
 The NRN pipeline is separated into 4 distinct processes which are intended to be executed in sequence:
 
-:1. ``conform``: Standardization and harmonization of data source(s) into NRN format.
-:2. ``validate``: Enforcement of a set of validations and restrictions on NRN dataset geometry and attribution.
-:3. ``confirm``: Generation and recovery of National Unique Identifiers (NIDs).
-:4. ``export``: Configuration and export of required product distribution formats.
+1. ``conform``: Standardization and harmonization of data source(s) into NRN format.
+2. ``validate``: Enforcement of a set of validations and restrictions on NRN dataset geometry and attribution.
+3. ``confirm``: Generation and recovery of National Unique Identifiers (NIDs).
+4. ``export``: Configuration and export of required product distribution formats.
 
 Implementation
 ==============
@@ -28,9 +28,9 @@ specifications, can be displayed by passing :code:`--help` to the CLI tool.
 
 .. admonition:: Note
 
-    It is strongly recommended to use the NRN pipeline within the `nrn-rrn` conda environment. Otherwise, the expected
-    output and behaviour, as documented, cannot be guaranteed. conda environments can be activated via:
-    :code:`conda activate <env name>`.
+    It is strongly recommended to use the NRN pipeline within the ``nrn-rrn`` conda environment. Otherwise, the
+    expected output and behaviour, as documented, cannot be guaranteed. conda environments can be activated via:
+    :code:`conda activate nrn-rrn`.
 
 Examples
 ========

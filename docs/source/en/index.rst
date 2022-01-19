@@ -32,7 +32,7 @@ Contact Information
 | Fax: 1-514-283-9350
 | Email: statcan.infostats-infostats.statcan@canada.ca
 | Website: https://statcan.gc.ca
-| Website: https://open.canada.ca
+| Data Download: https://open.canada.ca
 
 Copyright
 =========

@@ -11,7 +11,7 @@ Conform
 Aperçu
 ======
 
-Le processus `conform` utilise un ou plusieurs fichiers de configuration ``YAML`` (.yaml) pour définir le mappage des
+Le processus ``conform`` utilise un ou plusieurs fichiers de configuration ``YAML`` (.yaml) pour définir le mappage des
 données source vers le schéma RRN.
 
 Le schéma RRN est défini dans :doc:`/source/fr/product_documentation/feature_catalogue`.
@@ -22,7 +22,8 @@ données que possible, un certain nombre de fonctions ont été développées po
 leur intégration dans le modèle de données RRN.
 
 :Correspondance des attributs: Le processus d'intégration des données sources dans le modèle de données RRN.
-:Clé: Attribut individuel d'un fichier ``YAML``.
+:Clé: Attribut individuel d'un fichier ``YAML``. Les fichiers ``YAML`` sont constitués de paires clé-valeur similaires
+      aux dictionnaires Python.
 :YAML: Langage de sérialisation des données couramment utilisé pour les fichiers de configuration.
 
 Aperçu des configurations
@@ -68,7 +69,7 @@ Fichiers
 Noms de fichiers
 ^^^^^^^^^^^^^^^^
 
-Les noms de fichiers de configuration individuels n'ont pas d'importance, tant qu'ils ont l'extension ``.yaml`` requise.
+Les noms de fichiers de configuration individuels n'ont pas d'importance, tant qu'ils ont l'extension .yaml requise.
 
 Intégrité du nom de fichier
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -81,7 +82,7 @@ RRN.
 Structure
 ---------
 
-Structure générique : ::
+**Structure générique :**::
 
     src
     ├── conform
@@ -91,7 +92,7 @@ Structure générique : ::
     │   │   │   ├── <configuration file name>.yaml
     │   │   │   ...
 
-Structure spécifique (source : Nouveau-Brunswick) : ::
+**Structure spécifique (source : Nouveau-Brunswick) :**::
 
     src
     ├── conform
@@ -161,14 +162,15 @@ Data
 Les composants de données (« data » en anglais) définissent les propriétés du fichier source et de la couche
 pertinentes pour la construction d'un ensemble de données RRN.
 
-Clés obligatoires :
+**Clés obligatoires :**
 
 :filename: Nom du fichier source, y compris l'extension.
-:driver: Nom du pilote vectoriel ``OGR`` (voir : https://gdal.org/drivers/vector/index.html).
+:driver: Nom du pilote vectoriel ``OGR`` (`voir les détails complets du pilote
+         <https://gdal.org/drivers/vector/index.html>`_).
 :crs: Chaîne d'autorité du système de référence de coordonnées.
 :spatial: Drapeau pour indiquer si la source est spatiale.
 
-Clés facultatives :
+**Clés facultatives :**
 
 :layer: Nom de couche pour les fichiers contenant des couches de données.
 :query: Requête utilisée pour filtrer les enregistrements de source de données.
@@ -269,11 +271,9 @@ Structure
 Fonction: ``apply_domain``
 """"""""""""""""""""""""""
 
-**Description :** Applique les restrictions de domaine à partir d'un attribut de jeu de données RRN spécifié.
-
-**Attend des attributs de source unique ou multiple :** Unique.
-
-**Paramètres :**
+| **Description :** Applique les restrictions de domaine à partir d'un attribut de jeu de données RRN spécifié.
+| **Attend des attributs de source unique ou multiple :** Unique.
+| **Paramètres :**
 
 .. csv-table::
    :header: "Paramètre", "Valeur"
@@ -299,11 +299,9 @@ Fonction: ``apply_domain``
 Fonction: ``concatenate``
 """""""""""""""""""""""""
 
-**Description :** Concatène les valeurs en une seule chaîne.
-
-**Attend des attributs de source unique ou multiple :** Multiple.
-
-**Paramètres :**
+| **Description :** Concatène les valeurs en une seule chaîne.
+| **Attend des attributs de source unique ou multiple :** Multiple.
+| **Paramètres :**
 
 .. csv-table::
    :header: "Paramètre", "Valeur"
@@ -311,7 +309,7 @@ Fonction: ``concatenate``
    :align: left
 
    "columns", "Liste des noms attribués aux colonnes de données lorsqu'elles sont décompressées dans la fonction."
-   "separator", "Chaîne de délimiteur utilisée pour joindre les valeurs, par défaut = `"" ""`."
+   "separator", "Chaîne de délimiteur utilisée pour joindre les valeurs, par défaut = ``"" ""``."
 
 **Exemple :**
 
@@ -327,19 +325,17 @@ Fonction: ``concatenate``
 Fonction: ``direct``
 """"""""""""""""""""
 
-**Description :** Correspond directement à la valeur donnée avec le moulage de type facultatif. Cette fonction est
-purement destinée à fournir un appel de fonction pour la correspondance directe des attributs.
-
-**Attend des attributs de source unique ou multiple :** Unique.
-
-**Paramètres :**
+| **Description :** Correspond directement à la valeur donnée avec le moulage de type facultatif. Cette fonction est
+  purement destinée à fournir un appel de fonction pour la correspondance directe des attributs.
+| **Attend des attributs de source unique ou multiple :** Unique.
+| **Paramètres :**
 
 .. csv-table::
    :header: "Paramètre", "Valeur"
    :widths: auto
    :align: left
 
-   "cast_type", "Nom de chaîne d'une classe de type Python à convertir, par défaut = `None`. Valeurs acceptées :
+   "cast_type", "Nom de chaîne d'une classe de type Python à convertir, par défaut = ``None``. Valeurs acceptées :
    ``float``, ``int``, ``str``."
 
 **Exemple :**
@@ -355,11 +351,9 @@ purement destinée à fournir un appel de fonction pour la correspondance direct
 Fonction: ``map_values``
 """"""""""""""""""""""""
 
-**Description :** Correspond aux valeurs basées sur un dictionnaire de recherche.
-
-**Attend des attributs de source unique ou multiple :** Unique.
-
-**Paramètres :**
+| **Description :** Correspond aux valeurs basées sur un dictionnaire de recherche.
+| **Attend des attributs de source unique ou multiple :** Unique.
+| **Paramètres :**
 
 .. csv-table::
    :header: "Paramètre", "Valeur"
@@ -391,12 +385,10 @@ Fonction: ``map_values``
 Fonction: ``query_assign``
 """"""""""""""""""""""""""
 
-**Description :** Correspond à un seul ou à un ensemble de valeurs basées sur un dictionnaire de recherche de requêtes.
-Les non-matchs seront nuls.
-
-**Attend des attributs de source unique ou multiple :** Unique / Multiple.
-
-**Paramètres :**
+| **Description :** Correspond à un seul ou à un ensemble de valeurs basées sur un dictionnaire de recherche de
+  requêtes. Les non-matchs seront nuls.
+| **Attend des attributs de source unique ou multiple :** Unique / Multiple.
+| **Paramètres :**
 
 .. csv-table::
    :header: "Paramètre", "Valeur"
@@ -410,7 +402,7 @@ Les non-matchs seront nuls.
    | ``type``: indicateur du type de la valeur de sortie donnée. Les valeurs acceptées sont `string` (pour une valeur
    littérale) ou `column` (pour un nom d'attribut source, dont la valeur sera utilisée comme sortie). Voir
    :func:`pandas.DataFrame.query` argument ``expr`` pour les détails de la chaîne de requête."
-   "engine", "Le moteur utilisé pour traiter l'expression, par défaut = `python`. Voir :func:`pandas.eval` pour une
+   "engine", "Le moteur utilisé pour traiter l'expression, par défaut = ``python``. Voir :func:`pandas.eval` pour une
    liste complète des valeurs."
    "\**kwargs", "Arguments de mots clés facultatifs transmis à :func:`pandas.DataFrame.query`."
 
@@ -441,11 +433,9 @@ Les non-matchs seront nuls.
 Fonction: ``regex_find``
 """"""""""""""""""""""""
 
-**Description :** Utilise une expression régulière (regex) pour extraire de la valeur d'entrée.
-
-**Attend des attributs de source unique ou multiple :** Unique.
-
-**Paramètres :**
+| **Description :** Utilise une expression régulière (regex) pour extraire de la valeur d'entrée.
+| **Attend des attributs de source unique ou multiple :** Unique.
+| **Paramètres :**
 
 .. csv-table::
    :header: "Paramètre", "Valeur"
@@ -458,11 +448,11 @@ Fonction: ``regex_find``
    ``match_index``)."
    "strip_result", "La valeur extraite sera supprimée de la valeur d'origine, plutôt que renvoyée, valeur par défaut =
    `False`."
-   "sub_inplace", "Arguments de mots clés facultatifs passés à :func:`re.sub`, par défaut = `None`. Permet à une valeur
-   d'entrée d'être modifiée avant d'être appliquée à une expression régulière, tout en renvoyant la sortie comme si la
-   chaîne d'origine avait été utilisée. Par exemple, pour faire correspondre `de la` de `Chemin-de-la-Grande-Rivière`,
-   ``sub_inplace`` peut être utilisé pour remplacer les tirets par des espaces. Si ``strip_result=False`` alors `de la`
-   sera retourné, sinon `Chemin-Grande-Rivière` sera retourné."
+   "sub_inplace", "Arguments de mots clés facultatifs passés à :func:`re.sub`, par défaut = ``None``. Permet à une
+   valeur d'entrée d'être modifiée avant d'être appliquée à une expression régulière, tout en renvoyant la sortie comme
+   si la chaîne d'origine avait été utilisée. Par exemple, pour faire correspondre `de la` de
+   `Chemin-de-la-Grande-Rivière`, ``sub_inplace`` peut être utilisé pour remplacer les tirets par des espaces. Si
+   ``strip_result=False`` alors `de la` sera retourné, sinon `Chemin-Grande-Rivière` sera retourné."
 
 **Exemple :**
 
@@ -479,11 +469,9 @@ Fonction: ``regex_find``
 Fonction: ``regex_sub``
 """""""""""""""""""""""
 
-**Description :** Utilise une expression régulière (regex) pour extraire et substituer à partir de la valeur d'entrée.
-
-**Attend des attributs de source unique ou multiple :** Unique.
-
-**Paramètres :**
+| **Description :** Utilise une expression régulière (regex) pour extraire et substituer à partir de la valeur d'entrée.
+| **Attend des attributs de source unique ou multiple :** Unique.
+| **Paramètres :**
 
 .. csv-table::
    :header: "Paramètre", "Valeur"
@@ -621,7 +609,7 @@ représentation à gauche et à droite à un seul attribut RRN.
 Segmentation des adresses
 =========================
 
-Le processus de `conform` du RRN comprend un processus spécial pour segmenter les adresses contenues dans un ensemble
+Le processus de ``conform`` du RRN comprend un processus spécial pour segmenter les adresses contenues dans un ensemble
 de données de Points en plages. Pour la segmentation des adresses, aucune clé ``conform`` n'existe et, à la place, une
 clé supplémentaire ``segment`` est incluse dans la clé ``data`` comme la structure brute suivante :
 
