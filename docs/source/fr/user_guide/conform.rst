@@ -398,10 +398,12 @@ Fonction: ``query_assign``
    "columns", "Liste des noms attribués aux colonnes de données lorsqu'elles sont décompressées dans la fonction."
    "lookup", "Dictionnaire des correspondances requête-valeur où la valeur est un dictionnaire imbriqué composé de
    clés :
-   | ``value``: la valeur de sortie souhaitée pour la requête,
-   | ``type``: indicateur du type de la valeur de sortie donnée. Les valeurs acceptées sont `string` (pour une valeur
-   littérale) ou `column` (pour un nom d'attribut source, dont la valeur sera utilisée comme sortie). Voir
-   :func:`pandas.DataFrame.query` argument ``expr`` pour les détails de la chaîne de requête."
+
+     | ``value``: la valeur de sortie souhaitée pour la requête,
+
+     | ``type``: indicateur du type de la valeur de sortie donnée. Les valeurs acceptées sont ``string`` (pour une
+       valeur littérale) ou ``column`` (pour un nom d'attribut source, dont la valeur sera utilisée comme sortie). Voir
+       :func:`pandas.DataFrame.query` argument ``expr`` pour les détails de la chaîne de requête."
    "engine", "Le moteur utilisé pour traiter l'expression, par défaut = ``python``. Voir :func:`pandas.eval` pour une
    liste complète des valeurs."
    "\**kwargs", "Arguments de mots clés facultatifs transmis à :func:`pandas.DataFrame.query`."
@@ -558,7 +560,7 @@ Domaines d'attributs
 
 Lors de l'utilisation d'une fonction de correspondance d'attribut qui accepte une expression régulière, le mot-clé
 ``domain_<nom du jeu de données>_<nom d'attribut>`` peut être utilisé pour insérer les valeurs de domaine restreint de
-tout attribut RRN dans l'expression, séparées par le ``ou`` opérateur ``"|"``.
+tout attribut RRN dans l'expression, séparées par le ``ou`` opérateur ``|``.
 
 **Exemple (brutes) :**
 
@@ -592,7 +594,7 @@ Sortie imbriquée
 ^^^^^^^^^^^^^^^^
 
 Exclusif à l'ensemble de données RRN ``strplaname``, après le processus complet de correspondance des attributs, si des
-attributs de sortie sont renseignés par des valeurs imbriquées, telles qu'une ``list``, tous les enregistrements de cet
+attributs de sortie sont renseignés par des valeurs imbriquées, telles qu'une liste, tous les enregistrements de cet
 ensemble de données seront dupliqués de sorte que le premier emboîté la valeur de chaque attribut imbriqué devient la
 valeur d'attribut réelle pour la première instance dupliquée et la deuxième valeur imbriquée de chaque attribut
 imbriqué devient la valeur d'attribut réelle pour la deuxième instance dupliquée.
@@ -611,7 +613,7 @@ Segmentation des adresses
 
 Le processus de ``conform`` du RRN comprend un processus spécial pour segmenter les adresses contenues dans un ensemble
 de données de Points en plages. Pour la segmentation des adresses, aucune clé ``conform`` n'existe et, à la place, une
-clé supplémentaire ``segment`` est incluse dans la clé ``data`` comme la structure brute suivante :
+clé supplémentaire ``segment`` est incluse dans la clé ``data`` et a la structure brute suivante :
 
 .. code-block:: yaml
 

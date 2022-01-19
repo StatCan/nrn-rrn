@@ -387,10 +387,12 @@ Function: ``query_assign``
 
    "columns", "List of names assigned to the data columns when unpacked within the function."
    "lookup", "Dictionary of query-value mappings where the value is a nested dictionary consisting of keys:
-   | ``value``: the desired output value for the query,
-   | ``type``: indicator of the type of the given output value. Accepted values are ``string`` (for a literal value) or
-   ``column`` (for a source attribute name, the value of which will be used as the output). See
-   :func:`pandas.DataFrame.query` argument ``expr`` for query string details."
+
+     | ``value``: the desired output value for the query,
+
+     | ``type``: indicator of the type of the given output value. Accepted values are ``string`` (for a literal value)
+       or ``column`` (for a source attribute name, the value of which will be used as the output). See
+       :func:`pandas.DataFrame.query` argument ``expr`` for query string details."
    "engine", "The engine used to process the expression, default = ``python``. See :func:`pandas.eval` for a complete
    list of values."
    "\**kwargs", "Optional keyword arguments passed to :func:`pandas.DataFrame.query`."
@@ -544,7 +546,7 @@ Field Domains
 
 When using any field mapping function which accepts a regular expression, the keyword ``domain_<dataset>_<attribute>``
 can be used to insert the restricted domain values of any NRN attribute into the expression, separated by the ``or``
-operator ``"|"``.
+operator ``|``.
 
 **Example (raw):**
 
@@ -578,7 +580,7 @@ Nested Output
 ^^^^^^^^^^^^^
 
 Exclusive to the NRN dataset ``strplaname``, following the complete field mapping process, if any output attributes are
-populated by nested values, such as a ``list``, all records within that dataset will be duplicated such that the first
+populated by nested values, such as a list, all records within that dataset will be duplicated such that the first
 nested value of each nested attribute becomes the actual attribute value for the first duplicated instance and the
 second nested value of each nested attribute becomes the actual attribute value for the second duplicated instance.
 
@@ -596,7 +598,7 @@ Address Segmentation
 
 The NRN ``conform`` process includes a special process to segment addresses contained within a Point dataset into
 ranges. For address segmentation, no ``conform`` key exists and, instead, an additional key ``segment`` is included
-within the ``data`` key as has the following raw structure:
+within the ``data`` key and has the following raw structure:
 
 .. code-block:: yaml
 

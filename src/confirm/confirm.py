@@ -328,8 +328,8 @@ class Confirm:
         query = f"\"{field}\" in {*identifiers,}"
 
         # Log results.
-        logger.exception(f"Unable to proceed with {process} due to invalid geometries for the following {len(values)} "
-                         f"records (listed by {field}):\n{values}\n\nQuery: {query}")
+        logger.exception(f"Unable to proceed with {process} due to invalid geometries for the following "
+                         f"{len(identifiers)} records (listed by {field}):\n{values}\n\nQuery: {query}")
         sys.exit(1)
 
     @staticmethod
