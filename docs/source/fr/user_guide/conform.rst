@@ -646,21 +646,28 @@ Cette structure de données contient 3 clés obligatoires :
 :``address_fields``: Définit comment extraire les composants d'adresse des données source. Seuls les composants
                      d'attribut de base ``street`` (nom de la rue), ``number`` (numéro d'adresse) et ``suffix``
                      (suffixe du numéro d'adresse) sont acceptés. Les valeurs acceptables sont :
+
                      | a) Un nom d'attribut ou,
                      | b) Un dictionnaire ``regex_sub`` composé des clés ``pattern`` et ``repl`` qui sera passé à
-                     :func:`re.sub`.
+                          :func:`re.sub`.
+
 :``address_join_field``: Attribut de la source d'adresse utilisée pour joindre l'ensemble de données RRN ``roadseg``.
                          Les valeurs acceptables sont :
+
                          | a) Un nom d'attribut ou,
                          | b) Un dictionnaire composé de clés définissant la concaténation des attributs source
-                         d'adresse :
+                              d'adresse :
+
                          | ``fields``: Une liste d'attributs de source d'adresse.
                          | ``separator``: Un délimiteur utilisé pour concaténer les attributs.
+
 :``roadseg_join_field``: Attribut de l'ensemble de données RRN ``roadseg`` utilisé pour se joindre à la source
                          d'adresse. Les valeurs acceptables sont :
+
                          | a) Un nom d'attribut ou,
                          | b) Un dictionnaire composé de clés définissant la concaténation des attributs du jeu de
-                         données RRN ``roadseg`` :
+                              données RRN ``roadseg`` :
+
                          | ``fields``: Une liste des attributs ``roadseg`` de l'ensemble de données RRN.
                          | ``separator``: Un délimiteur utilisé pour concaténer les attributs.
 
@@ -715,6 +722,5 @@ Processus de segmentation
 
 Les documents suivants décrivent le processus de segmentation d'adresse :
 
-`Processus de segmentation - Colombie britannique </source/_static/reports/address_segmentation_british_columbia.html>`_
-
-`Processus de segmentation - Yellowknife </source/_static/reports/address_segmentation_yellowknife.html>`_
+| `Processus de segmentation - Colombie britannique <../../../../source/_static/reports/address_segmentation_british_columbia.html>`_
+| `Processus de segmentation - Yellowknife <../../../../source/_static/reports/address_segmentation_yellowknife.html>`_

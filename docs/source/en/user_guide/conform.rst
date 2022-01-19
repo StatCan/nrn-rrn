@@ -631,22 +631,29 @@ This data structure contains 3 mandatory keys:
 :``address_fields``: Defines how to extract address components from the source data. Only the basic attribute
                      components of ``street`` (street name), ``number`` (address number), and ``suffix`` (address
                      number suffix) are accepted. Acceptable values are:
-                     | a) An attribute name or,
-                     | b) A ``regex_sub`` dictionary consisting of keys ``pattern`` and ``repl`` which will be passed
-                     to :func:`re.sub`.
+
+                     | a) an attribute name or,
+                     | b) a ``regex_sub`` dictionary consisting of keys ``pattern`` and ``repl`` which will be passed
+                          to :func:`re.sub`.
+
 :``address_join_field``: Attribute of the address source used to join with NRN dataset ``roadseg``. Acceptable values
                          are:
-                         | a) An attribute name or,
-                         | b) A dictionary consisting of keys defining the concatenation of address source attributes:
+
+                         | a) an attribute name or,
+                         | b) a dictionary consisting of keys defining the concatenation of address source attributes:
+
                          | ``fields``: A list of address source attributes.
                          | ``separator``: A delimiter used to concatenate the attributes.
+
 :``roadseg_join_field``: Attribute of NRN dataset ``roadseg`` used to join with the address source. Acceptable values
                          are:
-                         | a) An attribute name or,
-                         | b) A dictionary consisting of keys defining the concatenation of NRN dataset ``roadseg``
-                         attributes:
-                         | ``fields``: A list of NRN dataset ``roadseg`` attributes.
-                         | ``separator``: A delimiter used to concatenate the attributes.
+
+                         | a) an attribute name or,
+                         | b) a dictionary consisting of keys defining the concatenation of NRN dataset ``roadseg``
+                              attributes:
+
+                              | ``fields``: A list of NRN dataset ``roadseg`` attributes.
+                              | ``separator``: A delimiter used to concatenate the attributes.
 
 Output
 ------
@@ -698,6 +705,5 @@ Segmentation Process
 
 The following documents describe the address segmentation process:
 
-`Address Segmentation - British Columbia </source/_static/reports/address_segmentation_british_columbia.html>`_
-
-`Address Segmentation - Yellowknife </source/_static/reports/address_segmentation_yellowknife.html>`_
+| `Address Segmentation - British Columbia <../../../../source/_static/reports/address_segmentation_british_columbia.html>`_
+| `Address Segmentation - Yellowknife <../../../../source/_static/reports/address_segmentation_yellowknife.html>`_
