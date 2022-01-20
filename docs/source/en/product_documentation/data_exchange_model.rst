@@ -40,7 +40,7 @@ Address ranges must not overlap on more than one Road Element NID. A Road Elemen
 adjoining address ranges. In the case where a House Number value is not known at segmentation, interpolated values can
 be calculated or the address range of the adjoining Road Segment can be repeated. Segmentation can be introduced to
 report known House Number value. At junctions where no House Number value is known, interpolated values can be
-calculated or a value -1 (for unknown) can be assigned as a House Number.
+calculated or a value ``-1`` (for unknown) can be assigned as a House Number.
 
 Address Range Increment
 -----------------------
@@ -49,8 +49,8 @@ A First House Number value of an address range can be smaller, equal or greater 
 Having a First House Number value always smaller or equal than the Last House Number value is possible through the use
 of the Digitizing Direction Flag.
 
-A House Number value 0 can only be combined with another House Number value 0. It means that the Road Segment does not
-have an address range.
+A House Number value ``0`` can only be combined with another House Number value ``0``. It means that the Road Segment
+does not have an address range.
 
 Digitizing Direction
 --------------------
@@ -97,8 +97,8 @@ Metadata on Addressing Components
 
 During the consultation, it was established that only the Dates and Provider would be part of the object metadata
 requirements to be populated in the addressing tables. Therefore, other Object Metadata attributes such as Planimetric
-Accuracy, Acquisition Technique and Metadata Coverage can be set to Unknown (-1) value. Dataset Name and Standard
-Version can and must always be populated.
+Accuracy, Acquisition Technique and Metadata Coverage can be set to ``Unknown`` (``-1``) value. Dataset Name and
+Standard Version can and must always be populated.
 
 Metadata on Junction
 --------------------
@@ -106,9 +106,9 @@ Metadata on Junction
 As an option, Object Metadata attributes on Junctions can be populated by the data provider. Otherwise, they will be
 automatically populated by the data publisher using the following default values and rules.
 
-:Acquisition Technique: 12 (Computed)
-:Provider: 2 (Federal)
-:Coverage: 1 (Complete)
+:Acquisition Technique: ``12`` (``Computed``)
+:Provider: ``2`` (``Federal``)
+:Coverage: ``1`` (``Complete``)
 :Planimetric Accuracy: Highest planimetric accuracy value of connecting segments.
 :Creation Date: Lowest creation date of connecting segments or current date for newly created junction.
 :Revision Date: Highest revision date of connecting segments or default value for newly created junction.
@@ -142,8 +142,8 @@ Functional Road Class Integrity
 A Functional Road Class should not change on the length of a structure and the structure should have the same
 Functional Road Class as one of the road segments to which it is connected.
 
-Roads with Functional Road Class Arterial, Expressway / Highway, Freeway, Ramp and Rapid Transit should not form a
-closed loop.
+Roads with Functional Road Class ``Arterial``, ``Expressway / Highway``, ``Freeway``, ``Ramp`` and ``Rapid Transit``
+should not form a closed loop.
 
 Ferry Connection Segments are assigned with the same Functional Road Class value of the two Road Segments that it joins
 when they are the same. If the Functional Road Classes differ, the lowest value (i.e. most prominent class) prevails.

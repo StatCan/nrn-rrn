@@ -42,7 +42,7 @@ peut cependant avoir plus d'un intervalles d'adresses adjacents. Dans le cas où
 pas connue lors de la segmentation, les valeurs interpolées peuvent être calculé ou l'intervalle d'adressage du Segment
 routier adjacent peut être répété. La segmentation peut être introduite pour signaler la valeur connue du Numéro de
 maison. Aux jonctions où aucune valeur de Numéro de maison n'est connue, les valeurs interpolées peuvent être calculé
-ou une valeur -1 (pour inconnu) peut être attribuée comme Numéro de maison.
+ou une valeur ``-1`` (pour inconnu) peut être attribuée comme Numéro de maison.
 
 Incrément d'intervalle d'adresse
 --------------------------------
@@ -51,8 +51,8 @@ Une valeur de Numéro première maison d'un intervalle d'adresses peut être inf
 de Numéro dernière maison. Avoir une valeur du Numéro première maison toujours inférieure ou égale à la valeur du
 Numéro dernière maison est possible grâce à l'utilisation de l'Indicateur sens numérisation.
 
-Une valeur de Numéro de maison 0 ne peut être combinée qu'avec une autre valeur de Numéro de maison 0. Cela signifie
-que le Segment routier ne avoir un intervalle d'adresses.
+Une valeur de Numéro de maison ``0`` ne peut être combinée qu'avec une autre valeur de Numéro de maison ``0``. Cela
+signifie que le Segment routier ne avoir un intervalle d'adresses.
 
 Sens numérisation
 -----------------
@@ -103,7 +103,7 @@ Métadonnées sur les composants d'adressage
 Lors de la consultation, il a été établi que seuls les Dates et le Fournisseur feraient partie des métadonnées de
 l'objet à renseigner dans les tables d'adressage. Par conséquent, d'autres attributs de Métadonnées d'objet tels que
 Précision planimétrique, Technique acquisition et Couverture des métadonnées peuvent être définies sur une valeur
-inconnue (-1). Nom jeu de données et Version normes peut et doit toujours être renseignée.
+``Inconnu`` (``-1``). Nom jeu de données et Version normes peut et doit toujours être renseignée.
 
 Métadonnées sur la jonction
 ---------------------------
@@ -115,9 +115,9 @@ En option, les attributs de Métadonnées d'objet sur les Jonctions peuvent êtr
 données. Sinon, ils seront automatiquement renseigné par l'éditeur de données à l'aide des valeurs et règles par défaut
 suivantes.
 
-:Technique acquisition: 12 (Calculé)
-:Fournisseur: 2 (Fédéral)
-:Couverture: 1 (Complet)
+:Technique acquisition: ``12`` (``Calculé``)
+:Fournisseur: ``2`` (``Fédéral``)
+:Couverture: ``1`` (``Complet``)
 :Précision planimétrique: Valeur de précision planimétrique la plus élevée des segments de connexion.
 :Date création: Date de création la plus basse des segments de connexion ou date actuelle pour la jonction nouvellement
                 créée.
@@ -157,8 +157,8 @@ Une Classification routière fonctionnelle ne devrait pas changer sur la longueu
 devrait avoir la même Classification routière fonctionnelle comme l'un des segments routiers auxquels elle est
 connectée.
 
-Les routes avec Classification routière fonctionnelle Artère, Route express, Autoroute, Bretelle et Réservée transport
-commun ne doivent pas former une boucle fermée.
+Les routes avec Classification routière fonctionnelle ``Artère``, ``Route express``, ``Autoroute``, ``Bretelle`` et
+``Réservée transport commun`` ne doivent pas former une boucle fermée.
 
 Les Segments de liaison par transbordeur sont affectés avec la même valeur de Classification routière fonctionnelle des
 deux Segments routiers qu'il rejoint quand ce sont les mêmes. Si les Classification routière fonctionnelle diffèrent,
