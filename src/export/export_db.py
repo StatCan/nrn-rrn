@@ -50,10 +50,10 @@ class Export:
         self.minor_version = None
 
         # Configure output path.
-        self.output_path = filepath.parents[2] / f"data/processed/{self.source}"
+        self.dst = filepath.parents[2] / f"data/processed/{self.source}"
 
-        # Clear output namespace.
-        namespace = list(self.output_path.glob("*"))
+        # Validate and conditionally clear output namespace.
+        namespace = list(filter(lambda f: f.stem != f"{self.source}_change_logs", self.dst.glob("*")))
 
         if len(namespace):
             logger.warning("Output namespace already occupied.")
@@ -237,7 +237,7 @@ class Export:
 
                 # Configure export directory.
                 export_dir, export_file = itemgetter("dir", "file")(export_specs["data"])
-                export_dir = self.output_path / self.format_path(export_dir) / self.format_path(export_file)
+                export_dir = self.dst / self.format_path(export_dir) / self.format_path(export_file)
 
                 # Configure mapped layer names.
                 nln_map = {table: self.format_path(export_specs["conform"][table]["name"]) for table in dframes}
@@ -355,8 +355,8 @@ class Export:
     def update_distribution_docs(self) -> None:
         """
         Writes updated documentation to data/processed for:
-            - completion rates / taux d'achèvement
-            - release notes / notes de publication
+            - completion rates
+            - release notes
         """
 
         # Update release notes.
@@ -377,7 +377,7 @@ class Export:
 
         # Write updated documents - English and French.
         self.write_documents(data, "en/release_notes")
-        self.write_documents(data, "fr/notes_de_publication")
+        self.write_documents(data, "fr/release_notes", export_yaml=False)
 
         # Update completion rates.
         logger.info(f"Updating documentation: completion rates.")
@@ -408,9 +408,9 @@ class Export:
 
         # Write updated documents - English and French.
         self.write_documents(data, "en/completion_rates")
-        self.write_documents(data, "fr/taux_d'achèvement")
+        self.write_documents(data, "fr/completion_rates", export_yaml=False)
 
-    def write_documents(self, data: dict, filename: str) -> None:
+    def write_documents(self, data: dict, filename: str, export_yaml: bool = False) -> None:
         """
         Updates a document template with a dictionary and exports:
             1) an rst file representing the updated template.
@@ -418,16 +418,17 @@ class Export:
 
         :param dict data: dictionary of values used to populate the document template.
         :param str filename: basename of a document in ../distribution_docs to be updated.
+        :param bool export_yaml: indicates if the yaml dictionary should be exported, default False.
         """
 
         # Configure source and destination paths.
         src = filepath.parent / f"distribution_docs/{filename}.rst"
-        dst = self.output_path / filename
+        dst = self.dst / filename
 
         try:
 
             # Load document as jinja template.
-            with open(src, "r") as doc:
+            with src.open("r") as doc:
                 template = jinja2.Template(doc.read())
 
             # Update template.
@@ -441,13 +442,17 @@ class Export:
         # Export updated document.
         try:
 
+            # Create destination directory structure.
+            dst.parent.mkdir(parents=True, exist_ok=True)
+
             # Write rst.
-            with open(dst.with_suffix(".rst"), "w") as doc:
+            with dst.with_suffix(".rst").open("w") as doc:
                 doc.write(updated_doc)
 
             # Write yaml.
-            with open(dst.with_suffix(".yaml"), "w") as doc:
-                yaml.dump(data, doc)
+            if export_yaml:
+                with dst.with_suffix(".yaml").open("w") as doc:
+                    yaml.dump(data, doc)
 
         except (ValueError, yaml.YAMLError) as e:
             logger.exception(f"Unable to write document: {dst}.")

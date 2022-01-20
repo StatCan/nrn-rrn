@@ -373,7 +373,7 @@ class Export:
 
         # Write updated documents - English and French.
         self.write_documents(data, "en/release_notes")
-        self.write_documents(data, "fr/release_notes")
+        self.write_documents(data, "fr/release_notes", export_yaml=False)
 
         # Update completion rates.
         logger.info(f"Updating documentation: completion rates.")
@@ -404,9 +404,9 @@ class Export:
 
         # Write updated documents - English and French.
         self.write_documents(data, "en/completion_rates")
-        self.write_documents(data, "fr/completion_rates")
+        self.write_documents(data, "fr/completion_rates", export_yaml=False)
 
-    def write_documents(self, data: dict, filename: str) -> None:
+    def write_documents(self, data: dict, filename: str, export_yaml: bool = False) -> None:
         """
         Updates a document template with a dictionary and exports:
             1) an rst file representing the updated template.
@@ -414,6 +414,7 @@ class Export:
 
         :param dict data: dictionary of values used to populate the document template.
         :param str filename: basename of a document in ../distribution_docs to be updated.
+        :param bool export_yaml: indicates if the yaml dictionary should be exported, default False.
         """
 
         # Configure source and destination paths.
@@ -423,7 +424,7 @@ class Export:
         try:
 
             # Load document as jinja template.
-            with open(src, "r") as doc:
+            with src.open("r") as doc:
                 template = jinja2.Template(doc.read())
 
             # Update template.
@@ -437,13 +438,17 @@ class Export:
         # Export updated document.
         try:
 
+            # Create destination directory structure.
+            dst.parent.mkdir(parents=True, exist_ok=True)
+
             # Write rst.
-            with open(dst.with_suffix(".rst"), "w") as doc:
+            with dst.with_suffix(".rst").open("w") as doc:
                 doc.write(updated_doc)
 
             # Write yaml.
-            with open(dst.with_suffix(".yaml"), "w") as doc:
-                yaml.dump(data, doc)
+            if export_yaml:
+                with dst.with_suffix(".yaml").open("w") as doc:
+                    yaml.dump(data, doc)
 
         except (ValueError, yaml.YAMLError) as e:
             logger.exception(f"Unable to write document: {dst}.")
