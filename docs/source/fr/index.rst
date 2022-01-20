@@ -32,7 +32,7 @@ Coordonnées
 | Télécopieur : 1-514-283-9350
 | Courriel : statcan.infostats-infostats.statcan@canada.ca
 | Site internet : https://statcan.gc.ca
-| Téléchargement de données : https://open.canada.ca
+| Gouvernement ouvert : https://open.canada.ca
 
 Copyright
 =========

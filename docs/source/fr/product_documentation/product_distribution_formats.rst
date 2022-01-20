@@ -29,8 +29,8 @@ Identification du produit
 :Nom: Réseau routier national
 :Version: 2.1
 :Date: 2012-03-31
-:Normes: Réseau routier national : Spécifications de produit, édition 2.1, 2012-03-31
-:Catalogue d'entités: Réseau routier national : Catalogue d'entités, édition 2.1, 2012-03-31
+:Normes: :doc:`data_product_specifications`
+:Catalogue d'entités: :doc:`feature_catalogue`
 
 Identification des formats de distribution
 ==========================================
@@ -41,8 +41,8 @@ GML – Geography Markup Language
 :Nom: GML – Geography Markup Language
 :Version: 2.1.2
 :Date: 2002-09-17
-:Spécifications: Geography Markup Language – GML – 2.1.2, OpenGIS® Implementation Specifications, OGC Document Number
-    02-069 (http://portal.opengeospatial.org/files/?artifact_id=11339)
+:Spécifications: `Geography Markup Language – GML – 2.1.2, OpenGIS Implementation Specifications, OGC Document Number
+                 02-069 <http://portal.opengeospatial.org/files/?artifact_id=11339>`_
 
 KML – Keyhole Markup Language
 -----------------------------
@@ -50,8 +50,8 @@ KML – Keyhole Markup Language
 :Nom: KML – Keyhole Markup Language
 :Version: 2.2
 :Date: 2008-04-14
-:Spécifications: Open Geospatial Consortium Inc., OGC® KML, Version 2.2.0, 2008-04-14, Reference number of this OGC®
-    project document: OGC 07-147r2 (http://portal.opengeospatial.org/files/?artifact_id=27810)
+:Spécifications: `Open Geospatial Consortium Inc., OGC KML, Version 2.2.0, 2008-04-14, Reference number of this OGC
+                 project document: OGC 07-147r2 <http://portal.opengeospatial.org/files/?artifact_id=27810>`_
 
 SHP – ESRI\ |trade| Shapefile
 -----------------------------
@@ -59,8 +59,8 @@ SHP – ESRI\ |trade| Shapefile
 :Nom: Shapefile
 :Version: 01
 :Date: Juillet 1998
-:Spécifications: ESRI Shapefile Technical Description, an ESRI White Paper, July 1998
-    (http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf)
+:Spécifications: `ESRI Shapefile Technical Description, an ESRI White Paper, July 1998
+                 <http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf>`_
 
 GPKG – OGC Geopackage
 ---------------------
@@ -83,31 +83,40 @@ contenu du jeu de données (GEOM et ADDR). Le nom des fichiers GML prend la form
 
     RRN_<IDENTIFIANT>_<édition>_<version>_<CONTENU>[_<MODIFICATION>].gml
 
-* RRN =                 Titre abrégé du produit.
-* <IDENTIFIANT> =       Code de province ou de territoire anglais correspondant à la localisation du jeu de données.
-                        Les codes possibles sont : AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT.
-* <édition> =           Édition du jeu de données.
-* <version> =           Version du jeu de données.
-* <CONTENU> =           Indicateur du contenu du jeu de données. Les valeurs possibles sont : GEOM (entités
-                        géométriques et attributs de base), ADDR (tables d'attributs d'adressage).
-* [<MODIFICATION>] =    [] = Optionnel. Type de modification apportée aux entités et attributs du jeu de données par
-                        rapport à l'édition précédente. Les valeurs possibles sont identifiées à
-                        :ref:`Change Management Files`.
-* .gml =                Extension du nom de fichier.
+.. csv-table::
+   :header: "Propriété", "Description"
+   :widths: auto
+   :align: left
 
-Exemples :
+   "RRN", "Titre abrégé du produit."
+   "<IDENTIFIANT>", "Code de province ou de territoire anglais correspondant à la localisation du jeu de données. Les
+   codes possibles sont : AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT."
+   "<édition>", "Édition du jeu de données."
+   "<version>", "Version du jeu de données."
+   "<CONTENU>", "Indicateur du contenu du jeu de données. Les valeurs possibles sont : GEOM (entités géométriques et
+   attributs de base), ADDR (tables d'attributs d'adressage)."
+   "[<MODIFICATION>]", "[] = Optionnel. Type de modification apportée aux entités et attributs du jeu de données par
+   rapport à l'édition précédente. Les valeurs possibles sont identifiées à :ref:`Change Management Files`."
+   ".gml", "Extension du nom de fichier."
 
-* RRN_AB_4_0_GEOM.gml             (Entités géométriques et attributs de base du jeu de données de l'Alberta, édition 4,
-                                  version 0);
-* RRN_AB_4_0_ADDR.gml             (Tables d'attributs d'adressage du jeu de données de l'Alberta, édition 4, version 0);
-* RRN_AB_4_0_GEOM_AJOUT.gml       (Entités géométriques et/ou attributs de base ajoutés au jeu de données de l'Alberta,
-                                  édition 4, version 0);
-* RRN_AB_4_0_ADDR_AJOUT.gml       (Tables des attributs d'adressage ajoutés au jeu de données de l'Alberta, édition 4,
-                                  version 0).
+**Exemples :**
+
+.. csv-table::
+   :header: "Nom de fichier", "Description"
+   :widths: auto
+   :align: left
+
+   "RRN_AB_4_0_GEOM.gml", "Entités géométriques et attributs de base du jeu de données de l'Alberta, édition 4, version
+   0."
+   "RRN_AB_4_0_ADDR.gml", "Tables d'attributs d'adressage du jeu de données de l'Alberta, édition 4, version 0."
+   "RRN_AB_4_0_GEOM_AJOUT.gml", "Entités géométriques et/ou attributs de base ajoutés au jeu de données de l'Alberta,
+   édition 4, version 0."
+   "RRN_AB_4_0_ADDR_AJOUT.gml", "Tables des attributs d'adressage ajoutés au jeu de données de l'Alberta, édition 4,
+   version 0."
 
 Un schéma XML (fichier XSD) est également livré pour chaque fichier GML. Ce fichier définit de façon structurée le type
 de contenu, la syntaxe et la sémantique des documents GML. Le nom de ce fichier est
-RRN_<IDENTIFIANT>_<édition>_<version>_<CONTENU>[_<MODIFICATION>].xsd et est cité en référence dans le fichier GML.
+``RRN_<IDENTIFIANT>_<édition>_<version>_<CONTENU>[_<MODIFICATION>].xsd`` et est cité en référence dans le fichier GML.
 
 Nomenclature du fichier KML
 ---------------------------
@@ -117,16 +126,26 @@ Le nom du fichier KML prend la forme suivante : ::
 
     nrn_rrn_<identifiant>_kml_fr.kmz
 
-* nrn_rrn =             Titre abrégé anglais et français du produit.
-* <identifiant> =       Code de province ou de territoire anglais correspondant à la localisation du jeu de données.
-                        Les codes possibles sont : ab, bc, mb, nb, nl, ns, nt, nu, on, pe, qc, sk, yt.
-* kml =                 Format de distribution du jeu de données.
-* fr =                  Code ISO de la langue de distribution du jeu de données.
-* .kmz =                Extension du nom de fichier.
+.. csv-table::
+   :header: "Propriété", "Description"
+   :widths: auto
+   :align: left
 
-Exemple :
+   "nrn_rrn", "Titre abrégé anglais et français du produit."
+   "<identifiant>", "Code de province ou de territoire anglais correspondant à la localisation du jeu de données. Les
+   codes possibles sont : ab, bc, mb, nb, nl, ns, nt, nu, on, pe, qc, sk, yt."
+   "kml", "Format de distribution du jeu de données."
+   "fr", "Code ISO de la langue de distribution du jeu de données."
+   ".kmz", "Extension du nom de fichier."
 
-* nrn_rrn_ab_kml_fr.kmz           (*Segment routier* du jeu de données de l'Alberta, édition 4, version 0).
+**Exemple :**
+
+.. csv-table::
+   :header: "Nom de fichier", "Description"
+   :widths: auto
+   :align: left
+
+   "nrn_rrn_ab_kml_fr.kmz", "*Segment routier* du jeu de données de l'Alberta, édition 4, version 0."
 
 Nomenclature des fichiers SHP
 -----------------------------
@@ -136,16 +155,20 @@ suit la structure suivante : ::
 
     RRN_<IDENTIFIANT>_<édition>_<version>_<ENTITÉ>[_<MODIFICATION>].shp
 
-* RRN =                 Titre abrégé du produit.
-* <IDENTIFIANT> =       Code de province ou de territoire anglais correspondant à la localisation du jeu de données.
-                        Les codes possibles sont : AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT.
-* <édition> =           Édition du jeu de données.
-* <version> =           Version du jeu de données.
-* <ENTITÉ> =            Nom abrégé de l'entité tel que défini à :ref:`Datasets`.
-* [<MODIFICATION>] =    [] = Optionnel. Type de modification apportée aux entités et attributs du jeu de données par
-                        rapport à l'édition précédente. Les valeurs possibles sont identifiées à
-                        :ref:`Change Management Files`.
-* .shp =                Extension du nom de fichier principal de géométrie.
+.. csv-table::
+   :header: "Propriété", "Description"
+   :widths: auto
+   :align: left
+
+   "RRN", "Titre abrégé du produit."
+   "<IDENTIFIANT>", "Code de province ou de territoire anglais correspondant à la localisation du jeu de données. Les
+   codes possibles sont : AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT."
+   "<édition>", "Édition du jeu de données."
+   "<version>", "Version du jeu de données."
+   "<ENTITÉ>", "Nom abrégé de l'entité tel que défini à :ref:`Datasets`."
+   "[<MODIFICATION>]", "[] = Optionnel. Type de modification apportée aux entités et attributs du jeu de données par
+   rapport à l'édition précédente. Les valeurs possibles sont identifiées à :ref:`Change Management Files`."
+   ".shp", "Extension du nom de fichier principal de géométrie."
 
 Dans le format SHP, il y a également cinq autres types de fichiers associés au fichier de géométrie de l'entité :
 
@@ -156,10 +179,16 @@ Dans le format SHP, il y a également cinq autres types de fichiers associés au
   principal de géométrie;
 * deux fichiers d'index spatial pour les données géométriques (.sbn, .sbx).
 
-Exemples :
+**Exemples :**
 
-* RRN_AB_4_0_SEGMROUT.shp         (Entité *Segment routier* du jeu de données de l'Alberta, édition 4, version 0);
-* RRN_AB_4_0_SEGMROUT_AJOUT.shp   (Entités géométriques et/ou attributs de base du *Segment routier* ajoutés au jeu de données de l'Alberta, édition 4, version 0).
+.. csv-table::
+   :header: "Nom de fichier", "Description"
+   :widths: auto
+   :align: left
+
+   "RRN_AB_4_0_SEGMROUT.shp", "Entité *Segment routier* du jeu de données de l'Alberta, édition 4, version 0."
+   "RRN_AB_4_0_SEGMROUT_AJOUT.shp", "Entités géométriques et/ou attributs de base du *Segment routier* ajoutés au jeu
+   de données de l'Alberta, édition 4, version 0."
 
 Nomenclature des fichiers GPKG
 ------------------------------
@@ -169,17 +198,27 @@ GPKG suit la structure suivante : ::
 
     RRN_<IDENTIFIANT>_<édition>_<version>_fr.gpkg
 
-* RRN =                 Titre abrégé du produit.
-* <IDENTIFIANT> =       Code de province ou de territoire anglais correspondant à la localisation du jeu de données.
-                        Les codes possibles sont : AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT.
-* <édition> =           Édition du jeu de données.
-* <version> =           Version du jeu de données.
-* fr =                  Code ISO de la langue de distribution du jeu de données.
-* .gpkg =               Extension du nom de fichier.
+.. csv-table::
+   :header: "Propriété", "Description"
+   :widths: auto
+   :align: left
 
-Examples:
+   "RRN", "Titre abrégé du produit."
+   "<IDENTIFIANT>", "Code de province ou de territoire anglais correspondant à la localisation du jeu de données. Les
+   codes possibles sont : AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT."
+   "<édition>", "Édition du jeu de données."
+   "<version>", "Version du jeu de données."
+   "fr", "Code ISO de la langue de distribution du jeu de données."
+   ".gpkg", "Extension du nom de fichier."
 
-* RRN_AB_4_0_fr.gpkg              (Toutes les entités du jeu de données de l'Alberta, édition 4, version 0).
+**Examples:**
+
+.. csv-table::
+   :header: "Nom de fichier", "Description"
+   :widths: auto
+   :align: left
+
+   "RRN_AB_4_0_fr.gpkg", "Toutes les entités du jeu de données de l'Alberta, édition 4, version 0."
 
 Fichier de métadonnées
 ----------------------
@@ -190,21 +229,31 @@ fichier de métadonnées est : ::
 
     nrn_rrn_<identifiant>_<édition>_<version>_fgdc_fr.<format>
 
-* nrn_rrn =             Titre abrégé anglais et français du produit.
-* <identifiant> =       Code de province ou de territoire anglais correspondant à la localisation du jeu de données.
-                        Les codes possibles sont : AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT.
-* <édition> =           Édition du jeu de données.
-* <version> =           Version du jeu de données.
-* fgdc =                Format du fichier de métadonnées selon la norme CSDGM du Federal Geographic Data Committee.
-* fr =                  Code ISO de la langue de distribution du jeu de données.
-* <format> =            Extension du nom de fichier (xml ou html).
+.. csv-table::
+   :header: "Propriété", "Description"
+   :widths: auto
+   :align: left
 
-Exemples :
+   "nrn_rrn", "Titre abrégé anglais et français du produit."
+   "<identifiant>", "Code de province ou de territoire anglais correspondant à la localisation du jeu de données. Les
+   codes possibles sont : AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT."
+   "<édition>", "Édition du jeu de données."
+   "<version>", "Version du jeu de données."
+   "fgdc", "Format du fichier de métadonnées selon la norme CSDGM du Federal Geographic Data Committee."
+   "fr", "Code ISO de la langue de distribution du jeu de données."
+   "<format>", "Extension du nom de fichier (xml ou html)."
 
-* nrn_rrn_ab_4_0_fgdc_en.xml      (Fichier de métadonnées du jeu de données de l'Alberta, édition 4, version 0 selon le
-                                  format FGDC/XML);
-* nrn_rrn_ab_4_0_fgdc_en.html     (Fichier de métadonnées du jeu de données de l'Alberta, édition 4, version 0 selon le
-                                  format FGDC/HTML).
+**Exemples :**
+
+.. csv-table::
+   :header: "Nom de fichier", "Description"
+   :widths: auto
+   :align: left
+
+   "nrn_rrn_ab_4_0_fgdc_en.xml", "Fichier de métadonnées du jeu de données de l'Alberta, édition 4, version 0 selon le
+   format FGDC/XML."
+   "nrn_rrn_ab_4_0_fgdc_en.html", "Fichier de métadonnées du jeu de données de l'Alberta, édition 4, version 0 selon le
+   format FGDC/HTML."
 
 Liste des noms de fichiers de distribution
 ------------------------------------------
@@ -234,8 +283,8 @@ L'extension du nom de fichier dépend directement du format de distribution.
    "Segment de liaison par transbordeur", "SegmentLiaisonTransbordeur", "SLIAISONTR", "Ligne"
    "Segment routier", "SegmentRoutier\ :sup:`*`\ ", "SEGMROUT", "Ligne"
 
-:sup:`*` Contenu KML (version simplifiée du jeu de données).
-:sup:`*` Fichier d'attributs (.dbf) dans le format SHP et entités sans géométrie dans le format GML.
+| :sup:`*` Contenu KML (version simplifiée du jeu de données).
+| :sup:`*` Fichier d'attributs (.dbf) dans le format SHP et entités sans géométrie dans le format GML.
 
 .. _Change Management Files:
 
@@ -257,7 +306,7 @@ données est généré pour chaque type d'effet. L'extension du nom de fichier d
    "Élimination", "<Nom du fichier GML/SHP>_ELIMINE"
 
 La méthode utilisée pour le *suivi des modifications géométriques* est indiquée dans un fichier texte nommé :
-LISEZMOI_<IDENTIFIANT>.txt qui est joint au jeu de données.
+``LISEZMOI_<IDENTIFIANT>.txt`` qui est joint au jeu de données.
 
 Identification des attributs
 ============================
@@ -265,8 +314,8 @@ Identification des attributs
 Les attributs communs à l'ensemble des entités du produit RRN sont identifiés dans le premier tableau. Les attributs
 spécifiques à chaque entité sont présentés dans la sous-section suivante.
 
-Le type de données de tous les formats de distribution est soit : C(c) pour caractères ou N(n,d) pour nombre (c =
-nombre de caractères, n = nombre total de chiffres, d = nombre de chiffres en décimales).
+Le type de données de tous les formats de distribution est soit : ``C(c)`` pour caractères ou ``N(n,d)`` pour nombre
+(``c`` = nombre de caractères, ``n`` = nombre total de chiffres, ``d`` = nombre de chiffres en décimales).
 
 Attributs communs pour toutes les entités (sauf Lien nom non officiel)
 ----------------------------------------------------------------------

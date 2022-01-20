@@ -28,8 +28,8 @@ Product Identification
 :Name: National Road Network
 :Version: 2.1
 :Date: 2012-03-31
-:Standard: National Road Network: Data Product Specifications, Edition 2.1, 2012-03-31
-:Feature catalogue: National Road Network: Feature Catalogue, Edition 2.1, 2012-03-31
+:Standard: :doc:`data_product_specifications`
+:Feature catalogue: :doc:`feature_catalogue`
 
 Distribution Formats Identification
 ===================================
@@ -40,8 +40,8 @@ GML – Geography Markup Language
 :Name: GML – Geography Markup Language
 :Version: 2.1.2
 :Date: 2002-09-17
-:Specifications: Geography Markup Language – GML – 2.1.2, OpenGIS® Implementation Specifications, OGC Document Number
-    02-069 (http://portal.opengeospatial.org/files/?artifact_id=11339)
+:Specifications: `Geography Markup Language – GML – 2.1.2, OpenGIS Implementation Specifications, OGC Document Number
+                 02-069 <http://portal.opengeospatial.org/files/?artifact_id=11339>`_
 
 KML – Keyhole Markup Language
 -----------------------------
@@ -49,8 +49,8 @@ KML – Keyhole Markup Language
 :Name: KML – Keyhole Markup Language
 :Version: 2.2
 :Date: 2008-04-14
-:Specifications: Open Geospatial Consortium Inc., OGC® KML, Version 2.2.0, 2008-04-14, Reference number of this OGC®
-    project document: OGC 07-147r2 (http://portal.opengeospatial.org/files/?artifact_id=27810)
+:Specifications: `Open Geospatial Consortium Inc., OGC KML, Version 2.2.0, 2008-04-14, Reference number of this OGC
+                 project document: OGC 07-147r2 <http://portal.opengeospatial.org/files/?artifact_id=27810>`_
 
 SHP – ESRI\ |trade| Shapefile
 -----------------------------
@@ -58,8 +58,8 @@ SHP – ESRI\ |trade| Shapefile
 :Name: Shapefile
 :Version: 01
 :Date: July 1998
-:Specifications: ESRI Shapefile Technical Description, an ESRI White Paper, July 1998
-    (http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf)
+:Specifications: `ESRI Shapefile Technical Description, an ESRI White Paper, July 1998
+                 <http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf>`_
 
 GPKG – OGC Geopackage
 ---------------------
@@ -82,31 +82,39 @@ accordingly::
 
     NRN_<IDENTIFIER>_<edition>_<version>_<CONTENT>[_<MODIFICATION>].gml
 
-* NRN =                 Abbreviated title of the product.
-* <IDENTIFIER> =        Code of a province or a territory corresponding to the dataset location. Possible codes are:
-                        AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT.
-* <edition> =           Dataset edition number.
-* <version> =           Dataset version number.
-* <CONTENT> =           Dataset content identifier. Possible values are: GEOM (Geometrical entities and basic
-                        attributes), ADDR (Address attributes tables).
-* [<MODIFICATION>] =    [] = Optional. Type of modification applied to the dataset entities and attributes in
-                        comparison to previous edition. Possible values are identified in
-                        :ref:`Change Management Files`.
-* .gml =                File name extension.
+.. csv-table::
+   :header: "Property", "Description"
+   :widths: auto
+   :align: left
 
-Examples:
+   "NRN", "Abbreviated title of the product."
+   "<IDENTIFIER>", "Code of a province or a territory corresponding to the dataset location. Possible codes are: AB,
+   BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT."
+   "<edition>", "Dataset edition number."
+   "<version>", "Dataset version number."
+   "<CONTENT>", "Dataset content identifier. Possible values are: GEOM (Geometrical entities and basic attributes),
+   ADDR (Address attributes tables)."
+   "[<MODIFICATION>]", "[] = Optional. Type of modification applied to the dataset entities and attributes in
+   comparison to previous edition. Possible values are identified in :ref:`Change Management Files`."
+   ".gml", "File name extension."
 
-* NRN_AB_4_0_GEOM.gml             (Geometrical entities and basic attributes of the dataset of Alberta, edition 4,
-                                  version 0);
-* NRN_AB_4_0_ADDR.gml             (Tables of addressing attributes of the dataset of Alberta, edition 4, version 0);
-* NRN_AB_4_0_GEOM_ADDED.gml       (Geometrical entities and/or basic attributes added in the dataset of Alberta,
-                                  edition 4, version 0);
-* NRN_AB_4_0_ADDR_ADDED.gml       (Tables of the addressing attributes added in the dataset of Alberta, edition 4,
-                                  version 0).
+**Examples:**
+
+.. csv-table::
+   :header: "File Name", "Description"
+   :widths: auto
+   :align: left
+
+   "NRN_AB_4_0_GEOM.gml", "Geometrical entities and basic attributes of the dataset of Alberta, edition 4, version 0."
+   "NRN_AB_4_0_ADDR.gml", "Tables of addressing attributes of the dataset of Alberta, edition 4, version 0."
+   "NRN_AB_4_0_GEOM_ADDED.gml", "Geometrical entities and/or basic attributes added in the dataset of Alberta, edition
+   4, version 0."
+   "NRN_AB_4_0_ADDR_ADDED.gml", "Tables of the addressing attributes added in the dataset of Alberta, edition 4,
+   version 0."
 
 An XML schema (XSD file) is also provided along with a GML data file. This file defines, in a structured manner, the
 type of content, the syntax and the semantic of GML documents. The name of this file is
-NRN_<IDENTIFIER>_<edition>_<version>_<CONTENT>[_<MODIFICATION>].xsd and a reference is recorded within the GML file.
+``NRN_<IDENTIFIER>_<edition>_<version>_<CONTENT>[_<MODIFICATION>].xsd`` and a reference is recorded within the GML file.
 
 KML File Name
 -------------
@@ -116,16 +124,26 @@ KML format. The name of the KML file is structured accordingly::
 
     nrn_rrn_<identifier>_kml_en.kmz
 
-* nrn_rrn =             Abbreviated English and French product title.
-* <identifier> =        Code of a province or a territory corresponding to the dataset location. Possible codes are:
-                        ab, bc, mb, nb, nl, ns, nt, nu, on, pe, qc, sk, yt.
-* kml =                 Dataset distribution format.
-* en =                  ISO code of the dataset distribution language.
-* .kmz =                File name extension.
+.. csv-table::
+   :header: "Property", "Description"
+   :widths: auto
+   :align: left
 
-Example:
+   "nrn_rrn", "Abbreviated English and French product title."
+   "<identifier>", "Code of a province or a territory corresponding to the dataset location. Possible codes are: ab,
+   bc, mb, nb, nl, ns, nt, nu, on, pe, qc, sk, yt."
+   "kml", "Dataset distribution format."
+   "en", "ISO code of the dataset distribution language."
+   ".kmz", "File name extension."
 
-* nrn_rrn_ab_kml_en.kmz           (*Road Segment* for dataset of Alberta).
+**Example:**
+
+.. csv-table::
+   :header: "File Name", "Description"
+   :widths: auto
+   :align: left
+
+   "nrn_rrn_ab_kml_en.kmz", "*Road Segment* for dataset of Alberta."
 
 SHP File Names
 --------------
@@ -135,16 +153,20 @@ name of the SHP files is structured accordingly::
 
     NRN_<IDENTIFIER>_<edition>_<version>_<ENTITY>[_<MODIFICATION>].shp
 
-* NRN =                 Abbreviated title of the product.
-* <IDENTIFIER> =        Code of a province or a territory corresponding to the dataset location. Possible codes are:
-                        AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT.
-* <edition> =           Dataset edition number.
-* <version> =           Dataset version number.
-* <ENTITY> =            Abbreviated entity name as defined in :ref:`Datasets`.
-* [<MODIFICATION>] =    [] = Optional. Type of modification applied to the dataset entities and attributes in
-                        comparison to previous edition. Possible values are identified in
-                        :ref:`Change Management Files`.
-* .shp =                Extension of the main geometry file name.
+.. csv-table::
+   :header: "Property", "Description"
+   :widths: auto
+   :align: left
+
+   "NRN", "Abbreviated title of the product."
+   "<IDENTIFIER>", "Code of a province or a territory corresponding to the dataset location. Possible codes are: AB,
+   BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT."
+   "<edition>", "Dataset edition number."
+   "<version>", "Dataset version number."
+   "<ENTITY>", "Abbreviated entity name as defined in :ref:`Datasets`."
+   "[<MODIFICATION>]", "[] = Optional. Type of modification applied to the dataset entities and attributes in
+   comparison to previous edition. Possible values are identified in :ref:`Change Management Files`."
+   ".shp", "Extension of the main geometry file name."
 
 There are also five other files associated with the main geometry file of an entity in SHP format:
 
@@ -154,11 +176,16 @@ There are also five other files associated with the main geometry file of an ent
 * an index file (.shx) containing the offset (relative position) for each record of the main geometry file;
 * two spatial index files for the geometrical data (.sbn, .sbx).
 
-Examples:
+**Examples:**
 
-* NRN_AB_4_0_ROADSEG.shp          (Entity *Road Segment* for dataset of Alberta, edition 4, version 0);
-* NRN_AB_4_0_ROADSEG_ADDED.shp    (Geometrical entities and/or basic attributes added to *Road Segment* in dataset of
-                                  Alberta, edition 4, version 0).
+.. csv-table::
+   :header: "File Name", "Description"
+   :widths: auto
+   :align: left
+
+   "NRN_AB_4_0_ROADSEG.shp", "Entity *Road Segment* for dataset of Alberta, edition 4, version 0."
+   "NRN_AB_4_0_ROADSEG_ADDED.shp", "Geometrical entities and/or basic attributes added to *Road Segment* in dataset of
+   Alberta, edition 4, version 0."
 
 GPKG File Names
 ---------------
@@ -168,17 +195,27 @@ layers according to their geometrical representation. The name of the GPKG file 
 
     NRN_<IDENTIFIER>_<edition>_<version>_en.gpkg
 
-* NRN =                 Abbreviated title of the product.
-* <IDENTIFIER> =        Code of a province or a territory corresponding to the dataset location. Possible codes are:
-                        AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT.
-* <edition> =           Dataset edition number.
-* <version> =           Dataset version number.
-* en =                  ISO code of the dataset distribution language.
-* .gpkg =               File name extension.
+.. csv-table::
+   :header: "Property", "Description"
+   :widths: auto
+   :align: left
 
-Examples:
+   "NRN", "Abbreviated title of the product."
+   "<IDENTIFIER>", "Code of a province or a territory corresponding to the dataset location. Possible codes are: AB,
+   BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT."
+   "<edition>", "Dataset edition number."
+   "<version>", "Dataset version number."
+   "en", "ISO code of the dataset distribution language."
+   ".gpkg", "File name extension."
 
-* NRN_AB_4_0_en.gpkg              (All entities for dataset of Alberta, edition 4, version 0).
+**Examples:**
+
+.. csv-table::
+   :header: "File Name", "Description"
+   :widths: auto
+   :align: left
+
+   "NRN_AB_4_0_en.gpkg", "All entities for dataset of Alberta, edition 4, version 0."
 
 Metadata File
 -------------
@@ -189,20 +226,29 @@ is structured accordingly::
 
     nrn_rrn_<identifier>_<edition>_<version>_fgdc_en.<format>
 
-* nrn_rrn =             Abbreviated English and French product title.
-* <identifier> =        Code of a province or a territory corresponding to the dataset location. Possible codes are:
-                        ab, bc, mb, nb, nl, ns, nt, nu, on, pe, qc, sk, yt.
-* <edition> =           Dataset edition number.
-* <version> =           Dataset version number.
-* fgdc =                Metadata file format according to CSDGM standard of the Federal Geographic Data Committee
-                        (FGDC).
-* en =                  ISO code of the dataset distribution language.
-* <format> =            File name extension (xml or html).
+.. csv-table::
+   :header: "Property", "Description"
+   :widths: auto
+   :align: left
 
-Examples:
+   "nrn_rrn", "Abbreviated English and French product title."
+   "<identifier>", "Code of a province or a territory corresponding to the dataset location. Possible codes are: ab,
+   bc, mb, nb, nl, ns, nt, nu, on, pe, qc, sk, yt."
+   "<edition>", "Dataset edition number."
+   "<version>", "Dataset version number."
+   "fgdc", "Metadata file format according to CSDGM standard of the Federal Geographic Data Committee (FGDC)."
+   "en", "ISO code of the dataset distribution language."
+   "<format>", "File name extension (xml or html)."
 
-* nrn_rrn_ab_4_0_fgdc_en.xml      (Metadata file for dataset of Alberta, edition 4, version 0 in FGDC/XML format);
-* nrn_rrn_ab_4_0_fgdc_en.html     (Metadata file for dataset of Alberta, edition 4, version 0 in FGDC/HTML format).
+**Examples:**
+
+.. csv-table::
+   :header: "File Name", "Description"
+   :widths: auto
+   :align: left
+
+   "nrn_rrn_ab_4_0_fgdc_en.xml", "Metadata file for dataset of Alberta, edition 4, version 0 in FGDC/XML format."
+   "nrn_rrn_ab_4_0_fgdc_en.html", "Metadata file for dataset of Alberta, edition 4, version 0 in FGDC/HTML format."
 
 List of distribution file names
 -------------------------------
@@ -231,8 +277,8 @@ The extension of the file name corresponds to the distribution format.
    "Street and Place Names", "StreetPlaceNames", "STRPLANAME", "Table\ :sup:`**`\ "
    "Toll Point", "TollPoint", "TOLLPOINT", "Point"
 
-:sup:`*` KML content (simplified version of the dataset).
-:sup:`*` Attributes file (.dbf) in SHP format and entities without geometry in GML format.
+| :sup:`*` KML content (simplified version of the dataset).
+| :sup:`*` Attributes file (.dbf) in SHP format and entities without geometry in GML format.
 
 .. _Change Management Files:
 
@@ -253,8 +299,8 @@ type. The extension of the file name corresponds to the distribution format.
    "Modified", "<GML/SHP File Name>_MODIFIED"
    "Retired", "<GML/SHP File Name>_RETIRED"
 
-A readme text file named: README_<IDENTIFIER>.txt that identifies the method used for the *follow-up of the geometrical
-modifications* is provided with the dataset.
+A readme text file named: ``README_<IDENTIFIER>.txt`` that identifies the method used for the *follow-up of the
+geometrical modifications* is provided with the dataset.
 
 Attributes Identification
 =========================
@@ -262,8 +308,8 @@ Attributes Identification
 The attributes common to all entities of the NRN product are listed in the first table. The attributes specific to each
 entity are presented in the following subsection.
 
-The data type for all distribution formats is either: C(c) for character or N(n,d) for number (c = number of
-characters, n = total number of digits, d = number of digits in decimal).
+The data type for all distribution formats is either: ``C(c)`` for character or ``N(n,d)`` for number (``c`` = number
+of characters, ``n`` = total number of digits, ``d`` = number of digits in decimal).
 
 Attributes Common to All Entities (Except Alternate Name Link)
 --------------------------------------------------------------
