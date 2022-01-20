@@ -27,10 +27,10 @@ Missing Data
 
 This section applies to all attributes for all feature classes.
 
-"-1" (numeric) / "Unknown" (character) is used when a value is unknown, missing, or invalid (not within the domain of
-the attribute).
+``-1`` (numeric) / ``Unknown`` (character) is used when a value is unknown, missing, or invalid (not within the domain
+of the attribute).
 
-.. _Object Metadata:
+.. _Object Metadata en:
 
 Object Metadata
 ===============
@@ -43,7 +43,7 @@ Acquisition Technique
 
 The type of data source or technique used to populate (create or revise) the dataset.
 
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
@@ -68,7 +68,7 @@ Coverage
 This value indicates if this set of metadata covers the full length of the Network Linear Element or only a portion of
 it.
 
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
@@ -83,16 +83,16 @@ The date of data creation.
 
 :Domain: A date in the format YYYYMMDD. If the month or the day is unknown, corresponding characters are left blank.
 
-    Examples: 20060630, 200606, 2006.
+         | Examples: 20060630, 200606, 2006.
+
+.. _Dataset Name Domain en:
 
 Dataset Name
 ------------
 
 Province or Territory covered by the dataset.
 
-.. _Dataset Name Domain:
-
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Code", "Label"
    :widths: auto
    :align: left
@@ -123,7 +123,7 @@ Provider
 
 The affiliation of the organization that generated (created or revised) the object.
 
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
@@ -140,7 +140,7 @@ The date of data revision.
 
 :Domain: A date in the format YYYYMMDD. If the month or the day is unknown, corresponding characters are left blank.
 
-    Examples: 20060630, 200606, 2006.
+         | Examples: 20060630, 200606, 2006.
 
 Standard Version
 ----------------
@@ -164,9 +164,11 @@ Alternate Street Name NID (left, right)
 The identifier used to link an address range to its alternate street name. A specific value is defined for the left and
 right sides of the Road Element.
 
-:Domain: A UUID or "None" when no value applies.
+:Domain: A UUID or ``None`` when no value applies.
 
-    Example: 69822b23d217494896014e57a2edb8ac
+         | Example: 69822b23d217494896014e57a2edb8ac
+
+.. _Digitizing Direction Flag Domain en:
 
 Digitizing Direction Flag (left, right)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -174,9 +176,7 @@ Digitizing Direction Flag (left, right)
 Indicates if the attribute event follows the same direction as the digitizing of the Road Element. A specific value is
 defined for the left and right sides of the Road Element.
 
-.. _Digitizing Direction Flag Domain:
-
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
@@ -199,16 +199,16 @@ First House Number Suffix (left, right)
 A non-integer value, such as a fraction (e.g. 1⁄4) or a character (e.g. A) that sometimes follows the house number
 address value. A specific value is defined for the left and right sides of the Road Element.
 
-:Domain: A non-integer value or "None" when no value applies.
+:Domain: A non-integer value or ``None`` when no value applies.
+
+.. _House Number Type Domain en:
 
 First House Number Type (left, right)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Method used to populate the address range. A specific value is defined for the left and right sides of the Road Element.
 
-.. _House Number Type Domain:
-
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
@@ -229,7 +229,7 @@ House Number Structure (left, right)
 The type of house numbering (or address numbering) method applied to one side of a particular Road Element. A specific
 value is defined for the left and right sides of the Road Element.
 
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
@@ -263,14 +263,14 @@ Last House Number Suffix (left, right)
 A non-integer value, such as a fraction (e.g. 1⁄4) or a character (e.g. A) that sometimes follows the house number
 address value. A specific value is defined for the left and right sides of the Road Element.
 
-:Domain: A non-integer value or "None" when no value applies.
+:Domain: A non-integer value or ``None`` when no value applies.
 
 Last House Number Type (left, right)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Method used to populate the address range. A specific value is defined for the left and right sides of the Road Element.
 
-:Domain: Identical to :ref:`House Number Type Domain`.
+:Domain: Identical to :ref:`House Number Type Domain en`.
 
 NID
 ^^^
@@ -279,7 +279,7 @@ A national unique identifier.
 
 :Domain: A UUID.
 
-    Example: 69822b23d217494896014e57a2edb8ac
+         | Example: 69822b23d217494896014e57a2edb8ac
 
 Official Street Name NID (left, right)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -287,9 +287,9 @@ Official Street Name NID (left, right)
 The identifier used to link an address range to its recognized official street name. A specific value is defined for
 the left and right sides of the Road Element.
 
-:Domain: A UUID or "None" when no value applies.
+:Domain: A UUID or ``None`` when no value applies.
 
-    Example: 69822b23d217494896014e57a2edb8ac
+         | Example: 69822b23d217494896014e57a2edb8ac
 
 Reference System Indicator (left, right)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -297,7 +297,7 @@ Reference System Indicator (left, right)
 An indication of whether the physical address of all or a portion of a Road Element is based on a particular addressing
 system. A specific value is defined for the left and right sides of the Road Element.
 
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
@@ -312,7 +312,7 @@ system. A specific value is defined for the left and right sides of the Road Ele
 Object Metadata
 ^^^^^^^^^^^^^^^
 
-Refer to the attributes described in :ref:`Object Metadata`.
+Refer to the attributes described in :ref:`Object Metadata en`.
 
 Alternate Name Link
 ===================
@@ -330,7 +330,7 @@ A national unique identifier.
 
 :Domain: A UUID.
 
-    Example: 69822b23d217494896014e57a2edb8ac
+         | Example: 69822b23d217494896014e57a2edb8ac
 
 Street Name NID
 ^^^^^^^^^^^^^^^
@@ -339,12 +339,12 @@ The NID of the non official street and place name.
 
 :Domain: A UUID.
 
-    Example: 69822b23d217494896014e57a2edb8ac
+         | Example: 69822b23d217494896014e57a2edb8ac
 
 Object Metadata
 ^^^^^^^^^^^^^^^
 
-Refer to the attributes described in :ref:`Object Metadata`.
+Refer to the attributes described in :ref:`Object Metadata en`.
 
 Blocked Passage
 ===============
@@ -359,7 +359,7 @@ Blocked Passage Type
 
 The type of blocked passage as an indication of the fact whether it is removable.
 
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
@@ -376,7 +376,7 @@ A national unique identifier.
 
 :Domain: A UUID.
 
-    Example: 69822b23d217494896014e57a2edb8ac
+         | Example: 69822b23d217494896014e57a2edb8ac
 
 Road Element NID
 ^^^^^^^^^^^^^^^^
@@ -385,12 +385,12 @@ The NID of the Road Element on which the point geometry is located.
 
 :Domain: A UUID.
 
-    Example: 69822b23d217494896014e57a2edb8ac
+         | Example: 69822b23d217494896014e57a2edb8ac
 
 Object Metadata
 ^^^^^^^^^^^^^^^
 
-Refer to the attributes described in :ref:`Object Metadata`.
+Refer to the attributes described in :ref:`Object Metadata en`.
 
 Ferry Connection Segment
 ========================
@@ -400,14 +400,14 @@ The average route a ferryboat takes when transporting vehicles between two fixed
 Attribute Section
 -----------------
 
+.. _Closing Period Domain en:
+
 Closing Period
 ^^^^^^^^^^^^^^
 
 The period in which the road or ferry connection is not available to the public.
 
-.. _Closing Period Domain:
-
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
@@ -424,15 +424,15 @@ A unique identifier within a dataset assigned to each Ferry Connection Segment.
 
 :Domain: [1..n]
 
+.. _Functional Road Class Domain en:
+
 Functional Road Class
 ^^^^^^^^^^^^^^^^^^^^^
 
 A classification based on the importance of the role that the Road Element or Ferry Connection performs in the
 connectivity of the total road network.
 
-.. _Functional Road Class Domain:
-
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
@@ -466,7 +466,7 @@ A national unique identifier.
 
 :Domain: A UUID.
 
-    Example: 69822b23d217494896014e57a2edb8ac
+         | Example: 69822b23d217494896014e57a2edb8ac
 
 Route Name English (1, 2, 3, 4)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -475,7 +475,7 @@ The English version of a name of a particular route in a given road network as a
 agency. A particular Road Segment or Ferry Connection Segment can belong to more than one named route. In such cases,
 it has multiple route name attributes.
 
-:Domain: A complete English route name value such as "Trans-Canada Highway" or "None" when no value applies.
+:Domain: A complete English route name value such as ``Trans-Canada Highway`` or ``None`` when no value applies.
 
 Route Name French (1, 2, 3, 4)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -484,7 +484,7 @@ The French version of a name of a particular route in a given road network as at
 agency. A particular Road Segment or Ferry Connection Segment can belong to more than one named route. In such cases,
 it has multiple route name attributes.
 
-:Domain: A complete French route name value such as "Autoroute transcanadienne" or "None" when no value applies.
+:Domain: A complete French route name value such as ``Autoroute transcanadienne`` or ``None`` when no value applies.
 
 Route Number (1, 2, 3, 4, 5)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -493,15 +493,15 @@ The ID number of a particular route in a given road network as attributed by a n
 particular Road Segment or Ferry Connection Segment can belong to more than one numbered route. In such cases, it has
 multiple route number attributes.
 
-:Domain: A route number including possible associated non-integer characters such as "A" or "None" when no value
-    applies.
+:Domain: A route number including possible associated non-integer characters such as ``A`` or ``None`` when no value
+         applies.
 
-    Examples: 1, 1A, 230-A, 430-28.
+         | Examples: 1, 1A, 230-A, 430-28.
 
 Object Metadata
 ^^^^^^^^^^^^^^^
 
-Refer to the attributes described in :ref:`Object Metadata`.
+Refer to the attributes described in :ref:`Object Metadata en`.
 
 Junction
 ========
@@ -520,16 +520,17 @@ Exit Number
 
 The ID number of an exit on a controlled access thoroughfare that has been assigned by an administrating body.
 
-:Domain: An ID number including possible associated non-integer characters such as "A" or "None" when no value applies.
+:Domain: An ID number including possible associated non-integer characters such as ``A`` or ``None`` when no value
+         applies.
 
-    Examples: 11, 11A, 11-A, 80-EST, 80-E, 80E.
+         | Examples: 11, 11A, 11-A, 80-EST, 80-E, 80E.
 
 Junction Type
 ^^^^^^^^^^^^^
 
 The classification of a junction.
 
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
@@ -548,12 +549,12 @@ A national unique identifier.
 
 :Domain: A UUID.
 
-    Example: 69822b23d217494896014e57a2edb8ac
+         | Example: 69822b23d217494896014e57a2edb8ac
 
 Object Metadata
 ^^^^^^^^^^^^^^^
 
-Refer to the attributes described in :ref:`Object Metadata`.
+Refer to the attributes described in :ref:`Object Metadata en`.
 
 Road Segment
 ============
@@ -570,32 +571,33 @@ Address Range Digitizing Direction Flag (left, right)
 Indicates if the attribute event follows the same direction as the digitizing of the Road Element. A specific value is
 defined for the left and right sides of the Road Element.
 
-:Domain: Identical to :ref:`Digitizing Direction Flag Domain`.
+:Domain: Identical to :ref:`Digitizing Direction Flag Domain en`.
 
 Address Range NID
 ^^^^^^^^^^^^^^^^^
 
 A UUID assigned to each particular block face address ranges.
 
-:Domain: A UUID or "None" when no value applies.
+:Domain: A UUID or ``None`` when no value applies.
 
-    Example: 69822b23d217494896014e57a2edb8ac
+         | Example: 69822b23d217494896014e57a2edb8ac
 
 Closing Period
 ^^^^^^^^^^^^^^
 
 The period in which the road or ferry connection is not available to the public.
 
-:Domain: Identical to :ref:`Closing Period Domain`.
+:Domain: Identical to :ref:`Closing Period Domain en`.
 
 Exit Number
 ^^^^^^^^^^^
 
 The ID number of an exit on a controlled access thoroughfare that has been assigned by an administrating body.
 
-:Domain: An ID number including possible associated non-integer characters such as "A" or "None" when no value applies.
+:Domain: An ID number including possible associated non-integer characters such as ``A`` or ``None`` when no value
+         applies.
 
-    Examples: 11, 11A, 11-A, 80-EST, 80-E, 80E.
+         | Examples: 11, 11A, 11-A, 80-EST, 80-E, 80E.
 
 First House Number (left, right)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -603,7 +605,7 @@ First House Number (left, right)
 The first house number address value along a particular side (left or right) of a Road Element. A specific value is
 defined for the left and right sides of the Road Element.
 
-:Domain: [-1..n] The value "0" is used when no value applies.
+:Domain: [-1..n] The value ``0`` is used when no value applies.
 
 Functional Road Class
 ^^^^^^^^^^^^^^^^^^^^^
@@ -611,7 +613,7 @@ Functional Road Class
 A classification based on the importance of the role that the Road Element or Ferry Connection performs in the
 connectivity of the total road network.
 
-:Domain: Identical to :ref:`Functional Road Class Domain`.
+:Domain: Identical to :ref:`Functional Road Class Domain en`.
 
 Last House Number (left, right)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -619,7 +621,7 @@ Last House Number (left, right)
 The last house number address value along a particular side (left or right) of a Road Element. A specific value is
 defined for the left and right sides of the Road Element.
 
-:Domain: [-1..n] The value "0" is used when no value applies.
+:Domain: [-1..n] The value ``0`` is used when no value applies.
 
 NID
 ^^^
@@ -628,7 +630,7 @@ A national unique identifier.
 
 :Domain: A UUID.
 
-    Example: 69822b23d217494896014e57a2edb8ac
+         | Example: 69822b23d217494896014e57a2edb8ac
 
 Number of Lanes
 ^^^^^^^^^^^^^^^
@@ -644,7 +646,7 @@ Official name of an administrative area, district or other named area which is r
 name.
 
 :Domain: Derived from the Street and place names table. A specific value is defined for the left and right sides of the
-    Road Element. "None" when no value applies.
+         Road Element. ``None`` when no value applies.
 
 Official Street Name Concatenated (left, right)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -653,14 +655,14 @@ A concatenation of the officially recognized Directional prefix, Street type pre
 body, Street type suffix, Directional suffix and Muni quadrant values.
 
 :Domain: Derived from the Street and place names table. A specific value is defined for the left and right sides of the
-    Road Element. "None" when no value applies.
+         Road Element. ``None`` when no value applies.
 
 Paved Road Surface Type
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 The type of surface a paved Road Element has.
 
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
@@ -675,7 +677,7 @@ Pavement Status
 
 An indication of improvement applied to a Road surface.
 
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
@@ -689,7 +691,7 @@ Road Jurisdiction
 The agency with the responsibility/authority to ensure maintenance occurs but is not necessarily the one who undertakes
 the maintenance directly.
 
-:Domain: The Agency name or "None" when no value applies.
+:Domain: The Agency name or ``None`` when no value applies.
 
 Road Segment ID
 ^^^^^^^^^^^^^^^
@@ -705,7 +707,7 @@ The English version of a name of a particular route in a given road network as a
 agency. A particular Road Segment or Ferry Connection Segment can belong to more than one named route. In such cases,
 it has multiple route name attributes.
 
-:Domain: A complete English route name value such as "Trans-Canada Highway" or "None" when no value applies.
+:Domain: A complete English route name value such as ``Trans-Canada Highway`` or ``None`` when no value applies.
 
 Route Name French (1, 2, 3, 4)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -714,7 +716,7 @@ The French version of a name of a particular route in a given road network as at
 agency. A particular Road Segment or Ferry Connection Segment can belong to more than one named route. In such cases,
 it has multiple route name attributes.
 
-:Domain: A complete French route name value such as "Autoroute transcanadienne" or "None" when no value applies.
+:Domain: A complete French route name value such as ``Autoroute transcanadienne`` or ``None`` when no value applies.
 
 Route Number (1, 2, 3, 4, 5)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -723,10 +725,10 @@ The ID number of a particular route in a given road network as attributed by a n
 particular Road Segment or Ferry Connection Segment can belong to more than one numbered route. In such cases, it has
 multiple route number attributes.
 
-:Domain: A route number including possible associated non-integer characters such as "A" or "None" when no value
-    applies.
+:Domain: A route number including possible associated non-integer characters such as ``A`` or ``None`` when no value
+         applies.
 
-    Examples: 1, 1A, 230-A, 430-28.
+         | Examples: 1, 1A, 230-A, 430-28.
 
 Speed Restriction
 ^^^^^^^^^^^^^^^^^
@@ -741,30 +743,30 @@ Structure ID
 A national unique identifier assigned to the Road Segment or the set of adjoining Road Segments forming a structure.
 This identifier allows for the reconstitution of a structure that is fragmented by Junctions.
 
-:Domain: A UUID or "None" when no value applies.
+:Domain: A UUID or ``None`` when no value applies.
 
-    Example: 69822b23d217494896014e57a2edb8ac
+         | Example: 69822b23d217494896014e57a2edb8ac
 
 Structure Name English
 ^^^^^^^^^^^^^^^^^^^^^^
 
 The English version of the name of a road structure as assigned by a national or subnational agency.
 
-:Domain: A complete structure name or "None" when no value applies.
+:Domain: A complete structure name or ``None`` when no value applies.
 
 Structure Name French
 ^^^^^^^^^^^^^^^^^^^^^
 
 The French version of the name of a road structure as assigned by a national or subnational agency.
 
-:Domain: A complete structure name or "None" when no value applies.
+:Domain: A complete structure name or ``None`` when no value applies.
 
 Structure Type
 ^^^^^^^^^^^^^^
 
 The classification of a structure.
 
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
@@ -790,7 +792,7 @@ Traffic Direction
 
 The direction(s) of traffic flow allowed on the road.
 
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
@@ -806,7 +808,7 @@ Unpaved Road Surface Type
 
 The type of surface an unpaved Road Element has.
 
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
@@ -819,7 +821,7 @@ The type of surface an unpaved Road Element has.
 Object Metadata
 ^^^^^^^^^^^^^^^
 
-Refer to the attributes described in :ref:`Object Metadata`.
+Refer to the attributes described in :ref:`Object Metadata en`.
 
 Street and Place Names
 ======================
@@ -830,15 +832,15 @@ other named area which is required for uniqueness of the street name.
 Attribute Section
 -----------------
 
+.. _Street Direction Domain en:
+
 Directional Prefix
 ^^^^^^^^^^^^^^^^^^
 
 A geographic direction that is part of the street name and precedes the street name body or, if appropriate, the street 
 type prefix.
 
-.. _Street Direction Domain:
-
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
@@ -869,7 +871,7 @@ Directional Suffix
 A geographic direction that is part of the street name and succeeds the street name body or, if appropriate, the street
 type suffix.
 
-:Domain: Identical to :ref:`Street Direction Domain`.
+:Domain: Identical to :ref:`Street Direction Domain en`.
 
 Muni Quadrant
 ^^^^^^^^^^^^^
@@ -877,7 +879,7 @@ Muni Quadrant
 The attribute Muni quadrant is used in some addresses much like the directional attributes where the town is divided
 into sections based on major east-west and north-south divisions. The effect is as if multiple directional were used.
 
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
@@ -895,7 +897,7 @@ A national unique identifier.
 
 :Domain: A UUID.
 
-    Example: 69822b23d217494896014e57a2edb8ac
+         | Example: 69822b23d217494896014e57a2edb8ac
 
 Place Name
 ^^^^^^^^^^
@@ -904,7 +906,7 @@ Name of an administrative area, district or other named area which is required f
 
 :Domain: The complete name of the place.
 
-    Examples: Arnold's Cove, Saint-Jean-Baptiste-de-l'Îsle-Verte, Sault Ste. Marie, Grand-Sault, Grand Falls.
+         | Examples: Arnold's Cove, Saint-Jean-Baptiste-de-l'Îsle-Verte, Sault Ste. Marie, Grand-Sault, Grand Falls.
 
 Place Type
 ^^^^^^^^^^
@@ -913,21 +915,21 @@ Expression specifying the type of place.
 
 :Domain: Conforms to Census Subdivision (CSD) types and is periodically updated to reflect changes in those values.
 
-    Examples: C (City / Cité), IRI (Indian reserve / Réserve indienne), M (Municipality / Municipalité).
+         | Examples: C (City / Cité), IRI (Indian reserve / Réserve indienne), M (Municipality / Municipalité).
 
 Province
 ^^^^^^^^
 
 Province or Territory where the place is located.
 
-:Domain: Identical to :ref:`Dataset Name Domain`.
+:Domain: Identical to :ref:`Dataset Name Domain en`.
 
 Street Name Article
 ^^^^^^^^^^^^^^^^^^^
 
 Article(s) that is/are part of the street name and located at the beginning.
 
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Label", "Definition"
    :widths: auto
    :align: left
@@ -959,9 +961,11 @@ Street Name Body
 The portion of the street name (either official or alternate) that has the most identifying power excluding street type
 and directional prefixes or suffixes and street name articles.
 
-:Domain: The complete street name body or "None" when no value applies.
+:Domain: The complete street name body or ``None`` when no value applies.
 
-    Examples: Capitale, Trésor, Golf, Abbott, Abbott's, Main, Church, Park, Bread and Cheese.
+         | Examples: Capitale, Trésor, Golf, Abbott, Abbott's, Main, Church, Park, Bread and Cheese.
+
+.. _Street Type Domain en:
 
 Street Type Prefix
 ^^^^^^^^^^^^^^^^^^
@@ -969,9 +973,11 @@ Street Type Prefix
 A part of the street name of a Road Element identifying the street type. A prefix precedes the street name body of a 
 Road Element.
 
-.. _Street Type Domain:
+.. admonition:: Note
 
-.. csv-table:: Domain (new values are periodically added):
+    New values are periodically added.
+
+.. csv-table::
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
@@ -1256,12 +1262,12 @@ Street Type Suffix
 A part of the street name of a Road Element identifying the street type. A suffix follows the street name body of a
 Road Element.
 
-:Domain: Identical to :ref:`Street Type Domain`.
+:Domain: Identical to :ref:`Street Type Domain en`.
 
 Object Metadata
 ^^^^^^^^^^^^^^^
 
-Refer to the attributes described in :ref:`Object Metadata`.
+Refer to the attributes described in :ref:`Object Metadata en`.
 
 Toll Point
 ==========
@@ -1278,7 +1284,7 @@ A national unique identifier.
 
 :Domain: A UUID.
 
-    Example: 69822b23d217494896014e57a2edb8ac
+         | Example: 69822b23d217494896014e57a2edb8ac
 
 Road Element NID
 ^^^^^^^^^^^^^^^^
@@ -1287,14 +1293,14 @@ The NID of the Road Element on which the point geometry is located.
 
 :Domain: A UUID.
 
-    Example: 69822b23d217494896014e57a2edb8ac
+         | Example: 69822b23d217494896014e57a2edb8ac
 
 Toll Point Type
 ^^^^^^^^^^^^^^^
 
 The type of toll point.
 
-.. csv-table:: Domain:
+.. csv-table::
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
@@ -1309,4 +1315,4 @@ The type of toll point.
 Object Metadata
 ^^^^^^^^^^^^^^^
 
-Refer to the attributes described in :ref:`Object Metadata`.
+Refer to the attributes described in :ref:`Object Metadata en`.

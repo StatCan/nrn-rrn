@@ -28,10 +28,10 @@ Données manquantes
 
 Cette section s'applique à tous les attributs de toutes les entités.
 
-« -1 » (nombre) / « Inconnu » (caractère) est utilisé lorsqu'une valeur est inconnue, manquante ou invalide (pas dans
+``-1`` (nombre) / ``Inconnu`` (caractère) est utilisé lorsqu'une valeur est inconnue, manquante ou invalide (pas dans
 le domaine de l'attribut).
 
-.. _Object Metadata:
+.. _Object Metadata fr:
 
 Métadonnées d'objet
 ===================
@@ -44,7 +44,7 @@ Couverture
 
 Cette valeur indique si les métadonnées s'appliquent à tout l'Élément linéaire du réseau ou à une portion de celui-ci.
 
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Code", "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -60,7 +60,7 @@ La date de création des données.
 :Domaine: Une date selon le format AAAAMMJJ. Si le mois ou le jour est inconnu, les caractères correspondants sont
           laissés vides.
 
-    Exemples : 20060630, 200606, 2006.
+          | Exemples : 20060630, 200606, 2006.
 
 Date révision
 -------------
@@ -70,14 +70,14 @@ La date de révision des données.
 :Domaine: Une date selon le format AAAAMMJJ. Si le mois ou le jour est inconnu, les caractères correspondants sont
           laissés vides.
 
-    Exemples : 20060630, 200606, 2006.
+          | Exemples : 20060630, 200606, 2006.
 
 Fournisseur
 -----------
 
 L'affiliation de l'organisme qui a généré (acquis ou révisé) l'objet.
 
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Code", "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -87,14 +87,14 @@ L'affiliation de l'organisme qui a généré (acquis ou révisé) l'objet.
    3, "Provincial / Territorial", "Département ou agence provincial / territorial."
    4, "Municipal", "Département ou agence municipal."
 
+.. _Dataset Name Domain fr:
+
 Nom jeu de données
 ------------------
 
 Province ou territoire couvert par le jeu de données.
 
-.. _Dataset Name Domain:
-
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Code", "Étiquette"
    :widths: auto
    :align: left
@@ -125,7 +125,7 @@ Technique acquisition
 
 Le type de source ou la technique utilisé pour acquérir (création ou révision) les données.
 
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Code", "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -167,7 +167,7 @@ Un identifiant national unique.
 
 :Domaine: Un IDUU.
 
-    Exemple : 69822b23d217494896014e57a2edb8ac
+          | Exemple : 69822b23d217494896014e57a2edb8ac
 
 IDN nom de rue non officiel (gauche, droite)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -175,9 +175,9 @@ IDN nom de rue non officiel (gauche, droite)
 L'identifiant utilisé pour lier l'intervalle d'adresse à son ou ses noms de rue non reconnu(s) officiellement. Une
 valeur spécifique est définie pour les côtés gauche et droit de l'Élément routier.
 
-:Domaine: Un IDUU ou « Aucun » quand aucune valeur ne s'applique.
+:Domaine: Un IDUU ou ``Aucun`` quand aucune valeur ne s'applique.
 
-    Exemple : 69822b23d217494896014e57a2edb8ac
+          | Exemple : 69822b23d217494896014e57a2edb8ac
 
 IDN nom de rue officiel (gauche, droite)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -185,9 +185,11 @@ IDN nom de rue officiel (gauche, droite)
 L'identifiant utilisé pour lier l'intervalle d'adresse à son nom de rue reconnu officiellement. Une valeur spécifique
 est définie pour les côtés gauche et droit de l'Élément routier.
 
-:Domaine: Un IDUU ou « Aucun » quand aucune valeur ne s'applique.
+:Domaine: Un IDUU ou ``Aucun`` quand aucune valeur ne s'applique.
 
-    Exemple : 69822b23d217494896014e57a2edb8ac
+          | Exemple : 69822b23d217494896014e57a2edb8ac
+
+.. _Digitizing Direction Flag Domain fr:
 
 Indicateur sens numérisation (gauche, droite)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -195,9 +197,7 @@ Indicateur sens numérisation (gauche, droite)
 Indique si l'événement attributif est dans le même sens que celui de la numérisation de l'Élément routier. Une valeur
 spécifique est définie pour les côtés gauche et droit de l'Élément routier.
 
-.. _Digitizing Direction Flag Domain:
-
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Code", "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -212,7 +212,7 @@ Indicateur système référence (gauche, droite)
 Indicateur qui précise si l'adresse physique de tout Élément routier ou d'une partie de celui-ci est basé sur un
 système particulier d'adressage. Une valeur spécifique est définie pour les côtés gauche et droit de l'Élément routier.
 
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Code", "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -230,7 +230,7 @@ Numéro dernière maison (gauche, droite)
 Adresse du dernier bâtiment situé le long d'un côté particulier (gauche ou droit) d'un Élément routier. Une valeur
 spécifique est définie pour les côtés gauche et droit de l'Élément routier.
 
-:Domaine: [-1..n] La valeur « 0 » indique qu'aucune valeur ne s'applique.
+:Domaine: [-1..n] La valeur ``0`` indique qu'aucune valeur ne s'applique.
 
 Numéro première maison (gauche, droite)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -238,7 +238,7 @@ Numéro première maison (gauche, droite)
 Adresse du premier bâtiment situé le long d'un côté particulier (gauche ou droit) d'un Élément routier. Une valeur
 spécifique est définie pour les côtés gauche et droit de l'Élément routier.
 
-:Domaine: [-1..n] La valeur « 0 » indique qu'aucune valeur ne s'applique.
+:Domaine: [-1..n] La valeur ``0`` indique qu'aucune valeur ne s'applique.
 
 Structure numéro maison (gauche, droite)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -246,7 +246,7 @@ Structure numéro maison (gauche, droite)
 Type de numérotation de maisons (ou numéro d'adresse) appliqué à un côté d'un Élément routier particulier. Une valeur
 spécifique est définie pour les côtés gauche et droit de l'Élément routier.
 
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Code", "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -274,7 +274,7 @@ Suffixe numéro dernière maison (gauche, droite)
 Valeur non-entière telle une fraction (exemple : 1⁄4) ou un caractère alphabétique (exemple : A) qui suit à l'occasion
 le numéro civique d'une maison. Une valeur spécifique est définie pour les côtés gauche et droit de l'Élément routier.
 
-:Domaine: Une valeur non entière ou « Aucun » quand aucune valeur ne s'applique.
+:Domaine: Une valeur non entière ou ``Aucun`` quand aucune valeur ne s'applique.
 
 Suffixe numéro première maison (gauche, droite)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -282,7 +282,9 @@ Suffixe numéro première maison (gauche, droite)
 Valeur non-entière telle une fraction (exemple : 1⁄4) ou un caractère alphabétique (exemple : A) qui suit à l'occasion
 le numéro civique d'une maison. Une valeur spécifique est définie pour les côtés gauche et droit de l'Élément routier.
 
-:Domaine: Une valeur non entière ou « Aucun » quand aucune valeur ne s'applique.
+:Domaine: Une valeur non entière ou ``Aucun`` quand aucune valeur ne s'applique.
+
+.. _House Number Type Domain fr:
 
 Type numérotation dernière maison (gauche, droite)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -290,9 +292,7 @@ Type numérotation dernière maison (gauche, droite)
 Méthode utilisée pour acquérir l'intervalle d'adresse. Une valeur spécifique est définie pour les côtés gauche et droit
 de l'Élément routier.
 
-.. _House Number Type Domain:
-
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Code", "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -314,12 +314,12 @@ Type numérotation première maison (gauche, droite)
 Méthode utilisée pour acquérir l'intervalle d'adresse. Une valeur spécifique est définie pour les côtés gauche et droit
 de l'Élément routier.
 
-:Domaine: Identique à :ref:`House Number Type Domain`.
+:Domaine: Identique à :ref:`House Number Type Domain fr`.
 
 Métadonnées d'objet
 ^^^^^^^^^^^^^^^^^^^
 
-Référer aux attributs décrits dans la :ref:`Object Metadata`.
+Référer aux attributs décrits dans la :ref:`Object Metadata fr`.
 
 Jonction
 ========
@@ -342,7 +342,7 @@ Un identifiant national unique.
 
 :Domaine: Un IDUU.
 
-    Exemple : 69822b23d217494896014e57a2edb8ac
+          | Exemple : 69822b23d217494896014e57a2edb8ac
 
 Numéro de sortie
 ^^^^^^^^^^^^^^^^
@@ -350,17 +350,17 @@ Numéro de sortie
 Le numéro d'identifiant d'une sortie sur une voie de circulation à accès contrôlé qui a été attribué par une autorité
 administrative.
 
-:Domaine: Un numéro d'identifiant y compris les caractères non entiers tels que « A » qui y sont parfois associés ou
-    « Aucun » quand aucune valeur ne s'applique.
+:Domaine: Un numéro d'identifiant y compris les caractères non entiers tels que ``A`` qui y sont parfois associés ou
+          ``Aucun`` quand aucune valeur ne s'applique.
 
-    Exemples : 11, 11A, 11-A, 80-EST, 80-E, 80E.
+          | Exemples : 11, 11A, 11-A, 80-EST, 80-E, 80E.
 
 Type jonction
 ^^^^^^^^^^^^^
 
 La classification du type de jonction.
 
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Code", "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -376,7 +376,7 @@ La classification du type de jonction.
 Métadonnées d'objet
 ^^^^^^^^^^^^^^^^^^^
 
-Référer aux attributs décrits dans la :ref:`Object Metadata`.
+Référer aux attributs décrits dans la :ref:`Object Metadata fr`.
 
 Lien nom non officiel
 =====================
@@ -394,7 +394,7 @@ Un identifiant national unique.
 
 :Domaine: Un IDUU.
 
-    Exemple : 69822b23d217494896014e57a2edb8ac
+          | Exemple : 69822b23d217494896014e57a2edb8ac
 
 IDN nom de rue
 ^^^^^^^^^^^^^^
@@ -403,12 +403,12 @@ L'IDN du nom rue et de lieu non officiel.
 
 :Domaine: Un IDUU.
 
-    Exemple : 69822b23d217494896014e57a2edb8ac
+          | Exemple : 69822b23d217494896014e57a2edb8ac
 
 Métadonnées d'objet
 ^^^^^^^^^^^^^^^^^^^
 
-Référer aux attributs décrits dans la :ref:`Object Metadata`.
+Référer aux attributs décrits dans la :ref:`Object Metadata fr`.
 
 Noms de rue et de lieu
 ======================
@@ -424,7 +424,7 @@ Article nom rue
 
 Article(s) qui fait (font) partie du nom d'une rue et qui précède immédiatement le Corps nom rue.
 
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -456,9 +456,9 @@ Corps nom rue
 La portion, la plus significative, d'un nom de rue (officiel ou non) excluant les préfixes ou suffixes de types de rue
 et de direction ainsi que les articles de nom de rue.
 
-:Domaine: La valeur complète du Corps nom rue ou « Aucun » quand aucune valeur ne s'applique.
+:Domaine: La valeur complète du Corps nom rue ou ``Aucun`` quand aucune valeur ne s'applique.
 
-    Exemples : Capitale, Trésor, Golf, Abbott, Abbott's, Main, Church, Park, Bread and Cheese.
+          | Exemples : Capitale, Trésor, Golf, Abbott, Abbott's, Main, Church, Park, Bread and Cheese.
 
 IDN
 ^^^
@@ -467,7 +467,7 @@ Un identifiant national unique.
 
 :Domaine: Un IDUU.
 
-    Exemple : 69822b23d217494896014e57a2edb8ac
+          | Exemple : 69822b23d217494896014e57a2edb8ac
 
 Muni quadrant
 ^^^^^^^^^^^^^
@@ -476,7 +476,7 @@ L'attribut Muni quadrant est utilisé dans certains noms de rue comme un attribu
 qui sont divisées en sections selon des axes est-ouest et nord-sud. Il en résulte l'impression que le nom de rue
 contient plusieurs attributs directionnels.
 
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Code", "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -495,7 +495,9 @@ de rue.
 
 :Domaine: Le nom complet d'un lieu.
 
-    Exemples : Arnold's Cove, Saint-Jean-Baptiste-de-l'Îsle-Verte, Sault Ste. Marie, Grand-Sault, Grand Falls.
+          | Exemples : Arnold's Cove, Saint-Jean-Baptiste-de-l'Îsle-Verte, Sault Ste. Marie, Grand-Sault, Grand Falls.
+
+.. _Street Direction Domain fr:
 
 Préfixe direction
 ^^^^^^^^^^^^^^^^^
@@ -503,9 +505,7 @@ Préfixe direction
 Direction géographique qui fait partie du nom d'une rue et qui précède le corps nom rue ou, s'il y a lieu, le préfixe
 type rue.
 
-.. _Street Direction Domain:
-
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Code", "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -530,15 +530,19 @@ type rue.
    17, "Central", ""
    18, "Centre", ""
 
+.. _Street Type Domain fr:
+
 Préfixe type rue
 ^^^^^^^^^^^^^^^^
 
 Partie du nom d'une rue qui identifie le type de rue d'un Élément routier, y compris les articles et prépositions
 possibles. Un préfixe précède le corps nom rue d'un Élément routier.
 
-.. _Street Type Domain:
+.. admonition:: Notez
 
-.. csv-table:: Domaine (de nouvelles valeurs sont ajoutées périodiquement) :
+    De nouvelles valeurs sont ajoutées périodiquement.
+
+.. csv-table::
    :header: "Code", "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -822,7 +826,7 @@ Province
 
 Nom de la province ou du territoire dans lequel se situe le lieu.
 
-:Domaine: Identique à :ref:`Dataset Name Domain`.
+:Domaine: Identique à :ref:`Dataset Name Domain fr`.
 
 Suffixe direction
 ^^^^^^^^^^^^^^^^^
@@ -830,7 +834,7 @@ Suffixe direction
 Direction géographique qui fait partie du nom d'une rue et qui suit le corps nom rue ou, s'il y a lieu, le suffixe type
 rue.
 
-:Domaine: Identique à :ref:`Street Direction Domain`.
+:Domaine: Identique à :ref:`Street Direction Domain fr`.
 
 Suffixe type rue
 ^^^^^^^^^^^^^^^^
@@ -838,7 +842,7 @@ Suffixe type rue
 Partie du nom d'une rue qui identifie le type de rue d'un Élément routier, y compris les articles et prépositions
 possibles. Un suffixe suit le corps nom de rue d'un Élément routier.
 
-:Domaine: Identique à :ref:`Street Type Domain`.
+:Domaine: Identique à :ref:`Street Type Domain fr`.
 
 Type de lieu
 ^^^^^^^^^^^^
@@ -846,14 +850,14 @@ Type de lieu
 Expression spécifiant le type de lieu.
 
 :Domaine: Conforme aux types de subdivisions de recensement (SDR) et est périodiquement mis à jour pour refléter les
-    changements dans ces valeurs.
+          changements dans ces valeurs.
 
-    Exemples : C (City / Cité), IRI (Indian reserve / Réserve indienne), M (Municipality / Municipalité).
+          | Exemples : C (City / Cité), IRI (Indian reserve / Réserve indienne), M (Municipality / Municipalité).
 
 Métadonnées d'objet
 ^^^^^^^^^^^^^^^^^^^
 
-Référer aux attributs décrits dans la :ref:`Object Metadata`.
+Référer aux attributs décrits dans la :ref:`Object Metadata fr`.
 
 Passage obstrué
 ===============
@@ -870,7 +874,7 @@ Un identifiant national unique.
 
 :Domaine: Un IDUU.
 
-    Exemple : 69822b23d217494896014e57a2edb8ac
+          | Exemple : 69822b23d217494896014e57a2edb8ac
 
 IDN élément routier
 ^^^^^^^^^^^^^^^^^^^
@@ -879,14 +883,14 @@ L'IDN de l'Élément routier sur lequel la géométrie ponctuelle est positionn�
 
 :Domaine: Un IDUU.
 
-    Exemple : 69822b23d217494896014e57a2edb8ac
+          | Exemple : 69822b23d217494896014e57a2edb8ac
 
 Type passage obstrué
 ^^^^^^^^^^^^^^^^^^^^
 
 Le type de passage obstrué qui indique si celui-ci est amovible.
 
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Code", "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -900,7 +904,7 @@ Le type de passage obstrué qui indique si celui-ci est amovible.
 Métadonnées d'objet
 ^^^^^^^^^^^^^^^^^^^
 
-Référer aux attributs décrits dans la :ref:`Object Metadata`.
+Référer aux attributs décrits dans la :ref:`Object Metadata fr`.
 
 Poste de péage
 ==============
@@ -917,7 +921,7 @@ Un identifiant national unique.
 
 :Domaine: Un IDUU.
 
-    Exemple : 69822b23d217494896014e57a2edb8ac
+          | Exemple : 69822b23d217494896014e57a2edb8ac
 
 IDN élément routier
 ^^^^^^^^^^^^^^^^^^^
@@ -926,14 +930,14 @@ L'IDN de l'Élément routier sur lequel la géométrie ponctuelle est positionn�
 
 :Domaine: Un IDUU.
 
-    Exemple : 69822b23d217494896014e57a2edb8ac
+          | Exemple : 69822b23d217494896014e57a2edb8ac
 
 Type poste de péage
 ^^^^^^^^^^^^^^^^^^^
 
 Le type de poste de péage.
 
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Code", "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -948,7 +952,7 @@ Le type de poste de péage.
 Métadonnées d'objet
 ^^^^^^^^^^^^^^^^^^^
 
-Référer aux attributs décrits dans la :ref:`Object Metadata`.
+Référer aux attributs décrits dans la :ref:`Object Metadata fr`.
 
 Segment de liaison par transbordeur
 ===================================
@@ -959,15 +963,15 @@ réseau routier.
 Section attribut
 ----------------
 
+.. _Functional Road Class Domain fr:
+
 Classification routière fonctionnelle
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Une classification basée sur l'importance du rôle de l'Élément routier ou de la Liaison par transbordeur dans la
 connectivité du réseau routier.
 
-.. _Functional Road Class Domain:
-
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Code", "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -1004,7 +1008,7 @@ Un identifiant national unique.
 
 :Domaine: Un IDUU.
 
-    Exemple : 69822b23d217494896014e57a2edb8ac
+          | Exemple : 69822b23d217494896014e57a2edb8ac
 
 ID segment liaison par transbordeur
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1021,8 +1025,8 @@ La version anglaise du nom d'une route dans un réseau routier donné tel qu'att
 infranational. Il se peut qu'un Élément routier ou Liaison par transbordeur porte plus d'un nom. Ainsi, un Élément
 routier ou Liaison par transbordeur peut avoir plusieurs attributs nom de route.
 
-:Domaine: Un nom de route anglais complet tel que « Trans-Canada Highway » ou « Aucun » quand aucune valeur ne
-    s'applique.
+:Domaine: Un nom de route anglais complet tel que ``Trans-Canada Highway`` ou ``Aucun`` quand aucune valeur ne
+          s'applique.
 
 Nom de route français (1, 2, 3, 4)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1031,8 +1035,8 @@ La version française du nom d'une route dans un réseau routier donné tel qu'a
 infranational. Il se peut qu'un Élément routier ou Liaison par transbordeur porte plus d'un nom. Ainsi, un Élément
 routier ou Liaison par transbordeur peut avoir plusieurs attributs nom de route.
 
-:Domaine: Un nom de route français complet tel que « Autoroute transcanadienne » ou « Aucun » quand aucune valeur ne
-    s'applique.
+:Domaine: Un nom de route français complet tel que ``Autoroute transcanadienne`` ou ``Aucun`` quand aucune valeur ne
+          s'applique.
 
 Numéro de route (1, 2, 3, 4, 5)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1041,19 +1045,19 @@ Numéro d'identifiant d'une route dans un réseau routier tel qu'attribué par u
 se peut qu'un Élément routier ou Liaison par transbordeur porte plus d'un numéro. Ainsi, un Élément routier ou Liaison
 par transbordeur peut avoir plusieurs attributs numéro de route.
 
-:Domaine: Un numéro de route y compris les caractères non entiers qui y sont parfois associés ou « Aucun » quand aucune
-    valeur ne s'applique.
+:Domaine: Un numéro de route y compris les caractères non entiers qui y sont parfois associés ou ``Aucun`` quand aucune
+          valeur ne s'applique.
 
-    Exemples : 1, 1A, 230-A, 430-28.
+          | Exemples : 1, 1A, 230-A, 430-28.
+
+.. _Closing Period Domain fr:
 
 Période de fermeture
 ^^^^^^^^^^^^^^^^^^^^
 
 Période au cours de laquelle la route ou la liaison par transbordeur n'est pas accessible au public.
 
-.. _Closing Period Domain:
-
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Code", "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -1068,7 +1072,7 @@ Période au cours de laquelle la route ou la liaison par transbordeur n'est pas 
 Métadonnées d'objet
 ^^^^^^^^^^^^^^^^^^^
 
-Référer aux attributs décrits dans la :ref:`Object Metadata`.
+Référer aux attributs décrits dans la :ref:`Object Metadata fr`.
 
 Segment routier
 ===============
@@ -1086,7 +1090,7 @@ Autorité route
 Organisation qui a la responsabilité d'assurer la maintenance ou de voir au maintien de la route sans nécessairement
 être celle qui fait la maintenance directement.
 
-:Domaine: Un nom d'organisation ou « Aucun » quand aucune valeur ne s'applique.
+:Domaine: Un nom d'organisation ou ``Aucun`` quand aucune valeur ne s'applique.
 
 Classification routière fonctionnelle
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1094,14 +1098,14 @@ Classification routière fonctionnelle
 Une classification basée sur l'importance du rôle de l'Élément routier ou de la Liaison par transbordeur dans la
 connectivité du réseau routier.
 
-:Domaine: Identique à :ref:`Functional Road Class Domain`.
+:Domaine: Identique à :ref:`Functional Road Class Domain fr`.
 
 État revêtement
 ^^^^^^^^^^^^^^^
 
 Indication de la consolidation apportée à une chaussée.
 
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Code", "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -1117,16 +1121,16 @@ Un identifiant national unique.
 
 :Domaine: Un IDUU.
 
-    Exemple : 69822b23d217494896014e57a2edb8ac
+          | Exemple : 69822b23d217494896014e57a2edb8ac
 
 IDN intervalle d'adresse
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 Un IDUU associé à chaque intervalle d'adresse.
 
-:Domaine: Un IDUU ou « Aucun » quand aucune valeur ne s'applique.
+:Domaine: Un IDUU ou ``Aucun`` quand aucune valeur ne s'applique.
 
-    Exemple : 69822b23d217494896014e57a2edb8ac
+          | Exemple : 69822b23d217494896014e57a2edb8ac
 
 ID structure
 ^^^^^^^^^^^^
@@ -1134,9 +1138,9 @@ ID structure
 Un identifiant unique attribué au segment routier ou à l'ensemble de segments routiers formant une structure. Cet
 identifiant permet la reconstitution d'une structure fragmentée par des jonctions.
 
-:Domaine: Un IDUU ou « Aucun » quand aucune valeur ne s'applique.
+:Domaine: Un IDUU ou ``Aucun`` quand aucune valeur ne s'applique.
 
-    Exemple : 69822b23d217494896014e57a2edb8ac
+          | Exemple : 69822b23d217494896014e57a2edb8ac
 
 ID segment routier
 ^^^^^^^^^^^^^^^^^^
@@ -1151,7 +1155,7 @@ Indicateur sens numérisation adresse (gauche, droite)
 Indique si un événement attributif est dans le même sens que celui de la numérisation de l'Élément routier. Une valeur
 spécifique est définie pour les côtés gauche et droit de l'Élément routier.
 
-:Domaine: Identique à :ref:`Digitizing Direction Flag Domain`.
+:Domaine: Identique à :ref:`Digitizing Direction Flag Domain fr`.
 
 Limite de vitesse
 ^^^^^^^^^^^^^^^^^
@@ -1174,7 +1178,7 @@ Nom d'une municipalité, d'un district ou d'un autre territoire administratif no
 de rue.
 
 :Domaine: Dérivé de la table Noms de rue et de lieu. Une valeur spécifique est définie pour les côtés gauche et droit
-    de l'Élément routier. « Aucun » quand aucune valeur ne s'applique.
+          de l'Élément routier. ``Aucun`` quand aucune valeur ne s'applique.
 
 Nom de route anglais (1, 2, 3, 4)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1183,8 +1187,8 @@ La version anglaise du nom d'une route dans un réseau routier donné tel qu'att
 infranational. Il se peut qu'un Élément routier ou Liaison par transbordeur porte plus d'un nom. Ainsi, un Élément
 routier ou Liaison par transbordeur peut avoir plusieurs attributs nom de route.
 
-:Domaine: Un nom de route anglais complet tel que « Trans-Canada Highway » ou « Aucun » quand aucune valeur ne
-    s'applique.
+:Domaine: Un nom de route anglais complet tel que ``Trans-Canada Highway`` ou ``Aucun`` quand aucune valeur ne
+          s'applique.
 
 Nom de route français (1, 2, 3, 4)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1193,8 +1197,8 @@ La version française du nom d'une route dans un réseau routier donné tel qu'a
 infranational. Il se peut qu'un Élément routier ou Liaison par transbordeur porte plus d'un nom. Ainsi, un Élément
 routier ou Liaison par transbordeur peut avoir plusieurs attributs nom de route.
 
-:Domaine: Un nom de route français complet tel que « Autoroute transcanadienne » ou « Aucun » quand aucune valeur ne
-    s'applique.
+:Domaine: Un nom de route français complet tel que ``Autoroute transcanadienne`` ou ``Aucun`` quand aucune valeur ne
+          s'applique.
 
 Nom de rue officiel concaténé (gauche, droite)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1203,21 +1207,21 @@ Une concaténation des attributs Préfixe direction, Préfixe type rue, Article 
 Suffixe direction et Muni quadrant du nom de rue officiel.
 
 :Domaine: Dérivé de la table Noms de rue et de lieu. Une valeur spécifique est définie pour les côtés gauche et droit
-    de l'Élément routier. « Aucun » quand aucune valeur ne s'applique.
+          de l'Élément routier. ``Aucun`` quand aucune valeur ne s'applique.
 
 Nom de structure anglais
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 La version anglaise du nom d'un ouvrage routier tel qu'attribué par un organisme national ou infranational.
 
-:Domaine: Un nom de structure complet ou « Aucun » quand aucune valeur ne s'applique.
+:Domaine: Un nom de structure complet ou ``Aucun`` quand aucune valeur ne s'applique.
 
 Nom de structure français
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 La version française du nom d'un ouvrage routier tel qu'attribué par un organisme national ou infranational.
 
-:Domaine: Un nom de structure complet ou « Aucun » quand aucune valeur ne s'applique.
+:Domaine: Un nom de structure complet ou ``Aucun`` quand aucune valeur ne s'applique.
 
 Numéro dernière maison (gauche, droite)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1225,7 +1229,7 @@ Numéro dernière maison (gauche, droite)
 Adresse du dernier bâtiment situé le long d'un côté particulier (gauche ou droit) d'un Élément routier. Une valeur
 spécifique est définie pour les côtés gauche et droit de l'Élément routier.
 
-:Domaine: [-1..n] La valeur « 0 » indique qu'aucune valeur ne s'applique.
+:Domaine: [-1..n] La valeur ``0`` indique qu'aucune valeur ne s'applique.
 
 Numéro de route (1, 2, 3, 4, 5)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1234,10 +1238,10 @@ Numéro d'identifiant d'une route dans un réseau routier tel qu'attribué par u
 se peut qu'un Élément routier ou Liaison par transbordeur porte plus d'un numéro. Ainsi, un Élément routier ou Liaison
 par transbordeur peut avoir plusieurs attributs numéro de route.
 
-:Domaine: Un numéro de route y compris les caractères non entiers qui y sont parfois associés ou « Aucun » quand aucune
-    valeur ne s'applique.
+:Domaine: Un numéro de route y compris les caractères non entiers qui y sont parfois associés ou ``Aucun`` quand aucune
+          valeur ne s'applique.
 
-    Exemples : 1, 1A, 230-A, 430-28.
+          | Exemples : 1, 1A, 230-A, 430-28.
 
 Numéro de sortie
 ^^^^^^^^^^^^^^^^
@@ -1245,10 +1249,10 @@ Numéro de sortie
 Le numéro d'identifiant d'une sortie sur une voie de circulation à accès contrôlé qui a été attribué par une autorité
 administrative.
 
-:Domaine: Un numéro d'identifiant y compris les caractères non entiers tels que « A » qui y sont parfois associés ou
-    « Aucun » quand aucune valeur ne s'applique.
+:Domaine: Un numéro d'identifiant y compris les caractères non entiers tels que ``A`` qui y sont parfois associés ou
+          ``Aucun`` quand aucune valeur ne s'applique.
 
-    Exemples : 11, 11A, 11-A, 80-EST, 80-E, 80E.
+          | Exemples : 11, 11A, 11-A, 80-EST, 80-E, 80E.
 
 Numéro première maison (gauche, droite)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1256,21 +1260,21 @@ Numéro première maison (gauche, droite)
 Adresse du premier bâtiment situé le long d'un côté particulier (gauche ou droit) d'un Élément routier. Une valeur
 spécifique est définie pour les côtés gauche et droit de l'Élément routier.
 
-:Domaine: [-1..n] La valeur « 0 » indique qu'aucune valeur ne s'applique.
+:Domaine: [-1..n] La valeur ``0`` indique qu'aucune valeur ne s'applique.
 
 Période de fermeture
 ^^^^^^^^^^^^^^^^^^^^
 
 Période au cours de laquelle la route ou la liaison par transbordeur n'est pas accessible au public.
 
-:Domaine: Identique à :ref:`Closing Period Domain`.
+:Domaine: Identique à :ref:`Closing Period Domain fr`.
 
 Sens de circulation
 ^^^^^^^^^^^^^^^^^^^
 
 Le ou les sens de circulation permis sur la route.
 
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Code", "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -1286,7 +1290,7 @@ Type de chaussée non revêtue
 
 Le type de chaussée d'un Élément routier non revêtue.
 
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Code", "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -1301,7 +1305,7 @@ Type de chaussée revêtue
 
 Le type de chaussée d'un Élément routier revêtue.
 
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Code", "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -1316,7 +1320,7 @@ Type de structure
 
 La classification de la structure.
 
-.. csv-table:: Domaine :
+.. csv-table::
    :header: "Code", "Étiquette", "Définition"
    :widths: auto
    :align: left
@@ -1341,4 +1345,4 @@ La classification de la structure.
 Métadonnées d'objet
 ^^^^^^^^^^^^^^^^^^^
 
-Référer aux attributs décrits dans la :ref:`Object Metadata`.
+Référer aux attributs décrits dans la :ref:`Object Metadata fr`.
