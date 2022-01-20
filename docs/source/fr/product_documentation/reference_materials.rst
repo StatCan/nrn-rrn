@@ -6,7 +6,7 @@ Matériaux de référence
 .. include:: <isopub.txt>
 
 .. contents:: Matières :
-   :depth: 1
+   :depth: 2
 
 Sigles et abréviations
 ======================

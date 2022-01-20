@@ -6,7 +6,7 @@ Taux d'achèvement
 .. include:: <isopub.txt>
 
 .. contents:: Matières :
-   :depth: 2
+   :depth: 3
 
 Taux d'achèvement actuels
 =========================

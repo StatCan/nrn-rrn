@@ -6,7 +6,7 @@ Reference Materials
 .. include:: <isopub.txt>
 
 .. contents:: Contents:
-   :depth: 1
+   :depth: 2
 
 Acronyms and Abbreviations
 ==========================

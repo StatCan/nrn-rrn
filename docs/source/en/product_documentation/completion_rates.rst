@@ -6,9 +6,9 @@ Completion Rates
 .. include:: <isopub.txt>
 
 .. contents:: Contents:
-   :depth: 2
+   :depth: 3
 
-Current completion rates
+Current Completion Rates
 ========================
 
 Information on the latest dataset completion rates.

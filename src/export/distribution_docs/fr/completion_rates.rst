@@ -5,15 +5,16 @@ Taux d'achèvement
 .. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
-.. contents::
-   :depth: 4
+.. contents:: Matières :
+   :depth: 2
 
 Taux d'achèvement actuels
 =========================
 
 Informations sur les derniers taux d'achèvement des ensembles de données.
 
-.. note::
+.. admonition:: Notez
+
     | Les valeurs comprises entre 0 % et 1 %, exclusivement, sont arrondies à 1 %.
     | Les valeurs comprises entre 99 % et 100 %, exclusivement, sont arrondies à 99 %.
 

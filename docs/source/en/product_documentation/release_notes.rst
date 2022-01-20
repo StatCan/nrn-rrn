@@ -6,9 +6,9 @@ Release Notes
 .. include:: <isopub.txt>
 
 .. contents:: Contents:
-   :depth: 1
+   :depth: 2
 
-Current release notes
+Current Release Notes
 =====================
 
 Information on the latest dataset updates.

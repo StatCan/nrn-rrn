@@ -351,8 +351,8 @@ class Export:
     def update_distribution_docs(self) -> None:
         """
         Writes updated documentation to data/processed for:
-            - completion rates / taux d'achèvement
-            - release notes / notes de publication
+            - completion rates
+            - release notes
         """
 
         # Update release notes.
@@ -373,7 +373,7 @@ class Export:
 
         # Write updated documents - English and French.
         self.write_documents(data, "en/release_notes")
-        self.write_documents(data, "fr/notes_de_publication")
+        self.write_documents(data, "fr/release_notes")
 
         # Update completion rates.
         logger.info(f"Updating documentation: completion rates.")
@@ -404,7 +404,7 @@ class Export:
 
         # Write updated documents - English and French.
         self.write_documents(data, "en/completion_rates")
-        self.write_documents(data, "fr/taux_d'achèvement")
+        self.write_documents(data, "fr/completion_rates")
 
     def write_documents(self, data: dict, filename: str) -> None:
         """

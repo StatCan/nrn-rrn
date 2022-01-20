@@ -5,15 +5,16 @@ Completion Rates
 .. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
-.. contents::
-   :depth: 4
+.. contents:: Contents:
+   :depth: 3
 
-Current completion rates
+Current Completion Rates
 ========================
 
 Information on the latest dataset completion rates.
 
-.. note::
+.. admonition:: Note
+
     | Values between 0% and 1%, exclusively, are rounded up to 1%.
     | Values between 99% and 100%, exclusively, are rounded down to 99%.
 
