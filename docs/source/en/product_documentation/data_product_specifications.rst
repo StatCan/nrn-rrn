@@ -48,8 +48,8 @@ Language
 
 Languages in which the data product specifications are available in accordance with the ISO 639-2 standard:
 
-en – english
-fr – french
+| en – english
+| fr – french
 
 Informal description of the data product
 ----------------------------------------
@@ -215,8 +215,8 @@ homogeneous and normalized of the entire Canadian road network.
 
 The NRN data serve as a foundation for several applications. This common geometric base is maintained on a regular
 basis by closest to the source organizations selected for their specific interests or for their ease in offering
-adequate, up-to-date representations of road phenomena, in accordance with the GeoBase initiative (www.geobase.ca).
-This common infrastructure facilitates data integration of NRN data with supplementary data.
+adequate, up-to-date representations of road phenomena, in accordance with the `GeoBase <http://www.geobase.ca>`_
+initiative. This common infrastructure facilitates data integration of NRN data with supplementary data.
 
 Topic category
 --------------
@@ -358,8 +358,7 @@ Date type according to ISO 19115 standard:
 Responsible party
 """""""""""""""""
 
-OGP – International Organisation of Oil and Gas Producers
-URL: http://www.epsg.org
+`OGP – International Organisation of Oil and Gas Producers <http://www.epsg.org>`_
 
 Code
 ^^^^
@@ -556,7 +555,7 @@ Output file formats available for the product are: GML (*Geography Markup Langua
 
 The name of the files, entities and attributes are described in :doc:`product_distribution_formats`.
 
-Data are subject to the *GeoBase Unrestricted Use Licence Agreement* (www.geobase.ca).
+Data are subject to the `GeoBase Unrestricted Use Licence Agreement <http://www.geobase.ca>`_.
 
 Metadata
 ========

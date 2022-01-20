@@ -48,8 +48,8 @@ Langue
 
 Langues dans lesquelles les spécifications de produit sont disponibles conformément à la norme ISO 639-2 :
 
-en – anglais
-fr – français
+| en – anglais
+| fr – français
 
 Description informelle du produit
 ---------------------------------
@@ -222,8 +222,8 @@ normalisée de l'ensemble du réseau routier canadien.
 Les données RRN servent de fondation pour plusieurs applications. Cette base géométrique commune est acquise et
 maintenue à jour sur une base régulière par les organisations les plus près de la source sélectionnées pour leurs
 intérêts spécifiques ou leur facilité à offrir des représentations adéquates et actualisées des phénomènes routiers,
-conformément à l'initiative GéoBase (www.geobase.ca). Cette infrastructure commune facilite le processus d'intégration
-entre les données RRN et d'autres données complémentaires.
+conformément à l'initiative `GéoBase <http://www.geobase.ca>`_. Cette infrastructure commune facilite le processus
+d'intégration entre les données RRN et d'autres données complémentaires.
 
 Catégories
 ----------
@@ -370,8 +370,7 @@ Type de date selon la norme ISO 19115 :
 Responsable du registre
 """""""""""""""""""""""
 
-OGP – International Organisation of Oil and Gas Producers
-URL : http://www.epsg.org
+`OGP – International Organisation of Oil and Gas Producers <http://www.epsg.org>`_
 
 Code
 ^^^^
@@ -579,8 +578,8 @@ Geopackage*), KML (*Keyhole Markup Language*) and SHP (*ESRI*\ |trade| *Shapefil
 
 :doc:`product_distribution_formats` décrit le nom des fichiers, entités et attributs.
 
-L'utilisation des données est soumise aux conditions énoncées dans l'*Accord de licence d'utilisation sans restriction
-de GéoBase* (www.geobase.ca).
+L'utilisation des données est soumise aux conditions énoncées dans l'`Accord de licence d'utilisation sans restriction
+de GéoBase <http://www.geobase.ca>`_.
 
 Métadonnées
 ===========
