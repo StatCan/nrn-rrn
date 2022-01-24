@@ -6,7 +6,7 @@ Identification Rules
 .. include:: <isopub.txt>
 
 .. contents:: Contents:
-   :depth: 1
+   :depth: 2
 
 Overview
 ========
@@ -45,14 +45,14 @@ Infrastructure – USA (NSDI) Framework Transportation Identification Standard w
 and described an Identifier code [#f5]_. However, within the ISO TC 211/SC: Geographic Information Standard - Encoding
 [#f6]_ the UUID definition did comply to the fundamental requirements sought after:
 
-    “An application domain defines a universe and an identification scheme called universal unique identifiers (UUIDs).
+    "An application domain defines a universe and an identification scheme called universal unique identifiers (UUIDs).
     A UUID is assigned to an object when it is created and is stable over the object's entire life span. The UUID of a
     deleted object cannot be used again. UUIDs are required for long-term distributed data management and for
     implementing update mechanisms. These identifiers are also called persistent identifiers. A special name server may
     be used to resolve persistent identifiers. The identifiers are unique within a well-defined limited universe
-    defined by an application domain.”
+    defined by an application domain."
 
-This ISO definition is thus adopted for the “Identifier”. A UUID generation mechanism is presented in the following
+This ISO definition is thus adopted for the identifier. A UUID generation mechanism is presented in the following
 section.
 
 NVD Identification Standard
@@ -65,7 +65,7 @@ were studied.
 * The second consists of using a unique ID generation algorithm [#f7]_ that could be used by data producers with no
   particular management of range and domain.
 
-The *second* method is best suited and was the one retained.
+The second method is best suited and was the one retained.
 
 A UUID is an identifier that is unique across both space and time, with respect to the space of all UUIDs. UUID
 generation does not require a registration authority for each single identifier. Instead, it requires a unique value
@@ -73,9 +73,9 @@ over space for each UUID generator. This spatially unique value is specified as 
 already applied to network-connected systems. This 48-bit address can be assigned based on an address block obtained
 through the IEEE registration authority. This UUID specification assumes the availability of an IEEE 802 address.
 
-The UUID consists of a 16-byte record and must void of padding between fields. The hexadecimal values “a” to “f” must
-be lower case. The total size is 128 bits. For use as human-readable text, a UUID string representation (32 characters)
-is specified as a sequence of fields. The following string is a UUID example:
+The UUID consists of a 16-byte record and must void of padding between fields. The hexadecimal values ``a`` to ``f``
+must be lower case. The total size is 128 bits. For use as human-readable text, a UUID string representation (32
+characters) is specified as a sequence of fields. The following string is a UUID example:
 
 * 378a3917e824422cb25f268b8295da51
 
@@ -100,16 +100,16 @@ References
     géospatiale ISIS*, Laval University, March 2000.
 .. [#f2] ISO Technical Committee 204, Working Group 3. *ISO/TR 14825 GDF – Geographic Data Files – Version 4.0*, ISO/TC
     204 N629, October 12, 2000.
-.. [#f3] Dueker, Kenneth J. and Butler, J. Allison. *GIS-T Enterprise Data Model with Suggested Implementation
-    Choices*, Center for Urban Studies, School of Urban and Public Affairs, Portland State University, October 1, 1997.
+.. [#f3] Dueker, K. J. and Butler, J. A. *GIS-T Enterprise Data Model with Suggested Implementation Choices*, Center
+    for Urban Studies, School of Urban and Public Affairs, Portland State University, October 1, 1997.
 .. [#f4] http://www.nen.nl/cen278
 .. [#f5] National Spatial Data Infrastructure. *NSDI FRAMEWORK TRANSPORTATION IDENTIFICATION STANDARD -- Public Review
     Draft*, FGDC-STD-999.1-2000, Ground Transportation Subcommittee, Federal Geographic Data Committee, December, 2000.
 .. [#f6] ISO Technical Committee 211, Working Group 4. *Geographic Information – Encoding*, ISO/CD 19118.3, June 15,
     2001.
-.. [#f7] Readers wishing to use a standards-body definition of UUIDs/GUIDs should refer to: ISO/IEC 11578:1996
-    Information technology -- Open Systems Interconnection -- Remote Procedure Call
-    http://www.iso.org/iso/en/CatalogueDetailPage.CatalogueDetail?CSNUMBER=2229&ICS1=35&ICS2=100&ICS3=70 or DCE 1.1:
-    Remote Procedure Call Open Group Technical Standard Document Number C706, August 1997, 737 pages. (Supersedes C309
-    DCE: Remote Procedure Call 8/94, which was the basis for the ISO specification)
-    http://www.opengroup.org/publications/catalog/c706.htm
+.. [#f7] Readers wishing to use a standards-body definition of UUIDs/GUIDs should refer to: `ISO/IEC 11578:1996
+    Information technology -- Open Systems Interconnection -- Remote Procedure Call <http://www.iso.org/iso/en/
+    CatalogueDetailPage.CatalogueDetail?CSNUMBER=2229&ICS1=35&ICS2=100&ICS3=70>`_ or `DCE 1.1: Remote Procedure Call
+    Open Group Technical Standard Document Number C706, August 1997, 737 pages <https://pubs.opengroup.org/onlinepubs/
+    009629399/toc.pdf>`_ (supersedes C309 DCE: Remote Procedure Call 8/94, which was the basis for the ISO
+    specification).

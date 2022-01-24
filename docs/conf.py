@@ -68,7 +68,7 @@ html_theme_options = {
         {
             "name": "Open Government",
             "url": "https://open.canada.ca/data/en/dataset/3d282116-e556-400c-9306-ca1a3cada77f",
-            "icon": "fas fa-database",
+            "icon": "fas fa-cloud-download-alt",
             "type": "fontawesome"
         }
     ]

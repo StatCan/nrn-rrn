@@ -30,7 +30,7 @@ Contact Information
 
 | Telephone: 1-800-263-1136
 | Fax: 1-514-283-9350
-| Email: statcan.infostats-infostats.statcan@canada.ca
+| Email: infostats@statcan.gc.ca
 | Website: https://statcan.gc.ca
 | Open Government: https://open.canada.ca
 

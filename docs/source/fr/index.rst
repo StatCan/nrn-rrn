@@ -30,7 +30,7 @@ Coordonnées
 
 | Téléphone : 1-800-263-1136
 | Télécopieur : 1-514-283-9350
-| Courriel : statcan.infostats-infostats.statcan@canada.ca
+| Courriel : infostats@statcan.gc.ca
 | Site internet : https://statcan.gc.ca
 | Gouvernement ouvert : https://open.canada.ca
 
