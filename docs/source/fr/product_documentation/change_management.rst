@@ -6,7 +6,7 @@ Gestion des modifications
 .. include:: <isopub.txt>
 
 .. contents:: Matières :
-   :depth: 4
+   :depth: 5
 
 Aperçu
 ======
@@ -18,11 +18,11 @@ concepts de base sont nécessaires : règles d'identification et définition des
 :doc:`identification_rules` définit aussi précisément que possible le mécanisme d'identification utilisé. Du côté de la
 gestion des modifications, les DVN ne tente pas de suivre l'évolution des phénomènes du monde réel (entités), mais
 essaient plutôt de maintenir une certaine évolution des objets qui les représentent. En d'autres mots, les DVN ne fera
-pas le suivi des changements réels dans le territoire, ils identifient seulement les *effets* que ceux-ci ont sur les
+pas le suivi des changements réels dans le territoire, ils identifient seulement les ``effets`` que ceux-ci ont sur les
 données.
 
 Plusieurs projets (ou leur documentation) traitent de la gestion des mises à jour et de la modélisation temporelle
-[#f1]_, [#f2]_, [#f3]_. Le modèle dans ce document a été mis au point en collaboration avec le Centre de recherche en
+[#f1]_ [#f2]_ [#f3]_. Le modèle dans ce document a été mis au point en collaboration avec le Centre de recherche en
 géomatique (CRG) de l'Université Laval [#f4]_.
 
 Il est visé de suivre l'évolution des objets dans le but de relever tout changement qui peut s'être produit entre deux
@@ -48,11 +48,11 @@ données géométriques dans les DVN ne doivent subir qu'un minimum de changemen
 nouvelle source d'information offre une meilleure représentation que la précédente.
 
 Les effets sur les données DVN seront établis en fonction de la représentation précédente. Le cycle de vie des données
-est limité par deux événements. Le cycle débute toujours par un « ajout » (attribution d'un nouvel IDN) et se termine
-par « élimination ». Entre ces deux événements, la modification géométrique ou descriptive, ou encore la confirmation
-de l'état précédent, peut se produire, tout en conservant le même IDN. Les données ayant les effets « ajout »,
-« modification géométrique ou descriptive » et « confirmation » sont des entités dites *actives* (ou actuelles). Les
-entités ayant l'effet « élimination » sont des données dites *non actives* (historiques).
+est limité par deux événements. Le cycle débute toujours par un ``ajout`` (attribution d'un nouvel IDN) et se termine
+par ``élimination``. Entre ces deux événements, la modification géométrique ou descriptive, ou encore la confirmation
+de l'état précédent, peut se produire, tout en conservant le même IDN. Les données ayant les effets ``ajout``,
+``modification géométrique`` ou ``descriptive`` et ``confirmation`` sont des entités dites ``actives`` (ou actuelles).
+Les entités ayant l'effet ``élimination`` sont des données dites ``non actives`` (historiques).
 
 .. _Effect Types:
 
@@ -60,32 +60,32 @@ Types d'effets
 ==============
 
 L'actualisation permet d'établir un parallèle entre les données existantes et les nouvelles données provenant d'une
-mise à jour. Ces dernières produisent certains *effets* sur les données. Les effets suivants peuvent être classés
+mise à jour. Ces dernières produisent certains ``effets`` sur les données. Les effets suivants peuvent être classés
 comme :
 
 Ajout (Existence)
 -----------------
 
-Quand un nouvel objet n'a pas son équivalent dans les DVN, un nouvel objet est *ajouté* avec un nouvel IDN.
+Quand un nouvel objet n'a pas son équivalent dans les DVN, un nouvel objet est ``ajouté`` avec un nouvel IDN.
 
 Élimination (Existence)
 -----------------------
 
-Quand un objet ne représente plus une entité, il est *éliminé*. Ce type d'objet est éliminé des données courantes en
+Quand un objet ne représente plus une entité, il est ``éliminé``. Ce type d'objet est éliminé des données courantes en
 gardant son IDN.
 
 Modification (Évolution)
 ------------------------
 
-Un objet est dit *modifié* si l'un de ses attributs descriptifs ou sa représentation géométrique est différent. Le cas
-échéant, l'IDN initial est préservé pour la nouvelle version de l'objet. Deux types de modification sont possibles.
+Un objet est dit ``modifié`` si l'un de ses attributs descriptifs ou sa représentation géométrique est différent. Le
+cas échéant, l'IDN initial est préservé pour la nouvelle version de l'objet. Deux types de modification sont possibles.
 
 Modification descriptive
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 Une modification descriptive se produit quand une paire d'objets provenant de la même classe sont géométriquement
 identiques mais ont des valeurs attributives différentes. Par exemple, le type de surface d'une route spécifique peut
-avoir changé de « sans revêtement » à « avec revêtement ».
+avoir changé de ``non revêtue`` à ``revêtue``.
 
 Modification géométrique
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -125,7 +125,7 @@ réseau ainsi que les Jonctions conservent tous leurs IDN.
 Confirmation (Évolution)
 ------------------------
 
-Conjointement avec le changement, il y a *confirmation* des objets quand les attributs géométriques et descriptifs
+Conjointement avec le changement, il y a ``confirmation`` des objets quand les attributs géométriques et descriptifs
 n'ont pas été modifiés.
 
 Effets utilisés
@@ -134,12 +134,12 @@ Effets utilisés
 Données segmentées
 ------------------
 
-La gestion des modifications sur les données segmentées est faite à l'aide des *effets* définis à :ref:`Effect Types`.
+La gestion des modifications sur les données segmentées est faite à l'aide des ``effets`` définis à :ref:`Effect Types`.
 
 Dans le modèle segmenté, l'effet doit être associé à l'Élément Linéaire au complet même si celui-ci est décomposé en
 plusieurs segments à cause d'un changement d'attribut. C'est-à-dire qu'un même effet doit être utilisé pour l'ensemble
 des segments qui ont la même valeur d'attribut IDN. Les segments qui décrivent un même Élément Linéaire peuvent avoir
-un seul effet et l'ordre de priorité est le suivant : Ajout, Modification descriptive et Confirmation.
+un seul effet et l'ordre de priorité est le suivant : ``Ajout``, ``Modification descriptive`` et ``Confirmation``.
 
 La méthode de suivi utilisée pour les modifications géométriques est indiquée par le fournisseur des gestions des
 modifications.
@@ -150,7 +150,7 @@ Exemple
 L'exemple suivant sert à illustrer la gestion d'une mise à jour pour en faciliter la compréhension. Figure 2 : Exemple
 d'une mise à jour pour démontrer la comparaison entre les données d'origine et les nouvelles données. En matière de
 géométrie, un seul élément route (objet 6) a été ajouté par rapport aux données d'origine. Quant à la description, le
-type de surface de l'élément route (objet 2) a changé de sans revêtement à avec revêtement.
+type de surface de l'élément route (objet 2) a changé de ``non revêtue`` à ``revêtue``.
 
 .. figure:: /source/_static/figures/exemple_d'une_mise_à_jour.png
     :alt: Exemple d'une mise à jour
@@ -162,20 +162,20 @@ type de surface de l'élément route (objet 2) a changé de sans revêtement à 
    :widths: auto
    :align: left
 
-   3, "Aucune correspondance avec un nouvel objet.", "Élimination"
+   3, "Aucune correspondance avec un nouvel objet.", "``Élimination``"
    4, "Aucune correspondance avec un objet dans les données d'origine; l'arrivée de l'objet 6 a modifié la structure
-   topologique des objets (et par conséquent, la géométrie).", "Ajout"
+   topologique des objets (et par conséquent, la géométrie).", "``Ajout``"
    5, "Aucune correspondance avec un objet dans les données d'origine; l'arrivée de l'objet 6 a modifié la structure
-   topologique des objets (et par conséquent, la géométrie).", "Ajout"
-   6, "Aucune correspondance avec un objet dans les données d'origine; l'entité n'était pas représentée.", "Ajout"
-   e, "Aucune correspondance avec un objet dans les données d'origine.", "Ajout"
-   f, "Aucune correspondance avec un objet dans les données d'origine.", "Ajout"
-   2, "Valeur d'attribut modifiée.", "Modification descriptive"
-   1, "La géométrie et les attributs n'ont pas été modifiés.", "Confirmation"
-   a, "La géométrie et les attributs n'ont pas été modifiés.", "Confirmation"
-   b, "La géométrie et les attributs n'ont pas été modifiés.", "Confirmation"
-   c, "La géométrie et les attributs n'ont pas été modifiés.", "Confirmation"
-   d, "La géométrie et les attributs n'ont pas été modifiés.", "Confirmation"
+   topologique des objets (et par conséquent, la géométrie).", "``Ajout``"
+   6, "Aucune correspondance avec un objet dans les données d'origine; l'entité n'était pas représentée.", "``Ajout``"
+   e, "Aucune correspondance avec un objet dans les données d'origine.", "``Ajout``"
+   f, "Aucune correspondance avec un objet dans les données d'origine.", "``Ajout``"
+   2, "Valeur d'attribut modifiée.", "``Modification descriptive``"
+   1, "La géométrie et les attributs n'ont pas été modifiés.", "``Confirmation``"
+   a, "La géométrie et les attributs n'ont pas été modifiés.", "``Confirmation``"
+   b, "La géométrie et les attributs n'ont pas été modifiés.", "``Confirmation``"
+   c, "La géométrie et les attributs n'ont pas été modifiés.", "``Confirmation``"
+   d, "La géométrie et les attributs n'ont pas été modifiés.", "``Confirmation``"
 
 Tableau 1 : Mise à jour des effets.
 
