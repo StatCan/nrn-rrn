@@ -13,13 +13,14 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
+from datetime import datetime
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'National Road Network'
-copyright = '2021, Statistics Canada'
-author = 'Statistics Canada'
+project = 'NRN Home / Accueil RRN'
+copyright = f"{datetime.now().year}, Statistics Canada / Statistique Canada"
+author = 'Statistics Canada / Statistique Canada'
 
 
 # -- General configuration ---------------------------------------------------
@@ -28,29 +29,56 @@ author = 'Statistics Canada'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    "IPython.sphinxext.ipython_console_highlighting",
+    "IPython.sphinxext.ipython_directive",
+    "myst_nb",
+    "sphinx.ext.autosectionlabel",
 ]
 
-# Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+# The master toctree document.
+root_doc = "index"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
-# Translating with sphinx-intl.
-locale_dirs = ['locale/']
-gettext_compact = False
+# The name of the Pygments (syntax highlighting) style to use.
+pygments_style = "sphinx"
 
 
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-#
-html_theme = 'alabaster'
+html_theme = 'pydata_sphinx_theme'
+
+# Theme options are theme-specific and customize the look and feel of a theme
+# further.  For a list of options available for each theme, see the
+# documentation.
+html_theme_options = {
+    "search_bar_position": "sidebar",
+    "icon_links": [
+        {
+            "name": "GitHub",
+            "url": "https://github.com/jessestewart1/nrn-rrn",
+            "icon": "fab fa-github",
+            "type": "fontawesome"
+        },
+        {
+            "name": "Open Government",
+            "url": "https://open.canada.ca/data/en/dataset/3d282116-e556-400c-9306-ca1a3cada77f",
+            "icon": "fas fa-cloud-download-alt",
+            "type": "fontawesome"
+        }
+    ]
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['source/_static']
+
+html_css_files = [
+    "css/custom.css"
+]

@@ -94,7 +94,7 @@ junction:
     provider:   [str, 24]
     revdate:    [int, 8]
     specvers:   [float, 10]
-    exitnbr:    [str, 100]
+    exitnbr:    [str, 10]
     junctype:   [str, 14]
     nid:        [str, 32]
 roadseg:
