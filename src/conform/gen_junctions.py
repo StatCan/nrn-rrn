@@ -170,7 +170,7 @@ class Junction:
         logger.info("Compiling junctions into target dataset.")
 
         # Compile junctions into GeoDataFrame.
-        junction_pts = set(chain.from_iterable([deadend, ferry, intersection]))
+        junction_pts = set(chain.from_iterable([deadend, ferry, intersection, natprovter]))
         junctions = nodes_grouped_df.loc[nodes_grouped_df["pt"].isin(junction_pts)].copy(deep=True)
         junctions["junctype"] = None
         junctions["uuid"] = [uuid.uuid4().hex for _ in range(len(junctions))]
