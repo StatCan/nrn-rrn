@@ -31,7 +31,6 @@ author = 'Statistics Canada / Statistique Canada'
 extensions = [
     "IPython.sphinxext.ipython_console_highlighting",
     "IPython.sphinxext.ipython_directive",
-    "myst_nb",
     "sphinx.ext.autosectionlabel",
 ]
 

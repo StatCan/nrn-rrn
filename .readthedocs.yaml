@@ -14,4 +14,4 @@ formats: all
 
 # Optional, define Conda configuration.
 conda:
-  environment: environment.yml
+  environment: docs/environment.yml
