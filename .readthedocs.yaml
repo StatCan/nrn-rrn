@@ -10,7 +10,7 @@ sphinx:
   configuration: docs/conf.py
 
 # Optional, define formats.
-formats: all
+formats: []
 
 # Optional, define Conda configuration.
 conda:
