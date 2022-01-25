@@ -35,7 +35,7 @@ de données en temps).
 Le processus de gestion des mises à jour doit aussi permettre la reconstitution des données comme elles existaient à
 une date antérieure.
 
-.. figure:: /source/_static/figures/évolution_de_la_base_de_données_en_temps.png
+.. figure:: /source/_static/figures/evolution_of_the_database_in_time_fr.png
     :alt: Évolution de la base de données en temps
 
     Figure 1 : Évolution de la base de données en temps.
@@ -152,7 +152,7 @@ d'une mise à jour pour démontrer la comparaison entre les données d'origine e
 géométrie, un seul élément route (objet 6) a été ajouté par rapport aux données d'origine. Quant à la description, le
 type de surface de l'élément route (objet 2) a changé de ``non revêtue`` à ``revêtue``.
 
-.. figure:: /source/_static/figures/exemple_d'une_mise_à_jour.png
+.. figure:: /source/_static/figures/example_of_an_update_fr.png
     :alt: Exemple d'une mise à jour
 
     Figure 2 : Exemple d'une mise à jour.

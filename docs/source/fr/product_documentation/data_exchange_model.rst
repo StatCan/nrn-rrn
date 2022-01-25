@@ -22,7 +22,7 @@ d'identifier et d'examiner de nombreux aspects de la modèle physique d'échange
 Modèle d'échange de données
 ===========================
 
-.. figure:: /source/_static/figures/modèle_d'échange_de_données.png
+.. figure:: /source/_static/figures/data_exchange_model_fr.png
     :alt: Modèle d'échange de données
 
     Figure 1 : Modèle d'échange de données.
