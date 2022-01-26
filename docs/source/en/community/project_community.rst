@@ -53,4 +53,4 @@ currently providing data (or hosting an open data platform from which data is be
 
 .. raw:: html
 
-    <iframe src="/nrn-rrn/docs/source/_static/reports/sources.html" width="100%" height="500" style="border:none;"></iframe>
+    <iframe src="/source/_static/reports/sources.html" width="100%" height="500" style="border:none;"></iframe>
