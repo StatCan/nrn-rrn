@@ -722,5 +722,5 @@ Processus de segmentation
 
 Les documents suivants décrivent le processus de segmentation d'adresse :
 
-| `Processus de segmentation - Colombie britannique <source/_static/reports/address_segmentation_british_columbia.html>`_
-| `Processus de segmentation - Yellowknife <source/_static/reports/address_segmentation_yellowknife.html>`_
+| `Processus de segmentation - Colombie britannique <../../../source/_static/reports/address_segmentation_british_columbia.html>`_
+| `Processus de segmentation - Yellowknife <../../../source/_static/reports/address_segmentation_yellowknife.html>`_
