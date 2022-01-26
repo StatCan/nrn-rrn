@@ -54,4 +54,4 @@ suivante montre les juridictions fournissant actuellement des données (ou hébe
 
 .. raw:: html
 
-    <iframe src="/source/_static/reports/sources.html" width="100%" height="500" style="border:none;"></iframe>
+    <iframe src="source/_static/reports/sources.html" width="100%" height="500" style="border:none;"></iframe>
