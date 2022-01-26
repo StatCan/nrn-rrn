@@ -705,5 +705,5 @@ Segmentation Process
 
 The following documents describe the address segmentation process:
 
-| `Address Segmentation - British Columbia <../../../../source/_static/reports/address_segmentation_british_columbia.html>`_
-| `Address Segmentation - Yellowknife <../../../../source/_static/reports/address_segmentation_yellowknife.html>`_
+| `Address Segmentation - British Columbia </source/_static/reports/address_segmentation_british_columbia.html>`_
+| `Address Segmentation - Yellowknife </source/_static/reports/address_segmentation_yellowknife.html>`_
