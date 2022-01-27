@@ -569,7 +569,7 @@ blkpassage:
     'on': 100
     pe: 100
     qc: 0
-    sk: 99
+    sk: 100
     yt: 100
   acqtech:
     ab: 100
@@ -584,7 +584,7 @@ blkpassage:
     'on': 100
     pe: 100
     qc: 0
-    sk: 99
+    sk: 100
     yt: 100
   blkpassty:
     ab: 100
@@ -599,7 +599,7 @@ blkpassage:
     'on': 100
     pe: 100
     qc: 0
-    sk: 99
+    sk: 100
     yt: 100
   credate:
     ab: 100
@@ -629,11 +629,11 @@ blkpassage:
     'on': 100
     pe: 100
     qc: 0
-    sk: 99
+    sk: 100
     yt: 100
   metacover:
     ab: 100
-    avg: 61
+    avg: 62
     bc: 100
     mb: 100
     nb: 0
@@ -644,7 +644,7 @@ blkpassage:
     'on': 0
     pe: 100
     qc: 0
-    sk: 99
+    sk: 100
     yt: 100
   nid:
     ab: 100
@@ -674,7 +674,7 @@ blkpassage:
     'on': 1
     pe: 100
     qc: 0
-    sk: 99
+    sk: 100
     yt: 100
   revdate:
     ab: 100
@@ -704,7 +704,7 @@ blkpassage:
     'on': 100
     pe: 100
     qc: 0
-    sk: 100
+    sk: 99
     yt: 100
   specvers:
     ab: 100
@@ -1020,7 +1020,7 @@ ferryseg:
     'on': 6
     pe: 100
     qc: 100
-    sk: 0
+    sk: 8
     yt: 100
   rtnumber2:
     ab: 100
@@ -1171,7 +1171,7 @@ junction:
     'on': 1
     pe: 0
     qc: 100
-    sk: 1
+    sk: 0
     yt: 0
   junctype:
     ab: 100
@@ -1250,7 +1250,7 @@ junction:
     yt: 0
   specvers:
     ab: 100
-    avg: 46
+    avg: 38
     bc: 100
     mb: 100
     nb: 0
@@ -1261,7 +1261,7 @@ junction:
     'on': 0
     pe: 0
     qc: 100
-    sk: 100
+    sk: 0
     yt: 0
 roadseg:
   accuracy:
@@ -1386,7 +1386,7 @@ roadseg:
     yt: 28
   l_hnumf:
     ab: 90
-    avg: 77
+    avg: 69
     bc: 100
     mb: 65
     nb: 100
@@ -1397,11 +1397,11 @@ roadseg:
     'on': 84
     pe: 54
     qc: 98
-    sk: 100
+    sk: 0
     yt: 28
   l_hnuml:
     ab: 90
-    avg: 77
+    avg: 69
     bc: 100
     mb: 65
     nb: 100
@@ -1412,7 +1412,7 @@ roadseg:
     'on': 84
     pe: 54
     qc: 98
-    sk: 100
+    sk: 0
     yt: 28
   l_placenam:
     ab: 100
@@ -1442,7 +1442,7 @@ roadseg:
     'on': 85
     pe: 96
     qc: 96
-    sk: 28
+    sk: 34
     yt: 77
   metacover:
     ab: 100
@@ -1551,7 +1551,7 @@ roadseg:
     yt: 27
   r_hnumf:
     ab: 90
-    avg: 77
+    avg: 69
     bc: 100
     mb: 65
     nb: 100
@@ -1562,11 +1562,11 @@ roadseg:
     'on': 84
     pe: 55
     qc: 98
-    sk: 100
+    sk: 0
     yt: 27
   r_hnuml:
     ab: 90
-    avg: 77
+    avg: 69
     bc: 100
     mb: 65
     nb: 100
@@ -1577,7 +1577,7 @@ roadseg:
     'on': 84
     pe: 55
     qc: 98
-    sk: 100
+    sk: 0
     yt: 27
   r_placenam:
     ab: 100
@@ -1607,7 +1607,7 @@ roadseg:
     'on': 85
     pe: 96
     qc: 96
-    sk: 28
+    sk: 34
     yt: 77
   revdate:
     ab: 100
@@ -1881,7 +1881,7 @@ roadseg:
     yt: 100
   speed:
     ab: 1
-    avg: 33
+    avg: 32
     bc: 0
     mb: 0
     nb: 56
@@ -1892,11 +1892,11 @@ roadseg:
     'on': 100
     pe: 79
     qc: 0
-    sk: 99
+    sk: 87
     yt: 0
   structid:
     ab: 100
-    avg: 92
+    avg: 100
     bc: 100
     mb: 100
     nb: 100
@@ -1907,7 +1907,7 @@ roadseg:
     'on': 100
     pe: 100
     qc: 100
-    sk: 1
+    sk: 100
     yt: 100
   structtype:
     ab: 100
@@ -1937,11 +1937,11 @@ roadseg:
     'on': 1
     pe: 1
     qc: 100
-    sk: 1
+    sk: 0
     yt: 1
   strunamefr:
     ab: 98
-    avg: 46
+    avg: 45
     bc: 98
     mb: 97
     nb: 96
@@ -1952,11 +1952,11 @@ roadseg:
     'on': 1
     pe: 1
     qc: 100
-    sk: 1
+    sk: 0
     yt: 0
   trafficdir:
     ab: 61
-    avg: 49
+    avg: 50
     bc: 100
     mb: 0
     nb: 99
@@ -1967,7 +1967,7 @@ roadseg:
     'on': 0
     pe: 100
     qc: 0
-    sk: 0
+    sk: 3
     yt: 95
   unpavsurf:
     ab: 78
@@ -2073,7 +2073,7 @@ strplaname:
     'on': 100
     pe: 100
     qc: 0
-    sk: 10
+    sk: 6
     yt: 100
   metacover:
     ab: 0
@@ -2118,7 +2118,7 @@ strplaname:
     'on': 97
     pe: 96
     qc: 0
-    sk: 73
+    sk: 76
     yt: 95
   nid:
     ab: 0
@@ -2242,7 +2242,7 @@ strplaname:
     yt: 0
   strtypre:
     ab: 0
-    avg: 40
+    avg: 41
     bc: 0
     mb: 0
     nb: 100
@@ -2253,11 +2253,11 @@ strplaname:
     'on': 100
     pe: 4
     qc: 0
-    sk: 17
+    sk: 28
     yt: 100
   strtysuf:
     ab: 0
-    avg: 56
+    avg: 55
     bc: 0
     mb: 0
     nb: 100
@@ -2268,7 +2268,7 @@ strplaname:
     'on': 100
     pe: 91
     qc: 0
-    sk: 55
+    sk: 49
     yt: 100
 tollpoint:
   accuracy:
