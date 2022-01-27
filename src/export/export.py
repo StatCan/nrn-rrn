@@ -406,7 +406,7 @@ class Export:
         self.write_documents(data, "en/completion_rates")
         self.write_documents(data, "fr/completion_rates", export_yaml=False)
 
-    def write_documents(self, data: dict, filename: str, export_yaml: bool = False) -> None:
+    def write_documents(self, data: dict, filename: str, export_yaml: bool = True) -> None:
         """
         Updates a document template with a dictionary and exports:
             1) an rst file representing the updated template.
@@ -414,7 +414,7 @@ class Export:
 
         :param dict data: dictionary of values used to populate the document template.
         :param str filename: basename of a document in ../distribution_docs to be updated.
-        :param bool export_yaml: indicates if the yaml dictionary should be exported, default False.
+        :param bool export_yaml: indicates if the yaml dictionary should be exported, default True.
         """
 
         # Configure source and destination paths.
