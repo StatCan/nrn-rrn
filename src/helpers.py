@@ -363,8 +363,8 @@ def export(dataframes: Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]], output_
     try:
 
         # Validate / create driver.
-        if driver not in {"ESRI Shapefile", "GML", "GPKG", "KML"}:
-            raise ValueError("Invalid OGR driver, must be one of: ESRI Shapefile, GML, GPKG, KML.")
+        if driver not in {"ESRI Shapefile", "GPKG"}:
+            raise ValueError("Invalid OGR driver, must be one of: ESRI Shapefile, GPKG.")
         driver = ogr.GetDriverByName(driver)
 
         # Create directory structure and data source (only create source for layer-based drivers).

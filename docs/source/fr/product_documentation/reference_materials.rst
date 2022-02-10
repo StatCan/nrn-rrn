@@ -27,9 +27,6 @@ Sigles et abréviations
     GDF
         Geographic Data File
 
-    GML
-        Geography Markup Language
-
     GPKG
         Open Geospatial Consortium Geopackage
 
@@ -53,9 +50,6 @@ Sigles et abréviations
 
     ISO
         Organisation internationale de normalisation
-
-    KML
-        Keyhole Markup Language
 
     MNE
         Modèle numérique d'élévation

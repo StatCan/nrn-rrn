@@ -27,9 +27,6 @@ Acronyms and Abbreviations
     GDF
         Geographic Data File
 
-    GML
-        Geography Markup Language
-
     GPKG
         Open Geospatial Consortium Geopackage
 
@@ -50,9 +47,6 @@ Acronyms and Abbreviations
 
     ISO
         International Organization for Standardization
-
-    KML
-        Keyhole Markup Language
 
     NAD83CSRS
         North American Datum 1983 (Canadian Spatial Reference System)
