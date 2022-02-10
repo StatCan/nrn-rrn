@@ -171,13 +171,10 @@ class Export:
                 kwargs = {
                     "driver": {"gpkg": "GPKG", "shp": "ESRI Shapefile"}[frmt],
                     "type_schemas": helpers.load_yaml(filepath.parents[1] / "distribution_format.yaml"),
-                    "export_schemas": export_specs,
+                    "name_schemas": export_specs["conform"],
                     "nln_map": nln_map,
                     "keep_uuid": False,
-                    "outer_pbar": export_progress,
-                    "epsg": 4617,
-                    "geom_type": {table: df.geom_type.iloc[0] for table, df in dframes.items() if "geometry" in
-                                  df.columns}
+                    "outer_pbar": export_progress
                 }
 
                 # Export data.
