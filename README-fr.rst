@@ -2,7 +2,7 @@ Réseau routier national (RRN)
 =============================
 
 .. image:: https://img.shields.io/badge/Repository-nrn--rrn-brightgreen.svg?style=flat-square&logo=github
-   :target: https://github.com/jessestewart1/nrn-rrn
+   :target: https://github.com/StatCan/nrn-rrn
 .. image:: https://img.shields.io/badge/License-BSD%203--Clause-blue.svg?style=flat-square
    :target: https://opensource.org/licenses/BSD-3-Clause
 .. image:: https://readthedocs.org/projects/nrn-rrn-docs/badge/?style=flat-square
@@ -65,9 +65,9 @@ Utilisez les étapes suivantes pour installer le référentiel ``nrn-rrn`` et l'
 
   a) Utilisation de Git : ::
 
-      git clone https://github.com/jessestewart1/nrn-rrn.git
+      git clone https://github.com/StatCan/nrn-rrn.git
 
-  b) Installation manuelle : Téléchargez et décompressez le `référentiel <https://github.com/jessestewart1/nrn-rrn>`_.
+  b) Installation manuelle : Téléchargez et décompressez le `référentiel <https://github.com/StatCan/nrn-rrn>`_.
 
 2. Créez l'environnement conda à partir du fichier ``environment.yml`` : ::
 

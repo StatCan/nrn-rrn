@@ -60,7 +60,7 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "GitHub",
-            "url": "https://github.com/jessestewart1/nrn-rrn",
+            "url": "https://github.com/StatCan/nrn-rrn",
             "icon": "fab fa-github",
             "type": "fontawesome"
         },
