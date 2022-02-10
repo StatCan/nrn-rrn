@@ -2,7 +2,7 @@ National Road Network (NRN)
 ===========================
 
 .. image:: https://img.shields.io/badge/Repository-nrn--rrn-brightgreen.svg?style=flat-square&logo=github
-   :target: https://github.com/jessestewart1/nrn-rrn
+   :target: https://github.com/StatCan/nrn-rrn
 .. image:: https://img.shields.io/badge/License-BSD%203--Clause-blue.svg?style=flat-square
    :target: https://opensource.org/licenses/BSD-3-Clause
 .. image:: https://readthedocs.org/projects/nrn-rrn-docs/badge/?style=flat-square
@@ -62,9 +62,9 @@ Use the following steps to install the ``nrn-rrn`` repository and conda environm
 
   a) Using Git::
 
-      git clone https://github.com/jessestewart1/nrn-rrn.git
+      git clone https://github.com/StatCan/nrn-rrn.git
 
-  b) Manual install: Download and unzip the `repository <https://github.com/jessestewart1/nrn-rrn>`_.
+  b) Manual install: Download and unzip the `repository <https://github.com/StatCan/nrn-rrn>`_.
 
 2. Create the conda environment from the ``environment.yml`` file::
 
