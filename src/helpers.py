@@ -11,7 +11,7 @@ import sqlite3
 import sys
 import time
 import yaml
-from collections import defaultdict
+from collections import ChainMap, defaultdict
 from operator import attrgetter, itemgetter
 from osgeo import ogr, osr
 from pathlib import Path
@@ -316,31 +316,20 @@ def explode_geometry(gdf: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
         return gdf.copy(deep=True)
 
 
-def export(dataframes: Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]], dst: Path, driver: str = "GPKG",
-           type_schemas: Union[None, dict] = None, name_schemas: Union[None, dict] = None, merge_schemas: bool = False,
-           nln_map: Union[Dict[str, str], None] = None, keep_uuid: bool = True,
+def export(dfs: Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]], dst: Path, driver: str = "GPKG",
+           name_schemas: Union[None, dict] = None, merge_schemas: bool = False, keep_uuid: bool = True,
            outer_pbar: Union[tqdm, trange, None] = None) -> None:
     """
     Exports one or more (Geo)DataFrames as a specified OGR driver file / layer.
 
-    :param Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]] dataframes: dictionary of NRN dataset names and associated
-        (Geo)DataFrames.
+    :param Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]] dfs: dictionary of NRN dataset names and (Geo)DataFrames.
     :param Path dst: output path.
-    :param str driver: OGR driver short name, default 'GPKG'.
-    :param Union[None, dict] type_schemas: optional dictionary mapping of field types and widths for each provided
+    :param str driver: OGR driver short name, default='GPKG'.
+    :param Union[None, dict] name_schemas: optional dictionary mapping of dataset and field names for each provided
         dataset. Expected dictionary format:
         {
             <dataset_name>:
-                spatial: <bool>
-                fields:
-                    <field_name>: [<field_type>, <field_length>]
-                    ...
-                ...
-        }
-    :param Union[None, dict] name_schemas: optional dictionary mapping of field names for each provided dataset.
-        Expected dictionary format:
-        {
-            <dataset_name>:
+                name: <new_dataset_name>
                 fields:
                     <field_name>: <new_field_name>
                     ...
@@ -348,7 +337,6 @@ def export(dataframes: Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]], dst: Pa
         }
     :param bool merge_schemas: optional flag to merge type and name schemas such that attributes from any dataset can
         exist on each provided dataset, default False.
-    :param Union[Dict[str, str], None] nln_map: optional dictionary mapping of new layer names.
     :param bool keep_uuid: optional flag to preserve the uuid column, default True.
     :param Union[tqdm, trange, None] outer_pbar: optional pre-existing tqdm progress bar.
     """
@@ -371,79 +359,60 @@ def export(dataframes: Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]], dst: Pa
             dst.mkdir(parents=True, exist_ok=True)
             source = None
 
-        # Compile type schemas.
-        if not type_schemas:
-            type_schemas = load_yaml(distribution_format_path)
+        # Compile type schemas, conditionally merge.
+        type_schemas = load_yaml(distribution_format_path)
+        if merge_schemas:
+            merged = {"spatial": any(type_schemas[table]["spatial"] for table in dfs),
+                      "fields": dict(ChainMap(*[type_schema["fields"] for table, type_schema in type_schemas.items()]))}
+            type_schemas = {table: merged for table in type_schemas}
 
         # Compile name schemas (filter datasets and fields within the existing type schemas and dataframe columns).
         if not name_schemas:
-            name_schemas = defaultdict(dict)
-            for table in type_schemas:
-                name_schemas[table]["fields"] = {field: field for field in type_schemas[table]["fields"]}
-
-        # Conditionally merge schemas.
-        if merge_schemas:
-            type_schemas_merged, name_schemas_merged = defaultdict(dict), defaultdict(dict)
-            for table in type_schemas:
-                type_schemas_merged["fields"] |= type_schemas[table]["fields"]
-                name_schemas_merged["fields"] |= name_schemas[table]["fields"]
-            if any(type_schemas[table]["spatial"] for table in dataframes):
-                type_schemas_merged["spatial"] = True
-
-            # Update schemas with merged results.
-            type_schemas = {table: type_schemas_merged for table in type_schemas}
-            name_schemas = {table: name_schemas_merged for table in name_schemas}
+            name_schemas = {table: {"name": table, "fields": dict(zip(table_schema["fields"], table_schema["fields"]))}
+                            for table, table_schema in type_schemas.items()}
 
         # Iterate dataframes.
-        for table, df in dataframes.items():
+        for table, df in dfs.items():
+
+            name_schema, type_schema = name_schemas[table], type_schemas[table]
+            schema = {"name": name_schema["name"],
+                      "spatial": type_schema["spatial"],
+                      "fields": {field: {"name": name_schema["fields"][field],
+                                         "type": type_schema["fields"][field][0],
+                                         "width": type_schema["fields"][field][1]}
+                                 for field in set(name_schema["fields"]).intersection(set(df.columns))}}
+
+            # Conditionally add uuid to schema.
+            if keep_uuid and "uuid" in df.columns:
+                schema["fields"]["uuid"] = {"name": "uuid", "type": "str", "width": 32}
 
             # Configure layer geometry type and spatial reference system.
-            spatial = type_schemas[table]["spatial"]
+            spatial = schema["spatial"]
             srs = None
             geom_type = ogr.wkbNone
 
-            if spatial:
+            if schema["spatial"]:
                 srs = osr.SpatialReference()
                 srs.ImportFromEPSG(df.crs.to_epsg())
                 geom_type = attrgetter(f"wkb{df.geom_type.iloc[0]}")(ogr)
 
             # Create source (non-layer-based drivers only) and layer.
-            nln = str(nln_map[table]) if nln_map else table
             if dst.suffix:
-                layer = source.CreateLayer(name=nln, srs=srs, geom_type=geom_type, options=["OVERWRITE=YES"])
+                layer = source.CreateLayer(name=schema["name"], srs=srs, geom_type=geom_type, options=["OVERWRITE=YES"])
             else:
-                source = driver.CreateDataSource(str(dst / nln))
-                layer = source.CreateLayer(name=Path(nln).stem, srs=srs, geom_type=geom_type)
+                source = driver.CreateDataSource(str(dst / schema["name"]))
+                layer = source.CreateLayer(name=Path(schema["name"]).stem, srs=srs, geom_type=geom_type)
 
-            # Configure layer schema (field definitions).
+            # Set field definitions from schema.
             ogr_field_map = {"float": ogr.OFTReal, "int": ogr.OFTInteger, "str": ogr.OFTString}
-
-            # Filter type and name schemas.
-            type_schema = {field: specs for field, specs in type_schemas[table]["fields"].items() if field in df}
-            valid_fields = set(type_schema).intersection(set(df.columns))
-            name_schema = {field: map_field for field, map_field in name_schemas[table]["fields"].items()
-                           if field in valid_fields}
-
-            # Conditionally add uuid to schemas.
-            if keep_uuid and "uuid" in df.columns:
-                type_schema["uuid"] = ["str", 32]
-                name_schema["uuid"] = "uuid"
-
-            # Set field definitions from schemas.
-            for field_name, mapped_field_name in name_schema.items():
-                field_type, field_width = type_schema[field_name]
-                field_defn = ogr.FieldDefn(mapped_field_name, ogr_field_map[field_type])
-                field_defn.SetWidth(field_width)
+            for field, specs in schema["fields"].items():
+                field_defn = ogr.FieldDefn(specs["name"], ogr_field_map[specs["type"]])
+                field_defn.SetWidth(specs["width"])
                 layer.CreateField(field_defn)
 
-            # Remove invalid columns and reorder dataframe to match name schema.
-            if spatial:
-                df = df[[*name_schema, "geometry"]].copy(deep=True)
-            else:
-                df = df[[*name_schema]].copy(deep=True)
-
-            # Map dataframe column names (does nothing if already mapped).
-            df.rename(columns=name_schema, inplace=True)
+            # Reorder and rename columns to match schema.
+            df = df[[*schema["fields"], "geometry"] if spatial else [*schema["fields"]]].copy(deep=True)
+            df.rename(columns={field: specs["name"] for field, specs in schema["fields"].items()}, inplace=True)
 
             # Write layer.
             layer.StartTransaction()
@@ -495,8 +464,7 @@ def extract_nrn(url: str, source_code: int) -> Dict[str, Union[gpd.GeoDataFrame,
 
     :param str url: NRN database connection URL.
     :param int source_code: code for the source province / territory.
-    :return Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]]: dictionary of NRN dataset names and associated
-        (Geo)DataFrames.
+    :return Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]]: dictionary of NRN dataset names and (Geo)DataFrames.
     """
 
     logger.info(f"Extracting NRN datasets for source code: {source_code}.")

@@ -160,15 +160,14 @@ class Export:
                 export_dir, export_file = itemgetter("dir", "file")(export_specs["data"])
                 export_dir = self.dst / self.format_path(export_dir) / self.format_path(export_file)
 
-                # Configure mapped layer names.
-                nln_map = {table: self.format_path(export_specs["conform"][table]["name"]) for table in dframes}
+                # Configure formatted layer names.
+                for table, specs in export_specs["conform"].items():
+                    export_specs["conform"][table]["name"] = self.format_path(specs["name"])
 
                 # Configure export kwargs.
                 kwargs = {
-                    "driver": {"gpkg": "GPKG", "shp": "ESRI Shapefile"}[frmt],
-                    "type_schemas": helpers.load_yaml(filepath.parents[1] / "distribution_format.yaml"),
+                    "driver": export_specs["data"]["driver"],
                     "name_schemas": export_specs["conform"],
-                    "nln_map": nln_map,
                     "keep_uuid": False,
                     "outer_pbar": export_progress
                 }
