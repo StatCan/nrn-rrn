@@ -329,7 +329,7 @@ Le nom de rue, nom de lieu et l'intervalle d'adresse ont été aussi ajoutés en
 segment routier.
 
 :doc:`product_distribution_formats` illustre la matérialisation du modèle conceptuel du Catalogue d'entités dans le
-modèle physique des données du produit RRN selon les formats de distribution GML, GPKG, KML et SHP.
+modèle physique des données du produit RRN selon les formats de distribution.
 
 Catalogue d'entités
 ^^^^^^^^^^^^^^^^^^^
@@ -573,10 +573,7 @@ sont décrites dans le :doc:`change_management`.
 Livraison du produit
 ====================
 
-Les formats de fichiers de sortie disponibles pour le produit sont : GML (*Geography Markup Language*), GPKG (*OGR
-Geopackage*), KML (*Keyhole Markup Language*) and SHP (*ESRI*\ |trade| *Shapefile*).
-
-:doc:`product_distribution_formats` décrit le nom des fichiers, entités et attributs.
+:doc:`product_distribution_formats` décrit les formats de sortie, le nom des fichiers, entités et attributs.
 
 L'utilisation des données est soumise aux conditions énoncées dans l'`Accord de licence d'utilisation sans restriction
 de GéoBase <http://www.geobase.ca>`_.

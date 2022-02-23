@@ -318,7 +318,7 @@ Otherwise, Object Metadata attributes describe the sources used for creation.
 The street name, place name and address range were also added as attributes on the geometry of the entity Road Segment.
 
 :doc:`product_distribution_formats` demonstrates the implementation of the conceptual model into the physical model of
-the NRN data product according to the distribution formats GML, GPKG, KML and SHP.
+the NRN data product according to the distribution formats.
 
 Feature catalogue
 ^^^^^^^^^^^^^^^^^
@@ -550,10 +550,7 @@ in :doc:`change_management`.
 Data Product Delivery
 =====================
 
-Output file formats available for the product are: GML (*Geography Markup Language*), GPKG (*OGR Geopackage*), KML
-(*Keyhole Markup Language*) and SHP (*ESRI*\ |trade| *Shapefile*).
-
-The name of the files, entities and attributes are described in :doc:`product_distribution_formats`.
+The name of the output formats, files, entities and attributes are described in :doc:`product_distribution_formats`.
 
 Data are subject to the `GeoBase Unrestricted Use Licence Agreement <http://www.geobase.ca>`_.
 

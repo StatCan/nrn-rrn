@@ -1,17 +1,13 @@
 import click
 import jinja2
 import logging
-import numpy as np
-import pandas as pd
 import re
 import sys
 import yaml
 import zipfile
-from collections import Counter
 from datetime import datetime
-from operator import attrgetter, itemgetter
+from operator import itemgetter
 from pathlib import Path
-from shapely.geometry import LineString
 from tqdm import tqdm
 from tqdm.auto import trange
 from typing import Union
@@ -102,7 +98,6 @@ class Export:
 
         self.configure_release_version()
         self.gen_french_dataframes()
-        self.define_kml_groups()
         self.export_data()
         self.zip_data()
         self.update_distribution_docs()
@@ -113,7 +108,6 @@ class Export:
         logger.info("Configuring NRN release version.")
 
         # Extract the version number and release year for current source from the release notes.
-        release_year = None
         release_notes_path = filepath.parent / "distribution_docs/release_notes.yaml"
         release_notes = helpers.load_yaml(release_notes_path)
 
@@ -140,74 +134,6 @@ class Export:
 
         logger.info(f"Configured NRN release version: {self.major_version}.{self.minor_version}")
 
-    def define_kml_groups(self) -> None:
-        """
-        Defines groups by which to segregate the kml-bound input GeoDataFrame.
-        This is required due to the low feature and size limitations of kml.
-        """
-
-        logger.info("Defining KML groups.")
-        self.kml_groups = dict()
-        placenames, placenames_exceeded = None, None
-        kml_limit = 250
-
-        # Iterate languages.
-        for lang in ("en", "fr"):
-
-            logger.info(f"Defining KML groups for language: {lang}.")
-
-            # Retrieve source dataframe.
-            df = self.dframes[lang]["roadseg"].copy(deep=True)
-
-            # Compile placenames.
-            if placenames is None:
-
-                # Compile placenames.
-                placenames = pd.Series([*df["l_placenam"], *df.loc[df["l_placenam"] != df["r_placenam"], "r_placenam"]])
-
-                # Flag limit-exceeding placenames.
-                placenames_exceeded = {name for name, count in Counter(placenames).items() if count > kml_limit}
-
-                # Compile unique placename values.
-                placenames = set(placenames)
-
-            # Swap English-French default placename value, only if the value is present.
-            else:
-                default_add = self.defaults["fr"]["roadseg"]["l_placenam"]
-                default_rm = self.defaults["en"]["roadseg"]["l_placenam"]
-                if default_rm in placenames:
-                    placenames = {*placenames - {default_rm}, default_add}
-                if default_rm in placenames_exceeded:
-                    placenames_exceeded = {*placenames_exceeded - {default_rm}, default_add}
-
-            # Compile export parameters.
-            # name: placename as a valid file name.
-            # query: pandas query for all records with the placename.
-            names = list()
-            queries = list()
-
-            # Iterate placenames and compile export parameters.
-            for placename in sorted(placenames):
-
-                if placename in placenames_exceeded:
-
-                    # Compile indexes of placename records.
-                    indexes = df.query(f"l_placenam==\"{placename}\" or r_placenam==\"{placename}\"").index
-                    for index, indexes_range in enumerate(np.array_split(indexes, (len(indexes) // kml_limit) + 1)):
-
-                        # Configure export parameters.
-                        names.append(re.sub(r"[\W_]+", "_", f"{placename}_{index}"))
-                        queries.append(f"index.isin({list(indexes_range)})")
-
-                else:
-
-                    # Configure export parameters.
-                    names.append(re.sub(r"[\W_]+", "_", placename))
-                    queries.append(f"l_placenam==\"{placename}\" or r_placenam==\"{placename}\"")
-
-            # Store results.
-            self.kml_groups[lang] = pd.DataFrame({"name": names, "query": queries})
-
     def export_data(self) -> None:
         """Exports and packages all data."""
 
@@ -217,8 +143,7 @@ class Export:
         file_count = 0
         for lang, dfs in self.dframes.items():
             for frmt in self.formats:
-                count = len(set(dfs).intersection(set(self.distribution_formats[lang][frmt]["conform"])))
-                file_count += (len(self.kml_groups[lang]) * count) if frmt == "kml" else count
+                file_count += len(set(dfs).intersection(set(self.distribution_formats[lang][frmt]["conform"])))
         export_progress = trange(file_count, desc="Exporting data", bar_format=self.bar_format)
 
         # Iterate export formats and languages.
@@ -235,52 +160,20 @@ class Export:
                 export_dir, export_file = itemgetter("dir", "file")(export_specs["data"])
                 export_dir = self.dst / self.format_path(export_dir) / self.format_path(export_file)
 
-                # Configure mapped layer names.
-                nln_map = {table: self.format_path(export_specs["conform"][table]["name"]) for table in dframes}
+                # Configure formatted layer names.
+                for table, specs in export_specs["conform"].items():
+                    export_specs["conform"][table]["name"] = self.format_path(specs["name"])
 
                 # Configure export kwargs.
                 kwargs = {
-                    "driver": {"gml": "GML", "gpkg": "GPKG", "kml": "KML", "shp": "ESRI Shapefile"}[frmt],
-                    "type_schemas": helpers.load_yaml(filepath.parents[1] / "distribution_format.yaml"),
-                    "export_schemas": export_specs,
-                    "nln_map": nln_map,
+                    "driver": export_specs["data"]["driver"],
+                    "name_schemas": export_specs["conform"],
                     "keep_uuid": False,
-                    "outer_pbar": export_progress,
-                    "epsg": 4617,
-                    "geom_type": {table: df.geom_type.iloc[0] for table, df in dframes.items() if "geometry" in
-                                  df.columns}
+                    "outer_pbar": export_progress
                 }
 
-                # Configure KML.
-                if frmt == "kml":
-
-                    # Configure export names.
-                    self.kml_groups[lang]["name"] = self.kml_groups[lang]["name"].map(
-                        lambda name: str(export_dir).replace("<name>", name))
-
-                    # Iterate export datasets.
-                    for table, df in dframes.items():
-
-                        # Reverse lat/lon ordering.
-                        df = df.copy(deep=True)
-                        df["geometry"] = df["geometry"].map(
-                            lambda g: LineString(pt[::-1] for pt in attrgetter("coords")(g)))
-
-                        # Map dataframe queries (more efficient than iteratively querying).
-                        self.kml_groups[lang]["df"] = self.kml_groups[lang]["query"].map(
-                            lambda query: df.query(query).copy(deep=True))
-
-                        # Iterate KML groups.
-                        for kml_group in self.kml_groups[lang].itertuples(index=False):
-
-                            # Export data.
-                            kml_name, kml_df = attrgetter("name", "df")(kml_group)
-                            helpers.export({table: kml_df}, kml_name, **kwargs)
-
-                # Configure non-KML.
-                else:
-                    # Export data.
-                    helpers.export(dframes, export_dir, **kwargs)
+                # Export data.
+                helpers.export(dframes, export_dir, **kwargs)
 
         # Close progress bar.
         export_progress.close()
