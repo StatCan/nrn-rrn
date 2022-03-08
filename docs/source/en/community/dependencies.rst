@@ -54,11 +54,6 @@ similar to Python syntax. Then the template is passed data to render the final d
 
 ``Matplotlib`` is a comprehensive library for creating static, animated, and interactive visualizations in Python.
 
-`MyST-NB (myst-nb) <https://myst-nb.readthedocs.io/>`_
-======================================================
-
-``MyST-NB`` is a ``Sphinx`` extension for working with Jupyter Notebook (.ipynb) files.
-
 `NumPy (numpy) <https://numpy.org/>`_
 =====================================
 
