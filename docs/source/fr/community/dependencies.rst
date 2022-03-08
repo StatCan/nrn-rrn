@@ -57,11 +57,6 @@ document final.
 
 ``Matplotlib`` est une bibliothèque complète pour créer des visualisations statiques, animées et interactives en Python.
 
-`MyST-NB (myst-nb) <https://myst-nb.readthedocs.io/>`_
-======================================================
-
-``MyST-NB`` est une extension ``Sphinx`` pour travailler avec les fichiers Jupyter Notebook (.ipynb).
-
 `NumPy (numpy) <https://numpy.org/>`_
 =====================================
 
