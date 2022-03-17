@@ -325,7 +325,7 @@ class Confirm:
 
         # Construct standardized values and query.
         values = "\n".join(map(str, identifiers))
-        query = f"\"{field}\" in {*identifiers,}"
+        query = f"\"{field}\" in {*identifiers,}".replace(",)", ")")
 
         # Log results.
         logger.exception(f"Unable to proceed with {process} due to invalid geometries for the following "
