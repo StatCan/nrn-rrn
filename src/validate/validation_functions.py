@@ -349,9 +349,9 @@ class Validator:
 
                 # Compile error logs.
                 errors["values"] = deadends["ids"].map(
-                    lambda ids: f"Disconnected features are too close: {*ids,}").to_list()
+                    lambda ids: f"Disconnected features are too close: {*ids,}".replace(",)", ")")).to_list()
                 vals = set(chain.from_iterable(deadends["ids"]))
-                errors["query"] = f"\"{self.id}\" in {*vals,}"
+                errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors
 
@@ -396,7 +396,7 @@ class Validator:
                 # Compile error logs.
                 vals = set(df.loc[flag].index)
                 errors["values"] = vals
-                errors["query"] = f"\"{self.id}\" in {*vals,}"
+                errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors
 
@@ -435,7 +435,7 @@ class Validator:
                 # Compile error logs.
                 vals = set(coord_pairs.loc[flag].index)
                 errors["values"] = vals
-                errors["query"] = f"\"{self.id}\" in {*vals,}"
+                errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors
 
@@ -478,7 +478,7 @@ class Validator:
                 # Compile error logs.
                 vals = set(df.loc[flag].index)
                 errors["values"] = vals
-                errors["query"] = f"\"{self.id}\" in {*vals,}"
+                errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors
 
@@ -502,7 +502,7 @@ class Validator:
             # Compile error logs.
             vals = set(df.loc[flag].index)
             errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}"
+            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors
 
@@ -541,7 +541,7 @@ class Validator:
 
         # Compile error log query.
         if len(errors["values"]):
-            errors["query"] = f"\"{self.id}\" in {*errors['values'],}"
+            errors["query"] = f"\"{self.id}\" in {*errors['values'],}".replace(",)", ")")
 
         return errors
 
@@ -571,7 +571,7 @@ class Validator:
             # Compile error logs.
             vals = set(series.loc[flag].index)
             errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}"
+            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors
 
@@ -611,7 +611,7 @@ class Validator:
             # Compile error logs.
             vals = set(series.loc[flag].index)
             errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}"
+            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors
 
@@ -656,7 +656,7 @@ class Validator:
 
             vals = set(dups.index)
             errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}"
+            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors
 
@@ -683,7 +683,7 @@ class Validator:
             # Compile error logs.
             vals = set(overlaps.loc[flag].index)
             errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}"
+            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors
 
@@ -713,7 +713,7 @@ class Validator:
             # Compile error logs.
             vals = set(series.loc[flag].index)
             errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}"
+            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors
 
@@ -746,7 +746,7 @@ class Validator:
                 # Compile error logs.
                 vals = set(df.loc[df["nid"].isin(invalid_nids)].index)
                 errors["values"] = vals
-                errors["query"] = f"\"{self.id}\" in {*vals,}"
+                errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors
 
@@ -776,7 +776,7 @@ class Validator:
             # Compile error logs.
             vals = set(df.loc[flag].index)
             errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}"
+            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors
 
@@ -809,7 +809,7 @@ class Validator:
 
                 # Compile error logs.
                 errors["values"] = invalid_ids
-                errors["query"] = f"\"{self.id}\" in {*invalid_ids,}"
+                errors["query"] = f"\"{self.id}\" in {*invalid_ids,}".replace(",)", ")")
 
         return errors
 
@@ -845,7 +845,7 @@ class Validator:
             # Compile error logs.
             vals = set(series.loc[flag].index)
             errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}"
+            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors
 
@@ -905,7 +905,7 @@ class Validator:
                     # Compile error logs.
                     vals = set(series.loc[flag].index)
                     errors["values"] = vals
-                    errors["query"] = f"\"{self.id}\" in {*vals,}"
+                    errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors
 
@@ -933,7 +933,7 @@ class Validator:
             # Compile error logs.
             vals = set(series.loc[flag].index)
             errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}"
+            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors
 
@@ -957,7 +957,7 @@ class Validator:
             # Compile error logs.
             vals = set(df.iloc[invalid_idxs].index)
             errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}"
+            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors
 
@@ -985,6 +985,6 @@ class Validator:
             # Compile error logs.
             vals = set(series.loc[flag].index)
             errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}"
+            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors
