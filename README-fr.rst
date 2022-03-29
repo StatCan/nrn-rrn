@@ -8,7 +8,7 @@ Réseau routier national (RRN)
 .. image:: https://readthedocs.org/projects/nrn-rrn-docs/badge/?style=flat-square
    :target: https://nrn-rrn-docs.readthedocs.io/en/latest/
 
-.. include:: /source/_static/interactive_maps/process_overview.rst
+.. include:: /source/_static/maps/process_overview.rst
 
 Description
 -----------

@@ -53,4 +53,7 @@ des fichiers de configuration source individuels (voir :doc:`/source/fr/user_gui
 suivante montre les juridictions fournissant actuellement des données (ou hébergeant une plateforme de données ouvertes
 à partir de laquelle les données sont récupérées) pour le projet RRN :
 
-.. include:: /source/_static/interactive_maps/data_providers.rst
+.. figure:: /source/_static/maps/data_providers.png
+    :alt: Fournisseurs de données actuels
+
+    Figure 1 : Fournisseurs de données actuels.
