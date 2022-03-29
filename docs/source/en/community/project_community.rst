@@ -52,4 +52,7 @@ Data providers are continuously being added to the NRN project and their metadat
 configuration files (see :doc:`/source/en/user_guide/conform`). The following coverage map shows the jurisdictions
 currently providing data (or hosting an open data platform from which data is being retrieved) for the NRN project:
 
-.. include:: /source/_static/interactive_maps/data_providers.rst
+.. figure:: /source/_static/maps/data_providers.png
+    :alt: Current data providers
+
+    Figure 1: Current data providers.
