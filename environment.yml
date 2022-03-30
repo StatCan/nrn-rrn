@@ -19,7 +19,7 @@ dependencies:
   - pyyaml=5.4.1
   - requests=2.25.1
   - shapely=1.8.0
-  - sphinx=3.5.1
+  - sphinx=4.5.0
   - sqlalchemy=1.4.21
   - tabulate=0.8.9
   - tqdm=4.58.0
