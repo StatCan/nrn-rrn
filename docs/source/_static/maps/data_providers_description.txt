@@ -1,0 +1,4 @@
+CSD boundary file with the following modifications:
+
+1. Filtered to only those polygons with area >= 5000000 m2.
+2. Simplified geometry with parameters: tolerance=100, preserve_topology=True.
