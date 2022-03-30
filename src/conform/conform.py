@@ -10,11 +10,11 @@ import shutil
 import sys
 import uuid
 import zipfile
-from collections import Counter
 from copy import deepcopy
 from datetime import datetime
 from operator import itemgetter
 from pathlib import Path
+from tabulate import tabulate
 from typing import List, Union
 
 filepath = Path(__file__).resolve()
@@ -137,30 +137,25 @@ class Conform:
                     series_new = helpers.apply_domain(series_orig, domain=domain["lookup"],
                                                       default=self.defaults[table][field])
 
-                    # Compile original and new dtype names (for logging).
-                    dtype_orig = self.target_gdframes[table][field].dtype.name
-                    dtype_new = self.dtypes[table][field]
-
                     # Force adjust data type.
-                    series_new = series_new.map(lambda val: helpers.cast_dtype(val, dtype=dtype_new,
+                    series_new = series_new.map(lambda val: helpers.cast_dtype(val, dtype=self.dtypes[table][field],
                                                                                default=self.defaults[table][field]))
 
                     # Store results to target dataframe.
                     self.target_gdframes[table][field] = series_new.copy(deep=True)
 
                     # Compile and log modifications.
-                    mods = series_orig.astype(str) != series_new.astype(str)
-                    if mods.any():
+                    flag_mods = series_orig.astype(str) != series_new.astype(str)
+                    if flag_mods.any():
 
                         # Compile and quantify modifications.
-                        df = pd.DataFrame({"orig": series_orig[mods], "new": series_new[mods]})
-                        counts = Counter(series_orig[mods].fillna(-99))
+                        mods = pd.DataFrame({"From": series_orig[flag_mods], "To": series_new[flag_mods]})\
+                            .fillna("None").value_counts(sort=True).reset_index(name="Count")
+                        mods["Count"] = mods["Count"].map(lambda val: f"{val:,}")
 
-                        # Iterate and log record modifications.
-                        for vals in df.loc[~df.duplicated(keep="first")].values:
-
-                            logger.warning(f"Modified {counts[-99] if pd.isna(vals[0]) else counts[vals[0]]} "
-                                           f"instance(s) of {vals[0]} ({dtype_orig}) to {vals[1]} ({dtype_new}).")
+                        # Log modifications.
+                        tbl = tabulate(mods.values, headers=mods.columns, tablefmt="rst")
+                        logger.warning("Values have been modified:\n" + tbl)
 
         except (AttributeError, KeyError, ValueError):
             logger.exception(f"Invalid schema definition for {table}.{field}.")
@@ -229,7 +224,7 @@ class Conform:
 
                         # Create dataframe to hold results if multiple fields are given and not processed separately.
                         if not process_separately or len(source_field["fields"]) == 1:
-                            results = pd.Series()
+                            results = pd.Series(dtype=object)
                         else:
                             results = pd.DataFrame(columns=range(len(source_field["fields"])))
 
