@@ -12,9 +12,9 @@ license:
   text:
 language: en
 data:
-  filename: 2021/ab.gdb
+  filename: 2021/ab.gpkg
   layer: ROADSEG_Street_and_Place
-  driver: OpenFileGDB
+  driver: GPKG
   crs: "EPSG:3401"
   spatial: True
   query:
