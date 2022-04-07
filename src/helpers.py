@@ -375,7 +375,7 @@ def export(dfs: Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]], dst: Path, dri
         for table, df in dfs.items():
 
             name_schema, type_schema = name_schemas[table], type_schemas[table]
-            schema = {"name": name_schema["name"],
+            schema = {"name": str(name_schema["name"]),
                       "spatial": type_schema["spatial"],
                       "fields": {field: {"name": name_schema["fields"][field],
                                          "type": type_schema["fields"][field][0],
