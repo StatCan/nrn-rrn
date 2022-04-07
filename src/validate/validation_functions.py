@@ -30,8 +30,9 @@ logger.addHandler(handler)
 def ordered_pairs(coords: Tuple[tuple, ...]) -> List[Tuple[tuple, tuple]]:
     """
     Creates an ordered sequence of adjacent coordinate pairs, sorted.
+
     :param Tuple[tuple, ...] coords: tuple of coordinate tuples.
-    :return List[Tuple[tuple, tuple]]: ordered sequence of coordinate pair tuples.
+    :return List[Tuple[tuple, tuple], ...]: ordered sequence of coordinate pair tuples.
     """
 
     coords_1, coords_2 = tee(coords)

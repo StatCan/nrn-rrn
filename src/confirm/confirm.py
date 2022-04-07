@@ -5,6 +5,7 @@ import pandas as pd
 import string
 import sys
 import uuid
+from itertools import compress
 from operator import attrgetter, itemgetter
 from pathlib import Path
 from shapely.geometry import LineString, MultiLineString
@@ -227,19 +228,19 @@ class Confirm:
                 # Compile index of dissolved geometry associated with each original geometry.
                 covered_by = df_orig["geometry"].map(lambda g: df.sindex.query(g, predicate="covered_by"))
 
-                # Log records with invalid geometry and exit, if required.
+                # Identify invalid linkages (occurs for complex LineStrings).
                 invalid = set(covered_by.loc[covered_by.map(len) != 1].index)
                 if len(invalid):
-                    self.log_invalids(process="nid generation and recovery", identifiers=invalid, field="uuid")
 
-                else:
+                    # Resolve invalid linkages.
+                    covered_by = self.resolve_complex_linkages(df_orig, df, covered_by, invalid)
 
-                    # Generate dissolved dataset idx-nid lookup and recover nids for non-dissolved dataset.
-                    idx_nid_lookup = dict(zip(range(len(df)), df["nid"]))
-                    covered_by = covered_by.map(itemgetter(0)).map(idx_nid_lookup)
+                # Generate dissolved dataset idx-nid lookup and recover nids for non-dissolved dataset.
+                idx_nid_lookup = dict(zip(range(len(df)), df["nid"]))
+                covered_by = covered_by.map(itemgetter(0)).map(idx_nid_lookup)
 
-                    # Overwrite dissolved dataset with non-dissolved nid series.
-                    df = pd.DataFrame({"nid": covered_by.values}, index=covered_by.index)
+                # Overwrite dissolved dataset with non-dissolved nid series.
+                df = pd.DataFrame({"nid": covered_by.values}, index=covered_by.index)
 
             # Store results.
             self.dframes[table]["nid"] = df["nid"].copy(deep=True)
@@ -297,40 +298,53 @@ class Confirm:
             # Compile index of dissolved geometry associated with each original geometry.
             covered_by = struct["geometry"].map(lambda g: struct_merge.sindex.query(g, predicate="covered_by"))
 
-            # Log records with invalid geometry and exit, if required.
+            # Identify invalid linkages (occurs for complex LineStrings).
             invalid = set(covered_by.loc[covered_by.map(len) != 1].index)
             if len(invalid):
-                self.log_invalids(process="structid generation and recovery", identifiers=invalid, field="uuid")
 
-            else:
+                # Resolve invalid linkages.
+                covered_by = self.resolve_complex_linkages(struct, struct_merge, covered_by, invalid)
 
-                # Generate dissolved dataset idx-structid lookup and recover structids for non-dissolved dataset.
-                idx_structid_lookup = dict(zip(range(len(struct_merge)), struct_merge["structid"]))
-                covered_by = covered_by.map(itemgetter(0)).map(idx_structid_lookup)
+            # Generate dissolved dataset idx-structid lookup and recover structids for non-dissolved dataset.
+            idx_structid_lookup = dict(zip(range(len(struct_merge)), struct_merge["structid"]))
+            covered_by = covered_by.map(itemgetter(0)).map(idx_structid_lookup)
 
-                # Store results.
-                self.dframes["roadseg"].loc[covered_by.index, "structid"] = covered_by.copy(deep=True)
+            # Store results.
+            self.dframes["roadseg"].loc[covered_by.index, "structid"] = covered_by.copy(deep=True)
 
     @staticmethod
-    def log_invalids(process: str, identifiers: set, field: str = "uuid") -> None:
+    def resolve_complex_linkages(df: gpd.GeoDataFrame, df_dissolved: gpd.GeoDataFrame, covered_by: pd.Series,
+                                 invalid_ids: set) -> pd.Series:
         """
-        Logs the identifiers of records containing invalid geometries as both:
-        a) a list of identifiers
-        b) a query constructed from the identifiers and field name.
+        Resolves invalid covered_by results by identifying the indended result via intersection.
+        Invalid binary predicate results is a known issue for complex geometries
+        (https://github.com/shapely/shapely/issues/17).
 
-        :param str process: Name of the process in which the invalid geometries were flagged.
-        :param set identifiers: Set of identifiers.
-        :param str field: Field name containing the identifiers, default 'uuid'.
+        :param gpd.GeoDataFrame df: GeoDataFrame containing original geometries.
+        :param gpd.GeoDataFrame df_dissolved: GeoDataFrame containing dissolved geometries and NIDs.
+        :param pd.Series covered_by: covered_by results.
+        :param set invalid_ids: identifiers (indexes) of `df` records with invalid covered_by results.
+        :return pd.Series: resolved `covered_by`.
         """
 
-        # Construct standardized values and query.
-        values = "\n".join(map(str, identifiers))
-        query = f"\"{field}\" in {*identifiers,}".replace(",)", ")")
+        # Create subset dataframe containing invalid linkages.
+        df_ = df.loc[df.index.isin(invalid_ids)].copy(deep=True)
 
-        # Log results.
-        logger.exception(f"Unable to proceed with {process} due to invalid geometries for the following "
-                         f"{len(identifiers)} records (listed by {field}):\n{values}\n\nQuery: {query}")
-        sys.exit(1)
+        # Compile indexes and geometries of intersecting dissolved geometries.
+        df_["intersects_idxs"] = df_["geometry"].map(lambda g: df_dissolved.sindex.query(g, predicate="intersects"))
+        df_["intersects_geoms"] = df_["intersects_idxs"].map(lambda idxs: itemgetter(*idxs)(df_dissolved["geometry"]))
+
+        # Flag dissolved geometries which overlap the base geometry (must use `intersection` instead of predicates).
+        df_["overlaps_flag"] = df_[["geometry", "intersects_geoms"]].apply(lambda row: tuple(map(
+            lambda geom: isinstance(row[0].intersection(geom), (LineString, MultiLineString)), row[1])), axis=1)
+
+        # Compile index of flagged dissolved geometry.
+        df_["resolved_idx"] = df_[["intersects_idxs", "overlaps_flag"]].apply(lambda row: list(compress(*row)), axis=1)
+
+        # Update covered_by results with resolved identifiers.
+        covered_by.loc[df_.index] = df_["resolved_idx"]
+
+        return covered_by.copy(deep=True)
 
     @staticmethod
     def split_line(line: LineString, pts: Tuple[tuple, ...]) -> MultiLineString:
