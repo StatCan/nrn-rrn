@@ -16,7 +16,7 @@ Information sur les dernières mises à jour des jeux de données.
 =========================  ====  =======  ===================  ================  ====================
 Province / Territoire      Code  Édition  Date de publication  Date de validité  Nombre de kilomètres
 =========================  ====  =======  ===================  ================  ====================
-Alberta                    AB    14.0     2017-05              2017-02           237 811             
+Alberta                    AB    15.0     2022-04              2022-04           237 821             
 Colombie-Britannique       BC    14.0     2017-05              2017-03           93 961              
 Manitoba                   MB    6.0      2013-04              2012-04           89 003              
 Nouveau-Brunswick          NB    11.0     2021-06              2021-06           35 743              

@@ -16,7 +16,7 @@ Information on the latest dataset updates.
 =========================  ====  =======  ============  =============  ====================
 Province / Territory       Code  Edition  Release Date  Validity Date  Number of Kilometers
 =========================  ====  =======  ============  =============  ====================
-Alberta                    AB    14.0     2017-05       2017-02        237,811             
+Alberta                    AB    15.0     2022-04       2022-04        237,821             
 British Columbia           BC    14.0     2017-05       2017-03        93,961              
 Manitoba                   MB    6.0      2013-04       2012-04        89,003              
 New Brunswick              NB    11.0     2021-06       2021-06        35,743              
