@@ -1,0 +1,55 @@
+# Template for data not from source, but from directly updated NRN data.
+
+coverage:
+  country: ca
+  province: nt
+  ISO3166:
+    alpha2: CA-NT
+    country: Canada
+    subdivision: Northwest Territories
+  website:
+  update_frequency:
+license:
+  url:
+  text:
+language: en
+data:
+  filename: 2021/updated_nrn.gpkg
+  layer: addrange
+  driver: GPKG
+  crs:
+  spatial: False
+  query:
+conform:
+  addrange:
+    acqtech: acqtech
+    metacover: metacover
+    credate: credate
+    datasetnam: datasetnam
+    accuracy: accuracy
+    provider: provider
+    revdate: revdate
+    specvers: 2.0
+    l_altnanid: l_altnanid
+    r_altnanid: r_altnanid
+    l_digdirfg: l_digdirfg
+    r_digdirfg: r_digdirfg
+    l_hnumf: l_hnumf
+    r_hnumf: r_hnumf
+    l_hnumsuff: l_hnumsuff
+    r_hnumsuff: r_hnumsuff
+    l_hnumtypf: l_hnumtypf
+    r_hnumtypf: r_hnumtypf
+    l_hnumstr: l_hnumstr
+    r_hnumstr: r_hnumstr
+    l_hnuml: l_hnuml
+    r_hnuml: r_hnuml
+    l_hnumsufl: l_hnumsufl
+    r_hnumsufl: r_hnumsufl
+    l_hnumtypl: l_hnumtypl
+    r_hnumtypl: r_hnumtypl
+    nid: nid
+    l_offnanid: l_offnanid
+    r_offnanid: r_offnanid
+    l_rfsysind: l_rfsysind
+    r_rfsysind: r_rfsysind

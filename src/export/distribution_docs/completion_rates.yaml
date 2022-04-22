@@ -1,13 +1,13 @@
 addrange:
   accuracy:
     ab: 100
-    avg: 38
+    avg: 46
     bc: 0
     mb: 0
     nb: 0
     nl: 0
     ns: 100
-    nt: 0
+    nt: 100
     nu: 0
     'on': 100
     pe: 100
@@ -16,13 +16,13 @@ addrange:
     yt: 1
   acqtech:
     ab: 100
-    avg: 53
+    avg: 60
     bc: 0
     mb: 0
     nb: 100
     nl: 0
     ns: 0
-    nt: 0
+    nt: 100
     nu: 88
     'on': 100
     pe: 100
@@ -31,13 +31,13 @@ addrange:
     yt: 99
   credate:
     ab: 100
-    avg: 53
+    avg: 60
     bc: 0
     mb: 0
     nb: 99
     nl: 0
     ns: 99
-    nt: 0
+    nt: 100
     nu: 88
     'on': 100
     pe: 100
@@ -46,13 +46,13 @@ addrange:
     yt: 1
   datasetnam:
     ab: 100
-    avg: 62
+    avg: 69
     bc: 0
     mb: 0
     nb: 100
     nl: 0
     ns: 100
-    nt: 0
+    nt: 100
     nu: 100
     'on': 100
     pe: 100
@@ -76,13 +76,13 @@ addrange:
     yt: 0
   l_digdirfg:
     ab: 0
-    avg: 29
+    avg: 30
     bc: 0
     mb: 0
     nb: 99
     nl: 0
     ns: 100
-    nt: 0
+    nt: 6
     nu: 100
     'on': 0
     pe: 54
@@ -97,7 +97,7 @@ addrange:
     nb: 100
     nl: 0
     ns: 100
-    nt: 0
+    nt: 6
     nu: 100
     'on': 84
     pe: 54
@@ -112,7 +112,7 @@ addrange:
     nb: 100
     nl: 0
     ns: 100
-    nt: 0
+    nt: 6
     nu: 100
     'on': 84
     pe: 54
@@ -121,13 +121,13 @@ addrange:
     yt: 28
   l_hnumstr:
     ab: 0
-    avg: 37
+    avg: 38
     bc: 0
     mb: 0
     nb: 100
     nl: 0
     ns: 100
-    nt: 0
+    nt: 6
     nu: 100
     'on': 100
     pe: 54
@@ -142,7 +142,7 @@ addrange:
     nb: 99
     nl: 0
     ns: 0
-    nt: 0
+    nt: 1
     nu: 100
     'on': 0
     pe: 0
@@ -157,7 +157,7 @@ addrange:
     nb: 99
     nl: 0
     ns: 0
-    nt: 0
+    nt: 1
     nu: 100
     'on': 0
     pe: 0
@@ -166,13 +166,13 @@ addrange:
     yt: 1
   l_hnumtypf:
     ab: 0
-    avg: 27
+    avg: 28
     bc: 0
     mb: 0
     nb: 100
     nl: 0
     ns: 73
-    nt: 0
+    nt: 6
     nu: 100
     'on': 0
     pe: 54
@@ -181,13 +181,13 @@ addrange:
     yt: 28
   l_hnumtypl:
     ab: 0
-    avg: 27
+    avg: 28
     bc: 0
     mb: 0
     nb: 100
     nl: 0
     ns: 73
-    nt: 0
+    nt: 6
     nu: 100
     'on': 0
     pe: 54
@@ -196,13 +196,13 @@ addrange:
     yt: 28
   l_offnanid:
     ab: 100
-    avg: 62
+    avg: 69
     bc: 0
     mb: 0
     nb: 100
     nl: 0
     ns: 100
-    nt: 0
+    nt: 100
     nu: 100
     'on': 100
     pe: 100
@@ -211,13 +211,13 @@ addrange:
     yt: 100
   l_rfsysind:
     ab: 0
-    avg: 30
+    avg: 38
     bc: 0
     mb: 0
     nb: 100
     nl: 0
     ns: 100
-    nt: 0
+    nt: 100
     nu: 95
     'on': 0
     pe: 100
@@ -241,13 +241,13 @@ addrange:
     yt: 0
   nid:
     ab: 100
-    avg: 62
+    avg: 69
     bc: 0
     mb: 0
     nb: 100
     nl: 0
     ns: 100
-    nt: 0
+    nt: 100
     nu: 100
     'on': 100
     pe: 100
@@ -256,13 +256,13 @@ addrange:
     yt: 100
   provider:
     ab: 100
-    avg: 53
+    avg: 60
     bc: 0
     mb: 0
     nb: 100
     nl: 0
     ns: 100
-    nt: 0
+    nt: 100
     nu: 100
     'on': 84
     pe: 100
@@ -286,13 +286,13 @@ addrange:
     yt: 0
   r_digdirfg:
     ab: 0
-    avg: 29
+    avg: 30
     bc: 0
     mb: 0
     nb: 99
     nl: 0
     ns: 100
-    nt: 0
+    nt: 6
     nu: 100
     'on': 0
     pe: 55
@@ -307,7 +307,7 @@ addrange:
     nb: 100
     nl: 0
     ns: 100
-    nt: 0
+    nt: 6
     nu: 100
     'on': 84
     pe: 55
@@ -322,7 +322,7 @@ addrange:
     nb: 100
     nl: 0
     ns: 100
-    nt: 0
+    nt: 6
     nu: 100
     'on': 84
     pe: 55
@@ -331,13 +331,13 @@ addrange:
     yt: 27
   r_hnumstr:
     ab: 0
-    avg: 37
+    avg: 38
     bc: 0
     mb: 0
     nb: 100
     nl: 0
     ns: 100
-    nt: 0
+    nt: 6
     nu: 100
     'on': 100
     pe: 55
@@ -352,7 +352,7 @@ addrange:
     nb: 99
     nl: 0
     ns: 0
-    nt: 0
+    nt: 1
     nu: 100
     'on': 0
     pe: 0
@@ -367,7 +367,7 @@ addrange:
     nb: 99
     nl: 0
     ns: 0
-    nt: 0
+    nt: 1
     nu: 100
     'on': 0
     pe: 0
@@ -376,13 +376,13 @@ addrange:
     yt: 1
   r_hnumtypf:
     ab: 0
-    avg: 27
+    avg: 28
     bc: 0
     mb: 0
     nb: 100
     nl: 0
     ns: 73
-    nt: 0
+    nt: 6
     nu: 100
     'on': 0
     pe: 55
@@ -391,13 +391,13 @@ addrange:
     yt: 27
   r_hnumtypl:
     ab: 0
-    avg: 27
+    avg: 28
     bc: 0
     mb: 0
     nb: 100
     nl: 0
     ns: 73
-    nt: 0
+    nt: 6
     nu: 100
     'on': 0
     pe: 55
@@ -406,13 +406,13 @@ addrange:
     yt: 27
   r_offnanid:
     ab: 100
-    avg: 62
+    avg: 69
     bc: 0
     mb: 0
     nb: 100
     nl: 0
     ns: 100
-    nt: 0
+    nt: 100
     nu: 100
     'on': 100
     pe: 100
@@ -442,7 +442,7 @@ addrange:
     nb: 100
     nl: 0
     ns: 100
-    nt: 0
+    nt: 1
     nu: 100
     'on': 100
     pe: 100
@@ -693,13 +693,13 @@ blkpassage:
     yt: 100
   roadnid:
     ab: 99
-    avg: 77
+    avg: 75
     bc: 100
     mb: 100
     nb: 0
     nl: 100
     ns: 100
-    nt: 100
+    nt: 79
     nu: 0
     'on': 100
     pe: 100
@@ -1106,7 +1106,7 @@ junction:
     nb: 0
     nl: 100
     ns: 100
-    nt: 84
+    nt: 86
     nu: 0
     'on': 100
     pe: 100
@@ -1272,7 +1272,7 @@ roadseg:
     nb: 0
     nl: 100
     ns: 100
-    nt: 87
+    nt: 88
     nu: 0
     'on': 100
     pe: 100
@@ -1332,7 +1332,7 @@ roadseg:
     nb: 99
     nl: 100
     ns: 99
-    nt: 84
+    nt: 86
     nu: 88
     'on': 100
     pe: 100
@@ -1377,7 +1377,7 @@ roadseg:
     nb: 99
     nl: 100
     ns: 0
-    nt: 6
+    nt: 5
     nu: 100
     'on': 0
     pe: 54
@@ -1392,7 +1392,7 @@ roadseg:
     nb: 100
     nl: 99
     ns: 73
-    nt: 6
+    nt: 5
     nu: 100
     'on': 84
     pe: 54
@@ -1407,7 +1407,7 @@ roadseg:
     nb: 100
     nl: 99
     ns: 73
-    nt: 6
+    nt: 5
     nu: 100
     'on': 84
     pe: 54
@@ -1422,7 +1422,7 @@ roadseg:
     nb: 94
     nl: 100
     ns: 73
-    nt: 87
+    nt: 86
     nu: 100
     'on': 4
     pe: 99
@@ -1587,7 +1587,7 @@ roadseg:
     nb: 94
     nl: 100
     ns: 73
-    nt: 87
+    nt: 86
     nu: 100
     'on': 4
     pe: 99
@@ -1617,7 +1617,7 @@ roadseg:
     nb: 100
     nl: 100
     ns: 100
-    nt: 0
+    nt: 1
     nu: 100
     'on': 100
     pe: 100
@@ -2053,7 +2053,7 @@ strplaname:
     nb: 99
     nl: 0
     ns: 100
-    nt: 0
+    nt: 1
     nu: 100
     'on': 100
     pe: 100

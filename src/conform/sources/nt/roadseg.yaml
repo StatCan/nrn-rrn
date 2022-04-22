@@ -109,6 +109,7 @@ conform:
             SPOT and registry maps: Orthoimage
             SPOT and registry maps and documentation: Orthoimage
             Screen digitization off 1.5 metre SPOT imagery: Orthoimage
+            Screen Digitizing: Orthoimage
     metacover:
     credate: &credate
       fields: [DC_ENDDATE, CAPDATE, CAPYEAR]

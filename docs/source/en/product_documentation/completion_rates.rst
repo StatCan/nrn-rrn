@@ -26,36 +26,36 @@ Address Range (addrange)
 --------------------------------  -----------------------------------------------------------------------------------
 Attribute                           AB    BC    MB    NB    NL    NS    NT    NU    ON    PE    QC    SK    YT    Avg
 ================================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
-Acquisition Technique              100     0     0   100     0     0     0    88   100   100     0    99    99     53
+Acquisition Technique              100     0     0   100     0     0   100    88   100   100     0    99    99     60
 Coverage                            99     0     0     0     0     0     0    88     0   100     0    99     0     30
-Creation Date                      100     0     0    99     0    99     0    88   100   100     0    99     1    53
-Dataset Name                       100     0     0   100     0   100     0   100   100   100     0   100   100     62
-Planimetric Accuracy               100     0     0     0     0   100     0     0   100   100     0    99     1     38
-Provider                           100     0     0   100     0   100     0   100    84   100     0    99     1     53
-Revision Date                      100     0     0   100     0   100     0   100   100   100     0    99    98     61
+Creation Date                      100     0     0    99     0    99   100    88   100   100     0    99     1    60
+Dataset Name                       100     0     0   100     0   100   100   100   100   100     0   100   100     69
+Planimetric Accuracy               100     0     0     0     0   100   100     0   100   100     0    99     1     46
+Provider                           100     0     0   100     0   100   100   100    84   100     0    99     1     60
+Revision Date                      100     0     0   100     0   100     1   100   100   100     0    99    98     61
 Standard Version                   100     0     0   100     0   100   100   100   100   100     0   100   100     69
 Alternate Street Name NID Left       0     0     0     0     0     0     0     0     0     0     0     0     0      0
 Alternate Street Name NID Right      0     0     0     0     0     0     0     0     0     0     0     0     0      0
-Digitizing Direction Flag Left       0     0     0    99     0   100     0   100     0    54     0     0    28     29
-Digitizing Direction Flag Right      0     0     0    99     0   100     0   100     0    55     0     0    27     29
-First House Number Left              0     0     0   100     0   100     0   100    84    54     0     0    28     36
-First House Number Right             0     0     0   100     0   100     0   100    84    55     0     0    27     36
-First House Number Suffix Left       0     0     0    99     0     0     0   100     0     0     0     0     1     15
-First House Number Suffix Right      0     0     0    99     0     0     0   100     0     0     0     0     1     15
-First House Number Type Left         0     0     0   100     0    73     0   100     0    54     0     0    28     27
-First House Number Type Right        0     0     0   100     0    73     0   100     0    55     0     0    27     27
-House Number Structure Left          0     0     0   100     0   100     0   100   100    54     0     0    28     37
-House Number Structure Right         0     0     0   100     0   100     0   100   100    55     0     0    27     37
-Last House Number Left               0     0     0   100     0   100     0   100    84    54     0     0    28     36
-Last House Number Right              0     0     0   100     0   100     0   100    84    55     0     0    27     36
-Last House Number Suffix Left        0     0     0    99     0     0     0   100     0     0     0     0     1     15
-Last House Number Suffix Right       0     0     0    99     0     0     0   100     0     0     0     0     1     15
-Last House Number Type Left          0     0     0   100     0    73     0   100     0    54     0     0    28     27
-Last House Number Type Right         0     0     0   100     0    73     0   100     0    55     0     0    27     27
-NID                                100     0     0   100     0   100     0   100   100   100     0   100   100     62
-Official Street Name NID Left      100     0     0   100     0   100     0   100   100   100     0   100   100     62
-Official Street Name NID Right     100     0     0   100     0   100     0   100   100   100     0   100   100     62
-Reference System Indicator Left      0     0     0   100     0   100     0    95     0   100     0     0     0     30
+Digitizing Direction Flag Left       0     0     0    99     0   100     6   100     0    54     0     0    28     30
+Digitizing Direction Flag Right      0     0     0    99     0   100     6   100     0    55     0     0    27     30
+First House Number Left              0     0     0   100     0   100     6   100    84    54     0     0    28     36
+First House Number Right             0     0     0   100     0   100     6   100    84    55     0     0    27     36
+First House Number Suffix Left       0     0     0    99     0     0     1   100     0     0     0     0     1     15
+First House Number Suffix Right      0     0     0    99     0     0     1   100     0     0     0     0     1     15
+First House Number Type Left         0     0     0   100     0    73     6   100     0    54     0     0    28     28
+First House Number Type Right        0     0     0   100     0    73     6   100     0    55     0     0    27     28
+House Number Structure Left          0     0     0   100     0   100     6   100   100    54     0     0    28     38
+House Number Structure Right         0     0     0   100     0   100     6   100   100    55     0     0    27     38
+Last House Number Left               0     0     0   100     0   100     6   100    84    54     0     0    28     36
+Last House Number Right              0     0     0   100     0   100     6   100    84    55     0     0    27     36
+Last House Number Suffix Left        0     0     0    99     0     0     1   100     0     0     0     0     1     15
+Last House Number Suffix Right       0     0     0    99     0     0     1   100     0     0     0     0     1     15
+Last House Number Type Left          0     0     0   100     0    73     6   100     0    54     0     0    28     28
+Last House Number Type Right         0     0     0   100     0    73     6   100     0    55     0     0    27     28
+NID                                100     0     0   100     0   100   100   100   100   100     0   100   100     69
+Official Street Name NID Left      100     0     0   100     0   100   100   100   100   100     0   100   100     69
+Official Street Name NID Right     100     0     0   100     0   100   100   100   100   100     0   100   100     69
+Reference System Indicator Left      0     0     0   100     0   100   100    95     0   100     0     0     0     38
 Reference System Indicator Right     0     0     0   100     0   100   100    95     0   100     0     0     0     38
 ================================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
 
@@ -93,7 +93,7 @@ Revision Date           100   100   100     0   100   100   100     0   100   10
 Standard Version        100   100   100     0   100   100   100     0   100   100     0   100   100     77
 Blocked Passage Type    100     0   100     0    99    99   100     0   100   100     0   100   100     69
 NID                     100   100   100     0   100   100   100     0   100   100     0   100   100     77
-Road Element NID         99   100   100     0   100   100   100     0   100   100     0    99   100     77
+Road Element NID         99   100   100     0   100   100    79     0   100   100     0    99   100     75
 =====================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
 
 Ferry Segment (ferryseg)
@@ -143,7 +143,7 @@ Acquisition Technique   100   100   100   100   100   100   100   100   100   10
 Coverage                100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Creation Date           100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Dataset Name            100   100   100   100   100   100   100   100   100   100   100   100   100    100
-Planimetric Accuracy    100   100   100     0   100   100    84     0   100   100   100    99     1     76
+Planimetric Accuracy    100   100   100     0   100   100    86     0   100   100   100    99     1     76
 Provider                100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Revision Date             0   100   100     0   100     0     0     0     0     0   100     0     0     31
 Standard Version          0   100   100     0   100     0     0     0     0     0   100     0     0     31
@@ -162,26 +162,26 @@ Attribute                                        AB    BC    MB    NB    NL    N
 =============================================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
 Acquisition Technique                           100   100   100   100   100    95   100    88   100   100   100    99    99     99
 Coverage                                         99   100   100     0   100   100     0    88     0   100   100    99     0     68
-Creation Date                                   100   100   100    99   100    99    84    88   100   100   100    99     1     90
+Creation Date                                   100   100   100    99   100    99    86    88   100   100   100    99     1     90
 Dataset Name                                    100   100   100   100   100   100   100   100   100   100   100   100   100    100
-Planimetric Accuracy                            100   100   100     0   100   100    87     0   100   100   100    99     1     76
+Planimetric Accuracy                            100   100   100     0   100   100    88     0   100   100   100    99     1     76
 Provider                                        100   100   100   100   100   100    99   100    84   100   100    99     1     91
-Revision Date                                   100   100   100   100   100   100     0   100   100   100   100    99    98     92
+Revision Date                                   100   100   100   100   100   100     1   100   100   100   100    99    98     92
 Standard Version                                100   100   100   100   100   100   100   100   100   100   100   100   100    100
-Address Range Digitizing Direction Flag Left      0   100   100    99   100     0     6   100     0    54   100     0    28     53
+Address Range Digitizing Direction Flag Left      0   100   100    99   100     0     5   100     0    54   100     0    28     53
 Address Range Digitizing Direction Flag Right     0   100   100    99   100     0     6   100     0    55   100     0    27     53
 Address Range NID                               100   100   100   100   100    73   100   100   100   100   100   100   100     98
 Closing Period                                    0     1     0     1     0    28     2     0     0    82     1     0     1      9
 Exit Number                                     100   100   100   100   100     0     0     0     1     0   100     1     0     46
-First House Number Left                           0   100    65   100    99    73     6   100    84    54    98     0    28     62
+First House Number Left                           0   100    65   100    99    73     5   100    84    54    98     0    28     62
 First House Number Right                          0   100    65   100    99    73     6   100    84    55    98     0    27     62
 Functional Road Class                           100   100   100    99   100    97    99    83    98   100   100    99    97     98
-Last House Number Left                            0   100    65   100    99    73     6   100    84    54    98     0    28     62
+Last House Number Left                            0   100    65   100    99    73     5   100    84    54    98     0    28     62
 Last House Number Right                           0   100    65   100    99    73     6   100    84    55    98     0    27     62
 NID                                             100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Number of Lanes                                 100   100   100    99   100    99    76    81   100   100   100    99    98     96
-Official Place Name Left                        100   100   100    94   100    73    87   100     4    99    96    99   100     89
-Official Place Name Right                       100   100   100    94   100    73    87   100     4    99    96    99   100     89
+Official Place Name Left                        100   100   100    94   100    73    86   100     4    99    96    99   100     89
+Official Place Name Right                       100   100   100    94   100    73    86   100     4    99    96    99   100     89
 Official Street Name Concatenated Left           78   100   100    94   100    73    39   100    85    96    96    34    77     82
 Official Street Name Concatenated Right          78   100   100    94   100    73    39   100    85    96    96    34    77     82
 Paved Road Surface Type                          59    16    46    99    31    49   100    93    24   100    15    69   100     62
@@ -226,7 +226,7 @@ Planimetric Accuracy    100     0     0     0     0   100    91     0   100   10
 Provider                100     0     0   100     0   100    99   100    93   100     0    99     2     61
 Revision Date           100     0     0   100     0   100     0   100   100   100     0    99    95     61
 Standard Version        100     0     0   100     0   100   100   100   100   100     0   100   100     69
-Directional Prefix        0     0     0    99     0   100     0   100   100   100     0     1   100     46
+Directional Prefix        0     0     0    99     0   100     1   100   100   100     0     1   100     46
 Directional Suffix        0     0     0   100     0   100     1   100   100   100     0     6   100     47
 Muni Quadrant             0     0     0   100     0   100     0   100     0     0     0     0     0     23
 NID                     100     0     0   100     0   100   100   100   100   100     0   100   100     69

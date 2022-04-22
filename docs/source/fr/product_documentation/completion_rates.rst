@@ -26,36 +26,36 @@ Intervalles d'adresse (intervadr)
 ------------------------------------------  -----------------------------------------------------------------------------------
 Attribut                                      AB    BC    MB    NB    NL    NS    NT    NU    ON    PE    QC    SK    YT    Moy
 ==========================================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
-Technique acquisition                        100     0     0   100     0     0     0    88   100   100     0    99    99     53
+Technique acquisition                        100     0     0   100     0     0   100    88   100   100     0    99    99     60
 Couverture                                    99     0     0     0     0     0     0    88     0   100     0    99     0     30
-Date création                                100     0     0    99     0    99     0    88   100   100     0    99     1    53
-Nom jeu de données                           100     0     0   100     0   100     0   100   100   100     0   100   100     62
-Précision planimétrique                      100     0     0     0     0   100     0     0   100   100     0    99     1     38
-Fournisseur                                  100     0     0   100     0   100     0   100    84   100     0    99     1     53
-Date révision                                100     0     0   100     0   100     0   100   100   100     0    99    98     61
+Date création                                100     0     0    99     0    99   100    88   100   100     0    99     1    60
+Nom jeu de données                           100     0     0   100     0   100   100   100   100   100     0   100   100     69
+Précision planimétrique                      100     0     0     0     0   100   100     0   100   100     0    99     1     46
+Fournisseur                                  100     0     0   100     0   100   100   100    84   100     0    99     1     60
+Date révision                                100     0     0   100     0   100     1   100   100   100     0    99    98     61
 Version normes                               100     0     0   100     0   100   100   100   100   100     0   100   100     69
 IDN nom de rue non officiel à gauche           0     0     0     0     0     0     0     0     0     0     0     0     0      0
 IDN nom de rue non officiel à droite           0     0     0     0     0     0     0     0     0     0     0     0     0      0
-Indicateur sens numérisation à gauche          0     0     0    99     0   100     0   100     0    54     0     0    28     29
-Indicateur sens numérisation à droite          0     0     0    99     0   100     0   100     0    55     0     0    27     29
-Numéro première maison à gauche                0     0     0   100     0   100     0   100    84    54     0     0    28     36
-Numéro première maison à droite                0     0     0   100     0   100     0   100    84    55     0     0    27     36
-Suffixe numéro première maison à gauche        0     0     0    99     0     0     0   100     0     0     0     0     1     15
-Suffixe numéro première maison à droite        0     0     0    99     0     0     0   100     0     0     0     0     1     15
-Type numérotation première maison à gauche     0     0     0   100     0    73     0   100     0    54     0     0    28     27
-Type numérotation première maison à droite     0     0     0   100     0    73     0   100     0    55     0     0    27     27
-Structure numéro maison à gauche               0     0     0   100     0   100     0   100   100    54     0     0    28     37
-Structure numéro maison à droite               0     0     0   100     0   100     0   100   100    55     0     0    27     37
-Numéro dernière maison à gauche                0     0     0   100     0   100     0   100    84    54     0     0    28     36
-Numéro dernière maison à droite                0     0     0   100     0   100     0   100    84    55     0     0    27     36
-Suffixe numéro dernière maison à gauche        0     0     0    99     0     0     0   100     0     0     0     0     1     15
-Suffixe numéro dernière maison à droite        0     0     0    99     0     0     0   100     0     0     0     0     1     15
-Type numérotation dernière maison à gauche     0     0     0   100     0    73     0   100     0    54     0     0    28     27
-Type numérotation dernière maison à droite     0     0     0   100     0    73     0   100     0    55     0     0    27     27
-IDN                                          100     0     0   100     0   100     0   100   100   100     0   100   100     62
-IDN nom de rue officiel à gauche             100     0     0   100     0   100     0   100   100   100     0   100   100     62
-IDN nom de rue officiel à droite             100     0     0   100     0   100     0   100   100   100     0   100   100     62
-Indicateur système référence à gauche          0     0     0   100     0   100     0    95     0   100     0     0     0     30
+Indicateur sens numérisation à gauche          0     0     0    99     0   100     6   100     0    54     0     0    28     30
+Indicateur sens numérisation à droite          0     0     0    99     0   100     6   100     0    55     0     0    27     30
+Numéro première maison à gauche                0     0     0   100     0   100     6   100    84    54     0     0    28     36
+Numéro première maison à droite                0     0     0   100     0   100     6   100    84    55     0     0    27     36
+Suffixe numéro première maison à gauche        0     0     0    99     0     0     1   100     0     0     0     0     1     15
+Suffixe numéro première maison à droite        0     0     0    99     0     0     1   100     0     0     0     0     1     15
+Type numérotation première maison à gauche     0     0     0   100     0    73     6   100     0    54     0     0    28     28
+Type numérotation première maison à droite     0     0     0   100     0    73     6   100     0    55     0     0    27     28
+Structure numéro maison à gauche               0     0     0   100     0   100     6   100   100    54     0     0    28     38
+Structure numéro maison à droite               0     0     0   100     0   100     6   100   100    55     0     0    27     38
+Numéro dernière maison à gauche                0     0     0   100     0   100     6   100    84    54     0     0    28     36
+Numéro dernière maison à droite                0     0     0   100     0   100     6   100    84    55     0     0    27     36
+Suffixe numéro dernière maison à gauche        0     0     0    99     0     0     1   100     0     0     0     0     1     15
+Suffixe numéro dernière maison à droite        0     0     0    99     0     0     1   100     0     0     0     0     1     15
+Type numérotation dernière maison à gauche     0     0     0   100     0    73     6   100     0    54     0     0    28     28
+Type numérotation dernière maison à droite     0     0     0   100     0    73     6   100     0    55     0     0    27     28
+IDN                                          100     0     0   100     0   100   100   100   100   100     0   100   100     69
+IDN nom de rue officiel à gauche             100     0     0   100     0   100   100   100   100   100     0   100   100     69
+IDN nom de rue officiel à droite             100     0     0   100     0   100   100   100   100   100     0   100   100     69
+Indicateur système référence à gauche          0     0     0   100     0   100   100    95     0   100     0     0     0     38
 Indicateur système référence à droite          0     0     0   100     0   100   100    95     0   100     0     0     0     38
 ==========================================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
 
@@ -93,7 +93,7 @@ Date révision             100   100   100     0   100   100   100     0   100  
 Version normes            100   100   100     0   100   100   100     0   100   100     0   100   100     77
 Type passage obstrué      100     0   100     0    99    99   100     0   100   100     0   100   100     69
 IDN                       100   100   100     0   100   100   100     0   100   100     0   100   100     77
-IDN élément routier        99   100   100     0   100   100   100     0   100   100     0    99   100     77
+IDN élément routier        99   100   100     0   100   100    79     0   100   100     0    99   100     75
 =======================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
 
 Segment de liaison par transbordeur (sliaisontr)
@@ -143,7 +143,7 @@ Technique acquisition     100   100   100   100   100   100   100   100   100   
 Couverture                100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Date création             100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Nom jeu de données        100   100   100   100   100   100   100   100   100   100   100   100   100    100
-Précision planimétrique   100   100   100     0   100   100    84     0   100   100   100    99     1     76
+Précision planimétrique   100   100   100     0   100   100    86     0   100   100   100    99     1     76
 Fournisseur               100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Date révision               0   100   100     0   100     0     0     0     0     0   100     0     0     31
 Version normes              0   100   100     0   100     0     0     0     0     0   100     0     0     31
@@ -162,26 +162,26 @@ Attribut                                         AB    BC    MB    NB    NL    N
 =============================================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
 Technique acquisition                           100   100   100   100   100    95   100    88   100   100   100    99    99     99
 Couverture                                       99   100   100     0   100   100     0    88     0   100   100    99     0     68
-Date création                                   100   100   100    99   100    99    84    88   100   100   100    99     1     90
+Date création                                   100   100   100    99   100    99    86    88   100   100   100    99     1     90
 Nom jeu de données                              100   100   100   100   100   100   100   100   100   100   100   100   100    100
-Précision planimétrique                         100   100   100     0   100   100    87     0   100   100   100    99     1     76
+Précision planimétrique                         100   100   100     0   100   100    88     0   100   100   100    99     1     76
 Fournisseur                                     100   100   100   100   100   100    99   100    84   100   100    99     1     91
-Date révision                                   100   100   100   100   100   100     0   100   100   100   100    99    98     92
+Date révision                                   100   100   100   100   100   100     1   100   100   100   100    99    98     92
 Version normes                                  100   100   100   100   100   100   100   100   100   100   100   100   100    100
-Indicateur sens numérisation adresse à gauche     0   100   100    99   100     0     6   100     0    54   100     0    28     53
+Indicateur sens numérisation adresse à gauche     0   100   100    99   100     0     5   100     0    54   100     0    28     53
 Indicateur sens numérisation adresse à droite     0   100   100    99   100     0     6   100     0    55   100     0    27     53
 IDN intervalle d’adresse                        100   100   100   100   100    73   100   100   100   100   100   100   100     98
 Période de fermeture                              0     1     0     1     0    28     2     0     0    82     1     0     1      9
 Numéro de sortie                                100   100   100   100   100     0     0     0     1     0   100     1     0     46
-Numéro première maison à gauche                   0   100    65   100    99    73     6   100    84    54    98     0    28     62
+Numéro première maison à gauche                   0   100    65   100    99    73     5   100    84    54    98     0    28     62
 Numéro première maison à droite                   0   100    65   100    99    73     6   100    84    55    98     0    27     62
 Classification routière fonctionnelle           100   100   100    99   100    97    99    83    98   100   100    99    97     98
-Numéro dernière maison à gauche                   0   100    65   100    99    73     6   100    84    54    98     0    28     62
+Numéro dernière maison à gauche                   0   100    65   100    99    73     5   100    84    54    98     0    28     62
 Numéro dernière maison à droite                   0   100    65   100    99    73     6   100    84    55    98     0    27     62
 IDN                                             100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Nombre de voies                                 100   100   100    99   100    99    76    81   100   100   100    99    98     96
-Nom de lieu officiel à gauche                   100   100   100    94   100    73    87   100     4    99    96    99   100     89
-Nom de lieu officiel à droite                   100   100   100    94   100    73    87   100     4    99    96    99   100     89
+Nom de lieu officiel à gauche                   100   100   100    94   100    73    86   100     4    99    96    99   100     89
+Nom de lieu officiel à droite                   100   100   100    94   100    73    86   100     4    99    96    99   100     89
 Nom de rue officiel concaténé à gauche           78   100   100    94   100    73    39   100    85    96    96    34    77     82
 Nom de rue officiel concaténé à droite           78   100   100    94   100    73    39   100    85    96    96    34    77     82
 Type de chaussée revêtue                         59    16    46    99    31    49   100    93    24   100    15    69   100     62
@@ -226,7 +226,7 @@ Précision planimétrique   100     0     0     0     0   100    91     0   100 
 Fournisseur               100     0     0   100     0   100    99   100    93   100     0    99     2     61
 Date révision             100     0     0   100     0   100     0   100   100   100     0    99    95     61
 Version normes            100     0     0   100     0   100   100   100   100   100     0   100   100     69
-Préfixe direction           0     0     0    99     0   100     0   100   100   100     0     1   100     46
+Préfixe direction           0     0     0    99     0   100     1   100   100   100     0     1   100     46
 Suffixe direction           0     0     0   100     0   100     1   100   100   100     0     6   100     47
 Muni Quadrant               0     0     0   100     0   100     0   100     0     0     0     0     0     23
 IDN                       100     0     0   100     0   100   100   100   100   100     0   100   100     69
