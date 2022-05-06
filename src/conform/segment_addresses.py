@@ -80,6 +80,16 @@ class Segmentor:
         else:
             self.roadseg["join"] = roadseg[roadseg_join_field].copy(deep=True)
 
+        # Standardize join attributes.
+
+        # Lowercase join attribute to avoid case sensitivity.
+        self.addresses["join"] = self.addresses["join"].map(str).str.lower()
+        self.roadseg["join"] = self.roadseg["join"].map(str).str.lower()
+
+        # Strip whitespace.
+        self.addresses["join"] = self.addresses["join"].map(lambda val: re.sub(r" +", " ", val.strip()))
+        self.roadseg["join"] = self.roadseg["join"].map(lambda val: re.sub(r" +", " ", val.strip()))
+
         logger.info("Validating address records.")
 
         try:

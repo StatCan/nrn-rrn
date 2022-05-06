@@ -16,7 +16,7 @@ addrange:
     yt: 1
   acqtech:
     ab: 100
-    avg: 60
+    avg: 57
     bc: 0
     mb: 0
     nb: 100
@@ -28,7 +28,7 @@ addrange:
     pe: 100
     qc: 0
     sk: 99
-    yt: 99
+    yt: 50
   credate:
     ab: 100
     avg: 60
@@ -88,7 +88,7 @@ addrange:
     pe: 54
     qc: 0
     sk: 0
-    yt: 28
+    yt: 26
   l_hnumf:
     ab: 0
     avg: 36
@@ -103,7 +103,7 @@ addrange:
     pe: 54
     qc: 0
     sk: 0
-    yt: 28
+    yt: 26
   l_hnuml:
     ab: 0
     avg: 36
@@ -118,10 +118,10 @@ addrange:
     pe: 54
     qc: 0
     sk: 0
-    yt: 28
+    yt: 26
   l_hnumstr:
     ab: 0
-    avg: 38
+    avg: 37
     bc: 0
     mb: 0
     nb: 100
@@ -133,7 +133,7 @@ addrange:
     pe: 54
     qc: 0
     sk: 0
-    yt: 28
+    yt: 26
   l_hnumsuff:
     ab: 0
     avg: 15
@@ -178,7 +178,7 @@ addrange:
     pe: 54
     qc: 0
     sk: 0
-    yt: 28
+    yt: 26
   l_hnumtypl:
     ab: 0
     avg: 28
@@ -193,7 +193,7 @@ addrange:
     pe: 54
     qc: 0
     sk: 0
-    yt: 28
+    yt: 26
   l_offnanid:
     ab: 100
     avg: 69
@@ -298,7 +298,7 @@ addrange:
     pe: 55
     qc: 0
     sk: 0
-    yt: 27
+    yt: 25
   r_hnumf:
     ab: 0
     avg: 36
@@ -313,7 +313,7 @@ addrange:
     pe: 55
     qc: 0
     sk: 0
-    yt: 27
+    yt: 25
   r_hnuml:
     ab: 0
     avg: 36
@@ -328,10 +328,10 @@ addrange:
     pe: 55
     qc: 0
     sk: 0
-    yt: 27
+    yt: 25
   r_hnumstr:
     ab: 0
-    avg: 38
+    avg: 37
     bc: 0
     mb: 0
     nb: 100
@@ -343,7 +343,7 @@ addrange:
     pe: 55
     qc: 0
     sk: 0
-    yt: 27
+    yt: 25
   r_hnumsuff:
     ab: 0
     avg: 15
@@ -388,7 +388,7 @@ addrange:
     pe: 55
     qc: 0
     sk: 0
-    yt: 27
+    yt: 25
   r_hnumtypl:
     ab: 0
     avg: 28
@@ -403,7 +403,7 @@ addrange:
     pe: 55
     qc: 0
     sk: 0
-    yt: 27
+    yt: 25
   r_offnanid:
     ab: 100
     avg: 69
@@ -705,7 +705,7 @@ blkpassage:
     pe: 100
     qc: 0
     sk: 99
-    yt: 100
+    yt: 95
   specvers:
     ab: 100
     avg: 77
@@ -1281,7 +1281,7 @@ roadseg:
     yt: 1
   acqtech:
     ab: 100
-    avg: 99
+    avg: 95
     bc: 100
     mb: 100
     nb: 100
@@ -1293,7 +1293,7 @@ roadseg:
     pe: 100
     qc: 100
     sk: 99
-    yt: 99
+    yt: 50
   adrangenid:
     ab: 100
     avg: 98
@@ -1383,7 +1383,7 @@ roadseg:
     pe: 54
     qc: 100
     sk: 0
-    yt: 28
+    yt: 26
   l_hnumf:
     ab: 0
     avg: 62
@@ -1398,7 +1398,7 @@ roadseg:
     pe: 54
     qc: 98
     sk: 0
-    yt: 28
+    yt: 26
   l_hnuml:
     ab: 0
     avg: 62
@@ -1413,7 +1413,7 @@ roadseg:
     pe: 54
     qc: 98
     sk: 0
-    yt: 28
+    yt: 26
   l_placenam:
     ab: 100
     avg: 89
@@ -1431,7 +1431,7 @@ roadseg:
     yt: 100
   l_stname_c:
     ab: 78
-    avg: 82
+    avg: 83
     bc: 100
     mb: 100
     nb: 94
@@ -1443,7 +1443,7 @@ roadseg:
     pe: 96
     qc: 96
     sk: 34
-    yt: 77
+    yt: 78
   metacover:
     ab: 99
     avg: 68
@@ -1491,7 +1491,7 @@ roadseg:
     yt: 100
   pavstatus:
     ab: 100
-    avg: 99
+    avg: 95
     bc: 100
     mb: 100
     nb: 99
@@ -1503,10 +1503,10 @@ roadseg:
     pe: 100
     qc: 100
     sk: 99
-    yt: 100
+    yt: 41
   pavsurf:
     ab: 59
-    avg: 62
+    avg: 57
     bc: 16
     mb: 46
     nb: 99
@@ -1518,7 +1518,7 @@ roadseg:
     pe: 100
     qc: 15
     sk: 69
-    yt: 100
+    yt: 41
   provider:
     ab: 100
     avg: 91
@@ -1548,7 +1548,7 @@ roadseg:
     pe: 55
     qc: 100
     sk: 0
-    yt: 27
+    yt: 25
   r_hnumf:
     ab: 0
     avg: 62
@@ -1563,7 +1563,7 @@ roadseg:
     pe: 55
     qc: 98
     sk: 0
-    yt: 27
+    yt: 25
   r_hnuml:
     ab: 0
     avg: 62
@@ -1578,7 +1578,7 @@ roadseg:
     pe: 55
     qc: 98
     sk: 0
-    yt: 27
+    yt: 25
   r_placenam:
     ab: 100
     avg: 89
@@ -1596,7 +1596,7 @@ roadseg:
     yt: 100
   r_stname_c:
     ab: 78
-    avg: 82
+    avg: 83
     bc: 100
     mb: 100
     nb: 94
@@ -1608,7 +1608,7 @@ roadseg:
     pe: 96
     qc: 96
     sk: 34
-    yt: 77
+    yt: 78
   revdate:
     ab: 100
     avg: 92
@@ -1641,7 +1641,7 @@ roadseg:
     yt: 97
   roadjuris:
     ab: 99
-    avg: 47
+    avg: 48
     bc: 100
     mb: 0
     nb: 0
@@ -1653,7 +1653,7 @@ roadseg:
     pe: 100
     qc: 0
     sk: 0
-    yt: 85
+    yt: 97
   roadsegid:
     ab: 100
     avg: 100
@@ -1671,7 +1671,7 @@ roadseg:
     yt: 100
   rtename1en:
     ab: 100
-    avg: 50
+    avg: 56
     bc: 100
     mb: 100
     nb: 100
@@ -1683,10 +1683,10 @@ roadseg:
     pe: 3
     qc: 100
     sk: 1
-    yt: 27
+    yt: 100
   rtename1fr:
     ab: 100
-    avg: 49
+    avg: 54
     bc: 100
     mb: 100
     nb: 100
@@ -1698,10 +1698,10 @@ roadseg:
     pe: 3
     qc: 100
     sk: 1
-    yt: 27
+    yt: 100
   rtename2en:
     ab: 100
-    avg: 47
+    avg: 55
     bc: 100
     mb: 100
     nb: 100
@@ -1713,10 +1713,10 @@ roadseg:
     pe: 0
     qc: 100
     sk: 1
-    yt: 1
+    yt: 100
   rtename2fr:
     ab: 100
-    avg: 46
+    avg: 54
     bc: 100
     mb: 100
     nb: 100
@@ -1728,7 +1728,7 @@ roadseg:
     pe: 0
     qc: 100
     sk: 1
-    yt: 1
+    yt: 100
   rtename3en:
     ab: 100
     avg: 46
@@ -1968,10 +1968,10 @@ roadseg:
     pe: 100
     qc: 0
     sk: 3
-    yt: 95
+    yt: 96
   unpavsurf:
     ab: 79
-    avg: 80
+    avg: 77
     bc: 83
     mb: 53
     nb: 99
@@ -1983,7 +1983,7 @@ roadseg:
     pe: 99
     qc: 83
     sk: 99
-    yt: 88
+    yt: 41
 strplaname:
   accuracy:
     ab: 100
@@ -2002,7 +2002,7 @@ strplaname:
     yt: 1
   acqtech:
     ab: 100
-    avg: 59
+    avg: 53
     bc: 0
     mb: 0
     nb: 100
@@ -2014,7 +2014,7 @@ strplaname:
     pe: 100
     qc: 0
     sk: 99
-    yt: 98
+    yt: 28
   credate:
     ab: 100
     avg: 58
@@ -2119,7 +2119,7 @@ strplaname:
     pe: 96
     qc: 0
     sk: 76
-    yt: 95
+    yt: 94
   nid:
     ab: 100
     avg: 69
@@ -2179,7 +2179,7 @@ strplaname:
     pe: 100
     qc: 0
     sk: 99
-    yt: 2
+    yt: 1
   province:
     ab: 100
     avg: 69
@@ -2209,7 +2209,7 @@ strplaname:
     pe: 100
     qc: 0
     sk: 99
-    yt: 95
+    yt: 96
   specvers:
     ab: 100
     avg: 69
