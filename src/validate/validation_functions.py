@@ -229,7 +229,7 @@ class Validator:
         }
 
         # Iterate LineString datasets.
-        for dataset in ("ferryseg", "roadseg"):
+        for dataset in {"ferryseg", "roadseg"}.intersection(set(self.dfs)):
             df = self.dfs[dataset].copy(deep=True)
 
             # Generate computationally intensive geometry attributes as new columns.

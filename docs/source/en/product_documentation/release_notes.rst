@@ -23,7 +23,7 @@ New Brunswick              NB    11.0     2021-06       2021-06        35,743
 Newfoundland and Labrador  NL    7.0      2013-04       2012-09        23,026              
 Northwest Territories      NT    13.0     2022-04       2022-04        7,805               
 Nova Scotia                NS    14.0     2021-10       2021-10        51,895              
-Nunavut                    NU    9.0      2021-04       2020-10        927                 
+Nunavut                    NU    10.0     2022-05       2022-05        927                 
 Ontario                    ON    14.0     2021-12       2021-12        262,378             
 Prince Edward Island       PE    20.1     2021-08       2021-08        6,988               
 Quebec                     QC    9.0      2016-08       2016-02        162,768             

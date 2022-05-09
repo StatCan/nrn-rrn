@@ -26,11 +26,11 @@ Address Range (addrange)
 --------------------------------  -----------------------------------------------------------------------------------
 Attribute                           AB    BC    MB    NB    NL    NS    NT    NU    ON    PE    QC    SK    YT    Avg
 ================================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
-Acquisition Technique              100     0     0   100     0     0   100    88   100   100     0    99    50     57
+Acquisition Technique              100     0     0   100     0     0   100   100   100   100     0    99    50     58
 Coverage                            99     0     0     0     0     0     0    88     0   100     0    99     0     30
 Creation Date                      100     0     0    99     0    99   100    88   100   100     0    99     1    60
 Dataset Name                       100     0     0   100     0   100   100   100   100   100     0   100   100     69
-Planimetric Accuracy               100     0     0     0     0   100   100     0   100   100     0    99     1     46
+Planimetric Accuracy               100     0     0     0     0   100   100    88   100   100     0    99     1     53
 Provider                           100     0     0   100     0   100   100   100    84   100     0    99     1     60
 Revision Date                      100     0     0   100     0   100     1   100   100   100     0    99    98     61
 Standard Version                   100     0     0   100     0   100   100   100   100   100     0   100   100     69
@@ -55,8 +55,8 @@ Last House Number Type Right         0     0     0   100     0    73     6   100
 NID                                100     0     0   100     0   100   100   100   100   100     0   100   100     69
 Official Street Name NID Left      100     0     0   100     0   100   100   100   100   100     0   100   100     69
 Official Street Name NID Right     100     0     0   100     0   100   100   100   100   100     0   100   100     69
-Reference System Indicator Left      0     0     0   100     0   100   100    95     0   100     0     0     0     38
-Reference System Indicator Right     0     0     0   100     0   100   100    95     0   100     0     0     0     38
+Reference System Indicator Left      0     0     0   100     0   100   100     0     0   100     0     0     0     31
+Reference System Indicator Right     0     0     0   100     0   100   100     0     0   100     0     0     0     31
 ================================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
 
 Alternate Name Link (altnamlink)
@@ -143,7 +143,7 @@ Acquisition Technique   100   100   100   100   100   100   100   100   100   10
 Coverage                100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Creation Date           100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Dataset Name            100   100   100   100   100   100   100   100   100   100   100   100   100    100
-Planimetric Accuracy    100   100   100     0   100   100    86     0   100   100   100    99     1     76
+Planimetric Accuracy    100   100   100     0   100   100    86    88   100   100   100    99     1     83
 Provider                100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Revision Date             0   100   100     0   100     0     0     0     0     0   100     0     0     31
 Standard Version          0   100   100     0   100     0     0     0     0     0   100     0     0     31
@@ -164,7 +164,7 @@ Acquisition Technique                           100   100   100   100   100    9
 Coverage                                         99   100   100     0   100   100     0    88     0   100   100    99     0     68
 Creation Date                                   100   100   100    99   100    99    86    88   100   100   100    99     1     90
 Dataset Name                                    100   100   100   100   100   100   100   100   100   100   100   100   100    100
-Planimetric Accuracy                            100   100   100     0   100   100    88     0   100   100   100    99     1     76
+Planimetric Accuracy                            100   100   100     0   100   100    88    88   100   100   100    99     1     83
 Provider                                        100   100   100   100   100   100    99   100    84   100   100    99     1     91
 Revision Date                                   100   100   100   100   100   100     1   100   100   100   100    99    98     92
 Standard Version                                100   100   100   100   100   100   100   100   100   100   100   100   100    100
@@ -175,11 +175,11 @@ Closing Period                                    0     1     0     1     0    2
 Exit Number                                     100   100   100   100   100     0     0     0     1     0   100     1     0     46
 First House Number Left                           0   100    65   100    99    73     5   100    84    54    98     0    26     62
 First House Number Right                          0   100    65   100    99    73     6   100    84    55    98     0    25     62
-Functional Road Class                           100   100   100    99   100    97    99    83    98   100   100    99    97     98
+Functional Road Class                           100   100   100    99   100    97    99    10    98   100   100    99    97     92
 Last House Number Left                            0   100    65   100    99    73     5   100    84    54    98     0    26     62
 Last House Number Right                           0   100    65   100    99    73     6   100    84    55    98     0    25     62
 NID                                             100   100   100   100   100   100   100   100   100   100   100   100   100    100
-Number of Lanes                                 100   100   100    99   100    99    76    81   100   100   100    99    98     96
+Number of Lanes                                 100   100   100    99   100    99    76     0   100   100   100    99    98     90
 Official Place Name Left                        100   100   100    94   100    73    86   100     4    99    96    99   100     89
 Official Place Name Right                       100   100   100    94   100    73    86   100     4    99    96    99   100     89
 Official Street Name Concatenated Left           78   100   100    94   100    73    39   100    85    96    96    34    78     83
@@ -201,7 +201,7 @@ Route Number 2                                  100   100   100   100   100     
 Route Number 3                                  100   100   100   100   100     0     1     0     1     1   100     1     0     46
 Route Number 4                                  100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Route Number 5                                  100   100   100   100   100     0     0     0     1     0   100     1     0     46
-Speed Restriction                                 1     0     0    56     0     0     0    96   100    79     0    87     0     32
+Speed Restriction                                 1     0     0    56     0     0     0     2   100    79     0    87     0     25
 Structure Name English                           98    98    97    99   100     0     1     0     1     1   100     0     1     46
 Structure Name French                            98    98    97    96   100     0     0     0     1     1   100     0     0     45
 Structure ID                                    100   100   100   100   100   100   100   100   100   100   100   100   100    100
@@ -218,11 +218,11 @@ Street and Place Names (strplaname)
 ---------------------  -----------------------------------------------------------------------------------
 Attribute                AB    BC    MB    NB    NL    NS    NT    NU    ON    PE    QC    SK    YT    Avg
 =====================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
-Acquisition Technique   100     0     0   100     0     0   100    68   100   100     0    99    28     53
-Coverage                 99     0     0     0     0     0     0    68     0   100     0    99     0     28
-Creation Date           100     0     0    99     0    99    88    68   100   100     0    99     1     58
+Acquisition Technique   100     0     0   100     0     0   100   100   100   100     0    99    28     56
+Coverage                 99     0     0     0     0     0     0    60     0   100     0    99     0     28
+Creation Date           100     0     0    99     0    99    88    60   100   100     0    99     1     57
 Dataset Name            100     0     0   100     0   100   100   100   100   100     0   100   100     69
-Planimetric Accuracy    100     0     0     0     0   100    91     0   100   100     0    99     1     45
+Planimetric Accuracy    100     0     0     0     0   100    91    60   100   100     0    99     1     50
 Provider                100     0     0   100     0   100    99   100    93   100     0    99     1     61
 Revision Date           100     0     0   100     0   100     0   100   100   100     0    99    96     61
 Standard Version        100     0     0   100     0   100   100   100   100   100     0   100   100     69

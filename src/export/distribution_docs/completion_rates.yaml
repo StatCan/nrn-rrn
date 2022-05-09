@@ -1,14 +1,14 @@
 addrange:
   accuracy:
     ab: 100
-    avg: 46
+    avg: 53
     bc: 0
     mb: 0
     nb: 0
     nl: 0
     ns: 100
     nt: 100
-    nu: 0
+    nu: 88
     'on': 100
     pe: 100
     qc: 0
@@ -16,14 +16,14 @@ addrange:
     yt: 1
   acqtech:
     ab: 100
-    avg: 57
+    avg: 58
     bc: 0
     mb: 0
     nb: 100
     nl: 0
     ns: 0
     nt: 100
-    nu: 88
+    nu: 100
     'on': 100
     pe: 100
     qc: 0
@@ -211,14 +211,14 @@ addrange:
     yt: 100
   l_rfsysind:
     ab: 0
-    avg: 38
+    avg: 31
     bc: 0
     mb: 0
     nb: 100
     nl: 0
     ns: 100
     nt: 100
-    nu: 95
+    nu: 0
     'on': 0
     pe: 100
     qc: 0
@@ -421,14 +421,14 @@ addrange:
     yt: 100
   r_rfsysind:
     ab: 0
-    avg: 38
+    avg: 31
     bc: 0
     mb: 0
     nb: 100
     nl: 0
     ns: 100
     nt: 100
-    nu: 95
+    nu: 0
     'on': 0
     pe: 100
     qc: 0
@@ -1100,14 +1100,14 @@ ferryseg:
 junction:
   accuracy:
     ab: 100
-    avg: 76
+    avg: 83
     bc: 100
     mb: 100
     nb: 0
     nl: 100
     ns: 100
     nt: 86
-    nu: 0
+    nu: 88
     'on': 100
     pe: 100
     qc: 100
@@ -1266,14 +1266,14 @@ junction:
 roadseg:
   accuracy:
     ab: 100
-    avg: 76
+    avg: 83
     bc: 100
     mb: 100
     nb: 0
     nl: 100
     ns: 100
     nt: 88
-    nu: 0
+    nu: 88
     'on': 100
     pe: 100
     qc: 100
@@ -1461,14 +1461,14 @@ roadseg:
     yt: 0
   nbrlanes:
     ab: 100
-    avg: 96
+    avg: 90
     bc: 100
     mb: 100
     nb: 99
     nl: 100
     ns: 99
     nt: 76
-    nu: 81
+    nu: 0
     'on': 100
     pe: 100
     qc: 100
@@ -1626,14 +1626,14 @@ roadseg:
     yt: 98
   roadclass:
     ab: 100
-    avg: 98
+    avg: 92
     bc: 100
     mb: 100
     nb: 99
     nl: 100
     ns: 97
     nt: 99
-    nu: 83
+    nu: 10
     'on': 98
     pe: 100
     qc: 100
@@ -1881,14 +1881,14 @@ roadseg:
     yt: 100
   speed:
     ab: 1
-    avg: 32
+    avg: 25
     bc: 0
     mb: 0
     nb: 56
     nl: 0
     ns: 0
     nt: 0
-    nu: 96
+    nu: 2
     'on': 100
     pe: 79
     qc: 0
@@ -1987,14 +1987,14 @@ roadseg:
 strplaname:
   accuracy:
     ab: 100
-    avg: 45
+    avg: 50
     bc: 0
     mb: 0
     nb: 0
     nl: 0
     ns: 100
     nt: 91
-    nu: 0
+    nu: 60
     'on': 100
     pe: 100
     qc: 0
@@ -2002,14 +2002,14 @@ strplaname:
     yt: 1
   acqtech:
     ab: 100
-    avg: 53
+    avg: 56
     bc: 0
     mb: 0
     nb: 100
     nl: 0
     ns: 0
     nt: 100
-    nu: 68
+    nu: 100
     'on': 100
     pe: 100
     qc: 0
@@ -2017,14 +2017,14 @@ strplaname:
     yt: 28
   credate:
     ab: 100
-    avg: 58
+    avg: 57
     bc: 0
     mb: 0
     nb: 99
     nl: 0
     ns: 99
     nt: 88
-    nu: 68
+    nu: 60
     'on': 100
     pe: 100
     qc: 0
@@ -2084,7 +2084,7 @@ strplaname:
     nl: 0
     ns: 0
     nt: 0
-    nu: 68
+    nu: 60
     'on': 0
     pe: 100
     qc: 0

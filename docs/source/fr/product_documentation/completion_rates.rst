@@ -26,11 +26,11 @@ Intervalles d'adresse (intervadr)
 ------------------------------------------  -----------------------------------------------------------------------------------
 Attribut                                      AB    BC    MB    NB    NL    NS    NT    NU    ON    PE    QC    SK    YT    Moy
 ==========================================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
-Technique acquisition                        100     0     0   100     0     0   100    88   100   100     0    99    50     57
+Technique acquisition                        100     0     0   100     0     0   100   100   100   100     0    99    50     58
 Couverture                                    99     0     0     0     0     0     0    88     0   100     0    99     0     30
 Date création                                100     0     0    99     0    99   100    88   100   100     0    99     1    60
 Nom jeu de données                           100     0     0   100     0   100   100   100   100   100     0   100   100     69
-Précision planimétrique                      100     0     0     0     0   100   100     0   100   100     0    99     1     46
+Précision planimétrique                      100     0     0     0     0   100   100    88   100   100     0    99     1     53
 Fournisseur                                  100     0     0   100     0   100   100   100    84   100     0    99     1     60
 Date révision                                100     0     0   100     0   100     1   100   100   100     0    99    98     61
 Version normes                               100     0     0   100     0   100   100   100   100   100     0   100   100     69
@@ -55,8 +55,8 @@ Type numérotation dernière maison à droite     0     0     0   100     0    7
 IDN                                          100     0     0   100     0   100   100   100   100   100     0   100   100     69
 IDN nom de rue officiel à gauche             100     0     0   100     0   100   100   100   100   100     0   100   100     69
 IDN nom de rue officiel à droite             100     0     0   100     0   100   100   100   100   100     0   100   100     69
-Indicateur système référence à gauche          0     0     0   100     0   100   100    95     0   100     0     0     0     38
-Indicateur système référence à droite          0     0     0   100     0   100   100    95     0   100     0     0     0     38
+Indicateur système référence à gauche          0     0     0   100     0   100   100     0     0   100     0     0     0     31
+Indicateur système référence à droite          0     0     0   100     0   100   100     0     0   100     0     0     0     31
 ==========================================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
 
 Lien nom non officiel (liennoff)
@@ -143,7 +143,7 @@ Technique acquisition     100   100   100   100   100   100   100   100   100   
 Couverture                100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Date création             100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Nom jeu de données        100   100   100   100   100   100   100   100   100   100   100   100   100    100
-Précision planimétrique   100   100   100     0   100   100    86     0   100   100   100    99     1     76
+Précision planimétrique   100   100   100     0   100   100    86    88   100   100   100    99     1     83
 Fournisseur               100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Date révision               0   100   100     0   100     0     0     0     0     0   100     0     0     31
 Version normes              0   100   100     0   100     0     0     0     0     0   100     0     0     31
@@ -164,7 +164,7 @@ Technique acquisition                           100   100   100   100   100    9
 Couverture                                       99   100   100     0   100   100     0    88     0   100   100    99     0     68
 Date création                                   100   100   100    99   100    99    86    88   100   100   100    99     1     90
 Nom jeu de données                              100   100   100   100   100   100   100   100   100   100   100   100   100    100
-Précision planimétrique                         100   100   100     0   100   100    88     0   100   100   100    99     1     76
+Précision planimétrique                         100   100   100     0   100   100    88    88   100   100   100    99     1     83
 Fournisseur                                     100   100   100   100   100   100    99   100    84   100   100    99     1     91
 Date révision                                   100   100   100   100   100   100     1   100   100   100   100    99    98     92
 Version normes                                  100   100   100   100   100   100   100   100   100   100   100   100   100    100
@@ -175,11 +175,11 @@ Période de fermeture                              0     1     0     1     0    
 Numéro de sortie                                100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Numéro première maison à gauche                   0   100    65   100    99    73     5   100    84    54    98     0    26     62
 Numéro première maison à droite                   0   100    65   100    99    73     6   100    84    55    98     0    25     62
-Classification routière fonctionnelle           100   100   100    99   100    97    99    83    98   100   100    99    97     98
+Classification routière fonctionnelle           100   100   100    99   100    97    99    10    98   100   100    99    97     92
 Numéro dernière maison à gauche                   0   100    65   100    99    73     5   100    84    54    98     0    26     62
 Numéro dernière maison à droite                   0   100    65   100    99    73     6   100    84    55    98     0    25     62
 IDN                                             100   100   100   100   100   100   100   100   100   100   100   100   100    100
-Nombre de voies                                 100   100   100    99   100    99    76    81   100   100   100    99    98     96
+Nombre de voies                                 100   100   100    99   100    99    76     0   100   100   100    99    98     90
 Nom de lieu officiel à gauche                   100   100   100    94   100    73    86   100     4    99    96    99   100     89
 Nom de lieu officiel à droite                   100   100   100    94   100    73    86   100     4    99    96    99   100     89
 Nom de rue officiel concaténé à gauche           78   100   100    94   100    73    39   100    85    96    96    34    78     83
@@ -201,7 +201,7 @@ Numéro de route 2                               100   100   100   100   100    
 Numéro de route 3                               100   100   100   100   100     0     1     0     1     1   100     1     0     46
 Numéro de route 4                               100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Numéro de route 5                               100   100   100   100   100     0     0     0     1     0   100     1     0     46
-Limite de vitesse                                 1     0     0    56     0     0     0    96   100    79     0    87     0     32
+Limite de vitesse                                 1     0     0    56     0     0     0     2   100    79     0    87     0     25
 Nom de structure anglais                         98    98    97    99   100     0     1     0     1     1   100     0     1     46
 Nom de structure français                        98    98    97    96   100     0     0     0     1     1   100     0     0     45
 ID structure                                    100   100   100   100   100   100   100   100   100   100   100   100   100    100
@@ -218,11 +218,11 @@ Noms de rue et de lieu (nomruelieu)
 -----------------------  -----------------------------------------------------------------------------------
 Attribut                   AB    BC    MB    NB    NL    NS    NT    NU    ON    PE    QC    SK    YT    Moy
 =======================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
-Technique acquisition     100     0     0   100     0     0   100    68   100   100     0    99    28     53
-Couverture                 99     0     0     0     0     0     0    68     0   100     0    99     0     28
-Date création             100     0     0    99     0    99    88    68   100   100     0    99     1     58
+Technique acquisition     100     0     0   100     0     0   100   100   100   100     0    99    28     56
+Couverture                 99     0     0     0     0     0     0    60     0   100     0    99     0     28
+Date création             100     0     0    99     0    99    88    60   100   100     0    99     1     57
 Nom jeu de données        100     0     0   100     0   100   100   100   100   100     0   100   100     69
-Précision planimétrique   100     0     0     0     0   100    91     0   100   100     0    99     1     45
+Précision planimétrique   100     0     0     0     0   100    91    60   100   100     0    99     1     50
 Fournisseur               100     0     0   100     0   100    99   100    93   100     0    99     1     61
 Date révision             100     0     0   100     0   100     0   100   100   100     0    99    96     61
 Version normes            100     0     0   100     0   100   100   100   100   100     0   100   100     69

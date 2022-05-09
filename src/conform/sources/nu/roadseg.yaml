@@ -9,13 +9,13 @@ coverage:
     GIS data (Iqaluit):
       contact: J.L. Richards & Associates Limited (GIS data, Iqaluit)
       url: Provided directly from data contact.
-    Building numbers map:
+    Building numbers and street names map (Iqaluit):
       contact: Planning and Development, City of Iqaluit
-      url: https://www.iqaluit.ca/content/building-numbers-map-june-2018
+      url: https://www.iqaluit.ca/content/building-numbers-map-feb-2022
     GIS data (excluding Iqaluit):
       contact: Planning and Lands Division, Department of Community and Government Services, Government of Nunavut (GIS data, excluding Iqaluit)
       url: https://cgs-pals.ca/downloads/gis/
-    ICSP Toolkit (community maps, except Iqaluit):
+    Building numbers and street names map (excluding Iqaluit):
       contact: Department of Community and Government Services (community maps, excluding Iqaluit)
       url: http://www.buildingnunavut.com/en/communityprofiles/communityprofiles.asp
   update_frequency: unknown
@@ -24,7 +24,7 @@ license:
   text:
 language: en
 data:
-  filename: 2020/nu.gpkg
+  filename: 2021/nu.gpkg
   layer: data
   driver: GPKG
   crs: "EPSG:4617"
@@ -32,12 +32,48 @@ data:
   query:
 conform:
   addrange:
-    acqtech: acqtech
-    metacover: metacover
+    acqtech:
+      fields: placename
+      functions:
+        - function: query_assign
+          columns: placename
+          lookup:
+            placename == 'Iqaluit':
+              value: Paper Map
+              type: string
+            placename != 'Iqaluit':
+              value: Vector Data
+              type: string
+          engine: python
+    metacover: &metacover
+      fields: placename
+      functions:
+        - function: query_assign
+          columns: placename
+          lookup:
+            placename == 'Iqaluit':
+              value: Unknown
+              type: string
+            placename != 'Iqaluit':
+              value: Complete
+              type: string
+          engine: python
     credate: credate
     datasetnam: Nunavut
-    accuracy: accuracy
-    provider: provider
+    accuracy: &accuracy
+      fields: placename
+      functions:
+        - function: query_assign
+          columns: placename
+          lookup:
+            placename == 'Iqaluit':
+              value: -1
+              type: string
+            placename != 'Iqaluit':
+              value: 1
+              type: string
+          engine: python
+    provider: Federal
     revdate: revdate
     specvers: 2.0
     l_altnanid:
@@ -61,8 +97,8 @@ conform:
     nid: uuid
     l_offnanid: uuid
     r_offnanid: uuid
-    l_rfsysind: l_rfsysind
-    r_rfsysind: r_rfsysind
+    l_rfsysind: Unknown
+    r_rfsysind: Unknown
   roadseg:
     acqtech:
       fields: placename
@@ -70,105 +106,30 @@ conform:
         - function: query_assign
           columns: placename
           lookup:
-            ? placename in ('Arctic Bay', 'Arviat', 'Baker Lake', 'Cambridge Bay', 'Chesterfield Inlet', 'Clyde River',
-              'Coral Harbour', 'Gjoa Haven', 'Igloolik', 'Kimmirut', 'Kinngait', 'Kugaaruk', 'Kugluktuk', 'Naujaat',
-              'Pangnirtung', 'Pond Inlet', 'Qikiqtarjuaq', 'Rankin Inlet', 'Resolute Bay', 'Sanikiluaq', 'Sanirajak',
-              'Taloyoak', 'Whale Cove')
-            : value: Orthoimage
+            placename == 'Iqaluit':
+              value: Unknown
+              type: string
+            placename != 'Iqaluit':
+              value: Vector Data
               type: string
           engine: python
-    metacover: metacover
-    credate:
-      fields: placename
-      functions:
-        - function: query_assign
-          columns: placename
-          lookup:
-            placename == 'Arctic Bay':
-              value: 20190701
-              type: string
-            placename == 'Arviat':
-              value: 20190808
-              type: string
-            placename == 'Baker Lake':
-              value: 20180702
-              type: string
-            placename == 'Cambridge Bay':
-              value: 20190727
-              type: string
-            placename == 'Chesterfield Inlet':
-              value: 20190704
-              type: string
-            placename == 'Clyde River':
-              value: 20180712
-              type: string
-            placename == 'Coral Harbour':
-              value: 20180826
-              type: string
-            placename == 'Gjoa Haven':
-              value: 20190701
-              type: string
-            placename == 'Igloolik':
-              value: 20190630
-              type: string
-            placename == 'Kimmirut':
-              value: 20180705
-              type: string
-            placename == 'Kinngait':
-              value: 20190703
-              type: string
-            placename == 'Kugaaruk':
-              value: 20180703
-              type: string
-            placename == 'Kugluktuk':
-              value: 20190702
-              type: string
-            placename == 'Naujaat':
-              value: 20180703
-              type: string
-            placename == 'Pangnirtung':
-              value: 20180701
-              type: string
-            placename == 'Pond Inlet':
-              value: 20180714
-              type: string
-            placename == 'Qikiqtarjuaq':
-              value: 20180705
-              type: string
-            placename == 'Rankin Inlet':
-              value: 20190715
-              type: string
-            placename == 'Resolute Bay':
-              value: 20190726
-              type: string
-            placename == 'Sanikiluaq':
-              value: 20180706
-              type: string
-            placename == 'Sanirajak':
-              value: 20190701
-              type: string
-            placename == 'Taloyoak':
-              value: 20190702
-              type: string
-            placename == 'Whale Cove':
-              value: 20190715
-              type: string
-          engine: python
+    metacover: *metacover
+    credate: credate
     datasetnam: Nunavut
-    accuracy:
+    accuracy: *accuracy
+    provider:
       fields: placename
       functions:
         - function: query_assign
           columns: placename
           lookup:
-            ? placename in ('Arctic Bay', 'Arviat', 'Baker Lake', 'Cambridge Bay', 'Chesterfield Inlet', 'Clyde River',
-              'Coral Harbour', 'Gjoa Haven', 'Igloolik', 'Kimmirut', 'Kinngait', 'Kugaaruk', 'Kugluktuk', 'Naujaat',
-              'Pangnirtung', 'Pond Inlet', 'Qikiqtarjuaq', 'Rankin Inlet', 'Resolute Bay', 'Sanikiluaq', 'Sanirajak',
-              'Taloyoak', 'Whale Cove')
-            : value: 1
+            placename == 'Iqaluit':
+              value: Municipal
+              type: string
+            placename != 'Iqaluit':
+              value: Federal
               type: string
           engine: python
-    provider: provider
     revdate: revdate
     specvers: 2.0
     l_adddirfg: l_digdirfg
@@ -212,20 +173,32 @@ conform:
     trafficdir: trafficdir
     unpavsurf: unpavsurf
   strplaname:
-    acqtech: acqtech
-    metacover: metacover
+    acqtech: Paper Map
+    metacover: *metacover
     credate: credate
     datasetnam: Nunavut
-    accuracy: accuracy
-    provider: provider
+    accuracy: *accuracy
+    provider: Federal
     revdate: revdate
     specvers: 2.0
     dirprefix: dirprefix
     dirsuffix: dirsuffix
-    muniquad: muniquad
+    muniquad: None
     nid: uuid
     placename: placename
-    placetype: placetype
+    placetype:
+      fields: placename
+      functions:
+        - function: query_assign
+          columns: placename
+          lookup:
+            placename == 'Iqaluit':
+              value: City
+              type: string
+            placename != 'Iqaluit':
+              value: Hamlet
+              type: string
+          engine: python
     province: Nunavut
     starticle: starticle
     namebody: namebody
