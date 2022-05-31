@@ -11,6 +11,11 @@ Conform
 Aperçu
 ======
 
+.. figure:: /source/_static/figures/pipeline_example.png
+    :alt: Exemple de pipeline
+
+    Figure 1 : Exemple de pipeline.
+
 Le processus ``conform`` utilise un ou plusieurs fichiers de configuration ``YAML`` (.yaml) pour définir le mappage des
 données source vers le schéma RRN.
 

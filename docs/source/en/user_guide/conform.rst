@@ -11,6 +11,11 @@ Conform
 Overview
 ========
 
+.. figure:: /source/_static/figures/pipeline_example.png
+    :alt: Pipeline example
+
+    Figure 1: Pipeline example.
+
 The ``conform`` process uses one or more ``YAML`` (.yaml) configuration file(s) to define the mapping of source data to
 the NRN schema.
 
