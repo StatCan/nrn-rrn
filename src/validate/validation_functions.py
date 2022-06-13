@@ -803,9 +803,9 @@ class Validator:
         invalid_nodes = nodes_ferryseg.difference(nodes_roadseg)
         if len(invalid_nodes):
 
-            # Filter and compile identifiers of ferries with an invalid node.
-            invalid_ids = set(chain.from_iterable(map(lambda node: itemgetter(node)(self.pts_id_lookup[dataset]),
-                                                      invalid_nodes)))
+            # Flag records where both nodes are invalid.
+            invalid_ids = set(ferryseg.loc[(ferryseg["pt_start"].isin(invalid_nodes)) &
+                                           (ferryseg["pt_end"].isin(invalid_nodes))].index)
             if len(invalid_ids):
 
                 # Compile error logs.
