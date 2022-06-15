@@ -75,9 +75,10 @@ E100 - Construction
 ^^^^^^^^^^^^^^^^^^^
 
 :E101: Les arcs doivent avoir une longueur >= 3 mètres, à l'exception des structures (par exemple, les ponts).
-:E102: Les arcs doivent être simples (c'est-à-dire qu'ils ne doivent pas se chevaucher, se croiser ou toucher leur
+:E102: Les arcs ne doivent pas avoir une longueur nulle.
+:E103: Les arcs doivent être simples (c'est-à-dire qu'ils ne doivent pas se chevaucher, se croiser ou toucher leur
        intérieur).
-:E103: Les arcs doivent avoir une distance >= 0,01 mètre entre les sommets adjacents (tolérance de cluster).
+:E104: Les arcs doivent avoir une distance >= 0,01 mètre entre les sommets adjacents (tolérance de cluster).
 
 E200 - Dédoublement
 ^^^^^^^^^^^^^^^^^^^

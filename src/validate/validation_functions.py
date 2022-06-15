@@ -82,12 +82,18 @@ class Validator:
                 "iter_cols": None
             },
             102: {
+                "func": self.construction_zero_length,
+                "desc": "Arcs must not have zero length.",
+                "datasets": ["ferryseg", "roadseg"],
+                "iter_cols": None
+            },
+            103: {
                 "func": self.construction_simple,
                 "desc": "Arcs must be simple (i.e. must not self-overlap, self-cross, nor touch their interior).",
                 "datasets": ["ferryseg", "roadseg"],
                 "iter_cols": None
             },
-            103: {
+            104: {
                 "func": self.construction_cluster_tolerance,
                 "desc": "Arcs must have >= 0.01 meters distance between adjacent vertices (cluster tolerance).",
                 "datasets": ["ferryseg", "roadseg"],
@@ -498,6 +504,30 @@ class Validator:
 
         # Flag complex (non-simple) geometries.
         flag = ~df.is_simple
+        if sum(flag):
+
+            # Compile error logs.
+            vals = set(df.loc[flag].index)
+            errors["values"] = vals
+            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
+
+        return errors
+
+    def construction_zero_length(self, dataset: str) -> dict:
+        """
+        Validates: Arcs must not have zero length.
+
+        :param str dataset: name of the dataset to be validated.
+        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
+        """
+
+        errors = {"values": set(), "query": None}
+
+        # Fetch dataframe.
+        df = self.dfs[dataset].copy(deep=True)
+
+        # Flag arcs which are too short.
+        flag = df.length == 0
         if sum(flag):
 
             # Compile error logs.

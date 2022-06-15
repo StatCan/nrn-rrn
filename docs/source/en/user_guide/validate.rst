@@ -73,8 +73,9 @@ E100 - Construction
 ^^^^^^^^^^^^^^^^^^^
 
 :E101: Arcs must be >= 3 meters in length, except structures (e.g. Bridges).
-:E102: Arcs must be simple (i.e. must not self-overlap, self-cross, nor touch their interior).
-:E103: Arcs must have >= 0.01 meters distance between adjacent vertices (cluster tolerance).
+:E102: Arcs must not have zero length.
+:E103: Arcs must be simple (i.e. must not self-overlap, self-cross, nor touch their interior).
+:E104: Arcs must have >= 0.01 meters distance between adjacent vertices (cluster tolerance).
 
 E200 - Duplication
 ^^^^^^^^^^^^^^^^^^
