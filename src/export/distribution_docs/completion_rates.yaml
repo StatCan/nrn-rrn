@@ -334,7 +334,7 @@ addrange:
     avg: 37
     bc: 0
     mb: 0
-    nb: 100
+    nb: 99
     nl: 0
     ns: 100
     nt: 6
@@ -1314,7 +1314,7 @@ roadseg:
     avg: 9
     bc: 1
     mb: 0
-    nb: 1
+    nb: 2
     nl: 0
     ns: 28
     nt: 2
@@ -1884,7 +1884,7 @@ roadseg:
     avg: 25
     bc: 0
     mb: 0
-    nb: 56
+    nb: 57
     nl: 0
     ns: 0
     nt: 0
@@ -2050,7 +2050,7 @@ strplaname:
     avg: 46
     bc: 0
     mb: 0
-    nb: 99
+    nb: 100
     nl: 0
     ns: 100
     nt: 1

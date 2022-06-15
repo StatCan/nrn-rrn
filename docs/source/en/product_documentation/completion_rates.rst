@@ -45,7 +45,7 @@ First House Number Suffix Right      0     0     0    99     0     0     1   100
 First House Number Type Left         0     0     0   100     0    73     6   100     0    54     0     0    26     28
 First House Number Type Right        0     0     0   100     0    73     6   100     0    55     0     0    25     28
 House Number Structure Left          0     0     0   100     0   100     6   100   100    54     0     0    26     37
-House Number Structure Right         0     0     0   100     0   100     6   100   100    55     0     0    25     37
+House Number Structure Right         0     0     0    99     0   100     6   100   100    55     0     0    25     37
 Last House Number Left               0     0     0   100     0   100     6   100    84    54     0     0    26     36
 Last House Number Right              0     0     0   100     0   100     6   100    84    55     0     0    25     36
 Last House Number Suffix Left        0     0     0    99     0     0     1   100     0     0     0     0     1     15
@@ -171,7 +171,7 @@ Standard Version                                100   100   100   100   100   10
 Address Range Digitizing Direction Flag Left      0   100   100    99   100     0     5   100     0    54   100     0    26     53
 Address Range Digitizing Direction Flag Right     0   100   100    99   100     0     6   100     0    55   100     0    25     53
 Address Range NID                               100   100   100   100   100    73   100   100   100   100   100   100   100     98
-Closing Period                                    0     1     0     1     0    28     2     0     0    82     1     0     1      9
+Closing Period                                    0     1     0     2     0    28     2     0     0    82     1     0     1      9
 Exit Number                                     100   100   100   100   100     0     0     0     1     0   100     1     0     46
 First House Number Left                           0   100    65   100    99    73     5   100    84    54    98     0    26     62
 First House Number Right                          0   100    65   100    99    73     6   100    84    55    98     0    25     62
@@ -201,7 +201,7 @@ Route Number 2                                  100   100   100   100   100     
 Route Number 3                                  100   100   100   100   100     0     1     0     1     1   100     1     0     46
 Route Number 4                                  100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Route Number 5                                  100   100   100   100   100     0     0     0     1     0   100     1     0     46
-Speed Restriction                                 1     0     0    56     0     0     0     2   100    79     0    87     0     25
+Speed Restriction                                 1     0     0    57     0     0     0     2   100    79     0    87     0     25
 Structure Name English                           98    98    97    99   100     0     1     0     1     1   100     0     1     46
 Structure Name French                            98    98    97    96   100     0     0     0     1     1   100     0     0     45
 Structure ID                                    100   100   100   100   100   100   100   100   100   100   100   100   100    100
@@ -226,7 +226,7 @@ Planimetric Accuracy    100     0     0     0     0   100    91    60   100   10
 Provider                100     0     0   100     0   100    99   100    93   100     0    99     1     61
 Revision Date           100     0     0   100     0   100     0   100   100   100     0    99    96     61
 Standard Version        100     0     0   100     0   100   100   100   100   100     0   100   100     69
-Directional Prefix        0     0     0    99     0   100     1   100   100   100     0     1   100     46
+Directional Prefix        0     0     0   100     0   100     1   100   100   100     0     1   100     46
 Directional Suffix        0     0     0   100     0   100     1   100   100   100     0     6   100     47
 Muni Quadrant             0     0     0   100     0   100     0   100     0     0     0     0     0     23
 NID                     100     0     0   100     0   100   100   100   100   100     0   100   100     69

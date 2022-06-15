@@ -45,7 +45,7 @@ Suffixe numéro première maison à droite        0     0     0    99     0     
 Type numérotation première maison à gauche     0     0     0   100     0    73     6   100     0    54     0     0    26     28
 Type numérotation première maison à droite     0     0     0   100     0    73     6   100     0    55     0     0    25     28
 Structure numéro maison à gauche               0     0     0   100     0   100     6   100   100    54     0     0    26     37
-Structure numéro maison à droite               0     0     0   100     0   100     6   100   100    55     0     0    25     37
+Structure numéro maison à droite               0     0     0    99     0   100     6   100   100    55     0     0    25     37
 Numéro dernière maison à gauche                0     0     0   100     0   100     6   100    84    54     0     0    26     36
 Numéro dernière maison à droite                0     0     0   100     0   100     6   100    84    55     0     0    25     36
 Suffixe numéro dernière maison à gauche        0     0     0    99     0     0     1   100     0     0     0     0     1     15
@@ -171,7 +171,7 @@ Version normes                                  100   100   100   100   100   10
 Indicateur sens numérisation adresse à gauche     0   100   100    99   100     0     5   100     0    54   100     0    26     53
 Indicateur sens numérisation adresse à droite     0   100   100    99   100     0     6   100     0    55   100     0    25     53
 IDN intervalle d’adresse                        100   100   100   100   100    73   100   100   100   100   100   100   100     98
-Période de fermeture                              0     1     0     1     0    28     2     0     0    82     1     0     1      9
+Période de fermeture                              0     1     0     2     0    28     2     0     0    82     1     0     1      9
 Numéro de sortie                                100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Numéro première maison à gauche                   0   100    65   100    99    73     5   100    84    54    98     0    26     62
 Numéro première maison à droite                   0   100    65   100    99    73     6   100    84    55    98     0    25     62
@@ -201,7 +201,7 @@ Numéro de route 2                               100   100   100   100   100    
 Numéro de route 3                               100   100   100   100   100     0     1     0     1     1   100     1     0     46
 Numéro de route 4                               100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Numéro de route 5                               100   100   100   100   100     0     0     0     1     0   100     1     0     46
-Limite de vitesse                                 1     0     0    56     0     0     0     2   100    79     0    87     0     25
+Limite de vitesse                                 1     0     0    57     0     0     0     2   100    79     0    87     0     25
 Nom de structure anglais                         98    98    97    99   100     0     1     0     1     1   100     0     1     46
 Nom de structure français                        98    98    97    96   100     0     0     0     1     1   100     0     0     45
 ID structure                                    100   100   100   100   100   100   100   100   100   100   100   100   100    100
@@ -226,7 +226,7 @@ Précision planimétrique   100     0     0     0     0   100    91    60   100 
 Fournisseur               100     0     0   100     0   100    99   100    93   100     0    99     1     61
 Date révision             100     0     0   100     0   100     0   100   100   100     0    99    96     61
 Version normes            100     0     0   100     0   100   100   100   100   100     0   100   100     69
-Préfixe direction           0     0     0    99     0   100     1   100   100   100     0     1   100     46
+Préfixe direction           0     0     0   100     0   100     1   100   100   100     0     1   100     46
 Suffixe direction           0     0     0   100     0   100     1   100   100   100     0     6   100     47
 Muni Quadrant               0     0     0   100     0   100     0   100     0     0     0     0     0     23
 IDN                       100     0     0   100     0   100   100   100   100   100     0   100   100     69
