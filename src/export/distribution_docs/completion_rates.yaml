@@ -7,7 +7,7 @@ addrange:
     nb: 0
     nl: 0
     ns: 100
-    nt: 100
+    nt: 99
     nu: 88
     'on': 100
     pe: 100
@@ -22,7 +22,7 @@ addrange:
     nb: 100
     nl: 0
     ns: 0
-    nt: 100
+    nt: 99
     nu: 100
     'on': 100
     pe: 100
@@ -37,7 +37,7 @@ addrange:
     nb: 99
     nl: 0
     ns: 99
-    nt: 100
+    nt: 99
     nu: 88
     'on': 100
     pe: 100
@@ -82,7 +82,7 @@ addrange:
     nb: 99
     nl: 0
     ns: 100
-    nt: 6
+    nt: 5
     nu: 100
     'on': 0
     pe: 54
@@ -97,7 +97,7 @@ addrange:
     nb: 100
     nl: 0
     ns: 100
-    nt: 6
+    nt: 5
     nu: 100
     'on': 84
     pe: 54
@@ -112,7 +112,7 @@ addrange:
     nb: 100
     nl: 0
     ns: 100
-    nt: 6
+    nt: 5
     nu: 100
     'on': 84
     pe: 54
@@ -919,13 +919,13 @@ ferryseg:
     yt: 100
   rtename2en:
     ab: 100
-    avg: 70
+    avg: 62
     bc: 100
     mb: 100
     nb: 100
     nl: 100
     ns: 0
-    nt: 100
+    nt: 0
     nu: 0
     'on': 6
     pe: 100
@@ -1024,13 +1024,13 @@ ferryseg:
     yt: 100
   rtnumber2:
     ab: 100
-    avg: 69
+    avg: 62
     bc: 100
     mb: 100
     nb: 100
     nl: 100
     ns: 0
-    nt: 100
+    nt: 0
     nu: 0
     'on': 0
     pe: 100
@@ -1287,7 +1287,7 @@ roadseg:
     nb: 100
     nl: 100
     ns: 95
-    nt: 100
+    nt: 99
     nu: 88
     'on': 100
     pe: 100
@@ -1497,7 +1497,7 @@ roadseg:
     nb: 99
     nl: 100
     ns: 100
-    nt: 100
+    nt: 99
     nu: 93
     'on': 100
     pe: 100
@@ -1701,13 +1701,13 @@ roadseg:
     yt: 100
   rtename2en:
     ab: 100
-    avg: 55
+    avg: 54
     bc: 100
     mb: 100
     nb: 100
     nl: 100
     ns: 0
-    nt: 12
+    nt: 0
     nu: 0
     'on': 1
     pe: 0
@@ -1737,7 +1737,7 @@ roadseg:
     nb: 100
     nl: 100
     ns: 0
-    nt: 1
+    nt: 0
     nu: 0
     'on': 1
     pe: 0
@@ -1806,13 +1806,13 @@ roadseg:
     yt: 100
   rtnumber2:
     ab: 100
-    avg: 55
+    avg: 54
     bc: 100
     mb: 100
     nb: 100
     nl: 100
     ns: 0
-    nt: 11
+    nt: 0
     nu: 0
     'on': 1
     pe: 1
@@ -1827,7 +1827,7 @@ roadseg:
     nb: 100
     nl: 100
     ns: 0
-    nt: 1
+    nt: 0
     nu: 0
     'on': 1
     pe: 1
@@ -2008,7 +2008,7 @@ strplaname:
     nb: 100
     nl: 0
     ns: 0
-    nt: 100
+    nt: 99
     nu: 100
     'on': 100
     pe: 100
@@ -2068,7 +2068,7 @@ strplaname:
     nb: 100
     nl: 0
     ns: 100
-    nt: 1
+    nt: 2
     nu: 100
     'on': 100
     pe: 100
@@ -2098,7 +2098,7 @@ strplaname:
     nb: 100
     nl: 0
     ns: 100
-    nt: 0
+    nt: 1
     nu: 100
     'on': 0
     pe: 0
@@ -2113,7 +2113,7 @@ strplaname:
     nb: 100
     nl: 0
     ns: 100
-    nt: 92
+    nt: 91
     nu: 100
     'on': 97
     pe: 96
@@ -2248,7 +2248,7 @@ strplaname:
     nb: 100
     nl: 0
     ns: 100
-    nt: 1
+    nt: 2
     nu: 100
     'on': 100
     pe: 4
@@ -2263,7 +2263,7 @@ strplaname:
     nb: 100
     nl: 0
     ns: 99
-    nt: 81
+    nt: 82
     nu: 100
     'on': 100
     pe: 91

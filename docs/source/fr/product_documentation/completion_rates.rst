@@ -26,19 +26,19 @@ Intervalles d'adresse (intervadr)
 ------------------------------------------  -----------------------------------------------------------------------------------
 Attribut                                      AB    BC    MB    NB    NL    NS    NT    NU    ON    PE    QC    SK    YT    Moy
 ==========================================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
-Technique acquisition                        100     0     0   100     0     0   100   100   100   100     0    99    50     58
+Technique acquisition                        100     0     0   100     0     0    99   100   100   100     0    99    50     58
 Couverture                                    99     0     0     0     0     0     0    88     0   100     0    99     0     30
-Date création                                100     0     0    99     0    99   100    88   100   100     0    99     1    60
+Date création                                100     0     0    99     0    99    99    88   100   100     0    99     1    60
 Nom jeu de données                           100     0     0   100     0   100   100   100   100   100     0   100   100     69
-Précision planimétrique                      100     0     0     0     0   100   100    88   100   100     0    99     1     53
+Précision planimétrique                      100     0     0     0     0   100    99    88   100   100     0    99     1     53
 Fournisseur                                  100     0     0   100     0   100   100   100    84   100     0    99     1     60
 Date révision                                100     0     0   100     0   100     1   100   100   100     0    99    98     61
 Version normes                               100     0     0   100     0   100   100   100   100   100     0   100   100     69
 IDN nom de rue non officiel à gauche           0     0     0     0     0     0     0     0     0     0     0     0     0      0
 IDN nom de rue non officiel à droite           0     0     0     0     0     0     0     0     0     0     0     0     0      0
-Indicateur sens numérisation à gauche          0     0     0    99     0   100     6   100     0    54     0     0    26     30
+Indicateur sens numérisation à gauche          0     0     0    99     0   100     5   100     0    54     0     0    26     30
 Indicateur sens numérisation à droite          0     0     0    99     0   100     6   100     0    55     0     0    25     30
-Numéro première maison à gauche                0     0     0   100     0   100     6   100    84    54     0     0    26     36
+Numéro première maison à gauche                0     0     0   100     0   100     5   100    84    54     0     0    26     36
 Numéro première maison à droite                0     0     0   100     0   100     6   100    84    55     0     0    25     36
 Suffixe numéro première maison à gauche        0     0     0    99     0     0     1   100     0     0     0     0     1     15
 Suffixe numéro première maison à droite        0     0     0    99     0     0     1   100     0     0     0     0     1     15
@@ -46,7 +46,7 @@ Type numérotation première maison à gauche     0     0     0   100     0    7
 Type numérotation première maison à droite     0     0     0   100     0    73     6   100     0    55     0     0    25     28
 Structure numéro maison à gauche               0     0     0   100     0   100     6   100   100    54     0     0    26     37
 Structure numéro maison à droite               0     0     0    99     0   100     6   100   100    55     0     0    25     37
-Numéro dernière maison à gauche                0     0     0   100     0   100     6   100    84    54     0     0    26     36
+Numéro dernière maison à gauche                0     0     0   100     0   100     5   100    84    54     0     0    26     36
 Numéro dernière maison à droite                0     0     0   100     0   100     6   100    84    55     0     0    25     36
 Suffixe numéro dernière maison à gauche        0     0     0    99     0     0     1   100     0     0     0     0     1     15
 Suffixe numéro dernière maison à droite        0     0     0    99     0     0     1   100     0     0     0     0     1     15
@@ -117,7 +117,7 @@ ID segment liaison par transbordeur     100   100   100   100   100   100   100 
 Classification routière fonctionnelle   100   100   100     0   100     8   100     0   100   100   100   100   100     78
 IDN                                     100   100   100   100   100   100   100     0   100   100   100   100   100     92
 Nom de route anglais 1                  100   100   100   100   100     0   100     0    96   100   100   100   100     84
-Nom de route anglais 2                  100   100   100   100   100     0   100     0     6   100   100     0   100     70
+Nom de route anglais 2                  100   100   100   100   100     0     0     0     6   100   100     0   100     62
 Nom de route anglais 3                  100   100   100   100   100     0     0     0     0   100   100     0   100     62
 Nom de route anglais 4                  100   100   100   100   100     0     0     0     0   100   100     0   100     62
 Nom de route français 1                 100   100   100   100   100     0     0     0     3   100   100     0   100     62
@@ -125,7 +125,7 @@ Nom de route français 2                 100   100   100   100   100     0     0
 Nom de route français 3                 100   100   100   100   100     0     0     0     0   100   100     0   100     62
 Nom de route français 4                 100   100   100   100   100     0     0     0     0   100   100     0   100     62
 Numéro de route 1                       100   100   100   100   100     0   100     0     6   100   100     8   100     70
-Numéro de route 2                       100   100   100   100   100     0   100     0     0   100   100     0   100     69
+Numéro de route 2                       100   100   100   100   100     0     0     0     0   100   100     0   100     62
 Numéro de route 3                       100   100   100   100   100     0     0     0     0   100   100     0   100     62
 Numéro de route 4                       100   100   100   100   100     0     0     0     0   100   100     0   100     62
 Numéro de route 5                       100   100   100   100   100     0     0     0     0   100   100     0   100     62
@@ -160,7 +160,7 @@ Segment routier (segmrout)
 ---------------------------------------------  -----------------------------------------------------------------------------------
 Attribut                                         AB    BC    MB    NB    NL    NS    NT    NU    ON    PE    QC    SK    YT    Moy
 =============================================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
-Technique acquisition                           100   100   100   100   100    95   100    88   100   100   100    99    50     95
+Technique acquisition                           100   100   100   100   100    95    99    88   100   100   100    99    50     95
 Couverture                                       99   100   100     0   100   100     0    88     0   100   100    99     0     68
 Date création                                   100   100   100    99   100    99    86    88   100   100   100    99     1     90
 Nom jeu de données                              100   100   100   100   100   100   100   100   100   100   100   100   100    100
@@ -185,20 +185,20 @@ Nom de lieu officiel à droite                   100   100   100    94   100    
 Nom de rue officiel concaténé à gauche           78   100   100    94   100    73    39   100    85    96    96    34    78     83
 Nom de rue officiel concaténé à droite           78   100   100    94   100    73    39   100    85    96    96    34    78     83
 Type de chaussée revêtue                         59    16    46    99    31    49   100    93    24   100    15    69    41     57
-État revêtement                                 100   100   100    99   100   100   100    93   100   100   100    99    41     95
+État revêtement                                 100   100   100    99   100   100    99    93   100   100   100    99    41     95
 Autorité route                                   99   100     0     0     0    73     0    54   100   100     0     0    97     48
 ID segment routier                              100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Nom de route anglais 1                          100   100   100   100   100     1    15     0     2     3   100     1   100     56
-Nom de route anglais 2                          100   100   100   100   100     0    12     0     1     0   100     1   100     55
-Nom de route anglais 3                          100   100   100   100   100     0     1     0     1     0   100     1     0     46
+Nom de route anglais 2                          100   100   100   100   100     0     0     0     1     0   100     1   100     54
+Nom de route anglais 3                          100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Nom de route anglais 4                          100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Nom de route français 1                         100   100   100   100   100     1     0     0     1     3   100     1   100     54
 Nom de route français 2                         100   100   100   100   100     0     0     0     1     0   100     1   100     54
 Nom de route français 3                         100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Nom de route français 4                         100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Numéro de route 1                               100   100   100    99   100    12    11     0    11    36   100     9   100     60
-Numéro de route 2                               100   100   100   100   100     0    11     0     1     1   100     1   100     55
-Numéro de route 3                               100   100   100   100   100     0     1     0     1     1   100     1     0     46
+Numéro de route 2                               100   100   100   100   100     0     0     0     1     1   100     1   100     54
+Numéro de route 3                               100   100   100   100   100     0     0     0     1     1   100     1     0     46
 Numéro de route 4                               100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Numéro de route 5                               100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Limite de vitesse                                 1     0     0    57     0     0     0     2   100    79     0    87     0     25
@@ -218,7 +218,7 @@ Noms de rue et de lieu (nomruelieu)
 -----------------------  -----------------------------------------------------------------------------------
 Attribut                   AB    BC    MB    NB    NL    NS    NT    NU    ON    PE    QC    SK    YT    Moy
 =======================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
-Technique acquisition     100     0     0   100     0     0   100   100   100   100     0    99    28     56
+Technique acquisition     100     0     0   100     0     0    99   100   100   100     0    99    28     56
 Couverture                 99     0     0     0     0     0     0    60     0   100     0    99     0     28
 Date création             100     0     0    99     0    99    88    60   100   100     0    99     1     57
 Nom jeu de données        100     0     0   100     0   100   100   100   100   100     0   100   100     69
@@ -227,16 +227,16 @@ Fournisseur               100     0     0   100     0   100    99   100    93   
 Date révision             100     0     0   100     0   100     0   100   100   100     0    99    96     61
 Version normes            100     0     0   100     0   100   100   100   100   100     0   100   100     69
 Préfixe direction           0     0     0   100     0   100     1   100   100   100     0     1   100     46
-Suffixe direction           0     0     0   100     0   100     1   100   100   100     0     6   100     47
-Muni Quadrant               0     0     0   100     0   100     0   100     0     0     0     0     0     23
+Suffixe direction           0     0     0   100     0   100     2   100   100   100     0     6   100     47
+Muni Quadrant               0     0     0   100     0   100     1   100     0     0     0     0     0     23
 IDN                       100     0     0   100     0   100   100   100   100   100     0   100   100     69
 Nom de lieu               100     0     0    98     0   100    84   100     5    99     0    99   100     60
 Type de lieu                0     0     0     1     0     0    77   100     0     0     0     0    73     19
 Province                  100     0     0    99     0   100   100   100   100   100     0   100   100     69
 Article nom rue             0     0     0   100     0     0     1   100     1     0     0     1     0     16
-Corps nom rue              94     0     0   100     0   100    92   100    97    96     0    76    94     65
-Préfixe type rue            0     0     0   100     0   100     1   100   100     4     0    28   100     41
-Suffixe type rue            0     0     0   100     0    99    81   100   100    91     0    49   100     55
+Corps nom rue              94     0     0   100     0   100    91   100    97    96     0    76    94     65
+Préfixe type rue            0     0     0   100     0   100     2   100   100     4     0    28   100     41
+Suffixe type rue            0     0     0   100     0    99    82   100   100    91     0    49   100     55
 =======================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
 
 Poste de péage (postepeage)

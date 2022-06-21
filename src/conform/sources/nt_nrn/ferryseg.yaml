@@ -14,7 +14,7 @@ license:
   text:
 language: en
 data:
-  filename: 2021/updated_nrn.gpkg
+  filename: 2022/nt_nrn.gpkg
   layer: ferryseg
   driver: GPKG
   crs: "EPSG:4617"
@@ -33,7 +33,7 @@ conform:
     closing: closing
     ferrysegid:
     roadclass: roadclass
-    nid: nid
+    nid: uuid
     rtename1en: rtename1en
     rtename2en: rtename2en
     rtename3en: rtename3en

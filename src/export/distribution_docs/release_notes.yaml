@@ -29,9 +29,9 @@ ns:
   release_date: 2021-10
   validity_date: 2021-10
 nt:
-  edition: 13.0
-  number_of_kilometers: 7,805
-  release_date: 2022-04
+  edition: 13.1
+  number_of_kilometers: 7,812
+  release_date: 2022-06
   validity_date: 2022-04
 nu:
   edition: 10.0

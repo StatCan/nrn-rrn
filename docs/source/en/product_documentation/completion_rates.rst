@@ -26,19 +26,19 @@ Address Range (addrange)
 --------------------------------  -----------------------------------------------------------------------------------
 Attribute                           AB    BC    MB    NB    NL    NS    NT    NU    ON    PE    QC    SK    YT    Avg
 ================================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
-Acquisition Technique              100     0     0   100     0     0   100   100   100   100     0    99    50     58
+Acquisition Technique              100     0     0   100     0     0    99   100   100   100     0    99    50     58
 Coverage                            99     0     0     0     0     0     0    88     0   100     0    99     0     30
-Creation Date                      100     0     0    99     0    99   100    88   100   100     0    99     1    60
+Creation Date                      100     0     0    99     0    99    99    88   100   100     0    99     1    60
 Dataset Name                       100     0     0   100     0   100   100   100   100   100     0   100   100     69
-Planimetric Accuracy               100     0     0     0     0   100   100    88   100   100     0    99     1     53
+Planimetric Accuracy               100     0     0     0     0   100    99    88   100   100     0    99     1     53
 Provider                           100     0     0   100     0   100   100   100    84   100     0    99     1     60
 Revision Date                      100     0     0   100     0   100     1   100   100   100     0    99    98     61
 Standard Version                   100     0     0   100     0   100   100   100   100   100     0   100   100     69
 Alternate Street Name NID Left       0     0     0     0     0     0     0     0     0     0     0     0     0      0
 Alternate Street Name NID Right      0     0     0     0     0     0     0     0     0     0     0     0     0      0
-Digitizing Direction Flag Left       0     0     0    99     0   100     6   100     0    54     0     0    26     30
+Digitizing Direction Flag Left       0     0     0    99     0   100     5   100     0    54     0     0    26     30
 Digitizing Direction Flag Right      0     0     0    99     0   100     6   100     0    55     0     0    25     30
-First House Number Left              0     0     0   100     0   100     6   100    84    54     0     0    26     36
+First House Number Left              0     0     0   100     0   100     5   100    84    54     0     0    26     36
 First House Number Right             0     0     0   100     0   100     6   100    84    55     0     0    25     36
 First House Number Suffix Left       0     0     0    99     0     0     1   100     0     0     0     0     1     15
 First House Number Suffix Right      0     0     0    99     0     0     1   100     0     0     0     0     1     15
@@ -46,7 +46,7 @@ First House Number Type Left         0     0     0   100     0    73     6   100
 First House Number Type Right        0     0     0   100     0    73     6   100     0    55     0     0    25     28
 House Number Structure Left          0     0     0   100     0   100     6   100   100    54     0     0    26     37
 House Number Structure Right         0     0     0    99     0   100     6   100   100    55     0     0    25     37
-Last House Number Left               0     0     0   100     0   100     6   100    84    54     0     0    26     36
+Last House Number Left               0     0     0   100     0   100     5   100    84    54     0     0    26     36
 Last House Number Right              0     0     0   100     0   100     6   100    84    55     0     0    25     36
 Last House Number Suffix Left        0     0     0    99     0     0     1   100     0     0     0     0     1     15
 Last House Number Suffix Right       0     0     0    99     0     0     1   100     0     0     0     0     1     15
@@ -117,7 +117,7 @@ Ferry Segment ID        100   100   100   100   100   100   100     0   100   10
 Functional Road Class   100   100   100     0   100     8   100     0   100   100   100   100   100     78
 NID                     100   100   100   100   100   100   100     0   100   100   100   100   100     92
 Route Name English 1    100   100   100   100   100     0   100     0    96   100   100   100   100     84
-Route Name English 2    100   100   100   100   100     0   100     0     6   100   100     0   100     70
+Route Name English 2    100   100   100   100   100     0     0     0     6   100   100     0   100     62
 Route Name English 3    100   100   100   100   100     0     0     0     0   100   100     0   100     62
 Route Name English 4    100   100   100   100   100     0     0     0     0   100   100     0   100     62
 Route Name French 1     100   100   100   100   100     0     0     0     3   100   100     0   100     62
@@ -125,7 +125,7 @@ Route Name French 2     100   100   100   100   100     0     0     0     0   10
 Route Name French 3     100   100   100   100   100     0     0     0     0   100   100     0   100     62
 Route Name French 4     100   100   100   100   100     0     0     0     0   100   100     0   100     62
 Route Number 1          100   100   100   100   100     0   100     0     6   100   100     8   100     70
-Route Number 2          100   100   100   100   100     0   100     0     0   100   100     0   100     69
+Route Number 2          100   100   100   100   100     0     0     0     0   100   100     0   100     62
 Route Number 3          100   100   100   100   100     0     0     0     0   100   100     0   100     62
 Route Number 4          100   100   100   100   100     0     0     0     0   100   100     0   100     62
 Route Number 5          100   100   100   100   100     0     0     0     0   100   100     0   100     62
@@ -160,7 +160,7 @@ Road Segment (roadseg)
 ---------------------------------------------  -----------------------------------------------------------------------------------
 Attribute                                        AB    BC    MB    NB    NL    NS    NT    NU    ON    PE    QC    SK    YT    Avg
 =============================================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
-Acquisition Technique                           100   100   100   100   100    95   100    88   100   100   100    99    50     95
+Acquisition Technique                           100   100   100   100   100    95    99    88   100   100   100    99    50     95
 Coverage                                         99   100   100     0   100   100     0    88     0   100   100    99     0     68
 Creation Date                                   100   100   100    99   100    99    86    88   100   100   100    99     1     90
 Dataset Name                                    100   100   100   100   100   100   100   100   100   100   100   100   100    100
@@ -185,20 +185,20 @@ Official Place Name Right                       100   100   100    94   100    7
 Official Street Name Concatenated Left           78   100   100    94   100    73    39   100    85    96    96    34    78     83
 Official Street Name Concatenated Right          78   100   100    94   100    73    39   100    85    96    96    34    78     83
 Paved Road Surface Type                          59    16    46    99    31    49   100    93    24   100    15    69    41     57
-Pavement Status                                 100   100   100    99   100   100   100    93   100   100   100    99    41     95
+Pavement Status                                 100   100   100    99   100   100    99    93   100   100   100    99    41     95
 Road Jurisdiction                                99   100     0     0     0    73     0    54   100   100     0     0    97     48
 Road Segment ID                                 100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Route Name English 1                            100   100   100   100   100     1    15     0     2     3   100     1   100     56
-Route Name English 2                            100   100   100   100   100     0    12     0     1     0   100     1   100     55
-Route Name English 3                            100   100   100   100   100     0     1     0     1     0   100     1     0     46
+Route Name English 2                            100   100   100   100   100     0     0     0     1     0   100     1   100     54
+Route Name English 3                            100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Route Name English 4                            100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Route Name French 1                             100   100   100   100   100     1     0     0     1     3   100     1   100     54
 Route Name French 2                             100   100   100   100   100     0     0     0     1     0   100     1   100     54
 Route Name French 3                             100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Route Name French 4                             100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Route Number 1                                  100   100   100    99   100    12    11     0    11    36   100     9   100     60
-Route Number 2                                  100   100   100   100   100     0    11     0     1     1   100     1   100     55
-Route Number 3                                  100   100   100   100   100     0     1     0     1     1   100     1     0     46
+Route Number 2                                  100   100   100   100   100     0     0     0     1     1   100     1   100     54
+Route Number 3                                  100   100   100   100   100     0     0     0     1     1   100     1     0     46
 Route Number 4                                  100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Route Number 5                                  100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Speed Restriction                                 1     0     0    57     0     0     0     2   100    79     0    87     0     25
@@ -218,7 +218,7 @@ Street and Place Names (strplaname)
 ---------------------  -----------------------------------------------------------------------------------
 Attribute                AB    BC    MB    NB    NL    NS    NT    NU    ON    PE    QC    SK    YT    Avg
 =====================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
-Acquisition Technique   100     0     0   100     0     0   100   100   100   100     0    99    28     56
+Acquisition Technique   100     0     0   100     0     0    99   100   100   100     0    99    28     56
 Coverage                 99     0     0     0     0     0     0    60     0   100     0    99     0     28
 Creation Date           100     0     0    99     0    99    88    60   100   100     0    99     1     57
 Dataset Name            100     0     0   100     0   100   100   100   100   100     0   100   100     69
@@ -227,16 +227,16 @@ Provider                100     0     0   100     0   100    99   100    93   10
 Revision Date           100     0     0   100     0   100     0   100   100   100     0    99    96     61
 Standard Version        100     0     0   100     0   100   100   100   100   100     0   100   100     69
 Directional Prefix        0     0     0   100     0   100     1   100   100   100     0     1   100     46
-Directional Suffix        0     0     0   100     0   100     1   100   100   100     0     6   100     47
-Muni Quadrant             0     0     0   100     0   100     0   100     0     0     0     0     0     23
+Directional Suffix        0     0     0   100     0   100     2   100   100   100     0     6   100     47
+Muni Quadrant             0     0     0   100     0   100     1   100     0     0     0     0     0     23
 NID                     100     0     0   100     0   100   100   100   100   100     0   100   100     69
 Place Name              100     0     0    98     0   100    84   100     5    99     0    99   100     60
 Place Type                0     0     0     1     0     0    77   100     0     0     0     0    73     19
 Province                100     0     0    99     0   100   100   100   100   100     0   100   100     69
 Street Name Article       0     0     0   100     0     0     1   100     1     0     0     1     0     16
-Street Name Body         94     0     0   100     0   100    92   100    97    96     0    76    94     65
-Street Type Prefix        0     0     0   100     0   100     1   100   100     4     0    28   100     41
-Street Type Suffix        0     0     0   100     0    99    81   100   100    91     0    49   100     55
+Street Name Body         94     0     0   100     0   100    91   100    97    96     0    76    94     65
+Street Type Prefix        0     0     0   100     0   100     2   100   100     4     0    28   100     41
+Street Type Suffix        0     0     0   100     0    99    82   100   100    91     0    49   100     55
 =====================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
 
 Toll Point (tollpoint)

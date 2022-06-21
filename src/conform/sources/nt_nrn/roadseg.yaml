@@ -14,13 +14,45 @@ license:
   text:
 language: en
 data:
-  filename: 2021/updated_nrn.gpkg
+  filename: 2022/nt_nrn.gpkg
   layer: roadseg
   driver: GPKG
   crs: "EPSG:4617"
   spatial: True
   query:
 conform:
+  addrange:
+    acqtech: addrange_acqtech
+    metacover: addrange_metacover
+    credate: addrange_credate
+    datasetnam: addrange_datasetnam
+    accuracy: addrange_accuracy
+    provider: addrange_provider
+    revdate: addrange_revdate
+    specvers: 2.0
+    l_altnanid:
+    r_altnanid:
+    l_digdirfg: addrange_l_digdirfg
+    r_digdirfg: addrange_r_digdirfg
+    l_hnumf: addrange_l_hnumf
+    r_hnumf: addrange_r_hnumf
+    l_hnumsuff: addrange_l_hnumsuff
+    r_hnumsuff: addrange_r_hnumsuff
+    l_hnumtypf: addrange_l_hnumtypf
+    r_hnumtypf: addrange_r_hnumtypf
+    l_hnumstr: addrange_l_hnumstr
+    r_hnumstr: addrange_r_hnumstr
+    l_hnuml: addrange_l_hnuml
+    r_hnuml: addrange_r_hnuml
+    l_hnumsufl: addrange_l_hnumsufl
+    r_hnumsufl: addrange_r_hnumsufl
+    l_hnumtypl: addrange_l_hnumtypl
+    r_hnumtypl: addrange_r_hnumtypl
+    nid: uuid
+    l_offnanid: uuid
+    r_offnanid: uuid
+    l_rfsysind: addrange_l_rfsysind
+    r_rfsysind: addrange_r_rfsysind
   roadseg:
     acqtech: acqtech
     metacover: metacover
@@ -32,7 +64,7 @@ conform:
     specvers: 2.0
     l_adddirfg: l_adddirfg
     r_adddirfg: r_adddirfg
-    adrangenid: adrangenid
+    adrangenid: uuid
     closing: closing
     exitnbr: exitnbr
     l_hnumf: l_hnumf
@@ -40,7 +72,7 @@ conform:
     roadclass: roadclass
     l_hnuml: l_hnuml
     r_hnuml: r_hnuml
-    nid: nid
+    nid: uuid
     nbrlanes: nbrlanes
     l_placenam: l_placenam
     r_placenam: r_placenam
@@ -70,3 +102,23 @@ conform:
     structtype: structtype
     trafficdir: trafficdir
     unpavsurf: unpavsurf
+  strplaname:
+    acqtech: [strplaname_l_acqtech, strplaname_r_acqtech]
+    metacover: [strplaname_l_metacover, strplaname_r_metacover]
+    credate: [strplaname_l_credate, strplaname_r_credate]
+    datasetnam: [strplaname_l_datasetnam, strplaname_r_datasetnam]
+    accuracy: [strplaname_l_accuracy, strplaname_r_accuracy]
+    provider: [strplaname_l_provider, strplaname_r_provider]
+    revdate: [strplaname_l_revdate, strplaname_r_revdate]
+    specvers: 2.0
+    dirprefix: [strplaname_l_dirprefix, strplaname_r_dirprefix]
+    dirsuffix: [strplaname_l_dirsuffix, strplaname_r_dirsuffix]
+    muniquad: [strplaname_l_muniquad, strplaname_r_muniquad]
+    nid: uuid
+    placename: [strplaname_l_placename, strplaname_r_placename]
+    placetype: [strplaname_l_placetype, strplaname_r_placetype]
+    province: [strplaname_l_province, strplaname_r_province]
+    starticle: [strplaname_l_starticle, strplaname_r_starticle]
+    namebody: [strplaname_l_namebody, strplaname_r_namebody]
+    strtypre: [strplaname_l_strtypre, strplaname_r_strtypre]
+    strtysuf: [strplaname_l_strtysuf, strplaname_r_strtysuf]
