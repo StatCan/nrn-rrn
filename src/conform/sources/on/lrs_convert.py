@@ -49,9 +49,10 @@ class LRS:
         self.schema = {
             "orn_address_info": {
                 "fields": ["orn_road_net_element_id", "from_measure", "to_measure", "first_house_number",
-                           "last_house_number", "house_number_structure", "street_side", "effective_datetime"],
+                           "last_house_number", "house_number_structure", "street_side", "standard_municipality",
+                           "effective_datetime"],
                 "query": None,
-                "output_fields": ["hnumf", "hnuml", "hnumstr", "revdate"]
+                "output_fields": ["hnumf", "hnuml", "hnumstr", "placenam", "revdate"]
             },
             "orn_blocked_passage": {
                 "fields": ["orn_road_net_element_id", "at_measure", "blocked_passage_type", "agency_name",
@@ -187,6 +188,7 @@ class LRS:
             "route_name_french": "rtenamefr",
             "route_number": "rtnumber",
             "speed_limit": "speed",
+            "standard_municipality": "placenam",
             "street_name_body": "namebody",
             "street_type_prefix": "strtypre",
             "street_type_suffix": "strtysuf",
@@ -206,14 +208,16 @@ class LRS:
                     {
                         "query": "street_side != 'Right'",
                         "dataset_name": "orn_address_info_left",
-                        "rename_fields": {"hnumf": "l_hnumf", "hnuml": "l_hnuml", "hnumstr": "l_hnumstr"},
-                        "output_fields": ["l_hnumf", "l_hnuml", "l_hnumstr", "revdate"]
+                        "rename_fields": {"hnumf": "l_hnumf", "hnuml": "l_hnuml", "hnumstr": "l_hnumstr",
+                                          "placenam": "l_placenam"},
+                        "output_fields": ["l_hnumf", "l_hnuml", "l_hnumstr", "l_placenam", "revdate"]
                     },
                     {
                         "query": "street_side != 'Left'",
                         "dataset_name": "orn_address_info_right",
-                        "rename_fields": {"hnumf": "r_hnumf", "hnuml": "r_hnuml", "hnumstr": "r_hnumstr"},
-                        "output_fields": ["r_hnumf", "r_hnuml", "r_hnumstr", "revdate"]
+                        "rename_fields": {"hnumf": "r_hnumf", "hnuml": "r_hnuml", "hnumstr": "r_hnumstr",
+                                          "placenam": "r_placenam"},
+                        "output_fields": ["r_hnumf", "r_hnuml", "r_hnumstr", "r_placenam", "revdate"]
                     }
                 ]
             },
@@ -319,6 +323,7 @@ class LRS:
             sys.exit(1)
         if self.dst.exists():
             logger.exception(f"Invalid dst input: {dst}. File already exists.")
+            sys.exit(1)
 
     def __call__(self) -> None:
         """Executes class functionality."""
@@ -911,10 +916,6 @@ class LRS:
             geom_types = set(df.geom_type)
             if any(geom_type in geom_types for geom_type in {"MultiPoint", "MultiLineString"}):
                 self.nrn_datasets[table] = helpers.explode_geometry(df).copy(deep=True)
-
-            # Reformat date fields.
-            for col in {"credate", "revdate"}.intersection(set(df.columns)):
-                df[col] = df[col].map(pd.to_datetime).dt.strftime("%Y%m%d")
 
         # Export to GeoPackage.
         helpers.export(self.nrn_datasets, self.dst, merge_schemas=True)

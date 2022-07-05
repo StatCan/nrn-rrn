@@ -161,6 +161,7 @@ class LRS:
             sys.exit(1)
         if self.dst.exists():
             logger.exception(f"Invalid dst input: {dst}. File already exists.")
+            sys.exit(1)
 
     def __call__(self) -> None:
         """Executes class functionality."""
@@ -774,10 +775,6 @@ class LRS:
             geom_types = set(df.geom_type)
             if any(geom_type in geom_types for geom_type in {"MultiPoint", "MultiLineString"}):
                 self.nrn_datasets[table] = helpers.explode_geometry(df).copy(deep=True)
-
-            # Reformat date fields.
-            for col in {"credate", "revdate"}.intersection(set(df.columns)):
-                df[col] = df[col].map(pd.to_datetime).dt.strftime("%Y%m%d")
 
         # Export to GeoPackage.
         helpers.export(self.nrn_datasets, self.dst, merge_schemas=True)

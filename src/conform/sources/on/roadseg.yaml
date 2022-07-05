@@ -12,7 +12,7 @@ license:
   text: Open Government License - Ontario
 language: en
 data:
-  filename: 2021/orn.gpkg
+  filename: 2022/orn.gpkg
   layer: roadseg
   driver: GPKG
   crs: "EPSG:4617"
@@ -31,13 +31,12 @@ conform:
         - function: query_assign
           columns: provider
           lookup:
-            ? provider.str.lower().str.contains('city of |county of | county|district municipality of |district of |
-              municipality of |town of |township of |united counties of |village of ', na=False, regex=True)
+            ? provider.str.lower().str.contains('city of |county of | county|district of |municipality of |town of |
+              township of |united counties of |village of ', na=False, regex=True)
             : value: Municipal
               type: string
-            ? provider.str.lower().isin(['ministry of natural resources and forestry', 'ministry of transportation',
-              'ontario ministry of health', 'ontario provincial police', 'ontario road network'])
-            : value: Provincial
+            provider.str.lower().str.contains('ministry of |ontario', na=False, regex=True)
+              value: Provincial
               type: string
             provider.str.lower().isin(['elections and statistics canada', 'nrcan']):
               value: Federal
@@ -93,10 +92,13 @@ conform:
         - function: query_assign
           columns: roadclass
           lookup:
+            roadclass.str.lower() == 'alleyway / laneway':
+              value: Alleyway / Lane
+              type: string
             roadclass.str.lower() == 'service':
               value: Service Lane
               type: string
-            roadclass.str.lower() != 'service':
+            ~roadclass.str.lower().isin(['alleyway / laneway', 'service']):
               value: roadclass
               type: column
           engine: python
@@ -104,29 +106,8 @@ conform:
     r_hnuml: r_hnuml
     nid:
     nbrlanes: nbrlanes
-    l_placenam: &placename
-      fields: [roadjuris, provider]
-      functions:
-        - function: query_assign
-          columns: [placename, provider]
-          lookup:
-            ? placename.str.lower().isin(['407 etr', 'local roads board', 'ministry of natural resources and forestry',
-              'ministry of transportation', 'niagara parks commission', 'ontario parks', 'private']) and
-              provider.str.lower().str.contains('city of |county of | county|district municipality of |district of |
-              municipality of |town of |township of |united counties of |village of ', na=False, regex=True)
-            : value: provider
-              type: column
-            placename.str.lower() == 'corporation of the municipality of mississippi mills':
-              value: Municipality of Mississippi Mills
-              type: string
-            placename.str.lower() == 'greater toronto airport authority':
-              value: City of Mississauga
-              type: string
-            placename.str.lower() == 'the corporation of the municipality of east ferris':
-              value: Municipality of East Ferris
-              type: string
-          engine: python
-    r_placenam: *placename
+    l_placenam: l_placenam
+    r_placenam: r_placenam
     l_stname_c: r_stname_c
     r_stname_c: r_stname_c
     pavsurf: pavsurf
@@ -151,7 +132,14 @@ conform:
     strunamefr: strunamefr
     structid:
     structtype: structtype
-    trafficdir: trafficdir
+    trafficdir:
+      fields: trafficdir
+      functions:
+        - function: map_values
+          lookup:
+            Both: Both directions
+            Positive: Same direction
+            Negative: Opposite direction
     unpavsurf: pavsurf
   strplaname:
     acqtech: acqtech
@@ -167,32 +155,23 @@ conform:
       functions: &street_dir
         - function: map_values
           lookup:
+            Nord Est: Nord-est
+            Nord Ouest: Nord-ouest
             North East: Northeast
             North West: Northwest
             South East: Southeast
             South West: Southwest
+            Sud Est: Sud-est
+            Sud Ouest: Sud-ouest
     dirsuffix:
       fields: dirsuffix
       functions: *street_dir
     muniquad:
     nid: uuid
-    placename: *placename
+    placename: [l_placenam, r_placenam]
     placetype:
     province: Ontario
     starticle:
-      fields: namebody
-      functions:
-        - function: regex_find
-          pattern: "\\b(domain_strplaname_starticle)\\b"
-          match_index: 0
-          group_index: 0
-    namebody:
-      fields: namebody
-      functions:
-        - function: regex_find
-          pattern: "\\b(domain_strplaname_starticle)\\b"
-          match_index: 0
-          group_index: 0
-          strip_result: True
+    namebody: namebody
     strtypre: strtypre
     strtysuf: strtysuf
