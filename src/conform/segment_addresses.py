@@ -8,13 +8,8 @@ import sys
 from bisect import bisect
 from collections import OrderedDict
 from operator import itemgetter
-from pathlib import Path
 from shapely.geometry import LineString, Point
 from typing import List, Tuple, Union
-
-filepath = Path(__file__).resolve()
-sys.path.insert(1, str(filepath.parents[1]))
-import helpers
 
 
 # Set logger.
@@ -212,7 +207,7 @@ class Segmentor:
 
             return sequence
 
-        def sort_addresses(numbers: List[int], suffixes: List[Union[int, str]], distances: List[float]) \
+        def sort_addresses(numbers: Tuple[int], suffixes: Tuple[Union[int, str]], distances: Tuple[float]) \
                 -> Tuple[Tuple[int, ...], Tuple[Union[int, str], ...], Tuple[float, ...]]:
             """
             Sorts addresses successively by its components:
@@ -221,9 +216,9 @@ class Segmentor:
             3) address suffix
             Sorting accounts for the directionality of the address sequence.
 
-            :param List[int] numbers: sequence of address numbers.
-            :param List[Union[int, str]] suffixes: sequence of address suffixes.
-            :param List[float] distances: sequence of address distances along the associated NRN roadseg LineString.
+            :param Tuple[int] numbers: sequence of address numbers.
+            :param Tuple[Union[int, str]] suffixes: sequence of address suffixes.
+            :param Tuple[float] distances: sequence of address distances along the associated NRN roadseg LineString.
             :return Tuple[Tuple[int, ...], Tuple[Union[int, str], ...], Tuple[float, ...]]: nested lists of address
                 numbers, address suffixes, and address distance along the associated NRN roadseg LineString,
                 respectively, sorted.
@@ -253,8 +248,10 @@ class Segmentor:
 
         # Create dataframes from grouped addresses.
         cols = ("number", "suffix", "distance")
-        addresses_l = pd.DataFrame({col: helpers.groupby_to_list(addresses_l, "roadseg_index", col) for col in cols})
-        addresses_r = pd.DataFrame({col: helpers.groupby_to_list(addresses_r, "roadseg_index", col) for col in cols})
+        addresses_l = pd.DataFrame({col: addresses_l[["roadseg_index", col]]
+                                   .groupby(by="roadseg_index", axis=0, as_index=True)[col].agg(tuple) for col in cols})
+        addresses_r = pd.DataFrame({col: addresses_r[["roadseg_index", col]]
+                                   .groupby(by="roadseg_index", axis=0, as_index=True)[col].agg(tuple) for col in cols})
 
         # Sort addresses.
         addresses_l = addresses_l.apply(lambda row: sort_addresses(*row), axis=1)
@@ -441,7 +438,8 @@ class Segmentor:
         self.roadseg["roadseg_index"] = self.roadseg.index
 
         merge = self.addresses.merge(self.roadseg[["roadseg_index", "join"]], how="left", on="join")
-        self.addresses["roadseg_index"] = helpers.groupby_to_list(merge, "addresses_index", "roadseg_index")
+        self.addresses["roadseg_index"] = merge[["addresses_index", "roadseg_index"]]\
+            .groupby(by="addresses_index", axis=0, as_index=True)["roadseg_index"].agg(tuple)
 
         self.addresses.drop(columns=["addresses_index"], inplace=True)
         self.roadseg.drop(columns=["roadseg_index"], inplace=True)

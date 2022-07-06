@@ -156,8 +156,8 @@ class Confirm:
                 junctions = gpd.GeoSeries(junctions.unique(), crs=junctions.crs)
 
                 # Dissolve geometries, grouped by match field, and explode multi-part results.
-                df_merge = helpers.groupby_to_list(df, group_field=match_field, list_field="geometry")\
-                    .map(linemerge).explode()
+                df_merge = df[[match_field, "geometry"]].groupby(by=match_field, axis=0, as_index=True)["geometry"]\
+                    .agg(tuple).map(linemerge).explode()
                 df_merge = gpd.GeoDataFrame({match_field: df_merge.index}, geometry=df_merge.values, crs=df.crs)
 
                 # Compile junctions, as coordinates, contained within each dissolved geometry.
@@ -183,7 +183,8 @@ class Confirm:
                 # Create dissolved geometries, grouped by nid, for old dataset.
                 # Overwrite df variable with results to feed into generic process flow.
                 old_nid_match_field_lookup = dict(zip(df_old["nid"], df_old[match_field]))
-                df_merge_old = helpers.groupby_to_list(df_old, group_field="nid", list_field="geometry").map(linemerge)
+                df_merge_old = df_old[["nid", "geometry"]].groupby(by="nid", axis=0, as_index=True)["geometry"]\
+                    .agg(tuple).map(linemerge)
                 df_old = gpd.GeoDataFrame(
                     {"nid": df_merge_old.index, match_field: df_merge_old.index.map(old_nid_match_field_lookup)},
                     geometry=df_merge_old.values, crs=df_old.crs
@@ -273,8 +274,8 @@ class Confirm:
                 .explode(ignore_index=True)
 
             # Dissolve contiguous structures, grouped by structid, for old dataset.
-            struct_merge_old = helpers.groupby_to_list(struct_old, group_field="nid", list_field="geometry")\
-                .map(linemerge)
+            struct_merge_old = struct_old[["nid", "geometry"]].groupby(by="nid", axis=0, as_index=True)["geometry"]\
+                .agg(tuple).map(linemerge)
             struct_merge_old = gpd.GeoDataFrame(
                 {"structid": struct_merge_old.index}, geometry=struct_merge_old.values, crs=struct_old.crs)
 

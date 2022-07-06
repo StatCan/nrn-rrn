@@ -660,7 +660,8 @@ class LRS:
 
                 # Compile breakpoints as flattened list.
                 df["breakpts"] = df[["from", "to"]].apply(list, axis=1)
-                breakpts = helpers.groupby_to_list(df, con_id_field, "breakpts").map(chain.from_iterable).map(list)
+                breakpts = df[[con_id_field, "breakpts"]].groupby(by=con_id_field, axis=0, as_index=True)["breakpts"]\
+                    .agg(tuple).map(chain.from_iterable).map(tuple)
 
                 # Merge breakpoints with base dataset.
                 breakpts.name = f"{name}_breakpts"
@@ -671,7 +672,7 @@ class LRS:
 
         breakpt_cols = [col for col in base.columns if col.endswith("_breakpts")]
         base["breakpts"] = base[breakpt_cols].apply(
-            lambda row: chain.from_iterable(r for r in row if isinstance(r, list)), axis=1).map(set).map(sorted)
+            lambda row: chain.from_iterable(r for r in row if isinstance(r, tuple)), axis=1).map(set).map(sorted)
 
         # Remove extraneous columns.
         base.drop(columns=breakpt_cols, inplace=True)

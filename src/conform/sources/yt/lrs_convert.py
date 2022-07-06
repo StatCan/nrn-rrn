@@ -465,7 +465,9 @@ class LRS:
         # Merge geometries for many-to-one links; keep only the first record but keep the entire merged geometry.
         con_id_field = self.calibrations["id_field"]
         flag = base[con_id_field].duplicated(keep=False)
-        geom_links = dict(helpers.groupby_to_list(base.loc[flag], con_id_field, "geometry").map(linemerge))
+        geom_links = dict(base.loc[flag][[con_id_field, "geometry"]]
+                          .groupby(by=con_id_field, axis=0, as_index=True)["geometry"].agg(tuple)
+                          .map(linemerge))
         base = base.loc[~base[con_id_field].duplicated(keep="first")]
         base.loc[flag, "geometry"] = base.loc[flag, con_id_field].map(geom_links)
 
@@ -489,7 +491,8 @@ class LRS:
 
                 # Compile breakpoints as flattened list.
                 df["breakpts"] = df[["from", "to"]].apply(list, axis=1)
-                breakpts = helpers.groupby_to_list(df, con_id_field, "breakpts").map(chain.from_iterable).map(list)
+                breakpts = df[[con_id_field, "breakpts"]].groupby(by=con_id_field, axis=0, as_index=True)["breakpts"]\
+                    .agg(tuple).map(chain.from_iterable).map(tuple)
 
                 # Merge breakpoints with base dataset.
                 breakpts.name = f"{name}_breakpts"
@@ -500,7 +503,7 @@ class LRS:
 
         breakpt_cols = [col for col in base.columns if col.endswith("_breakpts")]
         base["breakpts"] = base[breakpt_cols].apply(
-            lambda row: chain.from_iterable(r for r in row if isinstance(r, list)), axis=1).map(set).map(sorted)
+            lambda row: chain.from_iterable(r for r in row if isinstance(r, tuple)), axis=1).map(set).map(sorted)
 
         # Remove extraneous columns.
         base.drop(columns=breakpt_cols, inplace=True)

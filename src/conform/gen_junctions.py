@@ -146,7 +146,7 @@ class Junction:
         # Compile all nodes and group uuids by geometry.
         nodes = self.roadseg["geometry"].map(lambda g: itemgetter(0, -1)(attrgetter("coords")(g))).explode()
         nodes_df = pd.DataFrame({"uuid": nodes.index, "pt": nodes.values})
-        nodes_grouped = helpers.groupby_to_list(nodes_df, group_field="pt", list_field="uuid")
+        nodes_grouped = nodes_df[["pt", "uuid"]].groupby(by="pt", axis=0, as_index=True)["uuid"].agg(tuple)
         nodes_grouped_df = gpd.GeoDataFrame({"pt": nodes_grouped.index, "uuids": nodes_grouped.values},
                                             geometry=nodes_grouped.index.map(Point).values, crs="EPSG:4617")
 
