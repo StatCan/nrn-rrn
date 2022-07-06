@@ -335,6 +335,10 @@ class Confirm:
         df_["intersects_idxs"] = df_["geometry"].map(lambda g: df_dissolved.sindex.query(g, predicate="intersects"))
         df_["intersects_geoms"] = df_["intersects_idxs"].map(lambda idxs: itemgetter(*idxs)(df_dissolved["geometry"]))
 
+        # Nest non-tuple intersection geometries into single-item tuples.
+        flag = df_["intersects_geoms"].map(lambda val: isinstance(val, LineString))
+        df_.loc[flag, "intersects_geoms"] = df_.loc[flag, "intersects_geoms"].map(lambda val: (val,))
+
         # Flag dissolved geometries which overlap the base geometry (must use `intersection` instead of predicates).
         df_["overlaps_flag"] = df_[["geometry", "intersects_geoms"]].apply(lambda row: tuple(map(
             lambda geom: isinstance(row[0].intersection(geom), (LineString, MultiLineString)), row[1])), axis=1)
