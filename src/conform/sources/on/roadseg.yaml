@@ -17,7 +17,7 @@ data:
   driver: GPKG
   crs: "EPSG:4617"
   spatial: True
-  query:
+  query: "provider = 'CITY OF OTTAWA'"
 conform:
   addrange:
     acqtech: acqtech
