@@ -112,6 +112,7 @@ def main(source: str, remove: bool = False) -> None:
     """
     Executes an NRN process.
 
+    \b
     :param str source: abbreviation for the source province / territory.
     :param bool remove: remove pre-existing output file (validations.log), default False.
     """

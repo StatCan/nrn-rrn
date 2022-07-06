@@ -401,6 +401,7 @@ def main(source: str, remove: bool = False) -> None:
     """
     Executes an NRN process.
 
+    \b
     :param str source: abbreviation for the source province / territory.
     :param bool remove: removes pre-existing files within the data/processed directory for the specified source,
         excluding change logs, default False.

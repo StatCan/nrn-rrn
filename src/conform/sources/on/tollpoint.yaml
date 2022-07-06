@@ -35,7 +35,7 @@ conform:
               township of |united counties of |village of ', na=False, regex=True)
             : value: Municipal
               type: string
-            provider.str.lower().str.contains('ministry of |ontario', na=False, regex=True)
+            provider.str.lower().str.contains('ministry of |ontario', na=False, regex=True):
               value: Provincial
               type: string
             provider.str.lower().isin(['elections and statistics canada', 'nrcan']):

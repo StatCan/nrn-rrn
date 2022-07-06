@@ -407,6 +407,7 @@ def main(source: str, url: str = "postgresql://postgres:postgres@localhost:5433/
     """
     Executes an NRN process.
 
+    \b
     :param str source: abbreviation for the source province / territory.
     :param str url: PostgreSQL database connection url.
     :param bool remove: removes pre-existing files within the data/processed directory for the specified source,
