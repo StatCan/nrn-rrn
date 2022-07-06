@@ -393,17 +393,23 @@ class Confirm:
             for table in tables:
 
                 logger.info(f"Updating nid linkages for table relationship: {table} - roadseg.")
+                max_dist = 5
 
                 # Copy table dataframe and reproject to meter-based crs.
                 df = self.dframes[table].to_crs("EPSG:3348").copy(deep=True)
 
                 # Create idx-idx lookup dict for nearest features between table and roadseg.
-                nearest_idx_lookup = dict(zip(*roadseg.sindex.nearest(
-                    df["geometry"], return_all=False, max_distance=5, return_distance=False)))
+                try:
+                    nearest_idx_lookup = dict(zip(*roadseg.sindex.nearest(
+                        df["geometry"], return_all=False, max_distance=max_dist, return_distance=False)))
 
-                # Populate table roadnid based on lookup dicts.
-                df["roadnid"] = range(len(df))
-                df["roadnid"] = df["roadnid"].map(nearest_idx_lookup).fillna(default).map(roadseg_idx_nid_lookup)
+                    # Populate table roadnid based on lookup dicts.
+                    df["roadnid"] = range(len(df))
+                    df["roadnid"] = df["roadnid"].map(nearest_idx_lookup).fillna(default).map(roadseg_idx_nid_lookup)
+
+                except IndexError:
+                    logger.warning(f"No spatial linkages based on distance={max_dist}, populating with default value.")
+                    df["roadnid"] = default
 
                 # Store results.
                 self.dframes[table]["roadnid"] = df["roadnid"].copy(deep=True)
