@@ -881,6 +881,7 @@ def main(src: Union[Path, str], dst: Union[Path, str] = filepath.parents[4] / "d
     """
     Executes the LRS class.
 
+    \b
     :param Union[Path, str] src: source path.
     :param Union[Path, str] dst: destination path,
         default = Path(__file__).resolve().parents[4] / 'data/raw/yt/yt.gpkg'.
