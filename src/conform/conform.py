@@ -713,7 +713,7 @@ class Conform:
             # Generate nid lookup dict.
             # Process: group nids by match fields, set first value in each group as index, explode groups, create dict
             # from reversed index and values.
-            nids_grouped = df[[*match_fields, "nid"]].groupby(by=match_fields, axis=0, as_index=True).agg(tuple)
+            nids_grouped = df[[*match_fields, "nid"]].groupby(by=match_fields, axis=0, as_index=True)["nid"].agg(tuple)
             # nids_grouped = helpers.groupby_to_list(df, match_fields, "nid")
             nids_grouped.index = nids_grouped.map(itemgetter(0))
             nids_exploded = nids_grouped.explode()
