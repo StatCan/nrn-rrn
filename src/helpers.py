@@ -130,8 +130,7 @@ def cast_dtype(val: Any, dtype: Type, default: Any) -> Any:
         if pd.isna(val) or val == "":
             return default
         else:
-            return dtype(val)
-            # return itemgetter(0)(np.array([val]).astype(dtype))
+            return itemgetter(0)(np.array([val]).astype(dtype))
 
     except (TypeError, ValueError):
         return default
