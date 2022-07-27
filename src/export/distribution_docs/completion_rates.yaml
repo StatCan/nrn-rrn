@@ -444,7 +444,7 @@ addrange:
     ns: 100
     nt: 1
     nu: 100
-    'on': 100
+    'on': 99
     pe: 100
     qc: 0
     sk: 99
@@ -1416,7 +1416,7 @@ roadseg:
     yt: 26
   l_placenam:
     ab: 100
-    avg: 89
+    avg: 95
     bc: 100
     mb: 100
     nb: 94
@@ -1424,7 +1424,7 @@ roadseg:
     ns: 73
     nt: 86
     nu: 100
-    'on': 4
+    'on': 84
     pe: 99
     qc: 96
     sk: 99
@@ -1469,7 +1469,7 @@ roadseg:
     ns: 99
     nt: 76
     nu: 0
-    'on': 100
+    'on': 99
     pe: 100
     qc: 100
     sk: 99
@@ -1499,7 +1499,7 @@ roadseg:
     ns: 100
     nt: 99
     nu: 93
-    'on': 100
+    'on': 99
     pe: 100
     qc: 100
     sk: 99
@@ -1581,7 +1581,7 @@ roadseg:
     yt: 25
   r_placenam:
     ab: 100
-    avg: 89
+    avg: 95
     bc: 100
     mb: 100
     nb: 94
@@ -1589,7 +1589,7 @@ roadseg:
     ns: 73
     nt: 86
     nu: 100
-    'on': 4
+    'on': 84
     pe: 99
     qc: 96
     sk: 99
@@ -1619,7 +1619,7 @@ roadseg:
     ns: 100
     nt: 1
     nu: 100
-    'on': 100
+    'on': 99
     pe: 100
     qc: 100
     sk: 99
@@ -1634,7 +1634,7 @@ roadseg:
     ns: 97
     nt: 99
     nu: 10
-    'on': 98
+    'on': 99
     pe: 100
     qc: 100
     sk: 99
@@ -1649,7 +1649,7 @@ roadseg:
     ns: 73
     nt: 0
     nu: 54
-    'on': 100
+    'on': 99
     pe: 100
     qc: 0
     sk: 0
@@ -1889,7 +1889,7 @@ roadseg:
     ns: 0
     nt: 0
     nu: 2
-    'on': 100
+    'on': 99
     pe: 79
     qc: 0
     sk: 87
@@ -1956,7 +1956,7 @@ roadseg:
     yt: 0
   trafficdir:
     ab: 79
-    avg: 51
+    avg: 59
     bc: 100
     mb: 0
     nb: 99
@@ -1964,7 +1964,7 @@ roadseg:
     ns: 98
     nt: 0
     nu: 88
-    'on': 0
+    'on': 100
     pe: 100
     qc: 0
     sk: 3
@@ -1979,7 +1979,7 @@ roadseg:
     ns: 50
     nt: 72
     nu: 93
-    'on': 75
+    'on': 76
     pe: 99
     qc: 83
     sk: 99
@@ -2137,7 +2137,7 @@ strplaname:
     yt: 100
   placename:
     ab: 100
-    avg: 60
+    avg: 67
     bc: 0
     mb: 0
     nb: 98
@@ -2145,7 +2145,7 @@ strplaname:
     ns: 100
     nt: 84
     nu: 100
-    'on': 5
+    'on': 96
     pe: 99
     qc: 0
     sk: 99
@@ -2205,7 +2205,7 @@ strplaname:
     ns: 100
     nt: 0
     nu: 100
-    'on': 100
+    'on': 99
     pe: 100
     qc: 0
     sk: 99
@@ -2235,7 +2235,7 @@ strplaname:
     ns: 0
     nt: 1
     nu: 100
-    'on': 1
+    'on': 0
     pe: 0
     qc: 0
     sk: 1

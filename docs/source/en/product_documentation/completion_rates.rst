@@ -32,7 +32,7 @@ Creation Date                      100     0     0    99     0    99    99    88
 Dataset Name                       100     0     0   100     0   100   100   100   100   100     0   100   100     69
 Planimetric Accuracy               100     0     0     0     0   100    99    88   100   100     0    99     1     53
 Provider                           100     0     0   100     0   100   100   100    84   100     0    99     1     60
-Revision Date                      100     0     0   100     0   100     1   100   100   100     0    99    98     61
+Revision Date                      100     0     0   100     0   100     1   100    99   100     0    99    98     61
 Standard Version                   100     0     0   100     0   100   100   100   100   100     0   100   100     69
 Alternate Street Name NID Left       0     0     0     0     0     0     0     0     0     0     0     0     0      0
 Alternate Street Name NID Right      0     0     0     0     0     0     0     0     0     0     0     0     0      0
@@ -166,7 +166,7 @@ Creation Date                                   100   100   100    99   100    9
 Dataset Name                                    100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Planimetric Accuracy                            100   100   100     0   100   100    88    88   100   100   100    99     1     83
 Provider                                        100   100   100   100   100   100    99   100    84   100   100    99     1     91
-Revision Date                                   100   100   100   100   100   100     1   100   100   100   100    99    98     92
+Revision Date                                   100   100   100   100   100   100     1   100    99   100   100    99    98     92
 Standard Version                                100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Address Range Digitizing Direction Flag Left      0   100   100    99   100     0     5   100     0    54   100     0    26     53
 Address Range Digitizing Direction Flag Right     0   100   100    99   100     0     6   100     0    55   100     0    25     53
@@ -175,18 +175,18 @@ Closing Period                                    0     1     0     2     0    2
 Exit Number                                     100   100   100   100   100     0     0     0     1     0   100     1     0     46
 First House Number Left                           0   100    65   100    99    73     5   100    84    54    98     0    26     62
 First House Number Right                          0   100    65   100    99    73     6   100    84    55    98     0    25     62
-Functional Road Class                           100   100   100    99   100    97    99    10    98   100   100    99    97     92
+Functional Road Class                           100   100   100    99   100    97    99    10    99   100   100    99    97     92
 Last House Number Left                            0   100    65   100    99    73     5   100    84    54    98     0    26     62
 Last House Number Right                           0   100    65   100    99    73     6   100    84    55    98     0    25     62
 NID                                             100   100   100   100   100   100   100   100   100   100   100   100   100    100
-Number of Lanes                                 100   100   100    99   100    99    76     0   100   100   100    99    98     90
-Official Place Name Left                        100   100   100    94   100    73    86   100     4    99    96    99   100     89
-Official Place Name Right                       100   100   100    94   100    73    86   100     4    99    96    99   100     89
+Number of Lanes                                 100   100   100    99   100    99    76     0    99   100   100    99    98     90
+Official Place Name Left                        100   100   100    94   100    73    86   100    84    99    96    99   100     95
+Official Place Name Right                       100   100   100    94   100    73    86   100    84    99    96    99   100     95
 Official Street Name Concatenated Left           78   100   100    94   100    73    39   100    85    96    96    34    78     83
 Official Street Name Concatenated Right          78   100   100    94   100    73    39   100    85    96    96    34    78     83
 Paved Road Surface Type                          59    16    46    99    31    49   100    93    24   100    15    69    41     57
-Pavement Status                                 100   100   100    99   100   100    99    93   100   100   100    99    41     95
-Road Jurisdiction                                99   100     0     0     0    73     0    54   100   100     0     0    97     48
+Pavement Status                                 100   100   100    99   100   100    99    93    99   100   100    99    41     95
+Road Jurisdiction                                99   100     0     0     0    73     0    54    99   100     0     0    97     48
 Road Segment ID                                 100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Route Name English 1                            100   100   100   100   100     1    15     0     2     3   100     1   100     56
 Route Name English 2                            100   100   100   100   100     0     0     0     1     0   100     1   100     54
@@ -201,13 +201,13 @@ Route Number 2                                  100   100   100   100   100     
 Route Number 3                                  100   100   100   100   100     0     0     0     1     1   100     1     0     46
 Route Number 4                                  100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Route Number 5                                  100   100   100   100   100     0     0     0     1     0   100     1     0     46
-Speed Restriction                                 1     0     0    57     0     0     0     2   100    79     0    87     0     25
+Speed Restriction                                 1     0     0    57     0     0     0     2    99    79     0    87     0     25
 Structure Name English                           98    98    97    99   100     0     1     0     1     1   100     0     1     46
 Structure Name French                            98    98    97    96   100     0     0     0     1     1   100     0     0     45
 Structure ID                                    100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Structure Type                                  100   100   100   100   100   100     1   100   100   100   100    99     1     85
-Traffic Direction                                79   100     0    99     0    98     0    88     0   100     0     3    96     51
-Unpaved Road Surface Type                        79    83    53    99    73    50    72    93    75    99    83    99    41     77
+Traffic Direction                                79   100     0    99     0    98     0    88   100   100     0     3    96     59
+Unpaved Road Surface Type                        79    83    53    99    73    50    72    93    76    99    83    99    41     77
 =============================================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
 
 Street and Place Names (strplaname)
@@ -224,16 +224,16 @@ Creation Date           100     0     0    99     0    99    88    60   100   10
 Dataset Name            100     0     0   100     0   100   100   100   100   100     0   100   100     69
 Planimetric Accuracy    100     0     0     0     0   100    91    60   100   100     0    99     1     50
 Provider                100     0     0   100     0   100    99   100    93   100     0    99     1     61
-Revision Date           100     0     0   100     0   100     0   100   100   100     0    99    96     61
+Revision Date           100     0     0   100     0   100     0   100    99   100     0    99    96     61
 Standard Version        100     0     0   100     0   100   100   100   100   100     0   100   100     69
 Directional Prefix        0     0     0   100     0   100     1   100   100   100     0     1   100     46
 Directional Suffix        0     0     0   100     0   100     2   100   100   100     0     6   100     47
 Muni Quadrant             0     0     0   100     0   100     1   100     0     0     0     0     0     23
 NID                     100     0     0   100     0   100   100   100   100   100     0   100   100     69
-Place Name              100     0     0    98     0   100    84   100     5    99     0    99   100     60
+Place Name              100     0     0    98     0   100    84   100    96    99     0    99   100     67
 Place Type                0     0     0     1     0     0    77   100     0     0     0     0    73     19
 Province                100     0     0    99     0   100   100   100   100   100     0   100   100     69
-Street Name Article       0     0     0   100     0     0     1   100     1     0     0     1     0     16
+Street Name Article       0     0     0   100     0     0     1   100     0     0     0     1     0     16
 Street Name Body         94     0     0   100     0   100    91   100    97    96     0    76    94     65
 Street Type Prefix        0     0     0   100     0   100     2   100   100     4     0    28   100     41
 Street Type Suffix        0     0     0   100     0    99    82   100   100    91     0    49   100     55
