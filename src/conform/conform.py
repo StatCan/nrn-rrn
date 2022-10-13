@@ -15,7 +15,9 @@ from datetime import datetime
 from operator import itemgetter
 from pathlib import Path
 from tabulate import tabulate
-from typing import List, Union
+from tqdm import tqdm
+from tqdm.auto import trange
+from typing import List, Tuple, Union
 
 filepath = Path(__file__).resolve()
 sys.path.insert(1, str(filepath.parents[1]))
@@ -119,16 +121,21 @@ class Conform:
     def apply_domains(self) -> None:
         """Applies domain restrictions to each column in the target (Geo)DataFrames."""
 
-        logger.info("Applying field domains.")
         table = None
         field = None
+
+        # Instantiate progress bar.
+        domains_pbar = trange(sum([len(self.domains[table]) for table in self.target_gdframes]),
+                              desc="Applying field domains.", bar_format="{desc}|{bar}| {percentage:3.0f}% {r_bar}",
+                              leave=True)
 
         try:
 
             for table in self.target_gdframes:
                 for field, domain in self.domains[table].items():
 
-                    logger.info(f"Applying domain to {table}.{field}.")
+                    domains_pbar.set_description(f"Applying field domains. Current table: {table}. Current field: "
+                                                 f"{field}")
 
                     # Copy series as object dtype.
                     series_orig = self.target_gdframes[table][field].copy(deep=True).astype(object)
@@ -155,7 +162,12 @@ class Conform:
 
                         # Log modifications.
                         tbl = tabulate(mods.values, headers=mods.columns, tablefmt="rst")
-                        logger.warning("Values have been modified:\n" + tbl)
+                        domains_pbar.clear()
+                        logger.warning(f"Values have been modified for {table}.{field}:\n" + tbl)
+                        domains_pbar.refresh()
+
+                    # Update progress bar.
+                    domains_pbar.update(1)
 
         except (AttributeError, KeyError, ValueError):
             logger.exception(f"Invalid schema definition for {table}.{field}.")
@@ -172,32 +184,33 @@ class Conform:
 
             # Retrieve target attributes.
             for target_name in source_attributes["conform"]:
-                logger.info(f"Applying field mapping from {source_name} to {target_name}.")
 
                 # Retrieve table field mapping attributes.
                 maps = source_attributes["conform"][target_name]
 
                 # Field mapping.
-                for target_field, source_field in maps.items():
+                fields_pbar = tqdm(maps.items(), total=len(maps),
+                                   bar_format="{desc}|{bar}| {percentage:3.0f}% {r_bar}", leave=True)
+                for target_field, source_field in fields_pbar:
+                    fields_pbar.set_description(f"Applying field mapping to {target_name}. Current field: "
+                                                f"{target_field}")
 
                     # Retrieve target dataframe.
                     target_gdf = self.target_gdframes[target_name]
 
                     # No mapping.
                     if source_field is None:
-                        logger.info(f"Target field {target_field}: No mapping provided.")
+                        pass
 
                     # Raw value mapping.
                     elif isinstance(source_field, (str, int, float)) and str(source_field).lower() not in \
                             source_gdf.columns:
-                        logger.info(f"Target field {target_field}: Applying raw value.")
 
                         # Update target dataframe with raw value.
                         target_gdf[target_field] = source_field
 
                     # Function mapping.
                     else:
-                        logger.info(f"Target field {target_field}: Identifying function chain.")
 
                         # Restructure mapping dict for direct field mapping in case of string or list input.
                         if isinstance(source_field, (str, list)):
@@ -238,8 +251,7 @@ class Conform:
                                 mapped_series = mapped_df.apply(lambda row: row.values, axis=1)
 
                             # Apply field mapping functions to mapped series.
-                            field_mapping_results = self.apply_functions(mapped_series, source_field["functions"],
-                                                                         target_field)
+                            field_mapping_results = self.apply_functions(mapped_series, source_field["functions"])
 
                             # Store results.
                             if isinstance(results, pd.Series):
@@ -260,14 +272,13 @@ class Conform:
                     # Store updated target dataframe.
                     self.target_gdframes[target_name] = target_gdf.copy(deep=True)
 
-    def apply_functions(self, series: pd.Series, func_list: List[dict], target_field: str) -> pd.Series:
+    def apply_functions(self, series: pd.Series, func_list: List[dict]) -> pd.Series:
         """
         Iterates and applies field mapping function(s) to a Series.
 
         :param pd.Series series: Series.
         :param List[dict] func_list: list of yaml-constructed field mapping definitions passed to
             :func:`field_map_functions`.
-        :param str target_field: name of the destination field to which the given Series will be assigned.
         :return pd.Series: mapped Series.
         """
 
@@ -275,8 +286,6 @@ class Conform:
         for func in func_list:
             func_name = func["function"]
             params = {k: v for k, v in func.items() if k not in {"function", "iterate_cols"}}
-
-            logger.info(f"Target field {target_field}: Applying field mapping function: {func_name}.")
 
             # Generate expression.
             expr = f"field_map_functions.{func_name}(series, **params)"
@@ -311,17 +320,18 @@ class Conform:
     def clean_datasets(self) -> None:
         """Applies a series of data cleanups to certain datasets."""
 
-        logger.info(f"Applying data cleanup functions.")
-
         def _enforce_min_value(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
-                Union[gpd.GeoDataFrame, pd.DataFrame]:
+                Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]:
             """
             Enforces minimum value for NRN attributes: 'accuracy', 'nbrlanes', 'speed'.
 
             :param str table: name of an NRN dataset.
             :param Union[gpd.GeoDataFrame, pd.DataFrame] df: (Geo)DataFrame containing the target NRN attribute(s).
-            :return Union[gpd.GeoDataFrame, pd.DataFrame]: (Geo)DataFrame with attribute modifications.
+            :return Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]: Modified (Geo)DataFrame and string
+                                                                                    log of changes, if any.
             """
+
+            log = None
 
             # Define minimum values.
             min_values = {
@@ -333,8 +343,6 @@ class Conform:
             # Iterate columns.
             for col in {"accuracy", "nbrlanes", "speed"}.intersection(df.columns):
 
-                logger.info(f"Applying data cleanup \"enforce min value\" to: {table}.{col}.")
-
                 # Enforce minimum value.
                 series_orig = df[col].copy(deep=True)
                 df.loc[df[col] < min_values[col], col] = self.defaults[table][col]
@@ -342,26 +350,27 @@ class Conform:
                 # Quantify and log modifications.
                 mods = (series_orig != df[col]).sum()
                 if mods:
-                    logger.warning(f"Modified {mods} record(s) in {table}.{col}."
-                                   f"\nModification details: Values < minimum set to default value.")
+                    log = f"Modified {mods} record(s) in {table}.{col}." \
+                          f"\nModification details: Values < minimum set to default value."
 
-            return df.copy(deep=True)
+            return df.copy(deep=True), log
 
         def _lower_case_ids(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
-                Union[gpd.GeoDataFrame, pd.DataFrame]:
+                Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]:
             """
             Sets all ID fields to lower case.
 
             :param str table: name of an NRN dataset.
             :param Union[gpd.GeoDataFrame, pd.DataFrame] df: (Geo)DataFrame containing the target NRN attribute(s).
-            :return Union[gpd.GeoDataFrame, pd.DataFrame]: (Geo)DataFrame with attribute modifications.
+            :return Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]: Modified (Geo)DataFrame and string
+                                                                                    log of changes, if any.
             """
+
+            log = None
 
             # Iterate columns which a) end with "id", b) are str type, and c) are not uuid.
             dtypes = self.dtypes[table]
             for col in [fld for fld in df.columns.difference(["uuid"]) if fld.endswith("id") and dtypes[fld] == "str"]:
-
-                logger.info(f"Applying data cleanup \"lower case IDs\" to: {table}.{col}.")
 
                 # Filter records to non-default values which are not already lower case.
                 default = self.defaults[table][col]
@@ -372,45 +381,46 @@ class Conform:
                     df.loc[s_filtered.index, col] = s_filtered.map(str.lower)
 
                     # Quantify and log modifications.
-                    logger.warning(f"Modified {len(s_filtered)} record(s) in {table}.{col}."
-                                   "\nModification details: Values set to lower case.")
+                    log = f"Modified {len(s_filtered)} record(s) in {table}.{col}." \
+                          f"\nModification details: Values set to lower case."
 
-            return df.copy(deep=True)
+            return df.copy(deep=True), log
 
         def _overwrite_segment_ids(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
-                Union[gpd.GeoDataFrame, pd.DataFrame]:
+                Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]:
             """
             Populates the NRN attributes 'ferrysegid' or 'roadsegid', whichever appropriate, with incrementing integer
             values from 1-n.
 
             :param str table: name of an NRN dataset.
             :param Union[gpd.GeoDataFrame, pd.DataFrame] df: (Geo)DataFrame containing the target NRN attribute(s).
-            :return Union[gpd.GeoDataFrame, pd.DataFrame]: (Geo)DataFrame with attribute modifications.
+            :return Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]: Modified (Geo)DataFrame and string
+                                                                                    log of changes, if any.
             """
 
-            if table in {"ferryseg", "roadseg"}:
+            log = None
 
-                logger.info(f"Applying data cleanup \"overwrite segment IDs\" to: {table}.")
+            if table in {"ferryseg", "roadseg"}:
 
                 # Overwrite column.
                 col = {"ferryseg": "ferrysegid", "roadseg": "roadsegid"}[table]
                 df[col] = range(1, len(df) + 1)
 
-            return df.copy(deep=True)
+            return df.copy(deep=True), log
 
         def _resolve_date_order(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
-                Union[gpd.GeoDataFrame, pd.DataFrame]:
+                Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]:
             """
             Resolves conflicts between credate and revdate by swapping values where credate > revdate.
             Exception for 'revdate = 0', since this is valid.
 
             :param str table: name of an NRN dataset.
             :param Union[gpd.GeoDataFrame, pd.DataFrame] df: (Geo)DataFrame containing the target NRN attribute(s).
-            :return Union[gpd.GeoDataFrame, pd.DataFrame]: (Geo)DataFrame with attribute modifications.
+            :return Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]: Modified (Geo)DataFrame and string
+                                                                                    log of changes, if any.
             """
 
-            logger.info(f"Applying data cleanup \"resolve date order\" to: {table}.")
-
+            log = None
             df_orig = df.copy(deep=True)
 
             # Filter to non-default dates and non-zero revdates.
@@ -438,24 +448,25 @@ class Conform:
 
                 # Log modifications.
                 mods = sum(flag)
-                logger.warning(f"Modified {mods} record(s) in {table}.credate/revdate."
-                               f"\nModification details: Swapped values.")
+                log = f"Modified {mods} record(s) in {table}.credate/revdate." \
+                      f"\nModification details: Swapped values."
 
-            return df_orig.copy(deep=True)
+            return df_orig.copy(deep=True), log
 
         def _resolve_pavsurf(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
-                Union[gpd.GeoDataFrame, pd.DataFrame]:
+                Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]:
             """
             Resolves conflicts between pavstatus and pavsurf / unpavsurf.
 
             :param str table: name of an NRN dataset.
             :param Union[gpd.GeoDataFrame, pd.DataFrame] df: (Geo)DataFrame containing the target NRN attribute(s).
-            :return Union[gpd.GeoDataFrame, pd.DataFrame]: (Geo)DataFrame with attribute modifications.
+            :return Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]: Modified (Geo)DataFrame and string
+                                                                                    log of changes, if any.
             """
 
-            if table == "roadseg":
+            log = None
 
-                logger.info(f"Applying data cleanup \"resolve pavsurf\" to: {table}.")
+            if table == "roadseg":
 
                 paved_orig = df["pavsurf"].copy(deep=True)
                 unpaved_orig = df["unpavsurf"].copy(deep=True)
@@ -478,23 +489,23 @@ class Conform:
                 for col, series_orig in (("pavsurf", paved_orig), ("unpavsurf", unpaved_orig)):
                     mods = sum(series_orig != df[col])
                     if mods:
-                        logger.warning(f"Modified {mods} record(s) in {table}.{col}."
-                                       f"\nModification details: Values set to \"None\" / default value.")
+                        log = f"Modified {mods} record(s) in {table}.{col}." \
+                              f"\nModification details: Values set to \"None\" / default value."
 
-            return df.copy(deep=True)
+            return df.copy(deep=True), log
 
         def _resolve_zero_credates(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
-                Union[gpd.GeoDataFrame, pd.DataFrame]:
+                Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]:
             """
             Resolves instances of 'credate = 0' by setting to the default value.
 
             :param str table: name of an NRN dataset.
             :param Union[gpd.GeoDataFrame, pd.DataFrame] df: (Geo)DataFrame containing the target NRN attribute(s).
-            :return Union[gpd.GeoDataFrame, pd.DataFrame]: (Geo)DataFrame with attribute modifications.
+            :return Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]: Modified (Geo)DataFrame and string
+                                                                                    log of changes, if any.
             """
 
-            logger.info(f"Applying data cleanup \"resolve zero credates\" to: {table}.")
-
+            log = None
             df_orig = df.copy(deep=True)
 
             # Flag records with credate = 0.
@@ -506,28 +517,29 @@ class Conform:
 
                 # Log modifications.
                 mods = sum(flag)
-                logger.warning(f"Modified {mods} record(s) in {table}.credate."
-                               f"\nModification details: Set instances of \"0\" to default value.")
+                log = f"Modified {mods} record(s) in {table}.credate." \
+                      f"\nModification details: Set instances of \"0\" to default value."
 
-            return df_orig.copy(deep=True)
+            return df_orig.copy(deep=True), log
 
         def _standardize_nones(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
-                Union[gpd.GeoDataFrame, pd.DataFrame]:
+                Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]:
             """
             Standardizes string 'None's (distinct from Null).
 
             :param str table: name of an NRN dataset.
             :param Union[gpd.GeoDataFrame, pd.DataFrame] df: (Geo)DataFrame containing the target NRN attribute(s).
-            :return Union[gpd.GeoDataFrame, pd.DataFrame]: (Geo)DataFrame with attribute modifications.
+            :return Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]: Modified (Geo)DataFrame and string
+                                                                                    log of changes, if any.
             """
+
+            log = None
 
             # Compile valid columns.
             cols = df.select_dtypes(include="object", exclude="geometry").columns.values
 
             # Iterate columns.
             for col in cols:
-
-                logger.info(f"Applying data cleanup \"standardize nones\" to: {table}.{col}.")
 
                 # Apply modifications.
                 series_orig = df[col].copy(deep=True)
@@ -536,28 +548,29 @@ class Conform:
                 # Quantify and log modifications.
                 mods = (series_orig != df[col]).sum()
                 if mods:
-                    logger.warning(f"Modified {mods} record(s) in {table}.{col}."
-                                   f"\nModification details: Various None-types standardized to \"None\".")
+                    log = f"Modified {mods} record(s) in {table}.{col}." \
+                          f"\nModification details: Various None-types standardized to \"None\"."
 
-            return df.copy(deep=True)
+            return df.copy(deep=True), log
 
         def _strip_whitespace(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
-                Union[gpd.GeoDataFrame, pd.DataFrame]:
+                Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]:
             """
             Strips leading, trailing, and successive internal whitespace for each (Geo)DataFrame column.
 
             :param str table: name of an NRN dataset.
             :param Union[gpd.GeoDataFrame, pd.DataFrame] df: (Geo)DataFrame containing the target NRN attribute(s).
-            :return Union[gpd.GeoDataFrame, pd.DataFrame]: (Geo)DataFrame with attribute modifications.
+            :return Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]: Modified (Geo)DataFrame and string
+                                                                                    log of changes, if any.
             """
+
+            log = None
 
             # Compile valid columns.
             cols = df.select_dtypes(include="object", exclude="geometry").columns.values
 
             # Iterate columns.
             for col in cols:
-
-                logger.info(f"Applying data cleanup \"strip whitespace\" to dataset: {table}.{col}.")
 
                 # Apply modifications.
                 series_orig = df[col].copy(deep=True)
@@ -566,14 +579,14 @@ class Conform:
                 # Quantify and log modifications.
                 mods = (series_orig != df[col]).sum()
                 if mods:
-                    logger.warning(f"Modified {mods} record(s) in {table}.{col}."
-                                   "\nModification details: Values stripped of leading, trailing, and successive "
-                                   "internal whitespace.")
+                    log = f"Modified {mods} record(s) in {table}.{col}." \
+                          f"\nModification details: Values stripped of leading, trailing, and successive " \
+                          f"internal whitespace."
 
-            return df.copy(deep=True)
+            return df.copy(deep=True), log
 
         def _title_case_names(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
-                Union[gpd.GeoDataFrame, pd.DataFrame]:
+                Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]:
             """
             Sets to title case all NRN name attributes:
                 ferryseg: rtename1en, rtename1fr, rtename2en, rtename2fr, rtename3en, rtename3fr, rtename4en, rtename4fr
@@ -583,8 +596,11 @@ class Conform:
 
             :param str table: name of an NRN dataset.
             :param Union[gpd.GeoDataFrame, pd.DataFrame] df: (Geo)DataFrame containing the target NRN attribute(s).
-            :return Union[gpd.GeoDataFrame, pd.DataFrame]: (Geo)DataFrame with attribute modifications.
+            :return Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]: Modified (Geo)DataFrame and string
+                                                                                    log of changes, if any.
             """
+
+            log = None
 
             if table in {"ferryseg", "roadseg", "strplaname"}:
 
@@ -601,8 +617,6 @@ class Conform:
                 # Iterate columns.
                 for col in name_fields[table]:
 
-                    logger.info(f"Applying data cleanup \"title case names\" to: {table}.{col}.")
-
                     # Filter records to non-default values which are not already title case.
                     default = self.defaults[table][col]
                     s_filtered = df.loc[df[col].map(lambda route: route != default and not route.istitle()), col]
@@ -612,19 +626,34 @@ class Conform:
                         df.loc[s_filtered.index, col] = s_filtered.map(str.title)
 
                         # Quantify and log modifications.
-                        logger.warning(f"Modified {len(s_filtered)} record(s) in {table}.{col}."
-                                       "\nModification details: Values set to title case.")
+                        log = f"Modified {len(s_filtered)} record(s) in {table}.{col}." \
+                              f"\nModification details: Values set to title case."
 
-            return df.copy(deep=True)
+            return df.copy(deep=True), log
 
-        # Apply cleanup functions.
+        # Define functions and execution order.
+        funcs = (_enforce_min_value, _lower_case_ids, _overwrite_segment_ids, _resolve_zero_credates,
+                 _resolve_date_order, _resolve_pavsurf, _standardize_nones, _strip_whitespace, _title_case_names)
+
+        # Instantiate progress bar.
+        # TODO: fix for iterative cleanup functions.
+        cleanup_pbar = trange(len(self.target_gdframes) * len(funcs),
+                              desc="Applying cleanup functions.", bar_format="{desc}|{bar}| {percentage:3.0f}% {r_bar}",
+                              leave=True)
+
+        # Interate and apply cleanup functions to each dataframe.
         for table, df in self.target_gdframes.items():
+            for func in funcs:
+                df, log = func(table, df)
 
-            # Iterate cleanup functions.
-            for func in (_enforce_min_value, _lower_case_ids, _overwrite_segment_ids, _resolve_zero_credates,
-                         _resolve_date_order, _resolve_pavsurf, _standardize_nones, _strip_whitespace,
-                         _title_case_names):
-                df = func(table, df)
+                # Log modifications.
+                if log:
+                    cleanup_pbar.clear()
+                    logger.warning(log)
+                    cleanup_pbar.refresh()
+
+                # Update progress bar.
+                cleanup_pbar.update(1)
 
             # Store updated dataframe.
             self.target_gdframes.update({table: df.copy(deep=True)})

@@ -66,6 +66,7 @@ def concatenate(df: Union[pd.DataFrame, pd.Series], columns: List[str], separato
         invalid = set(columns) - set(df.columns)
         if len(invalid):
             logger.exception(f"Invalid column(s): {', '.join(invalid)}.")
+            sys.exit(1)
 
         # Concatenate values, excluding Nulls, Nones, and Unknowns.
         sep = str(separator)
@@ -181,6 +182,7 @@ def query_assign(df: Union[pd.DataFrame, pd.Series], columns: List[str], lookup:
 
                 if lookup[query]["value"] not in columns:
                     logger.exception(f"Invalid column for lookup['{query}']: {lookup[query]['value']}.")
+                    sys.exit(1)
 
         # Unpack nested series.
         if isinstance(df, pd.Series):
@@ -347,6 +349,7 @@ def regex_sub(series: pd.Series, **kwargs: dict) -> pd.Series:
 
     else:
         logger.exception("Invalid input. 'repl' must be a regex string or lookup dictionary.")
+        sys.exit(1)
 
     # Replace empty or nan values with numpy nan.
     series.loc[(series == "") | (series.isna())] = np.nan
