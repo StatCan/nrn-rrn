@@ -12,7 +12,7 @@ license:
   text: Open Government License - Nova Scotia
 language: en
 data:
-  filename: 2021/NRN_Output.gdb
+  filename: NRN_Output.gdb
   layer: NRN_TOLLPOINT
   driver: OpenFileGDB
   crs: "EPSG:2961"
@@ -29,5 +29,5 @@ conform:
     revdate: REVDATE
     specvers: 2.0
     nid:
-    roadnid:
+    roadnid: ROADNID
     tollpttype: TOLLPTTYPE

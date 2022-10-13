@@ -820,6 +820,10 @@ possibles. Un préfixe précède le corps nom rue d'un Élément routier.
    269, "Tili", ""
    270, "Nook", ""
    271, "Drung", ""
+   272, "Awti", ""
+   273, "Awti'j", ""
+   274, "Rest", ""
+   275, "Rotary", ""
 
 Province
 ^^^^^^^^

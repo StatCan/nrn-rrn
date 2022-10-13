@@ -90,6 +90,9 @@ class Confirm:
             table: {change: set() for change in ("added", "retired", "modified", "confirmed")} for table in self.dframes
         }
 
+        # NID change lookup for roadseg.
+        self.roadseg_nid_changes = dict(zip(self.dframes["roadseg"]["nid"], self.dframes["roadseg"]["nid"]))
+
     def __call__(self) -> None:
         """Executes an NRN process."""
 
@@ -246,6 +249,10 @@ class Confirm:
             # Store results.
             self.dframes[table]["nid"] = df["nid"].copy(deep=True)
 
+            # Store results - nid changes lookup.
+            if table == "roadseg":
+                self.roadseg_nid_changes = dict(zip(self.roadseg_nid_changes.keys(), df["nid"]))
+
     def gen_structids(self) -> None:
         """
         Generates structid values for roadseg. Additionally recovers structids from the previous version, where
@@ -373,34 +380,56 @@ class Confirm:
 
     def update_nid_linkages(self) -> None:
         """
-        Updates the nid linkages of NRN roadseg:
+        Updates the nid linkages of NRN roadseg for datasets:
         1) blkpassage.roadnid
         2) tollpoint.roadnid
+
+        First, based on attribute linkage (roadnid-nid), then by spatial proximity for all remaining features.
         """
 
         logger.info("Updating nid linkages for table: roadseg.")
 
-        # Check table existence.
-        tables = [table for table in ("blkpassage", "tollpoint") if table in self.dframes]
+        roadseg = None
+        roadseg_idx_nid_lookup = dict()
+        default = self.defaults["roadseg"]["nid"]
 
-        if tables:
+        # Iterate existing dataframes.
+        for table in {"blkpassage", "tollpoint"}.intersection(self.dframes):
 
-            # Copy roadseg and reproject to meter-based crs.
-            roadseg = self.dframes["roadseg"].to_crs("EPSG:3348").copy(deep=True)
+            logger.info(f"Updating nid linkages for table relationship: roadseg - {table}.")
+            max_dist = 5
 
-            # Create roadseg idx-nid lookup dict. Add nid default to dict.
-            roadseg_idx_nid_lookup = dict(zip(range(len(roadseg)), roadseg["nid"]))
-            default = self.defaults["roadseg"]["nid"]
-            roadseg_idx_nid_lookup[default] = default
+            # Copy table dataframe.
+            df = self.dframes[table].copy(deep=True)
 
-            # Iterate dataframes, if available.
-            for table in tables:
+            # Attribute-based linkage.
 
-                logger.info(f"Updating nid linkages for table relationship: {table} - roadseg.")
-                max_dist = 5
+            # Check if any valid nid linkages exist.
+            flag_valid = df["roadnid"].isin(self.roadseg_nid_changes)
+            if sum(flag_valid):
 
-                # Copy table dataframe and reproject to meter-based crs.
-                df = self.dframes[table].to_crs("EPSG:3348").copy(deep=True)
+                # Update roadnid based on change lookup dict.
+                df.loc[flag_valid, "roadnid"] = df.loc[flag_valid, "roadnid"].map(self.roadseg_nid_changes)
+
+                # Store results.
+                self.dframes[table]["roadnid"] = df["roadnid"].copy(deep=True)
+
+            # Geometry-based linkage.
+
+            if sum(~flag_valid):
+
+                # Create roadseg geometry lookup variables.
+                if not roadseg:
+
+                    # Copy roadseg and reproject to meter-based crs.
+                    roadseg = self.dframes["roadseg"].to_crs("EPSG:3348").copy(deep=True)
+
+                    # Create roadseg idx-nid lookup dict.
+                    roadseg_idx_nid_lookup = dict(zip(range(len(roadseg)), roadseg["nid"]))
+                    roadseg_idx_nid_lookup[default] = default
+
+                # Reproject dataframe to meter-based crs.
+                df = df.loc[~flag_valid].to_crs("EPSG:3348").copy(deep=True)
 
                 # Create idx-idx lookup dict for nearest features between table and roadseg.
                 try:
@@ -416,7 +445,7 @@ class Confirm:
                     df["roadnid"] = default
 
                 # Store results.
-                self.dframes[table]["roadnid"] = df["roadnid"].copy(deep=True)
+                self.dframes[table].loc[~flag_valid, "roadnid"] = df["roadnid"].copy(deep=True)
 
     @staticmethod
     def validate_ids(series: pd.Series) -> pd.Series:

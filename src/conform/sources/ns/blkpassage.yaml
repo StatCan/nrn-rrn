@@ -12,7 +12,7 @@ license:
   text: Open Government License - Nova Scotia
 language: en
 data:
-  filename: 2021/NRN_Output.gdb
+  filename: NRN_Output.gdb
   layer: NRN_BLKPASSAGE
   driver: OpenFileGDB
   crs: "EPSG:2961"
@@ -30,4 +30,4 @@ conform:
     specvers: 2.0
     blkpassty: BLKPASSTY
     nid:
-    roadnid:
+    roadnid: ROADNID
