@@ -1260,6 +1260,11 @@ Road Element.
    273, "Awti'j", ""
    274, "Rest", ""
    275, "Rotary", ""
+   276, "Connection", ""
+   277, "Estate", ""
+   278, "Crossover", ""
+   279, "Hideaway", ""
+   280, "Linkway", ""
 
 Street Type Suffix
 ^^^^^^^^^^^^^^^^^^
