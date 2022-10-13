@@ -10,7 +10,6 @@ Communauté du projet
 
 | **Jesse Stewart** | Développeur principal et chef de projet | jesse.stewart@statcan.gc.ca
 | **Jeff Johnson** | Data Integration and Processing | jeff.johnson@statcan.gc.ca
-| **Élizabeth LeBlanc** | Gestionnaire national des ensembles de données et représentant du COCG | elizabeth.leblanc@statcan.gc.ca
 
 Contributeurs
 =============

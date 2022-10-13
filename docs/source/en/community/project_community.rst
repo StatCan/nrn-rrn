@@ -10,7 +10,6 @@ Team
 
 | **Jesse Stewart** | Lead Developer and Project Manager | jesse.stewart@statcan.gc.ca
 | **Jeff Johnson** | Data Integration and Processing | jeff.johnson@statcan.gc.ca
-| **Élizabeth LeBlanc** | National Datasets Manager and CCOG Representative | elizabeth.leblanc@statcan.gc.ca
 
 Contributors
 ============
