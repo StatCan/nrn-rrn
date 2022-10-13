@@ -402,6 +402,7 @@ class Conform:
                 Union[gpd.GeoDataFrame, pd.DataFrame]:
             """
             Resolves conflicts between credate and revdate by swapping values where credate > revdate.
+            Exception for 'revdate = 0', since this is valid.
 
             :param str table: name of an NRN dataset.
             :param Union[gpd.GeoDataFrame, pd.DataFrame] df: (Geo)DataFrame containing the target NRN attribute(s).
@@ -412,13 +413,13 @@ class Conform:
 
             df_orig = df.copy(deep=True)
 
-            # Filter to non-default dates.
+            # Filter to non-default dates and non-zero revdates.
             defaults = {"credate": self.defaults[table]["credate"],
                         "revdate": self.defaults[table]["revdate"]}
             df = df.loc[(df["credate"] != defaults["credate"]) &
-                        (df["revdate"] != defaults["revdate"]), ["credate", "revdate"]].copy(deep=True)
+                        (~df["revdate"].isin({defaults["revdate"], 0})), ["credate", "revdate"]].copy(deep=True)
 
-            # Temporary populate incomplete dates with "01" suffix.
+            # Temporarily populate incomplete dates with "01" suffix.
             for col in ("credate", "revdate"):
                 for length in (4, 6):
                     flag = df[col].map(lambda val: int(math.log10(val)) + 1) == length
@@ -481,6 +482,34 @@ class Conform:
                                        f"\nModification details: Values set to \"None\" / default value.")
 
             return df.copy(deep=True)
+
+        def _resolve_zero_credates(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
+                Union[gpd.GeoDataFrame, pd.DataFrame]:
+            """
+            Resolves instances of 'credate = 0' by setting to the default value.
+
+            :param str table: name of an NRN dataset.
+            :param Union[gpd.GeoDataFrame, pd.DataFrame] df: (Geo)DataFrame containing the target NRN attribute(s).
+            :return Union[gpd.GeoDataFrame, pd.DataFrame]: (Geo)DataFrame with attribute modifications.
+            """
+
+            logger.info(f"Applying data cleanup \"resolve zero credates\" to: {table}.")
+
+            df_orig = df.copy(deep=True)
+
+            # Flag records with credate = 0.
+            flag = df["credate"] == 0
+            if sum(flag):
+
+                # Set values to default.
+                df_orig.loc[flag.index, "credate"] = self.defaults[table]["credate"]
+
+                # Log modifications.
+                mods = sum(flag)
+                logger.warning(f"Modified {mods} record(s) in {table}.credate."
+                               f"\nModification details: Set instances of \"0\" to default value.")
+
+            return df_orig.copy(deep=True)
 
         def _standardize_nones(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
                 Union[gpd.GeoDataFrame, pd.DataFrame]:
@@ -592,8 +621,9 @@ class Conform:
         for table, df in self.target_gdframes.items():
 
             # Iterate cleanup functions.
-            for func in (_enforce_min_value, _lower_case_ids, _overwrite_segment_ids, _resolve_date_order,
-                         _resolve_pavsurf, _standardize_nones, _strip_whitespace, _title_case_names):
+            for func in (_enforce_min_value, _lower_case_ids, _overwrite_segment_ids, _resolve_zero_credates,
+                         _resolve_date_order, _resolve_pavsurf, _standardize_nones, _strip_whitespace,
+                         _title_case_names):
                 df = func(table, df)
 
             # Store updated dataframe.

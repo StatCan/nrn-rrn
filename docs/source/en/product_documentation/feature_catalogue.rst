@@ -139,6 +139,7 @@ Revision Date
 The date of data revision.
 
 :Domain: A date in the format YYYYMMDD. If the month or the day is unknown, corresponding characters are left blank.
+         The value "0" is used when no value applies.
 
          | Examples: 20060630, 200606, 2006.
 

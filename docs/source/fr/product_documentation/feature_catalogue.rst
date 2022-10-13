@@ -68,7 +68,7 @@ Date révision
 La date de révision des données.
 
 :Domaine: Une date selon le format AAAAMMJJ. Si le mois ou le jour est inconnu, les caractères correspondants sont
-          laissés vides.
+          laissés vides. La valeur ``0`` indique qu'aucune valeur ne s'applique.
 
           | Exemples : 20060630, 200606, 2006.
 
