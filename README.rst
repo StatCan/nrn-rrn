@@ -8,8 +8,6 @@ National Road Network (NRN)
 .. image:: https://readthedocs.org/projects/nrn-rrn-docs/badge/?style=flat-square
    :target: https://nrn-rrn-docs.readthedocs.io/en/latest/
 
-.. include:: /source/_static/maps/process_overview.rst
-
 Description
 -----------
 
