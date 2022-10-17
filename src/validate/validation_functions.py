@@ -552,9 +552,9 @@ class Validator:
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
 
-        # Filter to non-default dates.
+        # Filter to non-default and non-zero dates.
         default = self.defaults_all[dataset][col]
-        series = df.loc[df[col] != default, col].copy(deep=True)
+        series = df.loc[~df[col].isin({default, 0}), col].copy(deep=True)
 
         # Define length-dependant datetime strftime formats.
         strftime = {4: "%Y", 6: "%Y%m", 8: "%Y%m%d"}
@@ -592,9 +592,9 @@ class Validator:
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
 
-        # Filter to non-default dates.
+        # Filter to non-default and non-zero dates.
         default = self.defaults_all[dataset][col]
-        series = df.loc[df[col] != default, col].copy(deep=True)
+        series = df.loc[~df[col].isin({default, 0}), col].copy(deep=True)
 
         # Flag records with an invalid length.
         flag = ~series.map(lambda val: int(math.log10(val)) + 1).isin({4, 6, 8})
@@ -621,9 +621,9 @@ class Validator:
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
 
-        # Filter to non-default dates.
+        # Filter to non-default and non-zero dates.
         default = self.defaults_all[dataset][col]
-        series = df.loc[df[col] != default, col].copy(deep=True)
+        series = df.loc[~df[col].isin({default, 0}), col].copy(deep=True)
 
         # Fetch current date.
         today = int(datetime.today().strftime("%Y%m%d"))
