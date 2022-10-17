@@ -121,13 +121,14 @@ class Conform:
     def apply_domains(self) -> None:
         """Applies domain restrictions to each column in the target (Geo)DataFrames."""
 
+        logger.info("Applying field domains.")
+
         table = None
         field = None
 
         # Instantiate progress bar.
         domains_pbar = trange(sum([len(self.domains[table]) for table in self.target_gdframes]),
-                              desc="Applying field domains.", bar_format="{desc}|{bar}| {percentage:3.0f}% {r_bar}",
-                              leave=True)
+                              desc="Applying field domains.", bar_format="{desc}|{bar}| {percentage:3.0f}% {r_bar}")
 
         try:
 
@@ -173,6 +174,9 @@ class Conform:
             logger.exception(f"Invalid schema definition for {table}.{field}.")
             sys.exit(1)
 
+        # Close progress bar.
+        domains_pbar.close()
+
     def apply_field_mapping(self) -> None:
         """Maps the source (Geo)DataFrames to the target (Geo)DataFrames via user-specific field mapping functions."""
 
@@ -188,9 +192,10 @@ class Conform:
                 # Retrieve table field mapping attributes.
                 maps = source_attributes["conform"][target_name]
 
+                # Instantiate progress bar.
+                fields_pbar = tqdm(maps.items(), total=len(maps), bar_format="{desc}|{bar}| {percentage:3.0f}% {r_bar}")
+
                 # Field mapping.
-                fields_pbar = tqdm(maps.items(), total=len(maps),
-                                   bar_format="{desc}|{bar}| {percentage:3.0f}% {r_bar}", leave=True)
                 for target_field, source_field in fields_pbar:
                     fields_pbar.set_description(f"Applying field mapping to {target_name}. Current field: "
                                                 f"{target_field}")
@@ -331,7 +336,7 @@ class Conform:
                                                                                     log of changes, if any.
             """
 
-            log = None
+            log = ""
 
             # Define minimum values.
             min_values = {
@@ -350,8 +355,8 @@ class Conform:
                 # Quantify and log modifications.
                 mods = (series_orig != df[col]).sum()
                 if mods:
-                    log = f"Modified {mods} record(s) in {table}.{col}." \
-                          f"\nModification details: Values < minimum set to default value."
+                    log += f"Modified {mods} record(s) in {table}.{col}." \
+                           f"\nModification details: Values < minimum set to default value.\n"
 
             return df.copy(deep=True), log
 
@@ -366,7 +371,7 @@ class Conform:
                                                                                     log of changes, if any.
             """
 
-            log = None
+            log = ""
 
             # Iterate columns which a) end with "id", b) are str type, and c) are not uuid.
             dtypes = self.dtypes[table]
@@ -381,8 +386,8 @@ class Conform:
                     df.loc[s_filtered.index, col] = s_filtered.map(str.lower)
 
                     # Quantify and log modifications.
-                    log = f"Modified {len(s_filtered)} record(s) in {table}.{col}." \
-                          f"\nModification details: Values set to lower case."
+                    log += f"Modified {len(s_filtered)} record(s) in {table}.{col}." \
+                           f"\nModification details: Values set to lower case.\n"
 
             return df.copy(deep=True), log
 
@@ -398,7 +403,7 @@ class Conform:
                                                                                     log of changes, if any.
             """
 
-            log = None
+            log = ""
 
             if table in {"ferryseg", "roadseg"}:
 
@@ -420,7 +425,7 @@ class Conform:
                                                                                     log of changes, if any.
             """
 
-            log = None
+            log = ""
             df_orig = df.copy(deep=True)
 
             # Filter to non-default dates and non-zero revdates.
@@ -448,8 +453,8 @@ class Conform:
 
                 # Log modifications.
                 mods = sum(flag)
-                log = f"Modified {mods} record(s) in {table}.credate/revdate." \
-                      f"\nModification details: Swapped values."
+                log += f"Modified {mods} record(s) in {table}.credate/revdate." \
+                       f"\nModification details: Swapped values.\n"
 
             return df_orig.copy(deep=True), log
 
@@ -464,7 +469,7 @@ class Conform:
                                                                                     log of changes, if any.
             """
 
-            log = None
+            log = ""
 
             if table == "roadseg":
 
@@ -489,8 +494,8 @@ class Conform:
                 for col, series_orig in (("pavsurf", paved_orig), ("unpavsurf", unpaved_orig)):
                     mods = sum(series_orig != df[col])
                     if mods:
-                        log = f"Modified {mods} record(s) in {table}.{col}." \
-                              f"\nModification details: Values set to \"None\" / default value."
+                        log += f"Modified {mods} record(s) in {table}.{col}." \
+                               f"\nModification details: Values set to \"None\" / default value.\n"
 
             return df.copy(deep=True), log
 
@@ -505,7 +510,7 @@ class Conform:
                                                                                     log of changes, if any.
             """
 
-            log = None
+            log = ""
             df_orig = df.copy(deep=True)
 
             # Flag records with credate = 0.
@@ -517,8 +522,8 @@ class Conform:
 
                 # Log modifications.
                 mods = sum(flag)
-                log = f"Modified {mods} record(s) in {table}.credate." \
-                      f"\nModification details: Set instances of \"0\" to default value."
+                log += f"Modified {mods} record(s) in {table}.credate." \
+                       f"\nModification details: Set instances of \"0\" to default value.\n"
 
             return df_orig.copy(deep=True), log
 
@@ -533,7 +538,7 @@ class Conform:
                                                                                     log of changes, if any.
             """
 
-            log = None
+            log = ""
 
             # Compile valid columns.
             cols = df.select_dtypes(include="object", exclude="geometry").columns.values
@@ -548,8 +553,8 @@ class Conform:
                 # Quantify and log modifications.
                 mods = (series_orig != df[col]).sum()
                 if mods:
-                    log = f"Modified {mods} record(s) in {table}.{col}." \
-                          f"\nModification details: Various None-types standardized to \"None\"."
+                    log += f"Modified {mods} record(s) in {table}.{col}." \
+                           f"\nModification details: Various None-types standardized to \"None\".\n"
 
             return df.copy(deep=True), log
 
@@ -564,7 +569,7 @@ class Conform:
                                                                                     log of changes, if any.
             """
 
-            log = None
+            log = ""
 
             # Compile valid columns.
             cols = df.select_dtypes(include="object", exclude="geometry").columns.values
@@ -579,9 +584,9 @@ class Conform:
                 # Quantify and log modifications.
                 mods = (series_orig != df[col]).sum()
                 if mods:
-                    log = f"Modified {mods} record(s) in {table}.{col}." \
-                          f"\nModification details: Values stripped of leading, trailing, and successive " \
-                          f"internal whitespace."
+                    log += f"Modified {mods} record(s) in {table}.{col}." \
+                           f"\nModification details: Values stripped of leading, trailing, and successive internal " \
+                           f"whitespace.\n"
 
             return df.copy(deep=True), log
 
@@ -600,7 +605,7 @@ class Conform:
                                                                                     log of changes, if any.
             """
 
-            log = None
+            log = ""
 
             if table in {"ferryseg", "roadseg", "strplaname"}:
 
@@ -626,24 +631,29 @@ class Conform:
                         df.loc[s_filtered.index, col] = s_filtered.map(str.title)
 
                         # Quantify and log modifications.
-                        log = f"Modified {len(s_filtered)} record(s) in {table}.{col}." \
-                              f"\nModification details: Values set to title case."
+                        log += f"Modified {len(s_filtered)} record(s) in {table}.{col}." \
+                               f"\nModification details: Values set to title case.\n"
 
             return df.copy(deep=True), log
+
+        logger.info("Applying cleanup functions.")
 
         # Define functions and execution order.
         funcs = (_enforce_min_value, _lower_case_ids, _overwrite_segment_ids, _resolve_zero_credates,
                  _resolve_date_order, _resolve_pavsurf, _standardize_nones, _strip_whitespace, _title_case_names)
 
         # Instantiate progress bar.
-        # TODO: fix for iterative cleanup functions.
-        cleanup_pbar = trange(len(self.target_gdframes) * len(funcs),
-                              desc="Applying cleanup functions.", bar_format="{desc}|{bar}| {percentage:3.0f}% {r_bar}",
-                              leave=True)
+        cleanup_pbar = trange(len(self.target_gdframes) * len(funcs), desc="Applying cleanup functions.",
+                              bar_format="{desc}|{bar}| {percentage:3.0f}% {r_bar}")
 
-        # Interate and apply cleanup functions to each dataframe.
+        # Iterate and apply cleanup functions to each dataframe.
         for table, df in self.target_gdframes.items():
             for func in funcs:
+
+                cleanup_pbar.set_description(f"Applying cleanup functions. Current table: {table}. Current function: "
+                                             f"{func.__name__}")
+
+                # Parse function results.
                 df, log = func(table, df)
 
                 # Log modifications.
@@ -657,6 +667,7 @@ class Conform:
 
             # Store updated dataframe.
             self.target_gdframes.update({table: df.copy(deep=True)})
+        cleanup_pbar.close()
 
     def compile_source_attributes(self) -> None:
         """Compiles the yaml files in the sources' directory into a dictionary."""
