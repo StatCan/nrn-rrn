@@ -12,9 +12,9 @@ license:
   text: Open Government License - Nova Scotia
 language: en
 data:
-  filename: NRN_Output.gdb
+  filename: NRN_Output.gpkg
   layer: NRN_FERRYSEG
-  driver: OpenFileGDB
+  driver: GPKG
   crs: "EPSG:2961"
   spatial: True
   query:

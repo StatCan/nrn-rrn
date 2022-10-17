@@ -12,9 +12,9 @@ license:
   text: Open Government License - Nova Scotia
 language: en
 data:
-  filename: NRN_Output.gdb
+  filename: NRN_Output.gpkg
   layer: NRN_STRPLANAME
-  driver: OpenFileGDB
+  driver: GPKG
   crs:
   spatial: False
   query:
