@@ -389,7 +389,7 @@ class Confirm:
 
         logger.info("Updating nid linkages for table: roadseg.")
 
-        roadseg = None
+        roadseg = gpd.GeoDataFrame()
         roadseg_idx_nid_lookup = dict()
         default = self.defaults["roadseg"]["nid"]
 
@@ -419,7 +419,7 @@ class Confirm:
             if sum(~flag_valid):
 
                 # Create roadseg geometry lookup variables.
-                if not roadseg:
+                if not len(roadseg):
 
                     # Copy roadseg and reproject to meter-based crs.
                     roadseg = self.dframes["roadseg"].to_crs("EPSG:3348").copy(deep=True)
