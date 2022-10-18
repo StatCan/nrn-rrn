@@ -667,6 +667,8 @@ class Conform:
 
             # Store updated dataframe.
             self.target_gdframes.update({table: df.copy(deep=True)})
+
+        # Close progress bar.
         cleanup_pbar.close()
 
     def compile_source_attributes(self) -> None:

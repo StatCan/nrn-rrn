@@ -11,6 +11,7 @@ from itertools import chain
 from operator import attrgetter, itemgetter
 from pathlib import Path
 from shapely.geometry import Point
+from tqdm import trange
 from typing import Dict, Union
 
 filepath = Path(__file__).resolve()
@@ -229,6 +230,9 @@ class Validator:
     def __call__(self) -> None:
         """Orchestrates the execution of validation functions and compiles the resulting errors."""
 
+        logger.info("Applying validations.")
+        #TODO fix incomplete progress bars in output.
+
         try:
 
             # Iterate validations.
@@ -239,6 +243,10 @@ class Validator:
                 if isinstance(iter_cols, list):
                     iter_cols = {dataset: iter_cols for dataset in datasets}
 
+                # Instantiate progress bar.
+                pbar = trange(sum(map(len, iter_cols.values())) if iter_cols else len(datasets),
+                              desc="Applying validations.", bar_format="{desc}|{bar}| {percentage:3.0f}% {r_bar}")
+
                 # Iterate datasets, if they exist.
                 for dataset in set(datasets).intersection(self.dfs):
 
@@ -246,21 +254,32 @@ class Validator:
                     if iter_cols:
                         for col in iter_cols[dataset]:
 
-                            logger.info(f"Applying validation E{code}: \"{func.__name__}\"; target={dataset}.{col}.")
+                            pbar.set_description(f"Applying validation E{code}: \"{func.__name__}\". Current target: "
+                                                 f"{dataset}.{col}")
 
                             # Execute validation and store non-empty results.
                             results = func(dataset, col=col)
                             if len(results["values"]):
                                 self.errors[f"E{code} - {dataset}.{col} - {desc}"] = deepcopy(results)
 
+                            # Update progress bar.
+                            pbar.update(1)
+
                     else:
 
-                        logger.info(f"Applying validation E{code}: \"{func.__name__}\"; target={dataset}.")
+                        pbar.set_description(f"Applying validation E{code}: \"{func.__name__}\". Current target: "
+                                             f"{dataset}")
 
                         # Execute validation and store non-empty results.
                         results = func(dataset)
                         if len(results["values"]):
                             self.errors[f"E{code} - {dataset} - {desc}"] = deepcopy(results)
+
+                        # Update progress bar.
+                        pbar.update(1)
+
+                # Close progress bar.
+                pbar.close()
 
         except (KeyError, SyntaxError, ValueError) as e:
             logger.exception("Unable to apply validation.")
