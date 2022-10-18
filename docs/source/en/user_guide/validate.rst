@@ -19,6 +19,13 @@ The only output of ``validate`` is a log (.log) file which will be exported to:
 ``nrn-rrn/data/interim/validations.log``. The intended process is for the user to repair the original source data based
 on the specified errors in the output log. Once completed, the entire pipeline should be rerun from the initial process.
 
+.. admonition:: Note
+
+    While the unique identifiers logged by the validations exist only on the interim data, edits should only to be made
+    to the raw data. Therefore, when editing, both the raw and interim data are required (interim data for locating the
+    invalid features and raw data for editing). Furthermore, after completing the required edits, the pipeline must be
+    re-run from the beginning.
+
 Log Structure
 =============
 

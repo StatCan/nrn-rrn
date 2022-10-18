@@ -14,9 +14,9 @@ Aperçu
 Le pipeline NRN est séparé en 4 processus distincts destinés à être exécutés en séquence :
 
 1. ``conform``: Standardisation et harmonisation des sources de données au format RRN.
-2. ``validate``: Application d'un ensemble de validations et de restrictions sur la géométrie et l'attribution des
+2. ``confirm``: Génération et récupération d'identifiants nationaux uniques (IDN).
+3. ``validate``: Application d'un ensemble de validations et de restrictions sur la géométrie et l'attribution des
    ensembles de données RRN.
-3. ``confirm``: Génération et récupération d'identifiants nationaux uniques (IDN).
 4. ``export``: Configuration et exportation des formats de distribution de produits requis.
 
 Mise en œuvre

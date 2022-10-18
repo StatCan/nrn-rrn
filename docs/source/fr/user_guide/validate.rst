@@ -20,6 +20,14 @@ La seule sortie de ``validate`` est un fichier journal (.log) qui sera exporté 
 d'origine en fonction des erreurs spécifiées dans le journal de sortie. Une fois terminé, l'ensemble du pipeline doit
 être réexécuté à partir du processus initial.
 
+.. admonition:: Notez
+
+    Bien que les identifiants uniques enregistrés par les validations n'existent que sur les données intermédiaires,
+    les modifications ne doivent être apportées qu'aux données brutes. Par conséquent, lors de la mise à jour, les
+    données brutes et provisoires sont requises (données provisoires pour localiser les entités non valides et données
+    brutes pour la mise à jour). De plus, après avoir terminé les modifications requises, le pipeline doit être
+    réexécuté depuis le début.
+
 Structure du journal
 ====================
 
