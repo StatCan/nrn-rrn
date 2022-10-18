@@ -7,10 +7,10 @@ import sys
 from collections import defaultdict
 from copy import deepcopy
 from datetime import datetime
-from itertools import chain, compress, tee
+from itertools import chain, tee
 from operator import attrgetter, itemgetter
 from pathlib import Path
-from shapely.geometry import MultiPoint, Point
+from shapely.geometry import Point
 from typing import Dict, List, Tuple, Union
 
 filepath = Path(__file__).resolve()
@@ -93,12 +93,6 @@ class Validator:
                 "datasets": ["ferryseg", "roadseg"],
                 "iter_cols": None
             },
-            104: {
-                "func": self.construction_cluster_tolerance,
-                "desc": "Arcs must have >= 0.01 meters distance between adjacent vertices (cluster tolerance).",
-                "datasets": ["ferryseg", "roadseg"],
-                "iter_cols": None
-            },
             201: {
                 "func": self.duplication_duplicated,
                 "desc": "Features within the same dataset must not be duplicated.",
@@ -112,12 +106,6 @@ class Validator:
                 "iter_cols": None
             },
             301: {
-                "func": self.connectivity_node_intersection,
-                "desc": "Arcs must only connect at endpoints (nodes).",
-                "datasets": ["ferryseg", "roadseg"],
-                "iter_cols": None
-            },
-            302: {
                 "func": self.connectivity_min_distance,
                 "desc": "Arcs must be >= 5 meters from each other, excluding connected arcs (i.e. no dangles).",
                 "datasets": ["ferryseg", "roadseg"],
@@ -221,7 +209,6 @@ class Validator:
         # Define validation thresholds.
         self._min_len = 3
         self._min_dist = 5
-        self._min_cluster_dist = 0.01
 
         logger.info("Generating reusable geometry attributes.")
 
@@ -359,90 +346,6 @@ class Validator:
                 errors["values"] = deadends["ids"].map(
                     lambda ids: f"Disconnected features are too close: {*ids,}".replace(",)", ")")).to_list()
                 vals = set(chain.from_iterable(deadends["ids"]))
-                errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
-
-        return errors
-
-    def connectivity_node_intersection(self, dataset: str) -> dict:
-        """
-        Validates: Arcs must only connect at endpoints (nodes).
-
-        :param str dataset: name of the dataset to be validated.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
-        """
-
-        errors = {"values": set(), "query": None}
-
-        # Fetch dataframe.
-        df = self.dfs[dataset].copy(deep=True)
-
-        # Compile nodes.
-        nodes = set(df["pt_start"].append(df["pt_end"]))
-
-        # Compile interior vertices (non-nodes).
-        # Note: only arcs with > 2 vertices are used.
-        non_nodes = set(df.loc[df["pts_tuple"].map(len) > 2, "pts_tuple"]
-                        .map(lambda pts: set(pts[1:-1])).map(tuple).explode())
-
-        # Compile invalid vertices.
-        invalid_pts = nodes.intersection(non_nodes)
-
-        # Filter invalid vertices to those with multiple connected features.
-        invalid_pts = set(compress(invalid_pts,
-                                   map(lambda pt: len(itemgetter(pt)(self.pts_id_lookup[dataset])) > 1, invalid_pts)))
-        if len(invalid_pts):
-
-            # Filter arcs to those with an invalid vertex.
-            invalid_ids = set(chain.from_iterable(map(lambda pt: itemgetter(pt)(self.pts_id_lookup[dataset]),
-                                                      invalid_pts)))
-            df = df.loc[df.index.isin(invalid_ids)]
-
-            # Flag invalid segments where the invalid vertex is a non-node.
-            flag = df["pts_tuple"].map(lambda pts: len(set(pts[1:-1]).intersection(invalid_pts))) > 0
-            if sum(flag):
-
-                # Compile error logs.
-                vals = set(df.loc[flag].index)
-                errors["values"] = vals
-                errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
-
-        return errors
-
-    def construction_cluster_tolerance(self, dataset: str) -> dict:
-        """
-        Validates: Arcs must have >= 0.01 meters distance between adjacent vertices (cluster tolerance).
-
-        :param str dataset: name of the dataset to be validated.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
-        """
-
-        errors = {"values": set(), "query": None}
-
-        # Fetch dataframe.
-        df = self.dfs[dataset].copy(deep=True)
-
-        # Filter arcs to those with > 2 vertices.
-        df = df.loc[df["pts_tuple"].map(len) > 2]
-        if len(df):
-
-            # Explode coordinate pairs and calculate distances.
-            coord_pairs = df["pts_ordered_pairs"].explode()
-            coord_dist = coord_pairs.map(lambda pair: math.dist(*pair))
-
-            # Flag pairs with distances that are too small.
-            flag = coord_dist < self._min_cluster_dist
-            if sum(flag):
-
-                # Export invalid pairs as MultiPoint geometries.
-                pts = coord_pairs.loc[flag].map(MultiPoint)
-                pts_df = gpd.GeoDataFrame({self.id: pts.index.values}, geometry=[*pts], crs=self.to_crs)
-
-                logger.info(f"Writing to file: {self.dst.name}|layer={dataset}_cluster_tolerance")
-                pts_df.to_file(str(self.dst), driver="GPKG", layer=f"{dataset}_cluster_tolerance")
-
-                # Compile error logs.
-                vals = set(coord_pairs.loc[flag].index)
-                errors["values"] = vals
                 errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors

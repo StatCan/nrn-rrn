@@ -78,7 +78,6 @@ E100 - Construction
 :E102: Les arcs ne doivent pas avoir une longueur nulle.
 :E103: Les arcs doivent être simples (c'est-à-dire qu'ils ne doivent pas se chevaucher, se croiser ou toucher leur
        intérieur).
-:E104: Les arcs doivent avoir une distance >= 0,01 mètre entre les sommets adjacents (tolérance de cluster).
 
 E200 - Dédoublement
 ^^^^^^^^^^^^^^^^^^^
@@ -90,8 +89,7 @@ E200 - Dédoublement
 E300 - Connectivité
 ^^^^^^^^^^^^^^^^^^^
 
-:E301: Les arcs ne doivent se connecter qu'aux extrémités (nœuds).
-:E302: Les arcs doivent être >= 5 mètres les uns des autres, à l'exclusion des arcs connectés (c'est-à-dire sans
+:E301: Les arcs doivent être >= 5 mètres les uns des autres, à l'exclusion des arcs connectés (c'est-à-dire sans
        pendants).
 
 E400 - Dates

@@ -75,7 +75,6 @@ E100 - Construction
 :E101: Arcs must be >= 3 meters in length, except structures (e.g. Bridges).
 :E102: Arcs must not have zero length.
 :E103: Arcs must be simple (i.e. must not self-overlap, self-cross, nor touch their interior).
-:E104: Arcs must have >= 0.01 meters distance between adjacent vertices (cluster tolerance).
 
 E200 - Duplication
 ^^^^^^^^^^^^^^^^^^
@@ -86,8 +85,7 @@ E200 - Duplication
 E300 - Connectivity
 ^^^^^^^^^^^^^^^^^^^
 
-:E301: Arcs must only connect at endpoints (nodes).
-:E302: Arcs must be >= 5 meters from each other, excluding connected arcs (i.e. no dangles).
+:E301: Arcs must be >= 5 meters from each other, excluding connected arcs (i.e. no dangles).
 
 E400 - Dates
 ^^^^^^^^^^^^
