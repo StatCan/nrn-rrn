@@ -7,11 +7,11 @@ import sys
 from collections import defaultdict
 from copy import deepcopy
 from datetime import datetime
-from itertools import chain, tee
+from itertools import chain
 from operator import attrgetter, itemgetter
 from pathlib import Path
 from shapely.geometry import Point
-from typing import Dict, List, Tuple, Union
+from typing import Dict, Union
 
 filepath = Path(__file__).resolve()
 sys.path.insert(1, str(Path(__file__).resolve().parents[1]))
@@ -25,20 +25,6 @@ handler = logging.StreamHandler(sys.stdout)
 handler.setLevel(logging.INFO)
 handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s: %(message)s", "%Y-%m-%d %H:%M:%S"))
 logger.addHandler(handler)
-
-
-def ordered_pairs(coords: Tuple[tuple, ...]) -> List[Tuple[tuple, tuple]]:
-    """
-    Creates an ordered sequence of adjacent coordinate pairs, sorted.
-
-    :param Tuple[tuple, ...] coords: tuple of coordinate tuples.
-    :return List[Tuple[tuple, tuple], ...]: ordered sequence of coordinate pair tuples.
-    """
-
-    coords_1, coords_2 = tee(coords)
-    next(coords_2, None)
-
-    return sorted(zip(coords_1, coords_2))
 
 
 class Validator:
@@ -229,7 +215,6 @@ class Validator:
             df["pts_tuple"] = df["geometry"].map(attrgetter("coords")).map(tuple)
             df["pt_start"] = df["pts_tuple"].map(itemgetter(0))
             df["pt_end"] = df["pts_tuple"].map(itemgetter(-1))
-            df["pts_ordered_pairs"] = df["pts_tuple"].map(ordered_pairs)
 
             # Generate computationally intensive lookups.
             pts = df["pts_tuple"].explode()
