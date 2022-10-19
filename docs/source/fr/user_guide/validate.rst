@@ -112,6 +112,7 @@ E500 - Identifiants
 ^^^^^^^^^^^^^^^^^^^
 
 :E501: Les liaisons IDN doivent être valides.
+:E502: Les IDN ne doivent pas être isolés (c'est-à-dire n'avoir aucun lien).
 
 E600 - Numéros de sortie
 ^^^^^^^^^^^^^^^^^^^^^^^^

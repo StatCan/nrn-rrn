@@ -129,6 +129,12 @@ class Validator:
                     "tollpoint": ["roadnid"]
                 }
             },
+            502: {
+                "func": self.identifiers_nid_isolation,
+                "desc": "NIDs must not be isolated (i.e. have no linkages).",
+                "datasets": ["addrange", "altnamlink", "strplaname"],
+                "iter_cols": None
+            },
             601: {
                 "func": self.exit_numbers_nid,
                 "desc": "Attribute \"exitnbr\" must be identical, excluding the default value or \"None\", for all "
@@ -736,6 +742,55 @@ class Validator:
                 # Compile error logs.
                 errors["values"] = invalid_ids
                 errors["query"] = f"\"{self.id}\" in {*invalid_ids,}".replace(",)", ")")
+
+        return errors
+
+    def identifiers_nid_isolation(self, dataset: str):
+        """
+        Validates: NIDs must not be isolated (i.e. have no linkages).
+
+        :param str dataset: name of the dataset to be validated.
+        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
+        """
+
+        errors = {"values": set(), "query": None}
+
+        # Configure dataset nid linkages.
+        linkages = {
+            "addrange":
+                {
+                    "roadseg": {"adrangenid"}
+                },
+            "altnamlink":
+                {
+                    "addrange": {"l_altnanid", "r_altnanid"}
+                },
+            "strplaname":
+                {
+                    "addrange": {"l_offnanid", "r_offnanid"},
+                    "altnamlink": {"strnamenid"}
+                }
+        }
+
+        # Fetch dataframe.
+        df = self.dfs[dataset].copy(deep=True)
+
+        # Compile all nids.
+        nids = set(df["nid"])
+
+        # Iterate datasets and fields that link to the nid of the current dataset.
+        for linked_dataset in set(linkages[dataset]).intersection(self.dfs):
+            for linked_field in linkages[dataset][linked_dataset]:
+
+                # Subtract nids with valid connections.
+                nids -= set(self.dfs[linked_dataset][linked_field])
+
+        if len(nids):
+
+            # Compile error logs.
+            vals = set(df.loc[df["nid"].isin(nids)].index)
+            errors["values"] = vals
+            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors
 

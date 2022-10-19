@@ -106,6 +106,7 @@ E500 - Identifiers
 ^^^^^^^^^^^^^^^^^^
 
 :E501: NID linkages must be valid.
+:E502: NIDs must not be isolated (i.e. have no linkages).
 
 E600 - Exit Numbers
 ^^^^^^^^^^^^^^^^^^^
