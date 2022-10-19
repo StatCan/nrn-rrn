@@ -105,8 +105,7 @@ E400 - Dates
 E500 - Identifiers
 ^^^^^^^^^^^^^^^^^^
 
-:E501: IDs must be 32 digit hexadecimal strings.
-:E502: NID linkages must be valid.
+:E501: NID linkages must be valid.
 
 E600 - Exit Numbers
 ^^^^^^^^^^^^^^^^^^^

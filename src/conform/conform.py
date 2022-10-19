@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 import re
 import shutil
+import string
 import sys
 import uuid
 import zipfile
@@ -113,8 +114,9 @@ class Conform:
         self.split_strplaname()
         self.recover_missing_datasets()
         self.apply_domains()
+        self.clean_nids()
         self.clean_datasets()
-        self.filter_and_relink_strplaname()
+        self.filter_strplaname()
         self.gen_junctions()
         helpers.export(self.target_gdframes, self.dst)
 
@@ -671,6 +673,78 @@ class Conform:
         # Close progress bar.
         cleanup_pbar.close()
 
+    def clean_nids(self) -> None:
+        """Standardizes all applicable NID and linked attributes to 32 digit hexadecimal strings."""
+
+        logger.info("Cleaning NIDs.")
+
+        # Define linkages.
+        linkages = {
+            "addrange":
+                {
+                    "roadseg": {"adrangenid"}
+                },
+            "altnamlink":
+                {
+                    "addrange": {"l_altnanid", "r_altnanid"}
+                },
+            "roadseg":
+                {
+                    "blkpassage": {"roadnid"},
+                    "tollpoint": {"roadnid"}
+                },
+            "strplaname":
+                {
+                    "addrange": {"l_offnanid", "r_offnanid"},
+                    "altnamlink": {"strnamenid"}
+                }
+        }
+
+        # Compile hexadecimal characters.
+        hexdigits = set(string.hexdigits)
+
+        # Iterate valid datasets.
+        for table in set(linkages).intersection(self.target_gdframes):
+
+            logger.info(f"Cleaning NIDs for {table}.")
+
+            df = self.target_gdframes[table].copy(deep=True)
+
+            # Filter to non-default and non-None values.
+            default = self.defaults[table]["nid"]
+            series = df.loc[~df["nid"].isin({default, "None"}), "nid"].copy(deep=True)
+
+            # Compile invalid ids.
+            series = series.astype(str)
+            flag = (series.map(len) != 32) | (series.map(lambda val: not set(val).issubset(hexdigits)))
+            if sum(flag):
+
+                # Create lookup dict between invalid and newly generated identifiers.
+                invalids = set(series.loc[flag])
+                lookup = dict(zip(invalids, map(lambda _: uuid.uuid4().hex, range(len(invalids)))))
+
+                # Update values in current dataset and store results.
+                series.loc[flag] = series.map(lookup)
+                self.target_gdframes[table].loc[series.index, "nid"] = series.copy(deep=True)
+
+                # Log results.
+                logger.warning(f"Modified {sum(flag)} record(s) in {table}.nid.")
+
+                # Iterate linked dataset attributes, if those datasets exist.
+                for linked_table in set(linkages[table]).intersection(self.target_gdframes):
+                    for linked_field in linkages[table][linked_table]:
+
+                        linked_series = self.target_gdframes[linked_table][linked_field].copy(deep=True)
+
+                        # Update linked values and store results.
+                        linked_flag = linked_series.isin(lookup)
+                        self.target_gdframes[linked_table].loc[linked_flag, linked_field] = \
+                            linked_series.loc[linked_flag].map(lookup).copy(deep=True)
+
+                        # Log results.
+                        logger.warning(f"Updated {sum(linked_flag)} record linkages for {table}.nid - "
+                                       f"{linked_table}.{linked_field}.")
+
     def compile_source_attributes(self) -> None:
         """Compiles the yaml files in the sources' directory into a dictionary."""
 
@@ -753,7 +827,7 @@ class Conform:
             if self.src_old["zip"].exists():
                 self.src_old["zip"].unlink()
 
-    def filter_and_relink_strplaname(self) -> None:
+    def filter_strplaname(self) -> None:
         """Reduces duplicated records, where possible, in NRN strplaname and repairs the remaining NID linkages."""
 
         df = self.target_gdframes["strplaname"].copy(deep=True)

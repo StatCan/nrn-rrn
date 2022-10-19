@@ -2,7 +2,6 @@ import geopandas as gpd
 import logging
 import math
 import pandas as pd
-import string
 import sys
 from collections import defaultdict
 from copy import deepcopy
@@ -119,20 +118,6 @@ class Validator:
                 "iter_cols": ["credate", "revdate"]
             },
             501: {
-                "func": self.identifiers_32hex,
-                "desc": "IDs must be 32 digit hexadecimal strings.",
-                "datasets": ["addrange", "altnamlink", "blkpassage", "ferryseg", "roadseg", "strplaname", "tollpoint"],
-                "iter_cols": {
-                    "addrange": ["l_altnanid", "l_offnanid", "nid", "r_altnanid", "r_offnanid"],
-                    "altnamlink": ["nid", "strnamenid"],
-                    "blkpassage": ["nid", "roadnid"],
-                    "ferryseg": ["nid"],
-                    "roadseg": ["adrangenid", "nid"],
-                    "strplaname": ["nid"],
-                    "tollpoint": ["nid", "roadnid"]
-                }
-            },
-            502: {
                 "func": self.identifiers_nid_linkages,
                 "desc": "NID linkages must be valid.",
                 "datasets": ["addrange", "altnamlink", "blkpassage", "roadseg", "tollpoint"],
@@ -751,42 +736,6 @@ class Validator:
                 # Compile error logs.
                 errors["values"] = invalid_ids
                 errors["query"] = f"\"{self.id}\" in {*invalid_ids,}".replace(",)", ")")
-
-        return errors
-
-    def identifiers_32hex(self, dataset: str, col: str) -> dict:
-        """
-        Validates: IDs must be 32 digit hexadecimal strings.
-
-        :param str dataset: name of the dataset to be validated.
-        :param str col: column name.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
-        """
-
-        errors = {"values": set(), "query": None}
-
-        # Fetch dataframe.
-        df = self.dfs[dataset].copy(deep=True)
-
-        # Filter to non-default and non-none values, excluding nids.
-        if col == "nid":
-            series = df[col].copy(deep=True)
-        else:
-            default = self.defaults_all[dataset][col]
-            series = df.loc[~df[col].isin({default, "None"}), col].copy(deep=True)
-
-        # Compile hexadecimal characters.
-        hexdigits = set(string.hexdigits)
-
-        # Flag records with non-hexadecimal or non-32 digit identifiers.
-        series = series.astype(str)
-        flag = (series.map(len) != 32) | (series.map(lambda val: not set(val).issubset(hexdigits)))
-        if sum(flag):
-
-            # Compile error logs.
-            vals = set(series.loc[flag].index)
-            errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors
 

@@ -111,8 +111,7 @@ E400 - Dates
 E500 - Identifiants
 ^^^^^^^^^^^^^^^^^^^
 
-:E501: Les ID doivent être des chaînes hexadécimales à 32 chiffres.
-:E502: Les liaisons IDN doivent être valides.
+:E501: Les liaisons IDN doivent être valides.
 
 E600 - Numéros de sortie
 ^^^^^^^^^^^^^^^^^^^^^^^^
