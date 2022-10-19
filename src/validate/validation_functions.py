@@ -231,7 +231,6 @@ class Validator:
         """Orchestrates the execution of validation functions and compiles the resulting errors."""
 
         logger.info("Applying validations.")
-        #TODO fix incomplete progress bars in output.
 
         try:
 
@@ -239,16 +238,19 @@ class Validator:
             for code, params in self.validations.items():
                 func, desc, datasets, iter_cols = itemgetter("func", "desc", "datasets", "iter_cols")(params)
 
+                # Configure valid datasets.
+                datasets = set(datasets).intersection(self.dfs)
+
                 # Reconfigure iter_cols as dict.
                 if isinstance(iter_cols, list):
                     iter_cols = {dataset: iter_cols for dataset in datasets}
 
                 # Instantiate progress bar.
-                pbar = trange(sum(map(len, iter_cols.values())) if iter_cols else len(datasets),
+                pbar = trange(sum(map(len, itemgetter(*datasets)(iter_cols))) if iter_cols else len(datasets),
                               desc="Applying validations.", bar_format="{desc}|{bar}| {percentage:3.0f}% {r_bar}")
 
-                # Iterate datasets, if they exist.
-                for dataset in set(datasets).intersection(self.dfs):
+                # Iterate datasets.
+                for dataset in datasets:
 
                     # Iterate columns, if required.
                     if iter_cols:
