@@ -117,6 +117,7 @@ class Conform:
         self.clean_nids()
         self.clean_datasets()
         self.filter_strplaname()
+        self.drop_isolated_linkages()
         self.gen_junctions()
         helpers.export(self.target_gdframes, self.dst)
 
@@ -826,6 +827,51 @@ class Conform:
 
             if self.src_old["zip"].exists():
                 self.src_old["zip"].unlink()
+
+    def drop_isolated_linkages(self):
+        """Drops all isolated NID linkages."""
+
+        logger.info("Dropping isolated linkages.")
+
+        # Configure dataset nid linkages.
+        linkages = {
+            "addrange":
+                {
+                    "roadseg": ["adrangenid"]
+                },
+            "altnamlink":
+                {
+                    "addrange": ["l_altnanid", "r_altnanid"]
+                },
+            "strplaname":
+                {
+                    "addrange": {"l_offnanid", "r_offnanid"},
+                    "altnamlink": {"strnamenid"}
+                }
+        }
+
+        # Iterate existing datasets.
+        for table in set(linkages).intersection(self.target_gdframes):
+            df = self.target_gdframes[table].copy(deep=True)
+
+            # Compile all nids.
+            nids = set(df["nid"])
+
+            # Iterate existing linked datasets and fields.
+            for linked_dataset in set(linkages[table]).intersection(self.target_gdframes):
+                for linked_field in linkages[table][linked_dataset]:
+
+                    # Subtract nids with valid connections.
+                    nids -= set(self.target_gdframes[linked_dataset][linked_field])
+
+            # Drop records with invalid (remaining) nids.
+            if len(nids):
+
+                # Drop records and store results.
+                self.target_gdframes[table] = df.loc[~df["nid"].isin(nids)].copy(deep=True)
+
+                # Log modifications.
+                logger.warning(f"Dropped {len(nids)} records with obsolete NID linkage(s) from {table}.nid.")
 
     def filter_strplaname(self) -> None:
         """Reduces duplicated records, where possible, in NRN strplaname and repairs the remaining NID linkages."""

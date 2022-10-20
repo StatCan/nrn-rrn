@@ -58,12 +58,17 @@ class Validator:
 
         logger.info("Configuring validations.")
 
+        # Define validation thresholds.
+        self._min_len = 1
+        self._min_dist = 5
+
         # Define validation.
         # Note: List validations in order if execution order matters.
         self.validations = {
             101: {
                 "func": self.construction_min_length,
-                "desc": "Arcs must be >= 3 meters in length, except structures (e.g. Bridges).",
+                "desc": f"Arcs must be >= {self._min_len} meter{'s' if self._min_len > 1 else ''} in length, except "
+                        f"structures (e.g. Bridges).",
                 "datasets": ["ferryseg", "roadseg"],
                 "iter_cols": None
             },
@@ -93,7 +98,8 @@ class Validator:
             },
             301: {
                 "func": self.connectivity_min_distance,
-                "desc": "Arcs must be >= 5 meters from each other, excluding connected arcs (i.e. no dangles).",
+                "desc": f"Arcs must be >= {self._min_dist} meter{'s' if self._min_dist > 1 else ''} from each other, "
+                        f"excluding connected arcs (i.e. no dangles).",
                 "datasets": ["ferryseg", "roadseg"],
                 "iter_cols": None
             },
@@ -128,12 +134,6 @@ class Validator:
                     "roadseg": ["adrangenid"],
                     "tollpoint": ["roadnid"]
                 }
-            },
-            502: {
-                "func": self.identifiers_nid_isolation,
-                "desc": "NIDs must not be isolated (i.e. have no linkages).",
-                "datasets": ["addrange", "altnamlink", "strplaname"],
-                "iter_cols": None
             },
             601: {
                 "func": self.exit_numbers_nid,
@@ -183,10 +183,6 @@ class Validator:
                 "iter_cols": None
             }
         }
-
-        # Define validation thresholds.
-        self._min_len = 3
-        self._min_dist = 5
 
         logger.info("Generating reusable geometry attributes.")
 
@@ -280,8 +276,9 @@ class Validator:
             sys.exit(1)
 
     def connectivity_min_distance(self, dataset: str) -> dict:
-        """
-        Validates: Arcs must be >= 5 meters from each other, excluding connected arcs (i.e. no dangles).
+        f"""
+        Validates: Arcs must be >= {self._min_dist} meter{'s' if self._min_dist > 1 else ''} from each other, excluding 
+        connected arcs (i.e. no dangles).
 
         :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
@@ -348,8 +345,9 @@ class Validator:
         return errors
 
     def construction_min_length(self, dataset: str) -> dict:
-        """
-        Validates: Arcs must be >= 3 meters in length, except structures (e.g. Bridges).
+        f"""
+        Validates: Arcs must be >= {self._min_len} meter{'s' if self._min_len > 1 else ''} in length, except structures 
+        (e.g. Bridges).
 
         :param str dataset: name of the dataset to be validated.
         :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
@@ -742,55 +740,6 @@ class Validator:
                 # Compile error logs.
                 errors["values"] = invalid_ids
                 errors["query"] = f"\"{self.id}\" in {*invalid_ids,}".replace(",)", ")")
-
-        return errors
-
-    def identifiers_nid_isolation(self, dataset: str):
-        """
-        Validates: NIDs must not be isolated (i.e. have no linkages).
-
-        :param str dataset: name of the dataset to be validated.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
-        """
-
-        errors = {"values": set(), "query": None}
-
-        # Configure dataset nid linkages.
-        linkages = {
-            "addrange":
-                {
-                    "roadseg": {"adrangenid"}
-                },
-            "altnamlink":
-                {
-                    "addrange": {"l_altnanid", "r_altnanid"}
-                },
-            "strplaname":
-                {
-                    "addrange": {"l_offnanid", "r_offnanid"},
-                    "altnamlink": {"strnamenid"}
-                }
-        }
-
-        # Fetch dataframe.
-        df = self.dfs[dataset].copy(deep=True)
-
-        # Compile all nids.
-        nids = set(df["nid"])
-
-        # Iterate datasets and fields that link to the nid of the current dataset.
-        for linked_dataset in set(linkages[dataset]).intersection(self.dfs):
-            for linked_field in linkages[dataset][linked_dataset]:
-
-                # Subtract nids with valid connections.
-                nids -= set(self.dfs[linked_dataset][linked_field])
-
-        if len(nids):
-
-            # Compile error logs.
-            vals = set(df.loc[df["nid"].isin(nids)].index)
-            errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 
         return errors
 

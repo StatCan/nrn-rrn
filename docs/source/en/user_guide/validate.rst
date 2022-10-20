@@ -79,7 +79,7 @@ Error Codes
 E100 - Construction
 ^^^^^^^^^^^^^^^^^^^
 
-:E101: Arcs must be >= 3 meters in length, except structures (e.g. Bridges).
+:E101: Arcs must be >= 1 meter in length, except structures (e.g. Bridges).
 :E102: Arcs must not have zero length.
 :E103: Arcs must be simple (i.e. must not self-overlap, self-cross, nor touch their interior).
 
@@ -106,7 +106,6 @@ E500 - Identifiers
 ^^^^^^^^^^^^^^^^^^
 
 :E501: NID linkages must be valid.
-:E502: NIDs must not be isolated (i.e. have no linkages).
 
 E600 - Exit Numbers
 ^^^^^^^^^^^^^^^^^^^

@@ -82,7 +82,7 @@ Codes d'erreur
 E100 - Construction
 ^^^^^^^^^^^^^^^^^^^
 
-:E101: Les arcs doivent avoir une longueur >= 3 mètres, à l'exception des structures (par exemple, les ponts).
+:E101: Les arcs doivent avoir une longueur >= 1 mètre, à l'exception des structures (par exemple, les ponts).
 :E102: Les arcs ne doivent pas avoir une longueur nulle.
 :E103: Les arcs doivent être simples (c'est-à-dire qu'ils ne doivent pas se chevaucher, se croiser ou toucher leur
        intérieur).
@@ -112,7 +112,6 @@ E500 - Identifiants
 ^^^^^^^^^^^^^^^^^^^
 
 :E501: Les liaisons IDN doivent être valides.
-:E502: Les IDN ne doivent pas être isolés (c'est-à-dire n'avoir aucun lien).
 
 E600 - Numéros de sortie
 ^^^^^^^^^^^^^^^^^^^^^^^^
