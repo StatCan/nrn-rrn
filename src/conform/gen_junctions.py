@@ -41,9 +41,11 @@ class Junction:
         self.source = source
         self.target_attributes = target_attributes
         self.roadseg = roadseg.copy(deep=True)
+        self.roadseg.index = self.roadseg["uuid"]
         self.ferryseg = None
         if isinstance(ferryseg, gpd.GeoDataFrame):
             self.ferryseg = ferryseg.copy(deep=True)
+            self.ferryseg.index = self.ferryseg["uuid"]
         self.junction = None
 
         # Compile field defaults, dtypes, and domains.
@@ -105,8 +107,18 @@ class Junction:
 
         logger.info("Generating remaining dataset attributes.")
 
+        attrs = {"accuracy", "exitnbr"}
+        default_exitnbr = self.defaults["exitnbr"]
+
         # Create attribute lookup dict.
-        uuid_attr_lookup = self.roadseg[list(set(self.roadseg.columns) - {"geometry"})].to_dict(orient="dict")
+        uuid_attr_lookup = self.roadseg[set(self.roadseg.columns).intersection(attrs)].to_dict(orient="dict")
+        if isinstance(self.ferryseg, gpd.GeoDataFrame):
+            uuid_attr_lookup_ = self.ferryseg[set(self.ferryseg.columns).intersection(attrs)].to_dict(orient="dict")
+            for attr in uuid_attr_lookup.keys():
+                if attr in uuid_attr_lookup_:
+                    uuid_attr_lookup[attr] |= uuid_attr_lookup_[attr]
+                else:
+                    uuid_attr_lookup[attr] |= dict(zip(self.ferryseg.index, [default_exitnbr]*len(self.ferryseg)))
 
         # Flag records with multiple linked uuids.
         flag = self.junction["uuids"].map(len) > 1
@@ -126,7 +138,6 @@ class Junction:
             lambda uuids: itemgetter(*uuids)(uuid_attr_lookup["accuracy"]))
 
         # Attribute: exitnbr. Take first non-default / non-null value, otherwise take the default value.
-        default_exitnbr = self.defaults["exitnbr"]
         self.junction.loc[flag, "exitnbr"] = self.junction.loc[flag, "uuids"].map(
             lambda uuids: [*set(itemgetter(*uuids)(uuid_attr_lookup["exitnbr"])) - {"None", default_exitnbr},
                            default_exitnbr][0])
@@ -143,37 +154,54 @@ class Junction:
         # Compile and classify junctions.
         logger.info("Compiling and classifying junctions.")
 
-        # Compile all nodes and group uuids by geometry.
+        # Compile all roadseg nodes and group uuids by geometry.
         nodes = self.roadseg["geometry"].map(lambda g: itemgetter(0, -1)(attrgetter("coords")(g))).explode()
-        nodes_df = pd.DataFrame({"uuid": nodes.index, "pt": nodes.values})
-        nodes_grouped = nodes_df[["pt", "uuid"]].groupby(by="pt", axis=0, as_index=True)["uuid"].agg(tuple)
-        nodes_grouped_df = gpd.GeoDataFrame({"pt": nodes_grouped.index, "uuids": nodes_grouped.values},
-                                            geometry=nodes_grouped.index.map(Point).values, crs="EPSG:4617")
+        nodes_grouped = pd.DataFrame({"uuid": nodes.index, "pt": nodes.values})\
+            .groupby(by="pt", axis=0, as_index=True)["uuid"].agg(tuple)
+        nodes_uuids_lookup = dict(zip(nodes_grouped.index, nodes_grouped.values))
+
+        # Compile all ferryseg nodes and group uuids by geometry.
+        ferry_nodes = set()
+        if isinstance(self.ferryseg, gpd.GeoDataFrame):
+            ferry_nodes = self.ferryseg["geometry"].map(lambda g: itemgetter(0, -1)(attrgetter("coords")(g))).explode()
+            ferry_nodes_grouped = pd.DataFrame({"uuid": ferry_nodes.index, "pt": ferry_nodes.values})\
+                .groupby(by="pt", axis=0, as_index=True)["uuid"].agg(tuple)
+            ferry_nodes_uuids_lookup = dict(zip(ferry_nodes_grouped.index, ferry_nodes_grouped.values))
+
+            # Update nodes-uuid lookup.
+            nodes_uuids_lookup |= ferry_nodes_uuids_lookup
 
         # Classify junctions.
-        ferry = set()
-        if isinstance(self.ferryseg, gpd.GeoDataFrame):
-            ferry = set(self.ferryseg["geometry"].map(lambda g: itemgetter(0, -1)(attrgetter("coords")(g))).explode())
-        deadend = set(nodes_grouped_df.loc[(nodes_grouped_df["uuids"].map(len) == 1) &
-                                           (~nodes_grouped_df["pt"].isin(ferry)), "pt"])
-        intersection = set(nodes_grouped_df.loc[(nodes_grouped_df["uuids"].map(len) >= 3) &
-                                                (~nodes_grouped_df["pt"].isin(ferry)), "pt"])
-        natprovter = set(chain.from_iterable([deadend, ferry, intersection])) -\
-                     set(nodes_grouped_df.loc[nodes_grouped_df.sindex.query(self.boundary, predicate="contains"), "pt"])
+        ferry = set(ferry_nodes)
+        deadend = set(nodes_grouped.loc[nodes_grouped.map(len) == 1].index) - ferry
+        intersection = set(nodes_grouped.loc[nodes_grouped.map(len) >= 3].index) - ferry
+
+        # Classify junctions - NatProvTer.
+        pts_ = set(chain.from_iterable([deadend, ferry, intersection]))
+        pts_df_ = gpd.GeoDataFrame({"pt": list(pts_)}, geometry=list(map(Point, pts_)), crs="EPSG:4617")
+        natprovter = pts_ - set(pts_df_.loc[pts_df_.sindex.query(self.boundary, predicate="contains"), "pt"])
 
         # Remove natprovter junctions from other classifications.
-        ferry = ferry - natprovter
-        deadend = deadend - natprovter
-        intersection = intersection - natprovter
+        ferry -= natprovter
+        deadend -= natprovter
+        intersection -= natprovter
+
+        # Remove ferry-to-ferry-only connections.
+        ferry = ferry.intersection(set(nodes))
 
         # Compile junctions into target dataset.
         logger.info("Compiling junctions into target dataset.")
 
         # Compile junctions into GeoDataFrame.
-        junction_pts = set(chain.from_iterable([deadend, ferry, intersection, natprovter]))
-        junctions = nodes_grouped_df.loc[nodes_grouped_df["pt"].isin(junction_pts)].copy(deep=True)
-        junctions["junctype"] = None
-        junctions["uuid"] = [uuid.uuid4().hex for _ in range(len(junctions))]
+        junction_pts = pd.Series(chain.from_iterable([deadend, ferry, intersection, natprovter]))
+        junctions = gpd.GeoDataFrame({
+            "pt": junction_pts,
+            "junctype": None,
+            "uuid": [uuid.uuid4().hex for _ in range(len(junction_pts))],
+            "uuids": junction_pts.map(nodes_uuids_lookup)
+        }, geometry=junction_pts.map(Point), crs="EPSG:4617")
+
+        # Assign junction type.
         for junctype, pts in {"Dead End": deadend, "Ferry": ferry, "Intersection": intersection,
                               "NatProvTer": natprovter}.items():
             junctions.loc[junctions["pt"].isin(pts), "junctype"] = junctype
