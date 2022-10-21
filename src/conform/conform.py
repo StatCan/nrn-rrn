@@ -36,7 +36,7 @@ handler.setLevel(logging.INFO)
 handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s: %(message)s", "%Y-%m-%d %H:%M:%S"))
 logger.addHandler(handler)
 
-
+#TODO: fix missing dates in NS data.
 class Conform:
     """Defines an NRN process."""
 
