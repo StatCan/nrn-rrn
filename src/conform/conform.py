@@ -36,7 +36,7 @@ handler.setLevel(logging.INFO)
 handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s: %(message)s", "%Y-%m-%d %H:%M:%S"))
 logger.addHandler(handler)
 
-#TODO: fix missing dates in NS data.
+
 class Conform:
     """Defines an NRN process."""
 
@@ -48,7 +48,7 @@ class Conform:
         :param bool remove: removes pre-existing files within the data/interim directory for the specified source,
             default False.
         :param bool exclude_old: sets parameter remove=True, excluding the previous NRN vintage
-            (data/interim/source_old.gpkg) for the specified source.
+            (data/interim/source_old.gpkg) for the specified source, default False.
         """
 
         self.source = source.lower()
@@ -451,8 +451,7 @@ class Conform:
             if sum(flag):
 
                 # Swap dates.
-                df_orig.loc[flag.index, ["credate", "revdate"]] = \
-                    df_orig.loc[flag.index, ["revdate", "credate"]].copy(deep=True)
+                df_orig.loc[flag, ["credate", "revdate"]] = df_orig.loc[flag, ["revdate", "credate"]].copy(deep=True)
 
                 # Log modifications.
                 mods = sum(flag)
@@ -521,7 +520,7 @@ class Conform:
             if sum(flag):
 
                 # Set values to default.
-                df_orig.loc[flag.index, "credate"] = self.defaults[table]["credate"]
+                df_orig.loc[flag, "credate"] = self.defaults[table]["credate"]
 
                 # Log modifications.
                 mods = sum(flag)
@@ -1230,7 +1229,7 @@ def main(source: str, remove: bool = False, exclude_old: bool = False) -> None:
     :param bool remove: removes pre-existing files within the data/interim directory for the specified source, default
         False.
     :param bool exclude_old: sets parameter remove=True, excluding the previous NRN vintage
-        (data/interim/source_old.gpkg) for the specified source.
+        (data/interim/source_old.gpkg) for the specified source, default False.
     """
 
     try:

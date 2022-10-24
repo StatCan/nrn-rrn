@@ -118,7 +118,7 @@ class Junction:
                 if attr in uuid_attr_lookup_:
                     uuid_attr_lookup[attr] |= uuid_attr_lookup_[attr]
                 else:
-                    uuid_attr_lookup[attr] |= dict(zip(self.ferryseg.index, [default_exitnbr]*len(self.ferryseg)))
+                    uuid_attr_lookup[attr] |= dict(zip(self.ferryseg.index, [self.defaults[attr]]*len(self.ferryseg)))
 
         # Flag records with multiple linked uuids.
         flag = self.junction["uuids"].map(len) > 1
