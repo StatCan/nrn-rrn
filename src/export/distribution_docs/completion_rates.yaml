@@ -859,12 +859,12 @@ ferryseg:
     yt: 100
   revdate:
     ab: 100
-    avg: 78
+    avg: 77
     bc: 100
     mb: 100
     nb: 100
     nl: 100
-    ns: 8
+    ns: 0
     nt: 0
     nu: 0
     'on': 100
@@ -1431,12 +1431,12 @@ roadseg:
     yt: 100
   l_stname_c:
     ab: 78
-    avg: 83
+    avg: 85
     bc: 100
     mb: 100
     nb: 94
     nl: 100
-    ns: 73
+    ns: 100
     nt: 39
     nu: 100
     'on': 85
@@ -1596,12 +1596,12 @@ roadseg:
     yt: 100
   r_stname_c:
     ab: 78
-    avg: 83
+    avg: 85
     bc: 100
     mb: 100
     nb: 94
     nl: 100
-    ns: 73
+    ns: 100
     nt: 39
     nu: 100
     'on': 85

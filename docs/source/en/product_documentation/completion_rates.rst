@@ -110,7 +110,7 @@ Creation Date           100   100   100   100   100     0    25     0   100   10
 Dataset Name            100   100   100   100   100   100   100     0   100   100   100   100   100     92
 Planimetric Accuracy    100   100   100     0   100   100    25     0   100   100   100   100   100     79
 Provider                100   100   100   100   100   100   100     0    70   100   100   100   100     90
-Revision Date           100   100   100   100   100     8     0     0   100   100   100   100   100     78
+Revision Date           100   100   100   100   100     0     0     0   100   100   100   100   100     77
 Standard Version        100   100   100   100   100   100   100     0   100   100   100   100   100     92
 Closing Period            0     0     0   100     0   100   100     0     0   100     0     0     0     31
 Ferry Segment ID        100   100   100   100   100   100   100     0   100   100   100   100   100     92
@@ -182,8 +182,8 @@ NID                                             100   100   100   100   100   10
 Number of Lanes                                 100   100   100    99   100    99    76     0    99   100   100    99    98     90
 Official Place Name Left                        100   100   100    94   100    73    86   100    84    99    96    99   100     95
 Official Place Name Right                       100   100   100    94   100    73    86   100    84    99    96    99   100     95
-Official Street Name Concatenated Left           78   100   100    94   100    73    39   100    85    96    96    34    78     83
-Official Street Name Concatenated Right          78   100   100    94   100    73    39   100    85    96    96    34    78     83
+Official Street Name Concatenated Left           78   100   100    94   100   100    39   100    85    96    96    34    78     85
+Official Street Name Concatenated Right          78   100   100    94   100   100    39   100    85    96    96    34    78     85
 Paved Road Surface Type                          59    16    46    99    31    49   100    93    24   100    15    69    41     57
 Pavement Status                                 100   100   100    99   100   100    99    93    99   100   100    99    41     95
 Road Jurisdiction                                99   100     0     0     0    73     0    54    99   100     0     0    97     48

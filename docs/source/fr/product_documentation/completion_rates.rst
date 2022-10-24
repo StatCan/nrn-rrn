@@ -110,7 +110,7 @@ Date création                           100   100   100   100   100     0    25
 Nom jeu de données                      100   100   100   100   100   100   100     0   100   100   100   100   100     92
 Précision planimétrique                 100   100   100     0   100   100    25     0   100   100   100   100   100     79
 Fournisseur                             100   100   100   100   100   100   100     0    70   100   100   100   100     90
-Date révision                           100   100   100   100   100     8     0     0   100   100   100   100   100     78
+Date révision                           100   100   100   100   100     0     0     0   100   100   100   100   100     77
 Version normes                          100   100   100   100   100   100   100     0   100   100   100   100   100     92
 Période de fermeture                      0     0     0   100     0   100   100     0     0   100     0     0     0     31
 ID segment liaison par transbordeur     100   100   100   100   100   100   100     0   100   100   100   100   100     92
@@ -182,8 +182,8 @@ IDN                                             100   100   100   100   100   10
 Nombre de voies                                 100   100   100    99   100    99    76     0    99   100   100    99    98     90
 Nom de lieu officiel à gauche                   100   100   100    94   100    73    86   100    84    99    96    99   100     95
 Nom de lieu officiel à droite                   100   100   100    94   100    73    86   100    84    99    96    99   100     95
-Nom de rue officiel concaténé à gauche           78   100   100    94   100    73    39   100    85    96    96    34    78     83
-Nom de rue officiel concaténé à droite           78   100   100    94   100    73    39   100    85    96    96    34    78     83
+Nom de rue officiel concaténé à gauche           78   100   100    94   100   100    39   100    85    96    96    34    78     85
+Nom de rue officiel concaténé à droite           78   100   100    94   100   100    39   100    85    96    96    34    78     85
 Type de chaussée revêtue                         59    16    46    99    31    49   100    93    24   100    15    69    41     57
 État revêtement                                 100   100   100    99   100   100    99    93    99   100   100    99    41     95
 Autorité route                                   99   100     0     0     0    73     0    54    99   100     0     0    97     48
