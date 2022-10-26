@@ -136,12 +136,12 @@ SELECT REPLACE(nrn.segment_id::text, '-', '') AS segment_id,
          WHEN 'Unpaved unknown' THEN 'Unknown'
        END unpavsurf,
        CASE
-         WHEN structure_source.structure_type = 0 THEN 'None'
-         ELSE REPLACE(structure_source.structure_id::text, '-', '')
+         WHEN structure.structure_type = 0 THEN 'None'
+         ELSE REPLACE(structure.structure_id::text, '-', '')
        END structid,
        structure_type_lookup.value_en AS structtype,
-       structure_source.structure_name_en AS strunameen,
-       structure_source.structure_name_fr AS strunamefr,
+       structure.structure_name_en AS strunameen,
+       structure.structure_name_fr AS strunamefr,
        traffic_direction_lookup.value_en AS trafficdir,
        addrange_l.first_house_number AS addrange_l_hnumf,
        addrange_l.first_house_number_suffix AS addrange_l_hnumsuff,
@@ -249,13 +249,7 @@ FROM
    WHERE segment_source.strplaname_l_province = {{ source_code }} OR segment_source.strplaname_r_province = {{ source_code }}) nrn
 
 -- Join with all linked datasets.
-LEFT JOIN
-  (SELECT structure_link.segment_id,
-          structure.*
-   FROM public.structure_link
-   LEFT JOIN public.structure structure ON structure_link.structure_id = structure.structure_id) structure_source
-ON nrn.segment_id = structure_source.segment_id
-
+LEFT JOIN public.structure structure ON nrn.structure_id = structure.structure_id
 LEFT JOIN public.address_range addrange_l ON nrn.segment_id_left = addrange_l.segment_id
 LEFT JOIN public.address_range addrange_r ON nrn.segment_id_right = addrange_r.segment_id
 LEFT JOIN route_name_1 ON nrn.segment_id_right = route_name_1.segment_id
@@ -284,7 +278,7 @@ LEFT JOIN public.province_lookup strplaname_r_province_lookup ON nrn.strplaname_
 LEFT JOIN public.closing_period_lookup closing_period_lookup ON nrn.closing_period = closing_period_lookup.code
 LEFT JOIN public.functional_road_class_lookup functional_road_class_lookup ON nrn.functional_road_class = functional_road_class_lookup.code
 LEFT JOIN public.road_surface_type_lookup road_surface_type_lookup ON nrn.road_surface_type = road_surface_type_lookup.code
-LEFT JOIN public.structure_type_lookup structure_type_lookup ON structure_source.structure_type = structure_type_lookup.code
+LEFT JOIN public.structure_type_lookup structure_type_lookup ON structure.structure_type = structure_type_lookup.code
 LEFT JOIN public.traffic_direction_lookup traffic_direction_lookup ON nrn.traffic_direction = traffic_direction_lookup.code
 LEFT JOIN public.house_number_type_lookup addrange_l_first_house_number_type_lookup ON addrange_l.first_house_number_type = addrange_l_first_house_number_type_lookup.code
 LEFT JOIN public.house_number_type_lookup addrange_l_last_house_number_type_lookup ON addrange_l.last_house_number_type = addrange_l_last_house_number_type_lookup.code
