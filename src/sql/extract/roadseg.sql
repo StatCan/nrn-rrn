@@ -151,7 +151,7 @@ SELECT REPLACE(nrn.segment_id::text, '-', '') AS segment_id,
        addrange_l_last_house_number_type_lookup.value_en AS addrange_l_hnumtypl,
        addrange_l_house_number_structure_lookup.value_en AS addrange_l_hnumstr,
        addrange_l_reference_system_indicator_lookup.value_en AS addrange_l_rfsysind,
-       REPLACE(COALESCE(addrange_r.address_range_id, nrn.segment_id)::text, '-', '') AS addrange_nid,
+       REPLACE(addrange_r.address_range_id::text, '-', '') AS addrange_nid,
        addrange_r_acquisition_technique_lookup.value_en AS addrange_acqtech,
        addrange_r_provider_lookup.value_en AS addrange_provider,
        addrange_r.creation_date AS addrange_credate,
@@ -244,14 +244,14 @@ FROM
              place_name_r.place_type AS strplaname_r_place_type,
              place_name_r.province AS strplaname_r_province
       FROM public.segment segment
-      LEFT JOIN public.place_name place_name_l ON segment.segment_id_left = place_name_l.segment_id
-      LEFT JOIN public.place_name place_name_r ON segment.segment_id_right = place_name_r.segment_id) segment_source
+      LEFT JOIN public.place_name place_name_l ON segment.place_name_id_left = place_name_l.place_name_id
+      LEFT JOIN public.place_name place_name_r ON segment.place_name_id_right = place_name_r.place_name_id) segment_source
    WHERE segment_source.strplaname_l_province = {{ source_code }} OR segment_source.strplaname_r_province = {{ source_code }}) nrn
 
 -- Join with all linked datasets.
 LEFT JOIN public.structure structure ON nrn.structure_id = structure.structure_id
-LEFT JOIN public.address_range addrange_l ON nrn.segment_id_left = addrange_l.segment_id
-LEFT JOIN public.address_range addrange_r ON nrn.segment_id_right = addrange_r.segment_id
+LEFT JOIN public.address_range addrange_l ON nrn.address_range_id_left = addrange_l.address_range_id
+LEFT JOIN public.address_range addrange_r ON nrn.address_range_id_right = addrange_r.address_range_id
 LEFT JOIN route_name_1 ON nrn.segment_id_right = route_name_1.segment_id
 LEFT JOIN route_name_2 ON nrn.segment_id_right = route_name_2.segment_id
 LEFT JOIN route_name_3 ON nrn.segment_id_right = route_name_3.segment_id
