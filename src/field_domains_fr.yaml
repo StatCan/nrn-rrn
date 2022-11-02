@@ -319,7 +319,7 @@ tables:
       MU: Municipality
       NH: Northern hamlet
       NL: Nisga'a land
-      NO: Unorganized / Non organisé
+      "NO": Unorganized / Non organisé
       NV: Northern village
       NVL: Nisga'a village
       P: Parish / Paroisse (municipalité de)
