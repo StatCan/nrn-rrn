@@ -107,6 +107,7 @@ SELECT REPLACE(nrn.segment_id::text, '-', '') AS segment_id,
        functional_road_class_lookup.value_en AS roadclass,
        CASE road_surface_type_lookup.value_en
          WHEN 'Unknown' THEN 'Unknown'
+         WHEN 'None' THEN 'Unpaved'
          WHEN 'Rigid' THEN 'Paved'
          WHEN 'Flexible' THEN 'Paved'
          WHEN 'Blocks' THEN 'Paved'
@@ -117,6 +118,7 @@ SELECT REPLACE(nrn.segment_id::text, '-', '') AS segment_id,
        END pavstatus,
        CASE road_surface_type_lookup.value_en
          WHEN 'Unknown' THEN 'Unknown'
+         WHEN 'None' THEN 'None'
          WHEN 'Rigid' THEN 'Rigid'
          WHEN 'Flexible' THEN 'Flexible'
          WHEN 'Blocks' THEN 'Blocks'
@@ -127,6 +129,7 @@ SELECT REPLACE(nrn.segment_id::text, '-', '') AS segment_id,
        END pavsurf,
        CASE road_surface_type_lookup.value_en
          WHEN 'Unknown' THEN 'Unknown'
+         WHEN 'None' THEN 'None'
          WHEN 'Rigid' THEN 'None'
          WHEN 'Flexible' THEN 'None'
          WHEN 'Blocks' THEN 'None'
