@@ -71,6 +71,13 @@ street_name AS
       WHERE row_number = 1) street_name_link_filter
       LEFT JOIN public.street_name ON street_name_link_filter.street_name_id = public.street_name.street_name_id)
 
+-- Create temporary table(s): place name.
+place_name AS
+  (SELECT *
+   FROM public.basic_block basic_block
+   LEFT JOIN public.census_block ON basic_block.cb_uid = public.census_block.cb_uid
+   LEFT JOIN public.census_subdivision ON basic_block.csd_uid = public.census_subdivision.csd_uid)
+
 -- Create primary table.
 
 -- Compile all NRN attributes into a single table.
@@ -247,8 +254,8 @@ FROM
              place_name_r.place_type AS strplaname_r_place_type,
              place_name_r.province AS strplaname_r_province
       FROM public.segment segment
-      LEFT JOIN public.place_name place_name_l ON segment.place_name_id_left = place_name_l.place_name_id
-      LEFT JOIN public.place_name place_name_r ON segment.place_name_id_right = place_name_r.place_name_id) segment_source
+      LEFT JOIN place_name place_name_l ON segment.bb_uid_l = place_name_l.bb_uid
+      LEFT JOIN place_name place_name_r ON segment.bb_uid_r = place_name_r.bb_uid) segment_source
    WHERE segment_source.strplaname_l_province = {{ source_code }} OR segment_source.strplaname_r_province = {{ source_code }}) nrn
 
 -- Join with all linked datasets.

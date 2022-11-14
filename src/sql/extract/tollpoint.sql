@@ -1,3 +1,10 @@
+-- Create temporary table(s): place name.
+place_name AS
+  (SELECT *
+   FROM public.basic_block basic_block
+   LEFT JOIN public.census_block ON basic_block.cb_uid = public.census_block.cb_uid
+   LEFT JOIN public.census_subdivision ON basic_block.csd_uid = public.census_subdivision.csd_uid)
+
 -- Compile all NRN attributes into a single table.
 SELECT REPLACE(toll_point.toll_point_id::text, '-', '') AS nid,
        REPLACE(toll_point.segment_id::text, '-', '') AS roadnid,
@@ -17,12 +24,12 @@ FROM
   (SELECT segment_source.segment_id
    FROM
      (SELECT segment.segment_id,
-             place_name_l.province AS l_province,
-             place_name_r.province AS r_province
+             place_name_l.province AS province_l,
+             place_name_r.province AS province_r
       FROM public.segment segment
-      LEFT JOIN public.place_name place_name_l ON segment.segment_id_left = place_name_l.segment_id
-      LEFT JOIN public.place_name place_name_r ON segment.segment_id_right = place_name_r.segment_id) segment_source
-   WHERE segment_source.l_province = {{ source_code }} OR segment_source.r_province = {{ source_code }}) nrn
+      LEFT JOIN place_name place_name_l ON segment.bb_uid_l = place_name_l.bb_uid
+      LEFT JOIN place_name place_name_r ON segment.bb_uid_r = place_name_r.bb_uid) segment_source
+   WHERE segment_source.province_l = {{ source_code }} OR segment_source.province_r = {{ source_code }}) nrn
 
 INNER JOIN public.toll_point toll_point ON nrn.segment_id = toll_point.segment_id
 
