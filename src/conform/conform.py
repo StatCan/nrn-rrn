@@ -447,11 +447,11 @@ class Conform:
                         df.loc[flag, col] = df.loc[flag, col].map(lambda val: (val * 100) + 1)
 
             # Flag records with invalid date order.
-            flag = df["credate"] > df["revdate"]
             if sum(flag):
 
                 # Swap dates.
-                df_orig.loc[flag, ["credate", "revdate"]] = df_orig.loc[flag, ["revdate", "credate"]].copy(deep=True)
+                df_orig.loc[flag.index, ["credate", "revdate"]] = \
+                    df_orig.loc[flag.index, ["revdate", "credate"]].copy(deep=True)
 
                 # Log modifications.
                 mods = sum(flag)

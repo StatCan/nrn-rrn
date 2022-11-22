@@ -12,7 +12,7 @@ license:
   text:
 language: en
 data:
-  filename: 2021/BLKPASSAGE.shp
+  filename: SK_NRN_2022/BLKPASSAGE.shp
   layer:
   driver: ESRI Shapefile
   crs: "EPSG:26913"
@@ -29,5 +29,5 @@ conform:
     credate: CREDATE
     revdate: REVDATE
     metacover: METACOVER
-    roadnid:
+    roadnid: ROADNID
     blkpassty: BLKPASSTY

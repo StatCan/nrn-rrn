@@ -12,7 +12,7 @@ license:
   text:
 language: en
 data:
-  filename: 2021/ROADSEG.shp
+  filename: SK_NRN_2022/ROADSEG.shp
   layer:
   driver: ESRI Shapefile
   crs: "EPSG:26913"
@@ -46,7 +46,7 @@ conform:
     r_hnumsufl:
     l_hnumtypl:
     r_hnumtypl:
-    nid: uuid
+    nid: ADRANGENID
     l_offnanid: uuid
     r_offnanid: uuid
     l_rfsysind:
@@ -62,7 +62,7 @@ conform:
     specvers: 2.0
     l_adddirfg:
     r_adddirfg:
-    adrangenid: uuid
+    adrangenid: ADRANGENID
     closing:
     exitnbr: EXITNBR
     l_hnumf:
@@ -70,7 +70,7 @@ conform:
     roadclass: ROADCLASS
     l_hnuml:
     r_hnuml:
-    nid: uuid
+    nid: NID
     nbrlanes: NBRLANES
     l_placenam: PLACENAME
     r_placenam: PLACENAME
