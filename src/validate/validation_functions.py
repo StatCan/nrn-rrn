@@ -290,7 +290,7 @@ class Validator:
         df = self.dfs[dataset].copy(deep=True)
 
         # Compile all non-duplicated nodes (dead ends) as a DataFrame.
-        pts = df["pt_start"].append(df["pt_end"])
+        pts = pd.concat([df["pt_start"], df["pt_end"]])
         deadends = pts.loc[~pts.duplicated(keep=False)]
         deadends = pd.DataFrame({"pt": deadends.values, self.id: deadends.index})
 
@@ -369,7 +369,7 @@ class Validator:
             structures = df.loc[~df["structtype"].isin({default, "None"})]
 
             # Compile duplicated structure nodes.
-            structure_nodes = pd.Series(structures["pt_start"].append(structures["pt_end"]))
+            structure_nodes = pd.concat([structures["pt_start"], structures["pt_end"]])
             structure_nodes_dups = set(structure_nodes.loc[structure_nodes.duplicated(keep=False)])
 
             # Flag isolated structures.
@@ -725,8 +725,8 @@ class Validator:
         roadseg = self.dfs["roadseg"].copy(deep=True)
 
         # Compile nodes.
-        nodes_ferryseg = set(ferryseg["pt_start"].append(ferryseg["pt_end"]))
-        nodes_roadseg = set(roadseg["pt_start"].append(roadseg["pt_end"]))
+        nodes_ferryseg = set(pd.concat([ferryseg["pt_start"], ferryseg["pt_end"]]))
+        nodes_roadseg = set(pd.concat([roadseg["pt_start"], roadseg["pt_end"]]))
 
         # Compile invalid ferry nodes.
         invalid_nodes = nodes_ferryseg.difference(nodes_roadseg)
