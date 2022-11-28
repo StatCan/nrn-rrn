@@ -90,7 +90,7 @@ class Export:
         self.source_name = {"ab": "Alberta", "bc": "British Columbia", "mb": "Manitoba", "nb": "New Brunswick",
                             "nl": "Newfoundland and Labrador", "ns": "Nova Scotia", "nt": "Northwest Territories",
                             "nu": "Nunavut", "on": "Ontario", "pe": "Prince Edward Island", "qc": "Quebec",
-                            "sk": "Saskatchewan", "yt": "Yukon Territory"}[source]
+                            "sk": "Saskatchewan", "yt": "Yukon"}[source]
         self.source_code = {v: k for k, v in self.domains["en"]["metadata"]["datasetnam"]["lookup"].items() if
                             isinstance(k, int)}[self.source_name]
 

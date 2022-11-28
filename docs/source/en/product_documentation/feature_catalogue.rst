@@ -107,7 +107,7 @@ Province or Territory covered by the dataset.
    8, "Saskatchewan"
    9, "Alberta"
    10, "British Columbia"
-   11, "Yukon Territory"
+   11, "Yukon"
    12, "Northwest Territories"
    13, "Nunavut"
 

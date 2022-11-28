@@ -109,7 +109,7 @@ Province ou territoire couvert par le jeu de données.
    8, "Saskatchewan"
    9, "Alberta"
    10, "Colombie-Britannique"
-   11, "Territoire du Yukon"
+   11, "Yukon"
    12, "Territoires du Nord-Ouest"
    13, "Nunavut"
 

@@ -35,7 +35,7 @@ conform:
               value: credate
               type: column
           engine: python
-    datasetnam: Yukon Territory
+    datasetnam: Yukon
     accuracy: accuracy
     provider: &provider
       fields: provider
@@ -97,7 +97,7 @@ conform:
     acqtech: acqtech
     metacover:
     credate: *credate
-    datasetnam: Yukon Territory
+    datasetnam: Yukon
     accuracy: accuracy
     provider: *provider
     revdate: *revdate
@@ -298,7 +298,7 @@ conform:
     acqtech: acqtech
     metacover:
     credate: *credate
-    datasetnam: Yukon Territory
+    datasetnam: Yukon
     accuracy: accuracy
     provider: *provider
     revdate: *revdate
@@ -309,7 +309,7 @@ conform:
     nid: uuid
     placename: [l_placenam, r_placenam]
     placetype: [l_placetype, r_placetype]
-    province: Yukon Territory
+    province: Yukon
     starticle:
     namebody: namebody
     strtypre: strtypre

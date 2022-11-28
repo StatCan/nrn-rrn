@@ -63,7 +63,7 @@ territorial abbreviation of the data source. Accepted source abbreviations are a
    "pe", "Prince Edward Island"
    "qc", "Quebec"
    "sk", "Saskatchewan"
-   "yt", "Yukon Territory"
+   "yt", "Yukon"
 
 Files
 -----
@@ -683,7 +683,7 @@ Examples
       address_join_field: street_nm
       roadseg_join_field: street_nm
 
-**Advanced Example (source: Yukon Territory):**
+**Advanced Example (source: Yukon):**
 
 .. code-block:: yaml
 

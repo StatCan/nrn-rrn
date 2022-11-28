@@ -66,7 +66,7 @@ suivantes :
    "pe", "Île-du-Prince-Édouard"
    "qc", "Québec"
    "sk", "Saskatchewan"
-   "yt", "Territoire du Yukon"
+   "yt", "Yukon"
 
 Fichiers
 --------
@@ -700,7 +700,7 @@ Exemples
       address_join_field: street_nm
       roadseg_join_field: street_nm
 
-**Exemple avancé (source : Territoire du Yukon) :**
+**Exemple avancé (source : Yukon) :**
 
 .. code-block:: yaml
 
