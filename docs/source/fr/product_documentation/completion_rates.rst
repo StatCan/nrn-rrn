@@ -91,7 +91,7 @@ Précision planimétrique   100   100   100     0   100   100   100     0   100 
 Fournisseur               100   100   100     0   100   100   100     0     1   100     0   100   100     69
 Date révision             100   100   100     0   100   100   100     0   100   100     0    99   100     77
 Version normes            100   100   100     0   100   100   100     0   100   100     0   100   100     77
-Type passage obstrué      100     0   100     0    99    99   100     0   100   100     0   100   100     69
+Type passage obstrué      100     0   100     0    99    99   100     0   100   100     0    99   100     69
 IDN                       100   100   100     0   100   100   100     0   100   100     0   100   100     77
 IDN élément routier        99   100   100     0   100   100    79     0   100   100     0    99    95     75
 =======================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
@@ -182,8 +182,8 @@ IDN                                             100   100   100   100   100   10
 Nombre de voies                                 100   100   100    99   100    99    76     0    99   100   100    99    98     90
 Nom de lieu officiel à gauche                   100   100   100    94   100    73    86   100    84    99    96    99   100     95
 Nom de lieu officiel à droite                   100   100   100    94   100    73    86   100    84    99    96    99   100     95
-Nom de rue officiel concaténé à gauche           78   100   100    94   100   100    39   100    85    96    96    34    78     85
-Nom de rue officiel concaténé à droite           78   100   100    94   100   100    39   100    85    96    96    34    78     85
+Nom de rue officiel concaténé à gauche           78   100   100    94   100   100    39   100    85    96    96    35    78     85
+Nom de rue officiel concaténé à droite           78   100   100    94   100   100    39   100    85    96    96    35    78     85
 Type de chaussée revêtue                         59    16    46    99    31    49   100    93    24   100    15    69    41     57
 État revêtement                                 100   100   100    99   100   100    99    93    99   100   100    99    41     95
 Autorité route                                   99   100     0     0     0    73     0    54    99   100     0     0    97     48
@@ -202,8 +202,8 @@ Numéro de route 3                               100   100   100   100   100    
 Numéro de route 4                               100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Numéro de route 5                               100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Limite de vitesse                                 1     0     0    57     0     0     0     2    99    79     0    87     0     25
-Nom de structure anglais                         98    98    97    99   100     0     1     0     1     1   100     0     1     46
-Nom de structure français                        98    98    97    96   100     0     0     0     1     1   100     0     0     45
+Nom de structure anglais                         98    98    97    99   100     0     1     0     1     1   100     1     1     46
+Nom de structure français                        98    98    97    96   100     0     0     0     1     1   100     1     0     46
 ID structure                                    100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Type de structure                               100   100   100   100   100   100     1   100   100   100   100    99     1     85
 Sens de circulation                              79   100     0    99     0    98     0    88   100   100     0     3    96     59
@@ -235,8 +235,8 @@ Type de lieu                0     0     0     1     0     0    77   100     0   
 Province                  100     0     0    99     0   100   100   100   100   100     0   100   100     69
 Article nom rue             0     0     0   100     0     0     1   100     0     0     0     1     0     16
 Corps nom rue              94     0     0   100     0   100    91   100    97    96     0    76    94     65
-Préfixe type rue            0     0     0   100     0   100     2   100   100     4     0    28   100     41
-Suffixe type rue            0     0     0   100     0    99    82   100   100    91     0    49   100     55
+Préfixe type rue            0     0     0   100     0   100     2   100   100     4     0    29   100     41
+Suffixe type rue            0     0     0   100     0    99    82   100   100    91     0    48   100     55
 =======================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
 
 Poste de péage (postepeage)

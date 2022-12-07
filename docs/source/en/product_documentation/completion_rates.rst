@@ -91,7 +91,7 @@ Planimetric Accuracy    100   100   100     0   100   100   100     0   100   10
 Provider                100   100   100     0   100   100   100     0     1   100     0   100   100     69
 Revision Date           100   100   100     0   100   100   100     0   100   100     0    99   100     77
 Standard Version        100   100   100     0   100   100   100     0   100   100     0   100   100     77
-Blocked Passage Type    100     0   100     0    99    99   100     0   100   100     0   100   100     69
+Blocked Passage Type    100     0   100     0    99    99   100     0   100   100     0    99   100     69
 NID                     100   100   100     0   100   100   100     0   100   100     0   100   100     77
 Road Element NID         99   100   100     0   100   100    79     0   100   100     0    99    95     75
 =====================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
@@ -182,8 +182,8 @@ NID                                             100   100   100   100   100   10
 Number of Lanes                                 100   100   100    99   100    99    76     0    99   100   100    99    98     90
 Official Place Name Left                        100   100   100    94   100    73    86   100    84    99    96    99   100     95
 Official Place Name Right                       100   100   100    94   100    73    86   100    84    99    96    99   100     95
-Official Street Name Concatenated Left           78   100   100    94   100   100    39   100    85    96    96    34    78     85
-Official Street Name Concatenated Right          78   100   100    94   100   100    39   100    85    96    96    34    78     85
+Official Street Name Concatenated Left           78   100   100    94   100   100    39   100    85    96    96    35    78     85
+Official Street Name Concatenated Right          78   100   100    94   100   100    39   100    85    96    96    35    78     85
 Paved Road Surface Type                          59    16    46    99    31    49   100    93    24   100    15    69    41     57
 Pavement Status                                 100   100   100    99   100   100    99    93    99   100   100    99    41     95
 Road Jurisdiction                                99   100     0     0     0    73     0    54    99   100     0     0    97     48
@@ -202,8 +202,8 @@ Route Number 3                                  100   100   100   100   100     
 Route Number 4                                  100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Route Number 5                                  100   100   100   100   100     0     0     0     1     0   100     1     0     46
 Speed Restriction                                 1     0     0    57     0     0     0     2    99    79     0    87     0     25
-Structure Name English                           98    98    97    99   100     0     1     0     1     1   100     0     1     46
-Structure Name French                            98    98    97    96   100     0     0     0     1     1   100     0     0     45
+Structure Name English                           98    98    97    99   100     0     1     0     1     1   100     1     1     46
+Structure Name French                            98    98    97    96   100     0     0     0     1     1   100     1     0     46
 Structure ID                                    100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Structure Type                                  100   100   100   100   100   100     1   100   100   100   100    99     1     85
 Traffic Direction                                79   100     0    99     0    98     0    88   100   100     0     3    96     59
@@ -235,8 +235,8 @@ Place Type                0     0     0     1     0     0    77   100     0     
 Province                100     0     0    99     0   100   100   100   100   100     0   100   100     69
 Street Name Article       0     0     0   100     0     0     1   100     0     0     0     1     0     16
 Street Name Body         94     0     0   100     0   100    91   100    97    96     0    76    94     65
-Street Type Prefix        0     0     0   100     0   100     2   100   100     4     0    28   100     41
-Street Type Suffix        0     0     0   100     0    99    82   100   100    91     0    49   100     55
+Street Type Prefix        0     0     0   100     0   100     2   100   100     4     0    29   100     41
+Street Type Suffix        0     0     0   100     0    99    82   100   100    91     0    48   100     55
 =====================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
 
 Toll Point (tollpoint)

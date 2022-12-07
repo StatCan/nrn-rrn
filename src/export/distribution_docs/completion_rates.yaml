@@ -599,7 +599,7 @@ blkpassage:
     'on': 100
     pe: 100
     qc: 0
-    sk: 100
+    sk: 99
     yt: 100
   credate:
     ab: 100
@@ -1442,7 +1442,7 @@ roadseg:
     'on': 85
     pe: 96
     qc: 96
-    sk: 34
+    sk: 35
     yt: 78
   metacover:
     ab: 99
@@ -1607,7 +1607,7 @@ roadseg:
     'on': 85
     pe: 96
     qc: 96
-    sk: 34
+    sk: 35
     yt: 78
   revdate:
     ab: 100
@@ -1937,11 +1937,11 @@ roadseg:
     'on': 1
     pe: 1
     qc: 100
-    sk: 0
+    sk: 1
     yt: 1
   strunamefr:
     ab: 98
-    avg: 45
+    avg: 46
     bc: 98
     mb: 97
     nb: 96
@@ -1952,7 +1952,7 @@ roadseg:
     'on': 1
     pe: 1
     qc: 100
-    sk: 0
+    sk: 1
     yt: 0
   trafficdir:
     ab: 79
@@ -2253,7 +2253,7 @@ strplaname:
     'on': 100
     pe: 4
     qc: 0
-    sk: 28
+    sk: 29
     yt: 100
   strtysuf:
     ab: 0
@@ -2268,7 +2268,7 @@ strplaname:
     'on': 100
     pe: 91
     qc: 0
-    sk: 49
+    sk: 48
     yt: 100
 tollpoint:
   accuracy:
