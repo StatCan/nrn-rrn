@@ -260,8 +260,8 @@ FROM
 
 -- Join with all linked datasets.
 LEFT JOIN public.structure structure ON nrn.structure_id = structure.structure_id
-LEFT JOIN public.address_range addrange_l ON nrn.address_range_id_left = addrange_l.address_range_id
-LEFT JOIN public.address_range addrange_r ON nrn.address_range_id_right = addrange_r.address_range_id
+LEFT JOIN public.address_range addrange_l ON nrn.segment_id_left = addrange_l.address_range_id
+LEFT JOIN public.address_range addrange_r ON nrn.segment_id_right = addrange_r.address_range_id
 LEFT JOIN route_name_1 ON nrn.segment_id_right = route_name_1.segment_id
 LEFT JOIN route_name_2 ON nrn.segment_id_right = route_name_2.segment_id
 LEFT JOIN route_name_3 ON nrn.segment_id_right = route_name_3.segment_id
