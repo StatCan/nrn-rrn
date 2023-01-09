@@ -1,8 +1,6 @@
 -- Drop / create sequences for incremental integer columns.
 DROP SEQUENCE IF EXISTS roadseg_seq;
-DROP SEQUENCE IF EXISTS ferryseg_seq;
 CREATE TEMP SEQUENCE roadseg_seq;
-CREATE TEMP SEQUENCE ferryseg_seq;
 
 -- Create temporary tables (subqueries to be reused).
 
@@ -90,7 +88,6 @@ SELECT REPLACE(nrn.segment_id::text, '-', '') AS segment_id,
        provider_lookup.value_en AS provider,
        nrn.creation_date AS credate,
        nrn.revision_date AS revdate,
-       nrn.segment_type AS segment_type,
        nrn.exit_number AS exitnbr,
        nrn.speed AS speed,
        nrn.number_of_lanes AS nbrlanes,
@@ -201,14 +198,7 @@ SELECT REPLACE(nrn.segment_id::text, '-', '') AS segment_id,
        street_name_r.street_name_body AS strplaname_r_namebody,
        strplaname_r_street_type_suffix_lookup.value_en AS strplaname_r_strtysuf,
        strplaname_r_street_direction_suffix_lookup.value_en AS strplaname_r_dirsuffix,
-       CASE nrn.segment_type
-         WHEN 1 THEN nextval('roadseg_seq')
-         ELSE -1
-       END roadsegid,
-       CASE nrn.segment_type
-         WHEN 2 THEN nextval('ferryseg_seq')
-         ELSE -1
-       END ferrysegid,
+       nextval('roadseg_seq') AS roadsegid,
        {{ source_code }} AS datasetnam,
        {{ metacover }} AS metacover,
        {{ specvers }} AS specvers,
@@ -256,7 +246,7 @@ FROM
       FROM public.segment segment
       LEFT JOIN place_name place_name_l ON segment.bb_uid_l = place_name_l.bb_uid
       LEFT JOIN place_name place_name_r ON segment.bb_uid_r = place_name_r.bb_uid) segment_source
-   WHERE segment_source.strplaname_l_province = {{ source_code }} OR segment_source.strplaname_r_province = {{ source_code }}) nrn
+   WHERE (segment_source.segment_type = 1) AND (segment_source.strplaname_l_province = {{ source_code }} OR segment_source.strplaname_r_province = {{ source_code }})) nrn
 
 -- Join with all linked datasets.
 LEFT JOIN public.structure structure ON nrn.structure_id = structure.structure_id
