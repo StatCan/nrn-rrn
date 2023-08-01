@@ -13,8 +13,10 @@ import uuid
 import zipfile
 from copy import deepcopy
 from datetime import datetime
-from operator import itemgetter
+from itertools import groupby
+from operator import attrgetter, itemgetter
 from pathlib import Path
+from shapely.geometry import LineString
 from tabulate import tabulate
 from tqdm import tqdm
 from tqdm.auto import trange
@@ -416,6 +418,39 @@ class Conform:
 
             return df.copy(deep=True), log
 
+        def _resolve_adjacent_vertices(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
+                Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]:
+            """
+            Resolves some instances of complex LineString geometries by substituting duplicated adjacent vertices for
+            single vertices.
+
+            :param str table: name of an NRN dataset.
+            :param Union[gpd.GeoDataFrame, pd.DataFrame] df: (Geo)DataFrame containing the target NRN attribute(s).
+            :return Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]: Modified (Geo)DataFrame and string
+                                                                                    log of changes, if any.
+            """
+
+            log = ""
+            df_orig = df.copy(deep=True)
+
+            if table in {"ferryseg", "roadseg"}:
+
+                # Flag complex (non-simple) geometries.
+                flag = ~df.is_simple
+                if sum(flag):
+
+                    # Replace duplicated adjacent vertices with single vertices.
+                    df.loc[flag, "geometry"] = df.loc[flag, "geometry"].map(
+                        lambda g: LineString([pt for pt, _ in groupby(attrgetter("coords")(g))]))
+
+                    # Quantify and log modifications.
+                    mods = sum(df_orig.loc[flag, "geometry"].to_wkt() != df.loc[flag, "geometry"].to_wkt())
+                    if mods:
+                        log += f"Modified {mods} record(s) in {table}.geometry." \
+                               f"\nModification details: Geometries simplified.\n"
+
+            return df.copy(deep=True), log
+
         def _resolve_date_order(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
                 Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]:
             """
@@ -641,8 +676,9 @@ class Conform:
         logger.info("Applying cleanup functions.")
 
         # Define functions and execution order.
-        funcs = (_enforce_min_value, _lower_case_ids, _overwrite_segment_ids, _resolve_zero_credates,
-                 _resolve_date_order, _resolve_pavsurf, _standardize_nones, _strip_whitespace, _title_case_names)
+        funcs = (_enforce_min_value, _lower_case_ids, _overwrite_segment_ids, _resolve_adjacent_vertices,
+                 _resolve_zero_credates, _resolve_date_order, _resolve_pavsurf, _standardize_nones, _strip_whitespace,
+                 _title_case_names)
 
         # Instantiate progress bar.
         cleanup_pbar = trange(len(self.target_gdframes) * len(funcs), desc="Applying cleanup functions.",

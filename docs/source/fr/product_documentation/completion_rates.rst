@@ -31,23 +31,23 @@ Couverture                                    99     0     0     0     0     0  
 Date création                                100     0     0    99     0    99    99    88   100   100     0    99     1    60
 Nom jeu de données                           100     0     0   100     0   100   100   100   100   100     0   100   100     69
 Précision planimétrique                      100     0     0     0     0   100    99    88   100   100     0    99     1     53
-Fournisseur                                  100     0     0   100     0   100   100   100    84   100     0    99     1     60
+Fournisseur                                  100     0     0   100     0   100   100   100    85   100     0    99     1     60
 Date révision                                100     0     0   100     0   100     1   100    99   100     0    99    98     61
 Version normes                               100     0     0   100     0   100   100   100   100   100     0   100   100     69
 IDN nom de rue non officiel à gauche           0     0     0     0     0     0     0     0     0     0     0     0     0      0
 IDN nom de rue non officiel à droite           0     0     0     0     0     0     0     0     0     0     0     0     0      0
 Indicateur sens numérisation à gauche          0     0     0    99     0   100     5   100     0    54     0     0    26     30
 Indicateur sens numérisation à droite          0     0     0    99     0   100     6   100     0    55     0     0    25     30
-Numéro première maison à gauche                0     0     0   100     0   100     5   100    84    54     0     0    26     36
-Numéro première maison à droite                0     0     0   100     0   100     6   100    84    55     0     0    25     36
+Numéro première maison à gauche                0     0     0   100     0   100     5   100    85    54     0     0    26     36
+Numéro première maison à droite                0     0     0   100     0   100     6   100    85    55     0     0    25     36
 Suffixe numéro première maison à gauche        0     0     0    99     0     0     1   100     0     0     0     0     1     15
 Suffixe numéro première maison à droite        0     0     0    99     0     0     1   100     0     0     0     0     1     15
 Type numérotation première maison à gauche     0     0     0   100     0    73     6   100     0    54     0     0    26     28
 Type numérotation première maison à droite     0     0     0   100     0    73     6   100     0    55     0     0    25     28
 Structure numéro maison à gauche               0     0     0   100     0   100     6   100   100    54     0     0    26     37
 Structure numéro maison à droite               0     0     0    99     0   100     6   100   100    55     0     0    25     37
-Numéro dernière maison à gauche                0     0     0   100     0   100     5   100    84    54     0     0    26     36
-Numéro dernière maison à droite                0     0     0   100     0   100     6   100    84    55     0     0    25     36
+Numéro dernière maison à gauche                0     0     0   100     0   100     5   100    85    54     0     0    26     36
+Numéro dernière maison à droite                0     0     0   100     0   100     6   100    85    55     0     0    25     36
 Suffixe numéro dernière maison à gauche        0     0     0    99     0     0     1   100     0     0     0     0     1     15
 Suffixe numéro dernière maison à droite        0     0     0    99     0     0     1   100     0     0     0     0     1     15
 Type numérotation dernière maison à gauche     0     0     0   100     0    73     6   100     0    54     0     0    26     28
@@ -165,7 +165,7 @@ Couverture                                       99   100   100     0   100   10
 Date création                                   100   100   100    99   100    99    86    88   100   100   100    99     1     90
 Nom jeu de données                              100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Précision planimétrique                         100   100   100     0   100   100    88    88   100   100   100    99     1     83
-Fournisseur                                     100   100   100   100   100   100    99   100    84   100   100    99     1     91
+Fournisseur                                     100   100   100   100   100   100    99   100    85   100   100    99     1     91
 Date révision                                   100   100   100   100   100   100     1   100    99   100   100    99    98     92
 Version normes                                  100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Indicateur sens numérisation adresse à gauche     0   100   100    99   100     0     5   100     0    54   100     0    26     53
@@ -173,18 +173,18 @@ Indicateur sens numérisation adresse à droite     0   100   100    99   100   
 IDN intervalle d’adresse                        100   100   100   100   100    73   100   100   100   100   100   100   100     98
 Période de fermeture                              0     1     0     2     0    28     2     0     0    82     1     0     1      9
 Numéro de sortie                                100   100   100   100   100     0     0     0     1     0   100     1     0     46
-Numéro première maison à gauche                   0   100    65   100    99    73     5   100    84    54    98     0    26     62
-Numéro première maison à droite                   0   100    65   100    99    73     6   100    84    55    98     0    25     62
+Numéro première maison à gauche                   0   100    65   100    99    73     5   100    85    54    98     0    26     62
+Numéro première maison à droite                   0   100    65   100    99    73     6   100    85    55    98     0    25     62
 Classification routière fonctionnelle           100   100   100    99   100    97    99    10    99   100   100    99    97     92
-Numéro dernière maison à gauche                   0   100    65   100    99    73     5   100    84    54    98     0    26     62
-Numéro dernière maison à droite                   0   100    65   100    99    73     6   100    84    55    98     0    25     62
+Numéro dernière maison à gauche                   0   100    65   100    99    73     5   100    85    54    98     0    26     62
+Numéro dernière maison à droite                   0   100    65   100    99    73     6   100    85    55    98     0    25     62
 IDN                                             100   100   100   100   100   100   100   100   100   100   100   100   100    100
 Nombre de voies                                 100   100   100    99   100    99    76     0    99   100   100    99    98     90
-Nom de lieu officiel à gauche                   100   100   100    94   100    73    86   100    84    99    96    99   100     95
-Nom de lieu officiel à droite                   100   100   100    94   100    73    86   100    84    99    96    99   100     95
-Nom de rue officiel concaténé à gauche           78   100   100    94   100   100    39   100    85    96    96    35    78     85
-Nom de rue officiel concaténé à droite           78   100   100    94   100   100    39   100    85    96    96    35    78     85
-Type de chaussée revêtue                         59    16    46    99    31    49   100    93    24   100    15    69    41     57
+Nom de lieu officiel à gauche                   100   100   100    94   100    73    86   100    85    99    96    99   100     95
+Nom de lieu officiel à droite                   100   100   100    94   100    73    86   100    85    99    96    99   100     95
+Nom de rue officiel concaténé à gauche           78   100   100    94   100   100    39   100    86    96    96    35    78     85
+Nom de rue officiel concaténé à droite           78   100   100    94   100   100    39   100    86    96    96    35    78     85
+Type de chaussée revêtue                         59    16    46    99    31    49   100    93    23   100    15    69    41     57
 État revêtement                                 100   100   100    99   100   100    99    93    99   100   100    99    41     95
 Autorité route                                   99   100     0     0     0    73     0    54    99   100     0     0    97     48
 ID segment routier                              100   100   100   100   100   100   100   100   100   100   100   100   100    100
@@ -236,7 +236,7 @@ Province                  100     0     0    99     0   100   100   100   100   
 Article nom rue             0     0     0   100     0     0     1   100     0     0     0     1     0     16
 Corps nom rue              94     0     0   100     0   100    91   100    97    96     0    76    94     65
 Préfixe type rue            0     0     0   100     0   100     2   100   100     4     0    29   100     41
-Suffixe type rue            0     0     0   100     0    99    82   100   100    91     0    48   100     55
+Suffixe type rue            0     0     0   100     0    99    82   100    99    91     0    48   100     55
 =======================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  =====
 
 Poste de péage (postepeage)
