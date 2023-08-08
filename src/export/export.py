@@ -291,10 +291,6 @@ class Export:
                 # Update column value for source.
                 data[table][col][self.source] = int(completion_rate)
 
-                # Update column average.
-                vals = itemgetter(*set(data[table][col]) - {"avg"})(data[table][col])
-                data[table][col]["avg"] = int(round(sum(map(int, vals)) / len(vals), 0))
-
         # Write updated documents - English and French.
         self.write_documents(data, "en/completion_rates")
         self.write_documents(data, "fr/completion_rates", export_yaml=False)
