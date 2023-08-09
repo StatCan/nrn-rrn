@@ -12,7 +12,7 @@ license:
   text: GIS Data Layers - Licensing Agreements
 language: en
 data:
-  filename: 2021/PEI_NRN21.shp
+  filename: 2023/PEI_NRN22.shp
   layer:
   driver: ESRI Shapefile
   crs: "EPSG:2954"

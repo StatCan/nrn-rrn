@@ -5,14 +5,14 @@ coverage:
     alpha2: CA-PE
     country: Canada
     subdivision: Prince Edward Island
-  website: http://www.gov.pe.ca/gis/index.php3?number=77553
-  update_frequency: monthly
+  website: Provided directly from data contact.
+  update_frequency: daily
 license:
   url: http://www.gov.pe.ca/gis/index.php3?number=77462
   text: GIS Data Layers - Licensing Agreements
 language: en
 data:
-  filename: 2021/ca_points.shp
+  filename: 2023/911_CA0823.shp
   layer:
   driver: ESRI Shapefile
   crs: "EPSG:2954"
