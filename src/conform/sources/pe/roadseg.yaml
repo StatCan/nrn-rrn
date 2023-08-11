@@ -109,14 +109,87 @@ conform:
     provider: provider
     revdate: revdate
     specvers: 2.0
-    dirprefix: [l_dirprefi, r_dirprefi]
-    dirsuffix: [l_dirsuffi, r_dirsuffi]
+    dirprefix:
+      fields: [l_stname_f, r_stname_f]
+      process_separately: True
+      functions:
+        - function: regex_find
+          pattern: "(?<!^)\\b(domain_strplaname_dirsuffix)\\b"
+          match_index: -1
+          group_index: 0
+          strip_result: True
+        - function: regex_find
+          pattern: "\\b(domain_strplaname_dirprefix)\\b(?!$)"
+          match_index: 0
+          group_index: 0
+    dirsuffix:
+      fields: [l_stname_f, r_stname_f]
+      process_separately: True
+      functions:
+        - function: regex_find
+          pattern: "(?<!^)\\b(domain_strplaname_dirsuffix)\\b"
+          match_index: -1
+          group_index: 0
     muniquad:
     nid: uuid
     placename: [l_placenam, r_placenam]
     placetype:
     province: Prince Edward Island
-    starticle: [l_starticl, r_starticl]
-    namebody: [l_namebody, r_namebody]
-    strtypre: [l_strtypre, r_strtypre]
-    strtysuf: [l_strtysuf, r_strtysuf]
+    starticle:
+      fields: [l_stname_f, r_stname_f]
+      process_separately: True
+      functions:
+        - function: regex_find
+          pattern: "\\b(domain_strplaname_starticle)\\b"
+          match_index: 0
+          group_index: 0
+    namebody:
+      fields: [l_stname_f, r_stname_f]
+      process_separately: True
+      functions:
+        - function: regex_find
+          pattern: "(?<!^)\\b(domain_strplaname_dirsuffix)\\b"
+          match_index: -1
+          group_index: 0
+          strip_result: True
+        - function: regex_find
+          pattern: "\\b(domain_strplaname_dirprefix)\\b(?!$)"
+          match_index: 0
+          group_index: 0
+          strip_result: True
+        - function: regex_find
+          pattern: "(?<!^)\\b(domain_strplaname_strtysuf)\\b"
+          match_index: -1
+          group_index: 0
+          strip_result: True
+        - function: regex_find
+          pattern: "\\b(domain_strplaname_strtypre)\\b(?!$)"
+          match_index: 0
+          group_index: 0
+          strip_result: True
+        - function: regex_find
+          pattern: "\\b(domain_strplaname_starticle)\\b"
+          match_index: 0
+          group_index: 0
+          strip_result: True
+    strtypre:
+      fields: [l_stname_f, r_stname_f]
+      process_separately: True
+      functions:
+        - function: regex_find
+          pattern: "(?<!^)\\b(domain_strplaname_strtysuf)\\b"
+          match_index: -1
+          group_index: 0
+          strip_result: True
+        - function: regex_find
+          pattern: "\\b(domain_strplaname_strtypre)\\b(?!$)"
+          match_index: 0
+          group_index: 0
+    strtysuf:
+      fields: [l_stname_f, r_stname_f]
+      process_separately: True
+      functions:
+        - function: regex_find
+          pattern: "(?<!^)\\b(domain_strplaname_strtysuf)\\b"
+          match_index: -1
+          group_index: 0

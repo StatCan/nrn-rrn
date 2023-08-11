@@ -8,8 +8,11 @@ import sys
 from bisect import bisect
 from collections import OrderedDict
 from operator import itemgetter
+from pathlib import Path
 from shapely.geometry import LineString, Point
 from typing import List, Tuple, Union
+
+filepath = Path(__file__).resolve()
 
 
 # Set logger.
