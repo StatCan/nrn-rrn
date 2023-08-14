@@ -167,9 +167,14 @@ class Conform:
                         mods["Count"] = mods["Count"].map(lambda val: f"{val:,}")
 
                         # Log modifications.
-                        tbl = tabulate(mods.values, headers=mods.columns, tablefmt="rst")
+                        tbl_limit = 50
+                        tbl = tabulate(mods.head(n=tbl_limit).values, headers=mods.head(n=tbl_limit).columns,
+                                       tablefmt="rst")
+
                         domains_pbar.clear()
-                        logger.warning(f"Values have been modified for {table}.{field}:\n" + tbl)
+                        tbl_limit_note = f"Note: Table has been truncated to display limit of {tbl_limit}.\n" \
+                            if len(mods) > tbl_limit else ""
+                        logger.warning(f"Values have been modified for {table}.{field}:\n{tbl_limit_note}{tbl}\n")
                         domains_pbar.refresh()
 
                     # Update progress bar.

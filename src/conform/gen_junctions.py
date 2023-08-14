@@ -130,6 +130,7 @@ class Junction:
         self.junction["datasetnam"] = self.roadseg["datasetnam"].iloc[0]
         self.junction["provider"] = "Federal"
         self.junction["revdate"] = self.defaults["revdate"]
+        self.junction["specvers"] = 2
 
         # Attribute: accuracy. Take maximum value.
         self.junction.loc[flag, "accuracy"] = self.junction.loc[flag, "uuids"].map(
