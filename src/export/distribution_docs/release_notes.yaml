@@ -44,10 +44,10 @@ nu:
   release_date: 2023-08
   validity_date: 2023-08
 pe:
-  edition: 20.1
-  number_of_kilometers: 6,988
-  release_date: 2021-08
-  validity_date: 2021-08
+  edition: 21.0
+  number_of_kilometers: 7,025
+  release_date: 2023-08
+  validity_date: 2023-08
 qc:
   edition: 9.0
   number_of_kilometers: 162,768

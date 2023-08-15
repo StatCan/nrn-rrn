@@ -79,7 +79,7 @@ addrange:
     nt: 5
     nu: 100
     'on': 0
-    pe: 54
+    pe: 53
     qc: 0
     sk: 0
     yt: 26
@@ -93,7 +93,7 @@ addrange:
     nt: 5
     nu: 100
     'on': 85
-    pe: 54
+    pe: 53
     qc: 0
     sk: 0
     yt: 26
@@ -107,7 +107,7 @@ addrange:
     nt: 5
     nu: 100
     'on': 85
-    pe: 54
+    pe: 53
     qc: 0
     sk: 0
     yt: 26
@@ -121,7 +121,7 @@ addrange:
     nt: 6
     nu: 0
     'on': 100
-    pe: 54
+    pe: 53
     qc: 0
     sk: 0
     yt: 26
@@ -163,7 +163,7 @@ addrange:
     nt: 6
     nu: 0
     'on': 0
-    pe: 54
+    pe: 53
     qc: 0
     sk: 0
     yt: 26
@@ -177,7 +177,7 @@ addrange:
     nt: 6
     nu: 0
     'on': 0
-    pe: 54
+    pe: 53
     qc: 0
     sk: 0
     yt: 26
@@ -205,7 +205,7 @@ addrange:
     nt: 100
     nu: 0
     'on': 0
-    pe: 100
+    pe: 0
     qc: 0
     sk: 0
     yt: 0
@@ -275,7 +275,7 @@ addrange:
     nt: 6
     nu: 100
     'on': 0
-    pe: 55
+    pe: 54
     qc: 0
     sk: 0
     yt: 25
@@ -289,7 +289,7 @@ addrange:
     nt: 6
     nu: 100
     'on': 85
-    pe: 55
+    pe: 54
     qc: 0
     sk: 0
     yt: 25
@@ -303,7 +303,7 @@ addrange:
     nt: 6
     nu: 100
     'on': 85
-    pe: 55
+    pe: 54
     qc: 0
     sk: 0
     yt: 25
@@ -317,7 +317,7 @@ addrange:
     nt: 6
     nu: 0
     'on': 100
-    pe: 55
+    pe: 54
     qc: 0
     sk: 0
     yt: 25
@@ -359,7 +359,7 @@ addrange:
     nt: 6
     nu: 0
     'on': 0
-    pe: 55
+    pe: 54
     qc: 0
     sk: 0
     yt: 25
@@ -373,7 +373,7 @@ addrange:
     nt: 6
     nu: 0
     'on': 0
-    pe: 55
+    pe: 54
     qc: 0
     sk: 0
     yt: 25
@@ -401,7 +401,7 @@ addrange:
     nt: 100
     nu: 0
     'on': 0
-    pe: 100
+    pe: 0
     qc: 0
     sk: 0
     yt: 0
@@ -655,7 +655,7 @@ blkpassage:
     nt: 79
     nu: 0
     'on': 100
-    pe: 100
+    pe: 89
     qc: 0
     sk: 99
     yt: 95
@@ -1175,7 +1175,7 @@ junction:
     nt: 0
     nu: 0
     'on': 0
-    pe: 0
+    pe: 100
     qc: 100
     sk: 0
     yt: 0
@@ -1232,7 +1232,7 @@ roadseg:
     nt: 2
     nu: 0
     'on': 0
-    pe: 82
+    pe: 83
     qc: 1
     sk: 0
     yt: 1
@@ -1288,7 +1288,7 @@ roadseg:
     nt: 5
     nu: 100
     'on': 0
-    pe: 54
+    pe: 53
     qc: 100
     sk: 0
     yt: 26
@@ -1302,7 +1302,7 @@ roadseg:
     nt: 5
     nu: 100
     'on': 85
-    pe: 54
+    pe: 53
     qc: 98
     sk: 0
     yt: 26
@@ -1316,7 +1316,7 @@ roadseg:
     nt: 5
     nu: 100
     'on': 85
-    pe: 54
+    pe: 53
     qc: 98
     sk: 0
     yt: 26
@@ -1344,7 +1344,7 @@ roadseg:
     nt: 39
     nu: 91
     'on': 86
-    pe: 96
+    pe: 95
     qc: 96
     sk: 35
     yt: 78
@@ -1442,7 +1442,7 @@ roadseg:
     nt: 6
     nu: 100
     'on': 0
-    pe: 55
+    pe: 54
     qc: 100
     sk: 0
     yt: 25
@@ -1456,7 +1456,7 @@ roadseg:
     nt: 6
     nu: 100
     'on': 85
-    pe: 55
+    pe: 54
     qc: 98
     sk: 0
     yt: 25
@@ -1470,7 +1470,7 @@ roadseg:
     nt: 6
     nu: 100
     'on': 85
-    pe: 55
+    pe: 54
     qc: 98
     sk: 0
     yt: 25
@@ -1498,7 +1498,7 @@ roadseg:
     nt: 39
     nu: 91
     'on': 86
-    pe: 96
+    pe: 95
     qc: 96
     sk: 35
     yt: 78
@@ -1680,7 +1680,7 @@ roadseg:
     nt: 11
     nu: 0
     'on': 11
-    pe: 36
+    pe: 35
     qc: 100
     sk: 9
     yt: 100
@@ -1764,7 +1764,7 @@ roadseg:
     nt: 0
     nu: 2
     'on': 99
-    pe: 79
+    pe: 80
     qc: 0
     sk: 87
     yt: 0
@@ -1848,7 +1848,7 @@ roadseg:
     nt: 72
     nu: 94
     'on': 76
-    pe: 99
+    pe: 100
     qc: 83
     sk: 99
     yt: 41
@@ -1919,7 +1919,7 @@ strplaname:
     nt: 1
     nu: 100
     'on': 100
-    pe: 100
+    pe: 1
     qc: 0
     sk: 1
     yt: 100
@@ -1933,7 +1933,7 @@ strplaname:
     nt: 2
     nu: 1
     'on': 100
-    pe: 100
+    pe: 1
     qc: 0
     sk: 6
     yt: 100
@@ -2087,7 +2087,7 @@ strplaname:
     nt: 1
     nu: 100
     'on': 0
-    pe: 0
+    pe: 1
     qc: 0
     sk: 1
     yt: 0
@@ -2101,7 +2101,7 @@ strplaname:
     nt: 2
     nu: 100
     'on': 100
-    pe: 4
+    pe: 6
     qc: 0
     sk: 29
     yt: 100
@@ -2115,7 +2115,7 @@ strplaname:
     nt: 82
     nu: 73
     'on': 99
-    pe: 91
+    pe: 92
     qc: 0
     sk: 48
     yt: 100
