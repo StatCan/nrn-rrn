@@ -635,7 +635,7 @@ class Conform:
         def _title_case_names(table: str, df: Union[gpd.GeoDataFrame, pd.DataFrame]) -> \
                 Tuple[Union[gpd.GeoDataFrame, pd.DataFrame], Union[str, None]]:
             """
-            Sets to title case all NRN name attributes:
+            Sets to title case all NRN name attributes for those values which are completely uppercase or lowercase:
                 ferryseg: rtename1en, rtename1fr, rtename2en, rtename2fr, rtename3en, rtename3fr, rtename4en, rtename4fr
                 roadseg: l_placenam, l_stname_c, r_placenam, r_stname_c, rtename1en, rtename1fr, rtename2en, rtename2fr,
                          rtename3en, rtename3fr, rtename4en, rtename4fr, strunameen, strunamefr
@@ -664,9 +664,10 @@ class Conform:
                 # Iterate columns.
                 for col in name_fields[table]:
 
-                    # Filter records to non-default values which are not already title case.
+                    # Filter records to non-default values which are completely uppercase or lowercase.
                     default = self.defaults[table][col]
-                    s_filtered = df.loc[df[col].map(lambda route: route != default and not route.istitle()), col]
+                    s_filtered = df.loc[df[col].map(lambda route: route != default and
+                                                                  (route.isupper() or route.islower())), col]
 
                     # Apply modifications, if required.
                     if len(s_filtered):
