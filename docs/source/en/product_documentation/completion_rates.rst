@@ -32,7 +32,7 @@ Creation Date                      100     0     0    99     0    99    99    89
 Dataset Name                       100     0     0   100     0   100   100   100   100   100     0   100   100
 Planimetric Accuracy               100     0     0     0     0   100    99    87   100   100     0    99     1
 Provider                           100     0     0   100     0   100   100   100    85   100     0    99     1
-Revision Date                      100     0     0   100     0   100     1   100    99   100     0    99    98
+Revision Date                      100     0     0    99     0   100     1   100    99   100     0    99    98
 Standard Version                   100     0     0   100     0   100   100   100   100   100     0   100   100
 Alternate Street Name NID Left       0     0     0     0     0     0     0     0     0     0     0     0     0
 Alternate Street Name NID Right      0     0     0     0     0     0     0     0     0     0     0     0     0
@@ -146,7 +146,7 @@ Dataset Name            100   100   100   100   100   100   100   100   100   10
 Planimetric Accuracy    100   100   100     0   100   100    86    87   100   100   100    99     1
 Provider                100   100   100   100   100   100   100   100   100   100   100   100   100
 Revision Date             0   100   100     0   100     0     0     0     0     0   100     0     0
-Standard Version          0   100   100     0   100     0     0     0     0   100   100     0     0
+Standard Version          0   100   100   100   100     0     0     0     0   100   100     0     0
 Exit Number               1   100   100     3   100     0     0     0     1     0   100     0     0
 Junction Type           100   100   100   100   100   100   100   100   100   100   100   100   100
 NID                     100   100   100   100   100   100   100   100   100   100   100   100   100
@@ -166,7 +166,7 @@ Creation Date                                   100   100   100    99   100    9
 Dataset Name                                    100   100   100   100   100   100   100   100   100   100   100   100   100
 Planimetric Accuracy                            100   100   100     0   100   100    88    87   100   100   100    99     1
 Provider                                        100   100   100   100   100   100    99   100    85   100   100    99     1
-Revision Date                                   100   100   100   100   100   100     1   100    99   100   100    99    98
+Revision Date                                   100   100   100    99   100   100     1   100    99   100   100    99    98
 Standard Version                                100   100   100   100   100   100   100   100   100   100   100   100   100
 Address Range Digitizing Direction Flag Left      0   100   100    99   100     0     5   100     0    53   100     0    26
 Address Range Digitizing Direction Flag Right     0   100   100    99   100     0     6   100     0    54   100     0    25
@@ -224,7 +224,7 @@ Creation Date           100     0     0    99     0    99    88    67   100   10
 Dataset Name            100     0     0   100     0   100   100   100   100   100     0   100   100
 Planimetric Accuracy    100     0     0     0     0   100    91    65   100   100     0    99     1
 Provider                100     0     0   100     0   100    99   100    93   100     0    99     1
-Revision Date           100     0     0   100     0   100     0   100    99   100     0    99    96
+Revision Date           100     0     0    99     0   100     0   100    99   100     0    99    96
 Standard Version        100     0     0   100     0   100   100   100   100   100     0   100   100
 Directional Prefix        0     0     0   100     0   100     1   100   100     1     0     1   100
 Directional Suffix        0     0     0   100     0   100     2     1   100     1     0     6   100

@@ -409,7 +409,7 @@ addrange:
     ab: 100
     bc: 0
     mb: 0
-    nb: 100
+    nb: 99
     nl: 0
     ns: 100
     nt: 1
@@ -1169,7 +1169,7 @@ junction:
     ab: 0
     bc: 100
     mb: 100
-    nb: 0
+    nb: 100
     nl: 100
     ns: 0
     nt: 0
@@ -1506,7 +1506,7 @@ roadseg:
     ab: 100
     bc: 100
     mb: 100
-    nb: 100
+    nb: 99
     nl: 100
     ns: 100
     nt: 1
@@ -2053,7 +2053,7 @@ strplaname:
     ab: 100
     bc: 0
     mb: 0
-    nb: 100
+    nb: 99
     nl: 0
     ns: 100
     nt: 0

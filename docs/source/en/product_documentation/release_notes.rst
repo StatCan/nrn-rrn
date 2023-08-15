@@ -19,7 +19,7 @@ Province / Territory       Code  Edition  Release Date  Validity Date  Number of
 Alberta                    AB    15.0     2022-04       2022-04        237,821             
 British Columbia           BC    14.0     2017-05       2017-03        93,961              
 Manitoba                   MB    6.0      2013-04       2012-04        89,003              
-New Brunswick              NB    12.0     2022-06       2022-06        35,830              
+New Brunswick              NB    13.0     2023-08       2023-08        35,918              
 Newfoundland and Labrador  NL    7.0      2013-04       2012-09        23,026              
 Northwest Territories      NT    13.1     2022-06       2022-04        7,812               
 Nova Scotia                NS    15.0     2022-10       2022-10        51,985              

@@ -32,7 +32,7 @@ Date création                                100     0     0    99     0    99 
 Nom jeu de données                           100     0     0   100     0   100   100   100   100   100     0   100   100
 Précision planimétrique                      100     0     0     0     0   100    99    87   100   100     0    99     1
 Fournisseur                                  100     0     0   100     0   100   100   100    85   100     0    99     1
-Date révision                                100     0     0   100     0   100     1   100    99   100     0    99    98
+Date révision                                100     0     0    99     0   100     1   100    99   100     0    99    98
 Version normes                               100     0     0   100     0   100   100   100   100   100     0   100   100
 IDN nom de rue non officiel à gauche           0     0     0     0     0     0     0     0     0     0     0     0     0
 IDN nom de rue non officiel à droite           0     0     0     0     0     0     0     0     0     0     0     0     0
@@ -146,7 +146,7 @@ Nom jeu de données        100   100   100   100   100   100   100   100   100  
 Précision planimétrique   100   100   100     0   100   100    86    87   100   100   100    99     1
 Fournisseur               100   100   100   100   100   100   100   100   100   100   100   100   100
 Date révision               0   100   100     0   100     0     0     0     0     0   100     0     0
-Version normes              0   100   100     0   100     0     0     0     0   100   100     0     0
+Version normes              0   100   100   100   100     0     0     0     0   100   100     0     0
 Numéro de sortie            1   100   100     3   100     0     0     0     1     0   100     0     0
 Type jonction             100   100   100   100   100   100   100   100   100   100   100   100   100
 IDN                       100   100   100   100   100   100   100   100   100   100   100   100   100
@@ -166,7 +166,7 @@ Date création                                   100   100   100    99   100    
 Nom jeu de données                              100   100   100   100   100   100   100   100   100   100   100   100   100
 Précision planimétrique                         100   100   100     0   100   100    88    87   100   100   100    99     1
 Fournisseur                                     100   100   100   100   100   100    99   100    85   100   100    99     1
-Date révision                                   100   100   100   100   100   100     1   100    99   100   100    99    98
+Date révision                                   100   100   100    99   100   100     1   100    99   100   100    99    98
 Version normes                                  100   100   100   100   100   100   100   100   100   100   100   100   100
 Indicateur sens numérisation adresse à gauche     0   100   100    99   100     0     5   100     0    53   100     0    26
 Indicateur sens numérisation adresse à droite     0   100   100    99   100     0     6   100     0    54   100     0    25
@@ -224,7 +224,7 @@ Date création             100     0     0    99     0    99    88    67   100  
 Nom jeu de données        100     0     0   100     0   100   100   100   100   100     0   100   100
 Précision planimétrique   100     0     0     0     0   100    91    65   100   100     0    99     1
 Fournisseur               100     0     0   100     0   100    99   100    93   100     0    99     1
-Date révision             100     0     0   100     0   100     0   100    99   100     0    99    96
+Date révision             100     0     0    99     0   100     0   100    99   100     0    99    96
 Version normes            100     0     0   100     0   100   100   100   100   100     0   100   100
 Préfixe direction           0     0     0   100     0   100     1   100   100     1     0     1   100
 Suffixe direction           0     0     0   100     0   100     2     1   100     1     0     6   100

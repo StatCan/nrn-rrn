@@ -19,7 +19,7 @@ Province / Territoire      Code  Édition  Date de publication  Date de validit�
 Alberta                    AB    15.0     2022-04              2022-04           237 821             
 Colombie-Britannique       BC    14.0     2017-05              2017-03           93 961              
 Manitoba                   MB    6.0      2013-04              2012-04           89 003              
-Nouveau-Brunswick          NB    12.0     2022-06              2022-06           35 830              
+Nouveau-Brunswick          NB    13.0     2023-08              2023-08           35 918              
 Terre-Neuve-et-Labrador    NL    7.0      2013-04              2012-09           23 026              
 Territoires du Nord-Ouest  NT    13.1     2022-06              2022-04           7 812               
 Nouvelle-Écosse            NS    15.0     2022-10              2022-10           51 985              
