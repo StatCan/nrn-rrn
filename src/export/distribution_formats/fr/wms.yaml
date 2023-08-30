@@ -1,0 +1,39 @@
+data:
+  dir: NRN_RRN_<source>_WMS
+  file: NRN_<source>_WMS_fr.gpkg
+  driver: GPKG
+conform:
+  blkpassage:
+    name: NRN_<source>_BLKPASSAGE
+    fields:
+      datasetnam: datasetname
+      blkpassty:  blkpassty
+  ferryseg:
+    name: NRN_<source>_FERRYSEG
+    fields:
+      datasetnam: datasetnam
+  roadseg:
+    name: NRN_<source>_ROADSEG
+    fields:
+      datasetnam: datasetnam
+      roadclass:  roadclass
+      l_stname_c: l_stname_c
+      r_stname_c: r_stname_c
+      rtename1en: rtename1en
+      rtename2en: rtename2en
+      rtename3en: rtename3en
+      rtename4en: rtename4en
+      rtename1fr: rtename1fr
+      rtename2fr: rtename2fr
+      rtename3fr: rtename3fr
+      rtename4fr: rtename4fr
+      rtnumber1:  rtnumber1
+      rtnumber2:  rtnumber2
+      rtnumber3:  rtnumber3
+      rtnumber4:  rtnumber4
+      rtnumber5:  rtnumber5
+  tollpoint:
+    name: NRN_<source>_TOLLPOINT
+    fields:
+      datasetnam: datasetnam
+      tollpttype: tollpttype
