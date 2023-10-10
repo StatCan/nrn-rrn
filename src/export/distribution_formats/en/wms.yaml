@@ -1,6 +1,6 @@
 data:
   dir: NRN_RRN_<source>_WMS
-  file: NRN_<source>_WMS_en.gpkg
+  file: NRN_<source>_WMS.gpkg
   driver: GPKG
 conform:
   blkpassage:
@@ -32,6 +32,12 @@ conform:
       rtnumber3:  rtnumber3
       rtnumber4:  rtnumber4
       rtnumber5:  rtnumber5
+      wms_50m: wms_50m
+      wms_4m: wms_4m
+      wms_500k: wms_500k
+      wms_100k: wms_100k
+      wms_25k: wms_25k
+      wms_10k: wms_10k
   tollpoint:
     name: NRN_<source>_TOLLPOINT
     fields:

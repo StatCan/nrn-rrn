@@ -98,6 +98,7 @@ class Export:
 
         self.configure_release_version()
         self.gen_french_dataframes()
+        self.gen_wms_attributes()
         self.export_data()
         self.zip_data()
         self.update_distribution_docs()
@@ -240,6 +241,47 @@ class Export:
                 except (AttributeError, KeyError, ValueError):
                     logger.exception(f"Unable to apply French translations for table: {table}, field: {field}.")
                     sys.exit(1)
+
+    def gen_wms_attributes(self) -> None:
+        """
+        Generate WMS attributes for roadseg.
+        """
+
+        logger.info(f"Generating WMS datasets.")
+
+        df = self.dframes["en"]["roadseg"].copy(deep=True)
+
+        # Compile WMS queries.
+        data = helpers.load_yaml(filepath.parent / "wms_queries.yaml")["queries"]
+
+        # Iterative WMS scales and queries.
+        for attribute in data:
+            df[attribute] = 0
+            for prov, queries in data[attribute].items():
+                if (prov == self.source) and queries:
+
+                    try:
+
+                        # Query type: list or strings
+                        if isinstance(queries, list):
+                            for query in queries:
+                                df.loc[df.query(expr=query).index, attribute] = 1
+
+                        # Query type: all
+                        elif queries.lower() == "all":
+                            df[attribute] = 1
+
+                        # Query type: string
+                        else:
+                            df.loc[df.query(expr=queries).index, attribute] = 1
+
+                    except (NameError, SyntaxError) as e:
+                        logger.exception(f"Unable to execute query for attribute: {attribute}.")
+                        logger.exception(e)
+                        sys.exit(1)
+
+        # Replace original dataset.
+        self.dframes["en"]["roadseg"] = df.copy(deep=True)
 
     def update_distribution_docs(self) -> None:
         """
