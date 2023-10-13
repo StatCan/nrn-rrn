@@ -177,20 +177,6 @@ queries:
     qc: "(roadclass != 'Alleyway / Lane')"
     sk: "(roadclass != 'Alleyway / Lane')"
     yt: "(roadclass != 'Alleyway / Lane')"
-  wms_25k:
-    ab: "(roadclass != 'Alleyway / Lane')"
-    bc: "(roadclass != 'Alleyway / Lane')"
-    mb: "(roadclass != 'Alleyway / Lane')"
-    nb: "(roadclass != 'Alleyway / Lane')"
-    nl: "(roadclass != 'Alleyway / Lane')"
-    ns: "(roadclass != 'Alleyway / Lane')"
-    nt: "(roadclass != 'Alleyway / Lane')"
-    nu: "(roadclass != 'Alleyway / Lane')"
-    "on": "(roadclass != 'Alleyway / Lane')"
-    pe: "(roadclass != 'Alleyway / Lane')"
-    qc: "(roadclass != 'Alleyway / Lane')"
-    sk: "(roadclass != 'Alleyway / Lane')"
-    yt: "(roadclass != 'Alleyway / Lane')"
   wms_10k:
     ab: all
     bc: all

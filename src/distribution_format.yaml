@@ -148,6 +148,11 @@ roadseg:
     structtype: [str, 15]
     trafficdir: [str, 19]
     unpavsurf:  [str, 7]
+    wms_50m:    [int, 1]
+    wms_4m:     [int, 1]
+    wms_500k:   [int, 1]
+    wms_100k:   [int, 1]
+    wms_10k:    [int, 1]
 strplaname:
   spatial: False
   fields:

@@ -1,5 +1,5 @@
 data:
-  dir: NRN_RRN_<source>_WMS
+  dir: NRN_<source>_WMS
   file: NRN_<source>_WMS.gpkg
   driver: GPKG
 conform:
@@ -12,6 +12,9 @@ conform:
     name: NRN_<source>_FERRYSEG
     fields:
       datasetnam: datasetnam
+      rtename1en: rtename1en
+      rtename1fr: rtename1fr
+      rtnumber1: rtnumber1
   roadseg:
     name: NRN_<source>_ROADSEG
     fields:
@@ -19,6 +22,8 @@ conform:
       roadclass:  roadclass
       l_stname_c: l_stname_c
       r_stname_c: r_stname_c
+      l_placenam: l_placenam
+      r_placenam: r_placenam
       rtename1en: rtename1en
       rtename2en: rtename2en
       rtename3en: rtename3en
@@ -36,7 +41,6 @@ conform:
       wms_4m: wms_4m
       wms_500k: wms_500k
       wms_100k: wms_100k
-      wms_25k: wms_25k
       wms_10k: wms_10k
   tollpoint:
     name: NRN_<source>_TOLLPOINT

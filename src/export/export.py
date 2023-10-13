@@ -80,10 +80,11 @@ class Export:
 
         # Configure export formats.
         distribution_formats_path = filepath.parent / "distribution_formats"
-        self.formats = [f.stem for f in (distribution_formats_path / "en").glob("*")]
+        formats_en = [f.stem for f in (distribution_formats_path / "en").glob("*")]
+        formats_fr = [f.stem for f in (distribution_formats_path / "fr").glob("*")]
         self.distribution_formats = {
-            "en": {frmt: helpers.load_yaml(distribution_formats_path / f"en/{frmt}.yaml") for frmt in self.formats},
-            "fr": {frmt: helpers.load_yaml(distribution_formats_path / f"fr/{frmt}.yaml") for frmt in self.formats}
+            "en": {frmt: helpers.load_yaml(distribution_formats_path / f"en/{frmt}.yaml") for frmt in formats_en},
+            "fr": {frmt: helpers.load_yaml(distribution_formats_path / f"fr/{frmt}.yaml") for frmt in formats_fr}
         }
 
         # Define custom progress bar format.
@@ -143,13 +144,13 @@ class Export:
         # Configure export progress bar.
         file_count = 0
         for lang, dfs in self.dframes.items():
-            for frmt in self.formats:
+            for frmt in self.distribution_formats[lang]:
                 file_count += len(set(dfs).intersection(set(self.distribution_formats[lang][frmt]["conform"])))
         export_progress = trange(file_count, desc="Exporting data", bar_format=self.bar_format)
 
         # Iterate export formats and languages.
         for lang, dfs in self.dframes.items():
-            for frmt in self.formats:
+            for frmt in self.distribution_formats[lang]:
 
                 # Retrieve export specifications.
                 export_specs = self.distribution_formats[lang][frmt]
@@ -247,7 +248,7 @@ class Export:
         Generate WMS attributes for roadseg.
         """
 
-        logger.info(f"Generating WMS datasets.")
+        logger.info(f"Generating WMS attributes.")
 
         df = self.dframes["en"]["roadseg"].copy(deep=True)
 
