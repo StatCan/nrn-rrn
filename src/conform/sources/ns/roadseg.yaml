@@ -28,8 +28,8 @@ conform:
     provider: PROVIDER
     revdate: REVDATE
     specvers: 2.0
-    l_adddirfg:
-    r_adddirfg:
+    l_adddirfg: L_ADDDIRFG
+    r_adddirfg: R_ADDDIRFG
     adrangenid: ADRANGENID
     closing: CLOSING
     exitnbr: EXITNBR
