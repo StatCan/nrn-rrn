@@ -29,10 +29,10 @@ ns:
   release_date: 2023-10
   validity_date: 2023-10
 nt:
-  edition: 13.1
+  edition: 14.0
   number_of_kilometers: 7,812
-  release_date: 2022-06
-  validity_date: 2022-04
+  release_date: 2023-10
+  validity_date: 2023-10
 nu:
   edition: 11.0
   number_of_kilometers: 1,026

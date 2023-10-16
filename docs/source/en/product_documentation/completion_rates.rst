@@ -28,35 +28,35 @@ Attribute                           AB    BC    MB    NB    NL    NS    NT    NU
 ================================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====
 Acquisition Technique              100     0     0   100     0     0    99   100   100   100     0    99    50
 Coverage                            99     0     0     0     0     0     0    89     0   100     0    99     0
-Creation Date                      100     0     0    99     0    99    99    89   100   100     0    99     1
+Creation Date                      100     0     0    99     0    99    86    89   100   100     0    99     1
 Dataset Name                       100     0     0   100     0   100   100   100   100   100     0   100   100
-Planimetric Accuracy               100     0     0     0     0   100    99    87   100   100     0    99     1
-Provider                           100     0     0   100     0   100   100   100    85   100     0    99     1
+Planimetric Accuracy               100     0     0     0     0   100    88    87   100   100     0    99     1
+Provider                           100     0     0   100     0   100    99   100    85   100     0    99     1
 Revision Date                      100     0     0    99     0   100     1   100    99   100     0    99    98
 Standard Version                   100     0     0   100     0   100   100   100   100   100     0   100   100
 Alternate Street Name NID Left       0     0     0     0     0     0     0     0     0     0     0     0     0
 Alternate Street Name NID Right      0     0     0     0     0     0     0     0     0     0     0     0     0
-Digitizing Direction Flag Left       0     0     0    99     0   100     5   100     0    53     0     0    26
-Digitizing Direction Flag Right      0     0     0    99     0   100     6   100     0    54     0     0    25
-First House Number Left              0     0     0   100     0   100     5   100    85    53     0     0    26
-First House Number Right             0     0     0   100     0   100     6   100    85    54     0     0    25
-First House Number Suffix Left       0     0     0    99     0     0     1     0     0     0     0     0     1
-First House Number Suffix Right      0     0     0    99     0     0     1     0     0     0     0     0     1
-First House Number Type Left         0     0     0   100     0    73     6     0     0    53     0     0    26
-First House Number Type Right        0     0     0   100     0    73     6     0     0    54     0     0    25
-House Number Structure Left          0     0     0   100     0   100     6     0   100    53     0     0    26
-House Number Structure Right         0     0     0    99     0   100     6     0   100    54     0     0    25
-Last House Number Left               0     0     0   100     0   100     5   100    85    53     0     0    26
-Last House Number Right              0     0     0   100     0   100     6   100    85    54     0     0    25
-Last House Number Suffix Left        0     0     0    99     0     0     1     0     0     0     0     0     1
-Last House Number Suffix Right       0     0     0    99     0     0     1     0     0     0     0     0     1
-Last House Number Type Left          0     0     0   100     0    73     6     0     0    53     0     0    26
-Last House Number Type Right         0     0     0   100     0    73     6     0     0    54     0     0    25
+Digitizing Direction Flag Left       0     0     0    99     0   100     0   100     0    53     0     0    26
+Digitizing Direction Flag Right      0     0     0    99     0   100     0   100     0    54     0     0    25
+First House Number Left              0     0     0   100     0   100     0   100    85    53     0     0    26
+First House Number Right             0     0     0   100     0   100     0   100    85    54     0     0    25
+First House Number Suffix Left       0     0     0    99     0     0     0     0     0     0     0     0     1
+First House Number Suffix Right      0     0     0    99     0     0     0     0     0     0     0     0     1
+First House Number Type Left         0     0     0   100     0    73     0     0     0    53     0     0    26
+First House Number Type Right        0     0     0   100     0    73     0     0     0    54     0     0    25
+House Number Structure Left          0     0     0   100     0   100     0     0   100    53     0     0    26
+House Number Structure Right         0     0     0    99     0   100     0     0   100    54     0     0    25
+Last House Number Left               0     0     0   100     0   100     0   100    85    53     0     0    26
+Last House Number Right              0     0     0   100     0   100     0   100    85    54     0     0    25
+Last House Number Suffix Left        0     0     0    99     0     0     0     0     0     0     0     0     1
+Last House Number Suffix Right       0     0     0    99     0     0     0     0     0     0     0     0     1
+Last House Number Type Left          0     0     0   100     0    73     0     0     0    53     0     0    26
+Last House Number Type Right         0     0     0   100     0    73     0     0     0    54     0     0    25
 NID                                100     0     0   100     0   100   100   100   100   100     0   100   100
 Official Street Name NID Left      100     0     0   100     0   100   100   100   100   100     0   100   100
 Official Street Name NID Right     100     0     0   100     0   100   100   100   100   100     0   100   100
-Reference System Indicator Left      0     0     0   100     0   100   100     0     0     0     0     0     0
-Reference System Indicator Right     0     0     0   100     0   100   100     0     0     0     0     0     0
+Reference System Indicator Left      0     0     0   100     0   100     0     0     0     0     0     0     0
+Reference System Indicator Right     0     0     0   100     0   100     0     0     0     0     0     0     0
 ================================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====
 
 Alternate Name Link (altnamlink)
@@ -146,7 +146,7 @@ Dataset Name            100   100   100   100   100   100   100   100   100   10
 Planimetric Accuracy    100   100   100     0   100   100    86    87   100   100   100    99     1
 Provider                100   100   100   100   100   100   100   100   100   100   100   100   100
 Revision Date             0   100   100     0   100     0     0     0     0     0   100     0     0
-Standard Version          0   100   100   100   100   100     0     0     0   100   100     0     0
+Standard Version          0   100   100   100   100   100   100     0     0   100   100     0     0
 Exit Number               1   100   100     3   100     0     0     0     1     0   100     0     0
 Junction Type           100   100   100   100   100   100   100   100   100   100   100   100   100
 NID                     100   100   100   100   100   100   100   100   100   100   100   100   100
@@ -222,21 +222,21 @@ Acquisition Technique   100     0     0   100     0     0    99   100   100   10
 Coverage                 99     0     0     0     0     0     0    66     0   100     0    99     0
 Creation Date           100     0     0    99     0    99    88    67   100   100     0    99     1
 Dataset Name            100     0     0   100     0   100   100   100   100   100     0   100   100
-Planimetric Accuracy    100     0     0     0     0   100    91    65   100   100     0    99     1
+Planimetric Accuracy    100     0     0     0     0   100    92    65   100   100     0    99     1
 Provider                100     0     0   100     0   100    99   100    93   100     0    99     1
-Revision Date           100     0     0    99     0   100     0   100    99   100     0    99    96
+Revision Date           100     0     0    99     0   100     1   100    99   100     0    99    96
 Standard Version        100     0     0   100     0   100   100   100   100   100     0   100   100
-Directional Prefix        0     0     0   100     0   100     1   100   100     1     0     1   100
-Directional Suffix        0     0     0   100     0   100     2     1   100     1     0     6   100
-Muni Quadrant             0     0     0   100     0   100     1     0     0     0     0     0     0
+Directional Prefix        0     0     0   100     0   100     0   100   100     1     0     1   100
+Directional Suffix        0     0     0   100     0   100     0     1   100     1     0     6   100
+Muni Quadrant             0     0     0   100     0   100     0     0     0     0     0     0     0
 NID                     100     0     0   100     0   100   100   100   100   100     0   100   100
-Place Name              100     0     0    98     0   100    84   100    96    99     0    99   100
-Place Type                0     0     0     1     0     0    77   100     0     0     0     0    73
+Place Name              100     0     0    98     0   100    85   100    96    99     0    99   100
+Place Type                0     0     0     1     0     0     0   100     0     0     0     0    73
 Province                100     0     0    99     0   100   100   100   100   100     0   100   100
-Street Name Article       0     0     0   100     0     0     1   100     0     1     0     1     0
+Street Name Article       0     0     0   100     0     0     0   100     0     1     0     1     0
 Street Name Body         94     0     0   100     0   100    91    93    97    96     0    76    94
-Street Type Prefix        0     0     0   100     0   100     2   100   100     6     0    29   100
-Street Type Suffix        0     0     0   100     0    99    82    73    99    92     0    48   100
+Street Type Prefix        0     0     0   100     0   100     0   100   100     6     0    29   100
+Street Type Suffix        0     0     0   100     0    99     0    73    99    92     0    48   100
 =====================  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====  ====
 
 Toll Point (tollpoint)

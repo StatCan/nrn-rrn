@@ -21,7 +21,7 @@ Colombie-Britannique       BC    14.0     2017-05              2017-03          
 Manitoba                   MB    6.0      2013-04              2012-04           89 003              
 Nouveau-Brunswick          NB    13.0     2023-08              2023-08           35 918              
 Terre-Neuve-et-Labrador    NL    7.0      2013-04              2012-09           23 026              
-Territoires du Nord-Ouest  NT    13.1     2022-06              2022-04           7 812               
+Territoires du Nord-Ouest  NT    14.0     2023-10              2023-10           7 812               
 Nouvelle-Écosse            NS    16.0     2023-10              2023-10           52 091              
 Nunavut                    NU    11.0     2023-08              2023-08           1 026               
 Ontario                    ON    16.0     2023-08              2023-08           257 975             

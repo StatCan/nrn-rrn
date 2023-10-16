@@ -6,7 +6,7 @@ addrange:
     nb: 0
     nl: 0
     ns: 100
-    nt: 99
+    nt: 88
     nu: 87
     'on': 100
     pe: 100
@@ -34,7 +34,7 @@ addrange:
     nb: 99
     nl: 0
     ns: 99
-    nt: 99
+    nt: 86
     nu: 89
     'on': 100
     pe: 100
@@ -76,7 +76,7 @@ addrange:
     nb: 99
     nl: 0
     ns: 100
-    nt: 5
+    nt: 0
     nu: 100
     'on': 0
     pe: 53
@@ -90,7 +90,7 @@ addrange:
     nb: 100
     nl: 0
     ns: 100
-    nt: 5
+    nt: 0
     nu: 100
     'on': 85
     pe: 53
@@ -104,7 +104,7 @@ addrange:
     nb: 100
     nl: 0
     ns: 100
-    nt: 5
+    nt: 0
     nu: 100
     'on': 85
     pe: 53
@@ -118,7 +118,7 @@ addrange:
     nb: 100
     nl: 0
     ns: 100
-    nt: 6
+    nt: 0
     nu: 0
     'on': 100
     pe: 53
@@ -132,7 +132,7 @@ addrange:
     nb: 99
     nl: 0
     ns: 0
-    nt: 1
+    nt: 0
     nu: 0
     'on': 0
     pe: 0
@@ -146,7 +146,7 @@ addrange:
     nb: 99
     nl: 0
     ns: 0
-    nt: 1
+    nt: 0
     nu: 0
     'on': 0
     pe: 0
@@ -160,7 +160,7 @@ addrange:
     nb: 100
     nl: 0
     ns: 73
-    nt: 6
+    nt: 0
     nu: 0
     'on': 0
     pe: 53
@@ -174,7 +174,7 @@ addrange:
     nb: 100
     nl: 0
     ns: 73
-    nt: 6
+    nt: 0
     nu: 0
     'on': 0
     pe: 53
@@ -202,7 +202,7 @@ addrange:
     nb: 100
     nl: 0
     ns: 100
-    nt: 100
+    nt: 0
     nu: 0
     'on': 0
     pe: 0
@@ -244,7 +244,7 @@ addrange:
     nb: 100
     nl: 0
     ns: 100
-    nt: 100
+    nt: 99
     nu: 100
     'on': 85
     pe: 100
@@ -272,7 +272,7 @@ addrange:
     nb: 99
     nl: 0
     ns: 100
-    nt: 6
+    nt: 0
     nu: 100
     'on': 0
     pe: 54
@@ -286,7 +286,7 @@ addrange:
     nb: 100
     nl: 0
     ns: 100
-    nt: 6
+    nt: 0
     nu: 100
     'on': 85
     pe: 54
@@ -300,7 +300,7 @@ addrange:
     nb: 100
     nl: 0
     ns: 100
-    nt: 6
+    nt: 0
     nu: 100
     'on': 85
     pe: 54
@@ -314,7 +314,7 @@ addrange:
     nb: 99
     nl: 0
     ns: 100
-    nt: 6
+    nt: 0
     nu: 0
     'on': 100
     pe: 54
@@ -328,7 +328,7 @@ addrange:
     nb: 99
     nl: 0
     ns: 0
-    nt: 1
+    nt: 0
     nu: 0
     'on': 0
     pe: 0
@@ -342,7 +342,7 @@ addrange:
     nb: 99
     nl: 0
     ns: 0
-    nt: 1
+    nt: 0
     nu: 0
     'on': 0
     pe: 0
@@ -356,7 +356,7 @@ addrange:
     nb: 100
     nl: 0
     ns: 73
-    nt: 6
+    nt: 0
     nu: 0
     'on': 0
     pe: 54
@@ -370,7 +370,7 @@ addrange:
     nb: 100
     nl: 0
     ns: 73
-    nt: 6
+    nt: 0
     nu: 0
     'on': 0
     pe: 54
@@ -398,7 +398,7 @@ addrange:
     nb: 100
     nl: 0
     ns: 100
-    nt: 100
+    nt: 0
     nu: 0
     'on': 0
     pe: 0
@@ -1172,7 +1172,7 @@ junction:
     nb: 100
     nl: 100
     ns: 100
-    nt: 0
+    nt: 100
     nu: 0
     'on': 0
     pe: 100
@@ -1860,7 +1860,7 @@ strplaname:
     nb: 0
     nl: 0
     ns: 100
-    nt: 91
+    nt: 92
     nu: 65
     'on': 100
     pe: 100
@@ -1916,7 +1916,7 @@ strplaname:
     nb: 100
     nl: 0
     ns: 100
-    nt: 1
+    nt: 0
     nu: 100
     'on': 100
     pe: 1
@@ -1930,7 +1930,7 @@ strplaname:
     nb: 100
     nl: 0
     ns: 100
-    nt: 2
+    nt: 0
     nu: 1
     'on': 100
     pe: 1
@@ -1958,7 +1958,7 @@ strplaname:
     nb: 100
     nl: 0
     ns: 100
-    nt: 1
+    nt: 0
     nu: 0
     'on': 0
     pe: 0
@@ -2000,7 +2000,7 @@ strplaname:
     nb: 98
     nl: 0
     ns: 100
-    nt: 84
+    nt: 85
     nu: 100
     'on': 96
     pe: 99
@@ -2014,7 +2014,7 @@ strplaname:
     nb: 1
     nl: 0
     ns: 0
-    nt: 77
+    nt: 0
     nu: 100
     'on': 0
     pe: 0
@@ -2056,7 +2056,7 @@ strplaname:
     nb: 99
     nl: 0
     ns: 100
-    nt: 0
+    nt: 1
     nu: 100
     'on': 99
     pe: 100
@@ -2084,7 +2084,7 @@ strplaname:
     nb: 100
     nl: 0
     ns: 0
-    nt: 1
+    nt: 0
     nu: 100
     'on': 0
     pe: 1
@@ -2098,7 +2098,7 @@ strplaname:
     nb: 100
     nl: 0
     ns: 100
-    nt: 2
+    nt: 0
     nu: 100
     'on': 100
     pe: 6
@@ -2112,7 +2112,7 @@ strplaname:
     nb: 100
     nl: 0
     ns: 99
-    nt: 82
+    nt: 0
     nu: 73
     'on': 99
     pe: 92

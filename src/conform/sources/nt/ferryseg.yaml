@@ -14,7 +14,7 @@ license:
   text:
 language: en
 data:
-  filename: 2022/nt_nrn.gpkg
+  filename: 2023/nt_nrn.gpkg
   layer: ferryseg
   driver: GPKG
   crs: "EPSG:4617"
@@ -25,7 +25,7 @@ conform:
     acqtech: acqtech
     metacover: metacover
     credate: credate
-    datasetnam: datasetnam
+    datasetnam: Northwest Territories
     accuracy: accuracy
     provider: provider
     revdate: revdate
