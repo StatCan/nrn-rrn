@@ -1171,7 +1171,7 @@ junction:
     mb: 100
     nb: 100
     nl: 100
-    ns: 0
+    ns: 100
     nt: 0
     nu: 0
     'on': 0

@@ -12,7 +12,7 @@ license:
   text: Open Government License - Nova Scotia
 language: en
 data:
-  filename: NRN_Output.gpkg
+  filename: 2023/NRN_Output.gpkg
   layer: NRN_BLKPASSAGE
   driver: GPKG
   crs: "EPSG:2961"
