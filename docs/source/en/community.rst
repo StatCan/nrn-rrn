@@ -11,10 +11,8 @@ Community
    :hidden:
 
    community/project_community
-   community/contributing
    community/dependencies
 
 .. container:: button
 
-    :doc:`community/project_community` :doc:`community/contributing`
-    :doc:`community/dependencies`
+    :doc:`community/project_community` :doc:`community/dependencies`

@@ -19,6 +19,11 @@ Le pipeline NRN est séparé en 4 processus distincts destinés à être exécut
    ensembles de données RRN.
 4. ``export``: Configuration et exportation des formats de distribution de produits requis.
 
+.. figure:: /source/_static/figures/nrn_process_diagram.png
+    :alt: Diagramme de processus du RRN
+
+    Figure 1 : Diagramme de processus du RRN.
+
 Mise en œuvre
 =============
 

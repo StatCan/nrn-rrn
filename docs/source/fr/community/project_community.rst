@@ -5,21 +5,10 @@ Communauté du projet
 .. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
-Équipe
-======
+Section et organisme
+====================
 
-| **Jesse Stewart** | Développeur principal et chef de projet | jesse.stewart@statcan.gc.ca
-| **Jeff Johnson** | Data Integration and Processing | jeff.johnson@statcan.gc.ca
-
-Contributeurs
-=============
-
-Les avatars GitHub suivants représentent les contributeurs RRN, classés par nombre de contributions, cliquez pour
-obtenir des informations détaillées sur les contributions.
-
-.. image:: https://contrib.rocks/image?repo=StatCan/nrn-rrn
-   :target: https://github.com/StatCan/nrn-rrn/graphs/contributors
-   :alt: Contributeurs au dépôt GitHub.
+Centre de géomatique statistique (CGS) | Statistique Canada | geohelp@statcan.gc.ca
 
 Affiliations de projet
 ======================

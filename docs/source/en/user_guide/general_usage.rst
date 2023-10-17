@@ -18,6 +18,11 @@ The NRN pipeline is separated into 4 distinct processes which are intended to be
 3. ``validate``: Enforcement of a set of validations and restrictions on NRN dataset geometry and attribution.
 4. ``export``: Configuration and export of required product distribution formats.
 
+.. figure:: /source/_static/figures/nrn_process_diagram.png
+    :alt: NRN process diagram
+
+    Figure 1: NRN process diagram.
+
 Implementation
 ==============
 

@@ -5,21 +5,10 @@ Project Community
 .. include:: <isonum.txt>
 .. include:: <isopub.txt>
 
-Team
-====
+Section and Department
+======================
 
-| **Jesse Stewart** | Lead Developer and Project Manager | jesse.stewart@statcan.gc.ca
-| **Jeff Johnson** | Data Integration and Processing | jeff.johnson@statcan.gc.ca
-
-Contributors
-============
-
-The following GitHub avatars represent the NRN contributors, ordered by contribution count, click for detailed
-contribution insights.
-
-.. image:: https://contrib.rocks/image?repo=StatCan/nrn-rrn
-   :target: https://github.com/StatCan/nrn-rrn/graphs/contributors
-   :alt: GitHub repository contributors.
+Statistical Geomatics Centre (SGC) | Statistics Canada | geohelp@statcan.gc.ca
 
 Project Affiliations
 ====================

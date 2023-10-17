@@ -12,7 +12,7 @@ Overview
 ========
 
 The ``validate`` process enforces a set of validations and restrictions on NRN dataset geometry and attribution. The
-intention of the ``validate`` process is to flag actual and potential data error before continuing with the remainder
+intention of the ``validate`` process is to flag actual and potential data errors before continuing with the remainder
 of the NRN pipeline.
 
 The only output of ``validate`` is a log (.log) file which will be exported to:
