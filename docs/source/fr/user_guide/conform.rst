@@ -625,20 +625,8 @@ clé supplémentaire ``segment`` est incluse dans la clé ``data`` et a la struc
     segment:
       address_fields:
         street:
-          field:
-          regex_sub:
-            pattern:
-            repl:
         number:
-          field:
-          regex_sub:
-            pattern:
-            repl:
         suffix:
-          field:
-          regex_sub:
-            pattern:
-            repl:
       address_join_field:
         fields:
         separator:
@@ -653,8 +641,12 @@ Cette structure de données contient 3 clés obligatoires :
                      (suffixe du numéro d'adresse) sont acceptés. Les valeurs acceptables sont :
 
                      | a) Un nom d'attribut ou,
-                     | b) Un dictionnaire ``regex_sub`` composé des clés ``pattern`` et ``repl`` qui sera passé à
-                          :func:`re.sub`.
+                     | b) Un dictionnaire ``regex_sub`` composé des clés ``field``, ``pattern``, et ``repl`` qui sera
+                          passé à :func:`re.sub`.
+                     | c) Un dictionnaire ``concatenate`` composé de clés définissant la concaténation des attributs :
+
+                         | ``fields``: Une liste d'attributs.
+                         | ``separator``: Un délimiteur utilisé pour concaténer les attributs.
 
 :``address_join_field``: Attribut de la source d'adresse utilisée pour joindre l'ensemble de données RRN ``roadseg``.
                          Les valeurs acceptables sont :

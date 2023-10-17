@@ -55,9 +55,20 @@ class Segmentor:
 
                 # Apply regex substitution to field.
                 if isinstance(data, dict):
-                    field, regex_sub = itemgetter("field", "regex_sub")(data)
-                    self.addresses[attribute] = addresses[field].map(
-                        lambda val: re.sub(**regex_sub, string=val, flags=re.I)).copy(deep=True)
+                    if "regex_sub" in data:
+                        field, regex_sub = itemgetter("field", "regex_sub")(data)
+                        self.addresses[attribute] = addresses[field].map(
+                            lambda val: re.sub(**regex_sub, string=val, flags=re.I)).copy(deep=True)
+
+                    elif "concatenate" in data:
+                        fields, separator = itemgetter("fields", "separator")(data)
+                        self.addresses[attribute] = addresses[fields].apply(
+                            lambda row: separator.join([str(val) for val in row if val]), axis=1).copy(deep=True)
+
+                    else:
+                        logger.exception(f"Invalid definition for address field: {attribute}. Expected one of "
+                                         f"\"regex_sub\" or \"concatenate\" to be present.")
+                        sys.exit(1)
 
                 else:
                     self.addresses[attribute] = addresses[data].copy(deep=True)

@@ -12,26 +12,23 @@ license:
   text:
 language: en
 data:
-  filename: 2021/yt.gpkg
+  filename: 2023/yt.gpkg
   layer: addresses
   driver: GPKG
-  crs: "EPSG:4617"
+  crs: "EPSG:3578"
   spatial: True
   query:
   segment:
     address_fields:
-      street: street
-      number:
-        field: number
-        regex_sub:
-          pattern: "[^\\d]"
-          repl: ""
-      suffix:
-        field: number
-        regex_sub:
-          pattern: "\\d+"
-          repl: ""
-    address_join_field: street
+      street:
+        concatenate:
+          fields: [ST_NAME, ST_POSTYPE, ST_POSDIR]
+          separator: " "
+      number: ADD_NUMBER
+      suffix: UNIT
+    address_join_field:
+      fields: [ST_NAME, ST_POSTYPE, ST_POSDIR]
+      separator: " "
     roadseg_join_field:
-      fields: [dirprefix, strtypre, namebody, strtysuf, dirsuffix]
+      fields: [namebody, strtysuf, dirsuffix]
       separator: " "

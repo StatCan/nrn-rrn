@@ -610,20 +610,8 @@ within the ``data`` key and has the following raw structure:
     segment:
       address_fields:
         street:
-          field:
-          regex_sub:
-            pattern:
-            repl:
         number:
-          field:
-          regex_sub:
-            pattern:
-            repl:
         suffix:
-          field:
-          regex_sub:
-            pattern:
-            repl:
       address_join_field:
         fields:
         separator:
@@ -638,8 +626,12 @@ This data structure contains 3 mandatory keys:
                      number suffix) are accepted. Acceptable values are:
 
                      | a) an attribute name or,
-                     | b) a ``regex_sub`` dictionary consisting of keys ``pattern`` and ``repl`` which will be passed
-                          to :func:`re.sub`.
+                     | b) a ``regex_sub`` dictionary consisting of keys ``field``, ``pattern``, and ``repl`` which will
+                          be passed to :func:`re.sub`.
+                     | c) a ``concatenate`` dictionary consisting of keys defining the concatenation of attributes:
+
+                          | ``fields``: A list of attributes.
+                          | ``separator``: A delimiter used to concatenate the attributes.
 
 :``address_join_field``: Attribute of the address source used to join with NRN dataset ``roadseg``. Acceptable values
                          are:
