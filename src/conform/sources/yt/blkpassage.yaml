@@ -1,0 +1,33 @@
+coverage:
+  country: ca
+  province: yt
+  ISO3166:
+    alpha2: CA-YT
+    country: Canada
+    subdivision: Yukon
+  website: Provided directly from data contact.
+  update_frequency: continuous
+license:
+  url:
+  text:
+language: en
+data:
+  filename: 2023/yt.gdb
+  layer: nrn_blkpassage
+  driver: OpenFileGDB
+  crs: "EPSG:4617"
+  spatial: True
+  query:
+conform:
+  blkpassage:
+    acqtech: acqtech
+    metacover: metacover
+    credate: credate
+    datasetnam: Yukon
+    accuracy: accuracy
+    provider: provider
+    revdate: revdate
+    specvers: 2.0
+    blkpassty: blkpassty
+    nid:
+    roadnid:

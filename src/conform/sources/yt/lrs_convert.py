@@ -42,12 +42,15 @@ class LRS:
         self.base_dataset = "tdylrs_centerline_sequence"
         self.geometry_dataset = "tdylrs_centerline"
         self.event_measurement_fields = {"from": "fromkm", "to": "tokm"}
+
+        # Note: listed ids are only for those routes which begin outside of Yukon.
         self.calibrations = {
             "dataset": "tdylrs_calibration_point",
             "id_field": "routeid",
             "measurement_field": "measure",
             "ids": ["004097", "004307", "004349"]
         }
+
         self.point_datasets = {}
         self.point_event_measurement_field = None
 
