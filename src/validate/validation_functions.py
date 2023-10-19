@@ -208,7 +208,7 @@ class Validator:
             pts = df["pts_tuple"].explode()
             pts_df = pd.DataFrame({"pt": pts.values, self.id: pts.index})
             self.pts_id_lookup[dataset] = deepcopy(pts_df[["pt", self.id]]
-                                                   .groupby(by="pt", axis=0, as_index=True)[self.id].agg(set).to_dict())
+                                                   .groupby(by="pt", as_index=True)[self.id].agg(set).to_dict())
             self.idx_id_lookup[dataset] = deepcopy(dict(zip(range(len(df)), df.index)))
 
             # Store updated dataframe.
@@ -307,7 +307,7 @@ class Validator:
 
             # Aggregate deadends to their source features.
             # Note: source features will exist twice if both nodes are deadends; these results will be aggregated.
-            deadends_agg = deadends[[self.id, "intersects"]].groupby(by=self.id, axis=0, as_index=True)["intersects"]\
+            deadends_agg = deadends[[self.id, "intersects"]].groupby(by=self.id, as_index=True)["intersects"]\
                 .agg(tuple).map(chain.from_iterable).map(set).to_dict()
             deadends["intersects"] = deadends[self.id].map(deadends_agg)
             deadends.drop_duplicates(subset=self.id, inplace=True)
@@ -667,7 +667,7 @@ class Validator:
         if len(df):
 
             # Group exitnbrs by nid, removing duplicates.
-            nid_exitnbrs = df[["nid", "exitnbr"]].groupby(by="nid", axis=0, as_index=True)["exitnbr"].agg(set)
+            nid_exitnbrs = df[["nid", "exitnbr"]].groupby(by="nid", as_index=True)["exitnbr"].agg(set)
 
             # Compile nids with multiple exitnbrs.
             invalid_nids = set(nid_exitnbrs.loc[nid_exitnbrs.map(len) > 1].index)

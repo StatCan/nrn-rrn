@@ -263,9 +263,9 @@ class Segmentor:
         # Create dataframes from grouped addresses.
         cols = ("number", "suffix", "distance")
         addresses_l = pd.DataFrame({col: addresses_l[["roadseg_index", col]]
-                                   .groupby(by="roadseg_index", axis=0, as_index=True)[col].agg(tuple) for col in cols})
+                                   .groupby(by="roadseg_index", as_index=True)[col].agg(tuple) for col in cols})
         addresses_r = pd.DataFrame({col: addresses_r[["roadseg_index", col]]
-                                   .groupby(by="roadseg_index", axis=0, as_index=True)[col].agg(tuple) for col in cols})
+                                   .groupby(by="roadseg_index", as_index=True)[col].agg(tuple) for col in cols})
 
         # Sort addresses.
         addresses_l = addresses_l.apply(lambda row: sort_addresses(*row), axis=1)
@@ -453,7 +453,7 @@ class Segmentor:
 
         merge = self.addresses.merge(self.roadseg[["roadseg_index", "join"]], how="left", on="join")
         self.addresses["roadseg_index"] = merge[["addresses_index", "roadseg_index"]]\
-            .groupby(by="addresses_index", axis=0, as_index=True)["roadseg_index"].agg(tuple)
+            .groupby(by="addresses_index", as_index=True)["roadseg_index"].agg(tuple)
 
         self.addresses.drop(columns=["addresses_index"], inplace=True)
         self.roadseg.drop(columns=["roadseg_index"], inplace=True)

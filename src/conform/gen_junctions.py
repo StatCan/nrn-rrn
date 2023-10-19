@@ -158,7 +158,7 @@ class Junction:
         # Compile all roadseg nodes and group uuids by geometry.
         nodes = self.roadseg["geometry"].map(lambda g: itemgetter(0, -1)(attrgetter("coords")(g))).explode()
         nodes_grouped = pd.DataFrame({"uuid": nodes.index, "pt": nodes.values})\
-            .groupby(by="pt", axis=0, as_index=True)["uuid"].agg(tuple)
+            .groupby(by="pt", as_index=True)["uuid"].agg(tuple)
         nodes_uuids_lookup = dict(zip(nodes_grouped.index, nodes_grouped.values))
 
         # Compile all ferryseg nodes and group uuids by geometry.
@@ -166,7 +166,7 @@ class Junction:
         if isinstance(self.ferryseg, gpd.GeoDataFrame):
             ferry_nodes = self.ferryseg["geometry"].map(lambda g: itemgetter(0, -1)(attrgetter("coords")(g))).explode()
             ferry_nodes_grouped = pd.DataFrame({"uuid": ferry_nodes.index, "pt": ferry_nodes.values})\
-                .groupby(by="pt", axis=0, as_index=True)["uuid"].agg(tuple)
+                .groupby(by="pt", as_index=True)["uuid"].agg(tuple)
             ferry_nodes_uuids_lookup = dict(zip(ferry_nodes_grouped.index, ferry_nodes_grouped.values))
 
             # Update nodes-uuid lookup.

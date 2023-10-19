@@ -469,7 +469,7 @@ class LRS:
         con_id_field = self.calibrations["id_field"]
         flag = base[con_id_field].duplicated(keep=False)
         geom_links = dict(base.loc[flag][[con_id_field, "geometry"]]
-                          .groupby(by=con_id_field, axis=0, as_index=True)["geometry"].agg(tuple)
+                          .groupby(by=con_id_field, as_index=True)["geometry"].agg(tuple)
                           .map(linemerge))
         base = base.loc[~base[con_id_field].duplicated(keep="first")]
         base.loc[flag, "geometry"] = base.loc[flag, con_id_field].map(geom_links)
@@ -494,7 +494,7 @@ class LRS:
 
                 # Compile breakpoints as flattened list.
                 df["breakpts"] = df[["from", "to"]].apply(list, axis=1)
-                breakpts = df[[con_id_field, "breakpts"]].groupby(by=con_id_field, axis=0, as_index=True)["breakpts"]\
+                breakpts = df[[con_id_field, "breakpts"]].groupby(by=con_id_field, as_index=True)["breakpts"]\
                     .agg(tuple).map(chain.from_iterable).map(tuple)
 
                 # Merge breakpoints with base dataset.
@@ -657,7 +657,7 @@ class LRS:
 
                     # For any gaps (tolerance = 1 unit), reduce the 'from' measurement to the appropriate neighbouring
                     # 'to' measurement.
-                    for index, from_value in records.loc[records["from"] != from_min, "from"].iteritems():
+                    for index, from_value in records.loc[records["from"] != from_min, "from"].items():
                         neighbour = records.loc[(records.index != index) & ((from_value - records["to"]).between(0, 1))]
                         if len(neighbour):
 
