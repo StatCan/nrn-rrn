@@ -1,6 +1,6 @@
 import click
-import fiona
 import geopandas as gpd
+import fiona # DLL error (related to fiona/gdal/geopandas compatibility) requires either gdal or geopandas import first.
 import logging
 import pandas as pd
 import sys
@@ -8,7 +8,7 @@ from collections import Counter
 from itertools import accumulate, chain
 from operator import attrgetter, itemgetter
 from pathlib import Path
-from shapely.geometry import LineString, MultiLineString, Point
+from shapely import LineString, MultiLineString, Point
 from shapely.ops import linemerge
 from typing import List, Union
 
@@ -320,7 +320,7 @@ class LRS:
 
             # Compile cumulative geometry lengths as endpoints.
             endpts = [0, geom.length] if isinstance(geom, LineString) else \
-                list(accumulate([0, *[g.length for g in geom]]))
+                list(accumulate([0, *[g.length for g in geom.geoms]]))
 
             # Remove breakpoints which are <= 1 unit from an endpoint or outside of the geometry length range (zero to
             # max length). Endpoints include the start and end of every individual LineString in the geometry.
@@ -400,7 +400,7 @@ class LRS:
                 geoms = list()
 
                 # Compile cumulative LineString lengths as endpoint ranges.
-                endpts = list(accumulate([0, *[g.length for g in geom]]))
+                endpts = list(accumulate([0, *[g.length for g in geom.geoms]]))
                 endpts_rng = [pd.Interval(endpts[i], endpts[i+1]) for i in range(len(endpts)-1)]
 
                 # Iterate breakpoint pairs and extract the corresponding LineString from the MultiLineString.
@@ -411,12 +411,12 @@ class LRS:
                         if pd.Interval(*breakpts_).overlaps(endpt_rng):
                             geom_idx = idx
                             break
-                    geom_ = geom[geom_idx]
+                    geom_ = geom.geoms[geom_idx]
 
                     # Subtract from the breakpoints the distance of the LineString start relative to the full
                     # MultiLineString.
                     if geom_idx > 0:
-                        sub = sum(g.length for g in geom[:geom_idx])
+                        sub = sum(g.length for g in geom.geoms[:geom_idx].geoms)
                         breakpts_ = [breakpt - sub for breakpt in breakpts]
 
                     # Call this function with the new parameters, append results to geometry list.
@@ -439,17 +439,17 @@ class LRS:
 
             # Get LineString index order by intersecting calibration points with LineStrings.
             index_order = list(dict.fromkeys(chain.from_iterable(calibration_pts["geometry"].map(
-                lambda pt: [index for index, line in enumerate(geom) if pt.intersects(line)]).to_list())))
+                lambda pt: [index for index, line in enumerate(geom.geoms) if pt.intersects(line)]).to_list())))
 
             # Add missing indexes.
             # Note: indexes will not be missing with topologically correct geometries, however, these errors have been
             # identified in the data and it is preferred to accommodate them here and flag them collectively in the
             # actual NRN pipeline.
-            missing = set(range(len(geom))) - set(index_order)
+            missing = set(range(len(geom.geoms))) - set(index_order)
             index_order.extend(missing)
 
             # Create MultiLineString from LineString index ordering.
-            return MultiLineString(itemgetter(*index_order)(geom))
+            return MultiLineString(itemgetter(*index_order)(geom.geoms))
 
         logger.info("Assembling segmented network.")
 

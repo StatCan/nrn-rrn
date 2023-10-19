@@ -8,7 +8,7 @@ import uuid
 from itertools import compress
 from operator import attrgetter, itemgetter
 from pathlib import Path
-from shapely.geometry import LineString, MultiLineString
+from shapely import LineString, MultiLineString
 from shapely.ops import linemerge
 from typing import Tuple
 

@@ -1,6 +1,6 @@
 import click
-import fiona
 import geopandas as gpd
+import fiona # DLL error (related to fiona/gdal/geopandas compatibility) requires either gdal or geopandas import first.
 import logging
 import math
 import numpy as np
@@ -16,7 +16,7 @@ from datetime import datetime
 from itertools import groupby
 from operator import attrgetter, itemgetter
 from pathlib import Path
-from shapely.geometry import LineString
+from shapely import LineString
 from tabulate import tabulate
 from tqdm import tqdm
 from tqdm.auto import trange
@@ -848,7 +848,7 @@ class Conform:
                 with open(self.src_old["zip"], "wb") as f:
                     shutil.copyfileobj(download.raw, f)
 
-            except (shutil.Error) as e:
+            except shutil.Error as e:
                 logger.exception(f"Unable to download previous NRN vintage: \"{download_url}\".")
                 logger.exception(e)
                 sys.exit(1)

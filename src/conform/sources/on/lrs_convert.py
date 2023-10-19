@@ -1,6 +1,6 @@
 import click
-import fiona
 import geopandas as gpd
+import fiona # DLL error (related to fiona/gdal/geopandas compatibility) requires either gdal or geopandas import first.
 import logging
 import pandas as pd
 import sys
@@ -8,7 +8,7 @@ from collections import Counter
 from itertools import accumulate, chain
 from operator import attrgetter, itemgetter
 from pathlib import Path
-from shapely.geometry import LineString, MultiLineString, Point
+from shapely import LineString, MultiLineString, Point
 from typing import List, Union
 
 filepath = Path(__file__).resolve()

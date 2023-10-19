@@ -7,7 +7,7 @@ from datetime import datetime
 from itertools import chain
 from operator import attrgetter, itemgetter
 from pathlib import Path
-from shapely.geometry import Point
+from shapely import Point
 from typing import Union
 
 filepath = Path(__file__).resolve()

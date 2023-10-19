@@ -3,23 +3,16 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - click=7.1.2
-  - fiona=1.8.18
-  - gdal=3.1.4
-  - geoalchemy2=0.6.3
-  - geopandas=0.10.2
-  - jinja2=2.11.3
-  - matplotlib=3.4.2
-  - numpy=1.19.5
-  - pandas=1.1.5
-  - psycopg2=2.9.1
-  - pydata-sphinx-theme=0.7.2
-  - pygeos=0.10
-  - python=3.9
-  - pyyaml=5.4.1
-  - requests=2.25.1
-  - shapely=1.8.0
-  - sphinx=4.0.0
-  - sqlalchemy=1.4.21
-  - tabulate=0.8.9
-  - tqdm=4.58.0
+  - click=8.1.7
+  - fiona=1.9.5
+  - gdal=3.7.2
+  - geopandas=0.14.0
+  - jinja2=3.1.2
+  - numpy=1.26.0
+  - pandas=2.1.1
+  - python=3.11.6
+  - pyyaml=6.0.1
+  - requests=2.31.0
+  - shapely=2.0.2
+  - tabulate=0.9.0
+  - tqdm=4.66.1

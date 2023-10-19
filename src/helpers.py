@@ -1,7 +1,6 @@
 import datetime
-import fiona
 import geopandas as gpd
-import jinja2
+import fiona # DLL error (related to fiona/gdal/geopandas compatibility) requires either gdal or geopandas import first.
 import logging
 import numpy as np
 import pandas as pd
@@ -16,9 +15,7 @@ from itertools import groupby
 from operator import attrgetter, itemgetter
 from osgeo import ogr, osr
 from pathlib import Path
-from shapely.geometry import LineString, Point
-from sqlalchemy import create_engine, exc as sqlalchemy_exc
-from sqlalchemy.engine.base import Engine
+from shapely import LineString, Point
 from tqdm import tqdm
 from tqdm.auto import trange
 from typing import Any, Dict, List, Type, Union
@@ -270,25 +267,6 @@ def compile_dtypes(length: bool = False) -> dict:
     return dtypes
 
 
-def create_db_engine(url: str) -> Engine:
-    """
-    :param str url: NRN database connection URL.
-    :return sqlalchemy.engine.base.Engine: SQLAlchemy database engine.
-    """
-
-    logger.info(f"Creating NRN database engine.")
-
-    # Create database engine.
-    try:
-        engine = create_engine(url)
-    except sqlalchemy_exc.SQLAlchemyError as e:
-        logger.exception(f"Unable to create engine for NRN database.")
-        logger.exception(e)
-        sys.exit(1)
-
-    return engine
-
-
 def explode_geometry(gdf: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
     """
     Explodes MultiLineStrings and MultiPoints to LineStrings and Points, respectively.
@@ -307,7 +285,7 @@ def explode_geometry(gdf: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
         single = gdf.loc[~gdf.index.isin(multi.index)]
 
         # Explode multi-type geometries.
-        multi_exploded = multi.explode().reset_index(drop=True)
+        multi_exploded = multi.explode(ignore_index=True, index_parts=False)
 
         # Merge all records.
         merged = gpd.GeoDataFrame(pd.concat([single, multi_exploded], ignore_index=True), crs=gdf.crs)
@@ -459,205 +437,7 @@ def export(dfs: Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]], dst: Path, dri
         sys.exit(1)
 
 
-def extract_nrn(url: str, source_code: int) -> Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]]:
-    """
-    Extracts NRN database records for the source into (Geo)DataFrames.
-
-    :param str url: NRN database connection URL.
-    :param int source_code: code for the source province / territory.
-    :return Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]]: dictionary of NRN dataset names and (Geo)DataFrames.
-    """
-
-    logger.info(f"Extracting NRN datasets for source code: {source_code}.")
-
-    # Connect to database.
-    con = create_db_engine(url)
-
-    # Compile field defaults, domains, and dtypes.
-    defaults = compile_default_values(lang="en")
-    domains = compile_domains(mapped_lang="en")
-    dtypes = compile_dtypes()
-
-    # Load and execute database queries for NRN datasets.
-    dfs = dict()
-    for sql_file in (filepath.parent / "sql/extract").glob("*.sql"):
-        logger.info(f"Extracting NRN dataset: {sql_file.stem}.")
-
-        try:
-
-            # Resolve layer name.
-            layer = sql_file.stem
-
-            # Load document as jinja template.
-            with open(sql_file, "r") as doc:
-                template = jinja2.Template(doc.read())
-
-            # Update template.
-            query = template.render(
-                source_code=source_code,
-                metacover=f"'{defaults[layer]['metacover']}'" if
-                isinstance(defaults[layer]["metacover"], str) else defaults[layer]["metacover"],
-                specvers=2.0,
-                muniquad=f"'{defaults['strplaname']['muniquad']}'" if
-                isinstance(defaults['strplaname']["muniquad"], str) else defaults['strplaname']["muniquad"]
-            )
-
-            # Execute query.
-            df = gpd.read_postgis(query, con, geom_col="geometry")
-
-            # Store non-empty dataset.
-            if len(df):
-                dfs[layer] = df.copy(deep=True)
-
-        except (jinja2.TemplateError, jinja2.TemplateAssertionError, jinja2.UndefinedError) as e:
-            logger.exception(f"Unable to load SQL from: {sql_file}.")
-            logger.exception(e)
-
-    # Separate individual datasets from extracted data.
-    logger.info("Separating individual datasets from extracted data.")
-    nrn = dict()
-
-    # Separate dataset: addrange.
-    logger.info("Separating dataset: addrange.")
-
-    # Separate records.
-    addrange = dfs["roadseg"].loc[dfs["roadseg"]["segment_type"] == 1, [
-        "addrange_acqtech", "metacover", "addrange_credate", "datasetnam", "accuracy", "addrange_provider",
-        "addrange_revdate", "specvers", "l_altnanid", "r_altnanid", "addrange_l_digdirfg", "addrange_r_digdirfg",
-        "addrange_l_hnumf", "addrange_r_hnumf", "addrange_l_hnumsuff", "addrange_r_hnumsuff", "addrange_l_hnumtypf",
-        "addrange_r_hnumtypf", "addrange_l_hnumstr", "addrange_r_hnumstr", "addrange_l_hnuml", "addrange_r_hnuml",
-        "addrange_l_hnumsufl", "addrange_r_hnumsufl", "addrange_l_hnumtypl", "addrange_r_hnumtypl", "addrange_nid",
-        "segment_id_left", "segment_id_right", "addrange_l_rfsysind", "addrange_r_rfsysind"]
-    ].rename(columns={
-        "addrange_acqtech": "acqtech", "addrange_credate": "credate", "addrange_provider": "provider",
-        "addrange_revdate": "revdate", "addrange_l_digdirfg": "l_digdirfg", "addrange_r_digdirfg": "r_digdirfg",
-        "addrange_l_hnumf": "l_hnumf", "addrange_r_hnumf": "r_hnumf", "addrange_l_hnumsuff": "l_hnumsuff",
-        "addrange_r_hnumsuff": "r_hnumsuff", "addrange_l_hnumtypf": "l_hnumtypf", "addrange_r_hnumtypf": "r_hnumtypf",
-        "addrange_l_hnumstr": "l_hnumstr", "addrange_r_hnumstr": "r_hnumstr", "addrange_l_hnuml": "l_hnuml",
-        "addrange_r_hnuml": "r_hnuml", "addrange_l_hnumsufl": "l_hnumsufl", "addrange_r_hnumsufl": "r_hnumsufl",
-        "addrange_l_hnumtypl": "l_hnumtypl", "addrange_r_hnumtypl": "r_hnumtypl", "addrange_nid": "nid",
-        "segment_id_left": "l_offnanid", "segment_id_right": "r_offnanid", "addrange_l_rfsysind": "l_rfsysind",
-        "addrange_r_rfsysind": "r_rfsysind"}
-    ).copy(deep=True)
-    addrange.reset_index(drop=True, inplace=True)
-
-    # Store dataset.
-    nrn["addrange"] = pd.DataFrame(addrange).copy(deep=True)
-
-    # Separate dataset: junction.
-    logger.info(f"Separating dataset: junction.")
-
-    # Separate records.
-    junction = dfs["junction"][[
-        "acqtech", "metacover", "credate", "datasetnam", "accuracy", "provider", "revdate", "specvers", "exitnbr",
-        "junctype", "nid", "geometry"]].copy(deep=True)
-    junction.reset_index(drop=True, inplace=True)
-
-    # Store dataset.
-    nrn["junction"] = junction.copy(deep=True)
-
-    # Separate dataset: ferryseg.
-    if 2 in set(dfs["roadseg"]["segment_type"]):
-        logger.info("Separating dataset: ferryseg.")
-
-        # Separate records.
-        ferryseg = dfs["roadseg"].loc[dfs["roadseg"]["segment_type"] == 2, [
-            "acqtech", "metacover", "credate", "datasetnam", "accuracy", "provider", "revdate", "specvers", "closing",
-            "ferrysegid", "roadclass", "nid", "rtename1en", "rtename2en", "rtename3en", "rtename4en", "rtename1fr",
-            "rtename2fr", "rtename3fr", "rtename4fr", "rtnumber1", "rtnumber2", "rtnumber3", "rtnumber4", "rtnumber5",
-            "geometry"]].copy(deep=True)
-        ferryseg.reset_index(drop=True, inplace=True)
-
-        # Store dataset.
-        nrn["ferryseg"] = ferryseg.copy(deep=True)
-
-    # Separate dataset: roadseg.
-    logger.info("Separating dataset: roadseg.")
-
-    # Separate records.
-    roadseg = dfs["roadseg"].loc[dfs["roadseg"]["segment_type"] == 1, [
-        "acqtech", "metacover", "credate", "datasetnam", "accuracy", "provider", "revdate", "specvers",
-        "addrange_l_digdirfg", "addrange_r_digdirfg", "addrange_nid", "closing", "exitnbr", "addrange_l_hnumf",
-        "addrange_r_hnumf", "roadclass", "addrange_l_hnuml", "addrange_r_hnuml", "nid", "nbrlanes",
-        "strplaname_l_placename", "strplaname_r_placename", "l_stname_c", "r_stname_c", "pavsurf", "pavstatus",
-        "roadjuris", "roadsegid", "rtename1en", "rtename2en", "rtename3en", "rtename4en", "rtename1fr", "rtename2fr",
-        "rtename3fr", "rtename4fr", "rtnumber1", "rtnumber2", "rtnumber3", "rtnumber4", "rtnumber5", "speed",
-        "strunameen", "strunamefr", "structid", "structtype", "trafficdir", "unpavsurf", "geometry"]
-    ].rename(columns={
-        "addrange_l_digdirfg": "l_adddirfg", "addrange_r_digdirfg": "r_adddirfg", "addrange_nid": "adrangenid",
-        "addrange_l_hnumf": "l_hnumf", "addrange_r_hnumf": "r_hnumf", "addrange_l_hnuml": "l_hnuml",
-        "addrange_r_hnuml": "r_hnuml", "strplaname_l_placename": "l_placenam", "strplaname_r_placename": "r_placenam"}
-    ).copy(deep=True)
-    roadseg.reset_index(drop=True, inplace=True)
-
-    # Store dataset.
-    nrn["roadseg"] = roadseg.copy(deep=True)
-
-    # Separate dataset: strplaname.
-    logger.info("Separating dataset: strplaname.")
-
-    # Separate records.
-    strplaname = pd.DataFrame().append([
-        dfs["roadseg"].loc[dfs["roadseg"]["segment_type"] == 1, [
-            "strplaname_l_acqtech", "metacover", "strplaname_l_credate", "datasetnam", "accuracy",
-            "strplaname_l_provider", "strplaname_l_revdate", "specvers", "strplaname_l_dirprefix",
-            "strplaname_l_dirsuffix", "muniquad", "segment_id_left", "strplaname_l_placename",
-            "strplaname_l_placetype", "strplaname_l_province", "strplaname_l_starticle", "strplaname_l_namebody",
-            "strplaname_l_strtypre", "strplaname_l_strtysuf"]
-        ].rename(columns={
-            "strplaname_l_acqtech": "acqtech", "strplaname_l_credate": "credate", "strplaname_l_provider": "provider",
-            "strplaname_l_revdate": "revdate", "strplaname_l_dirprefix": "dirprefix",
-            "strplaname_l_dirsuffix": "dirsuffix", "segment_id_left": "nid", "strplaname_l_placename": "placename",
-            "strplaname_l_placetype": "placetype", "strplaname_l_province": "province",
-            "strplaname_l_starticle": "starticle", "strplaname_l_namebody": "namebody",
-            "strplaname_l_strtypre": "strtypre", "strplaname_l_strtysuf": "strtysuf"}),
-        dfs["roadseg"].loc[dfs["roadseg"]["segment_type"] == 1, [
-            "strplaname_r_acqtech", "metacover", "strplaname_r_credate", "datasetnam", "accuracy",
-            "strplaname_r_provider", "strplaname_r_revdate", "specvers", "strplaname_r_dirprefix",
-            "strplaname_r_dirsuffix", "muniquad", "segment_id_right", "strplaname_r_placename",
-            "strplaname_r_placetype", "strplaname_r_province", "strplaname_r_starticle", "strplaname_r_namebody",
-            "strplaname_r_strtypre", "strplaname_r_strtysuf"]
-        ].rename(columns={
-            "strplaname_r_acqtech": "acqtech", "strplaname_r_credate": "credate", "strplaname_r_provider": "provider",
-            "strplaname_r_revdate": "revdate", "strplaname_r_dirprefix": "dirprefix",
-            "strplaname_r_dirsuffix": "dirsuffix", "segment_id_right": "nid", "strplaname_r_placename": "placename",
-            "strplaname_r_placetype": "placetype", "strplaname_r_province": "province",
-            "strplaname_r_starticle": "starticle", "strplaname_r_namebody": "namebody",
-            "strplaname_r_strtypre": "strtypre", "strplaname_r_strtysuf": "strtysuf"})]).copy(deep=True)
-    strplaname.reset_index(drop=True, inplace=True)
-
-    # Store dataset.
-    nrn["strplaname"] = pd.DataFrame(strplaname).copy(deep=True)
-
-    # Store remaining datasets which don't require separation.
-    for layer in set(dfs) - set(nrn):
-        logger.info(f"Storing dataset (separation not required): {layer}.")
-
-        # Store dataset.
-        nrn[layer] = dfs[layer].copy(deep=True)
-
-    # Apply domain restrictions and cast dtypes.
-    logger.info("Applying field domains and enforcing dtypes.")
-
-    for table, df in nrn.items():
-        logger.info(f"Applying domains and enforcing dtypes for table: {table}.")
-        for field, domain in domains[table].items():
-
-            series = df[field].copy(deep=True)
-
-            # Apply domain to series.
-            series = apply_domain(series, domain=domain["lookup"], default=defaults[table][field])
-
-            # Force adjust dtype.
-            series = series.map(lambda val: cast_dtype(val, dtype=dtypes[table][field], default=defaults[table][field]))
-
-            # Store result.
-            nrn[table][field] = series.copy(deep=True)
-
-    return nrn
-
-
-def get_url(url: str, attempt: int = 1, max_attempts = 10, **kwargs: dict) -> requests.Response:
+def get_url(url: str, attempt: int = 1, max_attempts=10, **kwargs: dict) -> requests.Response:
     """
     Fetches a response from a url, using exponential backoff for failed attempts.
 
@@ -676,7 +456,8 @@ def get_url(url: str, attempt: int = 1, max_attempts = 10, **kwargs: dict) -> re
         if attempt < max_attempts:
             response = requests.get(url, **kwargs)
         else:
-            logger.warning(f"Maximum attempts reached ({max_attempts}). Unable to get URL response.")
+            logger.exception(f"Maximum attempts reached ({max_attempts}). Unable to get URL response.")
+            sys.exit(1)
 
     except requests.exceptions.SSLError as e:
         logger.warning("Invalid or missing SSL certificate for the provided URL. Retrying without SSL verification...")

@@ -9,7 +9,7 @@ from bisect import bisect
 from collections import OrderedDict
 from operator import itemgetter
 from pathlib import Path
-from shapely.geometry import LineString, Point
+from shapely import LineString, Point
 from typing import List, Tuple, Union
 
 filepath = Path(__file__).resolve()
@@ -335,7 +335,7 @@ class Segmentor:
             2) direct connection between the address point and road segment.
             A positive determinant indicates 'left' parity and negative determinant indicates 'right' parity.
 
-            :param shapely.geometry.Point pt: address point.
+            :param shapely.Point pt: address point.
             :param Tuple[tuple, tuple] vector: nested tuple of 2 pairs of coordinates, derived from an NRN roadseg
                 LineString.
             :return str: address parity.
@@ -354,8 +354,8 @@ class Segmentor:
             2) the vector comprised of the NRN roadseg LineString coordinates immediately before and after the address
             intersection point.
 
-            :param shapely.geometry.Point pt: address-NRN roadseg intersection point.
-            :param shapely.geometry.LineString segment: NRN roadseg LineString.
+            :param shapely.Point pt: address-NRN roadseg intersection point.
+            :param shapely.LineString segment: NRN roadseg LineString.
             :return Tuple[float, Tuple[tuple, tuple]]: nested tuple comprised of the address point distance along the
                 NRN roadseg LineString and the vector comprised of the NRN roadseg LineString coordinates immediately
                 before and after the address intersection point, respectively.
@@ -430,7 +430,7 @@ class Segmentor:
             Resolves many-to-one linkages between an address point and NRN roadseg by keeping the closest (lowest
             geometric distance) of the NRN roadseg linkages to the address point.
 
-            :param shapely.geometry.Point pt: address point.
+            :param shapely.Point pt: address point.
             :param Tuple[int, ...] roadseg_indexes: NRN roadseg indexes linked to the address point.
             :return int: roadseg_indexes value of the closest NRN roadseg geometry to the address point (from the subset
                 of indexes in roadseg_indexes).
