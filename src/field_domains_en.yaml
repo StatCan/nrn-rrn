@@ -294,24 +294,21 @@ tables:
       0: None
       C: City / Cité
       CC: Chartered community
-      CÉ: Cité
       CG: Community government
-      CM: County (municipality)
       CN: Crown colony / Colonie de la couronne
-      COM: Community
       CT: Canton (municipalité de)
       CU: Cantons unis (municipalité de)
       CV: City / Ville
       CY: City
       DM: District municipality
       FD: Fire district
+      GR: Gouvernement régional
       HAM: Hamlet
       ID: Improvement district
       IGD: Indian government district
       IM: Island municipality
       IRI: Indian reserve / Réserve indienne
       LGD: Local government district
-      LOT: Township and royalty
       M: Municipality / Municipalité
       MD: Municipal district
       MÉ: Municipalité
@@ -321,12 +318,10 @@ tables:
       NL: Nisga'a land
       "NO": Unorganized / Non organisé
       NV: Northern village
-      NVL: Nisga'a village
       P: Parish / Paroisse (municipalité de)
       PE: Paroisse (municipalité de)
       RCR: Rural community / Communauté rurale
       RDA: Regional district electoral area
-      RG: Region
       RGM: Regional municipality
       RM: Rural municipality
       RMU: Resort municipality
@@ -341,12 +336,14 @@ tables:
       SNO: Subdivision of unorganized / Subdivision non organisée
       SV: Summer village
       T: Town
+      TAL: Tla'amin Lands
       TC: Terres réservées aux cris
       TI: Terre inuite
       TK: Terres réservées aux naskapis
       TL: Teslin land
       TP: Township
       TV: Town / Ville
+      TWL: Tsawwassen Lands
       V: Ville
       VC: Village cri
       VK: Village naskapi
