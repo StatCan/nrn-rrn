@@ -115,7 +115,7 @@ queries:
       - "((rtnumber1 == '6' or rtnumber2 == '6' or rtnumber3 == '6') and (l_placenam.str.contains(\"bratt's lake|rm of sherwood\", case=False) or r_placenam.str.contains(\"bratt's lake|rm of sherwood\", case=False)))"
       - "((rtnumber1 == '10' or rtnumber2 == '10' or rtnumber3 == '10') and ((l_placenam.str.contains(\"abernethy|balcarres|balgonie|cana|duff|edenwold|mcleod|melville|orkney|otthon|qu'appelle|stanley\", case=False) or r_placenam.str.contains(\"abernethy|balcarres|balgonie|cana|duff|edenwold|mcleod|melville|orkney|otthon|qu'appelle|stanley\", case=False)) or ((l_placenam.str.lower() == 'yorkton' or r_placenam.str.lower() == 'yorkton') and (l_stname_c.str.lower() == 'queen street' or r_stname_c.str.lower() == 'queen street'))))"
       - "((rtnumber1 == '39' or rtnumber2 == '39' or rtnumber3 == '39') and (l_placenam.str.contains('benson|brokenshell|caledonia|coalfields|cymri|estevan|griffin|halbrite|lang|macoun|mctaggart|midale|milestone|north portal|scott|weyburn|yellow grass', case=False) or r_placenam.str.contains('benson|brokenshell|caledonia|coalfields|cymri|estevan|griffin|halbrite|lang|macoun|mctaggart|midale|milestone|north portal|scott|weyburn|yellow grass', case=False)))"
-    yt: "(rtnumber1 in ('1', '2', '5', '37') or rtnumber2 in ('1', '2', '5', '37'))"
+    yt: "(rtnumber1 in ('1', '2', '5', '37'))"
   wms_500k:
     ab: "((roadclass in ('Freeway', 'Expressway / Highway', 'Arterial')) or ((l_placenam.str.lower() in ('calgary', 'edmonton', 'lethbridge') or r_placenam.str.lower() in ('calgary', 'edmonton', 'lethbridge')) and (roadclass == 'Collector')))"
     bc: "(roadclass in ('Freeway', 'Expressway / Highway', 'Arterial'))"

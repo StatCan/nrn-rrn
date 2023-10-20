@@ -13,7 +13,7 @@ license:
 language: en
 data:
   filename: 2023/yt.gdb
-  layer: nrn_blkpassage
+  layer: NRN_BLKPASSAGE
   driver: OpenFileGDB
   crs: "EPSG:4617"
   spatial: True

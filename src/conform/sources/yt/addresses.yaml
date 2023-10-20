@@ -13,7 +13,7 @@ license:
 language: en
 data:
   filename: 2023/yt.gpkg
-  layer: addresses
+  layer: CIVIC_ADDRESS_PT
   driver: GPKG
   crs: "EPSG:3578"
   spatial: True
@@ -22,12 +22,12 @@ data:
     address_fields:
       street:
         concatenate:
-          fields: [ST_NAME, ST_POSTYPE, ST_POSDIR]
+          fields: [st_name, st_postype, st_posdir]
           separator: " "
-      number: ADD_NUMBER
-      suffix: UNIT
+      number: add_number
+      suffix: addnum_suf
     address_join_field:
-      fields: [ST_NAME, ST_POSTYPE, ST_POSDIR]
+      fields: [st_name, st_postype, st_posdir]
       separator: " "
     roadseg_join_field:
       fields: [namebody, strtysuf, dirsuffix]

@@ -56,12 +56,13 @@ class Segmentor:
                 # Apply regex substitution to field.
                 if isinstance(data, dict):
                     if "regex_sub" in data:
-                        field, regex_sub = itemgetter("field", "regex_sub")(data)
+                        field = data["regex_sub"]["field"]
+                        kwargs = {k: v for k, v in data["regex_sub"].items() if k != "field"}
                         self.addresses[attribute] = addresses[field].map(
-                            lambda val: re.sub(**regex_sub, string=val, flags=re.I)).copy(deep=True)
+                            lambda val: re.sub(**kwargs, string=val, flags=re.I)).copy(deep=True)
 
                     elif "concatenate" in data:
-                        fields, separator = itemgetter("fields", "separator")(data)
+                        fields, separator = itemgetter("fields", "separator")(data["concatenate"])
                         self.addresses[attribute] = addresses[fields].apply(
                             lambda row: separator.join([str(val) for val in row if val]), axis=1).copy(deep=True)
 
@@ -99,6 +100,20 @@ class Segmentor:
         self.addresses["join"] = self.addresses["join"].map(lambda val: re.sub(r" +", " ", val.strip()))
         self.roadseg["join"] = self.roadseg["join"].map(lambda val: re.sub(r" +", " ", val.strip()))
 
+        # Standardize address attributes.
+
+        # Drop all records with non-numeric address number or Null street values.
+        drop_flag = (self.addresses["number"].map(lambda val: re.search(r"\d+", str(val))).isna() |
+                     self.addresses["street"].map(lambda val: str(val).lower().strip() in ('', 'none', 'null')))
+        if sum(drop_flag):
+            self.addresses = self.addresses.loc[~drop_flag].copy(deep=True)
+            logger.warning(f"Dropped {sum(drop_flag)} records due to non-numeric \"number\" or Null \"street\".")
+
+        # Set Null address attributes to Unknown.
+        # Note: Not required for numbers since they will have been dropped previously.
+        self.addresses.loc[self.addresses["suffix"].isna(), "suffix"] = "Unknown"
+        self.addresses.loc[self.addresses["street"].isna(), "street"] = "Unknown"
+
         logger.info("Validating address records.")
 
         try:
@@ -106,18 +121,13 @@ class Segmentor:
             # Convert address numbers to integer.
             self.addresses["number"] = self.addresses["number"].map(int)
 
-        except ValueError:
+        except (TypeError, ValueError) as e:
 
             # Flag invalid address numbers.
-            invalid = self.addresses.loc[~self.addresses["number"].map(lambda val: str(val).isdigit)]
+            invalid = self.addresses.loc[~self.addresses["number"].map(lambda val: str(val).strip().isdigit())]
             message = "\n".join(map(str, invalid[invalid.columns.difference(["geometry"])].itertuples(index=True)))
             logger.exception(f"Invalid address number for the following record(s):\n{message}")
             sys.exit(1)
-
-        logger.info("Filtering unit-level addresses.")
-
-        # Drop unit-level addresses, keeping only first instance.
-        self.addresses.drop_duplicates(subset=["street", "number", "suffix"], keep="first", inplace=True)
 
         logger.info("Input data is ready for segmentation.")
 
