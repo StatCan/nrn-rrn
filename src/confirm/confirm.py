@@ -160,8 +160,9 @@ class Confirm:
 
                 # Dissolve geometries, grouped by match field, and explode multi-part results.
                 df_merge = df[[match_field, "geometry"]].groupby(by=match_field, as_index=True)["geometry"]\
-                    .agg(tuple).map(linemerge).explode()
+                    .agg(tuple).map(linemerge)
                 df_merge = gpd.GeoDataFrame({match_field: df_merge.index}, geometry=df_merge.values, crs=df.crs)
+                df_merge = df_merge.explode(ignore_index=True)
 
                 # Compile junctions, as coordinates, contained within each dissolved geometry.
                 junctions_idx_geom_lookup = dict(junctions.map(lambda pt: itemgetter(0)(attrgetter("coords")(pt))))
