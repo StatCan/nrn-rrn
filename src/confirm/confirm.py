@@ -278,7 +278,7 @@ class Confirm:
             default = self.defaults["roadseg"]["structid"]
 
             # Dissolve contiguous structures, explode multi-part results.
-            struct_merge = gpd.GeoDataFrame(geometry=[linemerge(struct["geometry"].values)], crs=struct.crs)\
+            struct_merge = gpd.GeoDataFrame(geometry=[linemerge(tuple(struct["geometry"]))], crs=struct.crs)\
                 .explode(ignore_index=True)
 
             # Dissolve contiguous structures, grouped by structid, for old dataset.
