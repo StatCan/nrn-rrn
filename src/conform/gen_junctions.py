@@ -111,9 +111,10 @@ class Junction:
         default_exitnbr = self.defaults["exitnbr"]
 
         # Create attribute lookup dict.
-        uuid_attr_lookup = self.roadseg[set(self.roadseg.columns).intersection(attrs)].to_dict(orient="dict")
+        uuid_attr_lookup = self.roadseg[list(set(self.roadseg.columns).intersection(attrs))].to_dict(orient="dict")
         if isinstance(self.ferryseg, gpd.GeoDataFrame):
-            uuid_attr_lookup_ = self.ferryseg[set(self.ferryseg.columns).intersection(attrs)].to_dict(orient="dict")
+            uuid_attr_lookup_ = (self.ferryseg[list(set(self.ferryseg.columns).intersection(attrs))]
+                                 .to_dict(orient="dict"))
             for attr in uuid_attr_lookup.keys():
                 if attr in uuid_attr_lookup_:
                     uuid_attr_lookup[attr] |= uuid_attr_lookup_[attr]
@@ -209,7 +210,7 @@ class Junction:
 
         # Concatenate data with target DataFrame.
         self.junction = gpd.GeoDataFrame(pd.concat([self.junction, junctions], ignore_index=True, sort=False),
-                                         crs="EPSG:4617").copy(deep=True)
+                                         geometry="geometry", crs="EPSG:4617").copy(deep=True)
         self.junction.index = self.junction["uuid"]
 
     def gen_target_dataframe(self) -> None:
