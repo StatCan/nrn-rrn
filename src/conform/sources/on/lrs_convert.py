@@ -900,7 +900,7 @@ class LRS:
             # Merge point and base dataframes and interpolate Point object.
             point_df = point_df.merge(base[base_fields], how="left", on=con_id_field)
             point_df["geometry"] = point_df[[self.point_event_measurement_field, "geometry"]].apply(
-                lambda row: row[1].interpolate(row[0]), axis=1)
+                lambda row: row.iloc[1].interpolate(row.iloc[0]), axis=1)
 
             # Store point dataset as a DataFrame.
             self.nrn_datasets[nrn_dataset] = point_df.copy(deep=True)

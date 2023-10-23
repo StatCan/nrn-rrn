@@ -349,7 +349,8 @@ class Confirm:
 
         # Flag dissolved geometries which overlap the base geometry (must use `intersection` instead of predicates).
         df_["overlaps_flag"] = df_[["geometry", "intersects_geoms"]].apply(lambda row: tuple(map(
-            lambda geom: isinstance(row[0].intersection(geom), (LineString, MultiLineString)), row[1])), axis=1)
+            lambda geom: isinstance(row.iloc[0].intersection(geom), (LineString, MultiLineString)), row.iloc[1])),
+                                                                           axis=1)
 
         # Compile index of flagged dissolved geometry.
         df_["resolved_idx"] = df_[["intersects_idxs", "overlaps_flag"]].apply(lambda row: list(compress(*row)), axis=1)

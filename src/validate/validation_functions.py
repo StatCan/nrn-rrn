@@ -333,7 +333,7 @@ class Validator:
                 # Remove duplicated results.
                 deadends = deadends.loc[flag]
                 deadends["ids"] = deadends[[self.id, "disconnected"]].apply(
-                    lambda row: tuple({row[0], *row[1]}), axis=1)
+                    lambda row: tuple({row.iloc[0], *row.iloc[1]}), axis=1)
                 deadends.drop_duplicates(subset="ids", keep="first", inplace=True)
 
                 # Compile error logs.
