@@ -11,7 +11,7 @@ Utilisation générale
 Aperçu
 ======
 
-Le pipeline NRN est séparé en 4 processus distincts destinés à être exécutés en séquence :
+Le pipeline RRN est séparé en 4 processus distincts destinés à être exécutés en séquence :
 
 1. ``conform``: Standardisation et harmonisation des sources de données au format RRN.
 2. ``confirm``: Génération et récupération d'identifiants nationaux uniques (IDN).
@@ -49,3 +49,21 @@ Exécution d'un processus RRN : ::
 Affichage des informations de référence pour un processus RRN : ::
 
     python conform.py --help
+
+Tâches de post-traitement
+=========================
+
+Une fois le pipeline RRN complet terminé, les tâches manuelles suivantes doivent être effectuées :
+
+1. Copiez les documents de sortie dans le référentiel RRN, en écrasant les fichiers existants :
+
+  i. Depuis ``nrn-rrn/data/processed/<source>.zip/en/completion_rates.yaml`` à ``nrn-rrn/src/export/distribution_docs/completion_rates.yaml``.
+  ii. Depuis ``nrn-rrn/data/processed/<source>.zip/en/release_notes.yaml`` à ``nrn-rrn/src/export/distribution_docs/release_notes.yaml``.
+  iii. Depuis ``nrn-rrn/data/processed/<source>.zip/en/completion_rates.rst`` à ``nrn-rrn/docs/source/en/product_documentation/completion_rates.rst``.
+  iv. Depuis ``nrn-rrn/data/processed/<source>.zip/en/release_notes.rst`` à ``nrn-rrn/docs/source/en/product_documentation/release_notes.rst``.
+  v. Depuis ``nrn-rrn/data/processed/<source>.zip/fr/completion_rates.rst`` à ``nrn-rrn/docs/source/fr/product_documentation/completion_rates.rst``.
+  vi. Depuis ``nrn-rrn/data/processed/<source>.zip/fr/release_notes.rst`` à ``nrn-rrn/docs/source/fr/product_documentation/release_notes.rst``.
+
+2. Copiez les données traitées sur le serveur RRN concerné sous le sous-répertoire : ``5_Process``.
+3. Décompressez les données WMS de sortie et copiez le GeoPackage (``NRN_<SOURCE>_WMS.gpkg``) sur le serveur RRN concerné sous le sous-répertoire : ``7_Disseminate/wms``.
+4. Informer les personnes concernées de la nouvelle version du RRN par e-mail.

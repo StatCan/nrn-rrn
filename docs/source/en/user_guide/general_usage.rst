@@ -47,3 +47,21 @@ Execution of an NRN process::
 Displaying reference information for an NRN process::
 
     python conform.py --help
+
+Post-Processing Tasks
+=====================
+
+After completion of the full NRN pipeline, the following manual tasks must be performed:
+
+1. Copy output documents to NRN repository, overwriting existing files:
+
+  i. From ``nrn-rrn/data/processed/<source>.zip/en/completion_rates.yaml`` to ``nrn-rrn/src/export/distribution_docs/completion_rates.yaml``.
+  ii. From ``nrn-rrn/data/processed/<source>.zip/en/release_notes.yaml`` to ``nrn-rrn/src/export/distribution_docs/release_notes.yaml``.
+  iii. From ``nrn-rrn/data/processed/<source>.zip/en/completion_rates.rst`` to ``nrn-rrn/docs/source/en/product_documentation/completion_rates.rst``.
+  iv. From ``nrn-rrn/data/processed/<source>.zip/en/release_notes.rst`` to ``nrn-rrn/docs/source/en/product_documentation/release_notes.rst``.
+  v. From ``nrn-rrn/data/processed/<source>.zip/fr/completion_rates.rst`` to ``nrn-rrn/docs/source/fr/product_documentation/completion_rates.rst``.
+  vi. From ``nrn-rrn/data/processed/<source>.zip/fr/release_notes.rst`` to ``nrn-rrn/docs/source/fr/product_documentation/release_notes.rst``.
+
+2. Copy processed data to the relevant NRN server under subdirectory: ``5_Process``.
+3. Unzip output WMS data and copy GeoPackage (``NRN_<SOURCE>_WMS.gpkg``) to relevant NRN server under subdirectory: ``7_Disseminate/wms``.
+4. Notify relevant individuals of new NRN release via email.

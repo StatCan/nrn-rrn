@@ -26,7 +26,7 @@ addrange:
     pe: 100
     qc: 0
     sk: 99
-    yt: 50
+    yt: 51
   credate:
     ab: 100
     bc: 0
@@ -82,7 +82,7 @@ addrange:
     pe: 53
     qc: 0
     sk: 0
-    yt: 26
+    yt: 31
   l_hnumf:
     ab: 0
     bc: 0
@@ -96,7 +96,7 @@ addrange:
     pe: 53
     qc: 0
     sk: 0
-    yt: 26
+    yt: 31
   l_hnuml:
     ab: 0
     bc: 0
@@ -110,7 +110,7 @@ addrange:
     pe: 53
     qc: 0
     sk: 0
-    yt: 26
+    yt: 31
   l_hnumstr:
     ab: 0
     bc: 0
@@ -124,7 +124,7 @@ addrange:
     pe: 53
     qc: 0
     sk: 0
-    yt: 26
+    yt: 31
   l_hnumsuff:
     ab: 0
     bc: 0
@@ -138,7 +138,7 @@ addrange:
     pe: 0
     qc: 0
     sk: 0
-    yt: 1
+    yt: 30
   l_hnumsufl:
     ab: 0
     bc: 0
@@ -152,7 +152,7 @@ addrange:
     pe: 0
     qc: 0
     sk: 0
-    yt: 1
+    yt: 30
   l_hnumtypf:
     ab: 0
     bc: 0
@@ -166,7 +166,7 @@ addrange:
     pe: 53
     qc: 0
     sk: 0
-    yt: 26
+    yt: 31
   l_hnumtypl:
     ab: 0
     bc: 0
@@ -180,7 +180,7 @@ addrange:
     pe: 53
     qc: 0
     sk: 0
-    yt: 26
+    yt: 31
   l_offnanid:
     ab: 100
     bc: 0
@@ -250,7 +250,7 @@ addrange:
     pe: 100
     qc: 0
     sk: 99
-    yt: 1
+    yt: 100
   r_altnanid:
     ab: 0
     bc: 0
@@ -278,7 +278,7 @@ addrange:
     pe: 54
     qc: 0
     sk: 0
-    yt: 25
+    yt: 30
   r_hnumf:
     ab: 0
     bc: 0
@@ -292,7 +292,7 @@ addrange:
     pe: 54
     qc: 0
     sk: 0
-    yt: 25
+    yt: 30
   r_hnuml:
     ab: 0
     bc: 0
@@ -306,7 +306,7 @@ addrange:
     pe: 54
     qc: 0
     sk: 0
-    yt: 25
+    yt: 30
   r_hnumstr:
     ab: 0
     bc: 0
@@ -320,7 +320,7 @@ addrange:
     pe: 54
     qc: 0
     sk: 0
-    yt: 25
+    yt: 30
   r_hnumsuff:
     ab: 0
     bc: 0
@@ -334,7 +334,7 @@ addrange:
     pe: 0
     qc: 0
     sk: 0
-    yt: 1
+    yt: 29
   r_hnumsufl:
     ab: 0
     bc: 0
@@ -348,7 +348,7 @@ addrange:
     pe: 0
     qc: 0
     sk: 0
-    yt: 1
+    yt: 29
   r_hnumtypf:
     ab: 0
     bc: 0
@@ -362,7 +362,7 @@ addrange:
     pe: 54
     qc: 0
     sk: 0
-    yt: 25
+    yt: 30
   r_hnumtypl:
     ab: 0
     bc: 0
@@ -376,7 +376,7 @@ addrange:
     pe: 54
     qc: 0
     sk: 0
-    yt: 25
+    yt: 30
   r_offnanid:
     ab: 100
     bc: 0
@@ -532,7 +532,7 @@ blkpassage:
     pe: 100
     qc: 0
     sk: 100
-    yt: 100
+    yt: 98
   acqtech:
     ab: 100
     bc: 100
@@ -602,7 +602,7 @@ blkpassage:
     pe: 100
     qc: 0
     sk: 100
-    yt: 100
+    yt: 98
   nid:
     ab: 100
     bc: 100
@@ -630,7 +630,7 @@ blkpassage:
     pe: 100
     qc: 0
     sk: 100
-    yt: 100
+    yt: 99
   revdate:
     ab: 100
     bc: 100
@@ -644,7 +644,7 @@ blkpassage:
     pe: 100
     qc: 0
     sk: 99
-    yt: 100
+    yt: 98
   roadnid:
     ab: 99
     bc: 100
@@ -658,7 +658,7 @@ blkpassage:
     pe: 89
     qc: 0
     sk: 99
-    yt: 95
+    yt: 97
   specvers:
     ab: 100
     bc: 100
@@ -1178,7 +1178,7 @@ junction:
     pe: 100
     qc: 100
     sk: 0
-    yt: 0
+    yt: 100
 roadseg:
   accuracy:
     ab: 100
@@ -1207,7 +1207,7 @@ roadseg:
     pe: 100
     qc: 100
     sk: 99
-    yt: 50
+    yt: 51
   adrangenid:
     ab: 100
     bc: 100
@@ -1291,7 +1291,7 @@ roadseg:
     pe: 53
     qc: 100
     sk: 0
-    yt: 26
+    yt: 31
   l_hnumf:
     ab: 0
     bc: 100
@@ -1305,7 +1305,7 @@ roadseg:
     pe: 53
     qc: 98
     sk: 0
-    yt: 26
+    yt: 31
   l_hnuml:
     ab: 0
     bc: 100
@@ -1319,7 +1319,7 @@ roadseg:
     pe: 53
     qc: 98
     sk: 0
-    yt: 26
+    yt: 31
   l_placenam:
     ab: 100
     bc: 100
@@ -1347,7 +1347,7 @@ roadseg:
     pe: 95
     qc: 96
     sk: 35
-    yt: 78
+    yt: 80
   metacover:
     ab: 99
     bc: 100
@@ -1445,7 +1445,7 @@ roadseg:
     pe: 54
     qc: 100
     sk: 0
-    yt: 25
+    yt: 30
   r_hnumf:
     ab: 0
     bc: 100
@@ -1459,7 +1459,7 @@ roadseg:
     pe: 54
     qc: 98
     sk: 0
-    yt: 25
+    yt: 30
   r_hnuml:
     ab: 0
     bc: 100
@@ -1473,7 +1473,7 @@ roadseg:
     pe: 54
     qc: 98
     sk: 0
-    yt: 25
+    yt: 30
   r_placenam:
     ab: 100
     bc: 100
@@ -1501,7 +1501,7 @@ roadseg:
     pe: 95
     qc: 96
     sk: 35
-    yt: 78
+    yt: 80
   revdate:
     ab: 100
     bc: 100
@@ -1543,7 +1543,7 @@ roadseg:
     pe: 100
     qc: 0
     sk: 0
-    yt: 97
+    yt: 87
   roadsegid:
     ab: 100
     bc: 100
@@ -1571,7 +1571,7 @@ roadseg:
     pe: 3
     qc: 100
     sk: 1
-    yt: 100
+    yt: 32
   rtename1fr:
     ab: 100
     bc: 100
@@ -1585,7 +1585,7 @@ roadseg:
     pe: 3
     qc: 100
     sk: 1
-    yt: 100
+    yt: 32
   rtename2en:
     ab: 100
     bc: 100
@@ -1599,7 +1599,7 @@ roadseg:
     pe: 0
     qc: 100
     sk: 1
-    yt: 100
+    yt: 0
   rtename2fr:
     ab: 100
     bc: 100
@@ -1613,7 +1613,7 @@ roadseg:
     pe: 0
     qc: 100
     sk: 1
-    yt: 100
+    yt: 0
   rtename3en:
     ab: 100
     bc: 100
@@ -1683,7 +1683,7 @@ roadseg:
     pe: 35
     qc: 100
     sk: 9
-    yt: 100
+    yt: 32
   rtnumber2:
     ab: 100
     bc: 100
@@ -1697,7 +1697,7 @@ roadseg:
     pe: 1
     qc: 100
     sk: 1
-    yt: 100
+    yt: 0
   rtnumber3:
     ab: 100
     bc: 100
@@ -1880,7 +1880,7 @@ strplaname:
     pe: 100
     qc: 0
     sk: 99
-    yt: 28
+    yt: 29
   credate:
     ab: 100
     bc: 0
@@ -1894,7 +1894,7 @@ strplaname:
     pe: 100
     qc: 0
     sk: 99
-    yt: 1
+    yt: 3
   datasetnam:
     ab: 100
     bc: 0
@@ -2020,7 +2020,7 @@ strplaname:
     pe: 0
     qc: 0
     sk: 0
-    yt: 73
+    yt: 100
   provider:
     ab: 100
     bc: 0
@@ -2034,7 +2034,7 @@ strplaname:
     pe: 100
     qc: 0
     sk: 99
-    yt: 1
+    yt: 4
   province:
     ab: 100
     bc: 0
@@ -2062,7 +2062,7 @@ strplaname:
     pe: 100
     qc: 0
     sk: 99
-    yt: 96
+    yt: 95
   specvers:
     ab: 100
     bc: 0
