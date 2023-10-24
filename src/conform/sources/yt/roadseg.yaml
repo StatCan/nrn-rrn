@@ -28,10 +28,10 @@ conform:
         - function: query_assign
           columns: credate
           lookup:
-            credate=='19000101':
+            credate==19000101:
               value: Unknown
               type: string
-            credate!='19000101':
+            credate!=19000101:
               value: credate
               type: column
           engine: python
@@ -55,10 +55,10 @@ conform:
         - function: query_assign
           columns: revdate
           lookup:
-            revdate=='19000101':
+            revdate==19000101:
               value: Unknown
               type: string
-            revdate!='19000101':
+            revdate!=19000101:
               value: revdate
               type: column
           engine: python
@@ -97,13 +97,13 @@ conform:
       functions:
         - function: map_values
           lookup:
-            -1: Unknown
-            1: Provincial / Territorial
-            2: Provincial / Territorial
-            3: Provincial / Territorial
-            4: Provincial / Territorial
-            5: Provincial / Territorial
-            99: Other
+            '-1': Unknown
+            '1': Provincial / Territorial
+            '2': Provincial / Territorial
+            '3': Provincial / Territorial
+            '4': Provincial / Territorial
+            '5': Provincial / Territorial
+            '99': Other
             Unknown: Unknown
             Transportation Engineering: Provincial / Territorial
             Transportation Maintenance: Provincial / Territorial
@@ -183,29 +183,29 @@ conform:
       functions:
         - function: map_values
           lookup:
-            1: Alaska
-            2: British Columbia
-            3: Community Services
-            4: Energy, Mines and Resources
-            5: Environment
-            6: Federal
-            7: First Nation
-            8: Health and Social Services
-            9: Lands Branch
-            10: Municipal
-            11: Northwestel
-            12: Northwest Territories
-            13: Parks Canada
-            14: Private
-            15: Transportation
-            16: Transportation / Aviation
-            17: Tourism and Culture
-            18: Unknown
-            19: Yukon Parks
-            20: Yukon Electrical
-            21: Yukon Energy
-            22: Yukon Justice
-            34: Private
+            '1': Alaska
+            '2': British Columbia
+            '3': Community Services
+            '4': Energy, Mines and Resources
+            '5': Environment
+            '6': Federal
+            '7': First Nation
+            '8': Health and Social Services
+            '9': Lands Branch
+            '10': Municipal
+            '11': Northwestel
+            '12': Northwest Territories
+            '13': Parks Canada
+            '14': Private
+            '15': Transportation
+            '16': Transportation / Aviation
+            '17': Tourism and Culture
+            '18': Unknown
+            '19': Yukon Parks
+            '20': Yukon Electrical
+            '21': Yukon Energy
+            '22': Yukon Justice
+            '34': Private
     roadsegid:
     rtename1en:
       fields: [namebody, strtysuf]
