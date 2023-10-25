@@ -35,18 +35,14 @@ The ``nrn-rrn`` has no mandatory software dependencies but highly recommends the
 Furthermore, documentation for ``nrn-rrn`` installation and usage will make use of this software since it represents
 the easiest and recommended approach.
 
-Anaconda / conda
-""""""""""""""""
+Conda
+"""""
 
-The ``nrn-rrn`` is written in pure Python, but has several dependencies written with C libraries. These C libraries can
-be difficult to install (particularly on Windows) and, therefore, it is recommended to create and use the conda virtual 
-environment defined in the ``nrn-rrn``. conda is an environment and package manager and is the preferable choice for
-dependency management since it provides pre-built binaries for all dependencies of the ``nrn-rrn`` for all platforms
-(Windows, Mac, Linux).
-
-| `Anaconda <https://docs.anaconda.com/anaconda/install/>`_ with conda >= 4.9.
-| `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`_ will also suffice (minimal distribution only containing
-  Python and conda).
+Conda is a package and virtual environment management system and is strongly recommended for using the ``nrn-rrn``.
+Conda is available in several software including `Anaconda <https://docs.anaconda.com/anaconda/install/>`_ and
+`Miniconda <https://docs.conda.io/en/latest/miniconda.html>`_, but the recommended choice is to use
+`Miniforge3 <https://github.com/conda-forge/miniforge>`_ due to being a minimal installer and specific to the
+``conda-forge`` channel.
 
 Git
 """
