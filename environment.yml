@@ -1,7 +1,6 @@
 name: nrn-rrn
 channels:
-  - conda-forge
-  - defaults
+  - https://jfrog.aaw.cloud.statcan.ca/artifactory/conda-forge-remote/
 dependencies:
   - click=8.1.7
   - fiona=1.9.5

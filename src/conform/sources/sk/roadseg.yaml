@@ -5,17 +5,17 @@ coverage:
     alpha2: CA-SK
     country: Canada
     subdivision: Saskatchewan
-  website: http://efts.gov.sk.ca
-  update_frequency: unknown
+  website: https://geohub.saskatchewan.ca/datasets/saskatchewan::roadseg/about
+  update_frequency: continuous
 license:
-  url: https://www.isc.ca/About/Legal/Pages/default.aspx
-  text:
+  url: https://gisappl.saskatchewan.ca/Html5Ext/Resources/GOS_Standard_Unrestricted_Use_Data_Licence_v2.0.pdf
+  text: Government of Saskatchewan Standard Unrestricted Use Data License (Version 2.0)
 language: en
 data:
-  filename: SK_NRN_2022/ROADSEG.shp
+  filename: 2023/ROADSEG.shp
   layer:
   driver: ESRI Shapefile
-  crs: "EPSG:26913"
+  crs: "EPSG:3857"
   spatial: True
   query:
 conform:
@@ -137,26 +137,9 @@ conform:
     placetype:
     province: Saskatchewan
     starticle:
-      fields: POSTEDNAME
-      functions:
-        - function: regex_find
-          pattern: "\\b(domain_strplaname_starticle)\\b"
-          match_index: 0
-          group_index: 0
-          sub_inplace:
-            pattern: "[-]"
-            repl: " "
     namebody:
       fields: POSTEDNAME
       functions:
-        - function: regex_find
-          pattern: "\\b(domain_strplaname_starticle)\\b"
-          match_index: 0
-          group_index: 0
-          sub_inplace:
-            pattern: "[-]"
-            repl: " "
-          strip_result: True
         - function: regex_find
           pattern: "\\b(domain_strplaname_dirprefix)\\b(?!$)"
           match_index: 0
