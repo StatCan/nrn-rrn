@@ -1,0 +1,41 @@
+coverage:
+  country: ca
+  province: ab
+  ISO3166:
+    alpha2: CA-AB
+    country: Canada
+    subdivision: Alberta
+  website: Provided directly from data contact.
+  update_frequency: unknown
+license:
+  url:
+  text:
+language: en
+data:
+  filename: 2023/NRN_AB_22_0_STRPLANAME.dbf
+  layer:
+  driver: ESRI Shapefile
+  crs:
+  spatial: False
+  query:
+conform:
+  strplaname:
+    acqtech: ACQTECH
+    metacover: METACOVER
+    credate: CREDATE
+    datasetnam: Alberta
+    accuracy: ACCURACY
+    provider: PROVIDER
+    revdate: REVDATE
+    specvers: 2.0
+    dirprefix: DIRPREFIX
+    dirsuffix: DIRSUFFIX
+    muniquad: MUNIQUAD
+    nid: NID
+    placename: PLACENAME
+    placetype: PLACETYPE
+    province: PROVINCE
+    starticle: STARTICLE
+    namebody: NAMEBODY
+    strtypre: STRTYPRE
+    strtysuf: STRTYSUF
