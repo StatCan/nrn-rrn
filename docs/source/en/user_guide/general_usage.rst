@@ -62,6 +62,7 @@ After completion of the full NRN pipeline, the following manual tasks must be pe
    v. From ``nrn-rrn/data/processed/<source>.zip/fr/completion_rates.rst`` to ``nrn-rrn/docs/source/fr/product_documentation/completion_rates.rst``.
    vi. From ``nrn-rrn/data/processed/<source>.zip/fr/release_notes.rst`` to ``nrn-rrn/docs/source/fr/product_documentation/release_notes.rst``.
 
-2. Copy processed data to the relevant NRN server under subdirectory: ``5_Process``.
-3. Unzip output WMS data and copy GeoPackage (``NRN_<SOURCE>_WMS.gpkg``) to relevant NRN server under subdirectory: ``7_Disseminate/wms``.
-4. Notify relevant individuals of new NRN release via email.
+2. Use ``git`` to ``commit`` and ``push`` the updated documentation files to the repository.
+3. Copy processed data to the relevant NRN server under subdirectory: ``5_Process``.
+4. Unzip output WMS data and copy GeoPackage (``NRN_<SOURCE>_WMS.gpkg``) to relevant NRN server under subdirectory: ``7_Disseminate/wms``.
+5. Notify relevant individuals of new NRN release via email.
