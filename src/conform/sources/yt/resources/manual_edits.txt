@@ -1,0 +1,2 @@
+1. Deleted roads which are completely outside of Yukon boundaries (the sections of Highway 1 straddling the BC border are fine).
+2. Added attribution for l_placenam, r_placenam, l_placetype, r_placetype and manually populated based on CSD boundaries using CSD name and type attributes.

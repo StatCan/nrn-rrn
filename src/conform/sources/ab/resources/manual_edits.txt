@@ -1,0 +1,37 @@
+For some reason, AB includes address, placename, and street name attribution on addrange and strplaname, but not on roadseg.
+The following python code adds that attribution to roadseg.
+============================================================================================================================
+
+import geopandas as gpd
+
+# Load datasets.
+roadseg = gpd.read_file("NRN_AB_22_0_ROADSEG.shp")
+addrange = gpd.read_file("NRN_AB_22_0_ADDRANGE.dbf")
+strplaname = gpd.read_file("NRN_AB_22_0_STRPLANAME.dbf")
+
+# Drop duplicates prior to merge operations.
+addrange = addrange.loc[~addrange['NID'].duplicated(keep='first')].copy(deep=True)
+strplaname = strplaname.loc[~strplaname['NID'].duplicated(keep='first')].copy(deep=True)
+
+# Create concatenated street name attribute: STNAME_C.
+strplaname['STNAME_C'] = strplaname[['DIRPREFIX','STRTYPRE','NAMEBODY','STRTYSUF','DIRSUFFIX']].apply(lambda row: ' '.join([val for val in row if val not in {'Unknown', 'None'}]), axis=1)
+
+# Add left and right street name and place name attributes to addrange: L_STNAME_C, R_STNAME_C, L_PLACENAM, R_PLACENAM.
+l_ = addrange.merge(strplaname[['NID','STNAME_C','PLACENAME']], how='left', left_on='L_OFFNANID', right_on='NID')
+r_ = addrange.merge(strplaname[['NID','STNAME_C','PLACENAME']], how='left', left_on='R_OFFNANID', right_on='NID')
+addrange['L_STNAME_C'] = l_['STNAME_C']
+addrange['L_PLACENAM'] = l_['PLACENAME']
+
+r_ = addrange.merge(strplaname[['NID','STNAME_C','PLACENAME']], how='left', left_on='R_OFFNANID', right_on='NID')
+addrange['R_STNAME_C'] = r_['STNAME_C']
+addrange['R_PLACENAM'] = r_['PLACENAME']
+
+# Add all missing attribution to roadseg: L_HNUMF, L_HNUML, R_HNUMF, R_HNUML, L_DIGDIRFG, R_DIGDIRFG, L_STNAME_C, R_STNAME_C, L_PLACENAM, R_PLACENAM.
+_ = roadseg.merge(addrange[['NID','L_HNUMF','L_HNUML','R_HNUMF','R_HNUML','L_DIGDIRFG','R_DIGDIRFG','L_STNAME_C','R_STNAME_C','L_PLACENAM','R_PLACENAM']], how='left', left_on='ADRANGENID', right_on='NID')
+for col in ('L_HNUMF','L_HNUML','R_HNUMF','R_HNUML','L_STNAME_C','R_STNAME_C','L_PLACENAM','R_PLACENAM'):
+    roadseg[col] = _[col]
+roadseg['L_ADDDIRFG'] = _['L_DIGDIRFG']
+roadseg['R_ADDDIRFG'] = _['R_DIGDIRFG']
+
+# Export dataset.
+roadseg.to_file("NRN_AB_22_0_ROADSEG.shp")
