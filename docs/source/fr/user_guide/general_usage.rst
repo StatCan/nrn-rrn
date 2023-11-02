@@ -64,6 +64,7 @@ Une fois le pipeline RRN complet terminé, les tâches manuelles suivantes doive
    v. Depuis ``nrn-rrn/data/processed/<source>.zip/fr/completion_rates.rst`` à ``nrn-rrn/docs/source/fr/product_documentation/completion_rates.rst``.
    vi. Depuis ``nrn-rrn/data/processed/<source>.zip/fr/release_notes.rst`` à ``nrn-rrn/docs/source/fr/product_documentation/release_notes.rst``.
 
-2. Copiez les données traitées sur le serveur RRN concerné sous le sous-répertoire : ``5_Process``.
-3. Décompressez les données WMS de sortie et copiez le GeoPackage (``NRN_<SOURCE>_WMS.gpkg``) sur le serveur RRN concerné sous le sous-répertoire : ``7_Disseminate/wms``.
-4. Informer les personnes concernées de la nouvelle version du RRN par e-mail.
+2. Utilisez ``git`` pour ``commit`` et ``push`` les fichiers de documentation mis à jour vers le référentiel.
+3. Copiez les données traitées sur le serveur RRN concerné sous le sous-répertoire : ``5_Process``.
+4. Décompressez les données WMS de sortie et copiez le GeoPackage (``NRN_<SOURCE>_WMS.gpkg``) sur le serveur RRN concerné sous le sous-répertoire : ``7_Disseminate/wms``.
+5. Informer les personnes concernées de la nouvelle version du RRN par e-mail.
