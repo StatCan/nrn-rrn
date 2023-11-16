@@ -18,4 +18,3 @@ Documentation du produit
    product_documentation/data_exchange_model
    product_documentation/change_management
    product_documentation/identification_rules
-   product_documentation/completion_rates

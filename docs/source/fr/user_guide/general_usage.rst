@@ -57,12 +57,9 @@ Une fois le pipeline RRN complet terminé, les tâches manuelles suivantes doive
 
 1. Copiez les documents de sortie dans le référentiel RRN, en écrasant les fichiers existants :
 
-   i. Depuis ``nrn-rrn/data/processed/<source>.zip/en/completion_rates.yaml`` à ``nrn-rrn/src/export/distribution_docs/completion_rates.yaml``.
-   ii. Depuis ``nrn-rrn/data/processed/<source>.zip/en/release_notes.yaml`` à ``nrn-rrn/src/export/distribution_docs/release_notes.yaml``.
-   iii. Depuis ``nrn-rrn/data/processed/<source>.zip/en/completion_rates.rst`` à ``nrn-rrn/docs/source/en/product_documentation/completion_rates.rst``.
-   iv. Depuis ``nrn-rrn/data/processed/<source>.zip/en/release_notes.rst`` à ``nrn-rrn/docs/source/en/product_documentation/release_notes.rst``.
-   v. Depuis ``nrn-rrn/data/processed/<source>.zip/fr/completion_rates.rst`` à ``nrn-rrn/docs/source/fr/product_documentation/completion_rates.rst``.
-   vi. Depuis ``nrn-rrn/data/processed/<source>.zip/fr/release_notes.rst`` à ``nrn-rrn/docs/source/fr/product_documentation/release_notes.rst``.
+   i. Depuis ``nrn-rrn/data/processed/<source>.zip/distribution_docs/en/release_notes.yaml`` à ``nrn-rrn/src/export/distribution_docs/data/release_notes.yaml``.
+   ii. Depuis ``nrn-rrn/data/processed/<source>.zip/distribution_docs/en/release_notes.rst`` à ``nrn-rrn/docs/source/en/product_documentation/release_notes.rst``.
+   iii. Depuis ``nrn-rrn/data/processed/<source>.zip/distribution_docs/fr/release_notes.rst`` à ``nrn-rrn/docs/source/fr/product_documentation/release_notes.rst``.
 
 2. Utilisez ``git`` pour ``commit`` et ``push`` les fichiers de documentation mis à jour vers le référentiel.
 3. Copiez les données traitées sur le serveur RRN concerné sous le sous-répertoire : ``5_Process``. Ignorez les documents de sortie susmentionnés.

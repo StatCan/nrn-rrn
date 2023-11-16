@@ -110,7 +110,7 @@ class Export:
         logger.info("Configuring NRN release version.")
 
         # Extract the version number and release year for current source from the release notes.
-        release_notes_path = filepath.parent / "distribution_docs/release_notes.yaml"
+        release_notes_path = filepath.parent / "distribution_docs/data/release_notes.yaml"
         release_notes = helpers.load_yaml(release_notes_path)
 
         try:
@@ -287,7 +287,6 @@ class Export:
     def update_distribution_docs(self) -> None:
         """
         Writes updated documentation to data/processed for:
-            - completion rates
             - release notes
         """
 
@@ -295,7 +294,7 @@ class Export:
         logger.info(f"Updating documentation: release notes.")
 
         # Compile previous data.
-        data = helpers.load_yaml(filepath.parent / "distribution_docs/release_notes.yaml")
+        data = helpers.load_yaml(filepath.parent / "distribution_docs/data/release_notes.yaml")
 
         # Update release notes - edition, release date, validity date.
         data[self.source]["edition"] = float(f"{self.major_version}.{self.minor_version}")
@@ -308,35 +307,8 @@ class Export:
         data[self.source]["number_of_kilometers"] = f"{kms:,d}"
 
         # Write updated documents - English and French.
-        self.write_documents(data, "en/release_notes")
+        self.write_documents(data, "en/release_notes", export_yaml=True)
         self.write_documents(data, "fr/release_notes", export_yaml=False)
-
-        # Update completion rates.
-        logger.info(f"Updating documentation: completion rates.")
-
-        # Compile previous data.
-        data = helpers.load_yaml(filepath.parent / "distribution_docs/completion_rates.yaml")
-
-        # Update completion rates.
-
-        # Iterate dataframe and column names.
-        for table, df in self.dframes["en"].items():
-            for col in data[table]:
-
-                # Configure column completion rate.
-                # Note: Values between 0 and 1 are rounded to 1, values between 99 and 100 are rounded to 99.
-                completion_rate = (len(df.loc[~df[col].isin({"Unknown", -1})]) / len(df)) * 100
-                if 0 < completion_rate < 1:
-                    completion_rate = 1
-                if 99 < completion_rate < 100:
-                    completion_rate = 99
-
-                # Update column value for source.
-                data[table][col][self.source] = int(completion_rate)
-
-        # Write updated documents - English and French.
-        self.write_documents(data, "en/completion_rates")
-        self.write_documents(data, "fr/completion_rates", export_yaml=False)
 
     def write_documents(self, data: dict, filename: str, export_yaml: bool = True) -> None:
         """
@@ -351,7 +323,7 @@ class Export:
 
         # Configure source and destination paths.
         src = filepath.parent / f"distribution_docs/{filename}.rst"
-        dst = self.dst / filename
+        dst = self.dst / "distribution_docs" / filename
 
         try:
 
