@@ -25,47 +25,26 @@ handler.setLevel(logging.INFO)
 handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s: %(message)s", "%Y-%m-%d %H:%M:%S"))
 logger.addHandler(handler)
 
-# Create logger for change logs.
-logger_change_logs = logging.getLogger("change_logs")
-logger_change_logs.setLevel(logging.INFO)
-
 
 class Confirm:
     """Defines an NRN process."""
 
-    def __init__(self, source: str, remove: bool = False) -> None:
+    def __init__(self, source: str) -> None:
         """
         Initializes an NRN process.
 
         :param str source: abbreviation for the source province / territory.
-        :param bool remove: removes pre-existing change logs within the data/processed directory for the specified
-            source, default False.
         """
 
         self.source = source.lower()
-        self.remove = remove
 
         # Configure data paths.
         self.src = filepath.parents[2] / f"data/interim/{self.source}.gpkg"
-        self.dst = filepath.parents[2] / f"data/processed/{self.source}/{self.source}_change_logs"
 
         # Validate source path.
         if not self.src.exists():
             logger.exception(f"Source not found: \"{self.src}\".")
             sys.exit(1)
-
-        # Validate and conditionally clear output namespace.
-        if self.dst.exists():
-            logger.warning("Output namespace already occupied.")
-
-            if self.remove:
-                logger.warning("Parameter remove=True: Removing directory.")
-                helpers.rm_tree(self.dst)
-
-            else:
-                logger.exception("Parameter remove=False: Unable to proceed while output namespace is occupied. Set "
-                                 "remove=True (-r) or manually clear the output namespace.")
-                sys.exit(1)
 
         # Define match fields (fields used for grouping records in current dataset / linking to old dataset)
         # Note: roadseg requires a match field, the remaining entries are optional.
@@ -85,11 +64,6 @@ class Confirm:
         self.dframes_old = helpers.load_gpkg(self.src.parent / f"{self.source}_old.gpkg", find=True,
                                              layers=["blkpassage", "ferryseg", "junction", "roadseg", "tollpoint"])
 
-        # Define change logs dictionary.
-        self.change_logs = {
-            table: {change: set() for change in ("added", "retired", "modified", "confirmed")} for table in self.dframes
-        }
-
         # NID change lookup for roadseg.
         self.roadseg_nid_changes = dict(zip(self.dframes["roadseg"]["nid"], self.dframes["roadseg"]["nid"]))
 
@@ -99,36 +73,7 @@ class Confirm:
         self.gen_nids()
         self.gen_structids()
         self.update_nid_linkages()
-        self.export_nid_change_logs()
         helpers.export(self.dframes, self.src)
-
-    def export_nid_change_logs(self) -> None:
-        """Exports nid change classifications as log files."""
-
-        logger.info(f"Writing nid change logs to: \"{self.dst}\".")
-
-        # Create change logs directory.
-        Path(self.dst).mkdir(parents=True, exist_ok=True)
-
-        # Iterate tables and nid classification types.
-        for table in self.change_logs:
-            for classification, log in self.change_logs[table].items():
-
-                # Configure log path.
-                log_path = self.dst / f"{self.source}_{table}_{classification}.log"
-
-                # Drop pre-existing File Handler.
-                for f_handler in logger_change_logs.handlers:
-                    logger_change_logs.removeHandler(f_handler)
-
-                # Add File Handler with new log path.
-                f_handler = logging.FileHandler(log_path)
-                f_handler.setLevel(logging.INFO)
-                f_handler.setFormatter(logger.handlers[0].formatter)
-                logger_change_logs.addHandler(f_handler)
-
-                # Write log.
-                logger_change_logs.info(log)
 
     def gen_nids(self) -> None:
         """
@@ -210,22 +155,10 @@ class Confirm:
 
             # Recover nids from wkb-nid lookup.
             df["nid"] = df_wkb.map(wkb_nid_lookup).fillna(default)
-            self.change_logs[table]["confirmed"] = set(df.loc[df["nid"] != default, "nid"])
-
-            # Identify modified records based on match field.
-            if match_field:
-                flag_modified = (df["nid"] != default) & (df[match_field] != df["nid"].map(nid_match_lookup))
-
-                self.change_logs[table]["modified"] = set(df.loc[flag_modified, "nid"])
-                self.change_logs[table]["confirmed"] = \
-                    self.change_logs[table]["confirmed"] - set(df.loc[flag_modified, "nid"])
 
             # Assign a new nid to all required records.
             flag_added = (df["nid"] == default)
             df.loc[flag_added, "nid"] = [uuid.uuid4().hex for _ in range(sum(flag_added))]
-
-            self.change_logs[table]["added"] = set(df.loc[flag_added, "nid"])
-            self.change_logs[table]["retired"] = set(df_old["nid"]) - set(df["nid"])
 
             # Link dissolved geometries to original geometries, if required.
             if table == "roadseg":
@@ -473,22 +406,18 @@ class Confirm:
 
 @click.command()
 @click.argument("source", type=click.Choice("ab bc mb nb nl ns nt nu on pe qc sk yt".split(), False))
-@click.option("--remove / --no-remove", "-r", default=False, show_default=True,
-              help="Remove pre-existing change logs within the data/processed directory for the specified source.")
-def main(source: str, remove: bool = False) -> None:
+def main(source: str) -> None:
     """
     Executes an NRN process.
 
     \b
     :param str source: abbreviation for the source province / territory.
-    :param bool remove: removes pre-existing change logs within the data/processed directory for the specified source,
-        default False.
     """
 
     try:
 
         with helpers.Timer():
-            process = Confirm(source, remove)
+            process = Confirm(source)
             process()
 
     except KeyboardInterrupt:

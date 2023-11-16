@@ -70,7 +70,7 @@ name of the SHP files is structured accordingly::
    "<version>", "Dataset version number."
    "<ENTITY>", "Abbreviated entity name as defined in :ref:`Datasets`."
    "[<MODIFICATION>]", "[] = Optional. Type of modification applied to the dataset entities and attributes in
-   comparison to previous edition. Possible values are identified in :ref:`Change Management Files`."
+   comparison to previous edition."
    ".shp", "Extension of the main geometry file name."
 
 There are also five other files associated with the main geometry file of an entity in SHP format:
@@ -183,28 +183,6 @@ The extension of the file name corresponds to the distribution format.
    "Toll Point", "TOLLPOINT", "Point"
 
 | :sup:`*` Attributes file (.dbf) in SHP format.
-
-.. _Change Management Files:
-
-Change Management Files
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Change management consists in identifying the effects of an addition, confirmation, retirement and modification of the
-objects (geometry and/or attribute) between two consecutive dataset editions. A data file is produced for each effect
-type. The extension of the file name corresponds to the distribution format.
-
-.. csv-table::
-   :header: "Change management Effect name", "SHP File name"
-   :widths: auto
-   :align: left
-
-   "Added", "<SHP File Name>_ADDED"
-   "Confirmed", "<SHP File Name>_CONFIRMED"
-   "Modified", "<SHP File Name>_MODIFIED"
-   "Retired", "<SHP File Name>_RETIRED"
-
-A readme text file named: ``README_<IDENTIFIER>.txt`` that identifies the method used for the *follow-up of the
-geometrical modifications* is provided with the dataset.
 
 Attributes Identification
 =========================

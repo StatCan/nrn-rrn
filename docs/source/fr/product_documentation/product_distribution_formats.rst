@@ -70,7 +70,7 @@ suit la structure suivante : ::
    "<version>", "Version du jeu de données."
    "<ENTITÉ>", "Nom abrégé de l'entité tel que défini à :ref:`Datasets`."
    "[<MODIFICATION>]", "[] = Optionnel. Type de modification apportée aux entités et attributs du jeu de données par
-   rapport à l'édition précédente. Les valeurs possibles sont identifiées à :ref:`Change Management Files`."
+   rapport à l'édition précédente."
    ".shp", "Extension du nom de fichier principal de géométrie."
 
 Dans le format SHP, il y a également cinq autres types de fichiers associés au fichier de géométrie de l'entité :
@@ -187,28 +187,6 @@ L'extension du nom de fichier dépend directement du format de distribution.
    "Segment routier", "SEGMROUT", "Ligne"
 
 | :sup:`*` Fichier d'attributs (.dbf) dans le format SHP.
-
-.. _Change Management Files:
-
-Fichiers de gestion des modifications
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-La gestion des modifications consiste principalement à identifier l'ajout, la confirmation, l'élimination ou la
-modification des objets (géométrie et/ou attribut) entre deux éditions successives d'un jeu de données. Un fichier de
-données est généré pour chaque type d'effet. L'extension du nom de fichier dépend directement du format de distribution.
-
-.. csv-table::
-   :header: "Gestion des modifications Nom de l'effet", "Nom du fichier SHP"
-   :widths: auto
-   :align: left
-
-   "Ajout", "<Nom du fichier SHP>_AJOUT"
-   "Confirmation", "<Nom du fichier SHP>_CONFIRME"
-   "Modification", "<Nom du fichier SHP>_MODIFIE"
-   "Élimination", "<Nom du fichier SHP>_ELIMINE"
-
-La méthode utilisée pour le *suivi des modifications géométriques* est indiquée dans un fichier texte nommé :
-``LISEZMOI_<IDENTIFIANT>.txt`` qui est joint au jeu de données.
 
 Identification des attributs
 ============================

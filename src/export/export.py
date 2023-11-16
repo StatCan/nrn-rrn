@@ -35,7 +35,7 @@ class Export:
 
         :param str source: abbreviation for the source province / territory.
         :param bool remove: removes pre-existing files within the data/processed directory for the specified source,
-            excluding change logs, default False.
+            default False.
         """
 
         self.source = source.lower()
@@ -53,7 +53,7 @@ class Export:
             sys.exit(1)
 
         # Validate and conditionally clear output namespace.
-        namespace = list(filter(lambda f: f.stem != f"{self.source}_change_logs", self.dst.glob("*")))
+        namespace = list(self.dst.glob("*"))
 
         if len(namespace):
             logger.warning("Output namespace already occupied.")
@@ -397,12 +397,12 @@ class Export:
 
         # Configure zip progress bar.
         file_count = 0
-        for data_dir in filter(lambda f: f.name != f"{self.source}_change_logs.zip", root.glob("*")):
+        for data_dir in root.glob("*"):
             file_count += len(list(filter(Path.is_file, data_dir.rglob("*"))))
         zip_progress = trange(file_count, desc="Compressing data", bar_format=self.bar_format)
 
-        # Iterate output directories. Ignore change logs if already zipped.
-        for data_dir in filter(lambda f: f.name != f"{self.source}_change_logs.zip", root.glob("*")):
+        # Iterate output directories.
+        for data_dir in root.glob("*"):
 
             try:
 
@@ -434,8 +434,7 @@ class Export:
 @click.command()
 @click.argument("source", type=click.Choice("ab bc mb nb nl ns nt nu on pe qc sk yt".split(), False))
 @click.option("--remove / --no-remove", "-r", default=False, show_default=True,
-              help="Remove pre-existing files within the data/processed directory for the specified source, excluding "
-                   "change logs.")
+              help="Remove pre-existing files within the data/processed directory for the specified source.")
 def main(source: str, remove: bool = False) -> None:
     """
     Executes an NRN process.
@@ -443,7 +442,7 @@ def main(source: str, remove: bool = False) -> None:
     \b
     :param str source: abbreviation for the source province / territory.
     :param bool remove: removes pre-existing files within the data/processed directory for the specified source,
-        excluding change logs, default False.
+        default False.
     """
 
     try:
