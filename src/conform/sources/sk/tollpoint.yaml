@@ -5,14 +5,14 @@ coverage:
     alpha2: CA-SK
     country: Canada
     subdivision: Saskatchewan
-  website: https://geohub.saskatchewan.ca/datasets/tollpoint-official/about
+  website: Provided directly from data contact.
   update_frequency: continuous
 license:
   url: https://gisappl.saskatchewan.ca/Html5Ext/Resources/GOS_Standard_Unrestricted_Use_Data_Licence_v2.0.pdf
   text: Government of Saskatchewan Standard Unrestricted Use Data License (Version 2.0)
 language: en
 data:
-  filename: 2023/TOLLPOINT_OFFICIAL.shp
+  filename: 2023/TOLLPOINT.shp
   layer:
   driver: ESRI Shapefile
   crs: "EPSG:26913"
