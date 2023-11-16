@@ -79,66 +79,76 @@ des validations en fonction du type général de problème que la validation ten
 Codes d'erreur
 --------------
 
+Certaines validations sont des avertissements destinés à détecter des problèmes potentiels de données et peuvent ne pas
+devoir être résolus selon les circonstances. Pour faire la distinction entre les avertissements et les vraies erreurs,
+chacun des codes d'erreur suivants est étiqueté comme « ferme » ou « légère » :
+
+:ferme: L'erreur doit être résolue.
+:légère: L'erreur doit être examinée et résolue uniquement s'il s'agit réellement d'un problème. Si ce n'est pas un
+         problème, on peut l'ignorer.
+
 E100 - Construction
 ^^^^^^^^^^^^^^^^^^^
 
-:E101: Les arcs doivent avoir une longueur >= 1 mètre, à l'exception des structures (par exemple, les ponts).
-:E102: Les arcs ne doivent pas avoir une longueur nulle.
-:E103: Les arcs doivent être simples (c'est-à-dire qu'ils ne doivent pas se chevaucher, se croiser ou toucher leur
-       intérieur).
+:E101 [légère]: Les arcs doivent avoir une longueur >= 1 mètre, à l'exception des structures (par exemple, les ponts).
+:E102 [ferme]: Les arcs ne doivent pas avoir une longueur nulle.
+:E103 [ferme]: Les arcs doivent être simples (c'est-à-dire qu'ils ne doivent pas se chevaucher, se croiser ou toucher
+               leur intérieur).
 
 E200 - Dédoublement
 ^^^^^^^^^^^^^^^^^^^
 
-:E201: Les entités d'un même jeu de données ne doivent pas être dupliquées.
-:E202: Les arcs du même jeu de données ne doivent pas se chevaucher (c'est-à-dire contenir des sommets adjacents
-       dupliqués).
+:E201 [ferme]: Les entités d'un même jeu de données ne doivent pas être dupliquées.
+:E202 [ferme]: Les arcs du même jeu de données ne doivent pas se chevaucher (c'est-à-dire contenir des sommets adjacents
+               dupliqués).
 
 E300 - Connectivité
 ^^^^^^^^^^^^^^^^^^^
 
-:E301: Les arcs doivent être >= 5 mètres les uns des autres, à l'exclusion des arcs connectés (c'est-à-dire sans
-       pendants).
+:E301 [légère]: Les arcs doivent être >= 5 mètres les uns des autres, à l'exclusion des arcs connectés (c'est-à-dire
+                sans pendants).
 
 E400 - Dates
 ^^^^^^^^^^^^
 
-:E401: Les attributs « datecre » et « daterev » doivent avoir des longueurs de 4, 6 ou 8. Par conséquent, en utilisant
-       des chiffres complétés par des zéros, les dates peuvent représenter les formats : AAAA, AAAAMM ou AAAAMMJJ.
-:E402: Les attributs « datecre » et « daterev » doivent avoir une combinaison AAAAMMJJ valide.
-:E403: Les attributs « datecre » et « daterev » doivent être compris entre 19600101 et la date actuelle, inclusivement.
+:E401 [ferme]: Les attributs « datecre » et « daterev » doivent avoir des longueurs de 4, 6 ou 8. Par conséquent, en
+               utilisant des chiffres complétés par des zéros, les dates peuvent représenter les formats : AAAA, AAAAMM
+               ou AAAAMMJJ.
+:E402 [ferme]: Les attributs « datecre » et « daterev » doivent avoir une combinaison AAAAMMJJ valide.
+:E403 [ferme]: Les attributs « datecre » et « daterev » doivent être compris entre 19600101 et la date actuelle,
+               inclusivement.
 
 E500 - Identifiants
 ^^^^^^^^^^^^^^^^^^^
 
-:E501: Les liaisons IDN doivent être valides.
+:E501 [ferme]: Les liaisons IDN doivent être valides.
 
 E600 - Numéros de sortie
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-:E601: L'attribut « numsortie » doit être identique, à l'exception de la valeur par défaut ou « Aucun », pour tous les
-       arcs partageant un IDN.
-:E602: Lorsque l'attribut « numsortie » n'est pas égal à la valeur par défaut ou « Aucun », l'attribut « classroute »
-       doit être égal à l'un des éléments suivants : « Autoroute », « Bretelle », « Réservée transport commun »,
-       « Route express », « Service ».
+:E601 [ferme]: L'attribut « numsortie » doit être identique, à l'exception de la valeur par défaut ou « Aucun », pour
+               tous les arcs partageant un IDN.
+:E602 [légère]: Lorsque l'attribut « numsortie » n'est pas égal à la valeur par défaut ou « Aucun », l'attribut
+                « classroute » doit être égal à l'un des éléments suivants : « Autoroute », « Bretelle »,
+                « Réservée transport commun », « Route express », « Service ».
 
 E700 - Intégration de traversier
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-:E701: Les arcs de ferry doivent être connectés à un arc routier à au moins un de leurs nœuds.
+:E701 [légère]: Les arcs de ferry doivent être connectés à un arc routier à au moins un de leurs nœuds.
 
 E800 - Nombre de voies
 ^^^^^^^^^^^^^^^^^^^^^^
 
-:E801: L'attribut « nbrvoies » doit être compris entre 1 et 8 inclus.
+:E801 [légère]: L'attribut « nbrvoies » doit être compris entre 1 et 8 inclus.
 
 E900 - Vitesse
 ^^^^^^^^^^^^^^
 
-:E901: L'attribut « vitesse » doit être compris entre 5 et 120, inclusivement.
+:E901 [légère]: L'attribut « vitesse » doit être compris entre 5 et 120, inclusivement.
 
 E1000 - Codage
 ^^^^^^^^^^^^^^
 
-:E1001: L'attribut contient un ou plusieurs points d'interrogation (« ? »), qui peuvent être le résultat d'un codage de
-        caractères non valide.
+:E1001 [légère]: L'attribut contient un ou plusieurs points d'interrogation (« ? »), qui peuvent être le résultat d'un
+                 codage de caractères non valide.
