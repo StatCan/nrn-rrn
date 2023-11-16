@@ -1,5 +1,5 @@
 data:
-  dir: NRN_RRN_<source>_<major_version>_<minor_version>_GPKG
+  dir: NRN_RRN_<source>_GPKG
   file: NRN_<source>_<major_version>_<minor_version>_GPKG_en.gpkg
   driver: GPKG
 conform:

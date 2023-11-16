@@ -1,5 +1,5 @@
 data:
-  dir: NRN_RRN_<source>_<major_version>_<minor_version>_SHAPE/RRN_<source>_<major_version>_<minor_version>_SHAPE_fr
+  dir: NRN_RRN_<source>_SHAPE/RRN_<source>_<major_version>_<minor_version>_SHAPE_fr
   file:
   driver: ESRI Shapefile
 conform:
