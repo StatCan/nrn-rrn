@@ -142,8 +142,3 @@ E1000 - Codage
 
 :E1001: L'attribut contient un ou plusieurs points d'interrogation (« ? »), qui peuvent être le résultat d'un codage de
         caractères non valide.
-
-E1100 - Étendue
-^^^^^^^^^^^^^^^
-
-:E1101: La géométrie n'est pas complètement dans la région source.

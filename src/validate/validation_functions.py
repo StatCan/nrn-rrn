@@ -51,11 +51,6 @@ class Validator:
         # Compile default field values.
         self.defaults_all = helpers.compile_default_values()
 
-        # Load administrative boundary, reprojected to meter-based crs.
-        boundaries = gpd.read_file(filepath.parents[1] / "boundaries.zip", layer="boundaries")
-        boundaries = boundaries.loc[boundaries["source"] == self.source].to_crs(self.to_crs)
-        self.boundary = boundaries["geometry"].iloc[0]
-
         logger.info("Configuring validations.")
 
         # Define validation thresholds.
@@ -175,12 +170,6 @@ class Validator:
                 "datasets": ["addrange", "blkpassage", "ferryseg", "junction", "roadseg", "strplaname", "tollpoint"],
                 "iter_cols": {name: set(df.select_dtypes(include="object").columns) - {"geometry", "nid", "uuid"} for
                               name, df in self.dfs.items()}
-            },
-            1101: {
-                "func": self.scope_,
-                "desc": "Geometry is not completely within the source region.",
-                "datasets": ["blkpassage", "ferryseg", "roadseg", "tollpoint"],
-                "iter_cols": None
             }
         }
 
@@ -826,30 +815,6 @@ class Validator:
 
             # Compile error logs.
             vals = set(series.loc[flag].index)
-            errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
-
-        return errors
-
-    def scope_(self, dataset: str) -> dict:
-        """
-        Validates: Geometry is not completely within the source region.
-
-        :param str dataset: name of the dataset to be validated.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
-        """
-
-        errors = {"values": set(), "query": None}
-
-        # Fetch dataframe.
-        df = self.dfs[dataset].copy(deep=True)
-
-        # Compile indexes of geometries not completely within the source region.
-        invalid_idxs = list(set(range(len(df))) - set(df.sindex.query(self.boundary, predicate="contains")))
-        if len(invalid_idxs):
-
-            # Compile error logs.
-            vals = set(df.iloc[invalid_idxs].index)
             errors["values"] = vals
             errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
 

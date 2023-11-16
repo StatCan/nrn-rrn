@@ -134,8 +134,3 @@ E1000 - Encoding
 ^^^^^^^^^^^^^^^^
 
 :E1001: Attribute contains one or more question mark ("?"), which may be the result of invalid character encoding.
-
-E1100 - Scope
-^^^^^^^^^^^^^
-
-:E1101: Geometry is not completely within the source region.
