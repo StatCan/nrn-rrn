@@ -55,11 +55,11 @@ Tâches de post-traitement
 
 Une fois le pipeline RRN complet terminé, les tâches manuelles suivantes doivent être effectuées :
 
-#. Copiez les documents de sortie dans le référentiel RRN, en écrasant les fichiers existants :
+1. Copiez les documents de sortie dans le référentiel RRN, en écrasant les fichiers existants :
 
    i. Depuis ``nrn-rrn/data/processed/<source>.zip/distribution_docs/en/release_notes.yaml`` à ``nrn-rrn/src/export/distribution_docs/data/release_notes.yaml``.
-   ii. Depuis ``nrn-rrn/data/processed/<source>.zip/distribution_docs/en/release_notes.rst`` à ``nrn-rrn/docs/source/en/product_documentation/release_notes.rst``.
-   iii. Depuis ``nrn-rrn/data/processed/<source>.zip/distribution_docs/fr/release_notes.rst`` à ``nrn-rrn/docs/source/fr/product_documentation/release_notes.rst``.
+   #. Depuis ``nrn-rrn/data/processed/<source>.zip/distribution_docs/en/release_notes.rst`` à ``nrn-rrn/docs/source/en/product_documentation/release_notes.rst``.
+   #. Depuis ``nrn-rrn/data/processed/<source>.zip/distribution_docs/fr/release_notes.rst`` à ``nrn-rrn/docs/source/fr/product_documentation/release_notes.rst``.
 
 #. Utilisez ``git`` pour ``commit`` et ``push`` les fichiers de documentation mis à jour vers le référentiel.
 
@@ -72,25 +72,25 @@ Une fois le pipeline RRN complet terminé, les tâches manuelles suivantes doive
    i. Dans le projet WMS (.aprx), situé dans ``7_Disseminate/wms``, ouvrez l'outil
       « Save As Offline Service Definition » comme indiqué dans la figure 2.
 
-   ii. Sélectionnez / remplissez les paramètres requis dans chaque onglet illustré dans la figure 3. Les propriétés du
-       service dans la figure 3c sont renseignées à l'aide des données suivantes (exclut les propriétés vides) :
+   #. Sélectionnez / remplissez les paramètres requis dans chaque onglet illustré dans la figure 3. Les propriétés du
+      service dans la figure 3c sont renseignées à l'aide des données suivantes (exclut les propriétés vides) :
 
-       * Name: WMS
-       * Title: National Road Network / Réseau routier national
-       * Abstract: NRN WMS service / service WMS du RRN
-       * Keyword: canada, geographic infrastructure, infrastructure géographique, nrn, rrn, national road network, réseau routier national, transport, road transport, transport routier, infrastructure, road maps, carte routière, road networks, réseau routier
-       * ContactOrganization: Statistics Canada / Statistique Canada
-       * Address: 170 Tunney’s Pasture Driveway / 170, Promenade Tunney’s Pasture
-       * AddressType: Civic / Civique
-       * City: Ottawa
-       * StateOrProvince: Ontario
-       * PostCode: K1A 0T6
-       * Country: Canada
-       * ContactVoiceTelephone: 1-800-263-1136
-       * ContactFacsimileTelephone: 1-514-283-9350
-       * ContactElectronicMailAddress: infostats@statcan.gc.ca
+      :Name: WMS
+      :Title: National Road Network / Réseau routier national
+      :Abstract: NRN WMS service / service WMS du RRN
+      :Keyword: canada, geographic infrastructure, infrastructure géographique, nrn, rrn, national road network, réseau routier national, transport, road transport, transport routier, infrastructure, road maps, carte routière, road networks, réseau routier
+      :ContactOrganization: Statistics Canada / Statistique Canada
+      :Address: 170 Tunney’s Pasture Driveway / 170, Promenade Tunney’s Pasture
+      :AddressType: Civic / Civique
+      :City: Ottawa
+      :StateOrProvince: Ontario
+      :PostCode: K1A 0T6
+      :Country: Canada
+      :ContactVoiceTelephone: 1-800-263-1136
+      :ContactFacsimileTelephone: 1-514-283-9350
+      :ContactElectronicMailAddress: infostats@statcan.gc.ca
 
-   iii. « Analyze », puis « Save » le fichier .sd (voir bas de la figure 3c).
+   #. « Analyze », puis « Save » le fichier .sd (voir bas de la figure 3c).
 
 .. figure:: /source/_static/figures/wms_sd_tool_location.png
     :alt: Emplacement de l'outil « Save As Offline Service Definition »
