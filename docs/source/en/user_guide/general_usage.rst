@@ -55,24 +55,21 @@ After completion of the full NRN pipeline, the following manual tasks must be pe
 
 1. Copy output documents to NRN repository, overwriting existing files:
 
-|
    i. From ``nrn-rrn/data/processed/<source>.zip/distribution_docs/en/release_notes.yaml`` to ``nrn-rrn/src/export/distribution_docs/data/release_notes.yaml``.
    #. From ``nrn-rrn/data/processed/<source>.zip/distribution_docs/en/release_notes.rst`` to ``nrn-rrn/docs/source/en/product_documentation/release_notes.rst``.
    #. From ``nrn-rrn/data/processed/<source>.zip/distribution_docs/fr/release_notes.rst`` to ``nrn-rrn/docs/source/fr/product_documentation/release_notes.rst``.
 
-|
 #. Use ``git`` to ``commit`` and ``push`` the updated documentation files to the repository.
-|
+
 #. Copy processed data to the relevant NRN server under subdirectory: ``5_Process``. Ignore aforementioned output documents.
-|
+
 #. Unzip output WMS data and copy File GeoDatabase (``NRN_<SOURCE>_WMS.gdb``) to relevant NRN server under subdirectory: ``7_Disseminate/wms``.
-|
+
 #. Generate a new .sd file (for WMS):
 
-|
    i. In the WMS project (.aprx), located in ``7_Disseminate/wms``, open the "Save As Offline Service Definition" tool
       as shown in Figure 2.
-|
+
    #. Select / populate the required parameters in each tab shown in Figure 3. Service properties in Figure 3c are
       populated using the following data (excludes empty properties):
 
@@ -91,7 +88,6 @@ After completion of the full NRN pipeline, the following manual tasks must be pe
       :ContactFacsimileTelephone: 1-514-283-9350
       :ContactElectronicMailAddress: infostats@statcan.gc.ca
 
-|
    #. "Analyze" and then "Save" the .sd file (see bottom of Figure 3c).
 
 .. figure:: /source/_static/figures/wms_sd_tool_location.png
@@ -104,5 +100,4 @@ After completion of the full NRN pipeline, the following manual tasks must be pe
 
     Figure 3: "Save As Offline Service Definition" tool parameters.
 
-|
 #. Notify relevant individuals of new NRN release via email.
