@@ -65,7 +65,7 @@ Une fois le pipeline RRN complet terminé, les tâches manuelles suivantes doive
 
 #. Copiez les données traitées sur le serveur RRN concerné sous le sous-répertoire : ``5_Process``. Ignorez les documents de sortie susmentionnés.
 
-#. Décompressez les données WMS de sortie et copiez le GeoPackage (``NRN_<SOURCE>_WMS.gpkg``) sur le serveur RRN concerné sous le sous-répertoire : ``7_Disseminate/wms``.
+#. Décompressez les données WMS de sortie et copiez le File GeoDatabase (``NRN_<SOURCE>_WMS.gdb``) sur le serveur RRN concerné sous le sous-répertoire : ``7_Disseminate/wms``.
 
 #. Générez un nouveau fichier .sd (pour WMS) :
 

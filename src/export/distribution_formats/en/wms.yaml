@@ -1,7 +1,7 @@
 data:
   dir: NRN_<source>_WMS
-  file: NRN_<source>_WMS.gpkg
-  driver: GPKG
+  file: NRN_<source>_WMS.gdb
+  driver: OpenFileGDB
 conform:
   blkpassage:
     name: NRN_<source>_BLKPASSAGE

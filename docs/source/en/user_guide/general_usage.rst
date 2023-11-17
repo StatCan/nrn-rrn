@@ -64,7 +64,7 @@ After completion of the full NRN pipeline, the following manual tasks must be pe
 
 #. Copy processed data to the relevant NRN server under subdirectory: ``5_Process``. Ignore aforementioned output documents.
 
-#. Unzip output WMS data and copy GeoPackage (``NRN_<SOURCE>_WMS.gpkg``) to relevant NRN server under subdirectory: ``7_Disseminate/wms``.
+#. Unzip output WMS data and copy File GeoDatabase (``NRN_<SOURCE>_WMS.gdb``) to relevant NRN server under subdirectory: ``7_Disseminate/wms``.
 
 #. Generate a new .sd file (for WMS):
 
