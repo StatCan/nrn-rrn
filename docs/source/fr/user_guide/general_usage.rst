@@ -92,6 +92,8 @@ Une fois le pipeline RRN complet terminé, les tâches manuelles suivantes doive
 
    #. « Analyze », puis « Save » le fichier .sd (voir bas de la figure 3c).
 
+#. Informer les personnes concernées de la nouvelle version du RRN par e-mail.
+
 .. figure:: /source/_static/figures/wms_sd_tool_location.png
     :alt: Emplacement de l'outil « Save As Offline Service Definition »
 
@@ -101,5 +103,3 @@ Une fois le pipeline RRN complet terminé, les tâches manuelles suivantes doive
     :alt: Paramètres de l'outil « Save As Offline Service Definition »
 
     Figure 3 : Paramètres de l'outil « Save As Offline Service Definition ».
-
-#. Informer les personnes concernées de la nouvelle version du RRN par e-mail.

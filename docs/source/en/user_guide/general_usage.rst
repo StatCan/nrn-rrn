@@ -90,6 +90,8 @@ After completion of the full NRN pipeline, the following manual tasks must be pe
 
    #. "Analyze" and then "Save" the .sd file (see bottom of Figure 3c).
 
+#. Notify relevant individuals of new NRN release via email.
+
 .. figure:: /source/_static/figures/wms_sd_tool_location.png
     :alt: "Save As Offline Service Definition" tool location
 
@@ -99,5 +101,3 @@ After completion of the full NRN pipeline, the following manual tasks must be pe
     :alt: "Save As Offline Service Definition" tool parameters
 
     Figure 3: "Save As Offline Service Definition" tool parameters.
-
-#. Notify relevant individuals of new NRN release via email.
