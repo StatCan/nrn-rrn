@@ -72,11 +72,6 @@ Une fois le pipeline RRN complet terminé, les tâches manuelles suivantes doive
    i. Dans le projet WMS (.aprx), situé dans ``7_Disseminate/wms``, ouvrez l'outil
       « Save As Offline Service Definition » comme indiqué dans la figure 2.
 
-.. figure:: /source/_static/figures/wms_sd_tool_location.png
-    :alt: Emplacement de l'outil « Save As Offline Service Definition »
-
-    Figure 2 : Emplacement de l'outil « Save As Offline Service Definition ».
-
    ii. Sélectionnez / remplissez les paramètres requis dans chaque onglet illustré dans la figure 3. Les propriétés du
        service dans la figure 3c sont renseignées à l'aide des données suivantes (exclut les propriétés vides) :
 
@@ -96,6 +91,11 @@ Une fois le pipeline RRN complet terminé, les tâches manuelles suivantes doive
        * ContactElectronicMailAddress: infostats@statcan.gc.ca
 
    iii. « Analyze », puis « Save » le fichier .sd (voir bas de la figure 3c).
+
+.. figure:: /source/_static/figures/wms_sd_tool_location.png
+    :alt: Emplacement de l'outil « Save As Offline Service Definition »
+
+    Figure 2 : Emplacement de l'outil « Save As Offline Service Definition ».
 
 .. figure:: /source/_static/figures/wms_sd_tool_parameters.png
     :alt: Paramètres de l'outil « Save As Offline Service Definition »
