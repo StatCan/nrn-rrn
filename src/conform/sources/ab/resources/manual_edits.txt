@@ -4,10 +4,17 @@ The following python code adds that attribution to roadseg.
 
 import geopandas as gpd
 
+# Define inputs / outputs.
+src_roadseg = "NRN_AB_22_0_ROADSEG.shp"
+src_addrange = "NRN_AB_22_0_ADDRANGE.dbf"
+src_strplaname = "NRN_AB_22_0_STRPLANAME.dbf"
+
+dst_roadseg = "NRN_AB_22_0_ROADSEG.shp"
+
 # Load datasets.
-roadseg = gpd.read_file("NRN_AB_22_0_ROADSEG.shp")
-addrange = gpd.read_file("NRN_AB_22_0_ADDRANGE.dbf")
-strplaname = gpd.read_file("NRN_AB_22_0_STRPLANAME.dbf")
+roadseg = gpd.read_file(src_roadseg)
+addrange = gpd.read_file(src_addrange)
+strplaname = gpd.read_file(src_strplaname)
 
 # Drop duplicates prior to merge operations.
 addrange = addrange.loc[~addrange['NID'].duplicated(keep='first')].copy(deep=True)
@@ -34,4 +41,4 @@ roadseg['L_ADDDIRFG'] = _['L_DIGDIRFG']
 roadseg['R_ADDDIRFG'] = _['R_DIGDIRFG']
 
 # Export dataset.
-roadseg.to_file("NRN_AB_22_0_ROADSEG.shp")
+roadseg.to_file(dst_roadseg)
