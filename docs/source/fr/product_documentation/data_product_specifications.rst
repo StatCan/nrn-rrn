@@ -31,7 +31,7 @@ Responsable du produit
 ----------------------
 
 | GéoBase
-| Stastistique Canada
+| Statistique Canada
 | Centre de géomatique statistique
 | 170, Promenade Tunney's Pasture,
 | Ottawa, Ontario, Canada

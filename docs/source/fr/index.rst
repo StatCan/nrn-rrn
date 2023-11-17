@@ -22,7 +22,7 @@ Documentation du Réseau routier national
 Coordonnées
 ===========
 
-| Stastistique Canada
+| Statistique Canada
 | Centre de géomatique statistique
 | 170, Promenade Tunney's Pasture,
 | Ottawa, Ontario, Canada

@@ -53,13 +53,52 @@ Post-Processing Tasks
 
 After completion of the full NRN pipeline, the following manual tasks must be performed:
 
-1. Copy output documents to NRN repository, overwriting existing files:
+#. Copy output documents to NRN repository, overwriting existing files:
 
    i. From ``nrn-rrn/data/processed/<source>.zip/distribution_docs/en/release_notes.yaml`` to ``nrn-rrn/src/export/distribution_docs/data/release_notes.yaml``.
    ii. From ``nrn-rrn/data/processed/<source>.zip/distribution_docs/en/release_notes.rst`` to ``nrn-rrn/docs/source/en/product_documentation/release_notes.rst``.
    iii. From ``nrn-rrn/data/processed/<source>.zip/distribution_docs/fr/release_notes.rst`` to ``nrn-rrn/docs/source/fr/product_documentation/release_notes.rst``.
 
-2. Use ``git`` to ``commit`` and ``push`` the updated documentation files to the repository.
-3. Copy processed data to the relevant NRN server under subdirectory: ``5_Process``. Ignore aforementioned output documents.
-4. Unzip output WMS data and copy GeoPackage (``NRN_<SOURCE>_WMS.gpkg``) to relevant NRN server under subdirectory: ``7_Disseminate/wms``.
-5. Notify relevant individuals of new NRN release via email.
+
+#. Use ``git`` to ``commit`` and ``push`` the updated documentation files to the repository.
+
+#. Copy processed data to the relevant NRN server under subdirectory: ``5_Process``. Ignore aforementioned output documents.
+
+#. Unzip output WMS data and copy GeoPackage (``NRN_<SOURCE>_WMS.gpkg``) to relevant NRN server under subdirectory: ``7_Disseminate/wms``.
+
+#. Generate a new .sd file (for WMS):
+
+   i. In the WMS project (.aprx), located in ``7_Disseminate/wms``, open the "Save As Offline Service Definition" tool
+      as shown in Figure 2.
+
+.. figure:: /source/_static/figures/wms_sd_tool_location.png
+    :alt: "Save As Offline Service Definition" tool location
+
+    Figure 2: "Save As Offline Service Definition" tool location.
+
+   ii. Select / populate the required parameters in each tab shown in Figure 3. Service properties in Figure 3c are
+       populated using the following data (excludes empty properties):
+
+       * Name: WMS
+       * Title: National Road Network / Réseau routier national
+       * Abstract: NRN WMS service / service WMS du RRN
+       * Keyword: canada, geographic infrastructure, infrastructure géographique, nrn, rrn, national road network, réseau routier national, transport, road transport, transport routier, infrastructure, road maps, carte routière, road networks, réseau routier
+       * ContactOrganization: Statistics Canada / Statistique Canada
+       * Address: 170 Tunney’s Pasture Driveway / 170, Promenade Tunney’s Pasture
+       * AddressType: Civic / Civique
+       * City: Ottawa
+       * StateOrProvince: Ontario
+       * PostCode: K1A 0T6
+       * Country: Canada
+       * ContactVoiceTelephone: 1-800-263-1136
+       * ContactFacsimileTelephone: 1-514-283-9350
+       * ContactElectronicMailAddress: infostats@statcan.gc.ca
+
+   iii. "Analyze" and then "Save" the .sd file (see bottom of Figure 3c).
+
+.. figure:: /source/_static/figures/wms_sd_tool_parameters.png
+    :alt: "Save As Offline Service Definition" tool parameters
+
+    Figure 3: "Save As Offline Service Definition" tool parameters.
+
+#. Notify relevant individuals of new NRN release via email.
