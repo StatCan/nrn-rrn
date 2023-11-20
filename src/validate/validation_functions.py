@@ -3,7 +3,6 @@ import logging
 import math
 import pandas as pd
 import sys
-from collections import defaultdict
 from copy import deepcopy
 from datetime import datetime
 from itertools import chain
@@ -38,7 +37,7 @@ class Validator:
         :param Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]] dfs: dictionary of NRN datasets as (Geo)DataFrames.
         """
 
-        self.errors = defaultdict(list)
+        self.errors = dict()
         self.source = source
         self.id = "uuid"
         self.to_crs = "EPSG:3348"
@@ -62,65 +61,51 @@ class Validator:
         self.validations = {
             101: {
                 "func": self.construction_min_length,
-                "desc": f"Arcs must be >= {self._min_len} meter{'s' if self._min_len > 1 else ''} in length, except "
-                        f"structures (e.g. Bridges).",
                 "datasets": ["ferryseg", "roadseg"],
                 "iter_cols": None
             },
             102: {
                 "func": self.construction_zero_length,
-                "desc": "Arcs must not have zero length.",
                 "datasets": ["ferryseg", "roadseg"],
                 "iter_cols": None
             },
             103: {
                 "func": self.construction_simple,
-                "desc": "Arcs must be simple (i.e. must not self-overlap, self-cross, nor touch their interior).",
                 "datasets": ["ferryseg", "roadseg"],
                 "iter_cols": None
             },
             201: {
                 "func": self.duplication_duplicated,
-                "desc": "Features within the same dataset must not be duplicated.",
                 "datasets": ["blkpassage", "ferryseg", "roadseg", "tollpoint"],
                 "iter_cols": None
             },
             202: {
                 "func": self.duplication_overlap,
-                "desc": "Arcs within the same dataset must not overlap (i.e. contain duplicated adjacent vertices).",
                 "datasets": ["ferryseg", "roadseg"],
                 "iter_cols": None
             },
             301: {
                 "func": self.connectivity_min_distance,
-                "desc": f"Arcs must be >= {self._min_dist} meter{'s' if self._min_dist > 1 else ''} from each other, "
-                        f"excluding connected arcs (i.e. no dangles).",
                 "datasets": ["ferryseg", "roadseg"],
                 "iter_cols": None
             },
             401: {
                 "func": self.dates_length,
-                "desc": "Attributes \"credate\" and \"revdate\" must have lengths of 4, 6, or 8. Therefore, using "
-                        "zero-padded digits, dates can represent in the formats: YYYY, YYYYMM, or YYYYMMDD.",
                 "datasets": ["addrange", "blkpassage", "ferryseg", "roadseg", "strplaname", "tollpoint"],
                 "iter_cols": ["credate", "revdate"]
             },
             402: {
                 "func": self.dates_combination,
-                "desc": "Attributes \"credate\" and \"revdate\" must have a valid YYYYMMDD combination.",
                 "datasets": ["addrange", "blkpassage", "ferryseg", "roadseg", "strplaname", "tollpoint"],
                 "iter_cols": ["credate", "revdate"]
             },
             403: {
                 "func": self.dates_range,
-                "desc": "Attributes \"credate\" and \"revdate\" must be between 19600101 and the current date, "
-                        "inclusively.",
                 "datasets": ["addrange", "blkpassage", "ferryseg", "roadseg", "strplaname", "tollpoint"],
                 "iter_cols": ["credate", "revdate"]
             },
             501: {
                 "func": self.identifiers_nid_linkages,
-                "desc": "NID linkages must be valid.",
                 "datasets": ["addrange", "altnamlink", "blkpassage", "roadseg", "tollpoint"],
                 "iter_cols": {
                     "addrange": ["l_altnanid", "l_offnanid", "r_altnanid", "r_offnanid"],
@@ -132,41 +117,31 @@ class Validator:
             },
             601: {
                 "func": self.exit_numbers_nid,
-                "desc": "Attribute \"exitnbr\" must be identical, excluding the default value or \"None\", for all "
-                        "arcs sharing an NID.",
                 "datasets": ["roadseg"],
                 "iter_cols": None
             },
             602: {
                 "func": self.exit_numbers_roadclass,
-                "desc": "When attribute \"exitnbr\" is not equal to the default value or \"None\", attribute "
-                        "\"roadclass\" must equal one of the following: \"Expressway / Highway\", \"Freeway\", "
-                        "\"Ramp\", \"Rapid Transit\", \"Service Lane\".",
                 "datasets": ["roadseg"],
                 "iter_cols": None
             },
             701: {
                 "func": self.ferry_integration_,
-                "desc": "Ferry arcs must be connected to a road arc at at least one of their nodes.",
                 "datasets": ["ferryseg"],
                 "iter_cols": None
             },
             801: {
                 "func": self.number_of_lanes_,
-                "desc": "Attribute \"nbrlanes\" must be between 1 and 8, inclusively.",
                 "datasets": ["roadseg"],
                 "iter_cols": None
             },
             901: {
                 "func": self.speed_,
-                "desc": "Attribute \"speed\" must be between 5 and 120, inclusively.",
                 "datasets": ["roadseg"],
                 "iter_cols": None
             },
             1001: {
                 "func": self.encoding_,
-                "desc": "Attribute contains one or more question mark (\"?\"), which may be the result of invalid "
-                        "character encoding.",
                 "datasets": ["addrange", "blkpassage", "ferryseg", "junction", "roadseg", "strplaname", "tollpoint"],
                 "iter_cols": {name: set(df.select_dtypes(include="object").columns) - {"geometry", "nid", "uuid"} for
                               name, df in self.dfs.items()}
@@ -212,7 +187,7 @@ class Validator:
 
             # Iterate validations.
             for code, params in self.validations.items():
-                func, desc, datasets, iter_cols = itemgetter("func", "desc", "datasets", "iter_cols")(params)
+                func, datasets, iter_cols = itemgetter("func", "datasets", "iter_cols")(params)
 
                 # Configure valid datasets.
                 datasets = set(datasets).intersection(self.dfs)
@@ -232,26 +207,22 @@ class Validator:
                     if iter_cols:
                         for col in iter_cols[dataset]:
 
-                            pbar.set_description(f"Applying validation E{code}: \"{func.__name__}\". Current target: "
+                            pbar.set_description(f"Applying validation {code}: \"{func.__name__}\". Current target: "
                                                  f"{dataset}.{col}")
 
-                            # Execute validation and store non-empty results.
-                            results = func(dataset, col=col)
-                            if len(results["values"]):
-                                self.errors[f"E{code} - {dataset}.{col} - {desc}"] = deepcopy(results)
+                            # Execute validation and store results.
+                            self.errors[f"{code} - {dataset}.{col}"] = deepcopy(func(dataset, col=col))
 
                             # Update progress bar.
                             pbar.update(1)
 
                     else:
 
-                        pbar.set_description(f"Applying validation E{code}: \"{func.__name__}\". Current target: "
+                        pbar.set_description(f"Applying validation {code}: \"{func.__name__}\". Current target: "
                                              f"{dataset}")
 
-                        # Execute validation and store non-empty results.
-                        results = func(dataset)
-                        if len(results["values"]):
-                            self.errors[f"E{code} - {dataset} - {desc}"] = deepcopy(results)
+                        # Execute validation and store results.
+                        self.errors[f"{code} - {dataset}"] = deepcopy(func(dataset))
 
                         # Update progress bar.
                         pbar.update(1)
@@ -264,16 +235,16 @@ class Validator:
             logger.exception(e)
             sys.exit(1)
 
-    def connectivity_min_distance(self, dataset: str) -> dict:
+    def connectivity_min_distance(self, dataset: str) -> set:
         f"""
         Validates: Arcs must be >= {self._min_dist} meter{'s' if self._min_dist > 1 else ''} from each other, excluding 
         connected arcs (i.e. no dangles).
 
         :param str dataset: name of the dataset to be validated.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
+        :return set: set containing identifiers of erroneous records.
         """
 
-        errors = {"values": set(), "query": None}
+        errors = set()
 
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
@@ -317,32 +288,23 @@ class Validator:
 
             # Filter to those results with disconnected segments.
             flag = deadends["disconnected"].map(len) > 0
+
+            # Compile error logs.
             if sum(flag):
-
-                # Remove duplicated results.
-                deadends = deadends.loc[flag]
-                deadends["ids"] = deadends[[self.id, "disconnected"]].apply(
-                    lambda row: tuple({row.iloc[0], *row.iloc[1]}), axis=1)
-                deadends.drop_duplicates(subset="ids", keep="first", inplace=True)
-
-                # Compile error logs.
-                errors["values"] = deadends["ids"].map(
-                    lambda ids: f"Disconnected features are too close: {*ids,}".replace(",)", ")")).to_list()
-                vals = set(chain.from_iterable(deadends["ids"]))
-                errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
+                errors.update(set(deadends.loc[flag, self.id]))
 
         return errors
 
-    def construction_min_length(self, dataset: str) -> dict:
+    def construction_min_length(self, dataset: str) -> set:
         f"""
         Validates: Arcs must be >= {self._min_len} meter{'s' if self._min_len > 1 else ''} in length, except structures 
         (e.g. Bridges).
 
         :param str dataset: name of the dataset to be validated.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
+        :return set: set containing identifiers of erroneous records.
         """
 
-        errors = {"values": set(), "query": None}
+        errors = set()
 
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
@@ -368,73 +330,67 @@ class Validator:
 
             # Modify flag to exclude isolated structures.
             flag = (flag & (~isolated_structure_flag))
-            if sum(flag):
 
-                # Compile error logs.
-                vals = set(df.loc[flag].index)
-                errors["values"] = vals
-                errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
+            # Compile error logs.
+            if sum(flag):
+                errors.update(set(df.loc[flag].index))
 
         return errors
 
-    def construction_simple(self, dataset: str) -> dict:
+    def construction_simple(self, dataset: str) -> set:
         """
         Validates: Arcs must be simple (i.e. must not self-overlap, self-cross, nor touch their interior).
 
         :param str dataset: name of the dataset to be validated.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
+        :return set: set containing identifiers of erroneous records.
         """
 
-        errors = {"values": set(), "query": None}
+        errors = set()
 
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
 
         # Flag complex (non-simple) geometries.
         flag = ~df.is_simple
-        if sum(flag):
 
-            # Compile error logs.
-            vals = set(df.loc[flag].index)
-            errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
+        # Compile error logs.
+        if sum(flag):
+            errors.update(set(df.loc[flag].index))
 
         return errors
 
-    def construction_zero_length(self, dataset: str) -> dict:
+    def construction_zero_length(self, dataset: str) -> set:
         """
         Validates: Arcs must not have zero length.
 
         :param str dataset: name of the dataset to be validated.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
+        :return set: set containing identifiers of erroneous records.
         """
 
-        errors = {"values": set(), "query": None}
+        errors = set()
 
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
 
         # Flag arcs which are too short.
         flag = df.length == 0
-        if sum(flag):
 
-            # Compile error logs.
-            vals = set(df.loc[flag].index)
-            errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
+        # Compile error logs.
+        if sum(flag):
+            errors.update(set(df.loc[flag].index))
 
         return errors
 
-    def dates_combination(self, dataset: str, col: str) -> dict:
+    def dates_combination(self, dataset: str, col: str) -> set:
         """
         Validates: Attributes \"credate\" and \"revdate\" must have a valid YYYYMMDD combination.
 
         :param str dataset: name of the dataset to be validated.
         :param str col: column name.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
+        :return set: set containing identifiers of erroneous records.
         """
 
-        errors = {"values": set(), "query": None}
+        errors = set()
 
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
@@ -452,29 +408,24 @@ class Validator:
 
             # Flag records with invalid YYYYMMDD combination.
             flag = pd.to_datetime(series_, format=strftime[length], errors="coerce").isna()
+
+            # Compile error logs.
             if sum(flag):
-
-                # Compile error logs.
-                vals = set(series_.loc[flag].index)
-                errors["values"].update(vals)
-
-        # Compile error log query.
-        if len(errors["values"]):
-            errors["query"] = f"\"{self.id}\" in {*errors['values'],}".replace(",)", ")")
+                errors.update(set(series_.loc[flag].index))
 
         return errors
 
-    def dates_length(self, dataset: str, col: str) -> dict:
+    def dates_length(self, dataset: str, col: str) -> set:
         """
         Validates: Attributes \"credate\" and \"revdate\" must have lengths of 4, 6, or 8. Therefore, using
             zero-padded digits, dates can represent in the formats: YYYY, YYYYMM, or YYYYMMDD.
 
         :param str dataset: name of the dataset to be validated.
         :param str col: column name.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
+        :return set: set containing identifiers of erroneous records.
         """
 
-        errors = {"values": set(), "query": None}
+        errors = set()
 
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
@@ -485,25 +436,23 @@ class Validator:
 
         # Flag records with an invalid length.
         flag = ~series.map(lambda val: int(math.log10(val)) + 1).isin({4, 6, 8})
-        if sum(flag):
 
-            # Compile error logs.
-            vals = set(series.loc[flag].index)
-            errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
+        # Compile error logs.
+        if sum(flag):
+            errors.update(set(series.loc[flag].index))
 
         return errors
 
-    def dates_range(self, dataset: str, col: str) -> dict:
+    def dates_range(self, dataset: str, col: str) -> set:
         """
         Validates: Attributes \"credate\" and \"revdate\" must be between 19600101 and the current date, inclusively.
 
         :param str dataset: name of the dataset to be validated.
         :param str col: column name.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
+        :return set: set containing identifiers of erroneous records.
         """
 
-        errors = {"values": set(), "query": None}
+        errors = set()
 
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
@@ -525,24 +474,22 @@ class Validator:
 
         # Flag records with invalid range.
         flag = ~series.between(left=19600101, right=today, inclusive="both")
-        if sum(flag):
 
-            # Compile error logs.
-            vals = set(series.loc[flag].index)
-            errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
+        # Compile error logs.
+        if sum(flag):
+            errors.update(set(series.loc[flag].index))
 
         return errors
 
-    def duplication_duplicated(self, dataset: str) -> dict:
+    def duplication_duplicated(self, dataset: str) -> set:
         """
         Validates: Features within the same dataset must not be duplicated.
 
         :param str dataset: name of the dataset to be validated.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
+        :return set: set containing identifiers of erroneous records.
         """
 
-        errors = {"values": set(), "query": None}
+        errors = set()
         dups = pd.Series()
 
         # Fetch dataframe.
@@ -572,22 +519,19 @@ class Validator:
 
         # Compile error logs.
         if len(dups):
-
-            vals = set(dups.index)
-            errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
+            errors.update(set(dups.index))
 
         return errors
 
-    def duplication_overlap(self, dataset: str) -> dict:
+    def duplication_overlap(self, dataset: str) -> set:
         """
         Validates: Arcs within the same dataset must not overlap (i.e. contain duplicated adjacent vertices).
 
         :param str dataset: name of the dataset to be validated.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
+        :return set: set containing identifiers of erroneous records.
         """
 
-        errors = {"values": set(), "query": None}
+        errors = set()
 
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
@@ -597,26 +541,24 @@ class Validator:
 
         # Flag arcs which have one or more overlapping segments.
         flag = overlaps.map(len) > 0
-        if sum(flag):
 
-            # Compile error logs.
-            vals = set(overlaps.loc[flag].index)
-            errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
+        # Compile error logs.
+        if sum(flag):
+            errors.update(set(overlaps.loc[flag].index))
 
         return errors
 
-    def encoding_(self, dataset: str, col: str) -> dict:
+    def encoding_(self, dataset: str, col: str) -> set:
         """
         Validates: Attribute contains one or more question mark (\"?\"), which may be the result of invalid character
             encoding.
 
         :param str dataset: name of the dataset to be validated.
         :param str col: column name.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
+        :return set: set containing identifiers of erroneous records.
         """
 
-        errors = {"values": set(), "query": None}
+        errors = set()
 
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
@@ -627,25 +569,23 @@ class Validator:
 
         # Flag records containing a question mark ("?").
         flag = series.str.contains("?", regex=False)
-        if sum(flag):
 
-            # Compile error logs.
-            vals = set(series.loc[flag].index)
-            errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
+        # Compile error logs.
+        if sum(flag):
+            errors.update(set(series.loc[flag].index))
 
         return errors
 
-    def exit_numbers_nid(self, dataset: str) -> dict:
+    def exit_numbers_nid(self, dataset: str) -> set:
         """
         Validates: Attribute \"exitnbr\" must be identical, excluding the default value or \"None\", for all arcs
             sharing an NID.
 
         :param str dataset: name of the dataset to be validated.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
+        :return set: set containing identifiers of erroneous records.
         """
 
-        errors = {"values": set(), "query": None}
+        errors = set()
 
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
@@ -660,26 +600,27 @@ class Validator:
 
             # Compile nids with multiple exitnbrs.
             invalid_nids = set(nid_exitnbrs.loc[nid_exitnbrs.map(len) > 1].index)
-            if len(invalid_nids):
 
-                # Compile error logs.
-                vals = set(df.loc[df["nid"].isin(invalid_nids)].index)
-                errors["values"] = vals
-                errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
+            # Flag records with an invalid nid.
+            flag = df["nid"].isin(invalid_nids)
+
+            # Compile error logs.
+            if sum(flag):
+                errors.update(set(df.loc[flag].index))
 
         return errors
 
-    def exit_numbers_roadclass(self, dataset: str) -> dict:
+    def exit_numbers_roadclass(self, dataset: str) -> set:
         """
         Validates: When attribute \"exitnbr\" is not equal to the default value or \"None\", attribute \"roadclass\"
             must equal one of the following: \"Expressway / Highway\", \"Freeway\", \"Ramp\", \"Rapid Transit\",
             \"Service Lane\".
 
         :param str dataset: name of the dataset to be validated.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
+        :return set: set containing identifiers of erroneous records.
         """
 
-        errors = {"values": set(), "query": None}
+        errors = set()
 
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
@@ -690,24 +631,22 @@ class Validator:
 
         # Flag records with non-default and non-none exitnbr and roadclass not in the valid list.
         flag = ~(df["exitnbr"].isin({default_exitnbr, "None"})) & ~(df["roadclass"].isin(valid_roadclass))
-        if sum(flag):
 
-            # Compile error logs.
-            vals = set(df.loc[flag].index)
-            errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
+        # Compile error logs.
+        if sum(flag):
+            errors.update(set(df.loc[flag].index))
 
         return errors
 
-    def ferry_integration_(self, dataset: str) -> dict:
+    def ferry_integration_(self, dataset: str) -> set:
         """
         Validates: Ferry arcs must be connected to a road arc at at least one of their nodes.
 
         :param str dataset: name of the dataset to be validated.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
+        :return set: set containing identifiers of erroneous records.
         """
 
-        errors = {"values": set(), "query": None}
+        errors = set()
 
         # Fetch dataframes.
         ferryseg = self.dfs[dataset].copy(deep=True)
@@ -721,27 +660,25 @@ class Validator:
         invalid_nodes = nodes_ferryseg.difference(nodes_roadseg)
         if len(invalid_nodes):
 
-            # Flag records where both nodes are invalid.
+            # Compile ids of records where both nodes are invalid.
             invalid_ids = set(ferryseg.loc[(ferryseg["pt_start"].isin(invalid_nodes)) &
                                            (ferryseg["pt_end"].isin(invalid_nodes))].index)
-            if len(invalid_ids):
 
-                # Compile error logs.
-                errors["values"] = invalid_ids
-                errors["query"] = f"\"{self.id}\" in {*invalid_ids,}".replace(",)", ")")
+            # Compile error logs.
+            errors.update(invalid_ids)
 
         return errors
 
-    def identifiers_nid_linkages(self, dataset: str, col: str) -> dict:
+    def identifiers_nid_linkages(self, dataset: str, col: str) -> set:
         """
         Validates: NID linkages must be valid.
 
         :param str dataset: name of the dataset to be validated.
         :param str col: column name.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
+        :return set: set containing identifiers of erroneous records.
         """
 
-        errors = {"values": set(), "query": None}
+        errors = set()
 
         # Configure dataset nid linkages.
         linkages = {
@@ -783,24 +720,22 @@ class Validator:
 
                 # Flag missing identifiers.
                 flag = ~series.isin(nids)
-                if sum(flag):
 
-                    # Compile error logs.
-                    vals = set(series.loc[flag].index)
-                    errors["values"] = vals
-                    errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
+                # Compile error logs.
+                if sum(flag):
+                    errors.update(set(series.loc[flag].index))
 
         return errors
 
-    def number_of_lanes_(self, dataset: str) -> dict:
+    def number_of_lanes_(self, dataset: str) -> set:
         """
         Validates: Attribute \"nbrlanes\" must be between 1 and 8, inclusively.
 
         :param str dataset: name of the dataset to be validated.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
+        :return set: set containing identifiers of erroneous records.
         """
 
-        errors = {"values": set(), "query": None}
+        errors = set()
 
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
@@ -811,24 +746,22 @@ class Validator:
 
         # Flag records with invalid values.
         flag = ~series.between(left=1, right=8, inclusive="both")
-        if sum(flag):
 
-            # Compile error logs.
-            vals = set(series.loc[flag].index)
-            errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
+        # Compile error logs.
+        if sum(flag):
+            errors.update(set(series.loc[flag].index))
 
         return errors
 
-    def speed_(self, dataset: str) -> dict:
+    def speed_(self, dataset: str) -> set:
         """
         Validates: Attribute \"speed\" must be between 5 and 120, inclusively.
 
         :param str dataset: name of the dataset to be validated.
-        :return dict: dict containing error messages and, optionally, a query to identify erroneous records.
+        :return set: set containing identifiers of erroneous records.
         """
 
-        errors = {"values": set(), "query": None}
+        errors = set()
 
         # Fetch dataframe.
         df = self.dfs[dataset].copy(deep=True)
@@ -839,11 +772,9 @@ class Validator:
 
         # Flag records with invalid values.
         flag = ~series.between(left=5, right=120, inclusive="both")
-        if sum(flag):
 
-            # Compile error logs.
-            vals = set(series.loc[flag].index)
-            errors["values"] = vals
-            errors["query"] = f"\"{self.id}\" in {*vals,}".replace(",)", ")")
+        # Compile error logs.
+        if sum(flag):
+            errors.update(set(series.loc[flag].index))
 
         return errors

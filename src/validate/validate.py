@@ -1,7 +1,7 @@
 import click
 import logging
-import re
 import sys
+from itertools import chain
 from pathlib import Path
 
 filepath = Path(__file__).resolve()
@@ -63,16 +63,27 @@ class Validate:
     def __call__(self) -> None:
         """Executes an NRN process."""
 
-        self.validations()
+        self._validate()
         self.log_errors()
+
+    def _validate(self) -> None:
+        """Applies a set of validations to one or more NRN datasets."""
+
+        logger.info("Initiating validator.")
+
+        # Instantiate and execute validator class.
+        self.Validator = Validator(self.dframes, source=self.source)
+        self.Validator()
 
     def log_errors(self) -> None:
         """Outputs error logs returned by validation functions."""
 
         logger.info(f"Writing error logs: \"{self.validations_log}\".")
 
-        total_records = 0
-        unique_records = set()
+        # Quantify errors.
+        identifiers = list(chain.from_iterable(self.Validator.errors.values()))
+        total_records = len(identifiers)
+        total_unique_records = len(set(identifiers))
 
         # Add File Handler to validation logger.
         f_handler = logging.FileHandler(self.validations_log)
@@ -81,27 +92,15 @@ class Validate:
         logger_validations.addHandler(f_handler)
 
         # Iterate and log errors.
-        for code, errors in sorted(self.Validator.errors.items()):
+        for code, vals in sorted(self.Validator.errors.items()):
+            if len(vals):
 
-            # Format and write logs.
-            errors["values"] = "\n".join(map(str, errors["values"]))
-            logger_validations.warning(f"{code}\n\nValues:\n{errors['values']}\n\nQuery: {errors['query']}\n")
-
-            # Quantify invalid records.
-            total_records += errors["query"].count(",") + 1
-            unique_records.update(set(re.findall(pattern=r"\((.*?)\)", string=errors["query"])[0].split(",")))
+                # Format and write logs.
+                values = "\n".join(map(str, vals))
+                logger_validations.warning(f"{code}\n\nValues:\n{values}\n")
 
         logger.info(f"Total records flagged by validations: {total_records:,d}.")
-        logger.info(f"Total unique records flagged by validations: {len(unique_records):,d}.")
-
-    def validations(self) -> None:
-        """Applies a set of validations to one or more NRN datasets."""
-
-        logger.info("Initiating validator.")
-
-        # Instantiate and execute validator class.
-        self.Validator = Validator(self.dframes, source=self.source)
-        self.Validator()
+        logger.info(f"Total unique records flagged by validations: {total_unique_records:,d}.")
 
 
 @click.command()
