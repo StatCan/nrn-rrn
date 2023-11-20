@@ -244,9 +244,7 @@ class Export:
                     sys.exit(1)
 
     def gen_wms_attributes(self) -> None:
-        """
-        Generate WMS attributes for roadseg.
-        """
+        """Generate WMS attributes for roadseg."""
 
         logger.info(f"Generating WMS attributes.")
 

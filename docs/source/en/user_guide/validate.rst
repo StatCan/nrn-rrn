@@ -15,50 +15,10 @@ The ``validate`` process enforces a set of validations and restrictions on NRN d
 intention of the ``validate`` process is to flag actual and potential data errors before continuing with the remainder
 of the NRN pipeline.
 
-The only output of ``validate`` is a log (.log) file which will be exported to:
-``nrn-rrn/data/interim/validations.log``. The intended process is for the user to repair the original source data based
-on the specified errors in the output log. Once completed, the entire pipeline should be rerun from the initial process.
-
-.. admonition:: Note
-
-    While the unique identifiers logged by the validations exist only on the interim data, edits should only to be made
-    to the raw data. Therefore, when editing, both the raw and interim data are required (interim data for locating the
-    invalid features and raw data for editing). Furthermore, after completing the required edits, the pipeline must be
-    re-run from the beginning.
-
-Log Structure
-=============
-
-The output log will contain a series of standardized logs for each validation executed by the ``validate`` process.
-Each logged validation will have the same content structure.
-
-**Generic structure:** ::
-
-    <timestamp> - WARNING: E<error code> - <NRN dataset> - <Error description>.
-
-    Values:
-    <uuid>
-    ...
-
-    Query: "uuid" in ('<uuid>', ...)
-
-**Specific structure:** ::
-
-    2022-01-04 16:00:51 - WARNING: E201 - roadseg - Features within the same dataset must not be duplicated.
-
-    Values:
-    76d283b46076400c900ed84c02ab605f
-    c9ac2f60a0814eec9ff56bf95ad79804
-
-    Query: "uuid" in ('76d283b46076400c900ed84c02ab605f', 'c9ac2f60a0814eec9ff56bf95ad79804')
-
-**Components:**
-
-:Values: A list containing the ``uuid`` value of each record flagged by the validation for the NRN dataset. ``uuid`` is
-         a unique identifier assigned to each record of each NRN dataset for the purpose of tracking and identifying
-         records throughout the NRN pipeline.
-:Query: A QGIS expression to query all records flagged by the validation for the NRN dataset. This will contain the
-        same values as ``Values``.
+The only output of ``validate`` is a GeoPackage which will contain a subset of features for each validation and dataset
+which was flagged by that validation. This GeoPackage will be exported to: ``nrn-rrn/data/interim/validations.gpkg``.
+The intended process is for the user to repair the original source data based on the subset datasets in the output
+GeoPackage. Once completed, the entire pipeline should be rerun from the beginning.
 
 Validation Errors
 =================
@@ -68,7 +28,7 @@ Error Structure
 
 All validations have been assigned a unique error code with the following structure::
 
-    E<major code (1-2 digits)><minor code (2 digits)>
+    <major code (1-2 digits)><minor code (2 digits)>
 
 Major and minor error codes are used to provide a more simplified and efficient classification of validations based on
 the general type of issue that the validation is attempting to address.
@@ -83,61 +43,60 @@ tagged as either "hard" or "soft":
 :hard: The error must be resolved.
 :soft: The error should be reviewed and resolved only if actually an issue. If it is not an issue, it can be ignored.
 
-E100 - Construction
+100 - Construction
 ^^^^^^^^^^^^^^^^^^^
 
-:E101 [soft]: Arcs must be >= 1 meter in length, except structures (e.g. Bridges).
-:E102 [hard]: Arcs must not have zero length.
-:E103 [hard]: Arcs must be simple (i.e. must not self-overlap, self-cross, nor touch their interior).
+:101 [soft]: Arcs must be >= 1 meter in length, except structures (e.g. Bridges).
+:102 [hard]: Arcs must not have zero length.
+:103 [hard]: Arcs must be simple (i.e. must not self-overlap, self-cross, nor touch their interior).
 
-E200 - Duplication
+200 - Duplication
 ^^^^^^^^^^^^^^^^^^
 
-:E201 [hard]: Features within the same dataset must not be duplicated.
-:E202 [hard]: Arcs within the same dataset must not overlap (i.e. contain duplicated adjacent vertices).
+:201 [hard]: Features within the same dataset must not be duplicated.
+:202 [hard]: Arcs within the same dataset must not overlap (i.e. contain duplicated adjacent vertices).
 
-E300 - Connectivity
+300 - Connectivity
 ^^^^^^^^^^^^^^^^^^^
 
-:E301 [soft]: Arcs must be >= 5 meters from each other, excluding connected arcs (i.e. no dangles).
+:301 [soft]: Arcs must be >= 5 meters from each other, excluding connected arcs (i.e. no dangles).
 
-E400 - Dates
+400 - Dates
 ^^^^^^^^^^^^
 
-:E401 [hard]: Attributes "credate" and "revdate" must have lengths of 4, 6, or 8. Therefore, using zero-padded digits,
-              dates can represent in the formats: YYYY, YYYYMM, or YYYYMMDD.
-:E402 [hard]: Attributes "credate" and "revdate" must have a valid YYYYMMDD combination.
-:E403 [hard]: Attributes "credate" and "revdate" must be between 19600101 and the current date, inclusively.
+:401 [hard]: Attributes "credate" and "revdate" must have lengths of 4, 6, or 8. Therefore, using zero-padded digits,
+             dates can represent in the formats: YYYY, YYYYMM, or YYYYMMDD.
+:402 [hard]: Attributes "credate" and "revdate" must have a valid YYYYMMDD combination.
+:403 [hard]: Attributes "credate" and "revdate" must be between 19600101 and the current date, inclusively.
 
-E500 - Identifiers
+500 - Identifiers
 ^^^^^^^^^^^^^^^^^^
 
-:E501 [hard]: NID linkages must be valid.
+:501 [hard]: NID linkages must be valid.
 
-E600 - Exit Numbers
+600 - Exit Numbers
 ^^^^^^^^^^^^^^^^^^^
 
-:E601 [hard]: Attribute "exitnbr" must be identical, excluding the default value or "None", for all arcs sharing an NID.
-:E602 [soft]: When attribute "exitnbr" is not equal to the default value or "None", attribute "roadclass" must equal
-              one of the following: "Expressway / Highway", "Freeway", "Ramp", "Rapid Transit", "Service Lane".
+:601 [hard]: Attribute "exitnbr" must be identical, excluding the default value or "None", for all arcs sharing an NID.
+:602 [soft]: When attribute "exitnbr" is not equal to the default value or "None", attribute "roadclass" must equal one
+             of the following: "Expressway / Highway", "Freeway", "Ramp", "Rapid Transit", "Service Lane".
 
-E700 - Ferry Integration
+700 - Ferry Integration
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-:E701 [soft]: Ferry arcs must be connected to a road arc at at least one of their nodes.
+:701 [soft]: Ferry arcs must be connected to a road arc at at least one of their nodes.
 
-E800 - Number of Lanes
+800 - Number of Lanes
 ^^^^^^^^^^^^^^^^^^^^^^
 
-:E801 [soft]: Attribute "nbrlanes" must be between 1 and 8, inclusively.
+:801 [soft]: Attribute "nbrlanes" must be between 1 and 8, inclusively.
 
-E900 - Speed
+900 - Speed
 ^^^^^^^^^^^^
 
-:E901 [soft]: Attribute "speed" must be between 5 and 120, inclusively.
+:901 [soft]: Attribute "speed" must be between 5 and 120, inclusively.
 
-E1000 - Encoding
+1000 - Encoding
 ^^^^^^^^^^^^^^^^
 
-:E1001 [soft]: Attribute contains one or more question mark ("?"), which may be the result of invalid character
-               encoding.
+:1001 [soft]: Attribute contains one or more question mark ("?"), which may be the result of invalid character encoding.

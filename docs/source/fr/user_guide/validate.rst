@@ -15,53 +15,11 @@ Le processus ``validate`` applique un ensemble de validations et de restrictions
 ensembles de données RRN. L'intention du processus ``validate`` est de signaler les erreurs de données réelles et
 potentielles avant de continuer avec le reste du pipeline RRN.
 
-La seule sortie de ``validate`` est un fichier journal (.log) qui sera exporté vers :
-``nrn-rrn/data/interim/validations.log``. Le processus prévu consiste pour l'utilisateur à réparer les données source
-d'origine en fonction des erreurs spécifiées dans le journal de sortie. Une fois terminé, l'ensemble du pipeline doit
-être réexécuté à partir du processus initial.
-
-.. admonition:: Notez
-
-    Bien que les identifiants uniques enregistrés par les validations n'existent que sur les données intermédiaires,
-    les modifications ne doivent être apportées qu'aux données brutes. Par conséquent, lors de la mise à jour, les
-    données brutes et provisoires sont requises (données provisoires pour localiser les entités non valides et données
-    brutes pour la mise à jour). De plus, après avoir terminé les modifications requises, le pipeline doit être
-    réexécuté depuis le début.
-
-Structure du journal
-====================
-
-Le journal de sortie contiendra une série de journaux standardisés pour chaque validation exécutée par le processus
-``validate``. Chaque validation enregistrée aura la même structure de contenu.
-
-**Structure générique :** ::
-
-    <horodatage> - WARNING: E<code d'erreur> - <jeu de données RRN> - <Description de l'erreur>.
-
-    Values:
-    <uuid>
-    ...
-
-    Query: "uuid" in ('<uuid>', ...)
-
-**Structure spécifique :** ::
-
-    2022-01-04 16:00:51 - WARNING: E201 - roadseg - Features within the same dataset must not be duplicated.
-
-    Values:
-    76d283b46076400c900ed84c02ab605f
-    c9ac2f60a0814eec9ff56bf95ad79804
-
-    Query: "uuid" in ('76d283b46076400c900ed84c02ab605f', 'c9ac2f60a0814eec9ff56bf95ad79804')
-
-**Composants :**
-
-:Values: « Valeurs » en français. Une liste contenant la valeur ``uuid`` de chaque enregistrement marqué par la
-         validation pour l'ensemble de données RRN. ``uuid`` est un identifiant unique attribué à chaque enregistrement
-         de chaque ensemble de données RRN dans le but de suivre et d'identifier les enregistrements tout au long du
-         pipeline RRN.
-:Query: « Requête » en français. Une expression QGIS pour interroger tous les enregistrements marqués par la validation
-        du jeu de données RRN. Celui-ci contiendra les mêmes valeurs que ``Values``.
+La seule sortie de ``validate`` est un GeoPackage qui contiendra un sous-ensemble de fonctionnalités pour chaque
+validation et ensemble de données marqué par cette validation. Ce GeoPackage sera exporté vers :
+``nrn-rrn/data/interim/validations.gpkg``. Le processus prévu consiste pour l'utilisateur à réparer les données sources
+d'origine en fonction des sous-ensembles de données du GeoPackage de sortie. Une fois terminé, l’ensemble du pipeline
+doit être réexécuté depuis le début.
 
 Erreurs de validation
 =====================
@@ -71,7 +29,7 @@ Structure d'erreur
 
 Toutes les validations se sont vu attribuer un code d'erreur unique avec la structure suivante: ::
 
-    E<code majeur (1-2 chiffres)><code mineur (2 chiffres)>
+    <code majeur (1-2 chiffres)><code mineur (2 chiffres)>
 
 Les codes d'erreur majeure et mineure sont utilisés pour fournir une classification plus simplifiée et plus efficace
 des validations en fonction du type général de problème que la validation tente de résoudre.
@@ -87,68 +45,68 @@ chacun des codes d'erreur suivants est étiqueté comme « ferme » ou « légè
 :légère: L'erreur doit être examinée et résolue uniquement s'il s'agit réellement d'un problème. Si ce n'est pas un
          problème, on peut l'ignorer.
 
-E100 - Construction
+100 - Construction
 ^^^^^^^^^^^^^^^^^^^
 
-:E101 [légère]: Les arcs doivent avoir une longueur >= 1 mètre, à l'exception des structures (par exemple, les ponts).
-:E102 [ferme]: Les arcs ne doivent pas avoir une longueur nulle.
-:E103 [ferme]: Les arcs doivent être simples (c'est-à-dire qu'ils ne doivent pas se chevaucher, se croiser ou toucher
-               leur intérieur).
+:101 [légère]: Les arcs doivent avoir une longueur >= 1 mètre, à l'exception des structures (par exemple, les ponts).
+:102 [ferme]: Les arcs ne doivent pas avoir une longueur nulle.
+:103 [ferme]: Les arcs doivent être simples (c'est-à-dire qu'ils ne doivent pas se chevaucher, se croiser ou toucher
+              leur intérieur).
 
-E200 - Dédoublement
+200 - Dédoublement
 ^^^^^^^^^^^^^^^^^^^
 
-:E201 [ferme]: Les entités d'un même jeu de données ne doivent pas être dupliquées.
-:E202 [ferme]: Les arcs du même jeu de données ne doivent pas se chevaucher (c'est-à-dire contenir des sommets adjacents
-               dupliqués).
+:201 [ferme]: Les entités d'un même jeu de données ne doivent pas être dupliquées.
+:202 [ferme]: Les arcs du même jeu de données ne doivent pas se chevaucher (c'est-à-dire contenir des sommets adjacents
+              dupliqués).
 
-E300 - Connectivité
+300 - Connectivité
 ^^^^^^^^^^^^^^^^^^^
 
-:E301 [légère]: Les arcs doivent être >= 5 mètres les uns des autres, à l'exclusion des arcs connectés (c'est-à-dire
-                sans pendants).
+:301 [légère]: Les arcs doivent être >= 5 mètres les uns des autres, à l'exclusion des arcs connectés (c'est-à-dire
+               sans pendants).
 
-E400 - Dates
+400 - Dates
 ^^^^^^^^^^^^
 
-:E401 [ferme]: Les attributs « datecre » et « daterev » doivent avoir des longueurs de 4, 6 ou 8. Par conséquent, en
-               utilisant des chiffres complétés par des zéros, les dates peuvent représenter les formats : AAAA, AAAAMM
-               ou AAAAMMJJ.
-:E402 [ferme]: Les attributs « datecre » et « daterev » doivent avoir une combinaison AAAAMMJJ valide.
-:E403 [ferme]: Les attributs « datecre » et « daterev » doivent être compris entre 19600101 et la date actuelle,
-               inclusivement.
+:401 [ferme]: Les attributs « datecre » et « daterev » doivent avoir des longueurs de 4, 6 ou 8. Par conséquent, en
+              utilisant des chiffres complétés par des zéros, les dates peuvent représenter les formats : AAAA, AAAAMM
+              ou AAAAMMJJ.
+:402 [ferme]: Les attributs « datecre » et « daterev » doivent avoir une combinaison AAAAMMJJ valide.
+:403 [ferme]: Les attributs « datecre » et « daterev » doivent être compris entre 19600101 et la date actuelle,
+              inclusivement.
 
-E500 - Identifiants
+500 - Identifiants
 ^^^^^^^^^^^^^^^^^^^
 
-:E501 [ferme]: Les liaisons IDN doivent être valides.
+:501 [ferme]: Les liaisons IDN doivent être valides.
 
-E600 - Numéros de sortie
+600 - Numéros de sortie
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-:E601 [ferme]: L'attribut « numsortie » doit être identique, à l'exception de la valeur par défaut ou « Aucun », pour
-               tous les arcs partageant un IDN.
-:E602 [légère]: Lorsque l'attribut « numsortie » n'est pas égal à la valeur par défaut ou « Aucun », l'attribut
-                « classroute » doit être égal à l'un des éléments suivants : « Autoroute », « Bretelle »,
-                « Réservée transport commun », « Route express », « Service ».
+:601 [ferme]: L'attribut « numsortie » doit être identique, à l'exception de la valeur par défaut ou « Aucun », pour
+              tous les arcs partageant un IDN.
+:602 [légère]: Lorsque l'attribut « numsortie » n'est pas égal à la valeur par défaut ou « Aucun », l'attribut
+               « classroute » doit être égal à l'un des éléments suivants : « Autoroute », « Bretelle »,
+               « Réservée transport commun », « Route express », « Service ».
 
-E700 - Intégration de traversier
+700 - Intégration de traversier
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-:E701 [légère]: Les arcs de ferry doivent être connectés à un arc routier à au moins un de leurs nœuds.
+:701 [légère]: Les arcs de ferry doivent être connectés à un arc routier à au moins un de leurs nœuds.
 
-E800 - Nombre de voies
+800 - Nombre de voies
 ^^^^^^^^^^^^^^^^^^^^^^
 
-:E801 [légère]: L'attribut « nbrvoies » doit être compris entre 1 et 8 inclus.
+:801 [légère]: L'attribut « nbrvoies » doit être compris entre 1 et 8 inclus.
 
-E900 - Vitesse
+900 - Vitesse
 ^^^^^^^^^^^^^^
 
-:E901 [légère]: L'attribut « vitesse » doit être compris entre 5 et 120, inclusivement.
+:901 [légère]: L'attribut « vitesse » doit être compris entre 5 et 120, inclusivement.
 
-E1000 - Codage
+1000 - Codage
 ^^^^^^^^^^^^^^
 
-:E1001 [légère]: L'attribut contient un ou plusieurs points d'interrogation (« ? »), qui peuvent être le résultat d'un
-                 codage de caractères non valide.
+:1001 [légère]: L'attribut contient un ou plusieurs points d'interrogation (« ? »), qui peuvent être le résultat d'un
+                codage de caractères non valide.

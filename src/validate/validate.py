@@ -18,10 +18,6 @@ handler.setLevel(logging.INFO)
 handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s: %(message)s", "%Y-%m-%d %H:%M:%S"))
 logger.addHandler(handler)
 
-# Create logger for validation errors.
-logger_validations = logging.getLogger("validations")
-logger_validations.setLevel(logging.WARNING)
-
 
 class Validate:
     """Defines an NRN process."""
@@ -31,7 +27,7 @@ class Validate:
         Initializes an NRN process.
 
         :param str source: abbreviation for the source province / territory.
-        :param bool remove: remove pre-existing output file (validations.log), default False.
+        :param bool remove: remove pre-existing output file (validations.gpkg), default False.
         """
 
         self.source = source.lower()
@@ -40,7 +36,7 @@ class Validate:
 
         # Configure data paths.
         self.src = Path(filepath.parents[2] / f"data/interim/{self.source}.gpkg")
-        self.validations_log = Path(self.src.parent / "validations.log")
+        self.dst = filepath.parents[2] / f"data/interim/validations.gpkg"
 
         # Validate source path.
         if not self.src.exists():
@@ -48,12 +44,12 @@ class Validate:
             sys.exit(1)
 
         # Validate destination path.
-        if self.validations_log.exists():
+        if self.dst.exists():
             if remove:
-                logger.info(f"Removing conflicting file: \"{self.validations_log}\".")
-                self.validations_log.unlink()
+                logger.info(f"Removing conflicting file: \"{self.dst}\".")
+                self.dst.unlink()
             else:
-                logger.exception(f"Conflicting file exists (\"{self.validations_log}\") but remove=False. Set "
+                logger.exception(f"Conflicting file exists (\"{self.dst}\") but remove=False. Set "
                                  f"remove=True (-r) or manually clear the output namespace.")
                 sys.exit(1)
 
@@ -64,7 +60,7 @@ class Validate:
         """Executes an NRN process."""
 
         self._validate()
-        self._write_errors()
+        self._export_errors()
 
     def _validate(self) -> None:
         """Applies a set of validations to one or more NRN datasets."""
@@ -75,32 +71,26 @@ class Validate:
         self.Validator = Validator(self.dframes, source=self.source)
         self.Validator()
 
-    def _write_errors(self) -> None:
-        """Writes error logs returned by validation functions."""
+    def _export_errors(self) -> None:
+        """Exports new subset datasets based on error flags returned by validations."""
 
-        logger.info(f"Writing error logs: \"{self.validations_log}\".")
+        logger.info(f"Exporting subset datasets based on validation errors to: \"{self.dst}\".")
 
-        # Add File Handler to validation logger.
-        f_handler = logging.FileHandler(self.validations_log)
-        f_handler.setLevel(logging.WARNING)
-        f_handler.setFormatter(logger.handlers[0].formatter)
-        logger_validations.addHandler(f_handler)
-
-        # Iterate and log errors.
         error_counts = list()
 
+        # Iterate error codes and datasets.
         for code in sorted(self.Validator.errors):
-            error_name = self.Validator.validations[code]['func'].__name__
 
+            error_name = self.Validator.validations[code]['func'].__name__
             for dataset, vals in sorted(self.Validator.errors[code].items()):
 
                 # Store error count.
                 error_counts.append([f"{code} ({error_name})", dataset, len(vals)])
 
-                # Format and write logs.
+                # Subset dataset and export to validations output file.
                 if len(vals):
-                    values = "\n".join(map(str, vals))
-                    logger_validations.warning(f"{code} - {dataset}\n\nValues:\n{values}\n")
+                    df_subset = self.dframes[dataset].loc[self.dframes[dataset].index.isin(vals)].copy(deep=True)
+                    df_subset.to_file(str(self.dst), driver="GPKG", layer=f"v{code}_{dataset}", index=False)
 
         # Log validation results summary.
         summary = tabulate(error_counts, headers=["Validation", "Dataset", "Invalid Count"], tablefmt="rst",
@@ -112,14 +102,14 @@ class Validate:
 @click.command()
 @click.argument("source", type=click.Choice("ab bc mb nb nl ns nt nu on pe qc sk yt".split(), False))
 @click.option("--remove / --no-remove", "-r", default=False, show_default=True,
-              help="Remove pre-existing output file (validations.log).")
+              help="Remove pre-existing output file (validations.gpkg).")
 def main(source: str, remove: bool = False) -> None:
     """
     Executes an NRN process.
 
     \b
     :param str source: abbreviation for the source province / territory.
-    :param bool remove: remove pre-existing output file (validations.log), default False.
+    :param bool remove: remove pre-existing output file (validations.gpkg), default False.
     """
 
     try:
