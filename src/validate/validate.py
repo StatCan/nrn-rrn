@@ -98,8 +98,9 @@ class Validate:
                 error_counts.append([f"{code} ({error_name})", dataset, len(vals)])
 
                 # Format and write logs.
-                values = "\n".join(map(str, vals))
-                logger_validations.warning(f"{code} - {dataset}\n\nValues:\n{values}\n")
+                if len(vals):
+                    values = "\n".join(map(str, vals))
+                    logger_validations.warning(f"{code} - {dataset}\n\nValues:\n{values}\n")
 
         # Log validation results summary.
         summary = tabulate(error_counts, headers=["Validation", "Dataset", "Invalid Count"], tablefmt="rst",
