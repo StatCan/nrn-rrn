@@ -3,6 +3,7 @@ import logging
 import math
 import pandas as pd
 import sys
+from collections import defaultdict
 from copy import deepcopy
 from datetime import datetime
 from itertools import chain
@@ -37,7 +38,7 @@ class Validator:
         :param Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]] dfs: dictionary of NRN datasets as (Geo)DataFrames.
         """
 
-        self.errors = dict()
+        self.errors = defaultdict(dict)
         self.source = source
         self.id = "uuid"
         self.to_crs = "EPSG:3348"
@@ -203,15 +204,19 @@ class Validator:
                 # Iterate datasets.
                 for dataset in datasets:
 
+                    # Create entry for error.
+                    self.errors[code][dataset] = set()
+
                     # Iterate columns, if required.
                     if iter_cols:
+
                         for col in iter_cols[dataset]:
 
                             pbar.set_description(f"Applying validation {code}: \"{func.__name__}\". Current target: "
                                                  f"{dataset}.{col}")
 
                             # Execute validation and store results.
-                            self.errors[f"{code} - {dataset}.{col}"] = deepcopy(func(dataset, col=col))
+                            self.errors[code][dataset].update(deepcopy(func(dataset, col=col)))
 
                             # Update progress bar.
                             pbar.update(1)
@@ -222,7 +227,7 @@ class Validator:
                                              f"{dataset}")
 
                         # Execute validation and store results.
-                        self.errors[f"{code} - {dataset}"] = deepcopy(func(dataset))
+                        self.errors[code][dataset].update(deepcopy(func(dataset)))
 
                         # Update progress bar.
                         pbar.update(1)

@@ -1,8 +1,8 @@
 import click
 import logging
 import sys
-from itertools import chain
 from pathlib import Path
+from tabulate import tabulate
 
 filepath = Path(__file__).resolve()
 sys.path.insert(1, str(filepath.parents[1]))
@@ -64,7 +64,7 @@ class Validate:
         """Executes an NRN process."""
 
         self._validate()
-        self.log_errors()
+        self._write_errors()
 
     def _validate(self) -> None:
         """Applies a set of validations to one or more NRN datasets."""
@@ -75,15 +75,10 @@ class Validate:
         self.Validator = Validator(self.dframes, source=self.source)
         self.Validator()
 
-    def log_errors(self) -> None:
-        """Outputs error logs returned by validation functions."""
+    def _write_errors(self) -> None:
+        """Writes error logs returned by validation functions."""
 
         logger.info(f"Writing error logs: \"{self.validations_log}\".")
-
-        # Quantify errors.
-        identifiers = list(chain.from_iterable(self.Validator.errors.values()))
-        total_records = len(identifiers)
-        total_unique_records = len(set(identifiers))
 
         # Add File Handler to validation logger.
         f_handler = logging.FileHandler(self.validations_log)
@@ -92,15 +87,25 @@ class Validate:
         logger_validations.addHandler(f_handler)
 
         # Iterate and log errors.
-        for code, vals in sorted(self.Validator.errors.items()):
-            if len(vals):
+        error_counts = list()
+
+        for code in sorted(self.Validator.errors):
+            error_name = self.Validator.validations[code]['func'].__name__
+
+            for dataset, vals in sorted(self.Validator.errors[code].items()):
+
+                # Store error count.
+                error_counts.append([f"{code} ({error_name})", dataset, len(vals)])
 
                 # Format and write logs.
                 values = "\n".join(map(str, vals))
-                logger_validations.warning(f"{code}\n\nValues:\n{values}\n")
+                logger_validations.warning(f"{code} - {dataset}\n\nValues:\n{values}\n")
 
-        logger.info(f"Total records flagged by validations: {total_records:,d}.")
-        logger.info(f"Total unique records flagged by validations: {total_unique_records:,d}.")
+        # Log validation results summary.
+        summary = tabulate(error_counts, headers=["Validation", "Dataset", "Invalid Count"], tablefmt="rst",
+                           colalign=("left", "left", "right"))
+
+        logger.info("Validation results:\n" + summary)
 
 
 @click.command()
