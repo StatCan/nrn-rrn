@@ -234,7 +234,8 @@ class Export:
 
                     # Translate default values and Nones.
                     series.loc[series == self.defaults["en"][table][field]] = self.defaults["fr"][table][field]
-                    series.loc[series == "None"] = "Aucun"
+                    if "None" in series:
+                        series.loc[series == "None"] = "Aucun"
 
                     # Store results to dataframe.
                     self.dframes["fr"][table][field] = series.copy(deep=True)

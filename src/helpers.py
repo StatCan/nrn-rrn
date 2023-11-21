@@ -377,7 +377,8 @@ def export(dfs: Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]], dst: Path, dri
 
             # Create source (non-layer-based drivers only) and layer.
             if dst.suffix:
-                layer = source.CreateLayer(name=schema["name"], srs=srs, geom_type=geom_type, options=["OVERWRITE=YES"])
+                options = list() if (driver.name == "OpenFileGDB") else ["OVERWRITE=YES"]
+                layer = source.CreateLayer(name=schema["name"], srs=srs, geom_type=geom_type, options=options)
             else:
                 source = driver.CreateDataSource(str(dst / schema["name"]))
                 layer = source.CreateLayer(name=Path(schema["name"]).stem, srs=srs, geom_type=geom_type)

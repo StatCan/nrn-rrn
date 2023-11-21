@@ -1,7 +1,7 @@
 ab:
   edition: 16.0
   number_of_kilometers: 239,305
-  release_date: 2023-11
+  release_date: 2023-12
   validity_date: 2023-11
 bc:
   edition: 14.0
@@ -16,7 +16,7 @@ mb:
 nb:
   edition: 13.0
   number_of_kilometers: 35,918
-  release_date: 2023-08
+  release_date: 2023-12
   validity_date: 2023-08
 nl:
   edition: 7.0
@@ -26,28 +26,28 @@ nl:
 ns:
   edition: 16.0
   number_of_kilometers: 52,091
-  release_date: 2023-10
+  release_date: 2023-12
   validity_date: 2023-10
 nt:
   edition: 14.0
   number_of_kilometers: 7,812
-  release_date: 2023-10
+  release_date: 2023-12
   validity_date: 2023-10
 nu:
   edition: 11.0
   number_of_kilometers: 1,026
-  release_date: 2023-08
+  release_date: 2023-12
   validity_date: 2023-08
 'on':
   edition: 16.0
   number_of_kilometers: 257,975
-  release_date: 2023-08
+  release_date: 2023-12
   validity_date: 2023-08
 pe:
-  edition: 20.0
+  edition: 21.0
   number_of_kilometers: 7,025
-  release_date: 2022-08
-  validity_date: 2022-08
+  release_date: 2023-12
+  validity_date: 2023-09
 qc:
   edition: 9.0
   number_of_kilometers: 162,768
@@ -61,5 +61,5 @@ sk:
 yt:
   edition: 18.0
   number_of_kilometers: 6,559
-  release_date: 2023-10
+  release_date: 2023-12
   validity_date: 2023-10
