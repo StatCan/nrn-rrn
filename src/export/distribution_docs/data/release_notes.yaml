@@ -1,5 +1,5 @@
 ab:
-  edition: 15.0
+  edition: 16.0
   number_of_kilometers: 239,305
   release_date: 2023-11
   validity_date: 2023-11
@@ -44,10 +44,10 @@ nu:
   release_date: 2023-08
   validity_date: 2023-08
 pe:
-  edition: 21.0
+  edition: 20.0
   number_of_kilometers: 7,025
-  release_date: 2023-08
-  validity_date: 2023-08
+  release_date: 2022-08
+  validity_date: 2022-08
 qc:
   edition: 9.0
   number_of_kilometers: 162,768

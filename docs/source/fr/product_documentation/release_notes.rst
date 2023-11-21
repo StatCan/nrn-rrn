@@ -16,7 +16,7 @@ Information sur les dernières mises à jour des jeux de données.
 =========================  ====  =======  ===================  ================  ====================
 Province / Territoire      Code  Édition  Date de publication  Date de validité  Nombre de kilomètres
 =========================  ====  =======  ===================  ================  ====================
-Alberta                    AB    16.1     2023-11              2023-11           239 305             
+Alberta                    AB    16.0     2023-11              2023-11           239 305             
 Colombie-Britannique       BC    14.0     2017-05              2017-03           93 961              
 Manitoba                   MB    6.0      2013-04              2012-04           89 003              
 Nouveau-Brunswick          NB    13.0     2023-08              2023-08           35 918              
@@ -25,7 +25,7 @@ Territoires du Nord-Ouest  NT    14.0     2023-10              2023-10          
 Nouvelle-Écosse            NS    16.0     2023-10              2023-10           52 091              
 Nunavut                    NU    11.0     2023-08              2023-08           1 026               
 Ontario                    ON    16.0     2023-08              2023-08           257 975             
-Île-du-Prince-Édouard      PE    21.0     2023-08              2023-08           7 025               
+Île-du-Prince-Édouard      PE    20.0     2022-08              2022-08           7 025
 Québec                     QC    9.0      2016-08              2016-02           162 768             
 Saskatchewan               SK    12.1     2022-12              2022-11           250 122             
 Yukon                      YT    18.0     2023-10              2023-10           6 559               
