@@ -16,17 +16,17 @@ Information on the latest dataset updates.
 =========================  ====  =======  ============  =============  ====================
 Province / Territory       Code  Edition  Release Date  Validity Date  Number of Kilometers
 =========================  ====  =======  ============  =============  ====================
-Alberta                    AB    16.0     2023-12       2023-11        239,305
+Alberta                    AB    16.0     2023-12       2023-11        239,305             
 British Columbia           BC    14.0     2017-05       2017-03        93,961              
 Manitoba                   MB    6.0      2013-04       2012-04        89,003              
-New Brunswick              NB    13.0     2023-12       2023-08        35,918
+New Brunswick              NB    13.0     2023-12       2023-08        35,918              
 Newfoundland and Labrador  NL    7.0      2013-04       2012-09        23,026              
-Northwest Territories      NT    14.0     2023-12       2023-10        7,812
-Nova Scotia                NS    16.0     2023-12       2023-10        52,091
-Nunavut                    NU    11.0     2023-12       2023-08        1,026
-Ontario                    ON    16.0     2023-12       2023-08        257,975
-Prince Edward Island       PE    21.0     2023-12       2023-09        7,025
+Northwest Territories      NT    14.0     2023-12       2023-10        7,812               
+Nova Scotia                NS    16.0     2023-12       2023-10        52,091              
+Nunavut                    NU    11.0     2023-12       2023-08        1,026               
+Ontario                    ON    16.0     2023-12       2023-08        257,975             
+Prince Edward Island       PE    21.0     2023-12       2023-09        7,025               
 Quebec                     QC    9.0      2016-08       2016-02        162,768             
-Saskatchewan               SK    12.1     2022-12       2022-11        250,122             
-Yukon                      YT    18.0     2023-12       2023-10        6,559
+Saskatchewan               SK    13.0     2023-11       2023-11        250,188             
+Yukon                      YT    18.0     2023-12       2023-10        6,559               
 =========================  ====  =======  ============  =============  ====================

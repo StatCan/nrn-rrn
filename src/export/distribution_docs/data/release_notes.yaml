@@ -54,10 +54,10 @@ qc:
   release_date: 2016-08
   validity_date: 2016-02
 sk:
-  edition: 12.1
-  number_of_kilometers: 250,122
-  release_date: 2022-12
-  validity_date: 2022-11
+  edition: 13.0
+  number_of_kilometers: 250,188
+  release_date: 2023-11
+  validity_date: 2023-11
 yt:
   edition: 18.0
   number_of_kilometers: 6,559
