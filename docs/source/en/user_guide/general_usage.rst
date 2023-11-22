@@ -88,7 +88,7 @@ After completion of the full NRN pipeline, the following manual tasks must be pe
       :ContactFacsimileTelephone: 1-514-283-9350
       :ContactElectronicMailAddress: infostats@statcan.gc.ca
 
-   #. "Analyze" and then "Save" the .sd file (see bottom of Figure 3c).
+   #. "Analyze" and then "Save" the .sd file (see bottom of Figure 3c) to the same directory as the other WMS resources.
 
 #. Notify relevant individuals of new NRN release via email.
 

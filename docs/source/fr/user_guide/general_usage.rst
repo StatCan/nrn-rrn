@@ -90,7 +90,8 @@ Une fois le pipeline RRN complet terminé, les tâches manuelles suivantes doive
       :ContactFacsimileTelephone: 1-514-283-9350
       :ContactElectronicMailAddress: infostats@statcan.gc.ca
 
-   #. « Analyze », puis « Save » le fichier .sd (voir bas de la figure 3c).
+   #. « Analyze » puis « Save » le fichier .sd (voir bas de la figure 3c) dans le même répertoire que les autres
+      ressources WMS.
 
 #. Informer les personnes concernées de la nouvelle version du RRN par e-mail.
 
