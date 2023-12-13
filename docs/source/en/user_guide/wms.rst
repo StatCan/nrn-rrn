@@ -15,8 +15,8 @@ A WMS is not a required distribution format for the NRN, therefore there are no 
 current WMS implementation was developed based on reviewing the available data for each of the provincial / territorial
 NRN products and developing a hierarchical display and labelling scheme based on a meaningful structuring of the data.
 
-The WMS is constructed using an ArcGIS Pro project: ``nrn-rrn/wms/nrn_rrn_wms.aprx``. Any modifications to this file
-must be followed by copying the file to the NRN data server (since that server is not intended to hold the repository).
+The WMS is constructed using an ArcGIS Pro project: ``7_Disseminate/wms/nrn_rrn.aprx`` on the NRN server and is not
+kept in the ``nrn-rrn`` repository.
 
 WMS Structure
 =============

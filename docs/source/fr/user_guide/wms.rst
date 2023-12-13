@@ -16,9 +16,8 @@ conception. La mise en œuvre actuelle du WMS a été développée sur la base d
 chacun des produits provinciaux / territoriaux du RRN et de l'élaboration d'un système d'affichage et d'étiquetage
 hiérarchique basé sur une structuration significative des données.
 
-Le WMS est construit à l'aide d'un projet ArcGIS Pro : ``nrn-rrn/wms/nrn_rrn_wms.aprx``. Toute modification de ce
-fichier doit être suivie d'une copie du fichier sur le serveur de données du RRN (puisque ce serveur n'est pas destiné
-à contenir le référentiel).
+Le WMS est construit à l'aide d'un projet ArcGIS Pro : ``7_Disseminate/wms/nrn_rrn.aprx`` sur le serveur NRN et n'est
+pas conservé dans le référentiel ``nrn-rrn``.
 
 Structure du WMS
 ================
