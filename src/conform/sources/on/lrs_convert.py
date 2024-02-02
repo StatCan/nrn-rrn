@@ -513,8 +513,9 @@ class LRS:
 
         def convert_to_individual_utm_zones(df: gpd.GeoDataFrame) -> pd.DataFrame:
             """
-            Returns a DataFrame with each geometry reprojected to the corresponding UTM zone of its centroid. To allow
-            multiple CRS, a DataFrame must be used instead of a GeoDataFrame.
+            Returns a GeoDataFrame with each geometry reprojected to the corresponding UTM zone of its centroid. To
+            allow multiple CRS in a single GeoDataFrame, the CRS of each GeoDataFrame is set to the CRS of the first
+            GeoDataFrame (but the actual geometries are in the true CRS).
 
             :param gpd.GeoDataFrame df: GeoDataFrame.
             :return pd.DataFrame: DataFrame with individually reprojected geometries.
@@ -537,10 +538,14 @@ class LRS:
             df["epsg"] = df["geometry"].map(
                 lambda g: latlon_to_utm_epsg(*list(map(itemgetter(0), g.centroid.xy))[::-1]))
 
-            # Separate and reproject GeoDataFrames according to EPSG, store results as DataFrames.
+            # Separate and reproject GeoDataFrames according to EPSG.
+            # Set to common CRS so that they can be concatenated, even though the actual data is in a unique CRS.
             reprojected_dfs = list()
+            common_crs = f"EPSG:{df['epsg'].iloc[0]}"
             for epsg in set(df["epsg"]):
-                reprojected_dfs.append(pd.DataFrame(df.loc[df["epsg"] == epsg].to_crs(f"EPSG:{epsg}").copy(deep=True)))
+                df_reprojected = df.loc[df["epsg"] == epsg].to_crs(f"EPSG:{epsg}").copy(deep=True)
+                df_reprojected.set_crs(common_crs, allow_override=True, inplace=True)
+                reprojected_dfs.append(df_reprojected)
 
             # Concatenate reprojected DataFrames.
             return pd.concat(reprojected_dfs).copy(deep=True)

@@ -394,6 +394,11 @@ def export(dfs: Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]], dst: Path, dri
             df = df[[*schema["fields"], "geometry"] if spatial else [*schema["fields"]]].copy(deep=True)
             df.rename(columns={field: specs["name"] for field, specs in schema["fields"].items()}, inplace=True)
 
+            # Cast datetime fields to int.
+            for col in set(df.columns) - {"geometry"}:
+                if "dt" in dir(df[col]):
+                    df[col] = df[col].dt.strftime("%Y%m%d").map(int)
+
             # Write layer.
             layer.StartTransaction()
 
