@@ -24,7 +24,7 @@ Terre-Neuve-et-Labrador    NL    7.0      2013-04              2012-09          
 Territoires du Nord-Ouest  NT    14.0     2023-12              2023-10           7 812               
 Nouvelle-Écosse            NS    16.0     2023-12              2023-10           52 091              
 Nunavut                    NU    11.0     2023-12              2023-08           1 026               
-Ontario                    ON    16.0     2023-12              2023-08           257 975             
+Ontario                    ON    17.0     2024-02              2024-02           258 451             
 Île-du-Prince-Édouard      PE    21.0     2023-12              2023-09           7 025               
 Québec                     QC    9.0      2016-08              2016-02           162 768             
 Saskatchewan               SK    13.0     2023-11              2023-11           250 188             

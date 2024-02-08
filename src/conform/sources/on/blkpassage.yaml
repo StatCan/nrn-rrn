@@ -12,7 +12,7 @@ license:
   text: Open Government License - Ontario
 language: en
 data:
-  filename: 2023/on.gpkg
+  filename: 2024/on.gpkg
   layer: blkpassage
   driver: GPKG
   crs: "EPSG:4617"
