@@ -14,7 +14,7 @@ from typing import Union
 
 filepath = Path(__file__).resolve()
 sys.path.insert(1, str(filepath.parents[1]))
-import helpers
+from utils import helpers
 
 
 # Set logger.
@@ -67,7 +67,7 @@ class Export:
                     if f.is_file():
                         f.unlink()
                     else:
-                        helpers.rm_tree(f)
+                        helpers.delete_contents(f)
 
             else:
                 logger.exception("Parameter remove=False: Unable to proceed while output namespace is occupied. Set "
@@ -396,7 +396,7 @@ class Export:
                 sys.exit(1)
 
             # Remove original directory.
-            helpers.rm_tree(data_dir)
+            helpers.delete_contents(data_dir)
 
         # Close progress bar.
         zip_progress.close()
@@ -418,9 +418,12 @@ def main(source: str, remove: bool = False) -> None:
 
     try:
 
-        with helpers.Timer():
+        @helpers.timer
+        def run():
             process = Export(source, remove)
             process()
+
+        run()
 
     except KeyboardInterrupt:
         logger.exception("KeyboardInterrupt: Exiting program.")

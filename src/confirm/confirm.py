@@ -14,7 +14,7 @@ from typing import Tuple
 
 filepath = Path(__file__).resolve()
 sys.path.insert(1, str(filepath.parents[1]))
-import helpers
+from utils import helpers
 
 
 # Set logger.
@@ -416,9 +416,12 @@ def main(source: str) -> None:
 
     try:
 
-        with helpers.Timer():
+        @helpers.timer
+        def run():
             process = Confirm(source)
             process()
+
+        run()
 
     except KeyboardInterrupt:
         logger.exception("KeyboardInterrupt: Exiting program.")

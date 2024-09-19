@@ -1,6 +1,6 @@
 import click
+import fiona
 import geopandas as gpd
-import fiona # DLL error (related to fiona/gdal/geopandas compatibility) requires either gdal or geopandas import first.
 import logging
 import math
 import numpy as np
@@ -25,7 +25,7 @@ from typing import List, Tuple, Union
 filepath = Path(__file__).resolve()
 sys.path.insert(1, str(filepath.parents[1]))
 import field_map_functions
-import helpers
+from utils import helpers
 from gen_junctions import Junction
 from segment_addresses import Segmentor
 
@@ -1276,9 +1276,12 @@ def main(source: str, remove: bool = False, exclude_old: bool = False) -> None:
 
     try:
 
-        with helpers.Timer():
+        @helpers.timer
+        def run():
             process = Conform(source, remove, exclude_old)
             process()
+
+        run()
 
     except KeyboardInterrupt:
         logger.exception("KeyboardInterrupt: Exiting program.")

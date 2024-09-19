@@ -1,6 +1,6 @@
 import datetime
+import fiona
 import geopandas as gpd
-import fiona # DLL error (related to fiona/gdal/geopandas compatibility) requires either gdal or geopandas import first.
 import logging
 import numpy as np
 import pandas as pd
@@ -18,7 +18,7 @@ from pathlib import Path
 from shapely import LineString, Point
 from tqdm import tqdm
 from tqdm.auto import trange
-from typing import Any, Dict, List, Type, Union
+from typing import Any, Callable, Dict, List, Type, Union
 
 
 # Set logger.
@@ -36,36 +36,8 @@ ogr.UseExceptions()
 
 # Define globally accessible variables.
 filepath = Path(__file__).resolve()
-distribution_format_path = filepath.parent / "distribution_format.yaml"
-field_domains_path = {lang: filepath.parent / f"field_domains_{lang}.yaml" for lang in ("en", "fr")}
-
-
-class Timer:
-    """Tracks stage runtime."""
-
-    def __init__(self) -> None:
-        """Initializes the Timer class."""
-
-        self.start_time = None
-
-    def __enter__(self) -> None:
-        """Starts the timer."""
-
-        logger.info("Started.")
-        self.start_time = time.time()
-
-    def __exit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
-        """
-        Computes and returns the elapsed time.
-
-        :param Any exc_type: required parameter for __exit__.
-        :param Any exc_val: required parameter for __exit__.
-        :param Any exc_tb: required parameter for __exit__.
-        """
-
-        total_seconds = time.time() - self.start_time
-        delta = datetime.timedelta(seconds=total_seconds)
-        logger.info(f"Finished. Time elapsed: {delta}.")
+distribution_format_path = filepath.parents[1] / "distribution_format.yaml"
+field_domains_path = {lang: filepath.parents[1] / f"field_domains_{lang}.yaml" for lang in ("en", "fr")}
 
 
 def apply_domain(series: pd.Series, domain: dict, default: Any) -> pd.Series:
@@ -265,6 +237,34 @@ def compile_dtypes(length: bool = False) -> dict:
         sys.exit(1)
 
     return dtypes
+
+
+def delete_contents(path: Path) -> None:
+    """
+    Deletes a file or directory and all of its contents.
+
+    :param Path path: path to a file or directory to be removed.
+    """
+
+    if path.exists():
+
+        # Delete file.
+        if path.is_file():
+            path.unlink()
+
+        # Delete directory.
+        else:
+
+            # Recursively remove directory contents.
+            for child in path.iterdir():
+                delete_contents(child)
+
+            # Remove original directory.
+            path.rmdir()
+
+    else:
+        logger.exception(f"Unable to delete: \"{path}\". Path does not exist.")
+        sys.exit(1)
 
 
 def explode_geometry(gdf: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
@@ -603,30 +603,6 @@ def load_yaml(path: Union[Path, str]) -> Any:
             logger.exception(f"Unable to load yaml: {path}.")
 
 
-def rm_tree(path: Path) -> None:
-    """
-    Recursively removes a directory and all of its contents.
-
-    :param Path path: path to the directory to be removed.
-    """
-
-    if path.exists():
-
-        # Recursively remove directory contents.
-        for child in path.iterdir():
-            if child.is_file():
-                child.unlink()
-            else:
-                rm_tree(child)
-
-        # Remove original directory.
-        path.rmdir()
-
-    else:
-        logger.exception(f"Path does not exist: \"{path}\".")
-        sys.exit(1)
-
-
 def round_coordinates(gdf: gpd.GeoDataFrame, precision: int = 7) -> gpd.GeoDataFrame:
     """
     Rounds the GeoDataFrame geometry coordinates to a specific decimal precision.
@@ -669,3 +645,20 @@ def round_coordinates(gdf: gpd.GeoDataFrame, precision: int = 7) -> gpd.GeoDataF
         logger.exception("Unable to round coordinates for GeoDataFrame.")
         logger.exception(e)
         sys.exit(1)
+
+
+def timer(func: Callable) -> Any:
+    """Tracks function runtime."""
+
+    def wrapper(*args, **kwargs) -> Any:
+        logger.info("Started.")
+        start_time = time.time()
+
+        result = func(*args, **kwargs)
+
+        total_time = datetime.timedelta(seconds=time.time() - start_time)
+        logger.info(f"Finished. Time elapsed: {total_time}.")
+
+        return result
+
+    return wrapper

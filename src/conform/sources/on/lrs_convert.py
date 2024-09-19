@@ -1,6 +1,6 @@
 import click
+import fiona
 import geopandas as gpd
-import fiona # DLL error (related to fiona/gdal/geopandas compatibility) requires either gdal or geopandas import first.
 import logging
 import pandas as pd
 import sys
@@ -13,7 +13,7 @@ from typing import List, Union
 
 filepath = Path(__file__).resolve()
 sys.path.insert(1, str(filepath.parents[3]))
-import helpers
+from utils import helpers
 
 
 # Set logger.
@@ -1040,9 +1040,12 @@ def main(src: Union[Path, str], dst: Union[Path, str] = filepath.parents[4] / "d
 
     try:
 
-        with helpers.Timer():
+        @helpers.timer
+        def run():
             lrs = LRS(src, dst)
             lrs()
+
+        run()
 
     except KeyboardInterrupt:
         logger.exception("KeyboardInterrupt: Exiting program.")

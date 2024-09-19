@@ -6,7 +6,7 @@ from tabulate import tabulate
 
 filepath = Path(__file__).resolve()
 sys.path.insert(1, str(filepath.parents[1]))
-import helpers
+from utils import helpers
 from validation_functions import Validator
 
 
@@ -114,9 +114,12 @@ def main(source: str, remove: bool = False) -> None:
 
     try:
 
-        with helpers.Timer():
+        @helpers.timer
+        def run():
             process = Validate(source, remove)
             process()
+
+        run()
 
     except KeyboardInterrupt:
         logger.exception("KeyboardInterrupt: Exiting program.")
