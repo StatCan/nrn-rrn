@@ -14,6 +14,7 @@ from typing import List, Union
 filepath = Path(__file__).resolve()
 sys.path.insert(1, str(filepath.parents[3]))
 from utils import helpers
+from utils.gui import gui
 
 
 # Set logger.
@@ -28,14 +29,16 @@ logger.addHandler(handler)
 class LRS:
     """Class to convert ORN data from Linear Reference System (LRS) to GeoPackage."""
 
-    def __init__(self, src: Union[Path, str], dst: Union[Path, str]) -> None:
+    def __init__(self, src: Path, dst: Path) -> None:
         """
         Initializes the LRS conversion class.
 
-        :param Union[Path, str] src: source path.
-        :param Union[Path, str] dst: destination path.
+        :param Union[Path, str] src: Path to an input File GeoDatabase (.gdb).
+        :param Union[Path, str] dst: Path to an output GeoPackage (.gpkg).
         """
 
+        self.src = src
+        self.dst = dst
         self.nrn_datasets = dict()
         self.src_datasets = dict()
         self.base_dataset = "orn_road_net_element"
@@ -311,18 +314,13 @@ class LRS:
         }
 
         # Validate src.
-        self.src = Path(src).resolve()
         if self.src.suffix != ".gdb":
-            logger.exception(f"Invalid src input: {src}. Must be a File GeoDatabase.")
+            logger.exception(f"Invalid src input: {self.src}. Must be a File GeoDatabase.")
             sys.exit(1)
 
         # Validate dst.
-        self.dst = Path(dst).resolve()
         if self.dst.suffix != ".gpkg":
-            logger.exception(f"Invalid dst input: {dst}. Must be a GeoPackage.")
-            sys.exit(1)
-        if self.dst.exists():
-            logger.exception(f"Invalid dst input: {dst}. File already exists.")
+            logger.exception(f"Invalid dst input: {self.dst}. Must be a GeoPackage.")
             sys.exit(1)
 
     def __call__(self) -> None:
@@ -1025,17 +1023,15 @@ class LRS:
 
 
 @click.command()
-@click.argument("src", type=click.Path(exists=True))
-@click.option("--dst", type=click.Path(exists=False), default=filepath.parents[4] / "data/raw/on/on.gpkg",
-              show_default=True)
-def main(src: Union[Path, str], dst: Union[Path, str] = filepath.parents[4] / "data/raw/on/on.gpkg") -> None:
+@click.argument("src", type=click.Path(exists=True, file_okay=False, dir_okay=True, resolve_path=True))
+@click.argument("dst", type=click.Path(exists=False, file_okay=True, dir_okay=False, resolve_path=True))
+def main(src: Path, dst: Path) -> None:
     """
     Executes the LRS class.
 
     \b
-    :param Union[Path, str] src: source path.
-    :param Union[Path, str] dst: destination path,
-        default = Path(__file__).resolve().parents[4] / 'data/raw/on/on.gpkg'.
+    :param Union[Path, str] src: Path to an input File GeoDatabase (.gdb).
+    :param Union[Path, str] dst: Path to an output GeoPackage (.gpkg).
     """
 
     try:
@@ -1053,4 +1049,11 @@ def main(src: Union[Path, str], dst: Union[Path, str] = filepath.parents[4] / "d
 
 
 if __name__ == "__main__":
-    main()
+
+    # GUI
+    if sys.argv[-1] == "--gui":
+        main(args=gui(main, calling_script=Path(__file__).resolve()))
+
+    # CLI
+    else:
+        main()

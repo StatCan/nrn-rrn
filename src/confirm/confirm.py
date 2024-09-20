@@ -15,6 +15,7 @@ from typing import Tuple
 filepath = Path(__file__).resolve()
 sys.path.insert(1, str(filepath.parents[1]))
 from utils import helpers
+from utils.gui import gui
 
 
 # Set logger.
@@ -405,7 +406,8 @@ class Confirm:
 
 
 @click.command()
-@click.argument("source", type=click.Choice("ab bc mb nb nl ns nt nu on pe qc sk yt".split(), False))
+@click.argument("source", type=click.Choice(["ab", "bc", "mb", "nb", "nl", "ns", "nt", "nu", "on",
+                                             "pe", "qc", "sk", "yt"], case_sensitive=False))
 def main(source: str) -> None:
     """
     Executes an NRN process.
@@ -429,4 +431,11 @@ def main(source: str) -> None:
 
 
 if __name__ == "__main__":
-    main()
+
+    # GUI
+    if sys.argv[-1] == "--gui":
+        main(args=gui(main, calling_script=Path(__file__).resolve()))
+
+    # CLI
+    else:
+        main()

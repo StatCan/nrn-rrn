@@ -25,9 +25,10 @@ from typing import List, Tuple, Union
 filepath = Path(__file__).resolve()
 sys.path.insert(1, str(filepath.parents[1]))
 import field_map_functions
-from utils import helpers
 from gen_junctions import Junction
 from segment_addresses import Segmentor
+from utils import helpers
+from utils.gui import gui
 
 
 # Set logger.
@@ -42,22 +43,17 @@ logger.addHandler(handler)
 class Conform:
     """Defines an NRN process."""
 
-    def __init__(self, source: str, remove: bool = False, exclude_old: bool = False) -> None:
+    def __init__(self, source: str, download_old: bool = True) -> None:
         """
         Initializes an NRN process.
 
         :param str source: abbreviation for the source province / territory.
-        :param bool remove: removes pre-existing files within the data/interim directory for the specified source,
-            default False.
-        :param bool exclude_old: sets parameter remove=True, excluding the previous NRN vintage
-            (data/interim/source_old.gpkg) for the specified source, default False.
+        :param bool download_old: indicates whether previous NRN vintage, used for recovery of unprovided datasets and
+            continuity of NIDs, should be (re-)downloaded. Has no affect if previous NRN vintage does not already exist.
         """
 
         self.source = source.lower()
-        self.remove = remove
-        self.exclude_old = exclude_old
-        if self.exclude_old:
-            self.remove = exclude_old
+        self.download_old = download_old
 
         # Configure data paths.
         self.src = filepath.parents[2] / f"data/raw/{self.source}"
@@ -73,30 +69,10 @@ class Conform:
         self.source_gdframes = dict()
         self.target_gdframes = dict()
 
-        # Validate and conditionally clear output namespace.
-        namespace = list(filter(Path.is_file, self.dst.parent.glob(f"{self.source}[_.]*")))
-
-        if len(namespace):
-            logger.warning("Output namespace already occupied.")
-
-            if self.remove:
-                logger.warning("Parameter remove=True: Removing conflicting files.")
-
-                for f in namespace:
-
-                    # Conditionally exclude previous NRN vintage.
-                    if self.exclude_old and f.name == self.src_old["gpkg"].name:
-                        logger.info(f"Parameter exclude-old=True: Excluding conflicting file from removal: \"{f}\".")
-                        continue
-
-                    # Remove files.
-                    logger.info(f"Removing conflicting file: \"{f}\".")
-                    f.unlink()
-
-            else:
-                logger.exception("Parameter remove=False: Unable to proceed while output namespace is occupied. Set "
-                                 "remove=True (-r) or manually clear the output namespace.")
-                sys.exit(1)
+        # Validate destination Path.
+        if self.dst.exists():
+            logger.warning(f"Output namespace already occupied. Removing conflicting file: \"{self.dst}\".")
+            self.dst.unlink()
 
         # Configure field defaults, dtypes, and domains.
         self.defaults = helpers.compile_default_values()
@@ -826,7 +802,7 @@ class Conform:
         logger.info("Retrieving previous NRN vintage.")
 
         # Determine download requirement.
-        if self.src_old["gpkg"].exists():
+        if self.src_old["gpkg"].exists() and not self.download_old:
             logger.warning(f"Previous NRN vintage already exists: \"{self.src_old['gpkg']}\". Skipping step.")
 
         else:
@@ -1256,29 +1232,26 @@ class Conform:
 
 
 @click.command()
-@click.argument("source", type=click.Choice("ab bc mb nb nl ns nt nu on pe qc sk yt".split(), False))
-@click.option("--remove / --no-remove", "-r", default=False, show_default=True,
-              help="Remove pre-existing files within the data/interim directory for the specified source.")
-@click.option("--exclude-old / --no-exclude-old", "-e", default=False, show_default=True,
-              help="Sets parameter remove=True, excluding the previous NRN vintage (data/interim/source_old.gpkg) for "
-                   "the specified source.")
-def main(source: str, remove: bool = False, exclude_old: bool = False) -> None:
+@click.argument("source", type=click.Choice(["ab", "bc", "mb", "nb", "nl", "ns", "nt", "nu", "on",
+                                             "pe", "qc", "sk", "yt"], case_sensitive=False))
+@click.option("--download_old / --no_download_old", "-d", type=click.BOOL, default=True, show_default=True,
+              help="Indicates whether previous NRN vintage, used for recovery of unprovided datasets and continuity "
+                   "of NIDs, should be (re-)downloaded. Has no affect if previous NRN vintage does not already exist.")
+def main(source: str, download_old: bool = True) -> None:
     """
     Executes an NRN process.
 
     \b
     :param str source: abbreviation for the source province / territory.
-    :param bool remove: removes pre-existing files within the data/interim directory for the specified source, default
-        False.
-    :param bool exclude_old: sets parameter remove=True, excluding the previous NRN vintage
-        (data/interim/source_old.gpkg) for the specified source, default False.
+    :param bool download_old: indicates whether previous NRN vintage, used for recovery of unprovided datasets and
+        continuity of NIDs, should be (re-)downloaded. Has no affect if previous NRN vintage does not already exist.
     """
 
     try:
 
         @helpers.timer
         def run():
-            process = Conform(source, remove, exclude_old)
+            process = Conform(source, download_old)
             process()
 
         run()
@@ -1289,4 +1262,11 @@ def main(source: str, remove: bool = False, exclude_old: bool = False) -> None:
 
 
 if __name__ == "__main__":
-    main()
+
+    # GUI
+    if sys.argv[-1] == "--gui":
+        main(args=gui(main, calling_script=Path(__file__).resolve()))
+
+    # CLI
+    else:
+        main()

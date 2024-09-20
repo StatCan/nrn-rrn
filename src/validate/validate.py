@@ -7,6 +7,7 @@ from tabulate import tabulate
 filepath = Path(__file__).resolve()
 sys.path.insert(1, str(filepath.parents[1]))
 from utils import helpers
+from utils.gui import gui
 from validation_functions import Validator
 
 
@@ -22,16 +23,14 @@ logger.addHandler(handler)
 class Validate:
     """Defines an NRN process."""
 
-    def __init__(self, source: str, remove: bool = False) -> None:
+    def __init__(self, source: str) -> None:
         """
         Initializes an NRN process.
 
         :param str source: abbreviation for the source province / territory.
-        :param bool remove: remove pre-existing output file (validations.gpkg), default False.
         """
 
         self.source = source.lower()
-        self.remove = remove
         self.Validator = None
 
         # Configure data paths.
@@ -45,13 +44,8 @@ class Validate:
 
         # Validate destination path.
         if self.dst.exists():
-            if remove:
-                logger.info(f"Removing conflicting file: \"{self.dst}\".")
-                self.dst.unlink()
-            else:
-                logger.exception(f"Conflicting file exists (\"{self.dst}\") but remove=False. Set "
-                                 f"remove=True (-r) or manually clear the output namespace.")
-                sys.exit(1)
+            logger.warning(f"Removing conflicting output file: \"{self.dst}\".")
+            self.dst.unlink()
 
         # Load source data.
         self.dframes = helpers.load_gpkg(self.src)
@@ -100,23 +94,21 @@ class Validate:
 
 
 @click.command()
-@click.argument("source", type=click.Choice("ab bc mb nb nl ns nt nu on pe qc sk yt".split(), False))
-@click.option("--remove / --no-remove", "-r", default=False, show_default=True,
-              help="Remove pre-existing output file (validations.gpkg).")
-def main(source: str, remove: bool = False) -> None:
+@click.argument("source", type=click.Choice(["ab", "bc", "mb", "nb", "nl", "ns", "nt", "nu", "on",
+                                             "pe", "qc", "sk", "yt"], case_sensitive=False))
+def main(source: str) -> None:
     """
     Executes an NRN process.
 
     \b
     :param str source: abbreviation for the source province / territory.
-    :param bool remove: remove pre-existing output file (validations.gpkg), default False.
     """
 
     try:
 
         @helpers.timer
         def run():
-            process = Validate(source, remove)
+            process = Validate(source)
             process()
 
         run()
@@ -127,4 +119,11 @@ def main(source: str, remove: bool = False) -> None:
 
 
 if __name__ == "__main__":
-    main()
+
+    # GUI
+    if sys.argv[-1] == "--gui":
+        main(args=gui(main, calling_script=Path(__file__).resolve()))
+
+    # CLI
+    else:
+        main()

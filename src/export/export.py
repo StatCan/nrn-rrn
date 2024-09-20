@@ -15,6 +15,7 @@ from typing import Union
 filepath = Path(__file__).resolve()
 sys.path.insert(1, str(filepath.parents[1]))
 from utils import helpers
+from utils.gui import gui
 
 
 # Set logger.
@@ -29,17 +30,14 @@ logger.addHandler(handler)
 class Export:
     """Defines an NRN process."""
 
-    def __init__(self, source: str, remove: bool = False) -> None:
+    def __init__(self, source: str) -> None:
         """
         Initializes an NRN process.
 
         :param str source: abbreviation for the source province / territory.
-        :param bool remove: removes pre-existing files within the data/processed directory for the specified source,
-            default False.
         """
 
         self.source = source.lower()
-        self.remove = remove
         self.major_version = None
         self.minor_version = None
 
@@ -52,27 +50,10 @@ class Export:
             logger.exception(f"Input data not found: {self.src}.")
             sys.exit(1)
 
-        # Validate and conditionally clear output namespace.
-        namespace = list(self.dst.glob("*"))
-
-        if len(namespace):
-            logger.warning("Output namespace already occupied.")
-
-            if self.remove:
-                logger.warning("Parameter remove=True: Removing conflicting files.")
-
-                for f in namespace:
-                    logger.info(f"Removing conflicting file: \"{f}\".")
-
-                    if f.is_file():
-                        f.unlink()
-                    else:
-                        helpers.delete_contents(f)
-
-            else:
-                logger.exception("Parameter remove=False: Unable to proceed while output namespace is occupied. Set "
-                                 "remove=True (-r) or manually clear the output namespace.")
-                sys.exit(1)
+        # Validate destination path.
+        if self.dst.exists():
+            logger.warning(f"Output namespace already occupied. Removing conflicting contents from: \"{self.dst}\".")
+            helpers.delete_contents(self.dst)
 
         # Configure field defaults and domains.
         self.defaults = {lang: helpers.compile_default_values(lang=lang) for lang in ("en", "fr")}
@@ -403,24 +384,21 @@ class Export:
 
 
 @click.command()
-@click.argument("source", type=click.Choice("ab bc mb nb nl ns nt nu on pe qc sk yt".split(), False))
-@click.option("--remove / --no-remove", "-r", default=False, show_default=True,
-              help="Remove pre-existing files within the data/processed directory for the specified source.")
-def main(source: str, remove: bool = False) -> None:
+@click.argument("source", type=click.Choice(["ab", "bc", "mb", "nb", "nl", "ns", "nt", "nu", "on",
+                                             "pe", "qc", "sk", "yt"], case_sensitive=False))
+def main(source: str) -> None:
     """
     Executes an NRN process.
 
     \b
     :param str source: abbreviation for the source province / territory.
-    :param bool remove: removes pre-existing files within the data/processed directory for the specified source,
-        default False.
     """
 
     try:
 
         @helpers.timer
         def run():
-            process = Export(source, remove)
+            process = Export(source)
             process()
 
         run()
@@ -431,4 +409,11 @@ def main(source: str, remove: bool = False) -> None:
 
 
 if __name__ == "__main__":
-    main()
+
+    # GUI
+    if sys.argv[-1] == "--gui":
+        main(args=gui(main, calling_script=Path(__file__).resolve()))
+
+    # CLI
+    else:
+        main()
