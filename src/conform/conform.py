@@ -976,9 +976,7 @@ class Conform:
             # Load source data into a geodataframe.
             try:
 
-                df = gpd.read_file(self.src / source_yaml["data"]["filename"],
-                                   driver=source_yaml["data"]["driver"],
-                                   layer=source_yaml["data"]["layer"])
+                df = gpd.read_file(self.src / source_yaml["data"]["filename"], layer=source_yaml["data"]["layer"])
 
             except fiona.errors.FionaValueError as e:
                 logger.exception(f"Unable to load data source.")

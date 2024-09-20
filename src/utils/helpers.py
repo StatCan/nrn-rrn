@@ -549,7 +549,7 @@ def load_gpkg(gpkg_path: Union[Path, str], find: bool = False, layers: Union[Non
 
                 # Spatial data.
                 if distribution_format[table_name]["spatial"]:
-                    df = gpd.read_file(gpkg_path, layer=layers_map[table_name], driver="GPKG").rename(columns=str.lower)
+                    df = gpd.read_file(gpkg_path, layer=layers_map[table_name]).rename(columns=str.lower)
 
                 # Tabular data.
                 else:
