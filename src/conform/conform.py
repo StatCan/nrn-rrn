@@ -23,7 +23,7 @@ from tqdm.auto import trange
 from typing import List, Tuple, Union
 
 filepath = Path(__file__).resolve()
-sys.path.insert(1, str(filepath.parents[1]))
+sys.path.insert(1, filepath.parents[1].as_posix())
 import field_map_functions
 from gen_junctions import Junction
 from segment_addresses import Segmentor

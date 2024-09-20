@@ -13,7 +13,7 @@ from shapely.ops import linemerge
 from typing import List, Union
 
 filepath = Path(__file__).resolve()
-sys.path.insert(1, str(filepath.parents[3]))
+sys.path.insert(1, filepath.parents[3].as_posix())
 from utils import helpers
 from utils.gui import gui
 

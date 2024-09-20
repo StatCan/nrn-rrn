@@ -5,7 +5,7 @@ from pathlib import Path
 from tabulate import tabulate
 
 filepath = Path(__file__).resolve()
-sys.path.insert(1, str(filepath.parents[1]))
+sys.path.insert(1, filepath.parents[1].as_posix())
 from utils import helpers
 from utils.gui import gui
 from validation_functions import Validator
