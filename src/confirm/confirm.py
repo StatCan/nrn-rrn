@@ -89,6 +89,13 @@ class Confirm:
 
             logger.info(f"Generating NIDs for dataset: {table}.")
 
+            # Assign new nid to all records when no old dataset exists.
+            # Note: This is only possible for secondary datasets (i.e. anything other than roadseg), since these
+            # are sometimes missing from previous releases.
+            if table not in self.dframes_old:
+                self.dframes[table]["nid"] = [uuid.uuid4().hex for _ in range(len(df))]
+                return
+
             # Fetch old dataset, match field, and defaults.
             df_old = self.dframes_old[table].loc[self.validate_ids(self.dframes_old[table]["nid"])].copy(deep=True)
             match_field = self.match_fields[table] if table in self.match_fields else None
