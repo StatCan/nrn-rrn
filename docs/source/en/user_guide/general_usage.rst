@@ -26,16 +26,27 @@ The NRN pipeline is separated into 4 distinct processes which are intended to be
 Implementation
 ==============
 
-Each NRN process is implemented as a Command Line Interface (CLI) tool which can be called from any shell. The
-parameters for each CLI tool are largely the same, with ``source`` (provincial / territorial source abbreviation) being
-the only universal and required parameter for all CLI tools. Specific reference information, including parameter
-specifications, can be displayed by passing :code:`--help` to the CLI tool.
+Each NRN process is implemented as both a Command Line Interface (CLI) and graphical user interface (GUI). You may
+choose which method of use you prefer.
+
+CLI Method
+----------
+
+A CLI can be called from any shell (such as Command Prompt). The specific parameters and details of the CLI can be
+viewed by passing the keyword :code:`--help`.
 
 .. admonition:: Note
 
     It is strongly recommended to use the NRN pipeline within the ``nrn-rrn`` conda environment. Otherwise, the
     expected output and behaviour, as documented, cannot be guaranteed. conda environments can be activated via:
     :code:`conda activate nrn-rrn`.
+
+GUI Method
+----------
+
+A GUI is an interactive interface for providing inputs to a tool. The underlying script still executes within a conda
+environment, but none of the associated steps from the CLI method need to be done. The GUI can be executed by double-
+clicking the batch (.bat) file associated with each Python (.py) script.
 
 Examples
 ========

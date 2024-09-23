@@ -27,17 +27,28 @@ Le pipeline RRN est séparé en 4 processus distincts destinés à être exécut
 Mise en œuvre
 =============
 
-Chaque processus RRN est implémenté en tant qu'outil d'Interface en ligne de commande (ILC) qui peut être appelé à
-partir de n'importe quel shell. Les paramètres de chaque outil ILC sont en grande partie les mêmes, la ``source``
-(abréviation de la source provinciale/territoriale) étant le seul paramètre universel et obligatoire pour tous les
-outils ILC. Des informations de référence spécifiques, y compris les spécifications des paramètres, peuvent être
-affichées en passant :code:`--help` à l'outil ILC.
+Chaque processus RRN est mis en œuvre sous la forme d'une interface de ligne de commande (ILC) et d'une interface
+utilisateur graphique (GUI). Vous pouvez choisir la méthode d'utilisation que vous préférez.
+
+Méthode ILC
+-----------
+
+Un ILC peut être appelé à partir de n'importe quel shell. Les paramètres spécifiques et les détails de l'ILC peuvent
+être consultés en passant le mot-clé :code:`--help`.
 
 .. admonition:: Notez
 
     Il est fortement recommandé d'utiliser le pipeline RRN dans l'environnement conda ``nrn-rrn``. Sinon, le résultat
     et le comportement attendus, tels que documentés, ne peuvent être garantis. Les environnements conda peuvent être
     activés via : :code:`conda activate nrn-rrn`.
+
+Méthode GUI
+-----------
+
+Une GUI est une interface interactive permettant de fournir des données à un outil. Le script sous-jacent s'exécute
+toujours dans un environnement conda, mais aucune des étapes associées à la méthode ILC ne doit être effectuée.
+L'interface graphique peut être exécutée en double-cliquant sur le fichier batch (.bat) associé à chaque script Python
+(.py).
 
 Exemples
 ========
