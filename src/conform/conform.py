@@ -1235,7 +1235,7 @@ class Conform:
 @click.command()
 @click.argument("source", type=click.Choice(["ab", "bc", "mb", "nb", "nl", "ns", "nt", "nu", "on",
                                              "pe", "qc", "sk", "yt"], case_sensitive=False))
-@click.option("--download_old / --no_download_old", "-d", type=click.BOOL, default=True, show_default=True,
+@click.option("-d", "--download_old", type=click.BOOL, default=True, show_default=True,
               help="Indicates whether previous NRN vintage, used for recovery of unprovided datasets and continuity "
                    "of NIDs, should be (re-)downloaded. Has no affect if previous NRN vintage does not already exist.")
 def main(source: str, download_old: bool = True) -> None:
