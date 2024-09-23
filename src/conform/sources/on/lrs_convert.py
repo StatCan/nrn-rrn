@@ -561,10 +561,10 @@ class LRS:
 
             # Compile cumulative geometry lengths as endpoints.
             endpts = [0, geom.length] if isinstance(geom, LineString) else \
-                list(accumulate([0, *[g.length for g in geom]]))
+                list(accumulate([0, *[g.length for g in geom.geoms]]))
 
-            # Remove breakpoints which are <= 1 unit from an endpoint or outside of the geometry length range (zero to
-            # max length). Endpoints include the start and end of every individual LineString in the geometry.
+            # Remove breakpoints which are <= 1 unit from an endpoint or outside the geometry length range (zero to max
+            # length). Endpoints include the start and end of every individual LineString in the geometry.
             breakpts = [breakpt for breakpt in breakpts if any(
                 [(endpts[i] + 1) < breakpt < (endpts[i + 1] - 1) for i in range(len(endpts) - 1)])]
 
@@ -749,7 +749,7 @@ class LRS:
                 # Swap measurement order for records with invalid event measurements.
                 logger.info("Swapping measurement order for records with invalid event measurements.")
 
-                flag = df["from"] > df["to"]
+                flag = pd.Series(df["from"] > df["to"])
                 df.loc[flag, ["from", "to"]] = df.loc[flag, ["to", "from"]].values
                 logger.info(f"Swapped {sum(flag)} of {len(df)} records.")
 
@@ -817,7 +817,7 @@ class LRS:
             logger.info(f"Compiling source dataset {index + 1} of {len(self.schema)}: {layer}.")
 
             # Load layer into dataframe, force lowercase column names.
-            df = gpd.read_file(self.src, driver="OpenFileGDB", layer=layers_lower[layer]).rename(columns=str.lower)
+            df = gpd.read_file(self.src, layer=layers_lower[layer]).rename(columns=str.lower)
 
             # Filter columns.
             df.drop(columns=df.columns.difference(attr["fields"]), inplace=True)
@@ -1023,8 +1023,8 @@ class LRS:
 
 
 @click.command()
-@click.argument("src", type=click.Path(exists=True, file_okay=False, dir_okay=True, resolve_path=True))
-@click.argument("dst", type=click.Path(exists=False, file_okay=True, dir_okay=False, resolve_path=True))
+@click.argument("src", type=click.Path(exists=True, file_okay=False, dir_okay=True, resolve_path=True, path_type=Path))
+@click.argument("dst", type=click.Path(exists=False, file_okay=True, dir_okay=False, resolve_path=True, path_type=Path))
 def main(src: Path, dst: Path) -> None:
     """
     Executes the LRS class.

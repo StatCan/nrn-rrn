@@ -42,8 +42,8 @@ class LRS:
         self.dst = dst
         self.nrn_datasets = dict()
         self.src_datasets = dict()
-        self.base_dataset = "tdylrs_centerline_sequence"
-        self.geometry_dataset = "tdylrs_centerline"
+        self.base_dataset = "tdylrs_kp_ref_rte"
+        self.geometry_dataset = "tdylrs_kp_ref_rte"
         self.event_measurement_fields = {"from": "fromkm", "to": "tokm"}
 
         # Note: listed ids are only for those routes which begin outside of Yukon.
@@ -74,14 +74,9 @@ class LRS:
                 "query": "todate.isna() & ~fromdate.astype('str').str.startswith('9999') & networkid==1",
                 "output_fields": None
             },
-            "tdylrs_centerline": {
-                "fields": ["centerlineid", "geometry"],
-                "query": None,
-                "output_fields": None
-            },
-            "tdylrs_centerline_sequence": {
-                "fields": ["routeid", "fromdate", "todate", "networkid", "centerlineid"],
-                "query": "todate.isna() & ~fromdate.astype('str').str.startswith('9999') & networkid==1",
+            "tdylrs_kp_ref_rte": {
+                "fields": ["routeid", "fromdate", "todate", "geometry"],
+                "query": "todate.isna() & ~fromdate.astype('str').str.startswith('9999')",
                 "output_fields": ["fromdate"]
             },
             "tdylrs_primary_rte": {
@@ -124,7 +119,6 @@ class LRS:
         self.structure = {
             "base": self.base_dataset,
             "connections": {
-                "centerlineid": ["tdylrs_centerline"],
                 "routeid": ["br_bridge_ln", "sm_structure", "tdylrs_calibration_point", "tdylrs_primary_rte",
                             "td_lane_configuration", "td_number_of_lanes", "td_road_administration", "td_road_type",
                             "td_street_name"]
@@ -630,7 +624,7 @@ class LRS:
                     df.loc[flag, fld] = df.loc[flag, [con_id_field, fld]].apply(
                         lambda row: match_calibration_pts(*row), axis=1)
 
-                    count += sum(orig != df[fld])
+                    count += sum(pd.Series(orig != df[fld]))
 
                 logger.info(f"Matched {count} event measurements to calibration points.")
 
@@ -638,7 +632,7 @@ class LRS:
                 logger.info("Updating out-of-scope offsets for events measurements.")
 
                 for offset_id, offset in offsets.items():
-                    flag = df[con_id_field] == offset_id
+                    flag = pd.Series(df[con_id_field] == offset_id)
                     df.loc[flag, ["from", "to"]] = df.loc[flag, ["from", "to"]].subtract(offset)
 
                     logger.info(f"Updated {sum(flag)} offset event measurements for {con_id_field}={offset_id}.")
@@ -707,7 +701,7 @@ class LRS:
             logger.info(f"Compiling source dataset {index + 1} of {len(self.schema)}: {layer}.")
 
             # Load layer into dataframe, force lowercase column names.
-            df = gpd.read_file(self.src, driver="OpenFileGDB", layer=layers_lower[layer]).rename(columns=str.lower)
+            df = gpd.read_file(self.src, layer=layers_lower[layer]).rename(columns=str.lower)
 
             # Filter columns.
             df.drop(columns=df.columns.difference(attr["fields"]), inplace=True)
@@ -878,8 +872,8 @@ class LRS:
 
 
 @click.command()
-@click.argument("src", type=click.Path(exists=True, file_okay=False, dir_okay=True, resolve_path=True))
-@click.argument("dst", type=click.Path(exists=False, file_okay=True, dir_okay=False, resolve_path=True))
+@click.argument("src", type=click.Path(exists=True, file_okay=False, dir_okay=True, resolve_path=True, path_type=Path))
+@click.argument("dst", type=click.Path(exists=False, file_okay=True, dir_okay=False, resolve_path=True, path_type=Path))
 def main(src: Path, dst: Path) -> None:
     """
     Executes the LRS class.
