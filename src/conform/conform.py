@@ -134,7 +134,10 @@ class Conform:
                     self.target_gdframes[table][field] = series_new.copy(deep=True)
 
                     # Compile and log modifications.
-                    flag_mods = series_orig.astype(str) != series_new.astype(str)
+                    # Note: Cast both series to str for better comparison.
+                    series_orig = series_orig.astype(str)
+                    series_new = series_new.astype(str)
+                    flag_mods = pd.Series(series_orig != series_new)
                     if flag_mods.any():
 
                         # Compile and quantify modifications.
@@ -143,7 +146,7 @@ class Conform:
                         mods["Count"] = mods["Count"].map(lambda val: f"{val:,}")
 
                         # Log modifications.
-                        tbl_limit = 50
+                        tbl_limit = 10
                         tbl = tabulate(mods.head(n=tbl_limit).values, headers=mods.head(n=tbl_limit).columns,
                                        tablefmt="rst")
 
