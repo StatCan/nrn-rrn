@@ -1,4 +1,5 @@
 import click
+import geopandas as gpd
 import logging
 import sys
 from pathlib import Path
@@ -84,7 +85,7 @@ class Validate:
                 # Subset dataset and export to validations output file.
                 if len(vals):
                     df_subset = self.dframes[dataset].loc[self.dframes[dataset].index.isin(vals)].copy(deep=True)
-                    df_subset.to_file(str(self.dst), driver="GPKG", layer=f"v{code}_{dataset}", index=False)
+                    gpd.GeoDataFrame(df_subset).to_file(str(self.dst), layer=f"v{code}_{dataset}", index=False)
 
         # Log validation results summary.
         summary = tabulate(error_counts, headers=["Validation", "Dataset", "Invalid Count"], tablefmt="rst",

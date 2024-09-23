@@ -469,7 +469,10 @@ class Validator:
         # Fetch current date.
         today = int(datetime.today().strftime("%Y%m%d"))
 
-        # Temporary populate incomplete dates with "01" suffix.
+        # Temporarily populate incomplete dates with "01" suffix.
+        # Note: Requires casting to int64.
+        series = series.astype("int64")
+
         for length in (4, 6):
             flag = series.map(lambda val: int(math.log10(val)) + 1) == length
             if length == 4:
