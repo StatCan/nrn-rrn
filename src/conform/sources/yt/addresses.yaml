@@ -12,9 +12,9 @@ license:
   text:
 language: en
 data:
-  filename: yt_2024.gpkg
-  layer: CIVIC_ADDRESS_PT
-  driver: GPKG
+  filename: CivicAddress.shp
+  layer:
+  driver: ESRI Shapefile
   crs: "EPSG:3578"
   spatial: True
   query:

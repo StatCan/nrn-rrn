@@ -12,7 +12,7 @@ license:
   text:
 language: en
 data:
-  filename: 2023/NRN_AB_22_0_BLKPASSAGE.shp
+  filename: 2024/NRN_AB_23_0_BLKPASSAGE.shp
   layer:
   driver: ESRI Shapefile
   crs: "EPSG:4617"
